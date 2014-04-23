@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="app_name">SatAtt</string>
+    <string name="title_section1">HUD</string>
+    <string name="title_section2">Simulator</string>
+    <string name="title_section3">Basic indicators</string>
+    <string name="title_section4">Extra indicators</string>
+    <string name="title_section5">Models</string>
+    <string name="title_section6">Preferences</string>
+    <string name="basic_indicator_position">Position</string>
+    <string name="basic_indicator_velocity">Velocity</string>
+    <string name="basic_indicator_momentum">Momentum</string>
+    <string name="basic_indicator_acceleration">Acceleration</string>
+    <string name="basic_indicator_attitude">Attitude</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_screenshot">Screenshot</string>
+    <string name="action_settings">Settings</string>
+    <string name="name_">Name:</string>
+    <string name="type_">Type:</string>
+    <string name="display_">Display:</string>
+    <string name="color_">Color:</string>
+    <string name="units_">Units:</string>
+    <string name="color">Color</string>
+    <string name="ok">OK</string>
+    <string name="target">Target</string>
+    <string name="static_vector">Static Vector</string>
+    <string name="dynamic_vector">Dynamic Vector</string>
+    <string name="units_km">[Km]</string>
+    <string name="view_x">+X</string>
+    <string name="view_y">+Y</string>
+    <string name="view_z">+Z</string>
+    <string name="view_nx">-X</string>
+    <string name="view_ny">-Y</string>
+    <string name="view_nz">-Z</string>
+    <string name="view_xyz">XYZ</string>
+    <string name="eg_sim_time">2004/02/15 21:50:59.23</string>
+    <string name="eg_vel">Vel. 10 Km/s</string>
+    <string name="eg_accel">Accel. 10 Km/s2</string>
+    <string name="eg_roll">Roll: -3.14</string>
+    <string name="eg_pitch">Pitch: -3.14</string>
+    <string name="eg_yaw">Yaw: -3.14</string>
+    <string name="eg_radium">Orbit radium: 360.000 Km</string>
+    
+    
+    <string name="pref_performance">Performance</string>
+    <string name="pref_general">General</string>
+    <string name="pref_axis">Axis</string>
+    <string name="pref_spacecraft">Spacecraft</string>
+    <string name="pref_sun">Sun</string>
+    <string name="pref_earth">Earth</string>
+    <string name="pref_position">Position</string>
+    <string name="pref_velocity">Velocity</string>
+    <string name="pref_acceleration">Acceleration</string>
+    <string name="pref_momentum">Momentum</string>
+    <string name="pref_target_a">Target</string>
+    <string name="pref_vector_a">Vector</string>
+    <string name="pref_direction_a">Direction</string>
+    <string name="pref_title_detail_level">Detail level</string>
+    <string name="pref_summary_detail_level">Detail level of the graphics [1–9]</string>
+    <string name="pref_title_fps_update_skips">FPS update skips</string>
+    <string name="pref_summary_fps_update_skips">Number of cycles to avoid refreshing the FPS stats [0–999]</string>
+    <string name="pref_title_show_fps">Show FPS</string>
+    <string name="pref_summary_show_fps">Show FramesPerSecond of the model</string>
+    <string name="pref_title_show_sky">Show sky</string>
+    <string name="pref_summary_show_sky">Show stars background</string>
+    <string name="pref_title_show_sphere">Show sphere</string>
+    <string name="pref_summary_show_sphere">Show reference sphere</string>
+    <string name="pref_title_show_mini_spheres">Show mini spheres</string>
+    <string name="pref_summary_show_mini_spheres">Show mini spheres to improve the 3D effect</string>
+    <string name="pref_title_show_circles">Show circles</string>
+    <string name="pref_summary_show_circles">Show circles around the reference sphere</string>
+    <string name="pref_title_show_planes">Show planes</string>
+    <string name="pref_summary_show_planes">Show reference planes</string>
+    <string name="pref_title_show_axis">Show axis</string>
+    <string name="pref_summary_show_axis">Show reference axis</string>
+    <string name="pref_title_show_axis_labels">Show axis labels</string>
+    <string name="pref_summary_show_axis_labels">Show reference axis labels</string>
+    <string name="pref_title_show_spacecraft">Show spacecraft</string>
+    <string name="pref_summary_show_spacecraft">Show spacecraft model</string>
+    <string name="pref_title_show_engine_texture">Show engine texture</string>
+    <string name="pref_summary_show_engine_texture">Show spacecraft engine texture</string>
+    <string name="pref_title_sun_simple_glow">Simple glow effect</string>
+    <string name="pref_summary_sun_simple_glow">Use Sun simple glow effect</string>
+    <string name="pref_title_sun_rotates">Sun rotates</string>
+    <string name="pref_summary_sun_rotates">Sun body rotates</string>
+    <string name="pref_title_earth_rotates">Earth rotates</string>
+    <string name="pref_title_sun_rotation_speed">Rotation speed</string>
+    <string name="pref_summary_sun_rotation_speed">Sun rotation speed [0–9]</string>
+    <string name="pref_summary_earth_rotates">Earth body rotates</string>
+    <string name="pref_title_earth_rotation_speed">Rotation speed</string>
+    <string name="pref_summary_earth_rotation_speed">Earth rotation speed [0–9]</string>
+    <string name="pref_title_show_earth_texture">Show texture</string>
+    <string name="pref_summary_show_earth_texture">Show Earth surface texture</string>
+    <string name="pref_title_show_earth">Show body</string>
+    <string name="pref_summary_show_earth">Show Earth body</string>
+    <string name="pref_title_show_sun">Show body</string>
+    <string name="pref_summary_show_sun">Show Sun body</string>
+    <string name="pref_title_show_sun_texture">Show texture</string>
+    <string name="pref_summary_show_sun_texture">Show Sun surface texture</string>
+    <string name="pref_title_show_earth_line">Show line</string>
+    <string name="pref_summary_show_earth_line">Show Earth direction line</string>
+    <string name="pref_title_show_earth_distance">Show distance</string>
+    <string name="pref_summary_show_earth_distance">Show Earth distance label</string>
+    <string name="pref_title_show_sun_line">Show line</string>
+    <string name="pref_summary_show_sun_line">Show Sun direction line</string>
+    <string name="pref_title_show_sun_distance">Show distance</string>
+    <string name="pref_summary_show_sun_distance">Show Sun distance label</string>
+    <string name="pref_title_acceleration_limit">Limit</string>
+    <string name="pref_summary_acceleration_limit">Acceleration value corresponding to the radium of the reference sphere</string>
+    <string name="pref_title_acceleration_show">Show</string>
+    <string name="pref_summary_acceleration_show">Show acceleration vector</string>
+    <string name="pref_title_acceleration_color">Color</string>
+    <string name="pref_summary_acceleration_color">Acceleration vector color</string>
+    <string name="pref_title_velocity_limit">Limit</string>
+    <string name="pref_summary_velocity_limit">Velocity value corresponding to the radium of the reference sphere</string>
+    <string name="pref_title_velocity_show">Show</string>
+    <string name="pref_summary_velocity_show">Show velocity vector</string>
+    <string name="pref_title_velocity_color">Color</string>
+    <string name="pref_summary_velocity_color">Velocity vector color</string>
+    <string name="pref_title_momentum_show">Show</string>
+    <string name="pref_summary_momentum_show">Show momentum direction</string>
+    <string name="pref_title_momentum_color">Color</string>
+    <string name="pref_summary_momentum_color">Momentum direction color</string>
+    <string name="pref_title_target_a_show">Show</string>
+    <string name="pref_summary_target_a_show">Show target</string>
+    <string name="pref_title_target_a_color">Color</string>
+    <string name="pref_summary_target_a_color">Target color</string>
+    <string name="pref_title_vector_a_show">Show</string>
+    <string name="pref_summary_vector_a_show">Show vector</string>
+    <string name="pref_title_vector_a_color">Color</string>
+    <string name="pref_summary_vector_a_color">Vector color</string>
+    <string name="pref_title_vector_a_limit">Limit</string>
+    <string name="pref_summary_vector_a_limit">Vector value corresponding to the radium of the reference sphere</string>
+    <string name="pref_title_direction_a_show">Show</string>
+    <string name="pref_summary_direction_a_show">Show direction</string>
+    <string name="pref_title_direction_a_color">Color</string>
+    <string name="pref_summary_direction_a_color">Direction color</string>
+    
+    
+    
+    
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on Color to apply</string>    
+    <!-- Color Picker Preferences -->
+    <string name="pref_category">Category</string>
+    <string name="color1_title">Color 1</string>
+    <string name="color1_summary">black color by default, set by reference</string>
+    <string name="color2_title">Color 2</string>
+    <string name="color2_summary">not persistent color\nalpha slider added via code</string>
+    <string name="color3_title">Color 3</string>
+    <string name="color3_summary">picker with alpha slider</string>
+    <string name="color4_title">Color 4</string>
+    <string name="color4_summary">color set with HEX code in xml</string>
+
+    
+    
+
+</resources>

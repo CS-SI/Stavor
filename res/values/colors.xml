@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+	<color name="pref_def_velocity">#001dff</color>
+    <color name="pref_def_acceleration">#fc00b0</color>
+    <color name="pref_def_momentum">#00fc19</color>
+    <color name="pref_def_target_a">#ff0000</color>
+    <color name="pref_def_vector_a">#00fffa</color>
+    <color name="pref_def_direction_a">#ffff00</color>
+    
+    
+    <color name="white">#FFFFFF</color>
+    <color name="grey1">#D2D2D2</color>
+    <color name="grey2">#A8A8A8</color>
+    <color name="grey3">#7E7E7E</color>
+    <color name="grey4">#545454</color>
+    <color name="grey5">#2A2A2A</color>
+    <color name="black">#000000</color>
+    <color name="navigation">#424242</color>
+</resources>

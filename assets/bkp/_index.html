@@ -1,0 +1,215 @@
+<html>
+	<head>
+		<title>Attitude Sphere</title>
+		<style>canvas { width: 100%; height: 100%}</style>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+		<!--<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" media="screen" type="text/css" href="sphere.css"></link>
+		
+		<!--<script type="text/javascript" src="sphere.js"></script>-->
+	
+	</head>
+	<body>
+	
+		<!--<canvas id="space" width="200" height="100">
+			Your browser does not support the canvas element.
+		</canvas>-->
+		<script type="text/javascript" src="js/Three.js"></script>
+		<script type="text/javascript" src="js/Detector.js"></script>
+		<!--<script src="js/Stats.js"></script>-->
+		<script src="js/OrbitControls.js"></script>
+		<script src="js/THREEx.KeyboardState.js"></script>
+		<script src="js/THREEx.FullScreen.js"></script>
+		<script src="js/THREEx.WindowResize.js"></script>
+		
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+		<link rel=stylesheet href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+		
+		<script type="text/javascript">
+				
+			// standard global variables
+			var controls, stats, scene, camera, render;
+			var keyboard = new THREEx.KeyboardState();
+			//var clock = new THREE.Clock();
+			
+			init();
+			animate();
+			
+			// FUNCTIONS 		
+			function init() 
+			{
+				
+				scene = new THREE.Scene();
+				//camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
+				camera = new THREE.PerspectiveCamera( 45, 1, 0.1, 10000 );
+
+				// RENDERER
+				if ( Detector.webgl )
+					renderer = new THREE.WebGLRenderer( {antialias:true} );
+				else
+					renderer = new THREE.CanvasRenderer(); 
+				<!--var renderer = new THREE.WebGLRenderer();-->
+				//renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setSize( window.innerWidth, window.innerWidth );
+				document.body.appendChild( renderer.domElement );
+				//document.getElementById("space").appendChild( renderer.domElement );
+				
+				// EVENTS
+				THREEx.WindowResize(renderer, camera);
+				THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
+				// CONTROLS
+				//controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls = new THREE.OrbitControls(camera, document, renderer.domElement);
+				// STATS
+				/*stats = new Stats();
+				stats.domElement.style.position = 'absolute';
+				stats.domElement.style.bottom = '0px';
+				stats.domElement.style.zIndex = 100;
+				container.appendChild( stats.domElement );*/
+			
+				// LIGHT
+				var light = new THREE.PointLight(0xffffff);
+				light.position.set(0,200,200);
+				scene.add(light);
+				
+				camera.position.set(200,200,200);
+				camera.lookAt(scene.position);
+				
+				// ambient
+				var ambient = new THREE.AmbientLight( 0x202020 );
+				scene.add( ambient );
+			
+				////////////
+				// CUSTOM //
+				////////////
+				var mat_sphere = new THREE.MeshPhongMaterial( { color: 0xCCCCCC, transparent: true, opacity: 0.5, side: THREE.FrontSide } );
+				var arrow_head_length = 10;
+				var arrow_head_width = 2;
+				var show_axis = true;
+				var sphere_radius = 100;
+				var torus_radius = 100;
+				var torus_tube = 1;
+				var torus_seg_r = 10;
+				var torus_seg_t = 60;
+				
+				//innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength 
+				/*var sphere_y = new THREE.Mesh( new THREE.RingGeometry( 95, 98, 100, 15, 0, Math.PI * 2 ), mat_sphere );
+				sphere_y.position.set( 0, 0, 0 );
+				scene.add( sphere_y );
+				*/
+				var sphere = new THREE.Mesh( new THREE.SphereGeometry( sphere_radius, 50, 50 ), new THREE.MeshPhongMaterial( { color: 0xCCCCCC, transparent: true, opacity: 0.5, side: THREE.DoubleSide, blending: THREE.AdditiveBlending } ) );
+				sphere.position.set( 0, 0, 0 );
+				sphere.renderDepth = -0.1;
+				scene.add( sphere );
+				
+				
+				//radius, tube, segmentsR, segmentsT, arc
+				var sphere_y = new THREE.Mesh( new THREE.TorusGeometry( torus_radius, torus_tube, torus_seg_r, torus_seg_t ), mat_sphere );
+				sphere_y.position.set( 0, 0, 0 );
+				scene.add( sphere_y );
+				
+				var sphere_z = new THREE.Mesh( new THREE.TorusGeometry( torus_radius, torus_tube, torus_seg_r, torus_seg_t ), mat_sphere );
+				sphere_z.position.set( 0, 0, 0 );
+				sphere_z.rotation.x = Math.PI/2;
+				scene.add( sphere_z );
+				
+				var sphere_x = new THREE.Mesh( new THREE.TorusGeometry( torus_radius, torus_tube, torus_seg_r, torus_seg_t ), mat_sphere );
+				sphere_x.position.set( 0, 0, 0 );
+				sphere_x.rotation.y = Math.PI/2;
+				scene.add( sphere_x );
+				
+				if(show_axis){
+					var axis = new THREE.AxisHelper( 100 );
+					axis.position.set( 0, 0, 0 );
+					scene.add( axis );
+				}
+				
+				// ARROWS
+				var origin = new THREE.Vector3(0,0,0);
+				var terminus  = new THREE.Vector3(20,0,5);
+				var direction = new THREE.Vector3().subVectors(terminus, origin).normalize();
+				var arrow_pos = new THREE.ArrowHelper(direction, origin, 100, 0x001dff);
+				scene.add(arrow_pos);
+				
+				terminus  = new THREE.Vector3(5,0,20);
+				direction = new THREE.Vector3().subVectors(terminus, origin).normalize();
+				var arrow_vel = new THREE.ArrowHelper(direction, origin, 100, 0x00FFF6);
+				scene.add(arrow_vel);
+				
+				terminus  = new THREE.Vector3(55,0,30);
+				direction = new THREE.Vector3().subVectors(terminus, origin).normalize();
+				var arrow_accel = new THREE.ArrowHelper(direction, origin, 100, 0x10ff00);
+				scene.add(arrow_accel);
+				
+				terminus  = new THREE.Vector3(0,30,-55);
+				direction = new THREE.Vector3().subVectors(terminus, origin).normalize();
+				var arrow_att = new THREE.ArrowHelper(direction, origin, 100, 0xff0000);
+				scene.add(arrow_att);
+				
+				
+				/*var gridXZ = new THREE.GridHelper(100, 10);
+				gridXZ.setColors( new THREE.Color(0x006600), new THREE.Color(0x006600) );
+				gridXZ.position.set( 100,0,100 );
+				scene.add(gridXZ);
+				
+				var gridXY = new THREE.GridHelper(100, 10);
+				gridXY.position.set( 100,100,0 );
+				gridXY.rotation.x = Math.PI/2;
+				gridXY.setColors( new THREE.Color(0x000066), new THREE.Color(0x000066) );
+				scene.add(gridXY);
+
+				var gridYZ = new THREE.GridHelper(100, 10);
+				gridYZ.position.set( 0,100,100 );
+				gridYZ.rotation.z = Math.PI/2;
+				gridYZ.setColors( new THREE.Color(0x660000), new THREE.Color(0x660000) );
+				scene.add(gridYZ);
+				*/
+				// direction (normalized), origin, length, color(hex)
+				//var terminus  = new THREE.Vector3(75,75,-75);
+				//var direction = new THREE.Vector3().subVectors(terminus, origin).normalize();
+				//var arrow = new THREE.ArrowHelper(direction, origin, 50, 0x884400);
+				//scene.add(arrow);
+				
+				
+				/*object = new THREE.Mesh( new THREE.RingGeometry( 95, 98, 100, 15, 0, Math.PI * 2 ), new THREE.MeshPhongMaterial( { color: 0xCCCCCC } ) );
+				object.position.set( 0, 0, 0 );
+				scene.add( object );*/
+				
+				
+				// create a small sphere to show position of light
+				/*var lightbulb = new THREE.Mesh( 
+					new THREE.SphereGeometry( 10, 16, 8 ), 
+					new THREE.MeshBasicMaterial( { color: 0xffaa00 } )
+				);
+				scene.add( lightbulb );
+				lightbulb.position = light.position;*/
+			}
+				
+				
+			function animate(){
+				requestAnimationFrame(render);
+				render();
+				update();
+			}
+			function render() {
+				
+				/*cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;*/
+
+				renderer.render(scene, camera);
+			}
+			function update()
+			{
+				if ( keyboard.pressed("z") ) 
+				{	// do something   
+				}
+				
+				controls.update();
+				//stats.update();
+			}
+				
+		</script>
+	</body>
+</html>
+
