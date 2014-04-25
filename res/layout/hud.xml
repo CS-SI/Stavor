@@ -7,7 +7,7 @@
     android:textAlignment="gravity" >
 
     <LinearLayout
-        android:id="@+id/LinearLayout1"
+        android:id="@+id/commentsLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
@@ -23,9 +23,10 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:background="@color/grey2" >
 
-                <WebView
+                <org.xwalk.core.XWalkView
                     android:id="@+id/browser"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -52,7 +53,7 @@
             android:fillViewport="true" >
 
             <LinearLayout
-                android:id="@+id/LinearLayout1"
+                android:id="@+id/commentsLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical" >
@@ -76,7 +77,7 @@
                     android:progress="50" />
 
                 <LinearLayout
-                    android:id="@+id/LinearLayout1"
+                    android:id="@+id/commentsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 
@@ -109,7 +110,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/LinearLayout1"
+                    android:id="@+id/commentsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 

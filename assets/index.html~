@@ -52,7 +52,7 @@ This three.js demo is part of a collection at
 	function setLoadingProgress(progress) {// from 0 to 100 (will fill the progress bar from 50% to 100%)
 		if (typeof Android != "undefined"){ // check the bridge 
 		  if (Android.setProgress!= "undefined") { // check the method
-			 Android.setProgress(progress);
+			 //Android.setProgress(progress);
 		  }
 	   }
     }
@@ -280,7 +280,7 @@ This three.js demo is part of a collection at
 	var fps_update_skips = 60;
 
 	var show_sky = true;
-	var show_sphere = false;
+	var show_sphere = true;
 	var show_mini_spheres = true;
 	var show_circles = true;
 	var show_axis = true;

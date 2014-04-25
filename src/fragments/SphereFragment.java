@@ -1,5 +1,8 @@
 package fragments;
 
+import org.xwalk.core.XWalkSettings;
+import org.xwalk.core.XWalkView;
+
 import web.WebAppInterface;
 import model.ModelSimulation;
 import cs.si.satatt.MainActivity;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /**
@@ -49,13 +53,14 @@ public final class SphereFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.sphere, container,
 				false);
 		
-		WebView browser = (WebView) rootView.findViewById(R.id.browser);
-    	
-    	WebSettings browserSettings = browser.getSettings();
+		//XWalkView browser = (XWalkView) rootView.findViewById(R.id.xbrowser);
+		XWalkView browser = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
+		
+    	XWalkSettings browserSettings = browser.getSettings();
     	
     	browserSettings.setJavaScriptEnabled(true);
     	browserSettings.setUseWideViewPort(false);
-    	browserSettings.setLoadWithOverviewMode(true);
+    	//browserSettings.setLoadWithOverviewMode(true);
     	browserSettings.setAllowFileAccessFromFileURLs(true); //Maybe you don't need this rule
     	browserSettings.setAllowUniversalAccessFromFileURLs(true);
     	//browserSettings.setBuiltInZoomControls(true);
@@ -64,14 +69,14 @@ public final class SphereFragment extends Fragment {
     	
     	browser.clearCache(true);
     	
-      	browser.setWebChromeClient(new webclient.UAChrome(null) {
+      	/*browser.setXWalkWebChromeClient(new org.xwalk.core.client.XWalkDefaultWebChromeClient(rootView.getContext(), browser) {
       		public void onProgressChanged(WebView view, int progress) {
       			// Activities and WebViews measure progress with different scales.
       			// The progress meter will automatically disappear when we reach 100%
       			getActivity().setProgress(progress * 100);
       		}
       	});
-      	browser.setWebViewClient(new webclient.UAWebViewClient(null) {
+      	browser.setXWalkClient(new org.xwalk.core.client.XWalkDefaultClient(rootView.getContext(), browser) {
       		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
       			Toast.makeText(getActivity(), "Oh no! " + description, Toast.LENGTH_LONG).show();
       		}
@@ -80,9 +85,12 @@ public final class SphereFragment extends Fragment {
     	browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
     	browser.addJavascriptInterface(null, "unlockingandroid");
-    	
+    	*/
     	sim = new ModelSimulation(container.getContext());
-    	browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
+    	//browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
+    	
+    	LinearLayout commentsLayout=(LinearLayout)rootView.findViewById(R.id.commentsLayout);
+    	commentsLayout.addView(browser);
     	
     	browser.loadUrl(STARTING_PAGE);
 		

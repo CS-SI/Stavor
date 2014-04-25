@@ -9,6 +9,7 @@ public class ModelState {
 	public double[] value_target_a = {-5,-5,-5};
 	public double[] value_vector_a = {-7,-5,-5};
 	public double[] value_direction_a = {-5,-5,-7};
+	
 	//public double mass = 0;
 	//public int[] time = {2014, 01, 01, 23, 55, 10};
 }

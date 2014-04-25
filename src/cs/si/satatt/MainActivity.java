@@ -1,5 +1,7 @@
 package cs.si.satatt;
 
+import org.xwalk.core.XWalkView;
+
 import settings.SettingsBasicFragment;
 import settings.SettingsExtraFragment;
 import settings.SettingsGeneralFragment;

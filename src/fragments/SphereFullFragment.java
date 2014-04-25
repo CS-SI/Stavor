@@ -1,5 +1,8 @@
 package fragments;
 
+import org.xwalk.core.XWalkSettings;
+import org.xwalk.core.XWalkView;
+
 import web.WebAppInterface;
 import model.ModelSimulation;
 import cs.si.satatt.MainActivity;
@@ -43,7 +46,7 @@ public final class SphereFullFragment extends Fragment {
 	}
 	
 	public ModelSimulation sim;
-	private WebView browser;
+	private XWalkView browser;
 
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -94,14 +97,16 @@ public final class SphereFullFragment extends Fragment {
 		   }
 		  });
 		
-		browser = (WebView) rootView.findViewById(R.id.browser);
+		//browser = (WebView) rootView.findViewById(R.id.browser);
 		//browser.setBackgroundResource(R.color.black);
+		browser = (XWalkView)rootView.findViewById(R.id.browser);
+		
     	
-    	WebSettings browserSettings = browser.getSettings();
+    	XWalkSettings browserSettings = browser.getSettings();
     	
     	browserSettings.setJavaScriptEnabled(true);
     	browserSettings.setUseWideViewPort(false);
-    	browserSettings.setLoadWithOverviewMode(true);
+    	//browserSettings.setLoadWithOverviewMode(true);
     	browserSettings.setAllowFileAccessFromFileURLs(true); //Maybe you don't need this rule
     	browserSettings.setAllowUniversalAccessFromFileURLs(true);
     	//browserSettings.setBuiltInZoomControls(true);
@@ -110,7 +115,7 @@ public final class SphereFullFragment extends Fragment {
     	
     	browser.clearCache(true);
     	
-    	browser.setWebChromeClient(new webclient.UAChrome(null) {
+    	/*browser.setWebChromeClient(new webclient.UAChrome(null) {
       		public void onProgressChanged(WebView view, int progress) {
       			// Activities and WebViews measure progress with different scales.
       			// The progress meter will automatically disappear when we reach 100%
@@ -127,7 +132,7 @@ public final class SphereFullFragment extends Fragment {
     	browser.setWebViewClient(new webclient.UAWebViewClient(null));
     	browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
-    	browser.addJavascriptInterface(null, "unlockingandroid");
+    	browser.addJavascriptInterface(null, "unlockingandroid");*/
     	
     	sim = new ModelSimulation(container.getContext());
     	browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
