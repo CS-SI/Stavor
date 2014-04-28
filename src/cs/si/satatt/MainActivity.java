@@ -12,6 +12,7 @@ import fragments.NavigationDrawerFragment;
 import fragments.PlaceholderFragment;
 import fragments.SphereFragment;
 import fragments.SphereFullFragment;
+import fragments.TestFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.FragmentManager;
@@ -93,6 +94,11 @@ public class MainActivity extends ActionBarActivity implements
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, new SettingsGeneralFragment()).commit();
+		}else if(position==6){
+			// Display the fragment as the main content.
+	        fragmentManager
+	        .beginTransaction()
+	        .replace(R.id.container, TestFragment.newInstance(position + 1)).commit();
 		}else{
 			
 		}
@@ -116,7 +122,10 @@ public class MainActivity extends ActionBarActivity implements
 			mTitle = getString(R.string.title_section5);
 			break;
 		case 6:
-			mTitle = getString(R.string.title_section5);
+			mTitle = getString(R.string.title_section6);
+			break;
+		case 7:
+			mTitle = getString(R.string.title_section7);
 			break;
 		}
 	}

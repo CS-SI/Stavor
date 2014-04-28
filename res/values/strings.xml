@@ -8,6 +8,7 @@
     <string name="title_section4">Extra indicators</string>
     <string name="title_section5">Models</string>
     <string name="title_section6">Preferences</string>
+    <string name="title_section7">WebGL test</string>
     <string name="basic_indicator_position">Position</string>
     <string name="basic_indicator_velocity">Velocity</string>
     <string name="basic_indicator_momentum">Momentum</string>
@@ -42,6 +43,9 @@
     <string name="eg_pitch">Pitch: -3.14</string>
     <string name="eg_yaw">Yaw: -3.14</string>
     <string name="eg_radium">Orbit radium: 360.000 Km</string>
+    <string name="test_1">Test 1</string>
+    <string name="test_2">Test 2</string>
+    <string name="test_3">Test 3</string>
     
     
     <string name="pref_performance">Performance</string>
