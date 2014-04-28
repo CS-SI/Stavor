@@ -1,5 +1,7 @@
 package cs.si.satatt;
 
+import model.ModelSimulation;
+
 import org.xwalk.core.XWalkView;
 
 import settings.SettingsBasicFragment;
@@ -37,6 +39,7 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {	
 		super.onCreate(savedInstanceState);
+		simulation = new ModelSimulation(this);
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
 		setProgressBarVisibility(true);
@@ -49,6 +52,8 @@ public class MainActivity extends ActionBarActivity implements
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 	}
+	
+	public ModelSimulation simulation;
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
@@ -58,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
-					SphereFullFragment.newInstance(position + 1)).commit();
+					SphereFullFragment.newInstance(position + 1, simulation)).commit();
 		}else if(position==1){
 			/*fragmentManager
 			.beginTransaction()
@@ -67,7 +72,7 @@ public class MainActivity extends ActionBarActivity implements
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
-					SphereFragment.newInstance(position + 1)).commit();
+					SphereFragment.newInstance(position + 1, simulation)).commit();
 		}else if(position==2){
 			// Display the fragment as the main content.
 	        fragmentManager

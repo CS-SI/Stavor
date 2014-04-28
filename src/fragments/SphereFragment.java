@@ -1,11 +1,14 @@
 package fragments;
 
+import java.io.Serializable;
+
 import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
 import web.WebAppInterface;
 import model.ModelSimulation;
 import cs.si.satatt.MainActivity;
+import cs.si.satatt.Parameters;
 import cs.si.satatt.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -29,14 +32,17 @@ public final class SphereFragment extends Fragment {
 	 * fragment.
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
+	private static final String ARG_SIM_OBJ = "simulation_object";
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
+	 * @param simulation 
 	 */
-	public static SphereFragment newInstance(int sectionNumber) {	
+	public static SphereFragment newInstance(int sectionNumber, ModelSimulation simulation) {	
 		SphereFragment fragment = new SphereFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+		args.putSerializable(ARG_SIM_OBJ, (Serializable) simulation);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -86,13 +92,13 @@ public final class SphereFragment extends Fragment {
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
     	browser.addJavascriptInterface(null, "unlockingandroid");
     	*/
-    	sim = new ModelSimulation(container.getContext());
+    	sim = (ModelSimulation) getArguments().getSerializable(ARG_SIM_OBJ);
+    	sim.setCurrentView(rootView);
     	//browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
-    	
     	LinearLayout commentsLayout=(LinearLayout)rootView.findViewById(R.id.commentsLayout);
     	commentsLayout.addView(browser);
     	
-    	browser.loadUrl(STARTING_PAGE);
+    	browser.loadUrl(Parameters.Web.STARTING_PAGE);
 		
 		/*TextView textView = (TextView) rootView
 				.findViewById(R.id.section_label);
@@ -100,8 +106,6 @@ public final class SphereFragment extends Fragment {
 				ARG_SECTION_NUMBER)));*/
 		return rootView;
 	}
-	
-	public static final String STARTING_PAGE = "file:///android_asset/index.html";
     
     private class UANOOP {
     }

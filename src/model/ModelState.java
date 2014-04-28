@@ -1,6 +1,17 @@
 package model;
 
-public class ModelState {
+import java.io.Serializable;
+
+/**
+ * Parameters for the model representation.
+ * @author xavier
+ *
+ */
+public class ModelState implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6931304300114881770L;
 	public double[] value_sun = {87000000,87000000,87000000};
 	public double[] value_earth = {36000,12000,5};
 	public double[] value_velocity = {0,0,-15};
@@ -9,7 +20,4 @@ public class ModelState {
 	public double[] value_target_a = {-5,-5,-5};
 	public double[] value_vector_a = {-7,-5,-5};
 	public double[] value_direction_a = {-5,-5,-7};
-	
-	//public double mass = 0;
-	//public int[] time = {2014, 01, 01, 23, 55, 10};
 }
