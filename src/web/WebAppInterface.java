@@ -1,12 +1,13 @@
 package web;
 
 import cs.si.satatt.R;
-import fragments.SphereFullFragment;
+import fragments.HudFragment;
 import model.ModelSimulation;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.widget.Toast;
+
 import org.chromium.content.browser.JavascriptInterface;
 
 //XGGDEBUG:WAITING use ( org.xwalk.core.JavascriptInterface ) when the code is merged in: https://github.com/crosswalk-project/crosswalk/pull/1876/files
@@ -44,7 +45,7 @@ public class WebAppInterface {
     	activity.runOnUiThread( new Runnable() {
 	        public void run() {
 	        	try{
-	        		((SphereFullFragment)activity.getFragmentManager().findFragmentById(R.id.container)).updateFPS(stats);
+	        		((HudFragment)activity.getFragmentManager().findFragmentById(R.id.container)).updateFPS(stats);
 	        	}catch(Exception e){
 	        		
 	        	}

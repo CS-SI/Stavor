@@ -9,9 +9,7 @@ import settings.SettingsExtraFragment;
 import settings.SettingsGeneralFragment;
 import settings.SettingsModelsFragment;
 import fragments.NavigationDrawerFragment;
-import fragments.PlaceholderFragment;
-import fragments.SphereFragment;
-import fragments.SphereFullFragment;
+import fragments.HudFragment;
 import fragments.TestFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -64,7 +62,7 @@ public class MainActivity extends ActionBarActivity implements
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
-					SphereFullFragment.newInstance(position + 1, simulation)).commit();
+					HudFragment.newInstance(position + 1, simulation)).commit();
 		}else if(position==1){
 			/*fragmentManager
 			.beginTransaction()
@@ -73,7 +71,7 @@ public class MainActivity extends ActionBarActivity implements
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
-					SphereFragment.newInstance(position + 1, simulation)).commit();
+					HudFragment.newInstance(position + 1, simulation)).commit();
 		}else if(position==2){
 			// Display the fragment as the main content.
 	        fragmentManager
