@@ -18,13 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.SlidingDrawer.OnDrawerCloseListener;
@@ -60,7 +55,7 @@ public final class HudFragment extends Fragment {
 	
 	public ModelSimulation sim;
 	XWalkView browser;
-	LinearLayout commentsLayout, slider_content;
+	LinearLayout browserLayout, slider_content;
 
 	@SuppressWarnings("deprecation")
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
@@ -175,8 +170,8 @@ public final class HudFragment extends Fragment {
     	sim.setCurrentView(rootView);
     	browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
     	
-    	commentsLayout=(LinearLayout)rootView.findViewById(R.id.commentsLayout);
-    	commentsLayout.addView(browser);
+    	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
+    	browserLayout.addView(browser);
     	
     	browser.loadUrl(Parameters.Web.STARTING_PAGE);
 		

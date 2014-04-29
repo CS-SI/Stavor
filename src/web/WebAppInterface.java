@@ -4,8 +4,6 @@ import cs.si.satatt.R;
 import fragments.HudFragment;
 import model.ModelSimulation;
 import android.app.Activity;
-import android.content.Context;
-import android.os.Handler;
 import android.widget.Toast;
 
 import org.chromium.content.browser.JavascriptInterface;

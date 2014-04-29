@@ -1,15 +1,13 @@
 package cs.si.satatt;
 
 import model.ModelSimulation;
-
-import org.xwalk.core.XWalkView;
-
 import settings.SettingsBasicFragment;
 import settings.SettingsExtraFragment;
 import settings.SettingsGeneralFragment;
 import settings.SettingsModelsFragment;
 import fragments.NavigationDrawerFragment;
 import fragments.HudFragment;
+import fragments.SimulatorFragment;
 import fragments.TestFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -62,7 +60,7 @@ public class MainActivity extends ActionBarActivity implements
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
-					HudFragment.newInstance(position + 1, simulation)).commit();
+					SimulatorFragment.newInstance(position + 1, simulation)).commit();
 		}else if(position==1){
 			/*fragmentManager
 			.beginTransaction()

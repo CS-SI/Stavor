@@ -1,0 +1,13 @@
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_screen_simulator">
+    <PreferenceCategory 
+        android:title="@string/pref_sim_global"
+        android:key="@string/pref_key_sim_global">
+        <CheckBoxPreference
+            android:key="@string/pref_key_sim_global_remote"
+            android:summary="@string/pref_summary_sim_global_remote"
+            android:title="@string/pref_title_sim_global_remote"
+            android:defaultValue="false" />
+    </PreferenceCategory> 
+</PreferenceScreen>

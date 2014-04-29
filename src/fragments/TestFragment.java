@@ -1,12 +1,9 @@
 package fragments;
 
-import java.io.Serializable;
 
 import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
-import web.WebAppInterface;
-import model.ModelSimulation;
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.Parameters;
 import cs.si.satatt.R;
@@ -17,9 +14,6 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -101,26 +95,26 @@ public final class TestFragment extends Fragment {
     	
     	browser.clearCache(true);
     	
-      	/*browser.setXWalkWebChromeClient(new org.xwalk.core.client.XWalkDefaultWebChromeClient(rootView.getContext(), browser) {
-      		public void onProgressChanged(WebView view, int progress) {
+      	browser.setXWalkWebChromeClient(new org.xwalk.core.client.XWalkDefaultWebChromeClient(rootView.getContext(), browser) {
+      		public void onProgressChanged(XWalkView view, int progress) {
       			// Activities and WebViews measure progress with different scales.
       			// The progress meter will automatically disappear when we reach 100%
       			getActivity().setProgress(progress * 100);
       		}
       	});
       	browser.setXWalkClient(new org.xwalk.core.client.XWalkDefaultClient(rootView.getContext(), browser) {
-      		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+      		public void onReceivedError(XWalkView view, int errorCode, String description, String failingUrl) {
       			Toast.makeText(getActivity(), "Oh no! " + description, Toast.LENGTH_LONG).show();
       		}
       	});
-    	
+    	/*
     	browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
     	browser.addJavascriptInterface(null, "unlockingandroid");
     	*/
     	//browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
-    	LinearLayout commentsLayout=(LinearLayout)rootView.findViewById(R.id.commentsLayout);
-    	commentsLayout.addView(browser);
+    	LinearLayout browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
+    	browserLayout.addView(browser);
     	
     	browser.loadUrl(Parameters.Web.TEST_PAGE_1);
 		
@@ -131,8 +125,8 @@ public final class TestFragment extends Fragment {
 		return rootView;
 	}
     
-    private class UANOOP {
-    }
+    /*private class UANOOP {
+    }*/
 
 	@Override
 	public void onAttach(Activity activity) {
