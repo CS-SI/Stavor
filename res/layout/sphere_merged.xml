@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/panel_limit"
+    android:gravity="bottom"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/commentsLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey2"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <layout.WrappingSlidingDrawer
+            android:id="@+id/slidingDrawer1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:content="@+id/content"
+            android:handle="@+id/handle" >
+
+            <Button
+                android:id="@+id/handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Handle" />
+
+            <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewPanelTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="@string/eg_sim_time"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarPanelProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="50" />
+
+                <LinearLayout
+                    android:id="@+id/anglesLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textViewPanelRoll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.64"
+                        android:text="@string/eg_roll"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewPanelPitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.51"
+                        android:text="@string/eg_pitch"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewPanelYaw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.66"
+                        android:text="@string/eg_yaw"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/velLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textViewPanelVel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5.01"
+                        android:text="@string/eg_vel"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewPanelAccel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.33"
+                        android:text="@string/eg_accel"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewPanelRadium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/eg_radium"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textViewPanelMass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mass: 5000.000 Kg"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </layout.WrappingSlidingDrawer>
+
+    </FrameLayout>
+</RelativeLayout>

@@ -6,8 +6,10 @@ import model.ModelSimulation;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
-import android.webkit.JavascriptInterface;
 import android.widget.Toast;
+import org.chromium.content.browser.JavascriptInterface;
+
+//import android.webkit.JavascriptInterface; Used for WebView not XWalkView
 
 public class WebAppInterface {
     Activity activity;

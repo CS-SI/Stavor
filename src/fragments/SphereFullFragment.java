@@ -136,14 +136,15 @@ public final class SphereFullFragment extends Fragment {
     	
     	browser.setWebChromeClient(new webclient.UAChrome(null));
     	browser.setWebViewClient(new webclient.UAWebViewClient(null));
+    	*/
     	browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
-    	browser.addJavascriptInterface(null, "unlockingandroid");*/
+    	browser.addJavascriptInterface(null, "unlockingandroid");
     	
     	//sim = new ModelSimulation(container.getContext());
     	sim = (ModelSimulation) getArguments().getSerializable(ARG_SIM_OBJ);
     	sim.setCurrentView(rootView);
-    	//browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
+    	browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
     	
     	browser.loadUrl(Parameters.Web.STARTING_PAGE);
     	

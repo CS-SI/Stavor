@@ -17,10 +17,16 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.SlidingDrawer;
+import android.widget.SlidingDrawer.OnDrawerCloseListener;
+import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.Toast;
 
 /**
@@ -51,16 +57,36 @@ public final class SphereFragment extends Fragment {
 	}
 	
 	public ModelSimulation sim;
+	XWalkView browser;
+	LinearLayout commentsLayout;
 
+	@SuppressWarnings("deprecation")
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.sphere, container,
+		View rootView = inflater.inflate(R.layout.sphere_merged, container,
 				false);
 		
+		SlidingDrawer drawer = (SlidingDrawer) rootView.findViewById(R.id.slidingDrawer1);
+        drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
+            public void onDrawerOpened() {
+            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
+            	layoutParams.height = browser.getLayoutParams().height/2;
+            	browser.setLayoutParams(layoutParams);
+            }
+        });
+       
+        drawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
+            public void onDrawerClosed() {
+            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
+            	layoutParams.height = LayoutParams.MATCH_PARENT;
+            	browser.setLayoutParams(layoutParams);
+            }
+        });
+		
 		//XWalkView browser = (XWalkView) rootView.findViewById(R.id.xbrowser);
-		XWalkView browser = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
+		browser = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
 		
     	XWalkSettings browserSettings = browser.getSettings();
     	
@@ -87,15 +113,15 @@ public final class SphereFragment extends Fragment {
       			Toast.makeText(getActivity(), "Oh no! " + description, Toast.LENGTH_LONG).show();
       		}
       	});
-    	
+    	*/
     	browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
     	browser.addJavascriptInterface(null, "unlockingandroid");
-    	*/
+    	
     	sim = (ModelSimulation) getArguments().getSerializable(ARG_SIM_OBJ);
     	sim.setCurrentView(rootView);
-    	//browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
-    	LinearLayout commentsLayout=(LinearLayout)rootView.findViewById(R.id.commentsLayout);
+    	browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
+    	commentsLayout=(LinearLayout)rootView.findViewById(R.id.commentsLayout);
     	commentsLayout.addView(browser);
     	
     	browser.loadUrl(Parameters.Web.STARTING_PAGE);
