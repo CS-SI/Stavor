@@ -74,8 +74,13 @@ public final class HudFragment extends Fragment {
         drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
             public void onDrawerOpened() {
             	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
-            	layoutParams.height = browser.getHeight()-slider_content.getHeight();
-            	layoutParams.width = LayoutParams.MATCH_PARENT;
+            	if(getResources().getConfiguration().orientation==android.content.res.Configuration.ORIENTATION_PORTRAIT){
+                	layoutParams.height = browser.getHeight()-slider_content.getHeight();
+                	layoutParams.width = LayoutParams.MATCH_PARENT;
+            	}else{
+            		layoutParams.width = browser.getWidth()-slider_content.getWidth();
+                	layoutParams.height = LayoutParams.MATCH_PARENT;
+            	}
             	browser.setLayoutParams(layoutParams);
             }
         });

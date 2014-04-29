@@ -12,17 +12,19 @@ public class WrappingSlidingDrawer extends SlidingDrawer {
     public WrappingSlidingDrawer(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        int orientation = attrs.getAttributeIntValue("android", "orientation", ORIENTATION_VERTICAL);
+        //int orientation = attrs.getAttributeIntValue("android", "orientation", ORIENTATION_VERTICAL);
         mTopOffset = attrs.getAttributeIntValue("android", "topOffset", 0);
-        mVertical = (orientation == SlidingDrawer.ORIENTATION_VERTICAL);
+        //mVertical = (orientation == SlidingDrawer.ORIENTATION_VERTICAL);
+        mVertical = (getResources().getConfiguration().orientation==android.content.res.Configuration.ORIENTATION_PORTRAIT);
     }
 
     public WrappingSlidingDrawer(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        int orientation = attrs.getAttributeIntValue("android", "orientation", ORIENTATION_VERTICAL);
+        //int orientation = attrs.getAttributeIntValue("android", "orientation", ORIENTATION_VERTICAL);
         mTopOffset = attrs.getAttributeIntValue("android", "topOffset", 0);
-        mVertical = (orientation == SlidingDrawer.ORIENTATION_VERTICAL);
+        //mVertical = (orientation == SlidingDrawer.ORIENTATION_VERTICAL);
+        mVertical = (getResources().getConfiguration().orientation==android.content.res.Configuration.ORIENTATION_PORTRAIT);
     }
 
     @Override

@@ -28,7 +28,6 @@
             android:paddingBottom="0dp"
             android:paddingTop="0dp"
             android:text="@string/view_xyz" />
-
     </FrameLayout>
 
     <FrameLayout
@@ -45,31 +44,32 @@
             android:text="@string/fps_zero"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/white" />
-
     </FrameLayout>
 
     <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_alignParentRight="true" >
 
         <layout.WrappingSlidingDrawer
             android:id="@+id/slidingDrawer1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:content="@+id/content"
-            android:handle="@+id/handle" >
+            android:handle="@+id/handle"
+            android:orientation="horizontal" >
 
             <Button
                 android:id="@+id/handle"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_width="18dp"
+                android:layout_height="200dp"
                 android:minHeight="10dp"
                 android:minWidth="256dp" />
 
             <LinearLayout
                 android:id="@+id/content"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_border"
                 android:orientation="vertical" >
@@ -166,6 +166,6 @@
                     android:textColor="@color/white" />
             </LinearLayout>
         </layout.WrappingSlidingDrawer>
-
     </FrameLayout>
+
 </RelativeLayout>
