@@ -4,14 +4,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/panel_limit"
-    android:gravity="bottom"
+    android:gravity="top"
     android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/commentsLayout"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey2"
+        android:background="@color/black"
         android:orientation="vertical" >
     </LinearLayout>
 
@@ -37,6 +37,7 @@
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/custom_border"
                 android:orientation="vertical" >
 
                 <TextView

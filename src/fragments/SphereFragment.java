@@ -58,7 +58,7 @@ public final class SphereFragment extends Fragment {
 	
 	public ModelSimulation sim;
 	XWalkView browser;
-	LinearLayout commentsLayout;
+	LinearLayout commentsLayout, slider_content;
 
 	@SuppressWarnings("deprecation")
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
@@ -72,7 +72,8 @@ public final class SphereFragment extends Fragment {
         drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
             public void onDrawerOpened() {
             	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
-            	layoutParams.height = browser.getLayoutParams().height/2;
+            	layoutParams.height = browser.getHeight()-slider_content.getHeight();
+            	layoutParams.width = LayoutParams.MATCH_PARENT;
             	browser.setLayoutParams(layoutParams);
             }
         });
@@ -81,11 +82,12 @@ public final class SphereFragment extends Fragment {
             public void onDrawerClosed() {
             	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
             	layoutParams.height = LayoutParams.MATCH_PARENT;
+            	layoutParams.width = LayoutParams.MATCH_PARENT;
             	browser.setLayoutParams(layoutParams);
             }
         });
 		
-		//XWalkView browser = (XWalkView) rootView.findViewById(R.id.xbrowser);
+		slider_content = (LinearLayout) rootView.findViewById(R.id.content);
 		browser = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
 		
     	XWalkSettings browserSettings = browser.getSettings();
@@ -101,19 +103,20 @@ public final class SphereFragment extends Fragment {
     	
     	browser.clearCache(true);
     	
-      	/*browser.setXWalkWebChromeClient(new org.xwalk.core.client.XWalkDefaultWebChromeClient(rootView.getContext(), browser) {
-      		public void onProgressChanged(WebView view, int progress) {
+      	browser.setXWalkWebChromeClient(new org.xwalk.core.client.XWalkDefaultWebChromeClient(rootView.getContext(), browser) {
+      		@Override
+      		public void onProgressChanged(XWalkView view, int progress) {
       			// Activities and WebViews measure progress with different scales.
       			// The progress meter will automatically disappear when we reach 100%
       			getActivity().setProgress(progress * 100);
       		}
       	});
       	browser.setXWalkClient(new org.xwalk.core.client.XWalkDefaultClient(rootView.getContext(), browser) {
-      		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+      		public void onReceivedError(XWalkView view, int errorCode, String description, String failingUrl) {
       			Toast.makeText(getActivity(), "Oh no! " + description, Toast.LENGTH_LONG).show();
       		}
       	});
-    	*/
+    	
     	browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
     	browser.addJavascriptInterface(null, "unlockingandroid");
@@ -121,6 +124,7 @@ public final class SphereFragment extends Fragment {
     	sim = (ModelSimulation) getArguments().getSerializable(ARG_SIM_OBJ);
     	sim.setCurrentView(rootView);
     	browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
+    	
     	commentsLayout=(LinearLayout)rootView.findViewById(R.id.commentsLayout);
     	commentsLayout.addView(browser);
     	
