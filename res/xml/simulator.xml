@@ -9,5 +9,26 @@
             android:summary="@string/pref_summary_sim_global_remote"
             android:title="@string/pref_title_sim_global_remote"
             android:defaultValue="false" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_sim_remote"
+        android:key="@string/pref_key_sim_remote">
+		<EditTextPreference
+            android:key="@string/pref_key_sim_remote_host"
+            android:title="@string/pref_title_sim_remote_host"
+            android:summary="@string/pref_summary_sim_remote_host"
+            android:dialogTitle="@string/pref_title_sim_remote_host" />
+		<EditTextPreference
+            android:key="@string/pref_key_sim_remote_port"
+            android:summary="@string/pref_summary_sim_remote_port"
+            android:title="@string/pref_title_sim_remote_port"
+            android:defaultValue="1520"
+        	android:inputType="number" 
+        	android:maxLength="5"
+            android:numeric="integer" />
     </PreferenceCategory> 
+    <PreferenceCategory 
+        android:title="@string/pref_sim_local"
+        android:key="@string/pref_key_sim_local">
+    </PreferenceCategory>
 </PreferenceScreen>

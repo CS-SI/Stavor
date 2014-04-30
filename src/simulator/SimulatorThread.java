@@ -12,8 +12,8 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, SimResults, Bool
     protected Boolean doInBackground(ModelSimulation... params) {
     	sim = params[0];
         while(true) {
-        	SimResults results = simulate();
-            publishProgress(results);
+        	//SimResults results = simulate();
+            //publishProgress(results);
             if(isCancelled())
                 break;
         }

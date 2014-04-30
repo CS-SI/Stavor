@@ -5,6 +5,7 @@ import settings.SettingsBasicFragment;
 import settings.SettingsExtraFragment;
 import settings.SettingsGeneralFragment;
 import settings.SettingsModelsFragment;
+import simulator.Simulator;
 import fragments.NavigationDrawerFragment;
 import fragments.HudFragment;
 import fragments.SimulatorFragment;
@@ -32,11 +33,15 @@ public class MainActivity extends ActionBarActivity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
+	
+	private Simulator simulator;
+	public Simulator getSimulator(){
+		return simulator;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {	
 		super.onCreate(savedInstanceState);
-		simulation = new ModelSimulation(this);
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
 		setProgressBarVisibility(true);
@@ -49,18 +54,17 @@ public class MainActivity extends ActionBarActivity implements
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 	}
-	
-	public ModelSimulation simulation;
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
+
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
 		if(position==0){//XGGDEBUG: selection of tabs content
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
-					SimulatorFragment.newInstance(position + 1, simulation)).commit();
+					SimulatorFragment.newInstance(position + 1)).commit();
 		}else if(position==1){
 			/*fragmentManager
 			.beginTransaction()
@@ -69,7 +73,7 @@ public class MainActivity extends ActionBarActivity implements
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
-					HudFragment.newInstance(position + 1, simulation)).commit();
+					HudFragment.newInstance(position + 1)).commit();
 		}else if(position==2){
 			// Display the fragment as the main content.
 	        fragmentManager

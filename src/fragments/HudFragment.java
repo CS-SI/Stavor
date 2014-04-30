@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
+import simulator.Simulator;
 import web.WebAppInterface;
 import model.ModelSimulation;
 import cs.si.satatt.MainActivity;
@@ -35,17 +36,15 @@ public final class HudFragment extends Fragment {
 	 * fragment.
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
-	private static final String ARG_SIM_OBJ = "simulation_object";
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 * @param simulation 
 	 */
-	public static HudFragment newInstance(int sectionNumber, ModelSimulation simulation) {	
+	public static HudFragment newInstance(int sectionNumber) {	
 		HudFragment fragment = new HudFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-		args.putSerializable(ARG_SIM_OBJ, (Serializable) simulation);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -53,7 +52,7 @@ public final class HudFragment extends Fragment {
 	public HudFragment() {
 	}
 	
-	public ModelSimulation sim;
+	private Simulator simulator;
 	XWalkView browser;
 	LinearLayout browserLayout, slider_content;
 
@@ -166,9 +165,11 @@ public final class HudFragment extends Fragment {
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
     	browser.addJavascriptInterface(null, "unlockingandroid");
     	
-    	sim = (ModelSimulation) getArguments().getSerializable(ARG_SIM_OBJ);
-    	sim.setCurrentView(rootView);
-    	browser.addJavascriptInterface(new WebAppInterface(getActivity(), sim), "Android");
+    	simulator = ((MainActivity)getActivity()).getSimulator();
+    	if(simulator==null)
+			simulator = new Simulator((MainActivity)getActivity());
+    	simulator.getSimulationResults().setCurrentView(rootView);
+    	browser.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	browserLayout.addView(browser);

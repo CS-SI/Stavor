@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 import cs.si.satatt.Parameters;
 import cs.si.satatt.R;
 
-public class ModelSimulation implements Serializable {
+public class ModelSimulation {
 	/**
 	 * 
 	 */

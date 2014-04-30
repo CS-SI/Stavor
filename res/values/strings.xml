@@ -16,7 +16,7 @@
     <string name="basic_indicator_attitude">Attitude</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_screenshot">Screenshot</string>
+    <string name="action_screenshot">WiFi Display</string>
     <string name="action_settings">Settings</string>
     <string name="title_simulator">Simulator</string>
     <string name="title_sim_local">Local</string>
@@ -54,11 +54,23 @@
     <string name="test_1">Test 1</string>
     <string name="test_2">Test 2</string>
     <string name="test_3">Test 3</string>
+    <string name="powered_by">Powered by:</string>
+    <string name="sim_connect">Connect</string>
+    <string name="sim_disconnect">Disconnect</string>
+    <string name="sim_remote_host">Host:</string>
+    <string name="sim_remote_host_eg">127.0.0.1</string>
+    <string name="sim_remote_port">Port:</string>
+    <string name="sim_remote_port_eg">1520</string>
+    <string name="sim_local_new">New</string>
+    <string name="sim_local_edit">Edit</string>
+    <string name="sim_local_remove">Remove</string>
     
     
     <string name="pref_performance">Performance</string>
     <string name="pref_general">General</string>
     <string name="pref_sim_global">Global</string>
+    <string name="pref_sim_remote">Remote</string>
+    <string name="pref_sim_local">Local</string>
     <string name="pref_axis">Axis</string>
     <string name="pref_spacecraft">Spacecraft</string>
     <string name="pref_sun">Sun</string>
@@ -72,6 +84,10 @@
     <string name="pref_direction_a">Direction</string>
     <string name="pref_title_sim_global_remote">Remote simulator</string>
     <string name="pref_summary_sim_global_remote">Use a socket connected remote simulator</string>
+    <string name="pref_title_sim_remote_host">Host</string>
+    <string name="pref_summary_sim_remote_host">Socket server host</string>
+    <string name="pref_title_sim_remote_port">Port</string>
+    <string name="pref_summary_sim_remote_port">Socket communication port</string>
     <string name="pref_title_detail_level">Detail level</string>
     <string name="pref_summary_detail_level">Detail level of the graphics [1–9]</string>
     <string name="pref_title_fps_update_skips">FPS update skips</string>
