@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.apache.commons.math3.geometry.euclidean.threed.RotationOrder;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
 import org.orekit.frames.FramesFactory;
@@ -48,17 +49,16 @@ public class ModelSimulation {
     
     public void preInitialize(){
     	//XGGDEBUG:user selection of the inertial ref frame
-    	
-		if(inertialFrame==null){
-			inertialFrame = FramesFactory.getEME2000();
-		}
-		if(utc==null){
-			try {
-				utc = TimeScalesFactory.getUTC();
-			} catch (OrekitException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+    	try {
+			if(sunFrame==null){
+				sunFrame = CelestialBodyFactory.getSun().getInertiallyOrientedFrame();
 			}
+			if(utc==null){
+				utc = TimeScalesFactory.getUTC();
+			}
+    	} catch (OrekitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
     }
     
@@ -92,7 +92,7 @@ public class ModelSimulation {
     private AbsoluteDate tmp_time;
     private Vector3D tmp_vel;
     private TimeScale utc;
-    private Frame inertialFrame;
+    private Frame sunFrame;
     public void updateSimulation(SpacecraftState scs, int sim_progress){
     	ModelState new_state = new ModelState();
     	ModelInfo new_info = new ModelInfo();
@@ -115,7 +115,8 @@ public class ModelSimulation {
     	new_info.orbit_radium = earth.getNorm()/1000;
     	
     	try {
-			Vector3D sun = scs.getPVCoordinates(inertialFrame).getPosition().negate();
+    		Vector3D sun = scs.getPVCoordinates(sunFrame).getPosition().negate();
+			
 			new_state.value_sun[0] = sun.getX()/1000;
 	    	new_state.value_sun[1] = sun.getY()/1000;
 	    	new_state.value_sun[2] = sun.getZ()/1000;

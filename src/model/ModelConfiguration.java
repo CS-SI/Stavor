@@ -97,7 +97,7 @@ public class ModelConfiguration {
 	//Acceleration
 	public boolean show_acceleration = true;
 	public int color_acceleration = 0xfc00b0;
-	public float limit_acceleration = 15;//Km/s2
+	public float limit_acceleration = 5;//Km/s2
 	//Momentum
 	public boolean show_momentum = true;
 	public int color_momentum = 0x00fc19;

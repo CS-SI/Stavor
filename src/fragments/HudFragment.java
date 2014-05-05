@@ -88,7 +88,7 @@ public final class HudFragment extends Fragment {
             }
         });
         
-        drawer.getHandle().callOnClick();
+        //drawer.getHandle().callOnClick();
 		
 		slider_content = (LinearLayout) rootView.findViewById(R.id.content);
 		

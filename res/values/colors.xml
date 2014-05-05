@@ -7,6 +7,7 @@
     <color name="pref_def_vector_a">#00fffa</color>
     <color name="pref_def_direction_a">#ffff00</color>
     
+    <color name="panel_clock">#00c100</color>
     <color name="panel_limit">#FF0000</color>
     <color name="panel_value">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
