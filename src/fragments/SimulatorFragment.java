@@ -75,9 +75,7 @@ public final class SimulatorFragment extends Fragment {
 		
 		//simulator = (Simulator) getArguments().getSerializable(ARG_SIM_OBJ);
 		simulator = ((MainActivity)getActivity()).getSimulator();
-		if(simulator==null)
-			simulator = new Simulator((MainActivity)getActivity());
-    	simulator.getSimulationResults().setCurrentView(rootView);
+    	//simulator.setHudView(null);
     	
     	switch_remote = (Switch) rootView.findViewById(R.id.switch1);
     	sim_container = (ViewSwitcher) rootView.findViewById(R.id.sim_content);
@@ -94,7 +92,7 @@ public final class SimulatorFragment extends Fragment {
     	port_view = (EditText) rootView.findViewById(R.id.editTextPort);
     	
     	button_connect = (Button) rootView.findViewById(R.id.buttonConnect);
-    	loadCorrectButtonText(rootView);
+    	simulator.setButtonConnect(button_connect);
     	button_connect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -116,7 +114,6 @@ public final class SimulatorFragment extends Fragment {
             		}
             		simulator.connect();
             	}
-            	loadCorrectButtonText(v);
             }
         });
     	
@@ -135,12 +132,6 @@ public final class SimulatorFragment extends Fragment {
     		// Local
     		sim_container.setDisplayedChild(0);
     	}
-	}
-	private void loadCorrectButtonText(View view){
-    	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected))
-    		button_connect.setText(view.getContext().getString(R.string.sim_disconnect));
-    	else
-    		button_connect.setText(view.getContext().getString(R.string.sim_connect));
 	}
 
 	@Override

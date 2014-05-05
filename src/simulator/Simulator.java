@@ -4,9 +4,14 @@ import java.io.Serializable;
 
 import model.ModelSimulation;
 import cs.si.satatt.R;
+import cs.si.satatt.MainActivity;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class Simulator {
 	/**
@@ -21,11 +26,25 @@ public class Simulator {
 	private SocketsThread thread;
 	private SimulatorThread sthread;
 	private ModelSimulation simulation;
+	private Button buttonConnect;
+	
+	public void setButtonConnect(Button bt){
+		buttonConnect=bt;
+		updateConnectButtonText();
+	}
+	public void setHudView(View v){
+		simulation.setHud(v);
+	}
+	
+	public Context getContext(){
+		return context;
+	}
 	
 	public Simulator(Activity act){
 		activity = act;
 		sharedPref = activity.getSharedPreferences("cs.si.satatt", Context.MODE_PRIVATE);
 		context = activity.getApplicationContext();
+		simulation = new ModelSimulation(act);
 	}
 	
 	public ModelSimulation getSimulationResults(){
@@ -88,19 +107,25 @@ public class Simulator {
 	}
 
 	private void connectThread() {
+		activity.setProgress(10 * 100);
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
 			try{
+				activity.setProgress(20 * 100);
 				String host = sharedPref.getString(context.getString(R.string.pref_key_sim_remote_host), "127.0.0.1");
 				int port = Integer.parseInt(sharedPref.getString(context.getString(R.string.pref_key_sim_remote_port), "1520"));
+				activity.setProgress(30 * 100);
 				simulation = new ModelSimulation(activity);
+				activity.setProgress(40 * 100);
+				simulation.preInitialize();
 				thread = (SocketsThread) new SocketsThread(this,host,port).execute(simulation);
 			}catch(NumberFormatException nfe){
 			}
 		}else{
 			// Local
 		}
+		activity.setProgress(100 * 100);
 	}
 	
 	private void disconnectThread() {
@@ -108,7 +133,9 @@ public class Simulator {
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
+			thread.setDisconnected();
 			thread.cancel(false);
+			
 		}else{
 			// Local
 		}
@@ -166,6 +193,36 @@ public class Simulator {
 
 	public void setSimulatorStatus(SimulatorStatus new_status) {
 		simulatorStatus = new_status;
+		updateConnectButtonText();
+	}
+	
+	private void updateConnectButtonText(){
+		if(buttonConnect!=null){
+			activity.runOnUiThread( new Runnable() {
+				public void run() {
+					if(simulatorStatus.equals(SimulatorStatus.Connected))
+			    		buttonConnect.setText(context.getString(R.string.sim_disconnect));
+			    	else
+			    		buttonConnect.setText(context.getString(R.string.sim_connect));
+		        }
+			});
+		}
+	}
+
+	private String message = "";
+	public void showMessage(String string) {
+		message = string;
+		// TODO Auto-generated method stub
+		activity.runOnUiThread( new Runnable() {
+			public void run() {
+				Toast.makeText(context, message,
+		                Toast.LENGTH_LONG).show();
+	        }
+		});
+	}
+	public void goToHud() {
+		// TODO Auto-generated method stub
+		((MainActivity)activity).showHud();
 	}
 	
 }

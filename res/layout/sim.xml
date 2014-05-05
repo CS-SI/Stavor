@@ -76,6 +76,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:text="@string/sim_connect" />
+        android:text="@string/sim_connect"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

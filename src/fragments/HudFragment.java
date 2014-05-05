@@ -87,6 +87,8 @@ public final class HudFragment extends Fragment {
             	browser.setLayoutParams(layoutParams);
             }
         });
+        
+        drawer.getHandle().callOnClick();
 		
 		slider_content = (LinearLayout) rootView.findViewById(R.id.content);
 		
@@ -166,9 +168,8 @@ public final class HudFragment extends Fragment {
     	browser.addJavascriptInterface(null, "unlockingandroid");
     	
     	simulator = ((MainActivity)getActivity()).getSimulator();
-    	if(simulator==null)
-			simulator = new Simulator((MainActivity)getActivity());
-    	simulator.getSimulationResults().setCurrentView(rootView);
+    	simulator.setHudView(rootView);
+    	
     	browser.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);

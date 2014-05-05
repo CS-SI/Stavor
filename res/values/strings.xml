@@ -58,12 +58,18 @@
     <string name="sim_connect">Connect</string>
     <string name="sim_disconnect">Disconnect</string>
     <string name="sim_remote_host">Host:</string>
-    <string name="sim_remote_host_eg">127.0.0.1</string>
+    <string name="sim_remote_host_eg">192.168.43.10</string>
     <string name="sim_remote_port">Port:</string>
     <string name="sim_remote_port_eg">1520</string>
     <string name="sim_local_new">New</string>
     <string name="sim_local_edit">Edit</string>
     <string name="sim_local_remove">Remove</string>
+    
+    <string name="sim_remote_simulator_connected">Remote simulator connected!</string>
+    <string name="sim_remote_disconnected">Remote simulator disconnected</string>
+    <string name="sim_unknown_host">Unknown host</string>
+    <string name="sim_io_error">Simulator IO error</string>
+    <string name="sim_error">Simulator error</string>
     
     
     <string name="pref_performance">Performance</string>
