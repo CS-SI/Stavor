@@ -72,6 +72,7 @@
     <string name="sim_error">Simulator error</string>
     
     
+    <string name="pref_apk_install">Application install</string>
     <string name="pref_performance">Performance</string>
     <string name="pref_general">General</string>
     <string name="pref_sim_global">Global</string>
@@ -88,6 +89,8 @@
     <string name="pref_target_a">Target</string>
     <string name="pref_vector_a">Vector</string>
     <string name="pref_direction_a">Direction</string>
+    <string name="pref_title_data_installed">Orekit data is already installed</string>
+    <string name="pref_summary_data_installed">Flag to know if the Orekit data has been already installed</string>
     <string name="pref_title_sim_global_remote">Remote simulator</string>
     <string name="pref_summary_sim_global_remote">Use a socket connected remote simulator</string>
     <string name="pref_title_sim_remote_host">Host</string>
@@ -176,6 +179,7 @@
     <string name="pref_summary_direction_a_color">Direction color</string>
     
     
+    <string name="err_external_storage_not_accessible">External storage not accessible</string>
     
     
     <!-- Color Picker -->

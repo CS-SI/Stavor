@@ -20,11 +20,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import app.Parameters;
 
 import com.google.gson.Gson;
 
 import cs.si.satatt.OrekitInit;
-import cs.si.satatt.Parameters;
 import cs.si.satatt.R;
 
 public class ModelSimulation {

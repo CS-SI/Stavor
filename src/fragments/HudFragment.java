@@ -9,7 +9,6 @@ import simulator.Simulator;
 import web.WebAppInterface;
 import model.ModelSimulation;
 import cs.si.satatt.MainActivity;
-import cs.si.satatt.Parameters;
 import cs.si.satatt.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -26,6 +25,7 @@ import android.widget.TextView;
 import android.widget.SlidingDrawer.OnDrawerCloseListener;
 import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.Toast;
+import app.Parameters;
 
 /**
  * A sphere fragment containing a web view.

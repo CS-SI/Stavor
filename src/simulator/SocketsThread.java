@@ -12,13 +12,13 @@ import java.net.UnknownHostException;
 
 import org.orekit.propagation.SpacecraftState;
 
-import cs.si.satatt.Parameters;
 import cs.si.satatt.R;
 import cs.si.satatt.SerializationUtil;
 import model.ModelSimulation;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+import app.Parameters;
 
 public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
  

@@ -1,4 +1,4 @@
-package cs.si.satatt;
+package app;
 
 public class Parameters {
 	public static class Simulator {

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="pref_screen_apk">pref_screen_apk</string>
     <string name="pref_screen_simulator">pref_screen_simulator</string>
     <string name="pref_screen_preferences">pref_screen_preferences</string>
     <string name="pref_screen_models">pref_screen_models</string>
     <string name="pref_screen_basic_indicators">pref_screen_basic_indicators</string>
     <string name="pref_screen_extra_indicators">pref_screen_extra_indicators</string>
+    <string name="pref_key_apk_install">pref_key_apk_install</string>
+    <string name="pref_key_data_installed">pref_key_data_installed</string>
     <string name="pref_key_sim_global">pref_key_sim_global</string>
     <string name="pref_key_sim_global_remote">pref_key_sim_global_remote</string>
     <string name="pref_key_sim_remote">pref_key_sim_remote</string>

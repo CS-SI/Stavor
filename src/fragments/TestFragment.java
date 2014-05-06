@@ -5,7 +5,6 @@ import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
 import cs.si.satatt.MainActivity;
-import cs.si.satatt.Parameters;
 import cs.si.satatt.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import app.Parameters;
 
 /**
  * A test fragment containing a web view.
