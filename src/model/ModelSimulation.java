@@ -81,12 +81,15 @@ public class ModelSimulation {
      * @param st
      */
     private synchronized void updateState(ModelState st){
+    	Log.d("Sim",System.currentTimeMillis()+": "+"pre update 2");
     	state = st;
+    	Log.d("Sim",System.currentTimeMillis()+": "+"post update 2");
     }
     
     private synchronized void updateInfo(ModelInfo inf){
-    	info = inf;
-    	updateHUD();
+    	Log.d("Sim",System.currentTimeMillis()+": "+"pre update 3");
+    	info = inf; 
+    	Log.d("Sim",System.currentTimeMillis()+": "+"post update 3");
     }
     
     private AbsoluteDate tmp_time;
@@ -94,6 +97,7 @@ public class ModelSimulation {
     private TimeScale utc;
     private Frame sunFrame;
     public void updateSimulation(SpacecraftState scs, int sim_progress){
+    	Log.d("Sim",System.currentTimeMillis()+": "+"pre update 1");
     	ModelState new_state = new ModelState();
     	ModelInfo new_info = new ModelInfo();
     	
@@ -160,9 +164,11 @@ public class ModelSimulation {
     	
     	updateState(new_state);
     	updateInfo(new_info);
+    	Log.d("Sim",System.currentTimeMillis()+": "+"post update 1");
     }
     
-    private void updateHUD(){
+    public synchronized void updateHUD(){
+    	Log.d("Sim",System.currentTimeMillis()+": "+"pre update gui 1");
     	activity.runOnUiThread( new Runnable() {
 	        @SuppressLint("ResourceAsColor")
 			public void run() {
@@ -207,5 +213,6 @@ public class ModelSimulation {
 	        	}
 	        }
 	    });
+    	Log.d("Sim",System.currentTimeMillis()+": "+"post update gui 1");
     }
 }

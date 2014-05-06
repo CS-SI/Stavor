@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,7 +113,9 @@ public final class SimulatorFragment extends Fragment {
             		}else{
             			//Set mission
             		}
+            		Log.d("Sim",System.currentTimeMillis()+": "+"button connect pressed");
             		simulator.connect();
+            		Log.d("Sim",System.currentTimeMillis()+": "+"button connect onlick ends");
             	}
             }
         });

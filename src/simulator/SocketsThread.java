@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 
 import org.orekit.propagation.SpacecraftState;
 
+import cs.si.satatt.Parameters;
 import cs.si.satatt.R;
 import cs.si.satatt.SerializationUtil;
 import model.ModelSimulation;
@@ -19,7 +20,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-public class SocketsThread extends AsyncTask<ModelSimulation, SimResults, Boolean>{
+public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
  
 	private String dstAddress;
 	private int dstPort;
@@ -49,10 +50,12 @@ public class SocketsThread extends AsyncTask<ModelSimulation, SimResults, Boolea
 		}
 	}
 	
+	private long time_tmp_data = 0;
     @Override
     protected Boolean doInBackground(ModelSimulation... params) {
     	
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
+    		Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting socket");
     		try {
         		socket = new Socket(dstAddress, dstPort);
         		socket.setTcpNoDelay(true);
@@ -63,6 +66,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, SimResults, Boolea
 				setConnected();
 				simulator.goToHud();
         	    simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_simulator_connected));
+        	    Log.d("Sim",System.currentTimeMillis()+": "+"socket openend");
         	} catch (UnknownHostException e) {
         		// TODO Auto-generated catch block
         		e.printStackTrace();
@@ -77,14 +81,21 @@ public class SocketsThread extends AsyncTask<ModelSimulation, SimResults, Boolea
     	}
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
 		    try {
+		    	Log.d("Sim",System.currentTimeMillis()+": "+"enter infinite loop");
 				while (true){
-					long procTime = System.currentTimeMillis();
+					Log.d("Sim",System.currentTimeMillis()+": "+"before readObject");
 					SpacecraftState sstate = (SpacecraftState) inputOStream.readObject();
+					Log.d("Sim",System.currentTimeMillis()+": "+"after readObject");
 					if(sstate!=null){
-						SimResults results = new SimResults(sstate, 0);
-			            publishProgress(results);
+						if(time_tmp_data==0 || (System.nanoTime()-time_tmp_data)>Parameters.Simulator.min_hud_model_refreshing_interval_ns){
+							Log.d("Sim",System.currentTimeMillis()+": "+"update data");
+				    		time_tmp_data = System.nanoTime();
+							SimResults results = new SimResults(sstate, 0);
+							simulator.getSimulationResults().updateSimulation(results.spacecraftState, results.sim_progress);
+							Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
+						}
+			            publishProgress();
 					}
-			    	Log.d("Simulator", "Receive time: "+(System.currentTimeMillis()-procTime));
 		            if(isCancelled())
 		                break;
 				}
@@ -105,13 +116,15 @@ public class SocketsThread extends AsyncTask<ModelSimulation, SimResults, Boolea
         return true;
     }
  
+    private long time_tmp_gui = 0;
     @Override
-    protected void onProgressUpdate(SimResults... values) {
-
-		long procTime = System.currentTimeMillis();
-        simulator.getSimulationResults().updateSimulation(values[0].spacecraftState, values[0].sim_progress);
-
-    	Log.d("Simulator", "Update time: "+(System.currentTimeMillis()-procTime));
+    protected void onProgressUpdate(Void... values) {
+    	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
+    		Log.d("Sim",System.currentTimeMillis()+": "+"update gui");
+    		time_tmp_gui = System.nanoTime();
+    		simulator.getSimulationResults().updateHUD();
+    		Log.d("Sim",System.currentTimeMillis()+": "+"end update gui");
+    	}
     }
  
     @Override
