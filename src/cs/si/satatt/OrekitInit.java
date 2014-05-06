@@ -4,7 +4,9 @@ import java.io.File;
 
 import org.orekit.data.DataProvider;
 import org.orekit.data.DataProvidersManager;
+import org.orekit.data.DirectoryCrawler;
 import org.orekit.data.ZipJarCrawler;
+import org.orekit.errors.OrekitException;
 
 import android.content.Context;
 
@@ -12,7 +14,7 @@ public class OrekitInit {
 	
 	private final static String TAG = "OrekitInit";
 
-	public static void init(int source_, Context context_) {
+	public static void init(File root) {
 		
 		final DataProvidersManager providers_manager = DataProvidersManager.getInstance();
 		providers_manager.clearProviders();
@@ -36,9 +38,14 @@ public class OrekitInit {
 					Log.d(TAG, "dataset: embedded provider found");
 				}*/
 				
-				
-				DataProvider provider = new AndroidZipCrawler(source_,context_);
-				providers_manager.addProvider(provider);
+				DataProvider provider;
+				try {
+					provider = new DirectoryCrawler(root);
+					providers_manager.addProvider(provider);
+				} catch (OrekitException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				//Log.d(TAG, "dataset: provider found");
 		

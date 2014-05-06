@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import app.Installer;
 import app.Parameters;
 
 import com.google.gson.Gson;
@@ -40,7 +41,7 @@ public class ModelSimulation {
     private View view;
     
     public ModelSimulation(Activity acv){
-    	OrekitInit.init(R.raw.orekitdata,acv);
+    	OrekitInit.init(Installer.getOrekitDataRoot(acv));
     	activity=acv;
     	config = new ModelConfiguration(activity.getApplicationContext());
     	state = new ModelState();

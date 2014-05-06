@@ -48,7 +48,9 @@ public class Installer {
 	
 	*/
 	
-	
+	public static File getOrekitDataRoot(Activity activity){
+		return new File(activity.getExternalFilesDir(null)+File.separator+orekitDataPath);
+	}
 	
 	private static String orekitDataPath = "orekit";
 	private static String[] orekitDataFolders = {
@@ -94,7 +96,7 @@ public class Installer {
 		        OutputStream out = null;
 		        try {
 		          in = assetManager.open(orekitDataPath+File.separator+foldername+File.separator+filename);
-		          File outFile = new File(activity.getExternalFilesDir(null)+File.separator+foldername, filename);
+		          File outFile = new File(activity.getExternalFilesDir(null)+File.separator+orekitDataPath+File.separator+foldername, filename);
 		          outFile.getParentFile().mkdirs();
 		          out = new FileOutputStream(outFile);
 		          copyFile(in, out);
