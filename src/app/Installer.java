@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -59,19 +60,19 @@ public class Installer {
 		"Potential"
 	};
 	public static void installApkData(Activity activity){
-		SharedPreferences prefs = activity.getSharedPreferences("cs.si.satatt", Context.MODE_PRIVATE);
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
 		if(!prefs.getBoolean(activity.getString(R.string.pref_key_data_installed), false)){
 			Log.d("INSTALLER", "Installing Orekit data files...");
 			if(isExternalStorageWritable()){
 				if(copyAssets(activity)){
-					prefs.edit().putBoolean(activity.getString(R.string.pref_key_data_installed), true);
+					prefs.edit().putBoolean(activity.getString(R.string.pref_key_data_installed), true).commit();
 					Log.d("INSTALLER", "Installing Orekit data files... OK");
 				}else{
 					Log.d("INSTALLER", "Installing Orekit data files... FAIL");
 				}
 			}else{
 				Log.d("INSTALLER", "Cannot install Orekit data files, external storage not accessible");
-				Toast.makeText(activity.getApplicationContext(), R.string.err_external_storage_not_accessible, Toast.LENGTH_LONG);
+				Toast.makeText(activity.getApplicationContext(), R.string.err_external_storage_not_accessible, Toast.LENGTH_LONG).show();;
 			}
 		}else{
 			Log.d("INSTALLER", "Orekit data files are already installed...");
