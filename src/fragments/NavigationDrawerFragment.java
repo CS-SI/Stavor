@@ -268,7 +268,7 @@ public class NavigationDrawerFragment extends Fragment {
 	        	
         	
         	
-        	//XGGDEBUG: take screenshot
+        	//XGGDEBUG: take screenshot/Wifi display
         	
         	
         	// image naming and path  to include sd card  appending name you choose for file

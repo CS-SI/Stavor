@@ -27,11 +27,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 	private Socket socket = null;
 	private Simulator simulator;
 	private ObjectInputStream inputOStream;
-	private int bytesRead;
     private InputStream inputStream;
-    private byte[] buffer;
-    private ByteArrayInputStream bis;
-    private ByteArrayOutputStream byteArrayOutputStream;
 	
 	public SocketsThread(Simulator simu, String addr, int port){
 		simulator = simu;
@@ -58,9 +54,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     		Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting socket");
     		try {
         		socket = new Socket(dstAddress, dstPort);
-        		socket.setTcpNoDelay(true);
-        		byteArrayOutputStream = new ByteArrayOutputStream(1024);
-        		buffer = new byte[524288];
+        		//socket.setTcpNoDelay(true);
         	    inputStream = socket.getInputStream();
 				inputOStream = new ObjectInputStream( inputStream );
 				setConnected();
@@ -86,7 +80,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 					Log.d("Sim",System.currentTimeMillis()+": "+"before readObject");
 					SpacecraftState sstate = (SpacecraftState) inputOStream.readObject();
 					Log.d("Sim",System.currentTimeMillis()+": "+"after readObject");
-					if(sstate!=null){
+					/*if(sstate!=null){
 						if(time_tmp_data==0 || (System.nanoTime()-time_tmp_data)>Parameters.Simulator.min_hud_model_refreshing_interval_ns){
 							Log.d("Sim",System.currentTimeMillis()+": "+"update data");
 				    		time_tmp_data = System.nanoTime();
@@ -95,7 +89,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 							Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
 						}
 			            publishProgress();
-					}
+					}*/
 		            if(isCancelled())
 		                break;
 				}

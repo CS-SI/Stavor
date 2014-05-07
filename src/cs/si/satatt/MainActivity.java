@@ -66,7 +66,7 @@ public class MainActivity extends ActionBarActivity implements
 
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
-		if(position==0){//XGGDEBUG: selection of tabs content
+		if(position==0){// selection of tabs content
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,

@@ -49,7 +49,6 @@ public class ModelSimulation {
     }
     
     public void preInitialize(){
-    	//XGGDEBUG:user selection of the inertial ref frame
     	try {
 			if(sunFrame==null){
 				sunFrame = CelestialBodyFactory.getSun().getInertiallyOrientedFrame();
