@@ -15,6 +15,7 @@ import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -42,12 +43,22 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {	
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		Installer.installApkData(this);
 		
 		simulator = new Simulator(this);
+		MainActivity prevActivity = (MainActivity)getLastCustomNonConfigurationInstance();
+	   if(prevActivity!= null) { 
+	       // So the orientation did change
+	       // Restore some field for example
+	       this.simulator = prevActivity.simulator;
+	       //this.mNavigationDrawerFragment = prevActivity.mNavigationDrawerFragment;
+	       //this.mTitle = prevActivity.mTitle;
+	       Log.d("APP","Activity restarted: simulator recreated");
+	   }
+	    
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
 		setProgressBarVisibility(true);
@@ -171,22 +182,19 @@ public class MainActivity extends ActionBarActivity implements
 
 	public void showHud() {
 		// TODO Auto-generated method stub
-		//onNavigationDrawerItemSelected(1);
-		//XGGDEBUG:reactivate but implemented in another way cause when rotation of device it goes back to simulator
+		runOnUiThread( new Runnable() {
+			public void run() {
+				mNavigationDrawerFragment.select(1);
+				onSectionAttached(2);
+				restoreActionBar();
+	        }
+		});
 	}
 	
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-	    super.onConfigurationChanged(newConfig);
-		this.getResources().updateConfiguration(newConfig, null);
-
-	    // Checks the orientation of the screen
-	    /*if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-	        Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-	    }*/
+	public Object onRetainCustomNonConfigurationInstance() {
+	    //restore all your data here
+		return this;
 	}
-
 
 }

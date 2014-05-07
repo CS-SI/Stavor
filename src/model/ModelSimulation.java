@@ -72,15 +72,15 @@ public class ModelSimulation {
      * @param st
      */
     private synchronized void updateState(ModelState st){
-    	Log.d("Sim",System.currentTimeMillis()+": "+"pre update 2");
+    	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update 2");
     	state = st;
-    	Log.d("Sim",System.currentTimeMillis()+": "+"post update 2");
+    	//Log.d("Sim",System.currentTimeMillis()+": "+"post update 2");
     }
     
     private synchronized void updateInfo(ModelInfo inf){
-    	Log.d("Sim",System.currentTimeMillis()+": "+"pre update 3");
+    	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update 3");
     	info = inf; 
-    	Log.d("Sim",System.currentTimeMillis()+": "+"post update 3");
+    	//Log.d("Sim",System.currentTimeMillis()+": "+"post update 3");
     }
     
     private AbsoluteDate tmp_time;
