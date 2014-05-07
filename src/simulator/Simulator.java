@@ -100,20 +100,32 @@ public class Simulator {
 		}
 		return simulationStatus;
 	}
+	
+	private void setProgress(final int prog){
+		try{
+			activity.runOnUiThread( new Runnable() {
+				public void run() {
+					activity.setProgress(prog);//XGGDEBUG: put in UI Thread?
+		        }
+			});
+		}catch(NullPointerException nulle){
+			
+		}
+	}
 
 	private void connectThread() {
 		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting thread interior");
-		activity.setProgress(10 * 100);
+		setProgress(10 * 100);
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
 			try{
-				activity.setProgress(20 * 100);
+				setProgress(20 * 100);
 				String host = sharedPref.getString(context.getString(R.string.pref_key_sim_remote_host), "127.0.0.1");
 				int port = Integer.parseInt(sharedPref.getString(context.getString(R.string.pref_key_sim_remote_port), "1520"));
-				activity.setProgress(30 * 100);
+				setProgress(30 * 100);
 				simulation = new ModelSimulation(activity);
-				activity.setProgress(40 * 100);
+				setProgress(40 * 100);
 				//Log.d("Sim",System.currentTimeMillis()+": "+"simulator pre preinitialize");
 				simulation.preInitialize();
 				//Log.d("Sim",System.currentTimeMillis()+": "+"simulator post preinitialize");
@@ -124,7 +136,7 @@ public class Simulator {
 		}else{
 			// Local
 		}
-		activity.setProgress(100 * 100);
+		setProgress(100 * 100);
 		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator interior thread connected");
 	}
 	

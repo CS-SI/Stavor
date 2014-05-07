@@ -99,7 +99,11 @@ public final class TestFragment extends Fragment {
       		public void onProgressChanged(XWalkView view, int progress) {
       			// Activities and WebViews measure progress with different scales.
       			// The progress meter will automatically disappear when we reach 100%
-      			getActivity().setProgress(progress * 100);
+      			try{
+      				getActivity().setProgress(progress * 100);
+	      		}catch(NullPointerException nulle){
+	  				
+	  			}
       		}
       	});
       	browser.setXWalkClient(new org.xwalk.core.client.XWalkDefaultClient(rootView.getContext(), browser) {
