@@ -180,12 +180,12 @@ public class MainActivity extends ActionBarActivity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void showHud() {
+	public void showSection(final int sel) {
 		// TODO Auto-generated method stub
 		runOnUiThread( new Runnable() {
 			public void run() {
-				mNavigationDrawerFragment.select(1);
-				onSectionAttached(2);
+				mNavigationDrawerFragment.select(sel);
+				onSectionAttached(sel+1);
 				restoreActionBar();
 	        }
 		});
@@ -196,5 +196,30 @@ public class MainActivity extends ActionBarActivity implements
 	    //restore all your data here
 		return this;
 	}
+	
+    private Toast toast;
+    private long lastBackPressTime = 0;
+
+
+    @Override
+    public void onBackPressed() {
+    	int sel = mNavigationDrawerFragment.getSelectedPosition();
+    	if(sel>1){
+    		showSection(1);
+    	}else if (sel==1){
+    		showSection(0);
+    	}else if (sel==0){
+	    	if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
+	    		toast = Toast.makeText(this, getString(R.string.app_exit_prevent_message), 4000);
+	    		toast.show();
+	    		this.lastBackPressTime = System.currentTimeMillis();
+	    	} else {
+	    		if (toast != null) {
+	    			toast.cancel();
+	    		}
+	    		super.onBackPressed();
+	    	}
+    	}
+    }
 
 }

@@ -70,7 +70,9 @@ public class NavigationDrawerFragment extends Fragment {
     public NavigationDrawerFragment() {
     }
     
-    
+    public int getSelectedPosition(){
+    	return mCurrentSelectedPosition;
+    }
 	
 
     @Override

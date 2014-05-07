@@ -222,7 +222,7 @@ public class Simulator {
 	}
 	public void goToHud() {
 		// TODO Auto-generated method stub
-		((MainActivity)activity).showHud();
+		((MainActivity)activity).showSection(1);
 	}
 	
 }
