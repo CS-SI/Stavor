@@ -1,11 +1,8 @@
 package simulator;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -13,11 +10,9 @@ import java.net.UnknownHostException;
 import org.orekit.propagation.SpacecraftState;
 
 import cs.si.satatt.R;
-import cs.si.satatt.SerializationUtil;
 import model.ModelSimulation;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 import app.Parameters;
 
 public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
@@ -75,21 +70,23 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	}
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
 		    try {
-		    	Log.d("Sim",System.currentTimeMillis()+": "+"enter infinite loop");
+		    	//Log.d("Sim",System.currentTimeMillis()+": "+"enter infinite loop");
 				while (true){
-					Log.d("Sim",System.currentTimeMillis()+": "+"before readObject");
+					//Log.d("Sim",System.currentTimeMillis()+": "+"before readObject");
 					SpacecraftState sstate = (SpacecraftState) inputOStream.readObject();
-					Log.d("Sim",System.currentTimeMillis()+": "+"after readObject");
-					/*if(sstate!=null){
+					//Log.d("Sim",System.currentTimeMillis()+": "+"after readObject");
+					if(sstate!=null){
 						if(time_tmp_data==0 || (System.nanoTime()-time_tmp_data)>Parameters.Simulator.min_hud_model_refreshing_interval_ns){
-							Log.d("Sim",System.currentTimeMillis()+": "+"update data");
+							//Log.d("Sim",System.currentTimeMillis()+": "+"update data");
 				    		time_tmp_data = System.nanoTime();
 							SimResults results = new SimResults(sstate, 0);
 							simulator.getSimulationResults().updateSimulation(results.spacecraftState, results.sim_progress);
-							Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
+							//Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
+						}else{
+							//Log.d("Sim",System.currentTimeMillis()+": "+"avoid update data");
 						}
 			            publishProgress();
-					}*/
+					}
 		            if(isCancelled())
 		                break;
 				}
@@ -99,7 +96,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 				simulator.showMessage(simulator.getContext().getString(R.string.sim_error)+": "+e.getMessage());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 				simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_disconnected));
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -114,10 +111,10 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     @Override
     protected void onProgressUpdate(Void... values) {
     	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
-    		Log.d("Sim",System.currentTimeMillis()+": "+"update gui");
+    		//Log.d("Sim",System.currentTimeMillis()+": "+"update gui");
     		time_tmp_gui = System.nanoTime();
     		simulator.getSimulationResults().updateHUD();
-    		Log.d("Sim",System.currentTimeMillis()+": "+"end update gui");
+    		//Log.d("Sim",System.currentTimeMillis()+": "+"end update gui");
     	}
     }
  
@@ -139,10 +136,12 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     }
     
     private void setConnected(){
+    	Log.d("Sim",System.currentTimeMillis()+": "+"Simulator connected");
     	simulator.setSimulatorStatus(SimulatorStatus.Connected);
     }
     
     public void setDisconnected(){
+		Log.d("Sim",System.currentTimeMillis()+": "+"Simulator disconnected");
     	closeSocket();
     	simulator.setSimulatorStatus(SimulatorStatus.Disconnected);
     }

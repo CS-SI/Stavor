@@ -1,20 +1,15 @@
 package fragments;
 
-import java.io.Serializable;
-
 import simulator.Simulator;
 import simulator.SimulatorStatus;
-import model.ModelSimulation;
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Switch;
-import android.widget.TabHost;
-import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ViewSwitcher;
 
@@ -113,9 +105,9 @@ public final class SimulatorFragment extends Fragment {
             		}else{
             			//Set mission
             		}
-            		Log.d("Sim",System.currentTimeMillis()+": "+"button connect pressed");
+            		//Log.d("Sim",System.currentTimeMillis()+": "+"button connect pressed");
             		simulator.connect();
-            		Log.d("Sim",System.currentTimeMillis()+": "+"button connect onlick ends");
+            		//Log.d("Sim",System.currentTimeMillis()+": "+"button connect onlick ends");
             	}
             }
         });

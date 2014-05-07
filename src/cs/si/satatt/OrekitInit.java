@@ -5,14 +5,10 @@ import java.io.File;
 import org.orekit.data.DataProvider;
 import org.orekit.data.DataProvidersManager;
 import org.orekit.data.DirectoryCrawler;
-import org.orekit.data.ZipJarCrawler;
 import org.orekit.errors.OrekitException;
 
-import android.content.Context;
 
 public class OrekitInit {
-	
-	private final static String TAG = "OrekitInit";
 
 	public static void init(File root) {
 		

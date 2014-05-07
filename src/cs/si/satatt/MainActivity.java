@@ -1,6 +1,5 @@
 package cs.si.satatt;
 
-import model.ModelSimulation;
 import settings.SettingsBasicFragment;
 import settings.SettingsExtraFragment;
 import settings.SettingsGeneralFragment;

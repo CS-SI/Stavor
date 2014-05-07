@@ -1,24 +1,16 @@
 package simulator;
 
-import java.io.Serializable;
-
 import model.ModelSimulation;
 import cs.si.satatt.R;
 import cs.si.satatt.MainActivity;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 public class Simulator {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7144983071691596540L;
 	private SimulatorStatus simulatorStatus = SimulatorStatus.Disconnected;
 	private SimulationStatus simulationStatus = SimulationStatus.Stop;
 	private SharedPreferences sharedPref;
@@ -61,9 +53,9 @@ public class Simulator {
 	
 	public SimulatorStatus connect(){
 		if(simulatorStatus.equals(SimulatorStatus.Disconnected)){
-    		Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting thread");
+    		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting thread");
 			connectThread();
-			Log.d("Sim",System.currentTimeMillis()+": "+"simulator has connected thread");
+			//Log.d("Sim",System.currentTimeMillis()+": "+"simulator has connected thread");
 		}
 		return simulatorStatus;
 	}
@@ -110,7 +102,7 @@ public class Simulator {
 	}
 
 	private void connectThread() {
-		Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting thread interior");
+		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting thread interior");
 		activity.setProgress(10 * 100);
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
@@ -122,18 +114,18 @@ public class Simulator {
 				activity.setProgress(30 * 100);
 				simulation = new ModelSimulation(activity);
 				activity.setProgress(40 * 100);
-				Log.d("Sim",System.currentTimeMillis()+": "+"simulator pre preinitialize");
+				//Log.d("Sim",System.currentTimeMillis()+": "+"simulator pre preinitialize");
 				simulation.preInitialize();
-				Log.d("Sim",System.currentTimeMillis()+": "+"simulator post preinitialize");
+				//Log.d("Sim",System.currentTimeMillis()+": "+"simulator post preinitialize");
 				thread = (SocketsThread) new SocketsThread(this,host,port).execute(simulation);
-				Log.d("Sim",System.currentTimeMillis()+": "+"end executing thread ");
+				//Log.d("Sim",System.currentTimeMillis()+": "+"end executing thread ");
 			}catch(NumberFormatException nfe){
 			}
 		}else{
 			// Local
 		}
 		activity.setProgress(100 * 100);
-		Log.d("Sim",System.currentTimeMillis()+": "+"simulator interior thread connected");
+		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator interior thread connected");
 	}
 	
 	private void disconnectThread() {

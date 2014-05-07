@@ -2,7 +2,6 @@ package simulator;
 
 import model.ModelSimulation;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 public class SimulatorThread extends AsyncTask<ModelSimulation, SimResults, Boolean> {
  

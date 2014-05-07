@@ -1,13 +1,10 @@
 package model;
 
-import java.io.Serializable;
-
 import org.apache.commons.math3.geometry.euclidean.threed.RotationOrder;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
-import org.orekit.frames.FramesFactory;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.time.AbsoluteDate;
 import org.orekit.time.TimeScale;
@@ -15,13 +12,11 @@ import org.orekit.time.TimeScalesFactory;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import app.Installer;
-import app.Parameters;
 
 import com.google.gson.Gson;
 
@@ -29,10 +24,6 @@ import cs.si.satatt.OrekitInit;
 import cs.si.satatt.R;
 
 public class ModelSimulation {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3936082374216129814L;
 	private Gson gson = new Gson();
     private ModelConfiguration config;
     private ModelState state;
@@ -97,7 +88,7 @@ public class ModelSimulation {
     private TimeScale utc;
     private Frame sunFrame;
     public void updateSimulation(SpacecraftState scs, int sim_progress){
-    	Log.d("Sim",System.currentTimeMillis()+": "+"pre update 1");
+    	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update 1");
     	ModelState new_state = new ModelState();
     	ModelInfo new_info = new ModelInfo();
     	
@@ -164,11 +155,11 @@ public class ModelSimulation {
     	
     	updateState(new_state);
     	updateInfo(new_info);
-    	Log.d("Sim",System.currentTimeMillis()+": "+"post update 1");
+    	//Log.d("Sim",System.currentTimeMillis()+": "+"post update 1");
     }
     
     public synchronized void updateHUD(){
-    	Log.d("Sim",System.currentTimeMillis()+": "+"pre update gui 1");
+    	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update gui 1");
     	activity.runOnUiThread( new Runnable() {
 	        @SuppressLint("ResourceAsColor")
 			public void run() {
@@ -213,6 +204,6 @@ public class ModelSimulation {
 	        	}
 	        }
 	    });
-    	Log.d("Sim",System.currentTimeMillis()+": "+"post update gui 1");
+    	//Log.d("Sim",System.currentTimeMillis()+": "+"post update gui 1");
     }
 }

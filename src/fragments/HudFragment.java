@@ -1,13 +1,10 @@
 package fragments;
 
-import java.io.Serializable;
-
 import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
 import simulator.Simulator;
 import web.WebAppInterface;
-import model.ModelSimulation;
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
 import android.annotation.SuppressLint;

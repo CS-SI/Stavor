@@ -8,7 +8,6 @@ import java.io.OutputStream;
 
 import cs.si.satatt.R;
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Environment;
@@ -27,6 +26,7 @@ public class Installer {
 	}
 
 	/* Checks if external storage is available to at least read */
+	@SuppressWarnings("unused")
 	private static boolean isExternalStorageReadable() {
 	    String state = Environment.getExternalStorageState();
 	    if (Environment.MEDIA_MOUNTED.equals(state) ||
