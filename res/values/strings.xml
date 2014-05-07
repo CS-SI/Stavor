@@ -47,9 +47,9 @@
     <string name="eg_sim_time">0000-00-00  00:00:00.000</string>
     <string name="eg_vel">Vel. 0,00 Km/s</string>
     <string name="eg_accel">Accel. 0,00 Km/s2</string>
-    <string name="eg_roll">Roll: 0,000</string>
-    <string name="eg_pitch">Pitch: 0,000</string>
-    <string name="eg_yaw">Yaw: 0,000</string>
+    <string name="eg_roll">Roll: 0,0º</string>
+    <string name="eg_pitch">Pitch: 0,0º</string>
+    <string name="eg_yaw">Yaw: 0,0º</string>
     <string name="eg_radium">Orbit radium: 0,0 Km</string>
     <string name="eg_mass">Mass: 0,000 Kg</string>
     <string name="test_1">Test 1</string>

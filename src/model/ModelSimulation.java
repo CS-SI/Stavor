@@ -191,16 +191,16 @@ public class ModelSimulation {
 	        			panel_radium.setText("Orbit radium: "+String.format("%.1f", info.orbit_radium)+" Km");
 	        		TextView panel_mass = (TextView)view.findViewById(R.id.textViewPanelMass);
 	        		if(panel_mass != null)
-	        			panel_mass.setText("Mass: "+String.format("%.3f", info.mass)+" Kg");
+	        			panel_mass.setText("Mass: "+String.format("%.1f", info.mass)+" Kg");
 	        		TextView panel_roll = (TextView)view.findViewById(R.id.textViewPanelRoll);
 	        		if(panel_roll != null)
-	        			panel_roll.setText("Rol: "+String.format("%.3f", info.roll));
+	        			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"º");
 	        		TextView panel_pitch = (TextView)view.findViewById(R.id.textViewPanelPitch);
 	        		if(panel_pitch != null)
-	        			panel_pitch.setText("Pitch: "+String.format("%.3f", info.pitch));
+	        			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"º");
 	        		TextView panel_yaw = (TextView)view.findViewById(R.id.textViewPanelYaw);
 	        		if(panel_yaw != null)
-	        			panel_yaw.setText("Yaw: "+String.format("%.3f", info.yaw));
+	        			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"º");
 	        	}
 	        }
 	    });

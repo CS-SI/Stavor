@@ -98,30 +98,34 @@
 
                     <TextView
                         android:id="@+id/textViewPanelRoll"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.64"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_weight="1"
                         android:text="@string/eg_roll"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewPanelPitch"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.51"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_weight="1"
                         android:text="@string/eg_pitch"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewPanelYaw"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.66"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_weight="1"
                         android:text="@string/eg_yaw"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -131,18 +135,18 @@
 
                     <TextView
                         android:id="@+id/textViewPanelVel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5.01"
+                        android:layout_weight="1"
                         android:text="@string/eg_vel"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewPanelAccel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2.33"
+                        android:layout_weight="1"
                         android:text="@string/eg_accel"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
