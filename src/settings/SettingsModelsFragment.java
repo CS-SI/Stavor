@@ -19,7 +19,7 @@ public class SettingsModelsFragment extends PreferenceFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-        view.setBackgroundColor(getResources().getColor(R.color.white));
+        view.setBackgroundColor(getResources().getColor(android.R.color.background_light));
 
         return view;
     }

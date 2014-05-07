@@ -3,6 +3,9 @@ package settings;
 import cs.si.satatt.R;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 public class SettingsBasicFragment extends PreferenceFragment {
     @Override
@@ -11,5 +14,13 @@ public class SettingsBasicFragment extends PreferenceFragment {
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.basic_indicators);
+    }
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        view.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+
+        return view;
     }
 }
