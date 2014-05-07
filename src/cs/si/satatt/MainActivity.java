@@ -12,11 +12,13 @@ import fragments.TestFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.FragmentManager;
+import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.Toast;
 import app.Installer;
 
 public class MainActivity extends ActionBarActivity implements
@@ -169,7 +171,21 @@ public class MainActivity extends ActionBarActivity implements
 
 	public void showHud() {
 		// TODO Auto-generated method stub
-		onNavigationDrawerItemSelected(1);
+		//onNavigationDrawerItemSelected(1);
+		//XGGDEBUG:reactivate but implemented in another way cause when rotation of device it goes back to simulator
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+		this.getResources().updateConfiguration(newConfig, null);
+
+	    // Checks the orientation of the screen
+	    /*if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+	        Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+	    }*/
 	}
 
 

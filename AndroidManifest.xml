@@ -18,6 +18,7 @@
         android:theme="@style/splashScreenTheme" >
         <activity
             android:name="cs.si.satatt.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
              >
             <intent-filter>
