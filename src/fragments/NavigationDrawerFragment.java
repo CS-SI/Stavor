@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
@@ -269,7 +270,9 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
+        if (item.getItemId() == R.id.action_screenshot) {
+        	((MainActivity)getActivity()).showAbout();
+        }
 	        if (item.getItemId() == R.id.action_screenshot) {
 	        	
         	

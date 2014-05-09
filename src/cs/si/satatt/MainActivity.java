@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
@@ -197,10 +198,17 @@ public class MainActivity extends ActionBarActivity implements
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_about) {
+			showAbout();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void showAbout() {
+		// TODO Auto-generated method stub
+		Intent myIntent = new Intent(MainActivity.this, AboutActivity.class);
+		MainActivity.this.startActivity(myIntent);
 	}
 
 	public void showSection(final int sel) {
