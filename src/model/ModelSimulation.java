@@ -9,6 +9,7 @@ import org.orekit.propagation.SpacecraftState;
 import org.orekit.time.AbsoluteDate;
 import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
+import org.xwalk.core.XWalkView;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -31,6 +32,7 @@ public class ModelSimulation {
     private ModelInfo info;
     private MainActivity activity;
     private View view;
+    private XWalkView browser;
     
     public ModelSimulation(MainActivity acv){
     	OrekitInit.init(Installer.getOrekitDataRoot(acv));
@@ -55,8 +57,9 @@ public class ModelSimulation {
 		}
     }
     
-    public void setHud(View hud){
+    public void setHud(View hud, XWalkView mBrowser){
     	view = hud;
+    	browser = mBrowser;
     }
     
     public synchronized String getInitializationJSON() {
@@ -78,6 +81,12 @@ public class ModelSimulation {
     	state = st;
     	//Log.d("Sim",System.currentTimeMillis()+": "+"post update 2");
     }
+    
+    public void pushSimulationModel(){
+    	if(browser!=null && state!=null){
+    		browser.loadUrl("javascript:updateModelState('"+gson.toJson(state)+"')");
+    	}
+	}
     
     private synchronized void updateInfo(ModelInfo inf){
     	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update 3");

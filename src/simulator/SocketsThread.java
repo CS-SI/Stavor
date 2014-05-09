@@ -41,7 +41,6 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 		}
 	}
 	
-	private long time_tmp_data = 0;
     @Override
     protected Boolean doInBackground(ModelSimulation... params) {
     	
@@ -76,15 +75,10 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 					SpacecraftState sstate = (SpacecraftState) inputOStream.readObject();
 					//Log.d("Sim",System.currentTimeMillis()+": "+"after readObject");
 					if(sstate!=null){
-						if(time_tmp_data==0 || (System.nanoTime()-time_tmp_data)>Parameters.Simulator.min_hud_model_refreshing_interval_ns){
-							//Log.d("Sim",System.currentTimeMillis()+": "+"update data");
-				    		time_tmp_data = System.nanoTime();
-							SimResults results = new SimResults(sstate, 0);
-							simulator.getSimulationResults().updateSimulation(results.spacecraftState, results.sim_progress);
-							//Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
-						}else{
-							//Log.d("Sim",System.currentTimeMillis()+": "+"avoid update data");
-						}
+						SimResults results = new SimResults(sstate, 0);
+						simulator.getSimulationResults().updateSimulation(results.spacecraftState, results.sim_progress);
+						//Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
+						
 			            publishProgress();
 					}
 		            if(isCancelled())
@@ -106,7 +100,8 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	}
         return true;
     }
- 
+
+	private long time_tmp_data = 0;
     private long time_tmp_gui = 0;
     @Override
     protected void onProgressUpdate(Void... values) {
@@ -116,6 +111,14 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     		simulator.getSimulationResults().updateHUD();
     		//Log.d("Sim",System.currentTimeMillis()+": "+"end update gui");
     	}
+    	if(time_tmp_data==0 || (System.nanoTime()-time_tmp_data)>Parameters.Simulator.min_hud_model_refreshing_interval_ns){
+			//Log.d("Sim",System.currentTimeMillis()+": "+"update data");
+    		time_tmp_data = System.nanoTime();
+        	simulator.getSimulationResults().pushSimulationModel();
+			//Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
+		}else{
+			//Log.d("Sim",System.currentTimeMillis()+": "+"avoid update data");
+		}
     }
  
     @Override

@@ -1,5 +1,7 @@
 package simulator;
 
+import org.xwalk.core.XWalkView;
+
 import model.ModelSimulation;
 import cs.si.satatt.R;
 import cs.si.satatt.MainActivity;
@@ -31,8 +33,8 @@ public class Simulator {
 		switchSelector=st;
 		updateSwitchEnabled();
 	}
-	public void setHudView(View v){
-		simulation.setHud(v);
+	public void setHudView(View v, XWalkView x){
+		simulation.setHud(v,x);
 	}
 	
 	public Context getContext(){

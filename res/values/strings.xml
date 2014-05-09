@@ -2,6 +2,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <string name="app_name">SatAtt</string>
+    <string name="about">About</string>
     <string name="app_exit_prevent_message">Press back again to close this app</string>
     <string name="title_section1">Simulator</string>
     <string name="title_section2">HUD</string>

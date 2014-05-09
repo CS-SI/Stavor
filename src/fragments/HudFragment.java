@@ -1,5 +1,7 @@
 package fragments;
 
+import model.ModelState;
+
 import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
@@ -169,7 +171,7 @@ public final class HudFragment extends Fragment {
     	browser.addJavascriptInterface(null, "unlockingandroid");
     	
     	simulator = ((MainActivity)getActivity()).getSimulator();
-    	simulator.setHudView(rootView);
+    	simulator.setHudView(rootView, browser);
     	
     	browser.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
     	
