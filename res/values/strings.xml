@@ -10,6 +10,12 @@
     <string name="title_section5">Models</string>
     <string name="title_section6">Preferences</string>
     <string name="title_section7">WebGL test</string>
+    <string name="dialog_welcome">Welcome</string>
+    <string name="dialog_error">Error</string>
+    <string name="dialog_exit">Exit</string>
+    <string name="dialog_ignore">Ignore</string>
+    <string name="dialog_continue">Continue</string>
+    <string name="dialog_install_message">The default models and data for the simulator have been installed in the Orekit data root:</string>
     <string name="basic_indicator_position">Position</string>
     <string name="basic_indicator_velocity">Velocity</string>
     <string name="basic_indicator_momentum">Momentum</string>
@@ -180,8 +186,10 @@
     <string name="pref_summary_direction_a_color">Direction color</string>
     
     
-    <string name="err_external_storage_not_accessible">External storage not accessible</string>
-    
+    <string name="error_installing_orekit_default_data">Installation of the default Orekit data failed.</string>
+    <string name="error_installing_orekit_default_data_external_storage_not_accessible">Installation of the default Orekit data failed due to external storage not accessible.</string>
+    <string name="error_initializing_orekit">Error initializing simulator, is the needed data installed correctly?</string>
+    <string name="error_computing_orekit">Error computing simulator step, is the needed data installed correctly?</string>
     
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>

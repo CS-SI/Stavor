@@ -20,6 +20,7 @@ import app.Installer;
 
 import com.google.gson.Gson;
 
+import cs.si.satatt.MainActivity;
 import cs.si.satatt.OrekitInit;
 import cs.si.satatt.R;
 
@@ -28,10 +29,10 @@ public class ModelSimulation {
     private ModelConfiguration config;
     private ModelState state;
     private ModelInfo info;
-    private Activity activity;
+    private MainActivity activity;
     private View view;
     
-    public ModelSimulation(Activity acv){
+    public ModelSimulation(MainActivity acv){
     	OrekitInit.init(Installer.getOrekitDataRoot(acv));
     	activity=acv;
     	config = new ModelConfiguration(activity.getApplicationContext());
@@ -50,6 +51,7 @@ public class ModelSimulation {
     	} catch (OrekitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			activity.showErrorDialog(activity.getString(R.string.error_initializing_orekit), false);
 		}
     }
     
@@ -118,6 +120,7 @@ public class ModelSimulation {
 		} catch (OrekitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			activity.showErrorDialog(activity.getString(R.string.error_computing_orekit), false);
 		}
     	
     	new_info.progress = sim_progress;

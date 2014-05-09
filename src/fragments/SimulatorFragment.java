@@ -86,6 +86,7 @@ public final class SimulatorFragment extends Fragment {
     	
     	button_connect = (Button) rootView.findViewById(R.id.buttonConnect);
     	simulator.setButtonConnect(button_connect);
+    	simulator.setSwitchSelector(switch_remote);
     	button_connect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click

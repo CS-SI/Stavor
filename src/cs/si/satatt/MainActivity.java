@@ -1,5 +1,7 @@
 package cs.si.satatt;
 
+import dialogs.ErrorDialogFragment;
+import dialogs.WelcomeDialogFragment;
 import settings.SettingsBasicFragment;
 import settings.SettingsExtraFragment;
 import settings.SettingsGeneralFragment;
@@ -12,6 +14,7 @@ import fragments.SimulatorFragment;
 import fragments.TestFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
+import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
@@ -234,6 +237,17 @@ public class MainActivity extends ActionBarActivity implements
 	    		super.onBackPressed();
 	    	}
     	}
+    }
+    
+    public void showWelcomeMessage() {
+        DialogFragment newFragment = new WelcomeDialogFragment();
+        newFragment.show(getFragmentManager(), "welcome");
+    }
+    
+    public void showErrorDialog(String message, boolean canIgnore) {
+    	DialogFragment newFragment = ErrorDialogFragment.newInstance(message, canIgnore);
+    	newFragment.setCancelable(false);
+    	newFragment.show(getFragmentManager(), "error");
     }
 
 }

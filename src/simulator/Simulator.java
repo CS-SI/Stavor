@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 public class Simulator {
@@ -20,10 +21,15 @@ public class Simulator {
 	private SimulatorThread sthread;
 	private ModelSimulation simulation;
 	private Button buttonConnect;
+	private Switch switchSelector;
 	
 	public void setButtonConnect(Button bt){
 		buttonConnect=bt;
 		updateConnectButtonText();
+	}
+	public void setSwitchSelector(Switch st){
+		switchSelector=st;
+		updateSwitchEnabled();
 	}
 	public void setHudView(View v){
 		simulation.setHud(v);
@@ -33,7 +39,7 @@ public class Simulator {
 		return context;
 	}
 	
-	public Simulator(Activity act){
+	public Simulator(MainActivity act){
 		activity = act;
 		sharedPref = activity.getSharedPreferences("cs.si.satatt", Context.MODE_PRIVATE);
 		context = activity.getApplicationContext();
@@ -105,7 +111,7 @@ public class Simulator {
 		try{
 			activity.runOnUiThread( new Runnable() {
 				public void run() {
-					activity.setProgress(prog);//XGGDEBUG: put in UI Thread?
+					activity.setProgress(prog);
 		        }
 			});
 		}catch(NullPointerException nulle){
@@ -124,7 +130,7 @@ public class Simulator {
 				String host = sharedPref.getString(context.getString(R.string.pref_key_sim_remote_host), "127.0.0.1");
 				int port = Integer.parseInt(sharedPref.getString(context.getString(R.string.pref_key_sim_remote_port), "1520"));
 				setProgress(30 * 100);
-				simulation = new ModelSimulation(activity);
+				simulation = new ModelSimulation((MainActivity)activity);
 				setProgress(40 * 100);
 				//Log.d("Sim",System.currentTimeMillis()+": "+"simulator pre preinitialize");
 				simulation.preInitialize();
@@ -206,6 +212,7 @@ public class Simulator {
 	public void setSimulatorStatus(SimulatorStatus new_status) {
 		simulatorStatus = new_status;
 		updateConnectButtonText();
+		updateSwitchEnabled();
 	}
 	
 	private void updateConnectButtonText(){
@@ -216,6 +223,19 @@ public class Simulator {
 			    		buttonConnect.setText(context.getString(R.string.sim_disconnect));
 			    	else
 			    		buttonConnect.setText(context.getString(R.string.sim_connect));
+		        }
+			});
+		}
+	}
+	
+	private void updateSwitchEnabled(){
+		if(switchSelector!=null){
+			activity.runOnUiThread( new Runnable() {
+				public void run() {
+					if(simulatorStatus.equals(SimulatorStatus.Connected))
+			    		switchSelector.setEnabled(false);
+			    	else
+			    		switchSelector.setEnabled(true);
 		        }
 			});
 		}
