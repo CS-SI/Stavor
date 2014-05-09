@@ -7,6 +7,7 @@ import settings.SettingsModelsFragment;
 import simulator.Simulator;
 import fragments.NavigationDrawerFragment;
 import fragments.HudFragment;
+import fragments.RetainedFragment;
 import fragments.SimulatorFragment;
 import fragments.TestFragment;
 import android.support.v7.app.ActionBarActivity;
@@ -37,6 +38,9 @@ public class MainActivity extends ActionBarActivity implements
 	 */
 	private CharSequence mTitle;
 	
+	private RetainedFragment dataFragment;
+
+	
 	private Simulator simulator;
 	public Simulator getSimulator(){
 		return simulator;
@@ -47,24 +51,32 @@ public class MainActivity extends ActionBarActivity implements
 		super.onCreate(savedInstanceState);
 
 		Installer.installApkData(this);
-		
-		simulator = new Simulator(this);
-		MainActivity prevActivity = (MainActivity)getLastCustomNonConfigurationInstance();
-	   if(prevActivity!= null) { 
-	       // So the orientation did change
-	       // Restore some field for example
-	       this.simulator = prevActivity.simulator;
-	       //this.mNavigationDrawerFragment = prevActivity.mNavigationDrawerFragment;
-	       //this.mTitle = prevActivity.mTitle;
-	       Log.d("APP","Activity restarted: simulator recreated");
-	   }
-	    
+
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
 		setProgressBarVisibility(true);
 		
+		// find the retained fragment on activity restarts
+        FragmentManager fm = getFragmentManager();
+        dataFragment = (RetainedFragment) fm.findFragmentByTag("data");
+
+        // create the fragment and data the first time
+        if (dataFragment == null) {
+            // add the fragment
+            dataFragment = new RetainedFragment();
+            fm.beginTransaction().add(dataFragment, "data").commit();
+            // load the data from the web
+            dataFragment.setData(new Simulator(this));
+        }
+
+        // the data is available in dataFragment.getData()
+        this.simulator = dataFragment.getData();
+		
+        
+        // NAVIGATION
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
+		
 		mTitle = getTitle();
 
 		// Set up the drawer.
@@ -72,6 +84,14 @@ public class MainActivity extends ActionBarActivity implements
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		
 	}
+	
+	@Override
+    public void onDestroy() {
+        super.onDestroy();
+        // store the data in the fragment
+        dataFragment.setData(this.simulator);
+    }
+
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
@@ -189,12 +209,6 @@ public class MainActivity extends ActionBarActivity implements
 				restoreActionBar();
 	        }
 		});
-	}
-	
-	@Override
-	public Object onRetainCustomNonConfigurationInstance() {
-	    //restore all your data here
-		return this;
 	}
 	
     private Toast toast;
