@@ -33,10 +33,9 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="false"
-        android:layout_below="@id/spinnerlayout" >
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@id/spinnerlayout" >
 
         <TextView
             android:id="@+id/textViewFPS"

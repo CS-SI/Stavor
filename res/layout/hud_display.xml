@@ -48,7 +48,7 @@
 
     <FrameLayout
         android:id="@+id/spinnerlayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <Spinner
@@ -63,8 +63,9 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/SimControlFrame" >
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/spinnerlayout"
+        android:layout_marginTop="3dp" >
 
         <TextView
             android:id="@+id/textViewFPS"
