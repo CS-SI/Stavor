@@ -18,10 +18,12 @@
     <string name="about_table_gson">GSON</string>
     <string name="about_table_version">Version</string>
     <string name="about_table_license">License</string>
+    <string name="about_package">Package:</string>
     <string name="about_start_date">Project starting date:</string>
     <string name="about_start_date_value">04/2014</string>
     <string name="about_version">Current version:</string>
-    <string name="about_version_date">Last version date:</string>
+    <string name="about_version_date">Last update date:</string>
+    <string name="about_install_date">Install date:</string>
     <string name="about1">This application is a product of CS Systèmes d\'Information.</string>
     <string name="about2">With the integration of the following projects:</string>
     <string name="app_exit_prevent_message">Press back again to close this app</string>

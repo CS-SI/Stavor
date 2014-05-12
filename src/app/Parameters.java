@@ -4,6 +4,16 @@ public class Parameters {
 	public static class App {
 		public static final long splash_min_time_ns = 1000000000;//[ns] 1.0s min
 	}
+	public static class About {
+		public static final String project_start_date = "2014/04/01";
+		public static final String project_license = "Undef";
+		
+		public static final String version_orekit = "6.1";
+		public static final String version_xwalk = "???";
+		public static final String version_threejs = "r66 (mod)";
+		public static final String version_gson = "2.2.4";
+		public static final String version_androidcolorpicker = "1.0";
+	}
 	public static class Simulator {
 		public static final long min_hud_panel_refreshing_interval_ns = 500000000;//[ns] 2Hz max
 		public static final long min_hud_model_refreshing_interval_ns = 33333333;//[ns] 30Hz max

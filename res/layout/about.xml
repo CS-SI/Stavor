@@ -42,6 +42,27 @@
             android:layout_height="wrap_content" >
 
             <TextView
+                android:id="@+id/TextViewAbout007"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_package"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/TextViewVersionPackage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="@string/dummy"
+                android:textColor="@color/white" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
                 android:id="@+id/TextView06"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +70,7 @@
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/TextView10"
+                android:id="@+id/TextViewProjectLicense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -70,7 +91,7 @@
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/TextView04"
+                android:id="@+id/TextViewProjectStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -84,6 +105,27 @@
             android:layout_height="wrap_content" >
 
             <TextView
+                android:id="@+id/TextViewAbout003"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_install_date"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/TextViewVersionInstallDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="TextView"
+                android:textColor="@color/white" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
                 android:id="@+id/TextView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,7 +133,7 @@
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/TextView02"
+                android:id="@+id/TextViewVersionDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -112,7 +154,7 @@
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/TextViewVersionNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -229,7 +271,7 @@
                 android:textColor="@color/grey1" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/TextViewVersionOrekit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small Text"
@@ -262,7 +304,7 @@
                 android:textColor="@color/grey1" />
 
             <TextView
-                android:id="@+id/TextView07"
+                android:id="@+id/TextViewVersionXwalk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small Text"
@@ -294,7 +336,7 @@
                 android:textColor="@color/grey1" />
 
             <TextView
-                android:id="@+id/TextView11"
+                android:id="@+id/TextViewVersionThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small Text"
@@ -326,7 +368,7 @@
                 android:textColor="@color/grey1" />
 
             <TextView
-                android:id="@+id/TextView13"
+                android:id="@+id/TextViewVersionGson"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small Text"
@@ -358,7 +400,7 @@
                 android:textColor="@color/grey1" />
 
             <TextView
-                android:id="@+id/TextView17"
+                android:id="@+id/TextViewVersionColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small Text"

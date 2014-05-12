@@ -130,6 +130,13 @@ public class Simulator {
 		        }
 			});
 		}
+		if(switchSelector!=null){
+			activity.runOnUiThread( new Runnable() {
+				public void run() {
+					switchSelector.setEnabled(false);
+		        }
+			});
+		}
 		setProgress(10 * 100);
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
