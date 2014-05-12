@@ -84,7 +84,8 @@ public class ModelSimulation {
     
     public void pushSimulationModel(){
     	if(browser!=null && state!=null){
-    		browser.loadUrl("javascript:updateModelState('"+gson.toJson(state)+"')");
+    		//browser.loadUrl("javascript:updateModelState('"+gson.toJson(state)+"')");
+    		browser.load("javascript:updateModelState('"+gson.toJson(state)+"')","");
     	}
 	}
     

@@ -16,25 +16,55 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="42dp"
-        android:layout_height="42dp" >
+        android:id="@+id/SimControlFrame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" >
 
-        <Button
-            android:id="@+id/buttonView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/view"
-            android:includeFontPadding="false"
-            android:paddingBottom="0dp"
-            android:paddingTop="0dp"
-            android:text="@string/view_xyz" />
+        <LinearLayout
+            android:id="@+id/controlsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
+            <ImageButton
+                android:id="@+id/imageButtonPlay"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/dummy"
+                android:scaleType="fitCenter"
+                android:src="@drawable/play" />
+
+            <ImageButton
+                android:id="@+id/ImageButtonStop"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/dummy"
+                android:scaleType="fitCenter"
+                android:src="@drawable/stop" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/spinnerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Spinner
+            android:id="@+id/spinnerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/view_selector"
+            android:entries="@array/views_array"
+            android:gravity="center" />
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" >
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/SimControlFrame" >
 
         <TextView
             android:id="@+id/textViewFPS"
@@ -43,13 +73,12 @@
             android:text="@string/fps_zero"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/white" />
-
     </FrameLayout>
 
     <FrameLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
 
         <layout.WrappingSlidingDrawer
             android:id="@+id/slidingDrawer1"
@@ -125,7 +154,6 @@
                         android:text="@string/eg_yaw"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -169,6 +197,6 @@
                     android:textColor="@color/white" />
             </LinearLayout>
         </layout.WrappingSlidingDrawer>
-
     </FrameLayout>
+
 </RelativeLayout>

@@ -57,7 +57,8 @@ public final class TestFragment extends Fragment {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
-			   browser.loadUrl(Parameters.Web.TEST_PAGE_1);
+			   //browser.loadUrl(Parameters.Web.TEST_PAGE_1);
+			   browser.load(Parameters.Web.TEST_PAGE_1,"");
 		   }
 		  });
 		Button button2 = ((Button) rootView.findViewById(R.id.buttonTest2));
@@ -65,7 +66,8 @@ public final class TestFragment extends Fragment {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
-			   browser.loadUrl(Parameters.Web.TEST_PAGE_2);
+			   browser.load(Parameters.Web.TEST_PAGE_2,"");
+			   //browser.loadUrl(Parameters.Web.TEST_PAGE_2);
 		   }
 		  });
 		Button button3 = ((Button) rootView.findViewById(R.id.buttonTest3));
@@ -73,7 +75,8 @@ public final class TestFragment extends Fragment {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
-			   browser.loadUrl(Parameters.Web.TEST_PAGE_3);
+			   //browser.loadUrl(Parameters.Web.TEST_PAGE_3);
+			   browser.load(Parameters.Web.TEST_PAGE_3,"");
 		   }
 		  });
 		
@@ -95,7 +98,7 @@ public final class TestFragment extends Fragment {
     	
     	browser.clearCache(true);
     	
-      	browser.setXWalkWebChromeClient(new org.xwalk.core.client.XWalkDefaultWebChromeClient(rootView.getContext(), browser) {
+      	/*browser.setXWalkWebChromeClient(new org.xwalk.core.client.XWalkDefaultWebChromeClient(rootView.getContext(), browser) {
       		public void onProgressChanged(XWalkView view, int progress) {
       			// Activities and WebViews measure progress with different scales.
       			// The progress meter will automatically disappear when we reach 100%
@@ -110,7 +113,7 @@ public final class TestFragment extends Fragment {
       		public void onReceivedError(XWalkView view, int errorCode, String description, String failingUrl) {
       			Toast.makeText(getActivity(), "Oh no! " + description, Toast.LENGTH_LONG).show();
       		}
-      	});
+      	});*/
     	/*
     	browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
@@ -120,8 +123,9 @@ public final class TestFragment extends Fragment {
     	LinearLayout browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	browserLayout.addView(browser);
     	
-    	browser.loadUrl(Parameters.Web.TEST_PAGE_1);
-		
+    	//browser.loadUrl(Parameters.Web.TEST_PAGE_1);
+    	browser.load(Parameters.Web.TEST_PAGE_1,"");
+    	
 		/*TextView textView = (TextView) rootView
 				.findViewById(R.id.section_label);
 		textView.setText(Integer.toString(getArguments().getInt(

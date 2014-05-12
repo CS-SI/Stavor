@@ -169,7 +169,6 @@ This three.js demo is part of a collection at
 	function updateModelState(new_state){
 		//if (typeof Android != "undefined"){ // check the bridge 
 		  //if (Android.getStateJSON!= "undefined") { // check the method
-alert(new_state);
 			var state = JSON.parse(new_state);			
 			value_sun  = new THREE.Vector3( state.value_sun[0], state.value_sun[1], state.value_sun[2] ); //Km
 			value_earth  = new THREE.Vector3( state.value_earth[0], state.value_earth[1], state.value_earth[2] ); //Km
@@ -182,31 +181,60 @@ alert(new_state);
 		  //}
 	   //}
 	}
+	function getCamDistance(){
+		return Math.sqrt(camera.position.x*camera.position.x+camera.position.y*camera.position.y+camera.position.z*camera.position.z);
+	}
+	function getCamEquilater(){
+		return getCamDistance()/Math.sqrt(3);
+	}
+	function restoreMiniSpheres(){
+		if(show_mini_spheres){
+			miniSphereX.visible=true;
+			miniSphereXX.visible=true;
+			miniSphereY.visible=true;
+			miniSphereYY.visible=true;
+			miniSphereZ.visible=true;
+			miniSphereZZ.visible=true;
+		}
+	}
 	function changeView(view_mode){
+		restoreMiniSpheres();
 		switch(view_mode){
-			case 0://xyz
-				camera.position = new THREE.Vector3(300,300,300);
+			case "XYZ"://xyz
+				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
 				break;
-			case 1://+X
-				camera.position = new THREE.Vector3(519,0,0);
+			case "X"://+X
+				miniSphereX.visible=false;
+				camera.position = new THREE.Vector3(getCamDistance(),0,0);
 				break;
-			case 2://-X
-				camera.position = new THREE.Vector3(-519,0,0);
+			case "-X"://-X
+				miniSphereXX.visible=false;
+				camera.position = new THREE.Vector3(-getCamDistance(),0,0);
 				break;
-			case 3://+Y
-				camera.position = new THREE.Vector3(0,519,0);
+			case "Y"://+Y
+				miniSphereY.visible=false;
+				camera.position = new THREE.Vector3(0,getCamDistance(),0);
 				break;
-			case 4://-Y
-				camera.position = new THREE.Vector3(0,-519,0);
+			case "-Y"://-Y
+				miniSphereYY.visible=false;
+				camera.position = new THREE.Vector3(0,-getCamDistance(),0);
 				break;
-			case 5://+Z
-				camera.position = new THREE.Vector3(0,0,519);
+			case "Z"://+Z
+				miniSphereZ.visible=false;
+				camera.position = new THREE.Vector3(0,0,getCamDistance());
 				break;
-			case 6://-Z
-				camera.position = new THREE.Vector3(0,0,-519);
+			case "-Z"://-Z
+				miniSphereZZ.visible=false;
+				camera.position = new THREE.Vector3(0,0,-getCamDistance());
+				break;
+			case "Earth"://-Z
+				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
+				break;
+			case "Sun"://-Z
+				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
 				break;
 			default://xyz
-				camera.position = new THREE.Vector3(300,300,300);
+				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
 				break;
 		}
 		camera.lookAt(scene.position);
@@ -231,7 +259,7 @@ alert(new_state);
 	var fontsizeSun, borderColorSun, borderThicknessSun, backgroundColorSun, fontColorSun;
 	var fontsizeEarth, borderColorEarth, borderThicknessEarth, backgroundColorEarth, fontColorEarth;
 	var fps_update_counter = 0;
-	
+	var miniSphereX,miniSphereXX,miniSphereY,miniSphereYY,miniSphereZ,miniSphereZZ;
 	var gui, parameters;
 	
 	//-----------------------------------------------------------------------------------------------------------------------
@@ -553,29 +581,29 @@ function init()
 			scene.add( miniSphere );
 		}
 		
-		var miniSphereA = miniSphere.clone();
-		miniSphereA.position.set( sphere_radius+miniSphere_margin, 0, 0 );
-		scene.add( miniSphereA );
+		miniSphereX = miniSphere.clone();
+		miniSphereX.position.set( sphere_radius+miniSphere_margin, 0, 0 );
+		scene.add( miniSphereX );
 		
-		var miniSphereB = miniSphere.clone();
-		miniSphereB.position.set( -sphere_radius-miniSphere_margin, 0, 0 );
-		scene.add( miniSphereB );
+		miniSphereXX = miniSphere.clone();
+		miniSphereXX.position.set( -sphere_radius-miniSphere_margin, 0, 0 );
+		scene.add( miniSphereXX );
 		
-		var miniSphereC = miniSphere.clone();
-		miniSphereC.position.set( 0, sphere_radius+miniSphere_margin, 0 );
-		scene.add( miniSphereC );
+		miniSphereY = miniSphere.clone();
+		miniSphereY.position.set( 0, sphere_radius+miniSphere_margin, 0 );
+		scene.add( miniSphereY );
 		
-		var miniSphereD = miniSphere.clone();
-		miniSphereD.position.set( 0, -sphere_radius-miniSphere_margin, 0 );
-		scene.add( miniSphereD );
+		miniSphereYY = miniSphere.clone();
+		miniSphereYY.position.set( 0, -sphere_radius-miniSphere_margin, 0 );
+		scene.add( miniSphereYY );
 		
-		var miniSphereE = miniSphere.clone();
-		miniSphereE.position.set( 0, 0, sphere_radius+miniSphere_margin);
-		scene.add( miniSphereE );
+		miniSphereZ = miniSphere.clone();
+		miniSphereZ.position.set( 0, 0, sphere_radius+miniSphere_margin);
+		scene.add( miniSphereZ );
 		
-		var miniSphereF = miniSphere.clone();
-		miniSphereF.position.set( 0, 0, -sphere_radius-miniSphere_margin);
-		scene.add( miniSphereF );
+		miniSphereZZ = miniSphere.clone();
+		miniSphereZZ.position.set( 0, 0, -sphere_radius-miniSphere_margin);
+		scene.add( miniSphereZZ );
 	}
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			SPACECRAFT

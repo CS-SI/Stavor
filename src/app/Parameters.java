@@ -9,7 +9,7 @@ public class Parameters {
 		public static final String project_license = "Undef";
 		
 		public static final String version_orekit = "6.1";
-		public static final String version_xwalk = "???";
+		public static final String version_xwalk = "6.35.131.4 beta";
 		public static final String version_threejs = "r66 (mod)";
 		public static final String version_gson = "2.2.4";
 		public static final String version_androidcolorpicker = "1.0";

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="views_array">
+        <item>XYZ</item>
+        <item>X</item>
+        <item>-X</item>
+        <item>Y</item>
+        <item>-Y</item>
+        <item>Z</item>
+        <item>-Z</item>
+        <item>Earth</item>
+        <item>Sun</item>
+    </string-array>
+</resources>
