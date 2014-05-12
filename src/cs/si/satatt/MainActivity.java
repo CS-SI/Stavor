@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 import app.Installer;
+import app.Parameters;
 
 public class MainActivity extends ActionBarActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -53,6 +54,7 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		long start_time = System.nanoTime();
 
 		Installer.installApkData(this);
 
@@ -86,6 +88,16 @@ public class MainActivity extends ActionBarActivity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		
+		long diff_time = System.nanoTime()-start_time;
+		if(diff_time<Parameters.App.splash_min_time_ns){
+			try {
+				Thread.sleep((Parameters.App.splash_min_time_ns-diff_time)/1000000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	

@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.UnknownHostException;
 
 import org.orekit.propagation.SpacecraftState;
@@ -47,7 +49,9 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
     		Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting socket");
     		try {
-        		socket = new Socket(dstAddress, dstPort);
+        		//socket = new Socket(dstAddress, dstPort);
+        		socket = new Socket();
+        		socket.connect(new InetSocketAddress(dstAddress, dstPort), Parameters.Simulator.remote_connection_timeout_ms);
         		//socket.setTcpNoDelay(true);
         	    inputStream = socket.getInputStream();
 				inputOStream = new ObjectInputStream( inputStream );
@@ -91,7 +95,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();
-				simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_disconnected));
+				simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_disconnected)+": "+e.getMessage());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

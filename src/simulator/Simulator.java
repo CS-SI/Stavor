@@ -123,6 +123,13 @@ public class Simulator {
 
 	private void connectThread() {
 		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting thread interior");
+		if(buttonConnect!=null){
+			activity.runOnUiThread( new Runnable() {
+				public void run() {
+					buttonConnect.setEnabled(false);
+		        }
+			});
+		}
 		setProgress(10 * 100);
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
@@ -140,11 +147,11 @@ public class Simulator {
 				thread = (SocketsThread) new SocketsThread(this,host,port).execute(simulation);
 				//Log.d("Sim",System.currentTimeMillis()+": "+"end executing thread ");
 			}catch(NumberFormatException nfe){
+				setSimulatorStatus(SimulatorStatus.Disconnected);
 			}
 		}else{
 			// Local
 		}
-		setProgress(100 * 100);
 		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator interior thread connected");
 	}
 	
@@ -215,12 +222,14 @@ public class Simulator {
 		simulatorStatus = new_status;
 		updateConnectButtonText();
 		updateSwitchEnabled();
+		setProgress(100 * 100);
 	}
 	
 	private void updateConnectButtonText(){
 		if(buttonConnect!=null){
 			activity.runOnUiThread( new Runnable() {
 				public void run() {
+					buttonConnect.setEnabled(true);
 					if(simulatorStatus.equals(SimulatorStatus.Connected))
 			    		buttonConnect.setText(context.getString(R.string.sim_disconnect));
 			    	else
