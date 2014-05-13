@@ -2,7 +2,9 @@ package fragments;
 
 import model.ModelState;
 
+import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkSettings;
+import org.xwalk.core.XWalkUIClient;
 import org.xwalk.core.XWalkView;
 
 import simulator.Simulator;
@@ -17,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.WebResourceResponse;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -139,11 +142,14 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	
     	browser.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
     	
+    	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
+    	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+    	browser.setLayoutParams(browser_params);
     	browserLayout.addView(browser);
     	
     	//browser.loadUrl(Parameters.Web.STARTING_PAGE);
-    	browser.load(Parameters.Web.STARTING_PAGE,"");
+    	browser.load(Parameters.Web.STARTING_PAGE,null);
 		
 		/*TextView textView = (TextView) rootView
 				.findViewById(R.id.section_label);
@@ -178,11 +184,13 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
         // An item was selected. You can retrieve the selected item using
         String sel_view = (String) parent.getItemAtPosition(pos);
       //browser.loadUrl("javascript:changeView('"+sel_view+"')");
-		browser.load("javascript:changeView('"+sel_view+"')", "");
+		browser.load("javascript:changeView('"+sel_view+"')", null);
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
+ 
+
 
 }

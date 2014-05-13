@@ -58,7 +58,7 @@ public final class TestFragment extends Fragment {
 		   public void onClick(View v) {
 			   // button 1 was clicked!
 			   //browser.loadUrl(Parameters.Web.TEST_PAGE_1);
-			   browser.load(Parameters.Web.TEST_PAGE_1,"");
+			   browser.load(Parameters.Web.TEST_PAGE_1,null);
 		   }
 		  });
 		Button button2 = ((Button) rootView.findViewById(R.id.buttonTest2));
@@ -66,7 +66,7 @@ public final class TestFragment extends Fragment {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
-			   browser.load(Parameters.Web.TEST_PAGE_2,"");
+			   browser.load(Parameters.Web.TEST_PAGE_2,null);
 			   //browser.loadUrl(Parameters.Web.TEST_PAGE_2);
 		   }
 		  });
@@ -76,7 +76,7 @@ public final class TestFragment extends Fragment {
 		   public void onClick(View v) {
 			   // button 1 was clicked!
 			   //browser.loadUrl(Parameters.Web.TEST_PAGE_3);
-			   browser.load(Parameters.Web.TEST_PAGE_3,"");
+			   browser.load(Parameters.Web.TEST_PAGE_3,null);
 		   }
 		  });
 		

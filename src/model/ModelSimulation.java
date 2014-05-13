@@ -77,22 +77,18 @@ public class ModelSimulation {
      * @param st
      */
     private synchronized void updateState(ModelState st){
-    	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update 2");
     	state = st;
-    	//Log.d("Sim",System.currentTimeMillis()+": "+"post update 2");
     }
     
     public void pushSimulationModel(){
     	if(browser!=null && state!=null){
     		//browser.loadUrl("javascript:updateModelState('"+gson.toJson(state)+"')");
-    		browser.load("javascript:updateModelState('"+gson.toJson(state)+"')","");
+    		browser.load("javascript:updateModelState('"+gson.toJson(state)+"')",null);
     	}
 	}
     
     private synchronized void updateInfo(ModelInfo inf){
-    	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update 3");
     	info = inf; 
-    	//Log.d("Sim",System.currentTimeMillis()+": "+"post update 3");
     }
     
     private AbsoluteDate tmp_time;
