@@ -57,8 +57,8 @@ public final class TestFragment extends Fragment {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
-			   //browser.loadUrl(Parameters.Web.TEST_PAGE_1);
-			   browser.load(Parameters.Web.TEST_PAGE_1,null);
+			   browser.loadUrl(Parameters.Web.TEST_PAGE_1);
+			   //browser.load(Parameters.Web.TEST_PAGE_1,null);
 		   }
 		  });
 		Button button2 = ((Button) rootView.findViewById(R.id.buttonTest2));
@@ -66,8 +66,8 @@ public final class TestFragment extends Fragment {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
-			   browser.load(Parameters.Web.TEST_PAGE_2,null);
-			   //browser.loadUrl(Parameters.Web.TEST_PAGE_2);
+			   //browser.load(Parameters.Web.TEST_PAGE_2,null);
+			   browser.loadUrl(Parameters.Web.TEST_PAGE_2);
 		   }
 		  });
 		Button button3 = ((Button) rootView.findViewById(R.id.buttonTest3));
@@ -75,8 +75,8 @@ public final class TestFragment extends Fragment {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
-			   //browser.loadUrl(Parameters.Web.TEST_PAGE_3);
-			   browser.load(Parameters.Web.TEST_PAGE_3,null);
+			   browser.loadUrl(Parameters.Web.TEST_PAGE_3);
+			   //browser.load(Parameters.Web.TEST_PAGE_3,null);
 		   }
 		  });
 		
@@ -123,8 +123,8 @@ public final class TestFragment extends Fragment {
     	LinearLayout browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	browserLayout.addView(browser);
     	
-    	//browser.loadUrl(Parameters.Web.TEST_PAGE_1);
-    	browser.load(Parameters.Web.TEST_PAGE_1,"");
+    	browser.loadUrl(Parameters.Web.TEST_PAGE_1);
+    	//browser.load(Parameters.Web.TEST_PAGE_1,"");
     	
 		/*TextView textView = (TextView) rootView
 				.findViewById(R.id.section_label);

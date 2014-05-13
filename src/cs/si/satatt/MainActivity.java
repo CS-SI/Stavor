@@ -1,5 +1,9 @@
 package cs.si.satatt;
 
+/*import org.xwalk.core.XWalkResourceClient;
+import org.xwalk.core.XWalkUIClient;*/
+import org.xwalk.core.XWalkView;
+
 import dialogs.ErrorDialogFragment;
 import dialogs.WelcomeDialogFragment;
 import settings.SettingsBasicFragment;
@@ -24,6 +28,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.webkit.WebResourceResponse;
 import android.widget.Toast;
 import app.Installer;
 import app.Parameters;
@@ -50,7 +55,7 @@ public class MainActivity extends ActionBarActivity implements
 	public Simulator getSimulator(){
 		return simulator;
 	}
-
+    public XWalkView mXwalkView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,6 +66,11 @@ public class MainActivity extends ActionBarActivity implements
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
 		setProgressBarVisibility(true);
+		
+		mXwalkView = new XWalkView(this.getApplicationContext(), this);
+		//mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
+        //mXwalkView.setUIClient(new MyUIClient(mXwalkView));
+
 		
 		// find the retained fragment on activity restarts
         FragmentManager fm = getFragmentManager();
@@ -106,6 +116,10 @@ public class MainActivity extends ActionBarActivity implements
         super.onDestroy();
         // store the data in the fragment
         dataFragment.setData(this.simulator);
+        //XWalk
+        /*if (mXwalkView != null) {
+            mXwalkView.onDestroy();
+        }*/
     }
 
 
@@ -269,5 +283,63 @@ public class MainActivity extends ActionBarActivity implements
     	newFragment.setCancelable(false);
     	newFragment.show(getFragmentManager(), "error");
     }
+    
+    //XWalk
+/*
+    class MyResourceClient extends XWalkResourceClient {
+        MyResourceClient(XWalkView view) {
+            super(view);
+        }
+        @Override
+  		public void onProgressChanged(XWalkView view, int progress) {
+  			// Activities and WebViews measure progress with different scales.
+  			// The progress meter will automatically disappear when we reach 100%
+  			try{
+  				setProgress(progress * 100);
+  			}catch(NullPointerException nulle){
+  				
+  			}
+  		}
+    }
+
+    class MyUIClient extends XWalkUIClient {
+        MyUIClient(XWalkView view) {
+            super(view);
+        }
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mXwalkView != null) {
+            mXwalkView.pauseTimers();
+            mXwalkView.onHide();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mXwalkView != null) {
+            mXwalkView.resumeTimers();
+            mXwalkView.onShow();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (mXwalkView != null) {
+            mXwalkView.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if (mXwalkView != null) {
+            mXwalkView.onNewIntent(intent);
+        }
+    }
+
+*/
 
 }

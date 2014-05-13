@@ -2,9 +2,9 @@ package fragments;
 
 import model.ModelState;
 
-import org.xwalk.core.XWalkResourceClient;
+//import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkSettings;
-import org.xwalk.core.XWalkUIClient;
+//import org.xwalk.core.XWalkUIClient;
 import org.xwalk.core.XWalkView;
 
 import simulator.Simulator;
@@ -101,6 +101,7 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
 		TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
 		fps.setAlpha((float)0.0);
 		
+		browser = ((MainActivity)getActivity()).mXwalkView;
 		browser = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
 		
     	XWalkSettings browserSettings = browser.getSettings();
@@ -115,7 +116,7 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	//browserSettings.setSupportZoom(true);
     	
     	browser.clearCache(true);
-  /*    	browser.setXWalkWebChromeClient(new org.xwalk.core.XWalkWebChromeClient(rootView.getContext(), browser) {
+      	browser.setXWalkWebChromeClient(new org.xwalk.core.XWalkWebChromeClient() {
       		@Override
       		public void onProgressChanged(XWalkView view, int progress) {
       			// Activities and WebViews measure progress with different scales.
@@ -127,7 +128,7 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
       			}
       		}
       	});
-      	browser.setXWalkClient(new org.xwalk.core.XWalkUIClient(rootView.getContext(), browser) {
+      	/*browser.setXWalkClient(new org.xwalk.core.XWalkUIClient(rootView.getContext(), browser) {
       		public void onReceivedError(XWalkView view, int errorCode, String description, String failingUrl) {
       			Toast.makeText(getActivity(), "Oh no! " + description, Toast.LENGTH_LONG).show();
       		}
@@ -146,10 +147,11 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     	browser.setLayoutParams(browser_params);
+    	
     	browserLayout.addView(browser);
     	
-    	//browser.loadUrl(Parameters.Web.STARTING_PAGE);
-    	browser.load(Parameters.Web.STARTING_PAGE,null);
+    	browser.loadUrl(Parameters.Web.STARTING_PAGE);
+    	//browser.load(Parameters.Web.STARTING_PAGE,null);
 		
 		/*TextView textView = (TextView) rootView
 				.findViewById(R.id.section_label);
@@ -183,8 +185,8 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
             int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         String sel_view = (String) parent.getItemAtPosition(pos);
-      //browser.loadUrl("javascript:changeView('"+sel_view+"')");
-		browser.load("javascript:changeView('"+sel_view+"')", null);
+        browser.loadUrl("javascript:changeView('"+sel_view+"')");
+		//browser.load("javascript:changeView('"+sel_view+"')", null);
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
