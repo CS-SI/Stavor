@@ -62,6 +62,8 @@ public class MainActivity extends ActionBarActivity implements
 		long start_time = System.nanoTime();
 
 		Installer.installApkData(this);
+		
+		OrekitInit.init(Installer.getOrekitDataRoot(this));
 
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);

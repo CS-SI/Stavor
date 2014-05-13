@@ -15,8 +15,8 @@ public class Parameters {
 		public static final String version_androidcolorpicker = "1.0";
 	}
 	public static class Simulator {
-		public static final long min_hud_panel_refreshing_interval_ns = 500000000;//[ns] 2Hz max
-		public static final long min_hud_model_refreshing_interval_ns = 33333333;//[ns] 30Hz max
+		public static final long min_hud_panel_refreshing_interval_ns = 1000000000;//[ns] 1Hz max
+		public static final long min_hud_model_refreshing_interval_ns = 40000000;//[ns] 25Hz max
 		public static final int remote_connection_timeout_ms = 5000;//[ms]
 	}
 	public static class Web {

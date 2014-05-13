@@ -96,7 +96,9 @@
     <string name="sim_local_new">New</string>
     <string name="sim_local_edit">Edit</string>
     <string name="sim_local_remove">Remove</string>
-    
+    <string name="sim_local_simulator_connected">Simulator connected!</string>
+    <string name="sim_orekit_init_error">Simulator initialization error</string>
+    <string name="sim_orekit_prop_error">Simulator propagation error</string>
     <string name="sim_remote_simulator_connected">Remote simulator connected!</string>
     <string name="sim_remote_disconnected">Remote simulator disconnected</string>
     <string name="sim_unknown_host">Unknown host</string>

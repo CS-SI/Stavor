@@ -35,7 +35,7 @@ public class ModelSimulation {
     private XWalkView browser;
     
     public ModelSimulation(MainActivity acv){
-    	OrekitInit.init(Installer.getOrekitDataRoot(acv));
+    	//OrekitInit.init(Installer.getOrekitDataRoot(acv));
     	activity=acv;
     	config = new ModelConfiguration(activity.getApplicationContext());
     	state = new ModelState();
@@ -60,9 +60,10 @@ public class ModelSimulation {
     public void setHud(View hud, XWalkView mBrowser){
     	view = hud;
     	browser = mBrowser;
+    	initViews();
     }
-    
-    public synchronized String getInitializationJSON() {
+
+	public synchronized String getInitializationJSON() {
     	config = new ModelConfiguration(activity.getApplicationContext());
         return gson.toJson(config);
     }
@@ -168,51 +169,58 @@ public class ModelSimulation {
     }
     
     public synchronized void updateHUD(){
-    	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update gui 1");
-    	activity.runOnUiThread( new Runnable() {
-	        @SuppressLint("ResourceAsColor")
-			public void run() {
-	        	if(view != null){
-	        		TextView panel_time = (TextView)view.findViewById(R.id.textViewPanelTime);
-	        		if(panel_time != null)
-	        			panel_time.setText(info.time.replace("T", "  "));
-	        		ProgressBar panel_progress = (ProgressBar)view.findViewById(R.id.progressBarPanelProgress);
-	        		if(panel_progress != null)
-	        			panel_progress.setProgress(info.progress);
-	        		TextView panel_vel = (TextView)view.findViewById(R.id.textViewPanelVel);
-	        		if(panel_vel != null){
-	        			panel_vel.setText("Vel. "+String.format("%.2f", info.velocity)+" Km/s");
-	        			if(info.velocity>config.limit_velocity)
-	        				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
-	        			else
-	        				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_value));
-	        		}
-	        		TextView panel_accel = (TextView)view.findViewById(R.id.textViewPanelAccel);
-	        		if(panel_accel != null){
-	        			panel_accel.setText("Accel. "+String.format("%.2f", info.acceleration)+" Km/s2");
-	        			if(info.acceleration>config.limit_acceleration)
-	        				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
-	        			else
-	        				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_value));
-	        		}
-	        		TextView panel_radium = (TextView)view.findViewById(R.id.textViewPanelRadium);
-	        		if(panel_radium != null)
-	        			panel_radium.setText("Orbit radium: "+String.format("%.1f", info.orbit_radium)+" Km");
-	        		TextView panel_mass = (TextView)view.findViewById(R.id.textViewPanelMass);
-	        		if(panel_mass != null)
-	        			panel_mass.setText("Mass: "+String.format("%.1f", info.mass)+" Kg");
-	        		TextView panel_roll = (TextView)view.findViewById(R.id.textViewPanelRoll);
-	        		if(panel_roll != null)
-	        			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"º");
-	        		TextView panel_pitch = (TextView)view.findViewById(R.id.textViewPanelPitch);
-	        		if(panel_pitch != null)
-	        			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"º");
-	        		TextView panel_yaw = (TextView)view.findViewById(R.id.textViewPanelYaw);
-	        		if(panel_yaw != null)
-	        			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"º");
-	        	}
-	        }
-	    });
-    	//Log.d("Sim",System.currentTimeMillis()+": "+"post update gui 1");
+    		if(panel_time != null)
+    			panel_time.setText(info.time.replace("T", "  "));
+    		if(panel_progress != null)
+    			panel_progress.setProgress(info.progress);
+    		if(panel_vel != null){
+    			panel_vel.setText("Vel. "+String.format("%.2f", info.velocity)+" Km/s");
+    			if(info.velocity>config.limit_velocity)
+    				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
+    			else
+    				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_value));
+    		}
+    		if(panel_accel != null){
+    			panel_accel.setText("Accel. "+String.format("%.2f", info.acceleration)+" Km/s2");
+    			if(info.acceleration>config.limit_acceleration)
+    				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
+    			else
+    				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_value));
+    		}
+    		if(panel_radium != null)
+    			panel_radium.setText("Orbit radium: "+String.format("%.1f", info.orbit_radium)+" Km");
+    		if(panel_mass != null)
+    			panel_mass.setText("Mass: "+String.format("%.1f", info.mass)+" Kg");
+    		if(panel_roll != null)
+    			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"º");
+    		if(panel_pitch != null)
+    			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"º");
+    		if(panel_yaw != null)
+    			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"º");
     }
+    
+    TextView panel_time;
+	ProgressBar panel_progress;
+	TextView panel_vel;
+	TextView panel_accel;
+	TextView panel_radium;
+	TextView panel_mass;
+	TextView panel_roll;
+	TextView panel_pitch;
+	TextView panel_yaw;
+	
+	private void initViews() {
+		// TODO Auto-generated method stub
+		if(view != null){
+	    	panel_time = (TextView)view.findViewById(R.id.textViewPanelTime);
+			panel_progress = (ProgressBar)view.findViewById(R.id.progressBarPanelProgress);
+			panel_vel = (TextView)view.findViewById(R.id.textViewPanelVel);
+			panel_accel = (TextView)view.findViewById(R.id.textViewPanelAccel);
+			panel_radium = (TextView)view.findViewById(R.id.textViewPanelRadium);
+			panel_mass = (TextView)view.findViewById(R.id.textViewPanelMass);
+			panel_roll = (TextView)view.findViewById(R.id.textViewPanelRoll);
+			panel_pitch = (TextView)view.findViewById(R.id.textViewPanelPitch);
+			panel_yaw = (TextView)view.findViewById(R.id.textViewPanelYaw);
+		}
+	}
 }

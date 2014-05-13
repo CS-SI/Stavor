@@ -2,6 +2,7 @@ package simulator;
 
 import org.xwalk.core.XWalkView;
 
+import mission.Mission;
 import model.ModelSimulation;
 import cs.si.satatt.R;
 import cs.si.satatt.MainActivity;
@@ -158,6 +159,12 @@ public class Simulator {
 			}
 		}else{
 			// Local
+			setProgress(30 * 100);
+			simulation = new ModelSimulation((MainActivity)activity);
+			setProgress(40 * 100);
+			simulation.preInitialize();
+			sthread = (SimulatorThread) new SimulatorThread(this, new Mission()).execute(simulation);
+			//TODO new mission implement selector of mission
 		}
 		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator interior thread connected");
 	}
@@ -172,6 +179,8 @@ public class Simulator {
 			
 		}else{
 			// Local
+			sthread.setDisconnected();
+			sthread.cancel(false);
 		}
 	}
 	
@@ -192,6 +201,7 @@ public class Simulator {
 			thread.notify();
 		}else{
 			// Local
+			sthread.notify();
 		}
 	}
 	private void pauseThread() {
@@ -207,6 +217,12 @@ public class Simulator {
 			}
 		}else{
 			// Local
+			try {
+				sthread.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	private void stopThread() {
@@ -222,6 +238,12 @@ public class Simulator {
 			}
 		}else{
 			// Local
+			try {
+				sthread.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

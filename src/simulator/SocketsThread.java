@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.net.UnknownHostException;
 
 import org.orekit.propagation.SpacecraftState;

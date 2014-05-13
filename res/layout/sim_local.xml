@@ -21,21 +21,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/sim_local_new" />
+            android:text="@string/sim_local_new"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/sim_local_edit" />
+            android:text="@string/sim_local_edit"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/sim_local_remove" />
+            android:text="@string/sim_local_remove"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
     <ListView
