@@ -18,7 +18,7 @@ public class Parameters {
 	}
 	public static class Simulator {
 		public static final long min_hud_panel_refreshing_interval_ns = 1000000000;//[ns] 1Hz max
-		public static final long min_hud_model_refreshing_interval_ns = 50000000;//[ns] 20Hz max
+		public static final long min_hud_model_refreshing_interval_ns = 40000000;//[ns] 25Hz max
 		public static final long model_refreshing_interval_safe_guard_ns = 5000000;//[ns] 5ms
 		public static final int remote_connection_timeout_ms = 5000;//[ms]
 	}

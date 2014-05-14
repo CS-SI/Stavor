@@ -174,12 +174,6 @@ public class ModelSimulation {
     	updateInfo(new_info);
     	//Log.d("Sim",System.currentTimeMillis()+": "+"post update 1");
     }
-    int a = 0;
-    public void test(){
-    	a++;
-    	if(panel_time != null)
-			panel_time.setText(Integer.toString(a));
-    }
     public synchronized void updateHUD(){
     		if(panel_time != null)
     			panel_time.setText(info.time.replace("T", "  "));

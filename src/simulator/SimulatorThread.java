@@ -107,8 +107,7 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
     		
     		time_tmp_gui = System.nanoTime();
-    		//simulator.getSimulationResults().updateHUD();
-    		simulator.getSimulationResults().test();
+    		simulator.getSimulationResults().updateHUD();
     	}
     }
  
