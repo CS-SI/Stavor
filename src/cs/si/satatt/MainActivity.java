@@ -256,23 +256,27 @@ public class MainActivity extends ActionBarActivity implements
 
     @Override
     public void onBackPressed() {
-    	int sel = mNavigationDrawerFragment.getSelectedPosition();
-    	if(sel>1){
-    		showSection(1);
-    	}else if (sel==1){
-    		showSection(0);
-    	}else if (sel==0){
-	    	if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
-	    		toast = Toast.makeText(this, getString(R.string.app_exit_prevent_message), 4000);
-	    		toast.show();
-	    		this.lastBackPressTime = System.currentTimeMillis();
-	    	} else {
-	    		if (toast != null) {
-	    			toast.cancel();
-	    		}
-	    		super.onBackPressed();
+    	if (!mNavigationDrawerFragment.isDrawerOpen()) {
+	    	int sel = mNavigationDrawerFragment.getSelectedPosition();
+	    	if(sel>1){
+	    		showSection(1);
+	    	}else if (sel==1){
+	    		showSection(0);
+	    	}else if (sel==0){
+		    	if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
+		    		toast = Toast.makeText(this, getString(R.string.app_exit_prevent_message), 4000);
+		    		toast.show();
+		    		this.lastBackPressTime = System.currentTimeMillis();
+		    	} else {
+		    		if (toast != null) {
+		    			toast.cancel();
+		    		}
+		    		super.onBackPressed();
+		    	}
 	    	}
-    	}
+    	}else{
+    		mNavigationDrawerFragment.select();	
+	    }
     }
     
     public void showWelcomeMessage() {

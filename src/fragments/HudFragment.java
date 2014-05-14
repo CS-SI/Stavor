@@ -94,7 +94,7 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
             }
         });
         
-        //drawer.getHandle().callOnClick();
+        
 		
 		slider_content = (LinearLayout) rootView.findViewById(R.id.content);
 		
@@ -161,6 +161,8 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	Spinner spinner = (Spinner) rootView.findViewById(R.id.spinnerView);
     	spinner.setOnItemSelectedListener(this);
     	
+    	if(Parameters.Hud.start_panel_open)
+    		drawer.getHandle().callOnClick();
 		return rootView;
 	}
     
@@ -181,12 +183,15 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
 		fps.setAlpha((float)1.0);
 	}
 	
+	private boolean first = true;
 	public void onItemSelected(AdapterView<?> parent, View view, 
             int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         String sel_view = (String) parent.getItemAtPosition(pos);
-        browser.loadUrl("javascript:changeView('"+sel_view+"')");
+        if(!first)
+        	browser.loadUrl("javascript:changeView('"+sel_view+"')");
 		//browser.load("javascript:changeView('"+sel_view+"')", null);
+        first=false;
     }
 
     public void onNothingSelected(AdapterView<?> parent) {

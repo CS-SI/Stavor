@@ -14,6 +14,9 @@ public class Parameters {
 		public static final String version_gson = "2.2.4";
 		public static final String version_androidcolorpicker = "1.0";
 	}
+	public static class Hud {
+		public static final boolean start_panel_open = true;
+	}
 	public static class Simulator {
 		public static final long min_hud_panel_refreshing_interval_ns = 1000000000;//[ns] 1Hz max
 		public static final long min_hud_model_refreshing_interval_ns = 40000000;//[ns] 25Hz max

@@ -211,6 +211,9 @@ public class NavigationDrawerFragment extends Fragment {
     public void select(int position){
     	selectItem(position);
     }
+    public void select() {
+    	selectItem(mCurrentSelectedPosition);
+	}
 
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
@@ -353,4 +356,5 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
+
 }
