@@ -53,12 +53,20 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 				while (true){
 					//TODO Propagate
 					long dur = (System.nanoTime()-time_tmp_data);
-					if(dur<Parameters.Simulator.min_hud_model_refreshing_interval_ns){
+					if(dur<(Parameters.Simulator.min_hud_model_refreshing_interval_ns-Parameters.Simulator.model_refreshing_interval_safe_guard_ns)){
 						try {
-							long sleep_dur = (Parameters.Simulator.min_hud_model_refreshing_interval_ns-(System.nanoTime()-time_tmp_data))/1000000;
+							long sleep_dur = (Parameters.Simulator.min_hud_model_refreshing_interval_ns-dur)/1000000;
 							if(sleep_dur>0){
-								Thread.sleep(sleep_dur);
+								Thread.sleep(sleep_dur);		
 							}
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}else{
+						Log.d("SimLocal", "Simulation step longer than available time: "+dur);
+						try {
+							Thread.sleep(Parameters.Simulator.model_refreshing_interval_safe_guard_ns/1000000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -98,7 +106,8 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
     		
     		time_tmp_gui = System.nanoTime();
-    		simulator.getSimulationResults().updateHUD();
+    		//simulator.getSimulationResults().updateHUD();
+    		simulator.getSimulationResults().test();
     	}
     }
  

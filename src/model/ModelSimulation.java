@@ -174,7 +174,12 @@ public class ModelSimulation {
     	updateInfo(new_info);
     	//Log.d("Sim",System.currentTimeMillis()+": "+"post update 1");
     }
-    
+    int a = 0;
+    public void test(){
+    	a++;
+    	if(panel_time != null)
+			panel_time.setText(Integer.toString(a));
+    }
     public synchronized void updateHUD(){
     		if(panel_time != null)
     			panel_time.setText(info.time.replace("T", "  "));
@@ -204,6 +209,7 @@ public class ModelSimulation {
     			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"º");
     		if(panel_yaw != null)
     			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"º");
+    			
     }
     
     TextView panel_time;
