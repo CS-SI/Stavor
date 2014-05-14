@@ -38,6 +38,10 @@ public class Simulator {
 		simulation.setHud(v,x);
 	}
 	
+	public void setBrowserLoaded(boolean is){
+		simulation.setBrowserloaded(is);
+	}
+	
 	public Context getContext(){
 		return context;
 	}

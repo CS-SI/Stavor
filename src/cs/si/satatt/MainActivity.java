@@ -33,6 +33,7 @@ import android.view.Window;
 import android.webkit.WebResourceResponse;
 import android.widget.Toast;
 import app.Installer;
+import app.OrekitInit;
 import app.Parameters;
 
 public class MainActivity extends ActionBarActivity implements
@@ -114,18 +115,6 @@ public class MainActivity extends ActionBarActivity implements
 		}
 		
 	}
-	
-	@Override
-    public void onDestroy() {
-        super.onDestroy();
-        // store the data in the fragment
-        dataFragment.setData(this.simulator);
-        //XWalk
-        if (mXwalkView != null) {
-            mXwalkView.onDestroy();
-        }
-    }
-
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
@@ -163,7 +152,7 @@ public class MainActivity extends ActionBarActivity implements
 	        .replace(R.id.container, new SettingsModelsFragment()).commit();
 		}else if(position==5){
 			// Display the fragment as the main content.
-	        fragmentManager
+	        fragmentManager    
 	        .beginTransaction()
 	        .replace(R.id.container, new SettingsGeneralFragment()).commit();
 		}else if(position==6){
@@ -201,7 +190,7 @@ public class MainActivity extends ActionBarActivity implements
 			break;
 		}
 	}
-
+    
 	public void restoreActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -244,7 +233,7 @@ public class MainActivity extends ActionBarActivity implements
 	public void showSection(final int sel) {
 		// TODO Auto-generated method stub
 		runOnUiThread( new Runnable() {
-			public void run() {
+			public void run() {    
 				mNavigationDrawerFragment.select(sel);
 				onSectionAttached(sel+1);
 				restoreActionBar();
@@ -298,16 +287,18 @@ public class MainActivity extends ActionBarActivity implements
         MyResourceClient(XWalkView view) {
             super(view);
         }
-        @Override
+        /*@Override
   		public void onProgressChanged(XWalkView view, int progress) {
   			// Activities and WebViews measure progress with different scales.
   			// The progress meter will automatically disappear when we reach 100%
   			try{
+  				if(progress==100)
+  					simulator.setBrowserLoaded(true);
   				setProgress(progress * 100);
   			}catch(NullPointerException nulle){
   				
   			}
-  		}
+  		}*/
     }
 
     class MyUIClient extends XWalkUIClient {
@@ -345,6 +336,18 @@ public class MainActivity extends ActionBarActivity implements
     protected void onNewIntent(Intent intent) {
         if (mXwalkView != null) {
             mXwalkView.onNewIntent(intent);
+        }
+    }
+	
+	@Override
+    public void onDestroy() {
+        super.onDestroy();
+        // store the data in the fragment
+        dataFragment.setData(this.simulator);
+        //XWalk
+        simulator.setBrowserLoaded(false);
+        if (mXwalkView != null) {
+            mXwalkView.onDestroy();
         }
     }
 

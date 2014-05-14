@@ -1,4 +1,4 @@
-package cs.si.satatt;
+package app;
 
 import java.io.File;
 

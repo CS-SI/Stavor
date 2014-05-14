@@ -1,4 +1,4 @@
-package webclient;
+package unused;
 
 import cs.si.satatt.SatAttApplication;
 

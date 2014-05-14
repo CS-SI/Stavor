@@ -71,8 +71,7 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 					int progress = (int)((extrapDate.durationFrom(finalDate)/mission.sim_duration)*100); 
 
 					if(sstate!=null){
-						SimResults results = new SimResults(sstate, progress);
-						simulator.getSimulationResults().updateSimulation(results.spacecraftState, results.sim_progress);
+						simulator.getSimulationResults().updateSimulation(sstate, progress);
 						
 			            publishProgress();
 					}

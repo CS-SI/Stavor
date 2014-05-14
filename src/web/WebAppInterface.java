@@ -1,10 +1,12 @@
 package web;
 
+import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
 import fragments.HudFragment;
 import model.ModelSimulation;
 import android.app.Activity;
 import android.widget.Toast;
+
 
 //import org.chromium.content.browser.JavascriptInterface;
 import org.xwalk.core.JavascriptInterface;
@@ -31,6 +33,8 @@ public class WebAppInterface {
     /** Set loading progress (0-100) from the web page */
     @JavascriptInterface
     public void setProgress(final int progress) {
+    	if(progress==100)
+    		((MainActivity)activity).getSimulator().setBrowserLoaded(true);
     	activity.runOnUiThread( new Runnable() {
 	        public void run() {
             	activity.setProgress(progress * 100);

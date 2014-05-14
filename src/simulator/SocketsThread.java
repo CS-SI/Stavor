@@ -78,8 +78,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 					SpacecraftState sstate = (SpacecraftState) inputOStream.readObject();
 					//Log.d("Sim",System.currentTimeMillis()+": "+"after readObject");
 					if(sstate!=null){
-						SimResults results = new SimResults(sstate, 0);
-						simulator.getSimulationResults().updateSimulation(results.spacecraftState, results.sim_progress);
+						simulator.getSimulationResults().updateSimulation(sstate, 0);
 						//Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
 						
 			            publishProgress();

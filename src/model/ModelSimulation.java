@@ -18,11 +18,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import app.Installer;
+import app.OrekitInit;
 
 import com.google.gson.Gson;
 
 import cs.si.satatt.MainActivity;
-import cs.si.satatt.OrekitInit;
 import cs.si.satatt.R;
 
 public class ModelSimulation {
@@ -33,9 +33,11 @@ public class ModelSimulation {
     private MainActivity activity;
     private View view;
     private XWalkView browser;
+    private boolean isBrowserLoaded;
     
     public ModelSimulation(MainActivity acv){
     	//OrekitInit.init(Installer.getOrekitDataRoot(acv));
+    	isBrowserLoaded = false;
     	activity=acv;
     	config = new ModelConfiguration(activity.getApplicationContext());
     	state = new ModelState();
@@ -61,7 +63,12 @@ public class ModelSimulation {
     	view = hud;
     	browser = mBrowser;
     	initViews();
+    	
     }
+    
+    public void setBrowserloaded(boolean is) {
+    	isBrowserLoaded = is;
+	}
 
 	public synchronized String getInitializationJSON() {
     	config = new ModelConfiguration(activity.getApplicationContext());
@@ -82,7 +89,7 @@ public class ModelSimulation {
     }
     
     public void pushSimulationModel(){
-    	if(browser!=null && state!=null){
+    	if(browser!=null && state!=null && isBrowserLoaded){
     		//browser.loadUrl("javascript:updateModelState('"+gson.toJson(state)+"')");
     		browser.load("javascript:updateModelState('"+gson.toJson(state)+"')",null);
     	}
@@ -223,4 +230,6 @@ public class ModelSimulation {
 			panel_yaw = (TextView)view.findViewById(R.id.textViewPanelYaw);
 		}
 	}
+
+	
 }

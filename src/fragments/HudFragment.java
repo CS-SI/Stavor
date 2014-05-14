@@ -138,9 +138,9 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
       		}
       	});*/
     	
-    	browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
+    	/*browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
     	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
-    	browser.addJavascriptInterface(null, "unlockingandroid");
+    	browser.addJavascriptInterface(null, "unlockingandroid");*/
     	
     	simulator = ((MainActivity)getActivity()).getSimulator();
     	simulator.setHudView(rootView, browser);
