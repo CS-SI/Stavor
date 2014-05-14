@@ -116,6 +116,9 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	//browserSettings.setSupportZoom(true);
     	
     	browser.clearCache(true);
+    	
+    	//XGGDEBUG:XWALK5
+    	/*
       	browser.setXWalkWebChromeClient(new org.xwalk.core.XWalkWebChromeClient() {
       		@Override
       		public void onProgressChanged(XWalkView view, int progress) {
@@ -127,7 +130,8 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
       				
       			}
       		}
-      	});
+      	});*/
+      	
       	/*browser.setXWalkClient(new org.xwalk.core.XWalkUIClient(rootView.getContext(), browser) {
       		public void onReceivedError(XWalkView view, int errorCode, String description, String failingUrl) {
       			Toast.makeText(getActivity(), "Oh no! " + description, Toast.LENGTH_LONG).show();
@@ -150,8 +154,8 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	
     	browserLayout.addView(browser);
     	
-    	browser.loadUrl(Parameters.Web.STARTING_PAGE);
-    	//browser.load(Parameters.Web.STARTING_PAGE,null);
+    	//browser.loadUrl(Parameters.Web.STARTING_PAGE);
+    	browser.load(Parameters.Web.STARTING_PAGE,null);
 		
 		/*TextView textView = (TextView) rootView
 				.findViewById(R.id.section_label);
@@ -189,8 +193,8 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
         // An item was selected. You can retrieve the selected item using
         String sel_view = (String) parent.getItemAtPosition(pos);
         if(!first)
-        	browser.loadUrl("javascript:changeView('"+sel_view+"')");
-		//browser.load("javascript:changeView('"+sel_view+"')", null);
+        	//browser.loadUrl("javascript:changeView('"+sel_view+"')");
+        	browser.load("javascript:changeView('"+sel_view+"')", null);
         first=false;
     }
 

@@ -2,6 +2,8 @@ package cs.si.satatt;
 
 /*import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkUIClient;*/
+import org.xwalk.core.XWalkResourceClient;
+import org.xwalk.core.XWalkUIClient;
 import org.xwalk.core.XWalkView;
 
 import dialogs.ErrorDialogFragment;
@@ -70,8 +72,8 @@ public class MainActivity extends ActionBarActivity implements
 		setProgressBarVisibility(true);
 		
 		mXwalkView = new XWalkView(this.getApplicationContext(), this);
-		//mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
-        //mXwalkView.setUIClient(new MyUIClient(mXwalkView));
+		mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
+        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
 
 		
 		// find the retained fragment on activity restarts
@@ -119,9 +121,9 @@ public class MainActivity extends ActionBarActivity implements
         // store the data in the fragment
         dataFragment.setData(this.simulator);
         //XWalk
-        /*if (mXwalkView != null) {
+        if (mXwalkView != null) {
             mXwalkView.onDestroy();
-        }*/
+        }
     }
 
 
@@ -291,7 +293,7 @@ public class MainActivity extends ActionBarActivity implements
     }
     
     //XWalk
-/*
+
     class MyResourceClient extends XWalkResourceClient {
         MyResourceClient(XWalkView view) {
             super(view);
@@ -346,6 +348,6 @@ public class MainActivity extends ActionBarActivity implements
         }
     }
 
-*/
+
 
 }
