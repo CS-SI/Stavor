@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -67,6 +68,7 @@ public class Simulator {
 	public SimulatorStatus connect(){
 		if(simulatorStatus.equals(SimulatorStatus.Disconnected)){
     		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting thread");
+			simulationStatus = SimulationStatus.Play;
 			connectThread();
 			//Log.d("Sim",System.currentTimeMillis()+": "+"simulator has connected thread");
 		}
@@ -87,7 +89,6 @@ public class Simulator {
 				resumeThread();
 				simulationStatus = SimulationStatus.Play;
 			}else if(simulationStatus.equals(SimulationStatus.Stop)){
-				startThread();
 				simulationStatus = SimulationStatus.Play;
 			}
 		}
@@ -107,7 +108,6 @@ public class Simulator {
 	public SimulationStatus stop(){
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
 			if(!simulationStatus.equals(SimulationStatus.Stop)){
-				stopThread();
 				simulationStatus = SimulationStatus.Stop;
 			}
 		}
@@ -187,25 +187,19 @@ public class Simulator {
 			sthread.cancel(false);
 		}
 	}
-	
-	private void startThread() {
-		// TODO Auto-generated method stub
-		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
-		if(remote){
-			// Remote
-		}else{
-			// Local
-		}
-	}
 	private void resumeThread() {
 		// TODO Auto-generated method stub
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
-			thread.notify();
+			synchronized (thread) {
+				thread.notify();
+			}
 		}else{
 			// Local
-			sthread.notify();
+			synchronized (sthread) {
+				sthread.notify();
+			}
 		}
 	}
 	private void pauseThread() {
@@ -214,7 +208,9 @@ public class Simulator {
 		if(remote){
 			// Remote
 			try {
-				thread.wait();
+				synchronized (thread) {
+					thread.wait();
+				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -222,28 +218,9 @@ public class Simulator {
 		}else{
 			// Local
 			try {
-				sthread.wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-	private void stopThread() {
-		// TODO Auto-generated method stub
-		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
-		if(remote){
-			// Remote
-			try {
-				thread.wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else{
-			// Local
-			try {
-				sthread.wait();
+				synchronized (sthread) {
+					sthread.wait();
+				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -255,6 +232,7 @@ public class Simulator {
 		simulatorStatus = new_status;
 		updateConnectButtonText();
 		updateSwitchEnabled();
+		setCorrectSimulatorControls();
 		setProgress(100 * 100);
 	}
 	
@@ -299,6 +277,57 @@ public class Simulator {
 	public void goToHud() {
 		// TODO Auto-generated method stub
 		((MainActivity)activity).showSection(1);
+	}
+	
+	ImageButton but_play;
+	ImageButton but_stop;
+	public void setControlButtons(ImageButton b_play, ImageButton b_stop) {
+		but_play=b_play;
+		but_stop=b_stop;
+		
+		//Listeners
+		but_play.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+            	if(simulationStatus.equals(SimulationStatus.Play)){
+            		pause();
+            	}else{
+            		play();
+            	}
+            	setCorrectSimulatorControls();
+            }
+        });
+		but_stop.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+            }
+        });
+
+	}
+	public void setCorrectSimulatorControls() {
+		if(but_play!=null && but_stop!=null){
+			boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
+			if(remote){
+				but_play.setVisibility(View.GONE);
+				but_stop.setVisibility(View.GONE);
+			}else{
+				but_play.setVisibility(View.VISIBLE);
+				but_stop.setVisibility(View.VISIBLE);
+				if(getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
+					but_play.setEnabled(false);
+					but_stop.setEnabled(false);
+				}else{
+					but_play.setEnabled(true);
+					but_stop.setEnabled(true);
+					if(getSimulationStatus().equals(SimulationStatus.Play)){
+						//set pause drawable
+						but_play.setImageDrawable(activity.getResources().getDrawable(R.drawable.pause));
+					}else{
+						but_play.setImageDrawable(activity.getResources().getDrawable(R.drawable.play));
+					}
+				}
+			}
+		}
 	}
 	
 }

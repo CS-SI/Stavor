@@ -2,6 +2,7 @@ package fragments;
 
 import model.ModelState;
 
+
 //import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkSettings;
 //import org.xwalk.core.XWalkUIClient;
@@ -24,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SlidingDrawer;
 import android.widget.Spinner;
@@ -165,13 +167,20 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	Spinner spinner = (Spinner) rootView.findViewById(R.id.spinnerView);
     	spinner.setOnItemSelectedListener(this);
     	
+    	//Play/Pause/Stop buttons
+    	ImageButton but_play = (ImageButton)rootView.findViewById(R.id.imageButtonPlay);
+    	ImageButton but_stop = (ImageButton)rootView.findViewById(R.id.imageButtonStop);
+    	simulator.setControlButtons(but_play,but_stop);
+    	simulator.setCorrectSimulatorControls();
+    	
+    	
     	if(Parameters.Hud.start_panel_open)
     		drawer.getHandle().callOnClick();
 		return rootView;
 	}
-    
-    private class UANOOP {
-    }
+
+	/*private class UANOOP {
+    }*/
 
 	@Override
 	public void onAttach(Activity activity) {

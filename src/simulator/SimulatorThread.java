@@ -51,6 +51,7 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
 		    try {
 				while (true){
+					
 					//TODO Propagate
 					long dur = (System.nanoTime()-time_tmp_data);
 					if(dur<(Parameters.Simulator.min_hud_model_refreshing_interval_ns-Parameters.Simulator.model_refreshing_interval_safe_guard_ns)){
@@ -64,7 +65,7 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 							e.printStackTrace();
 						}
 					}else{
-						Log.d("SimLocal", "Simulation step longer than available time: "+dur);
+						//Log.d("SimLocal", "Simulation step longer than available time: "+dur);
 						try {
 							Thread.sleep(Parameters.Simulator.model_refreshing_interval_safe_guard_ns/1000000);
 						} catch (InterruptedException e) {
