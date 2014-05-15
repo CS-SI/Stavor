@@ -136,22 +136,26 @@ public class MainActivity extends ActionBarActivity implements
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
-	        .replace(R.id.container, new SettingsBasicFragment()).commit();
+	        .replace(R.id.container, 
+	        		SettingsBasicFragment.newInstance(position +1)).commit();
 		}else if(position==3){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
-	        .replace(R.id.container, new SettingsExtraFragment()).commit();
+	        .replace(R.id.container, 
+	        		SettingsExtraFragment.newInstance(position +1)).commit();
 		}else if(position==4){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
-	        .replace(R.id.container, new SettingsModelsFragment()).commit();
+	        .replace(R.id.container, 
+	        		SettingsModelsFragment.newInstance(position +1)).commit();
 		}else if(position==5){
 			// Display the fragment as the main content.
 	        fragmentManager    
 	        .beginTransaction()
-	        .replace(R.id.container, new SettingsGeneralFragment()).commit();
+	        .replace(R.id.container, 
+	        		SettingsGeneralFragment.newInstance(position +1)).commit();
 		}else if(position==6){
 			// Display the fragment as the main content.
 	        fragmentManager
