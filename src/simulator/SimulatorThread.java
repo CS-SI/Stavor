@@ -11,7 +11,6 @@ import org.orekit.propagation.Propagator;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.propagation.analytical.KeplerianPropagator;
 import org.orekit.time.AbsoluteDate;
-import org.orekit.utils.IERSConventions;
 
 import cs.si.satatt.R;
 import mission.Mission;

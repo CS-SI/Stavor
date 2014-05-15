@@ -1,7 +1,5 @@
 package fragments;
 
-import model.ModelState;
-
 
 //import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkSettings;
@@ -20,11 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.webkit.WebResourceResponse;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SlidingDrawer;
@@ -32,7 +27,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.SlidingDrawer.OnDrawerCloseListener;
 import android.widget.SlidingDrawer.OnDrawerOpenListener;
-import android.widget.Toast;
 import app.Parameters;
 
 /**

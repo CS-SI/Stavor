@@ -11,14 +11,9 @@ import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
 import org.xwalk.core.XWalkView;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import app.Installer;
-import app.OrekitInit;
 
 import com.google.gson.Gson;
 

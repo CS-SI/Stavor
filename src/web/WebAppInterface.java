@@ -5,7 +5,6 @@ import cs.si.satatt.R;
 import fragments.HudFragment;
 import model.ModelSimulation;
 import android.app.Activity;
-import android.util.Log;
 import android.widget.Toast;
 
 

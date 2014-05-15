@@ -14,7 +14,6 @@ import android.content.res.AssetManager;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 public class Installer {
 	/* Checks if external storage is available for read and write */
