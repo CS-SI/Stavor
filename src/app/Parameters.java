@@ -14,7 +14,7 @@ public class Parameters {
 		public static final String version_androidcolorpicker = "1.0";
 	}
 	public static class Hud {
-		public static final boolean start_panel_open = true;
+		public static final boolean start_panel_open = false;
 	}
 	public static class Simulator {
 		public static final long min_hud_panel_refreshing_interval_ns = 1000000000;//[ns] 1Hz max

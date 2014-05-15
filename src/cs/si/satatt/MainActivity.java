@@ -73,8 +73,8 @@ public class MainActivity extends ActionBarActivity implements
 		setProgressBarVisibility(true);
 		
 		mXwalkView = new XWalkView(this.getApplicationContext(), this);
-		mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
-        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
+		//mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
+        //mXwalkView.setUIClient(new MyUIClient(mXwalkView));
 
 		
 		// find the retained fragment on activity restarts
@@ -282,12 +282,12 @@ public class MainActivity extends ActionBarActivity implements
     }
     
     //XWalk
-
+    
     class MyResourceClient extends XWalkResourceClient {
         MyResourceClient(XWalkView view) {
             super(view);
         }
-        /*@Override
+        @Override
   		public void onProgressChanged(XWalkView view, int progress) {
   			// Activities and WebViews measure progress with different scales.
   			// The progress meter will automatically disappear when we reach 100%
@@ -298,9 +298,9 @@ public class MainActivity extends ActionBarActivity implements
   			}catch(NullPointerException nulle){
   				
   			}
-  		}*/
+  		}
     }
-
+	
     class MyUIClient extends XWalkUIClient {
         MyUIClient(XWalkView view) {
             super(view);
@@ -345,7 +345,6 @@ public class MainActivity extends ActionBarActivity implements
         // store the data in the fragment
         dataFragment.setData(this.simulator);
         //XWalk
-        simulator.setBrowserLoaded(false);
         if (mXwalkView != null) {
             mXwalkView.onDestroy();
         }

@@ -173,10 +173,15 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	simulator.setControlButtons(but_play,but_stop);
     	simulator.setCorrectSimulatorControls();
     	
-    	
     	if(Parameters.Hud.start_panel_open)
     		drawer.getHandle().callOnClick();
 		return rootView;
+	}
+	
+	@Override
+	public void onDestroyView(){
+		simulator.setBrowserLoaded(false);
+		super.onDestroyView();
 	}
 
 	/*private class UANOOP {
