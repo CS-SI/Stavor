@@ -1,70 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/expandableLayout"
+<RelativeLayout android:id="@+id/expandableLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical|center_horizontal"
-    android:background="@color/grey5" >
+    android:background="@color/grey5" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
-        android:id="@+id/RelativeLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@color/grey5"
-        android:orientation="vertical"
-        android:padding="15dp" >
+        android:id="@+id/remoteSurroundingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
 
-        <TextView
-            android:id="@+id/textView1"
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/sim_remote_host"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/grey5"
+            android:orientation="vertical"
+            android:padding="15dp" >
 
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextViewHost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView1"
-            android:layout_below="@+id/textView1"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/grey3"
-            android:ems="10"
-            android:gravity="center_vertical|center_horizontal"
-            android:inputType="textUri"
-            android:text="@string/sim_remote_host_eg"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/sim_remote_host"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/autoCompleteTextViewHost"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@+id/autoCompleteTextViewHost"
-            android:text="@string/sim_remote_port"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextViewHost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView1"
+                android:layout_below="@+id/textView1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/grey3"
+                android:ems="10"
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="textUri"
+                android:text="@string/sim_remote_host_eg"
+                android:textSize="20sp" >
 
-        <EditText
-            android:id="@+id/editTextPort"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/TextView01"
-            android:layout_alignTop="@+id/autoCompleteTextViewHost"
-            android:layout_marginLeft="16dp"
-            android:background="@color/grey3"
-            android:ems="10"
-            android:gravity="center_vertical|center_horizontal"
-            android:inputType="number"
-            android:text="@string/sim_remote_port_eg"
-            android:textSize="25sp" />
+                <requestFocus />
+            </AutoCompleteTextView>
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/autoCompleteTextViewHost"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/autoCompleteTextViewHost"
+                android:text="@string/sim_remote_port"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/editTextPort"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/TextView01"
+                android:layout_alignTop="@+id/autoCompleteTextViewHost"
+                android:layout_marginLeft="16dp"
+                android:background="@color/grey3"
+                android:ems="10"
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="number"
+                android:text="@string/sim_remote_port_eg"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>

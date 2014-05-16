@@ -267,18 +267,7 @@ public class NavigationDrawerFragment extends Fragment {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
-        }            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        	//XGGDEBUG
-        	//First update the previously selected item if one has been set
-            /*if(selectedListItem!=null){
-                TextView previousTitle = (TextView) selectedListItem.findViewById(R.id.nav_item_text);
-                previousTitle.setBackgroundResource(R.drawable.navigation_section);
-            }
-            //Then update the new one
-            TextView title = (TextView) view.findViewById(R.id.nav_item_text);
-            title.setBackgroundResource(R.drawable.navigation_selector);
-            selectedListItem = view;
-            */
+        }            
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
