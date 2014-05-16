@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -30,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -110,26 +112,65 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            	//XGGDEBUG
+            	//First update the previously selected item if one has been set
+                /*if(selectedListItem!=null){
+                    TextView previousTitle = (TextView) selectedListItem.findViewById(R.id.nav_item_text);
+                    previousTitle.setBackgroundResource(R.drawable.navigation_section);
+                }
+                //Then update the new one
+                TextView title = (TextView) view.findViewById(R.id.nav_item_text);
+                title.setBackgroundResource(R.drawable.navigation_selector);
+                selectedListItem = view;
+                */
                 selectItem(position);
             }
         });
+        
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
+                R.layout.nav_item,
+                R.id.nav_item_text,
                 new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                        getString(R.string.title_section4),
-                        getString(R.string.title_section5),
-                        getString(R.string.title_section6),
-                        getString(R.string.title_section7),
-                }));
+                    getString(R.string.title_section1),
+                    getString(R.string.title_section2),
+                    getString(R.string.title_section3),
+                    getString(R.string.title_section4),
+                    getString(R.string.title_section5),
+                    getString(R.string.title_section6),
+                    getString(R.string.title_section7),
+                }){
+        	@Override
+        	public View getView(int position, View convertView, ViewGroup parent)
+        	{
+        		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        	    View rowView = inflater.inflate(R.layout.nav_item, parent, false);
+        	    TextView textView = (TextView) rowView.findViewById(R.id.nav_item_text);
+        	    String[] values = new String[]{
+        	            getString(R.string.title_section1),
+        	            getString(R.string.title_section2),
+        	            getString(R.string.title_section3),
+        	            getString(R.string.title_section4),
+        	            getString(R.string.title_section5),
+        	            getString(R.string.title_section6),
+        	            getString(R.string.title_section7),
+        	        };
+        	    textView.setText(values[position]);
+        	    
+        	    if (position == mCurrentSelectedPosition) 
+        	    { 
+        	    	textView.setBackgroundResource(R.drawable.navigation_selector);
+        	    }else{
+        	    	textView.setBackgroundResource(R.drawable.navigation_section);
+        	    }
+        	    return rowView;
+        	}
+        });
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
-
+    
+    
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
@@ -210,16 +251,34 @@ public class NavigationDrawerFragment extends Fragment {
     
     public void select(int position){
     	selectItem(position);
+    	//setCorrectBackgrounds();
     }
-    public void select() {
-    	selectItem(mCurrentSelectedPosition);
-	}
+    /*private void setCorrectBackgrounds(){
+    	for(int i=0; i<mDrawerListView.getChildCount(); i++){
+    		if(mCurrentSelectedPosition==i)
+    			((TextView)mDrawerListView.getChildAt(i)).setBackgroundResource(R.drawable.navigation_selector);
+    		else
+    			((TextView)mDrawerListView.getChildAt(i)).setBackgroundResource(R.drawable.navigation_section);
+    	}
+    	
+    }*/
 
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
-        }
+        }            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        	//XGGDEBUG
+        	//First update the previously selected item if one has been set
+            /*if(selectedListItem!=null){
+                TextView previousTitle = (TextView) selectedListItem.findViewById(R.id.nav_item_text);
+                previousTitle.setBackgroundResource(R.drawable.navigation_section);
+            }
+            //Then update the new one
+            TextView title = (TextView) view.findViewById(R.id.nav_item_text);
+            title.setBackgroundResource(R.drawable.navigation_selector);
+            selectedListItem = view;
+            */
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }

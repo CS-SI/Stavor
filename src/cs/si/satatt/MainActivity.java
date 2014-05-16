@@ -242,6 +242,10 @@ public class MainActivity extends ActionBarActivity implements
 		});
 	}
 	
+	public void showSection() {
+		showSection(mNavigationDrawerFragment.getSelectedPosition());
+	}
+	
     private Toast toast;
     private long lastBackPressTime = 0;
 
@@ -267,7 +271,7 @@ public class MainActivity extends ActionBarActivity implements
 		    	}
 	    	}
     	}else{
-    		mNavigationDrawerFragment.select();	
+    		showSection();	
 	    }
     }
     
