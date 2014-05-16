@@ -50,7 +50,12 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
 		    try {
 				while (true){
-					
+					if(simulator.reset){
+						simulator.reset=false;
+						setSimulationParameters();
+						simulator.pause();
+					}
+					simulator.playCondition.block();
 					//TODO Propagate
 					long dur = (System.nanoTime()-time_tmp_data);
 					if(dur<(Parameters.Simulator.min_hud_model_refreshing_interval_ns-Parameters.Simulator.model_refreshing_interval_safe_guard_ns)){
@@ -76,12 +81,15 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 					
 					
 					SpacecraftState sstate = propagate();
-					int progress = (int)((extrapDate.durationFrom(finalDate)/mission.sim_duration)*100); 
+					int progress = (int)(((mission.sim_duration+extrapDate.durationFrom(finalDate))/mission.sim_duration)*100); 
 
 					if(sstate!=null){
 						simulator.getSimulationResults().updateSimulation(sstate, progress);
 						
 			            publishProgress();
+					}else{
+						simulator.stop();
+						simulator.showMessage(simulator.getContext().getString(R.string.sim_mission_ended));
 					}
 		            if(isCancelled())
 		                break;

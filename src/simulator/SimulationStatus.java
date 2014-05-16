@@ -1,5 +1,5 @@
 package simulator;
 
 public enum SimulationStatus {
-	Play, Pause, Stop;
+	Play, Pause;
 }

@@ -104,6 +104,7 @@
     <string name="sim_unknown_host">Unknown host</string>
     <string name="sim_io_error">Simulator IO error</string>
     <string name="sim_error">Simulator error</string>
+    <string name="sim_mission_ended">Mission ended</string>
     
     
     <string name="pref_apk_install">Application install</string>

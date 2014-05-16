@@ -315,6 +315,9 @@ public class MainActivity extends ActionBarActivity implements
             mXwalkView.pauseTimers();
             mXwalkView.onHide();
         }
+        if(simulator!=null){
+        	simulator.pause();
+        }
     }
 
     @Override

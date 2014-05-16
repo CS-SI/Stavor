@@ -1,9 +1,7 @@
 package fragments;
 
 
-//import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkSettings;
-//import org.xwalk.core.XWalkUIClient;
 import org.xwalk.core.XWalkView;
 
 import simulator.Simulator;
@@ -113,31 +111,6 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	
     	browser.clearCache(true);
     	
-    	//XGGDEBUG:XWALK5
-    	/*
-      	browser.setXWalkWebChromeClient(new org.xwalk.core.XWalkWebChromeClient() {
-      		@Override
-      		public void onProgressChanged(XWalkView view, int progress) {
-      			// Activities and WebViews measure progress with different scales.
-      			// The progress meter will automatically disappear when we reach 100%
-      			try{
-      				getActivity().setProgress(progress * 100);
-      			}catch(NullPointerException nulle){
-      				
-      			}
-      		}
-      	});*/
-      	
-      	/*browser.setXWalkClient(new org.xwalk.core.XWalkUIClient(rootView.getContext(), browser) {
-      		public void onReceivedError(XWalkView view, int errorCode, String description, String failingUrl) {
-      			Toast.makeText(getActivity(), "Oh no! " + description, Toast.LENGTH_LONG).show();
-      		}
-      	});*/
-    	
-    	/*browser.addJavascriptInterface(new webclient.UAJscriptHandler(null), "unlockingandroid");
-    	browser.addJavascriptInterface(new UANOOP() {}, "unlockingandroid");
-    	browser.addJavascriptInterface(null, "unlockingandroid");*/
-    	
     	simulator = ((MainActivity)getActivity()).getSimulator();
     	simulator.setHudView(rootView, browser);
     	
@@ -152,11 +125,6 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	
     	//browser.loadUrl(Parameters.Web.STARTING_PAGE);
     	browser.load(Parameters.Web.STARTING_PAGE,null);
-		
-		/*TextView textView = (TextView) rootView
-				.findViewById(R.id.section_label);
-		textView.setText(Integer.toString(getArguments().getInt(
-				ARG_SECTION_NUMBER)));*/
     	
     	Spinner spinner = (Spinner) rootView.findViewById(R.id.spinnerView);
     	spinner.setOnItemSelectedListener(this);
@@ -175,11 +143,9 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
 	@Override
 	public void onDestroyView(){
 		simulator.setBrowserLoaded(false);
+		simulator.pause();
 		super.onDestroyView();
 	}
-
-	/*private class UANOOP {
-    }*/
 
 	@Override
 	public void onAttach(Activity activity) {
