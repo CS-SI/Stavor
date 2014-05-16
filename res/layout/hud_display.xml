@@ -135,7 +135,7 @@
                         android:text="@string/eg_roll"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
-
+					<View style="@style/VDivider"/>
                     <TextView
                         android:id="@+id/textViewPanelPitch"
                         android:layout_width="0dp"
@@ -145,7 +145,7 @@
                         android:text="@string/eg_pitch"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
-
+					<View style="@style/VDivider"/>
                     <TextView
                         android:id="@+id/textViewPanelYaw"
                         android:layout_width="0dp"
@@ -156,7 +156,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
                 </LinearLayout>
-
+				<View style="@style/HDivider"/>
                 <LinearLayout
                     android:id="@+id/velLayout"
                     android:layout_width="match_parent"
@@ -170,7 +170,7 @@
                         android:text="@string/eg_vel"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
-
+					<View style="@style/VDivider"/>
                     <TextView
                         android:id="@+id/textViewPanelAccel"
                         android:layout_width="0dp"
@@ -180,7 +180,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
                 </LinearLayout>
-
+				<View style="@style/HDivider"/>
                 <TextView
                     android:id="@+id/textViewPanelRadium"
                     android:layout_width="match_parent"
@@ -188,7 +188,7 @@
                     android:text="@string/eg_radium"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/white" />
-
+				<View style="@style/HDivider"/>
                 <TextView
                     android:id="@+id/textViewPanelMass"
                     android:layout_width="match_parent"
