@@ -21,6 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="38dp"
             android:text="@string/sim_local_new"
             android:textColor="@color/white" />
 
@@ -29,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="38dp"
             android:text="@string/sim_local_edit"
             android:textColor="@color/white" />
 
@@ -37,6 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="38dp"
             android:text="@string/sim_local_remove"
             android:textColor="@color/white" />
 
