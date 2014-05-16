@@ -124,7 +124,9 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
                 </LinearLayout>
-
+				<View
+				    style="@style/HDivider"
+				    android:layout_width="250dp" />
                 <LinearLayout
                     android:id="@+id/velLayout"
                     android:layout_width="match_parent"
@@ -148,6 +150,9 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white" />
                 </LinearLayout>
+                <View
+				    style="@style/HDivider"
+				    android:layout_width="250dp" />
                 <TextView
                     android:id="@+id/textViewPanelRadium"
                     android:layout_width="match_parent"
@@ -155,6 +160,9 @@
                     android:text="@string/eg_radium"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/white" />
+                <View
+				    style="@style/HDivider"
+				    android:layout_width="250dp" />
                 <TextView
                     android:id="@+id/textViewPanelMass"
                     android:layout_width="match_parent"
