@@ -40,11 +40,11 @@
             android:summary="@string/pref_summary_show_sphere"
             android:title="@string/pref_title_show_sphere"
             android:defaultValue="true" />
-        <CheckBoxPreference
+        <!-- <CheckBoxPreference
             android:key="@string/pref_key_show_mini_spheres"
             android:summary="@string/pref_summary_show_mini_spheres"
             android:title="@string/pref_title_show_mini_spheres"
-            android:defaultValue="true" />
+            android:defaultValue="true" /> -->
         <CheckBoxPreference
             android:key="@string/pref_key_show_circles"
             android:summary="@string/pref_summary_show_circles"

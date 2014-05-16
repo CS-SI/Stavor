@@ -78,13 +78,14 @@ This three.js demo is part of a collection at
 
 			show_sky = config.show_sky;
 			show_sphere = config.show_sphere;
-			show_mini_spheres = config.show_mini_spheres;
+			//show_mini_spheres = config.show_mini_spheres; //option blocked for robustness (axis labels go clipped there)
 			show_circles = config.show_circles;
 			show_axis = config.show_axis;
 			show_axis_labels = config.show_axis_labels;
 			show_planes = config.show_planes;
 
-			show_spacecraft = config.show_spacecraft;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
+			//Option blocked for robustness (S/C will show the attitude and a view will follow it)
+			//show_spacecraft = config.show_spacecraft;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
 			sc_show_eng_texture = config.sc_show_eng_texture;
 			
 			show_sun = config.show_sun;
@@ -127,13 +128,13 @@ This three.js demo is part of a collection at
 	
 		show_sky = false;
 		show_sphere = false;
-		show_mini_spheres = true;
+		//show_mini_spheres = true;
 		show_circles = true;
 		show_axis = true;
 		show_axis_labels = true;
 		show_planes = false;
 
-		show_spacecraft = true;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
+		//show_spacecraft = true;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
 		sc_show_eng_texture = false;
 		
 		show_sun = false;
@@ -405,29 +406,6 @@ function init()
 	// SCENE
 	scene = new THREE.Scene();
 	// CAMERA
-	//var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
-	//var SCREEN_WIDTH = document.body.clientWidth, SCREEN_HEIGHT = document.body.clientHeight;
-	//var SCREEN_WIDTH = screen.width, SCREEN_HEIGHT = screen.height / window.devicePixelRatio - window.screenTop;
-	//showAndroidToast(SCREEN_WIDTH+"-"+SCREEN_HEIGHT);
-	/*var width = screen.height;
-	var height = screen.width;
-	var screenRatio;
-	var realWidth;
-	var realHeight;
-	if(width>height){realWidth=width;realHeight=height;screenRatio=(height/width);}
-	else{realWidth=height;realHeight=width;screenRatio=(width/height);}
-	if(isNaN(screenRatio)){
- 
-	if(window.innerHeight>window.innerWidth){realWidth=window.innerHeight; realHeight= window.innerWidth ;screenRatio = (window.innerWidth/window.innerHeight);}
-	else{realWidth=window.innerWidth; realHeight= window.innerHeight;screenRatio = (window.innerHeight/window.innerWidth);}
-	}
-	SCREEN_WIDTH = realWidth;
-	SCREEN_HEIGHT = realHeight;*/
-	/*var SCREEN_MIN, SCREEN_EXTRA = 120;
-	if(SCREEN_HEIGHT>SCREEN_WIDTH)
-		SCREEN_MIN = SCREEN_WIDTH;
-	else
-		SCREEN_MIN = SCREEN_HEIGHT;*///android:screenOrientation="portrait"
 	var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
 	var VIEW_ANGLE = cam_view_angle, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = cam_rend_near, FAR = cam_rend_far;
 	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
@@ -437,7 +415,6 @@ function init()
 	// RENDERER
 	if ( Detector.webgl ){
 		renderer = new THREE.WebGLRenderer( {antialias:true} );
-		//alert('WebGL compatible!');
 	}else{
 		renderer = new THREE.CanvasRenderer();
 		alert('WebGL not supported in this device');
@@ -472,78 +449,12 @@ function init()
 	var ambient = new THREE.AmbientLight( 0xFFFFFF );
 	//scene.add( ambient );
 	
-	// FLOOR
-	/*var floorTexture = new THREE.ImageUtils.loadTexture( 'images/checkerboard.jpg' );
-	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
-	floorTexture.repeat.set( 10, 10 );
-	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
-	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
-	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-	floor.position.y = -0.5;
-	floor.rotation.x = Math.PI / 2;
-	scene.add(floor);*/
-	// SKYBOX/FOG
-	//scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
 	
-	// GUI
-	/*gui = new dat.GUI();
-	
-	parameters = 
-	{
-		x: 0, y: 30, z: 0,
-		color: "#ff0000", // color (change "#" to "0x")
-		opacity: 1, 
-		visible: true,
-		material: "Phong",
-		reset: function() { resetCube() }
-	};
-
-	var folder1 = gui.addFolder('Position');
-	var cubeX = folder1.add( parameters, 'x' ).min(-200).max(200).step(1).listen();
-	var cubeY = folder1.add( parameters, 'y' ).min(0).max(100).step(1).listen();
-	var cubeZ = folder1.add( parameters, 'z' ).min(-200).max(200).step(1).listen();
-	folder1.open();
-	
-	cubeX.onChange(function(value) 
-	{   cube.position.x = value;   });
-	cubeY.onChange(function(value) 
-	{   cube.position.y = value;   });
-	cubeZ.onChange(function(value) 
-	{   cube.position.z = value;   });
-	
-	var cubeColor = gui.addColor( parameters, 'color' ).name('Color').listen();
-	cubeColor.onChange(function(value) // onFinishChange
-	{   cube.material.color.setHex( value.replace("#", "0x") );   });
-	
-	var cubeOpacity = gui.add( parameters, 'opacity' ).min(0).max(1).step(0.01).name('Opacity').listen();
-	cubeOpacity.onChange(function(value)
-	{   cube.material.opacity = value;   });
-	
-	var cubeMaterial = gui.add( parameters, 'material', [ "Basic", "Lambert", "Phong", "Wireframe" ] ).name('Material Type').listen();
-	cubeMaterial.onChange(function(value) 
-	{   updateCube();   });
-	
-	var cubeVisible = gui.add( parameters, 'visible' ).name('Visible?').listen();
-	cubeVisible.onChange(function(value) 
-	{   cube.visible = value;  	});
-	
-	gui.add( parameters, 'reset' ).name("Reset Cube Parameters");
-	
-	gui.open();
-	*/
 	
 	//***********************************************************************************************************************
 	//		STATIC ELEMENTS
 	//***********************************************************************************************************************
 	setLoadingProgress(35);
-	/*
-	var sprite_view = makeTextSprite( 3, " +X ", 
-		{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:174, b:0, a:1.0} } );
-	sprite_view.position.set( window.innerWidth - 50, window.innerWidth - 50, 0 );
-	//sprite_view.position.set( 50, 50, 0 );
-	//sprite_view.scale.set( 64, 64, 1.0 ); // imageWidth, imageHeight	
-	scene.add( sprite_view );
-	*/	
 	
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			REFERENCE SPHERE
@@ -613,16 +524,11 @@ function init()
 	//			SPACECRAFT
 	//-----------------------------------------------------------------------------------------------------------------------
 	if(show_spacecraft){
-		/*var sc_materials = [
-					new THREE.MeshLambertMaterial( { color: sc_body_color, metal: true, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } ),
-					new THREE.MeshBasicMaterial( { color: 0x000000, shading: THREE.SmoothShading, wireframe: true, transparent: true } )
-		];*/
 		if(!canvas_mode)
 			var sc_material = new THREE.MeshLambertMaterial( { color: sc_body_color, metal: true, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } );
 		else
 			var sc_material = new THREE.MeshBasicMaterial( { color: sc_body_color } );
 		var sc_geometry = new THREE.CylinderGeometry( 6, 1, 15, sc_body_segments );
-		//var sc = THREE.SceneUtils.createMultiMaterialObject( sc_geometry, sc_materials );
 		var sc = new THREE.Mesh( sc_geometry, sc_material );
 		sc.position.set( 0, 0, 0 );
 		sc.rotation.x = -Math.PI/2;

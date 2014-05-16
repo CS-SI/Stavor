@@ -4,17 +4,17 @@
     <PreferenceCategory 
         android:title="@string/pref_spacecraft"
         android:key="@string/pref_key_spacecraft">
-        <CheckBoxPreference
+        <!-- <CheckBoxPreference
             android:key="@string/pref_key_show_spacecraft"
             android:summary="@string/pref_summary_show_spacecraft"
             android:title="@string/pref_title_show_spacecraft"
-            android:defaultValue="true" />
+            android:defaultValue="true" /> -->
         <CheckBoxPreference
             android:key="@string/pref_key_show_engine_texture"
             android:summary="@string/pref_summary_show_engine_texture"
             android:title="@string/pref_title_show_engine_texture"
-            android:dependency="@string/pref_key_show_spacecraft"
             android:defaultValue="true" />
+        <!-- android:dependency="@string/pref_key_show_spacecraft"  -->
     </PreferenceCategory> 
     <PreferenceCategory 
         android:title="@string/pref_sun"
