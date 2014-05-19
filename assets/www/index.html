@@ -65,7 +65,7 @@ This three.js demo is part of a collection at
 	var container, scene, camera, renderer, controls, stats, light, sunLight, lineSun, spriteSun, contextSun, contextEarth, lineEarth, spriteEarth;
 	var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
-	var sun, earth, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
+	var sun, earth, spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
 	var origin = new THREE.Vector3(0,0,0);
 	var fontsizeSun, borderColorSun, borderThicknessSun, backgroundColorSun, fontColorSun;
 	var fontsizeEarth, borderColorEarth, borderThicknessEarth, backgroundColorEarth, fontColorEarth;
@@ -186,6 +186,7 @@ This three.js demo is part of a collection at
 //			DYNAMIC VALUES (Updated at each cycle)
 //-----------------------------------------------------------------------------------------------------------------------
 	
+	var value_attitude  = new THREE.Quaternion(0,0,0,1);
 	var value_sun  = new THREE.Vector3(87000000,87000000,87000000); //Km
 	var value_earth  = new THREE.Vector3(36000,12000,5); //Km
 	var value_velocity  = new THREE.Vector3(0,0,-15); //Km/s

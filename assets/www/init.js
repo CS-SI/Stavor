@@ -125,6 +125,8 @@ function init()
 	//			SPACECRAFT
 	//-----------------------------------------------------------------------------------------------------------------------
 	if(show_spacecraft){
+		spacecraft = new THREE.Object3D();
+		//spacecraft.useQuaternion = true;
 		if(!canvas_mode)
 			var sc_material = new THREE.MeshLambertMaterial( { color: sc_body_color, metal: true, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } );
 		else
@@ -133,7 +135,8 @@ function init()
 		var sc = new THREE.Mesh( sc_geometry, sc_material );
 		sc.position.set( 0, 0, 0 );
 		sc.rotation.x = -Math.PI/2;
-		scene.add( sc );
+		spacecraft.add(sc);
+		//scene.add( sc );
 		
 		if(!canvas_mode)
 			var mat_window = new THREE.MeshPhongMaterial( { color: sc_window_color, metal: true, side: THREE.FrontSide } );
@@ -141,7 +144,8 @@ function init()
 			var mat_window = new THREE.MeshBasicMaterial( { color: sc_window_color, side: THREE.FrontSide } );
 		var sc_window = new THREE.Mesh(new THREE.SphereGeometry( 3, sc_window_segments, sc_window_segments ), mat_window);
 		sc_window.position.set( 0, 1.5, -2 );
-		scene.add( sc_window );
+		spacecraft.add(sc_window);
+		//scene.add( sc_window );
 		
 		var eng_geometry = new THREE.CylinderGeometry( 2, 2.5, 2, sc_engine_segments );
 		if(!canvas_mode)
@@ -151,12 +155,14 @@ function init()
 		var eng = new THREE.Mesh( eng_geometry, eng_material );
 		eng.rotation.x = -Math.PI/2;
 		eng.position.set( -2.5, 0, -8 );
-		scene.add( eng );
+		spacecraft.add(eng);
+		//scene.add( eng );
 		
 		var eng2 = eng.clone();
 		eng2.rotation.x = -Math.PI/2;
 		eng2.position.set( 2.5, 0, -8 );
-		scene.add( eng2 );
+		spacecraft.add(eng2);
+		//scene.add( eng2 );
 		
 		if (sc_show_eng_texture){
 			var noiseTexture = new THREE.ImageUtils.loadTexture( 'textures/lava/cloud.png' );
@@ -197,10 +203,14 @@ function init()
 		var surface = new THREE.Mesh( flatGeometry, customMaterial2 );
 		//surface.rotation.z = -Math.PI/2;
 		surface.position.set( 2.5, 0, -9.1 );
-		scene.add( surface );
+		spacecraft.add(surface);
+		//scene.add( surface );
 		var engine_surface2 = surface.clone(); 
 		engine_surface2.position.set( -2.5, 0, -9.1 );
-		scene.add( engine_surface2 );
+		spacecraft.add(engine_surface2);
+		//scene.add( engine_surface2 );
+
+		scene.add(spacecraft);
 	}
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			SPHERE CIRCLES

@@ -126,7 +126,9 @@ function showAndroidToast(toast) {
 	function updateModelState(new_state){
 		//if (typeof Android != "undefined"){ // check the bridge 
 		  //if (Android.getStateJSON!= "undefined") { // check the method
-			var state = JSON.parse(new_state);			
+			var state = JSON.parse(new_state);
+			value_attitude = new THREE.Quaternion(state.value_attitude.x,state.value_attitude.y,state.value_attitude.z,state.value_attitude.w);	
+					
 			value_sun  = new THREE.Vector3( state.value_sun[0], state.value_sun[1], state.value_sun[2] ); //Km
 			value_earth  = new THREE.Vector3( state.value_earth[0], state.value_earth[1], state.value_earth[2] ); //Km
 			value_velocity  = new THREE.Vector3( state.value_velocity[0], state.value_velocity[1], state.value_velocity[2] ); //Km/s

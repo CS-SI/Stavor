@@ -2,6 +2,7 @@ package model;
 
 import org.apache.commons.math3.geometry.euclidean.threed.RotationOrder;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.orekit.attitudes.Attitude;
 import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
@@ -11,6 +12,7 @@ import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
 import org.xwalk.core.XWalkView;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -86,6 +88,7 @@ public class ModelSimulation {
     public void pushSimulationModel(){
     	if(browser!=null && state!=null && isBrowserLoaded){
     		//browser.loadUrl("javascript:updateModelState('"+gson.toJson(state)+"')");
+    		//Log.d("QUATERNION", state.value_attitude.w+","+state.value_attitude.x+","+state.value_attitude.y+","+state.value_attitude.z);
     		browser.load("javascript:updateModelState('"+gson.toJson(state)+"')",null);
     	}
 	}
@@ -102,6 +105,9 @@ public class ModelSimulation {
     	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update 1");
     	ModelState new_state = new ModelState();
     	ModelInfo new_info = new ModelInfo();
+    	
+    	Attitude sc_att = scs.getAttitude();
+    	new_state.value_attitude = new Quat(sc_att.getOrientation().getRotation());
     	
     	Vector3D velocity = scs.getPVCoordinates().getVelocity();
     	new_state.value_velocity[0] = velocity.getX()/1000;
@@ -138,7 +144,7 @@ public class ModelSimulation {
     	if(new_info.progress<0)
     		new_info.progress=0;
     	
-		AbsoluteDate date = scs.getAttitude().getDate();
+		AbsoluteDate date = sc_att.getDate();
 		new_info.time = date.getComponents(utc).toString();
 
 		//Compute acceleration
@@ -158,7 +164,7 @@ public class ModelSimulation {
     	tmp_vel = velocity;
     	tmp_time = date;
 
-    	double[] angles = scs.getAttitude().getOrientation().getRotation().getAngles(RotationOrder.XYZ);
+    	double[] angles = sc_att.getOrientation().getRotation().getAngles(RotationOrder.XYZ);
     	new_info.roll = angles[0];
     	new_info.pitch = angles[1];
     	new_info.yaw = angles[2];

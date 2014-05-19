@@ -92,7 +92,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 				simulator.showMessage(simulator.getContext().getString(R.string.sim_error)+": "+e.getMessage());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
 				simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_disconnected)+": "+e.getMessage());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
