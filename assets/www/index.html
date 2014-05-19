@@ -65,7 +65,7 @@ This three.js demo is part of a collection at
 	var container, scene, camera, renderer, controls, stats, light, sunLight, lineSun, spriteSun, contextSun, contextEarth, lineEarth, spriteEarth;
 	var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
-	var sun, earth, spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
+	var sun, sunGlow, earth, spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
 	var origin = new THREE.Vector3(0,0,0);
 	var fontsizeSun, borderColorSun, borderThicknessSun, backgroundColorSun, fontColorSun;
 	var fontsizeEarth, borderColorEarth, borderThicknessEarth, backgroundColorEarth, fontColorEarth;
@@ -88,6 +88,8 @@ This three.js demo is part of a collection at
 	var torus_radius = sphere_radius;
 	var torus_tube = 0.5;
 	
+	var sc_scale = 1.5;
+	var init_sc_dir = new THREE.Vector3(0,0,-1);
 	var sc_axis_lenght = sphere_radius*0.4;
 	var sc_body_color = 0xDDDDDD;
 	var sc_window_color = 0x00d4ff;
@@ -108,7 +110,7 @@ This three.js demo is part of a collection at
 	var target_head_length = 2;
 	var target_head_width = 1;
 	var target_length = sphere_radius + target_head_width;
-	var momentum_length = sphere_radius/4;
+	var momentum_length = sphere_radius/3;
 	var momentum_head_length = 8;
 	var momentum_head_width = 7;	
 		
@@ -171,9 +173,9 @@ This three.js demo is part of a collection at
 	if(performance_level<1)
 		performance_level=1;
 	var segments_scale = performance_level;//Multiply segments of all geometries: 
-	var sc_body_segments = 4 * segments_scale;
-	var sc_window_segments = 8 * segments_scale;
-	var sc_engine_segments = 8 * segments_scale;
+	var sc_body_segments = 8 * segments_scale;
+	var sc_window_segments = 10 * segments_scale;
+	var sc_engine_segments = 10 * segments_scale;
 	var sc_eng_disk_segments = sc_engine_segments;
 	var sun_seg = 10 * segments_scale;
 	var earth_seg = 12 * segments_scale;

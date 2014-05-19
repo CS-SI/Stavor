@@ -2,10 +2,15 @@ function update()
 {	
 
 	//Views
-	if(selected_view=="Earth")
+	if(selected_view=="Earth"){
 		camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
-	if(selected_view=="Sun")
+	}else if(selected_view=="Sun"){
 		camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());	
+	}else if(selected_view=="S/C"){
+		camera.position = init_sc_dir.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
+	}else{
+		controls.update();
+	}
 
 	//Ligts
 	light.position.set(camera.position.x,camera.position.y,camera.position.z);
@@ -18,7 +23,6 @@ function update()
 	if(show_spacecraft && sc_show_eng_texture){
 		customUniforms2.time.value += delta;
 	}
-	controls.update();
 	
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			ANDROID STATS UPDATE

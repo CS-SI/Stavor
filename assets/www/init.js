@@ -214,6 +214,7 @@ function init()
 		spacecraft.add(engine_surface2);
 		//scene.add( engine_surface2 );
 
+		spacecraft.scale.multiplyScalar(sc_scale);
 		scene.add(spacecraft);
 	}
 	//-----------------------------------------------------------------------------------------------------------------------
@@ -419,11 +420,11 @@ function init()
 				transparent: true
 			}   );
 				
-			this.moonGlow = new THREE.Mesh( sunGeometry.clone(), customMaterialGlow.clone() );
+			sunGlow = new THREE.Mesh( sunGeometry.clone(), customMaterialGlow.clone() );
 			
-			moonGlow.position = sun.position;
-			moonGlow.scale.multiplyScalar(1.8);
-			scene.add( moonGlow );
+			sunGlow.position = sun.position;
+			sunGlow.scale.multiplyScalar(1.8);
+			scene.add( sunGlow );
 		}else{
 			// SUPER SIMPLE GLOW EFFECT
 			// use sprite because it appears the same from all angles
@@ -433,9 +434,9 @@ function init()
 				useScreenCoordinates: false,// alignment: THREE.SpriteAlignment.center,
 				color: 0xf79216, transparent: false, blending: THREE.AdditiveBlending
 			});
-			var sprite = new THREE.Sprite( spriteMaterial );
-			sprite.scale.set(20, 20, 1.0);
-			sun.add(sprite); // this centers the glow at the mesh
+			sunGlow = new THREE.Sprite( spriteMaterial );
+			sunGlow.scale.set(20, 20, 1.0);
+			sun.add(sunGlow); // this centers the glow at the mesh
 		}
 		
 		if(sun_show_line){

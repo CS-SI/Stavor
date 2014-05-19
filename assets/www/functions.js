@@ -164,6 +164,7 @@ function showAndroidToast(toast) {
 		}
 		if(show_sun){
 			sun.visible=true;
+			sunGlow.visible=true;
 		}
 	}
 	var selected_view = "XYZ";
@@ -204,10 +205,11 @@ function showAndroidToast(toast) {
 				break;
 			case "Sun"://Sun
 				sun.visible = false;
+				sunGlow.visible=false;
 				camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());
 				break;
 			case "S/C"://Spacecraft
-				camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());
+				camera.position = init_sc_dir.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
 				break;
 			default://xyz
 				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
