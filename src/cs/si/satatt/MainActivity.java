@@ -70,8 +70,8 @@ public class MainActivity extends ActionBarActivity implements
 		setProgressBarVisibility(true);
 		
 		mXwalkView = new XWalkView(this.getApplicationContext(), this);
-		//mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
-        //mXwalkView.setUIClient(new MyUIClient(mXwalkView));
+		mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
+        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
 
 		
 		// find the retained fragment on activity restarts

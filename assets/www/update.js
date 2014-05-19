@@ -1,5 +1,13 @@
 function update()
 {	
+
+	//Views
+	if(selected_view=="Earth")
+		camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
+	if(selected_view=="Sun")
+		camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());	
+
+	//Ligts
 	light.position.set(camera.position.x,camera.position.y,camera.position.z);
 	if ( keyboard.pressed("z") ) 
 	{ 

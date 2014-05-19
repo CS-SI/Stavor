@@ -477,5 +477,6 @@ function init()
 			earth.add( spriteEarth );
 		}
 	}
+	changeView(selected_view);
 	setLoadingProgress(100);
 }

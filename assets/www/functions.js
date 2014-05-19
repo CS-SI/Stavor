@@ -154,8 +154,18 @@ function showAndroidToast(toast) {
 			miniSphereZZ.visible=true;
 		}
 	}
+	function restorePlanets(){
+		if(show_earth){
+			earth.visible=true;
+		}
+		if(show_sun){
+			sun.visible=true;
+		}
+	}
+	var selected_view = "XYZ";
 	function changeView(view_mode){
 		restoreMiniSpheres();
+		restorePlanets();
 		switch(view_mode){
 			case "XYZ"://xyz
 				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
@@ -184,15 +194,21 @@ function showAndroidToast(toast) {
 				miniSphereZZ.visible=false;
 				camera.position = new THREE.Vector3(0,0,-getCamDistance());
 				break;
-			case "Earth"://-Z
-				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
+			case "Earth"://Earth
+				earth.visible = false;
+				camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
 				break;
-			case "Sun"://-Z
-				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
+			case "Sun"://Sun
+				sun.visible = false;
+				camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());
+				break;
+			case "S/C"://Spacecraft
+				camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());
 				break;
 			default://xyz
 				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
 				break;
 		}
+		selected_view = view_mode;
 		camera.lookAt(scene.position);
 	}
