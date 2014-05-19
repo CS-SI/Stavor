@@ -10,6 +10,11 @@
             android:title="@string/pref_title_show_spacecraft"
             android:defaultValue="true" /> -->
         <CheckBoxPreference
+            android:key="@string/pref_key_show_sc_axis"
+            android:summary="@string/pref_summary_show_sc_axis"
+            android:title="@string/pref_title_show_sc_axis"
+            android:defaultValue="true" />
+        <CheckBoxPreference
             android:key="@string/pref_key_show_engine_texture"
             android:summary="@string/pref_summary_show_engine_texture"
             android:title="@string/pref_title_show_engine_texture"

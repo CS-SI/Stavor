@@ -38,6 +38,7 @@
     <string name="pref_key_show_axis">pref_key_show_axis</string>
     <string name="pref_key_show_axis_labels">pref_key_show_axis_labels</string>
     <string name="pref_key_show_spacecraft">pref_key_show_spacecraft</string>
+    <string name="pref_key_show_sc_axis">pref_key_show_sc_axis</string>
     <string name="pref_key_show_engine_texture">pref_key_show_engine_texture</string>
     <string name="pref_key_show_sun">pref_key_show_sun</string>
     <string name="pref_key_show_earth">pref_key_show_earth</string>

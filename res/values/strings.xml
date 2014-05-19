@@ -154,6 +154,8 @@
     <string name="pref_summary_show_axis_labels">Show reference axis labels</string>
     <string name="pref_title_show_spacecraft">Show spacecraft</string>
     <string name="pref_summary_show_spacecraft">Show spacecraft model</string>
+    <string name="pref_title_show_sc_axis">Show spacecraft axis</string>
+    <string name="pref_summary_show_sc_axis">Show spacecraft reference axis</string>
     <string name="pref_title_show_engine_texture">Show engine texture</string>
     <string name="pref_summary_show_engine_texture">Show spacecraft engine texture</string>
     <string name="pref_title_sun_simple_glow">Simple glow effect</string>

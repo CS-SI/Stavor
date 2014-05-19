@@ -31,6 +31,7 @@ public class ModelConfiguration {
 		show_axis = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_axis), show_axis);
 		show_axis_labels = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_axis_labels), show_axis_labels);
 		show_spacecraft = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_spacecraft), show_spacecraft);
+		show_sc_axis = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_sc_axis), show_sc_axis);
 		sc_show_eng_texture = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_engine_texture), sc_show_eng_texture);
 		sun_rotates = sharedPref.getBoolean(ctx.getString(R.string.pref_key_sun_rotates), sun_rotates);
 		show_sun = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_sun), show_sun);
@@ -74,6 +75,7 @@ public class ModelConfiguration {
 	public boolean show_axis_labels = true;
 	//Spacecraft
 	public boolean show_spacecraft = true;
+	public boolean show_sc_axis = true;
 	public boolean sc_show_eng_texture = true;
 	//Sun
 	public boolean show_sun = true;

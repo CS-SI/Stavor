@@ -38,6 +38,7 @@ function showAndroidToast(toast) {
 
 			//Option blocked for robustness (S/C will show the attitude and a view will follow it)
 			//show_spacecraft = config.show_spacecraft;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
+			show_sc_axis = config.show_sc_axis;
 			sc_show_eng_texture = config.sc_show_eng_texture;
 			
 			show_sun = config.show_sun;
@@ -87,6 +88,7 @@ function showAndroidToast(toast) {
 		show_planes = false;
 
 		//show_spacecraft = true;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
+		show_sc_axis = true;		
 		sc_show_eng_texture = false;
 		
 		show_sun = false;

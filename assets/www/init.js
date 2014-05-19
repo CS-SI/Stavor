@@ -126,7 +126,11 @@ function init()
 	//-----------------------------------------------------------------------------------------------------------------------
 	if(show_spacecraft){
 		spacecraft = new THREE.Object3D();
-		//spacecraft.useQuaternion = true;
+		if(show_sc_axis){
+			var sc_axis = new THREE.AxisHelper( sc_axis_lenght );
+			sc_axis.position.set( 0, 0, 0 );
+			spacecraft.add( sc_axis );
+		}
 		if(!canvas_mode)
 			var sc_material = new THREE.MeshLambertMaterial( { color: sc_body_color, metal: true, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } );
 		else
