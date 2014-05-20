@@ -27,7 +27,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.SlidingDrawer;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.SlidingDrawer.OnDrawerCloseListener;
 import android.widget.SlidingDrawer.OnDrawerOpenListener;
@@ -36,7 +35,7 @@ import app.Parameters;
 /**
  * A sphere fragment containing a web view.
  */
-public final class HudFragment extends Fragment implements OnItemSelectedListener {
+public final class HudFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -133,9 +132,6 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
     	//browser.loadUrl(Parameters.Web.STARTING_PAGE);
     	browser.load(Parameters.Web.STARTING_PAGE,null);
     	
-    	Spinner spinner = (Spinner) rootView.findViewById(R.id.spinnerView);
-    	spinner.setOnItemSelectedListener(this);
-    	
     	views_menu = (Button) rootView.findViewById(R.id.buttonViews);
     	views_menu.setOnClickListener(new OnClickListener(){
 			@Override
@@ -177,8 +173,8 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
 		fps.setAlpha((float)1.0);
 	}
 	
-	private boolean first = true;
-	public void onItemSelected(AdapterView<?> parent, View view, 
+	//private boolean first = true;
+/*	public void onItemSelected(AdapterView<?> parent, View view, 
             int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         String sel_view = (String) parent.getItemAtPosition(pos);
@@ -190,7 +186,7 @@ public final class HudFragment extends Fragment implements OnItemSelectedListene
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
-    }
+    }*/
  
     private void showPopup(View v) {
     	PopupMenu popup = new PopupMenu(getActivity(), v);

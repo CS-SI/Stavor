@@ -9,31 +9,31 @@ function update()
 		case "Sun"://Sun
 			camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());
 			break;
-		case "S/C-xyz"://Spacecraft
+		case "S/C-XYZ"://Spacecraft
 			camera.position = init_sc_dir_xyz.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
 			camera.up = init_sc_up_xyz.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 			break;
-		case "S/C-rear"://Spacecraft
+		case "S/C-Rear"://Spacecraft
 			camera.position = init_sc_dir_rear.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
 			camera.up = init_sc_up_rear.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 			break;
-		case "S/C-front"://Spacecraft
+		case "S/C-Front"://Spacecraft
 			camera.position = init_sc_dir_front.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
 			camera.up = init_sc_up_front.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 			break;
-		case "S/C-top"://Spacecraft
+		case "S/C-Top"://Spacecraft
 			camera.position = init_sc_dir_top.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
 			camera.up = init_sc_up_top.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 			break;
-		case "S/C-bottom"://Spacecraft
+		case "S/C-Bottom"://Spacecraft
 			camera.position = init_sc_dir_bottom.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
 			camera.up = init_sc_up_bottom.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 			break;
-		case "S/C-left"://Spacecraft
+		case "S/C-Left"://Spacecraft
 			camera.position = init_sc_dir_left.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
 			camera.up = init_sc_up_left.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 			break;
-		case "S/C-right"://Spacecraft
+		case "S/C-Right"://Spacecraft
 			camera.position = init_sc_dir_right.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
 			camera.up = init_sc_up_right.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 			break;
