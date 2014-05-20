@@ -17,7 +17,7 @@
         android:gravity="fill_horizontal" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/buttonViews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

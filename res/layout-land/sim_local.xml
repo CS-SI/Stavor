@@ -19,7 +19,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/buttonViews"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:layout_weight="1"

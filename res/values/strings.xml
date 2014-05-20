@@ -17,6 +17,8 @@
     <string name="menu_views_spacecraft_bottom">Bottom</string>
     <string name="menu_views_spacecraft_left">Left</string>
     <string name="menu_views_spacecraft_right">Right</string>
+    <string name="menu_views_earth">Earth</string>
+    <string name="menu_views_sun">Sun</string>
     
     
     <string name="app_name">SatAtt</string>
