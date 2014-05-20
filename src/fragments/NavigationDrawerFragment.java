@@ -324,59 +324,6 @@ public class NavigationDrawerFragment extends Fragment {
         if (item.getItemId() == R.id.action_screenshot) {
         	((MainActivity)getActivity()).showAbout();
         }
-	        if (item.getItemId() == R.id.action_screenshot) {
-	        	
-        	
-        	
-        	//XGGDEBUG: take screenshot/Wifi display
-        	
-        	
-        	// image naming and path  to include sd card  appending name you choose for file
-        	Long tsLong = System.currentTimeMillis()/1000;
-        	String ts = tsLong.toString();
-        	String mPath = Environment.getExternalStorageDirectory().toString() + "/Pictures/SatAtt/SatAtt_" + ts+".jpg";
-        	//String mPath = Environment.DIRECTORY_PICTURES + "/SatAtt_" + ts+".jpg";
-
-        	// create bitmap screen capture
-        	Bitmap bitmap;
-        	View v1 = this.getView().getRootView();
-        	v1.setDrawingCacheEnabled(true);
-        	bitmap = Bitmap.createBitmap(v1.getDrawingCache());
-        	v1.setDrawingCacheEnabled(false);
-        	
-        	/*
-        	Picture picture = ((WebView)(this.getView().getRootView().findViewById(R.id.browser))).capturePicture();
-            Bitmap  bitmap = Bitmap.createBitmap( picture.getWidth(), picture.getHeight(), Bitmap.Config.ARGB_8888);
-            Canvas c = new Canvas( bitmap ); 
-            picture.draw( c ); 
-        	*/
-        	
-
-        	OutputStream fout = null;
-        	File imageFile = new File(mPath);
-
-        	try {
-        		if(!imageFile.exists()) {
-        			imageFile.getParentFile().mkdirs();
-        		    imageFile.createNewFile();
-        		} 
-        	    fout = new FileOutputStream(imageFile, false);
-        	    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fout);
-        	    fout.flush();
-        	    fout.close();
-                Toast.makeText(getActivity(), "Saved as "+"/Pictures/SatAtt/SatAtt_" + ts+".jpg", Toast.LENGTH_SHORT).show();
-
-        	} catch (FileNotFoundException e) {
-        	    // TODO Auto-generated catch block
-        	    e.printStackTrace();
-        	} catch (IOException e) {
-        	    // TODO Auto-generated catch block
-        	    e.printStackTrace();
-        	}
-        	
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -20,11 +20,16 @@ import fragments.SimulatorFragment;
 import fragments.TestFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
+import android.app.AlarmManager;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -222,17 +227,34 @@ public class MainActivity extends ActionBarActivity implements
 			showAbout();
 			return true;
 		}
+		if (id == R.id.action_reset_conf) {
+			resetUserConfig();
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void resetUserConfig() {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		preferences.edit().clear().commit();
+		resetApplication();
+	}
+	private void resetApplication(){
+		Context context = getBaseContext();
+		Intent mStartActivity = new Intent(context, MainActivity.class);
+		int mPendingIntentId = 123456;
+		PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId,    mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+		AlarmManager mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+		mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+		System.exit(0);
+	}
+
 	public void showAbout() {
-		// TODO Auto-generated method stub
 		Intent myIntent = new Intent(MainActivity.this, AboutActivity.class);
 		MainActivity.this.startActivity(myIntent);
 	}
 
 	public void showSection(final int sel) {
-		// TODO Auto-generated method stub
 		runOnUiThread( new Runnable() {
 			public void run() {    
 				mNavigationDrawerFragment.select(sel);
