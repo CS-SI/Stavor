@@ -174,30 +174,37 @@ function showAndroidToast(toast) {
 		switch(view_mode){
 			case "XYZ"://xyz
 				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
+				camera.up = new THREE.Vector3(-0.577,0.577,-0.577);
 				break;
 			case "X"://+X
 				miniSphereX.visible=false;
 				camera.position = new THREE.Vector3(getCamDistance(),0,0);
+				camera.up = new THREE.Vector3(0,1,0);
 				break;
 			case "-X"://-X
 				miniSphereXX.visible=false;
 				camera.position = new THREE.Vector3(-getCamDistance(),0,0);
+				camera.up = new THREE.Vector3(0,1,0);
 				break;
 			case "Y"://+Y
 				miniSphereY.visible=false;
 				camera.position = new THREE.Vector3(0,getCamDistance(),0);
+				camera.up = new THREE.Vector3(0,0,1);
 				break;
 			case "-Y"://-Y
 				miniSphereYY.visible=false;
 				camera.position = new THREE.Vector3(0,-getCamDistance(),0);
+				camera.up = new THREE.Vector3(0,0,1);
 				break;
 			case "Z"://+Z
 				miniSphereZ.visible=false;
 				camera.position = new THREE.Vector3(0,0,getCamDistance());
+				camera.up = new THREE.Vector3(0,1,0);
 				break;
 			case "-Z"://-Z
 				miniSphereZZ.visible=false;
 				camera.position = new THREE.Vector3(0,0,-getCamDistance());
+				camera.up = new THREE.Vector3(0,1,0);
 				break;
 			case "Earth"://Earth
 				earth.visible = false;
