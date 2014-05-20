@@ -2,16 +2,60 @@ function update()
 {	
 
 	//Views
-	if(selected_view=="Earth"){
+	switch(selected_view){
+		case "Earth"://Earth
+			camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
+			break;
+		case "Sun"://Sun
+			camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());
+			break;
+		case "S/C-xyz"://Spacecraft
+			camera.position = init_sc_dir_xyz.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
+			camera.up = init_sc_up_xyz.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
+			break;
+		case "S/C-rear"://Spacecraft
+			camera.position = init_sc_dir_rear.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
+			camera.up = init_sc_up_rear.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
+			break;
+		case "S/C-front"://Spacecraft
+			camera.position = init_sc_dir_front.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
+			camera.up = init_sc_up_front.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
+			break;
+		case "S/C-top"://Spacecraft
+			camera.position = init_sc_dir_top.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
+			camera.up = init_sc_up_top.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
+			break;
+		case "S/C-bottom"://Spacecraft
+			camera.position = init_sc_dir_bottom.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
+			camera.up = init_sc_up_bottom.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
+			break;
+		case "S/C-left"://Spacecraft
+			camera.position = init_sc_dir_left.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
+			camera.up = init_sc_up_left.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
+			break;
+		case "S/C-right"://Spacecraft
+			camera.position = init_sc_dir_right.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
+			camera.up = init_sc_up_right.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
+			break;
+		default:
+			controls.update();
+			break;
+	}
+	camera.lookAt(scene.position);
+
+
+
+	/*if(selected_view=="Earth"){
 		camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
 	}else if(selected_view=="Sun"){
 		camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());	
 	}else if(selected_view=="S/C"){
 		camera.position = init_sc_dir.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
+		camera.up = init_sc_up.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 	}else{
 		controls.update();
 	}
-	camera.lookAt(scene.position);
+	camera.lookAt(scene.position);*/
 
 	//Ligts
 	light.position.set(camera.position.x,camera.position.y,camera.position.z);
