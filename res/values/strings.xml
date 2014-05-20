@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <string name="menu_views_ref_frame">Ref.Frame</string>
+    <string name="menu_views_ref_frame_xyz">XYZ</string>
+    <string name="menu_views_ref_frame_x">X</string>
+    <string name="menu_views_ref_frame_xx">-X</string>
+    <string name="menu_views_ref_frame_y">Y</string>
+    <string name="menu_views_ref_frame_yy">-y</string>
+    <string name="menu_views_ref_frame_z">Z</string>
+    <string name="menu_views_ref_frame_zz">-Z</string>
+    <string name="menu_views_spacecraft">Spacecraft</string>
+    <string name="menu_views_spacecraft_xyz">XYZ</string>
+    <string name="menu_views_spacecraft_rear">Rear</string>
+    <string name="menu_views_spacecraft_front">Front</string>
+    <string name="menu_views_spacecraft_top">Top</string>
+    <string name="menu_views_spacecraft_bottom">Bottom</string>
+    <string name="menu_views_spacecraft_left">Left</string>
+    <string name="menu_views_spacecraft_right">Right</string>
+    
+    
     <string name="app_name">SatAtt</string>
     <string name="about">About</string>
     <string name="dummy"></string>
