@@ -43,20 +43,6 @@ function update()
 	}
 	camera.lookAt(scene.position);
 
-
-
-	/*if(selected_view=="Earth"){
-		camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
-	}else if(selected_view=="Sun"){
-		camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());	
-	}else if(selected_view=="S/C"){
-		camera.position = init_sc_dir.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
-		camera.up = init_sc_up.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
-	}else{
-		controls.update();
-	}
-	camera.lookAt(scene.position);*/
-
 	//Ligts
 	light.position.set(camera.position.x,camera.position.y,camera.position.z);
 	if ( keyboard.pressed("z") ) 
@@ -84,11 +70,14 @@ function update()
 	//			SPACECRAFT UPDATE
 	//-----------------------------------------------------------------------------------------------------------------------
 	//if(show_spacecraft){
-		/*spacecraft.quaternion.copy(value_attitude);
-		spacecraft.matrixWorldNeedsUpdate = true;
-		spacecraft.updateMatrix();*/
-		spacecraft.rotation.x += 0.01;
-		spacecraft.rotation.y += 0.01;
+		if(!auto_rotate_sc){		
+			spacecraft.quaternion.copy(value_attitude);
+			spacecraft.matrixWorldNeedsUpdate = true;
+			spacecraft.updateMatrix();
+		}else{
+			spacecraft.rotation.x += 0.01;
+			spacecraft.rotation.y += 0.01;
+		}
 	//}
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			SUN UPDATE
