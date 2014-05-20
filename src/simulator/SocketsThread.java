@@ -36,7 +36,6 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 			try {
 				socket.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -46,25 +45,19 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     protected Boolean doInBackground(ModelSimulation... params) {
     	
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
-    		Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting socket");
     		try {
-        		//socket = new Socket(dstAddress, dstPort);
         		socket = new Socket();
         		socket.connect(new InetSocketAddress(dstAddress, dstPort), Parameters.Simulator.remote_connection_timeout_ms);
-        		//socket.setTcpNoDelay(true);
         	    inputStream = socket.getInputStream();
 				inputOStream = new ObjectInputStream( inputStream );
 				setConnected();
 				simulator.goToHud();
         	    simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_simulator_connected));
-        	    Log.d("Sim",System.currentTimeMillis()+": "+"socket openend");
         	} catch (UnknownHostException e) {
-        		// TODO Auto-generated catch block
         		e.printStackTrace();
         		simulator.showMessage(simulator.getContext().getString(R.string.sim_unknown_host));
         		setDisconnected();
         	} catch (IOException e) {
-        		// TODO Auto-generated catch block
         		e.printStackTrace();
         		simulator.showMessage(simulator.getContext().getString(R.string.sim_io_error)+": "+e.getMessage());
         		setDisconnected();
@@ -72,14 +65,10 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	}
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
 		    try {
-		    	//Log.d("Sim",System.currentTimeMillis()+": "+"enter infinite loop");
 				while (true){
-					//Log.d("Sim",System.currentTimeMillis()+": "+"before readObject");
 					SpacecraftState sstate = (SpacecraftState) inputOStream.readObject();
-					//Log.d("Sim",System.currentTimeMillis()+": "+"after readObject");
 					if(sstate!=null){
 						simulator.getSimulationResults().updateSimulation(sstate, 0);
-						//Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
 						
 			            publishProgress();
 					}
@@ -87,15 +76,12 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 		                break;
 				}
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				simulator.showMessage(simulator.getContext().getString(R.string.sim_error)+": "+e.getMessage());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_disconnected)+": "+e.getMessage());
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				simulator.showMessage(simulator.getContext().getString(R.string.sim_error)+": "+e.getMessage());
 			}
@@ -108,18 +94,12 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     @Override
     protected void onProgressUpdate(Void... values) {
     	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
-    		//Log.d("Sim",System.currentTimeMillis()+": "+"update gui");
     		time_tmp_gui = System.nanoTime();
     		simulator.getSimulationResults().updateHUD();
-    		//Log.d("Sim",System.currentTimeMillis()+": "+"end update gui");
     	}
     	if(time_tmp_data==0 || (System.nanoTime()-time_tmp_data)>Parameters.Simulator.min_hud_model_refreshing_interval_ns){
-			//Log.d("Sim",System.currentTimeMillis()+": "+"update data");
     		time_tmp_data = System.nanoTime();
         	simulator.getSimulationResults().pushSimulationModel();
-			//Log.d("Sim",System.currentTimeMillis()+": "+"end update data");
-		}else{
-			//Log.d("Sim",System.currentTimeMillis()+": "+"avoid update data");
 		}
     }
  
@@ -135,9 +115,6 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
  
     @Override
     protected void onCancelled() {
-        /*Toast.makeText(MainHilos.this, "Tarea cancelada!",
-                Toast.LENGTH_SHORT).show();*/
-    	//setDisconnected();
     }
     
     private void setConnected(){

@@ -11,6 +11,7 @@ function update()
 	}else{
 		controls.update();
 	}
+	camera.lookAt(scene.position);
 
 	//Ligts
 	light.position.set(camera.position.x,camera.position.y,camera.position.z);
@@ -39,9 +40,11 @@ function update()
 	//			SPACECRAFT UPDATE
 	//-----------------------------------------------------------------------------------------------------------------------
 	//if(show_spacecraft){
-		spacecraft.quaternion.copy(value_attitude);
+		/*spacecraft.quaternion.copy(value_attitude);
 		spacecraft.matrixWorldNeedsUpdate = true;
-		spacecraft.updateMatrix();
+		spacecraft.updateMatrix();*/
+		spacecraft.rotation.x += 0.01;
+		spacecraft.rotation.y += 0.01;
 	//}
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			SUN UPDATE
