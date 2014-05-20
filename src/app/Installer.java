@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import mission.Mission;
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
 import database.MissionReaderContract.MissionEntry;
 import database.MissionReaderDbHelper;
+import database.SerializationUtil;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
@@ -153,20 +155,41 @@ public class Installer {
 	
 	private static boolean addMissionEntry(SQLiteDatabase db){
 		// Create a new map of values, where column names are the keys
+		boolean result = true;
 		ContentValues values = new ContentValues();
-		values.put(MissionEntry.COLUMN_NAME_ENTRY_ID, "0");
 		values.put(MissionEntry.COLUMN_NAME_NAME, "Example");
 		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, "GTO Mission");
-
+		try {
+			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(new Mission()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		// Insert the new row, returning the primary key value of the new row
 		long newRowId;
 		newRowId = db.insert(
 				MissionEntry.TABLE_NAME,
 				null,
 		         values);
-		if(newRowId!=-1)
-			return true;
-		else
-			return false;
+		if(newRowId==-1)
+			result=false;
+		
+		//Second Example
+		values = new ContentValues();
+		values.put(MissionEntry.COLUMN_NAME_NAME, "Example 2");
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, "GEO Mission");
+		values.put(MissionEntry.COLUMN_NAME_CLASS, "");
+		
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				MissionEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId==-1)
+			result=false;
+		
+		
+		return result;
 	}
 }

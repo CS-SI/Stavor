@@ -1,9 +1,11 @@
-package unused;
+package database;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import mission.Mission;
 
 import org.orekit.propagation.SpacecraftState;
  
@@ -16,13 +18,13 @@ import org.orekit.propagation.SpacecraftState;
 public class SerializationUtil {
  
     // deserialize to Object from given file
-    public static SpacecraftState deserialize(String serialized) throws IOException,
+    public static Mission deserialize(String serialized) throws IOException,
             ClassNotFoundException {
     	try {
     	     byte b[] = serialized.getBytes(); 
     	     ByteArrayInputStream bi = new ByteArrayInputStream(b);
     	     ObjectInputStream si = new ObjectInputStream(bi);
-    	     SpacecraftState obj = (SpacecraftState) si.readObject();
+    	     Mission obj = (Mission) si.readObject();
     	     si.close();
     	     return obj;
     	 } catch (Exception e) {

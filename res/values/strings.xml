@@ -20,9 +20,6 @@
     <string name="menu_views_earth">Earth</string>
     <string name="menu_views_sun">Sun</string>
     
-    <string name="sim_mis_mission">Mission:</string>
-    <string name="sim_mis_description">Description:</string>
-    
     <string name="app_name">SatAtt</string>
     <string name="about">About</string>
     <string name="dummy"></string>
@@ -128,6 +125,8 @@
     <string name="sim_io_error">Simulator IO error</string>
     <string name="sim_error">Simulator error</string>
     <string name="sim_mission_ended">Mission ended</string>
+    <string name="sim_mis_mission">Mission:</string>
+    <string name="sim_mis_description">Description:</string>
     
     
     <string name="pref_apk_install">Application install</string>

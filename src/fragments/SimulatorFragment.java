@@ -146,7 +146,7 @@ public final class SimulatorFragment extends Fragment {
 
 		// How you want the results sorted in the resulting Cursor
 		String sortOrder =
-		    MissionEntry.COLUMN_NAME_NAME + " DESC";
+		    MissionEntry.COLUMN_NAME_NAME + " ASC";
 
 		Cursor c = db.query(
 		    MissionEntry.TABLE_NAME,  // The table to query
@@ -163,8 +163,8 @@ public final class SimulatorFragment extends Fragment {
 	    
 	    ListAdapter adapter=new SimpleCursorAdapter(this.getActivity().getApplicationContext(),
 	                     R.layout.mission_list_item, c,
-	                     new String[] {"name", "description"},
-	                     new int[] {R.id.textViewMission, R.id.textViewMissionDescription}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER );
+	                     new String[] {"_id", "name", "description"},
+	                     new int[] {R.id.textViewMissionId, R.id.textViewMission, R.id.textViewMissionDescription}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER );
 	    missionsList.setAdapter(adapter); 
 		
 	}
