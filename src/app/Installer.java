@@ -8,9 +8,13 @@ import java.io.OutputStream;
 
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
+import database.MissionReaderContract.MissionEntry;
+import database.MissionReaderDbHelper;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -122,5 +126,47 @@ public class Installer {
 	    while((read = in.read(buffer)) != -1){
 	      out.write(buffer, 0, read);
 	    }
+	}
+	
+	public static SQLiteDatabase installApkDatabase(MainActivity activity){
+		MissionReaderDbHelper mDbHelper = new MissionReaderDbHelper(activity.getApplicationContext());
+		SQLiteDatabase db = mDbHelper.getWritableDatabase();
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+		if(!prefs.getBoolean(activity.getString(R.string.pref_key_database_installed), false)){
+			Log.d("INSTALLER", "Installing Missions database...");
+			
+			if(addMissionEntry(db)){
+				prefs.edit().putBoolean(activity.getString(R.string.pref_key_database_installed), true).commit();
+				Log.d("INSTALLER", "Installing Missions database... OK");
+				//activity.showWelcomeMessage();
+			}else{
+				Log.d("INSTALLER", "Installing Missions database... FAIL");
+				activity.showErrorDialog(activity.getString(R.string.error_installing_missions_database), true);
+			}
+		}else{
+			Log.d("INSTALLER", "Missions database is already installed...");
+		}
+		
+		return db;
+	}
+	
+	private static boolean addMissionEntry(SQLiteDatabase db){
+		// Create a new map of values, where column names are the keys
+		ContentValues values = new ContentValues();
+		values.put(MissionEntry.COLUMN_NAME_ENTRY_ID, "0");
+		values.put(MissionEntry.COLUMN_NAME_NAME, "Example");
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, "GTO Mission");
+
+		// Insert the new row, returning the primary key value of the new row
+		long newRowId;
+		newRowId = db.insert(
+				MissionEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId!=-1)
+			return true;
+		else
+			return false;
 	}
 }

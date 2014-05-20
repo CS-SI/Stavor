@@ -8,6 +8,7 @@
     <string name="pref_screen_extra_indicators">pref_screen_extra_indicators</string>
     <string name="pref_key_apk_install">pref_key_apk_install</string>
     <string name="pref_key_data_installed">pref_key_data_installed</string>
+    <string name="pref_key_database_installed">pref_key_database_installed</string>
     <string name="pref_key_sim_global">pref_key_sim_global</string>
     <string name="pref_key_sim_global_remote">pref_key_sim_global_remote</string>
     <string name="pref_key_sim_remote">pref_key_sim_remote</string>

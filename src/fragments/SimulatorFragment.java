@@ -1,15 +1,22 @@
 package fragments;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import simulator.Simulator;
 import simulator.SimulatorStatus;
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
+import database.MissionReaderContract.MissionEntry;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +24,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Switch;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ViewSwitcher;
@@ -55,6 +65,7 @@ public final class SimulatorFragment extends Fragment {
 	Button button_connect;
 	AutoCompleteTextView host_view;
 	EditText port_view;
+	ListView missionsList;
 
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -69,6 +80,11 @@ public final class SimulatorFragment extends Fragment {
 		//simulator = (Simulator) getArguments().getSerializable(ARG_SIM_OBJ);
 		simulator = ((MainActivity)getActivity()).getSimulator();
     	//simulator.setHudView(null);
+		
+		
+		//Load missions in list
+		missionsList = (ListView) rootView.findViewById(R.id.listView1);
+		loadMissionList();
     	
     	switch_remote = (Switch) rootView.findViewById(R.id.switch1);
     	sim_container = (ViewSwitcher) rootView.findViewById(R.id.sim_content);
@@ -116,6 +132,42 @@ public final class SimulatorFragment extends Fragment {
 		return rootView;
 	}
     
+
+	private void loadMissionList() {
+		SQLiteDatabase db = ((MainActivity)getActivity()).db;
+
+		// Define a projection that specifies which columns from the database
+		// you will actually use after this query.
+		String[] projection = {
+		    MissionEntry._ID,
+		    MissionEntry.COLUMN_NAME_NAME,
+		    MissionEntry.COLUMN_NAME_DESCRIPTION,
+		    };
+
+		// How you want the results sorted in the resulting Cursor
+		String sortOrder =
+		    MissionEntry.COLUMN_NAME_NAME + " DESC";
+
+		Cursor c = db.query(
+		    MissionEntry.TABLE_NAME,  // The table to query
+		    projection,                               // The columns to return
+		    "",                                // The columns for the WHERE clause
+		    null,                            // The values for the WHERE clause
+		    "",                                     // don't group the rows
+		    "",                                     // don't filter by row groups
+		    sortOrder                                 // The sort order
+		    );
+
+	    c.moveToFirst(); 
+
+	    
+	    ListAdapter adapter=new SimpleCursorAdapter(this.getActivity().getApplicationContext(),
+	                     R.layout.mission_list_item, c,
+	                     new String[] {"name", "description"},
+	                     new int[] {R.id.textViewMission, R.id.textViewMissionDescription}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER );
+	    missionsList.setAdapter(adapter); 
+		
+	}
 
 	private void loadCorrectSimulatorScreen(View view) {
 		// TODO Auto-generated method stub

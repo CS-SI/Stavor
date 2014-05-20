@@ -9,5 +9,10 @@
             android:summary="@string/pref_summary_data_installed"
             android:title="@string/pref_title_data_installed"
             android:defaultValue="false" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_database_installed"
+            android:summary="@string/pref_summary_database_installed"
+            android:title="@string/pref_title_database_installed"
+            android:defaultValue="false" />
     </PreferenceCategory> 
 </PreferenceScreen>

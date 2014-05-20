@@ -20,6 +20,8 @@
     <string name="menu_views_earth">Earth</string>
     <string name="menu_views_sun">Sun</string>
     
+    <string name="sim_mis_mission">Mission:</string>
+    <string name="sim_mis_description">Description:</string>
     
     <string name="app_name">SatAtt</string>
     <string name="about">About</string>
@@ -145,6 +147,8 @@
     <string name="pref_target_a">Target</string>
     <string name="pref_vector_a">Vector</string>
     <string name="pref_direction_a">Direction</string>
+    <string name="pref_title_database_installed">Missions database is already installed</string>
+    <string name="pref_summary_database_installed">Flag to know if the Missions database has been already installed</string>
     <string name="pref_title_data_installed">Orekit data is already installed</string>
     <string name="pref_summary_data_installed">Flag to know if the Orekit data has been already installed</string>
     <string name="pref_title_sim_global_remote">Remote simulator</string>
@@ -236,7 +240,7 @@
     <string name="pref_title_direction_a_color">Color</string>
     <string name="pref_summary_direction_a_color">Direction color</string>
     
-    
+    <string name="error_installing_missions_database">Installation of the missions database failed.</string>
     <string name="error_installing_orekit_default_data">Installation of the default Orekit data failed.</string>
     <string name="error_installing_orekit_default_data_external_storage_not_accessible">Installation of the default Orekit data failed due to external storage not accessible.</string>
     <string name="error_initializing_orekit">Error initializing simulator, is the needed data installed correctly?</string>
