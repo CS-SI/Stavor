@@ -212,6 +212,9 @@
         android:layout_alignRight="@+id/linearLayout1"
         android:layout_below="@+id/textView6"
         android:layout_marginTop="20dp"
+        android:divider="?android:attr/dividerVertical"
+        android:stretchColumns="*"
+  		android:showDividers="middle"
         android:scrollbars="horizontal|vertical" >
 
         <TableRow
@@ -227,7 +230,7 @@
                 android:text="@string/about_table_project"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
@@ -236,7 +239,7 @@
                 android:text="@string/about_table_license"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
@@ -260,7 +263,7 @@
                 android:text="@string/about_table_orekit"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
@@ -269,7 +272,7 @@
                 android:text="@string/about_table_apache2_license"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextViewVersionOrekit"
                 android:layout_width="wrap_content"
@@ -293,7 +296,7 @@
                 android:text="@string/about_table_crosswalk"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextView05"
                 android:layout_width="wrap_content"
@@ -302,7 +305,7 @@
                 android:text="@string/about_table_bsd_license"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextViewVersionXwalk"
                 android:layout_width="wrap_content"
@@ -325,7 +328,7 @@
                 android:text="@string/about_table_threejs"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextView09"
                 android:layout_width="wrap_content"
@@ -334,7 +337,7 @@
                 android:text="@string/about_table_mit_license"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextViewVersionThree"
                 android:layout_width="wrap_content"
@@ -357,7 +360,7 @@
                 android:text="@string/about_table_gson"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextView16"
                 android:layout_width="wrap_content"
@@ -366,7 +369,7 @@
                 android:text="@string/about_table_apache2_license"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextViewVersionGson"
                 android:layout_width="wrap_content"
@@ -389,7 +392,7 @@
                 android:text="@string/about_table_colorpicker"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextView18"
                 android:layout_width="wrap_content"
@@ -398,7 +401,7 @@
                 android:text="@string/about_table_apache2_license"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextViewVersionColor"
                 android:layout_width="wrap_content"
@@ -420,7 +423,7 @@
                 android:text="@string/about_table_loader"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout"/>
             <TextView
                 android:id="@+id/TextView188"
                 android:layout_width="wrap_content"
@@ -429,7 +432,7 @@
                 android:text="@string/about_table_apache2_license"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
-
+			<View style="@style/VDividerAbout" />
             <TextView
                 android:id="@+id/TextViewVersionLoader"
                 android:layout_width="wrap_content"
