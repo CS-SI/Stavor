@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -140,6 +141,7 @@ public class NavigationDrawerFragment extends Fragment {
         		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         	    View rowView = inflater.inflate(R.layout.nav_item, parent, false);
         	    TextView textView = (TextView) rowView.findViewById(R.id.nav_item_text);
+        	    ImageView iconView = (ImageView) rowView.findViewById(R.id.nav_item_icon);
         	    String[] values = new String[]{
         	            getString(R.string.title_section1),
         	            getString(R.string.title_section2),
@@ -150,7 +152,29 @@ public class NavigationDrawerFragment extends Fragment {
         	            getString(R.string.title_section7),
         	        };
         	    textView.setText(values[position]);
-        	    
+        	    switch(position){
+	        	    case 0:
+	        	    	iconView.setImageResource(R.drawable.simulator);
+	        	    	break;
+	        	    case 1:
+	        	    	iconView.setImageResource(R.drawable.visualization);
+	        	    	break;
+	        	    case 2:
+	        	    	iconView.setImageResource(R.drawable.indicators);
+	        	    	break;
+	        	    case 3:
+	        	    	iconView.setImageResource(R.drawable.indicators);
+	        	    	break;
+	        	    case 4:
+	        	    	iconView.setImageResource(R.drawable.preferences);
+	        	    	break;
+	        	    case 5:
+	        	    	iconView.setImageResource(R.drawable.preferences);
+	        	    	break;
+	        	    case 6:
+	        	    	iconView.setImageResource(R.drawable.test);
+	        	    	break;
+        	    }
         	    
         	    if (position == mCurrentSelectedPosition) 
         	    { 
