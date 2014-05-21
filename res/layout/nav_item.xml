@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android1="http://schemas.android.com/apk/res/android"
-    android1:id="@+id/RelLayout001"
+    android1:id="@+id/nav_item_layout"
     android1:layout_width="match_parent"
-    android1:layout_height="wrap_content" >
+    android1:layout_height="wrap_content"
+    android1:background="@drawable/navigation_section" >
 
     <ImageView
         android1:id="@+id/nav_item_icon"
-        android1:layout_width="45dp"
-        android1:layout_height="45dp"
+        android1:layout_width="30dp"
+        android1:layout_height="30dp"
         android1:layout_alignParentLeft="true"
         android1:layout_alignParentTop="true"
-        android1:background="@drawable/navigation_section"
+        android1:contentDescription="@string/dummy"
         android1:scaleType="fitCenter"
         android1:src="@drawable/simulator" />
 
@@ -23,7 +24,7 @@
         android1:layout_alignParentRight="true"
         android1:layout_alignParentTop="true"
         android1:layout_toRightOf="@+id/nav_item_icon"
-        android1:background="@drawable/navigation_section"
+        android1:paddingLeft="5dp"
         android1:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

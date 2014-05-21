@@ -2,6 +2,7 @@ function update()
 {	
 
 	//Views
+	controls.update();
 	switch(selected_view){
 		case "Earth"://Earth
 			camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
@@ -38,7 +39,6 @@ function update()
 			camera.up = init_sc_up_right.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 			break;
 		default:
-			controls.update();
 			break;
 	}
 	camera.lookAt(scene.position);

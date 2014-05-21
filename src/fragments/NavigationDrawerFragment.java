@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -140,6 +141,7 @@ public class NavigationDrawerFragment extends Fragment {
         	{
         		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         	    View rowView = inflater.inflate(R.layout.nav_item, parent, false);
+        	    RelativeLayout layout = (RelativeLayout) rowView.findViewById(R.id.nav_item_layout);
         	    TextView textView = (TextView) rowView.findViewById(R.id.nav_item_text);
         	    ImageView iconView = (ImageView) rowView.findViewById(R.id.nav_item_icon);
         	    String[] values = new String[]{
@@ -152,35 +154,58 @@ public class NavigationDrawerFragment extends Fragment {
         	            getString(R.string.title_section7),
         	        };
         	    textView.setText(values[position]);
-        	    switch(position){
-	        	    case 0:
-	        	    	iconView.setImageResource(R.drawable.simulator);
-	        	    	break;
-	        	    case 1:
-	        	    	iconView.setImageResource(R.drawable.visualization);
-	        	    	break;
-	        	    case 2:
-	        	    	iconView.setImageResource(R.drawable.indicators);
-	        	    	break;
-	        	    case 3:
-	        	    	iconView.setImageResource(R.drawable.indicators);
-	        	    	break;
-	        	    case 4:
-	        	    	iconView.setImageResource(R.drawable.preferences);
-	        	    	break;
-	        	    case 5:
-	        	    	iconView.setImageResource(R.drawable.preferences);
-	        	    	break;
-	        	    case 6:
-	        	    	iconView.setImageResource(R.drawable.test);
-	        	    	break;
-        	    }
         	    
         	    if (position == mCurrentSelectedPosition) 
         	    { 
-        	    	textView.setBackgroundResource(R.drawable.navigation_selector);
+        	    	switch(position){
+		        	    case 0:
+		        	    	iconView.setImageResource(R.drawable.simulator_s);
+		        	    	break;
+		        	    case 1:
+		        	    	iconView.setImageResource(R.drawable.visualization_s);
+		        	    	break;
+		        	    case 2:
+		        	    	iconView.setImageResource(R.drawable.indicators_s);
+		        	    	break;
+		        	    case 3:
+		        	    	iconView.setImageResource(R.drawable.indicators_s);
+		        	    	break;
+		        	    case 4:
+		        	    	iconView.setImageResource(R.drawable.preferences_s);
+		        	    	break;
+		        	    case 5:
+		        	    	iconView.setImageResource(R.drawable.preferences_s);
+		        	    	break;
+		        	    case 6:
+		        	    	iconView.setImageResource(R.drawable.test_s);
+		        	    	break;
+	        	    }
+        	    	layout.setBackgroundResource(R.drawable.navigation_selector);
         	    }else{
-        	    	textView.setBackgroundResource(R.drawable.navigation_section);
+        	    	switch(position){
+		        	    case 0:
+		        	    	iconView.setImageResource(R.drawable.simulator);
+		        	    	break;
+		        	    case 1:
+		        	    	iconView.setImageResource(R.drawable.visualization);
+		        	    	break;
+		        	    case 2:
+		        	    	iconView.setImageResource(R.drawable.indicators);
+		        	    	break;
+		        	    case 3:
+		        	    	iconView.setImageResource(R.drawable.indicators);
+		        	    	break;
+		        	    case 4:
+		        	    	iconView.setImageResource(R.drawable.preferences);
+		        	    	break;
+		        	    case 5:
+		        	    	iconView.setImageResource(R.drawable.preferences);
+		        	    	break;
+		        	    case 6:
+		        	    	iconView.setImageResource(R.drawable.test);
+		        	    	break;
+	        	    }
+        	    	layout.setBackgroundResource(R.drawable.navigation_section);
         	    }
         	    return rowView;
         	}
