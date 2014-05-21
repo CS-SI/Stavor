@@ -7,12 +7,16 @@ import simulator.Simulator;
 import simulator.SimulatorStatus;
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
+import database.MissionReaderDbHelper;
 import database.MissionReaderContract.MissionEntry;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,21 +24,27 @@ import android.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Switch;
+import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
+
+import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
 
 /**
  * A simulator fragment containing a web view.
  */
-public final class SimulatorFragment extends Fragment {
+public final class SimulatorFragment extends Fragment implements LoaderCallbacks<Cursor> {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -66,6 +76,7 @@ public final class SimulatorFragment extends Fragment {
 	AutoCompleteTextView host_view;
 	EditText port_view;
 	ListView missionsList;
+	private SQLiteCursorLoader loader=null;
 
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -84,7 +95,35 @@ public final class SimulatorFragment extends Fragment {
 		
 		//Load missions in list
 		missionsList = (ListView) rootView.findViewById(R.id.listView1);
-		loadMissionList();
+		missionsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				restoreMissionsBackground();
+				arg1.setBackgroundResource(R.drawable.mission_item_sel);
+				try{
+					activeMissionId = Integer.parseInt((String) ((TextView)arg1.findViewById(R.id.textViewMissionId)).getText());
+					/*Toast.makeText(getActivity().getApplicationContext(), "Active mission: "+activeMissionId,
+			                Toast.LENGTH_LONG).show();*/
+				}catch(Exception e){
+					e.printStackTrace();
+					activeMissionId=-1;
+				}
+			}
+		});
+		adapter = new SimpleCursorAdapter(
+	    		this.getActivity().getApplicationContext(),
+	            R.layout.mission_list_item, null,
+	            new String[] {"_id", "name", "description"},
+	            new int[] {R.id.textViewMissionId, R.id.textViewMission, R.id.textViewMissionDescription}, 0 );
+
+		missionsList.setAdapter(adapter);
+	    registerForContextMenu(missionsList);
+	    //getLoaderManager().initLoader(0, null, this);
+		getLoaderManager().initLoader(R.id.listView1, null, this);
+		//
+    	
     	
     	switch_remote = (Switch) rootView.findViewById(R.id.switch1);
     	sim_container = (ViewSwitcher) rootView.findViewById(R.id.sim_content);
@@ -133,7 +172,13 @@ public final class SimulatorFragment extends Fragment {
 	}
     
 
-	private void loadMissionList() {
+	private void restoreMissionsBackground() {
+		for(int i = 0; i < missionsList.getChildCount(); i++){
+			LinearLayout lay = (LinearLayout)missionsList.getChildAt(i);
+			lay.setBackgroundResource(R.drawable.mission_item);
+		}
+	}
+	/*private void loadMissionList() {
 		SQLiteDatabase db = ((MainActivity)getActivity()).db;
 
 		// Define a projection that specifies which columns from the database
@@ -166,8 +211,9 @@ public final class SimulatorFragment extends Fragment {
 	                     new String[] {"_id", "name", "description"},
 	                     new int[] {R.id.textViewMissionId, R.id.textViewMission, R.id.textViewMissionDescription}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER );
 	    missionsList.setAdapter(adapter); 
-		
-	}
+	    
+	    
+	}*/
 
 	private void loadCorrectSimulatorScreen(View view) {
 		// TODO Auto-generated method stub
@@ -187,5 +233,53 @@ public final class SimulatorFragment extends Fragment {
 		super.onAttach(activity);
 		((MainActivity) activity).onSectionAttached(getArguments().getInt(
 				ARG_SECTION_NUMBER));
+	}
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		MissionReaderDbHelper db_help = ((MainActivity)getActivity()).db_help;
+		
+	    String sql="SELECT _ID, name, description FROM "+MissionEntry.TABLE_NAME+" ORDER BY name ASC;";
+	    String[] params = null;
+	    SQLiteCursorLoader loader = new SQLiteCursorLoader(
+	    		getActivity().getApplicationContext(),
+	    		db_help,
+	    		sql,
+	    		params);
+		return loader;
+	}
+	
+	SimpleCursorAdapter adapter;
+	int activeMissionId = -1;
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		this.loader=(SQLiteCursorLoader)loader;
+	    adapter.changeCursor(cursor);
+		
+		if (cursor != null && cursor.getCount() > 0) {
+			cursor.moveToFirst();
+			//int idIndex = cursor.getColumnIndex(MissionEntry._ID);
+			//int nameIndex = cursor.getColumnIndex(MissionEntry.COLUMN_NAME_NAME);
+			//this.itemId = cursor.getLong(idIndex);
+			//String name = cursor.getString(nameIndex);
+			//((EditText)findViewById(R.id.textViewMission)).setText(name);
+			//((EditText)findViewById(R.id.person)).setText(borrower);
+			
+			missionsList.post(new Runnable() {
+		        @Override
+		        public void run() {
+		        	int mActivePosition = 0;
+			    	missionsList.setSelection(mActivePosition);
+					missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
+			    	
+		        }    
+		    });
+		}
+		
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> arg0) {
+		adapter.changeCursor(null);
 	}
 }

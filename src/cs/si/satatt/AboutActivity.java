@@ -29,6 +29,7 @@ public class AboutActivity extends Activity {
 		TextView tx_version_three = (TextView) findViewById(R.id.TextViewVersionThree);
 		TextView tx_version_gson = (TextView) findViewById(R.id.TextViewVersionGson);
 		TextView tx_version_color = (TextView) findViewById(R.id.TextViewVersionColor);
+		TextView tx_version_loader = (TextView) findViewById(R.id.TextViewVersionLoader);
 		
 		try {
 			tx_package.setText(getPackageManager().getPackageInfo(getPackageName(), 0).packageName);
@@ -50,6 +51,7 @@ public class AboutActivity extends Activity {
 			tx_version_three.setText(Parameters.About.version_threejs);
 			tx_version_gson.setText(Parameters.About.version_gson);
 			tx_version_color.setText(Parameters.About.version_androidcolorpicker);
+			tx_version_loader.setText(Parameters.About.version_loader);
 			
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block

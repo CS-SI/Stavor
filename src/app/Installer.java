@@ -130,7 +130,7 @@ public class Installer {
 	    }
 	}
 	
-	public static SQLiteDatabase installApkDatabase(MainActivity activity){
+	public static MissionReaderDbHelper installApkDatabase(MainActivity activity){
 		MissionReaderDbHelper mDbHelper = new MissionReaderDbHelper(activity.getApplicationContext());
 		SQLiteDatabase db = mDbHelper.getWritableDatabase();
 		
@@ -150,17 +150,25 @@ public class Installer {
 			Log.d("INSTALLER", "Missions database is already installed...");
 		}
 		
-		return db;
+		return mDbHelper;
 	}
 	
 	private static boolean addMissionEntry(SQLiteDatabase db){
 		// Create a new map of values, where column names are the keys
 		boolean result = true;
+		
+		Mission mission = new Mission();
+		mission.name="Example GTO";
+		mission.description="GTO mission example";
+		mission.initial_orbit.a=2.4396159E7;
+		mission.initial_orbit.e=0.72831215;
+		
 		ContentValues values = new ContentValues();
-		values.put(MissionEntry.COLUMN_NAME_NAME, "Example");
-		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, "GTO Mission");
+		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, mission.description);
+		
 		try {
-			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(new Mission()));
+			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -176,10 +184,22 @@ public class Installer {
 			result=false;
 		
 		//Second Example
+		mission = new Mission();
+		mission.name="Example GEO";
+		mission.description="GEO mission example";
+		mission.initial_orbit.a=4.2164E7;
+		mission.initial_orbit.e=0.0;
+		mission.initial_orbit.i=0.0;
+		
 		values = new ContentValues();
-		values.put(MissionEntry.COLUMN_NAME_NAME, "Example 2");
-		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, "GEO Mission");
-		values.put(MissionEntry.COLUMN_NAME_CLASS, "");
+		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, mission.description);
+		try {
+			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		// Insert the new row, returning the primary key value of the new row
 		newRowId = db.insert(

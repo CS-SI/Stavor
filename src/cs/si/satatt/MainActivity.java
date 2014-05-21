@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity implements
 		return simulator;
 	}
     public XWalkView mXwalkView;
-    public SQLiteDatabase db;
+    public MissionReaderDbHelper db_help;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity implements
 		
 		OrekitInit.init(Installer.getOrekitDataRoot(this));
 		
-		db = Installer.installApkDatabase(this);
+		db_help = Installer.installApkDatabase(this);
 
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
@@ -381,7 +381,7 @@ public class MainActivity extends ActionBarActivity implements
         super.onDestroy();
         // store the data in the fragment
         dataFragment.setData(this.simulator);
-        db.close();
+        db_help.close();
         //XWalk
         if (mXwalkView != null) {
             mXwalkView.onDestroy();

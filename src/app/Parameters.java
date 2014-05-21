@@ -12,6 +12,7 @@ public class Parameters {
 		public static final String version_threejs = "r67";
 		public static final String version_gson = "2.2.4";
 		public static final String version_androidcolorpicker = "1.0";
+		public static final String version_loader = "0.7.3";
 	}
 	public static class Hud {
 		public static final boolean start_panel_open = true;

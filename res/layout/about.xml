@@ -407,6 +407,37 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey1" />
         </TableRow>
+        <TableRow
+            android:id="@+id/tableRow66"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView200"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="3dp"
+                android:text="@string/about_table_loader"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/grey1" />
+
+            <TextView
+                android:id="@+id/TextView188"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="3dp"
+                android:text="@string/about_table_apache2_license"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/grey1" />
+
+            <TextView
+                android:id="@+id/TextViewVersionLoader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/grey1" />
+        </TableRow>
 
     </TableLayout>
 

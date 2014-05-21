@@ -14,14 +14,14 @@ public final class MissionReaderContract {
     }
 
     private static final String TEXT_TYPE = " TEXT";
-    private static final String SERIALIZED_TYPE = " BLOB";
+    //private static final String SERIALIZED_TYPE = " BLOB";
     private static final String COMMA_SEP = ",";
     static final String SQL_CREATE_ENTRIES =
         "CREATE TABLE " + MissionEntry.TABLE_NAME + " (" +
         		MissionEntry._ID + " INTEGER PRIMARY KEY," +
         		MissionEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
         		MissionEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
-        		MissionEntry.COLUMN_NAME_CLASS + SERIALIZED_TYPE + 
+        		MissionEntry.COLUMN_NAME_CLASS + TEXT_TYPE + 
         " )";
 
     static final String SQL_DELETE_ENTRIES =

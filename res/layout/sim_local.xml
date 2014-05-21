@@ -52,7 +52,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/linearLayout1"
         android:layout_margin="5dp"
-        android:background="@color/grey3" >
+        android:background="@color/grey3"
+        android:choiceMode="singleChoice" >
 
     </ListView>
 
