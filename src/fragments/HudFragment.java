@@ -128,7 +128,7 @@ public final class HudFragment extends Fragment {
     	//browser.loadUrl(Parameters.Web.STARTING_PAGE);
     	browser.load(Parameters.Web.STARTING_PAGE,null);
     	
-    	views_menu = (Button) rootView.findViewById(R.id.buttonViews);
+    	views_menu = (Button) rootView.findViewById(R.id.buttonMissionNew);
     	views_menu.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {

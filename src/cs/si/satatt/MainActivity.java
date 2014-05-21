@@ -6,7 +6,10 @@ import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkUIClient;
 import org.xwalk.core.XWalkView;
 
+import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
+
 import database.MissionReaderDbHelper;
+import dialogs.DeleteMissionDialogFragment;
 import dialogs.ErrorDialogFragment;
 import dialogs.WelcomeDialogFragment;
 import settings.SettingsBasicFragment;
@@ -65,6 +68,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
     public XWalkView mXwalkView;
     public MissionReaderDbHelper db_help;
+    public SQLiteCursorLoader loader = null;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -314,6 +318,7 @@ public class MainActivity extends ActionBarActivity implements
     	newFragment.setCancelable(false);
     	newFragment.show(getFragmentManager(), "error");
     }
+    
     
     //XWalk
     

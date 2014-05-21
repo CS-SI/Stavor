@@ -9,8 +9,10 @@ import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
 import database.MissionReaderDbHelper;
 import database.MissionReaderContract.MissionEntry;
+import dialogs.DeleteMissionDialogFragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -23,6 +25,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -76,7 +79,6 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	AutoCompleteTextView host_view;
 	EditText port_view;
 	ListView missionsList;
-	private SQLiteCursorLoader loader=null;
 
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -104,11 +106,13 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 				arg1.setBackgroundResource(R.drawable.mission_item_sel);
 				try{
 					activeMissionId = Integer.parseInt((String) ((TextView)arg1.findViewById(R.id.textViewMissionId)).getText());
+					activeMissionName=(String) ((TextView)arg1.findViewById(R.id.textViewMission)).getText();
 					/*Toast.makeText(getActivity().getApplicationContext(), "Active mission: "+activeMissionId,
 			                Toast.LENGTH_LONG).show();*/
 				}catch(Exception e){
 					e.printStackTrace();
 					activeMissionId=-1;
+					activeMissionName="";
 				}
 			}
 		});
@@ -168,9 +172,30 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
             }
         });
     	
+    	Button button_delete = (Button)rootView.findViewById(R.id.buttonMissionDelete);
+    	button_delete.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if(activeMissionId==-1){
+					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
+				}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2 ){
+					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_removable), Toast.LENGTH_LONG).show();
+				}else{
+					showDeleteMissionDialog(activeMissionId, activeMissionName);
+				}
+			}
+    		
+    	});
+    	
 		return rootView;
 	}
     
+	public void showDeleteMissionDialog(int id, String name) {
+    	DialogFragment newFragment = DeleteMissionDialogFragment.newInstance(id, name);
+    	newFragment.setCancelable(true);
+    	newFragment.show(getFragmentManager(), "delete");
+    }
 
 	private void restoreMissionsBackground() {
 		for(int i = 0; i < missionsList.getChildCount(); i++){
@@ -251,9 +276,10 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	
 	SimpleCursorAdapter adapter;
 	int activeMissionId = -1;
+	String activeMissionName = "";
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		this.loader=(SQLiteCursorLoader)loader;
+		((MainActivity)getActivity()).loader=(SQLiteCursorLoader)loader;
 	    adapter.changeCursor(cursor);
 		
 		if (cursor != null && cursor.getCount() > 0) {

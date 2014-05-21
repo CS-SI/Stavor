@@ -60,6 +60,12 @@
     <string name="dialog_ignore">Ignore</string>
     <string name="dialog_continue">Continue</string>
     <string name="dialog_install_message">The default models and data for the simulator have been installed in the Orekit data root:</string>
+    
+    <string name="dialog_delete_title">Delete Mission</string>
+    <string name="dialog_delete_message">You are going to delete the mission: </string>
+    <string name="dialog_delete_confirm">Delete</string>
+    <string name="dialog_delete_cancel">Cancel</string>
+    
     <string name="basic_indicator_position">Position</string>
     <string name="basic_indicator_velocity">Velocity</string>
     <string name="basic_indicator_momentum">Momentum</string>
@@ -117,6 +123,8 @@
     <string name="sim_local_new">New</string>
     <string name="sim_local_edit">Edit</string>
     <string name="sim_local_remove">Remove</string>
+    <string name="sim_local_mission_not_removable">This mission cannot be deleted</string>
+    <string name="sim_local_select_first_a_mission">Select a mission first</string>
     <string name="sim_local_simulator_connected">Simulator connected!</string>
     <string name="sim_orekit_init_error">Simulator initialization error</string>
     <string name="sim_orekit_prop_error">Simulator propagation error</string>

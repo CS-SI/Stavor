@@ -52,7 +52,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/buttonViews"
+            android:id="@+id/buttonMissionNew"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:background="@drawable/view_selector"

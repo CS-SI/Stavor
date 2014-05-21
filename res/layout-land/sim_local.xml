@@ -19,7 +19,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/buttonViews"
+            android:id="@+id/buttonMissionNew"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -28,7 +28,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonMissionEdit"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -37,7 +37,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/buttonMissionDelete"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:layout_weight="1"
