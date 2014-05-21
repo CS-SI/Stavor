@@ -27,6 +27,11 @@ public class Simulator {
 	private ModelSimulation simulation;
 	private Button buttonConnect;
 	private Switch switchSelector;
+	private Mission mission;
+	
+	public void setSelectedMission(Mission mis){
+		mission = mis;
+	}
 	
 	public void setButtonConnect(Button bt){
 		buttonConnect=bt;
@@ -169,7 +174,7 @@ public class Simulator {
 			simulation = new ModelSimulation((MainActivity)activity);
 			setProgress(40 * 100);
 			simulation.preInitialize();
-			sthread = (SimulatorThread) new SimulatorThread(this, new Mission()).execute(simulation);
+			sthread = (SimulatorThread) new SimulatorThread(this, mission).execute(simulation);
 			//TODO new mission implement selector of mission
 		}
 		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator interior thread connected");

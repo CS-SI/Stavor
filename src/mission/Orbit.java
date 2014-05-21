@@ -1,11 +1,13 @@
 package mission;
 
+import java.io.Serializable;
+
 /**
  * Contains all the values of a Mission.
  * @author XavierGibert
  *
  */
-public class Orbit {
+public class Orbit implements Serializable{
 	public double mu =  3.986004415e+14;
 	/**
 	 * Semi major axis in meters

@@ -1,10 +1,12 @@
 package mission;
 
+import java.io.Serializable;
+
 import mission.Orbit;
 
 import org.orekit.time.AbsoluteDate;
 
-public class Mission {
+public class Mission implements Serializable{
 	public String name = "CustomMission";
 	public String description = "Mission description";
 	//public String initial_stage = "First Stage";

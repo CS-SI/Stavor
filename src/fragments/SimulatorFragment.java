@@ -3,12 +3,14 @@ package fragments;
 import java.util.ArrayList;
 import java.util.List;
 
+import mission.Mission;
 import simulator.Simulator;
 import simulator.SimulatorStatus;
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
 import database.MissionReaderDbHelper;
 import database.MissionReaderContract.MissionEntry;
+import database.SerializationUtil;
 import dialogs.DeleteMissionDialogFragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -162,12 +164,42 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	            				R.string.pref_key_sim_remote_port), 
 	            				port_view.getText().toString()
 	            				).commit();
+	            		simulator.connect();
             		}else{
             			//Set mission
+            			String[] projection = {
+            					MissionEntry._ID,
+            				    MissionEntry.COLUMN_NAME_CLASS
+            				    };
+
+        				//XGGDEBUG: put db in activity to not load it always.
+            			Cursor c = ((MainActivity)getActivity()).db_help.getWritableDatabase()
+            				.query(
+            						MissionEntry.TABLE_NAME,  // The table to query
+            					    projection,                               // The columns to return
+            					    MissionEntry._ID+" = ?",                                // The columns for the WHERE clause
+            					    new String[]{Integer.toString(activeMissionId)},                            // The values for the WHERE clause
+            					    "",                                     // don't group the rows
+            					    "",                                     // don't filter by row groups
+            					    null                                 // The sort order
+            					    );
+            			if (c != null && c.getCount() > 0) {
+            				c.moveToFirst();
+            				int idIndex = c.getColumnIndex(MissionEntry._ID);
+            				int nameIndex = c.getColumnIndex(MissionEntry.COLUMN_NAME_CLASS);
+            				//this.itemId = cursor.getLong(idIndex);
+            				byte[] mission_serie = c.getBlob(nameIndex);
+            				Mission mis = SerializationUtil.deserialize(mission_serie);
+            				if(mis!=null){
+		            			simulator.setSelectedMission(mis);
+		            			simulator.connect();
+            				}else{
+            					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
+            				}
+            			}else{
+            				Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_find_selected_mission_in_db), Toast.LENGTH_LONG).show();
+            			}
             		}
-            		//Log.d("Sim",System.currentTimeMillis()+": "+"button connect pressed");
-            		simulator.connect();
-            		//Log.d("Sim",System.currentTimeMillis()+": "+"button connect onlick ends");
             	}
             }
         });

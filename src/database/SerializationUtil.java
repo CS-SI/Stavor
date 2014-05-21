@@ -18,11 +18,10 @@ import org.orekit.propagation.SpacecraftState;
 public class SerializationUtil {
  
     // deserialize to Object from given file
-    public static Mission deserialize(String serialized) throws IOException,
-            ClassNotFoundException {
+    public static Mission deserialize(byte[] serialized) {
     	try {
-    	     byte b[] = serialized.getBytes(); 
-    	     ByteArrayInputStream bi = new ByteArrayInputStream(b);
+    	     //byte b[] = serialized.getBytes(); 
+    	     ByteArrayInputStream bi = new ByteArrayInputStream(serialized);
     	     ObjectInputStream si = new ObjectInputStream(bi);
     	     Mission obj = (Mission) si.readObject();
     	     si.close();
@@ -34,15 +33,16 @@ public class SerializationUtil {
     }
  
     // serialize the given object and save it to file
-    public static String serialize(Object obj)//str.getBytes("UTF-8")
+    public static byte[] serialize(Object obj)//str.getBytes("UTF-8")
             throws IOException {
         ByteArrayOutputStream fos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(obj);
         oos.flush();
-        String tmp = fos.toString();
+        //String tmp = fos.toString();
+        byte[] ba = fos.toByteArray();
         fos.close();
-        return tmp;
+        return ba;
     }
  
 }
