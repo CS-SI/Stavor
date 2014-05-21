@@ -8,7 +8,7 @@ public class Parameters {
 		public static final String project_start_date = "2014/04/01";
 		public static final String project_license = "Undef";
 		public static final String version_orekit = "6.1";
-		public static final String version_xwalk = "6.35.131.5 beta";
+		public static final String version_xwalk = "7.35.140.0 canary";
 		public static final String version_threejs = "r67";
 		public static final String version_gson = "2.2.4";
 		public static final String version_androidcolorpicker = "1.0";
