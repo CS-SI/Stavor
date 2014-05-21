@@ -321,7 +321,7 @@ public class MainActivity extends ActionBarActivity implements
         MyResourceClient(XWalkView view) {
             super(view);
         }
-        @Override
+        /*@Override
   		public void onProgressChanged(XWalkView view, int progress) {
   			// Activities and WebViews measure progress with different scales.
   			// The progress meter will automatically disappear when we reach 100%
@@ -332,7 +332,7 @@ public class MainActivity extends ActionBarActivity implements
   			}catch(NullPointerException nulle){
   				
   			}
-  		}
+  		}*/
     }
 	
     class MyUIClient extends XWalkUIClient {

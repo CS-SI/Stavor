@@ -1,11 +1,5 @@
 package fragments;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
 import android.support.v7.app.ActionBarActivity;
@@ -156,6 +150,7 @@ public class NavigationDrawerFragment extends Fragment {
         	            getString(R.string.title_section7),
         	        };
         	    textView.setText(values[position]);
+        	    
         	    
         	    if (position == mCurrentSelectedPosition) 
         	    { 
