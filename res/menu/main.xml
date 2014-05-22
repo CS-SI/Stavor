@@ -16,5 +16,9 @@
         android:id="@+id/action_reset_conf"
         android:title="@string/action_reset_conf"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_reset_db"
+        android:title="@string/action_reset_db"
+        app:showAsAction="never"/>
 
 </menu>

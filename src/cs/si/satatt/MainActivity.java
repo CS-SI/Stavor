@@ -11,6 +11,8 @@ import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
 import database.MissionReaderDbHelper;
 import dialogs.DeleteMissionDialogFragment;
 import dialogs.ErrorDialogFragment;
+import dialogs.ResetAppDialogFragment;
+import dialogs.ResetDbDialogFragment;
 import dialogs.WelcomeDialogFragment;
 import settings.SettingsBasicFragment;
 import settings.SettingsExtraFragment;
@@ -239,25 +241,14 @@ public class MainActivity extends ActionBarActivity implements
 			return true;
 		}
 		if (id == R.id.action_reset_conf) {
-			resetUserConfig();
+			resetUserConfigShowDialog();
+			return true;
+		}
+		if (id == R.id.action_reset_db) {
+			resetMissionsDbShowDialog();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private void resetUserConfig() {
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		preferences.edit().clear().commit();
-		resetApplication();
-	}
-	private void resetApplication(){
-		Context context = getBaseContext();
-		Intent mStartActivity = new Intent(context, MainActivity.class);
-		int mPendingIntentId = 123456;
-		PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId,    mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-		AlarmManager mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-		mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
-		System.exit(0);
 	}
 
 	public void showAbout() {
@@ -308,6 +299,7 @@ public class MainActivity extends ActionBarActivity implements
 	    }
     }
     
+    // Dialogs
     public void showWelcomeMessage() {
         DialogFragment newFragment = new WelcomeDialogFragment();
         newFragment.show(getFragmentManager(), "welcome");
@@ -318,6 +310,18 @@ public class MainActivity extends ActionBarActivity implements
     	newFragment.setCancelable(false);
     	newFragment.show(getFragmentManager(), "error");
     }
+    
+    private void resetUserConfigShowDialog() {
+    	DialogFragment newFragment = ResetAppDialogFragment.newInstance();
+    	newFragment.setCancelable(true);
+    	newFragment.show(getFragmentManager(), "reset");
+	}
+    
+    private void resetMissionsDbShowDialog() {
+    	DialogFragment newFragment = ResetDbDialogFragment.newInstance();
+    	newFragment.setCancelable(true);
+    	newFragment.show(getFragmentManager(), "reset_db");
+	}
     
     
     //XWalk

@@ -53,6 +53,7 @@ public class DeleteMissionDialogFragment extends DialogFragment {
 	private void deleteMission(int mission_id) {
 		// TODO Auto-generated method stub
 		MainActivity act = ((MainActivity)getActivity());
+		//XGGDEBUG:solve, this query is not well formed
 		act.loader.delete(MissionEntry.TABLE_NAME, MissionEntry._ID+"="+mission_id, null);
 	}
 
