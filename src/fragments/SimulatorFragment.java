@@ -151,6 +151,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
                 // Perform action on click
             	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
             		simulator.disconnect();
+            		selectFirstMissionInList();
             	}else{
             		boolean remote = sharedPref.getBoolean(v.getContext().getString(R.string.pref_key_sim_global_remote), false);
             		if(remote){
@@ -297,14 +298,18 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		        	if(isAdded()){
 			        	boolean remote = sharedPref.getBoolean(getString(R.string.pref_key_sim_global_remote), false);
 			        	if(!remote){
-				        	int mActivePosition = 0;
-					    	missionsList.setSelection(mActivePosition);
-							missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
+			        		selectFirstMissionInList();
 			        	}
 		        	}
 		        }    
 		    });
     	}
+	}
+	
+	private void selectFirstMissionInList(){
+		int mActivePosition = 0;
+    	missionsList.setSelection(mActivePosition);
+		missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
 	}
 
 	@Override

@@ -93,6 +93,7 @@ public class Simulator {
 	
 	public SimulatorStatus disconnect(){
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
+			resetSelectedMissionId();
 			disconnectThread();
 		}
 		return simulatorStatus;
@@ -183,21 +184,13 @@ public class Simulator {
 			setProgress(30 * 100);
 			simulation = new ModelSimulation((MainActivity)activity);
 			setProgress(40 * 100);
-			simulation.preInitialize();
-			sthread = null;
-			activity.runOnUiThread( new Runnable() {
-				public void run() {    
-					sthread = (SimulatorThread) new SimulatorThread(((MainActivity)activity).getSimulator(), mission).execute(simulation);
-		        }
-			});
-			
-			//TODO new mission implement selector of mission
+			simulation.preInitialize();    
+			sthread = (SimulatorThread) new SimulatorThread(((MainActivity)activity).getSimulator(), mission).execute(simulation);
+		    
 		}
-		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator interior thread connected");
 	}
 	
 	private void disconnectThread() {
-		// TODO Auto-generated method stub
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
@@ -216,7 +209,6 @@ public class Simulator {
 		}
 	}
 	private void resumeThread() {
-		// TODO Auto-generated method stub
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 		}else{
