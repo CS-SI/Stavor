@@ -66,6 +66,7 @@ function init()
 			transparent: true,
 			side: THREE.FrontSide,
 			metal: true,
+			depthWrite: false, depthTest: false, alphaTest: 0.1,
 			opacity: 0.4,
 			} );	
 		var mat_sphere2 = new THREE.MeshBasicMaterial( { 
@@ -73,6 +74,7 @@ function init()
 			transparent: true,
 			side: THREE.FrontSide,
 			metal: true,
+			depthWrite: false, depthTest: false, alphaTest: 0.1,
 			opacity: 0.11,
 			} );
 		var mats_sphere = [mat_sphere, mat_sphere2];
@@ -266,6 +268,12 @@ function init()
 	//-----------------------------------------------------------------------------------------------------------------------
 	
 	// IMPLEMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if(show_planes){
+		var material_op = new THREE.MeshNormalMaterial({color: 0x0000FF, transparent: true, depthWrite: false, depthTest: false, alphaTest: 0.1, opacity: 0.1, side: THREE.DoubleSide });
+		orbital_plane = new THREE.Mesh( new THREE.RingGeometry( sphere_radius/3, sphere_radius, 30, 10, 0, Math.PI * 2 ), material_op );
+		orbital_plane.position.set( 0, 0, 0 );
+		scene.add( orbital_plane );
+	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			SKY
