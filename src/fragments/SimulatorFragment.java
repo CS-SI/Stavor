@@ -103,16 +103,14 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				// TODO Auto-generated method stub
-				try{
-					restoreMissionsBackground();
+				restoreMissionsBackground();
+				if(arg1!=null){
 					arg1.setBackgroundResource(R.drawable.mission_item_sel);
 					activeMissionId = Integer.parseInt((String) ((TextView)arg1.findViewById(R.id.textViewMissionId)).getText());
 					activeMissionName=(String) ((TextView)arg1.findViewById(R.id.textViewMission)).getText();
 					/*Toast.makeText(getActivity().getApplicationContext(), "Active mission: "+activeMissionId,
 			                Toast.LENGTH_LONG).show();*/
-				}catch(Exception e){
-					e.printStackTrace();
+				}else{
 					activeMissionId=-1;
 					activeMissionName="";
 				}
