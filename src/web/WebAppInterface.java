@@ -12,9 +12,6 @@ import android.widget.Toast;
 //import org.chromium.content.browser.JavascriptInterface;
 import org.xwalk.core.JavascriptInterface;
 
-//XGGDEBUG:TEST-WAITING use ( org.xwalk.core.JavascriptInterface ) when the code is merged in: https://github.com/crosswalk-project/crosswalk/pull/1876/files
-//import android.webkit.JavascriptInterface; Used for WebView not XWalkView
-
 public class WebAppInterface {
     Activity activity;
     private ModelSimulation sim;

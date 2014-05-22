@@ -1,8 +1,5 @@
 package fragments;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mission.Mission;
 import simulator.Simulator;
 import simulator.SimulatorStatus;
@@ -19,12 +16,9 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,7 +29,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Switch;
@@ -89,13 +82,9 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		View rootView = inflater.inflate(R.layout.sim, container,
 				false);
 		
-		//sharedPref = PreferenceManager.getDefaultSharedPreferences(container.getContext());
 		sharedPref = this.getActivity().getSharedPreferences("cs.si.satatt", Context.MODE_PRIVATE);
 		
-		//simulator = (Simulator) getArguments().getSerializable(ARG_SIM_OBJ);
 		simulator = ((MainActivity)getActivity()).getSimulator();
-    	//simulator.setHudView(null);
-		
 		
 		//Load missions in list
 		missionsList = (ListView) rootView.findViewById(R.id.listView1);
@@ -124,17 +113,14 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 
 		missionsList.setAdapter(adapter);
 	    registerForContextMenu(missionsList);
-	    //getLoaderManager().initLoader(0, null, this);
 		getLoaderManager().initLoader(R.id.listView1, null, this);
-		//
     	
-    	
+    	//Switch local/remote
     	switch_remote = (Switch) rootView.findViewById(R.id.switch1);
     	sim_container = (ViewSwitcher) rootView.findViewById(R.id.sim_content);
     	loadCorrectSimulatorScreen(rootView);
     	switch_remote.setOnCheckedChangeListener(new OnCheckedChangeListener() {
     	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-    	        // Do Something
     	    	sharedPref.edit().putBoolean(buttonView.getContext().getString(R.string.pref_key_sim_global_remote), isChecked).commit();
     	    	loadCorrectSimulatorScreen(buttonView);
     	    }
@@ -148,7 +134,6 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	simulator.setSwitchSelector(switch_remote);
     	button_connect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
             	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
             		simulator.disconnect();
             		selectFirstMissionInList();
@@ -171,8 +156,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
             				    MissionEntry.COLUMN_NAME_CLASS
             				    };
 
-        				//XGGDEBUG: put db in activity to not load it always.
-            			Cursor c = ((MainActivity)getActivity()).db_help.getWritableDatabase()
+            			Cursor c = ((MainActivity)getActivity()).db
             				.query(
             						MissionEntry.TABLE_NAME,  // The table to query
             					    projection,                               // The columns to return
@@ -208,7 +192,6 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	button_delete.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				if(activeMissionId==-1){
 					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
 				}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2 ){
@@ -244,45 +227,8 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			}
 		}
 	}
-	/*private void loadMissionList() {
-		SQLiteDatabase db = ((MainActivity)getActivity()).db;
-
-		// Define a projection that specifies which columns from the database
-		// you will actually use after this query.
-		String[] projection = {
-		    MissionEntry._ID,
-		    MissionEntry.COLUMN_NAME_NAME,
-		    MissionEntry.COLUMN_NAME_DESCRIPTION,
-		    };
-
-		// How you want the results sorted in the resulting Cursor
-		String sortOrder =
-		    MissionEntry.COLUMN_NAME_NAME + " ASC";
-
-		Cursor c = db.query(
-		    MissionEntry.TABLE_NAME,  // The table to query
-		    projection,                               // The columns to return
-		    "",                                // The columns for the WHERE clause
-		    null,                            // The values for the WHERE clause
-		    "",                                     // don't group the rows
-		    "",                                     // don't filter by row groups
-		    sortOrder                                 // The sort order
-		    );
-
-	    c.moveToFirst(); 
-
-	    
-	    ListAdapter adapter=new SimpleCursorAdapter(this.getActivity().getApplicationContext(),
-	                     R.layout.mission_list_item, c,
-	                     new String[] {"_id", "name", "description"},
-	                     new int[] {R.id.textViewMissionId, R.id.textViewMission, R.id.textViewMissionDescription}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER );
-	    missionsList.setAdapter(adapter); 
-	    
-	    
-	}*/
 
 	private void loadCorrectSimulatorScreen(View view) {
-		// TODO Auto-generated method stub
 		boolean remote = sharedPref.getBoolean(view.getContext().getString(R.string.pref_key_sim_global_remote), false);
     	switch_remote.setChecked(remote);
     	if(remote){
@@ -291,7 +237,6 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	}else{
     		// Local
     		sim_container.setDisplayedChild(0);
-    		//((MainActivity)getActivity()).loader.reset();
     		missionsList.post(new Runnable() {
 		        @Override
 		        public void run() {
@@ -343,12 +288,6 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		
 		if (cursor != null && cursor.getCount() > 0) {
 			cursor.moveToFirst();
-			//int idIndex = cursor.getColumnIndex(MissionEntry._ID);
-			//int nameIndex = cursor.getColumnIndex(MissionEntry.COLUMN_NAME_NAME);
-			//this.itemId = cursor.getLong(idIndex);
-			//String name = cursor.getString(nameIndex);
-			//((EditText)findViewById(R.id.textViewMission)).setText(name);
-			//((EditText)findViewById(R.id.person)).setText(borrower);
 			
 			missionsList.post(new Runnable() {
 		        @Override

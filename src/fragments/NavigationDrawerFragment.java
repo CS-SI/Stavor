@@ -12,9 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,7 +26,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -108,17 +105,6 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            	//XGGDEBUG
-            	//First update the previously selected item if one has been set
-                /*if(selectedListItem!=null){
-                    TextView previousTitle = (TextView) selectedListItem.findViewById(R.id.nav_item_text);
-                    previousTitle.setBackgroundResource(R.drawable.navigation_section);
-                }
-                //Then update the new one
-                TextView title = (TextView) view.findViewById(R.id.nav_item_text);
-                title.setBackgroundResource(R.drawable.navigation_selector);
-                selectedListItem = view;
-                */
                 selectItem(position);
             }
         });
@@ -295,17 +281,7 @@ public class NavigationDrawerFragment extends Fragment {
     
     public void select(int position){
     	selectItem(position);
-    	//setCorrectBackgrounds();
     }
-    /*private void setCorrectBackgrounds(){
-    	for(int i=0; i<mDrawerListView.getChildCount(); i++){
-    		if(mCurrentSelectedPosition==i)
-    			((TextView)mDrawerListView.getChildAt(i)).setBackgroundResource(R.drawable.navigation_selector);
-    		else
-    			((TextView)mDrawerListView.getChildAt(i)).setBackgroundResource(R.drawable.navigation_section);
-    	}
-    	
-    }*/
 
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;

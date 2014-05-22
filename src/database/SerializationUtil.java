@@ -6,8 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import mission.Mission;
-
-import org.orekit.propagation.SpacecraftState;
  
 /**
  * A simple class with generic serialize and deserialize method implementations

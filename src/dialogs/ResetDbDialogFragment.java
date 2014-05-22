@@ -49,7 +49,7 @@ public class ResetDbDialogFragment extends DialogFragment {
     }
 	private void resetDb() {
 		//Delete database
-		((MainActivity)getActivity()).db_help.getWritableDatabase().delete(MissionEntry.TABLE_NAME, "1", null);
+		((MainActivity)getActivity()).db.delete(MissionEntry.TABLE_NAME, "1", null);
 		//((MainActivity)getActivity()).loader.execSQL("delete * from "+ MissionEntry.TABLE_NAME, null);
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
 		preferences.edit().putBoolean(getString(R.string.pref_key_database_installed), false).commit();

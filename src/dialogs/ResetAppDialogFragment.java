@@ -2,7 +2,6 @@ package dialogs;
 
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
-import database.MissionReaderContract.MissionEntry;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;

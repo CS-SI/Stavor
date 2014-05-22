@@ -8,6 +8,11 @@ import java.io.Serializable;
  *
  */
 public class Orbit implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5454548599446807545L;
+	
 	public double mu =  3.986004415e+14;
 	/**
 	 * Semi major axis in meters

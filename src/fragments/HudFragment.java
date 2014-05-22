@@ -125,7 +125,6 @@ public final class HudFragment extends Fragment {
     	
     	browserLayout.addView(browser);
     	
-    	//browser.loadUrl(Parameters.Web.STARTING_PAGE);
     	browser.load(Parameters.Web.STARTING_PAGE,null);
     	
     	views_menu = (Button) rootView.findViewById(R.id.buttonMissionNew);
@@ -169,21 +168,6 @@ public final class HudFragment extends Fragment {
 		fps.setAlpha((float)1.0);
 	}
 	
-	//private boolean first = true;
-/*	public void onItemSelected(AdapterView<?> parent, View view, 
-            int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        String sel_view = (String) parent.getItemAtPosition(pos);
-        if(!first)
-        	//browser.loadUrl("javascript:changeView('"+sel_view+"')");
-        	browser.load("javascript:changeView('"+sel_view+"')", null);
-        first=false;
-    }
-
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    }*/
- 
     private void showPopup(View v) {
     	PopupMenu popup = new PopupMenu(getActivity(), v);
 

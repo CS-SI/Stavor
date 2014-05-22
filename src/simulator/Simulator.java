@@ -82,11 +82,9 @@ public class Simulator {
 	
 	public SimulatorStatus connect(){
 		if(simulatorStatus.equals(SimulatorStatus.Disconnected)){
-    		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting thread");
 			simulationStatus = SimulationStatus.Pause;
 			playCondition = new ConditionVariable(false);
 			connectThread();
-			//Log.d("Sim",System.currentTimeMillis()+": "+"simulator has connected thread");
 		}
 		return simulatorStatus;
 	}
@@ -145,7 +143,6 @@ public class Simulator {
 	}
 
 	private void connectThread() {
-		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting thread interior");
 		if(buttonConnect!=null){
 			activity.runOnUiThread( new Runnable() {
 				public void run() {
@@ -171,11 +168,8 @@ public class Simulator {
 				setProgress(30 * 100);
 				simulation = new ModelSimulation((MainActivity)activity);
 				setProgress(40 * 100);
-				//Log.d("Sim",System.currentTimeMillis()+": "+"simulator pre preinitialize");
 				simulation.preInitialize();
-				//Log.d("Sim",System.currentTimeMillis()+": "+"simulator post preinitialize");
 				thread = (SocketsThread) new SocketsThread(this,host,port).execute(simulation);
-				//Log.d("Sim",System.currentTimeMillis()+": "+"end executing thread ");
 			}catch(NumberFormatException nfe){
 				setSimulatorStatus(SimulatorStatus.Disconnected);
 			}
@@ -194,18 +188,12 @@ public class Simulator {
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
-			//thread.setDisconnected();
-			//thread.cancel(true);
-			
 			thread.closeSocket();
-			//cancel=true;
 			
 		}else{
 			// Local
-			//sthread.setDisconnected();
 			cancel=true;
 			playCondition.open();
-			//sthread.cancel(false);
 		}
 	}
 	private void resumeThread() {
@@ -216,7 +204,6 @@ public class Simulator {
 		}
 	}
 	private void pauseThread() {
-		// TODO Auto-generated method stub
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 		}else{
@@ -262,7 +249,6 @@ public class Simulator {
 	private String message = "";
 	public void showMessage(String string) {
 		message = string;
-		// TODO Auto-generated method stub
 		activity.runOnUiThread( new Runnable() {
 			public void run() {
 				Toast.makeText(context, message,
@@ -271,7 +257,6 @@ public class Simulator {
 		});
 	}
 	public void goToHud() {
-		// TODO Auto-generated method stub
 		((MainActivity)activity).showSection(1);
 	}
 	

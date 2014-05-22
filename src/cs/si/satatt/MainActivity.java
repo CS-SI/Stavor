@@ -9,7 +9,6 @@ import org.xwalk.core.XWalkView;
 import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
 
 import database.MissionReaderDbHelper;
-import dialogs.DeleteMissionDialogFragment;
 import dialogs.ErrorDialogFragment;
 import dialogs.ResetAppDialogFragment;
 import dialogs.ResetDbDialogFragment;
@@ -26,18 +25,12 @@ import fragments.SimulatorFragment;
 import fragments.TestFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.app.AlarmManager;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -71,6 +64,7 @@ public class MainActivity extends ActionBarActivity implements
     public XWalkView mXwalkView;
     public MissionReaderDbHelper db_help;
     public SQLiteCursorLoader loader = null;
+    public SQLiteDatabase db;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +76,7 @@ public class MainActivity extends ActionBarActivity implements
 		OrekitInit.init(Installer.getOrekitDataRoot(this));
 		
 		db_help = Installer.installApkDatabase(this);
+		db = db_help.getWritableDatabase();
 
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);

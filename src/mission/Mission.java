@@ -7,6 +7,11 @@ import mission.Orbit;
 import org.orekit.time.AbsoluteDate;
 
 public class Mission implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1987145766082906026L;
+	
 	public String name = "CustomMission";
 	public String description = "Mission description";
 	//public String initial_stage = "First Stage";

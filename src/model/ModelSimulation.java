@@ -32,7 +32,6 @@ public class ModelSimulation {
     private boolean isBrowserLoaded;
     
     public ModelSimulation(MainActivity acv){
-    	//OrekitInit.init(Installer.getOrekitDataRoot(acv));
     	isBrowserLoaded = false;
     	activity=acv;
     	config = new ModelConfiguration(activity.getApplicationContext());
@@ -49,7 +48,6 @@ public class ModelSimulation {
 				utc = TimeScalesFactory.getUTC();
 			}
     	} catch (OrekitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			activity.showErrorDialog(activity.getString(R.string.error_initializing_orekit), false);
 		}
@@ -86,8 +84,6 @@ public class ModelSimulation {
     
     public void pushSimulationModel(){
     	if(browser!=null && state!=null && isBrowserLoaded){
-    		//browser.loadUrl("javascript:updateModelState('"+gson.toJson(state)+"')");
-    		//Log.d("QUATERNION", state.value_attitude.w+","+state.value_attitude.x+","+state.value_attitude.y+","+state.value_attitude.z);
     		browser.load("javascript:updateModelState('"+gson.toJson(state)+"')",null);
     	}
 	}
@@ -101,7 +97,6 @@ public class ModelSimulation {
     private TimeScale utc;
     private Frame sunFrame;
     public void updateSimulation(SpacecraftState scs, int sim_progress){
-    	//Log.d("Sim",System.currentTimeMillis()+": "+"pre update 1");
     	ModelState new_state = new ModelState();
     	ModelInfo new_info = new ModelInfo();
     	
@@ -132,7 +127,6 @@ public class ModelSimulation {
 	    	new_state.value_sun[1] = sun.getY()/1000;
 	    	new_state.value_sun[2] = sun.getZ()/1000;
 		} catch (OrekitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			activity.showErrorDialog(activity.getString(R.string.error_computing_orekit), false);
 		}
@@ -172,7 +166,6 @@ public class ModelSimulation {
     	
     	updateState(new_state);
     	updateInfo(new_info);
-    	//Log.d("Sim",System.currentTimeMillis()+": "+"post update 1");
     }
     public synchronized void updateHUD(){
     		if(panel_time != null)
@@ -217,7 +210,6 @@ public class ModelSimulation {
 	TextView panel_yaw;
 	
 	private void initViews() {
-		// TODO Auto-generated method stub
 		if(view != null){
 	    	panel_time = (TextView)view.findViewById(R.id.textViewPanelTime);
 			panel_progress = (ProgressBar)view.findViewById(R.id.progressBarPanelProgress);
@@ -230,6 +222,5 @@ public class ModelSimulation {
 			panel_yaw = (TextView)view.findViewById(R.id.textViewPanelYaw);
 		}
 	}
-
 	
 }

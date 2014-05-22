@@ -33,15 +33,12 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     protected Boolean doInBackground(ModelSimulation... params) {
     	Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
-    		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator connecting socket");
     		try {
     			setSimulationParameters();
 				setConnected();
 				simulator.goToHud();
         	    simulator.showMessage(simulator.getContext().getString(R.string.sim_local_simulator_connected));
-        	    //Log.d("Sim",System.currentTimeMillis()+": "+"socket openend");
         	} catch (OrekitException e) {
-        		// TODO Auto-generated catch block
         		e.printStackTrace();
         		simulator.showMessage(simulator.getContext().getString(R.string.sim_orekit_init_error)+": "+e.getMessage());
         		setDisconnected();
@@ -61,7 +58,6 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 		                break;
 		            }
 					
-					//TODO Propagate
 					long dur = (System.nanoTime()-time_tmp_data);
 					if(dur<(Parameters.Simulator.min_hud_model_refreshing_interval_ns-Parameters.Simulator.model_refreshing_interval_safe_guard_ns)){
 						try {
@@ -70,15 +66,12 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 								Thread.sleep(sleep_dur);		
 							}
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}else{
-						//Log.d("SimLocal", "Simulation step longer than available time: "+dur);
 						try {
 							Thread.sleep(Parameters.Simulator.model_refreshing_interval_safe_guard_ns/1000000);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -103,7 +96,6 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 		            Thread.yield();
 				}
 			} catch (OrekitException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				simulator.showMessage(simulator.getContext().getString(R.string.sim_orekit_prop_error)+": "+e.getMessage());
 			}
@@ -223,7 +215,6 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 			return currentState;
 		}else{
 			return null;
-			//TODO stop simulator
 		}
 	}
 

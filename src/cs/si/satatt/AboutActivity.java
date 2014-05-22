@@ -16,7 +16,6 @@ public class AboutActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.about);
-		//setProgressBarVisibility(true);
 				
 		TextView tx_package = (TextView) findViewById(R.id.TextViewVersionPackage);
 		TextView tx_license = (TextView) findViewById(R.id.TextViewProjectLicense);
@@ -37,7 +36,6 @@ public class AboutActivity extends Activity {
 			tx_start_date.setText(Parameters.About.project_start_date);
 			tx_license.setText(Parameters.About.project_license);
 			
-			//SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 	        Date resultdate = new Date(getPackageManager().getPackageInfo(getPackageName(), 0).lastUpdateTime);
@@ -54,7 +52,6 @@ public class AboutActivity extends Activity {
 			tx_version_loader.setText(Parameters.About.version_loader);
 			
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -62,7 +59,6 @@ public class AboutActivity extends Activity {
 	@Override
     public void onDestroy() {
         super.onDestroy();
-        // store the data in the fragment
     }
 
 

@@ -41,18 +41,6 @@ public class Installer {
 	    }
 	    return false;
 	}
-	/*
-	public static File getOrekitStorageDir() {
-	    // Get the directory for the user's public pictures directory.
-	    File file = new File(Environment.getExternalStoragePublicDirectory(
-	            Environment.DIRECTORY_DOWNLOADS), "OrekitData");
-	    if (!file.mkdirs()) {
-	        Log.e("Storage", "Directory not created");
-	    }
-	    return file;
-	}
-	
-	*/
 	
 	public static File getOrekitDataRoot(Activity activity){
 		return new File(activity.getExternalFilesDir(null)+File.separator+orekitDataPath);
@@ -82,7 +70,6 @@ public class Installer {
 				}
 			}else{
 				Log.d("INSTALLER", "Cannot install Orekit data files, external storage not accessible");
-				//Toast.makeText(activity.getApplicationContext(), R.string.err_external_storage_not_accessible, Toast.LENGTH_LONG).show();
 				activity.showErrorDialog(activity.getString(R.string.error_installing_orekit_default_data_external_storage_not_accessible), true);
 			}
 		}else{
@@ -170,7 +157,6 @@ public class Installer {
 		try {
 			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -197,7 +183,6 @@ public class Installer {
 		try {
 			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
