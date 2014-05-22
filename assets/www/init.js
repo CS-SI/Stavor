@@ -266,13 +266,32 @@ function init()
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			REFERENCE PLANES
 	//-----------------------------------------------------------------------------------------------------------------------
-	
+	var plane_orb;	
+
+	var planes_width = sphere_radius-(sphere_radius/5);
+	var plane_xy_color = 0xFF0000;
+	var plane_orb_color = 0x00FF00;
+	var plane_theta_seg = 30;
+	var plane_phi_seg = 10;
 	// IMPLEMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	if(show_planes){
-		var material_op = new THREE.MeshNormalMaterial({color: 0x0000FF, transparent: true, depthWrite: false, depthTest: false, alphaTest: 0.1, opacity: 0.1, side: THREE.DoubleSide });
-		orbital_plane = new THREE.Mesh( new THREE.RingGeometry( sphere_radius/3, sphere_radius, 30, 10, 0, Math.PI * 2 ), material_op );
-		orbital_plane.position.set( 0, 0, 0 );
-		scene.add( orbital_plane );
+		//XY plane
+		var material_plane_xy = new THREE.MeshPhongMaterial({color: plane_xy_color, transparent: true, depthWrite: false, depthTest: false, alphaTest: 0.1, opacity: 0.2, side: THREE.DoubleSide });
+		var plane_xy = new THREE.Mesh( new THREE.RingGeometry( planes_width, sphere_radius, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_xy );
+		plane_xy.position.set( 0, 0, 0 );
+		scene.add( plane_xy );
+
+
+		//Orbital plane
+		var material_plane_orb = new THREE.MeshPhongMaterial({color: plane_orb_color, transparent: true, depthWrite: false, depthTest: false, alphaTest: 0.1, opacity: 0.2, side: THREE.DoubleSide });
+		plane_orb = new THREE.Mesh( new THREE.RingGeometry( planes_width, sphere_radius, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_orb );
+		plane_orb.position.set( 0, 0, 0 );
+		plane_orb.rotation.x += 0.3;
+		scene.add( plane_orb );
+
+
+
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------
