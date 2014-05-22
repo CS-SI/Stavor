@@ -129,6 +129,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 		Log.d("Sim",System.currentTimeMillis()+": "+"Simulator disconnected");
     	closeSocket();
     	simulator.setSimulatorStatus(SimulatorStatus.Disconnected);
+    	simulator.resetSelectedMissionId();
     }
 
 }

@@ -143,6 +143,7 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     public void setDisconnected(){
 		Log.d("Sim",System.currentTimeMillis()+": "+"Simulator disconnected");
     	simulator.setSimulatorStatus(SimulatorStatus.Disconnected);
+    	simulator.resetSelectedMissionId();
     }
     
     private Frame inertialFrame, rotatingFrame;

@@ -187,9 +187,10 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
             				int nameIndex = c.getColumnIndex(MissionEntry.COLUMN_NAME_CLASS);
             				//this.itemId = cursor.getLong(idIndex);
             				byte[] mission_serie = c.getBlob(nameIndex);
+            				int mission_id = c.getInt(idIndex);
             				Mission mis = SerializationUtil.deserialize(mission_serie);
             				if(mis!=null){
-		            			simulator.setSelectedMission(mis);
+		            			simulator.setSelectedMission(mis, mission_id);
 		            			simulator.connect();
             				}else{
             					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
@@ -228,9 +229,18 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     }
 
 	private void restoreMissionsBackground() {
-		for(int i = 0; i < missionsList.getChildCount(); i++){
-			LinearLayout lay = (LinearLayout)missionsList.getChildAt(i);
-			lay.setBackgroundResource(R.drawable.mission_item);
+		if(missionsList!=null){
+			for(int i = 0; i < missionsList.getChildCount(); i++){
+				LinearLayout lay = (LinearLayout)missionsList.getChildAt(i);
+				lay.setBackgroundResource(R.drawable.mission_item);
+				TextView text_id = (TextView)lay.findViewById(R.id.textViewMissionId);
+				TextView text_name = (TextView)lay.findViewById(R.id.textViewMission);
+				if(simulator.getSelectedMissionid()==Integer.parseInt(text_id.getText().toString())){
+					text_name.setTextColor(getResources().getColor(R.color.red));
+				}else{
+					text_name.setTextColor(getResources().getColor(R.color.white));
+				}
+			}
 		}
 	}
 	/*private void loadMissionList() {
@@ -284,11 +294,13 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     		missionsList.post(new Runnable() {
 		        @Override
 		        public void run() {
-		        	boolean remote = sharedPref.getBoolean(getString(R.string.pref_key_sim_global_remote), false);
-		        	if(!remote){
-			        	int mActivePosition = 0;
-				    	missionsList.setSelection(mActivePosition);
-						missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
+		        	if(isAdded()){
+			        	boolean remote = sharedPref.getBoolean(getString(R.string.pref_key_sim_global_remote), false);
+			        	if(!remote){
+				        	int mActivePosition = 0;
+					    	missionsList.setSelection(mActivePosition);
+							missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
+			        	}
 		        	}
 		        }    
 		    });

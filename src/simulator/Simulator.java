@@ -28,9 +28,18 @@ public class Simulator {
 	private Button buttonConnect;
 	private Switch switchSelector;
 	private Mission mission;
+	private int mission_id=-1;
 	
-	public void setSelectedMission(Mission mis){
+	public void setSelectedMission(Mission mis, int id){
 		mission = mis;
+		mission_id = id;
+	}
+
+	public void resetSelectedMissionId() {
+		mission_id=-1;
+	}
+	public int getSelectedMissionid(){
+		return mission_id;
 	}
 	
 	public void setButtonConnect(Button bt){
