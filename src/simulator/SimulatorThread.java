@@ -56,6 +56,11 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 						simulator.pause();
 					}
 					simulator.playCondition.block();
+					if(simulator.cancel){
+		            	simulator.cancel=false;
+		                break;
+		            }
+					
 					//TODO Propagate
 					long dur = (System.nanoTime()-time_tmp_data);
 					if(dur<(Parameters.Simulator.min_hud_model_refreshing_interval_ns-Parameters.Simulator.model_refreshing_interval_safe_guard_ns)){
@@ -91,8 +96,10 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 						simulator.stop();
 						simulator.showMessage(simulator.getContext().getString(R.string.sim_mission_ended));
 					}
-		            if(isCancelled())
+		            if(simulator.cancel){
+		            	simulator.cancel=false;
 		                break;
+		            }
 		            Thread.yield();
 				}
 			} catch (OrekitException e) {
@@ -126,11 +133,6 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     @Override
     protected void onPostExecute(Boolean result) {
     	setDisconnected();
-    }
- 
-    @Override
-    protected void onCancelled() {
-        
     }
     
     private void setConnected(){

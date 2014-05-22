@@ -120,6 +120,7 @@ public class Simulator {
 	}
 	protected boolean reset = false;
 	protected ConditionVariable playCondition;
+	protected boolean cancel = false;
 	
 	private void setProgress(final int prog){
 		try{
@@ -174,7 +175,13 @@ public class Simulator {
 			simulation = new ModelSimulation((MainActivity)activity);
 			setProgress(40 * 100);
 			simulation.preInitialize();
-			sthread = (SimulatorThread) new SimulatorThread(this, mission).execute(simulation);
+			sthread = null;
+			activity.runOnUiThread( new Runnable() {
+				public void run() {    
+					sthread = (SimulatorThread) new SimulatorThread(((MainActivity)activity).getSimulator(), mission).execute(simulation);
+		        }
+			});
+			
 			//TODO new mission implement selector of mission
 		}
 		//Log.d("Sim",System.currentTimeMillis()+": "+"simulator interior thread connected");
@@ -185,13 +192,18 @@ public class Simulator {
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
-			thread.setDisconnected();
-			thread.cancel(false);
+			//thread.setDisconnected();
+			//thread.cancel(true);
+			
+			thread.closeSocket();
+			//cancel=true;
 			
 		}else{
 			// Local
-			sthread.setDisconnected();
-			sthread.cancel(false);
+			//sthread.setDisconnected();
+			cancel=true;
+			playCondition.open();
+			//sthread.cancel(false);
 		}
 	}
 	private void resumeThread() {

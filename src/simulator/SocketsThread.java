@@ -31,7 +31,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 		dstPort = port;
 	}
 	
-	private void closeSocket(){
+	public void closeSocket(){
 		if(socket != null){
 			try {
 				socket.close();
@@ -72,8 +72,10 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 						
 			            publishProgress();
 					}
-		            if(isCancelled())
+		            /*if(simulator.cancel){
+		            	simulator.cancel=false;
 		                break;
+		            }*/
 				}
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
@@ -115,6 +117,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
  
     @Override
     protected void onCancelled() {
+    	super.onCancelled();
     }
     
     private void setConnected(){

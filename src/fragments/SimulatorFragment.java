@@ -104,9 +104,9 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				restoreMissionsBackground();
-				arg1.setBackgroundResource(R.drawable.mission_item_sel);
 				try{
+					restoreMissionsBackground();
+					arg1.setBackgroundResource(R.drawable.mission_item_sel);
 					activeMissionId = Integer.parseInt((String) ((TextView)arg1.findViewById(R.id.textViewMissionId)).getText());
 					activeMissionName=(String) ((TextView)arg1.findViewById(R.id.textViewMission)).getText();
 					/*Toast.makeText(getActivity().getApplicationContext(), "Active mission: "+activeMissionId,
@@ -282,6 +282,18 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	}else{
     		// Local
     		sim_container.setDisplayedChild(0);
+    		//((MainActivity)getActivity()).loader.reset();
+    		missionsList.post(new Runnable() {
+		        @Override
+		        public void run() {
+		        	boolean remote = sharedPref.getBoolean(getString(R.string.pref_key_sim_global_remote), false);
+		        	if(!remote){
+			        	int mActivePosition = 0;
+				    	missionsList.setSelection(mActivePosition);
+						missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
+		        	}
+		        }    
+		    });
     	}
 	}
 
@@ -326,10 +338,12 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			missionsList.post(new Runnable() {
 		        @Override
 		        public void run() {
-		        	int mActivePosition = 0;
-			    	missionsList.setSelection(mActivePosition);
-					missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
-			    	
+		        	boolean remote = sharedPref.getBoolean(getString(R.string.pref_key_sim_global_remote), false);
+		        	if(!remote){
+			        	int mActivePosition = 0;
+				    	missionsList.setSelection(mActivePosition);
+						missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
+		        	}
 		        }    
 		    });
 		}
