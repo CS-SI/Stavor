@@ -21,10 +21,11 @@
 
 <script src="js/Detector.js"></script>
 <script src="js/Stats.js"></script>
-<script src="js/OrbitControls.js"></script>
-<script src="js/THREEx.KeyboardState.js"></script>
+<!--<script src="js/OrbitControls.js"></script>-->
+<script src="js/TrackballControls.js"></script>
+<!--<script src="js/THREEx.KeyboardState.js"></script>
 <script src="js/THREEx.FullScreen.js"></script>
-<script src="js/THREEx.WindowResize.js"></script>
+<script src="js/THREEx.WindowResize.js"></script>-->
 
 <script type='text/javascript' src='js/DAT.GUI.min.js'></script>
 
@@ -63,7 +64,7 @@ This three.js demo is part of a collection at
 	//***********************************************************************************************************************
 	setLoadingProgress(5);
 	var container, scene, camera, renderer, controls, stats, light, sunLight, lineSun, spriteSun, contextSun, contextEarth, lineEarth, spriteEarth;
-	var keyboard = new THREEx.KeyboardState();
+	//var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
 	var sun, sunGlow, earth, spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
 	var origin = new THREE.Vector3(0,0,0);

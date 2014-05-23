@@ -250,3 +250,15 @@ function showAndroidToast(toast) {
 		selected_view = view_mode;
 		camera.lookAt(scene.position);
 	}
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		controls.handleResize();
+
+		render();
+
+	}
