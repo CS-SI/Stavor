@@ -80,6 +80,47 @@ function update()
 		}
 	//}
 	//-----------------------------------------------------------------------------------------------------------------------
+	//			PLANES UPDATE
+	//-----------------------------------------------------------------------------------------------------------------------
+	if(show_planes){
+		//Compute inclination quaternion
+		var norm_orbital_plane = value_velocity.clone().normalize().cross(value_earth.clone().normalize());
+		var norm_rotation_earth = new THREE.Vector3(0,0,1);
+		var incl_quat = new THREE.Quaternion().setFromUnitVectors( norm_rotation_earth, norm_orbital_plane );
+
+		//Rotate orbital plane
+		plane_orb.quaternion.copy(incl_quat);
+		plane_orb.matrixWorldNeedsUpdate = true;
+		plane_orb.updateMatrix();
+
+		if(show_inclination){
+			//Compute instant inclination angle
+			var inclination = Math.asin(value_earth.z/value_earth.length());
+			//console.debug(inclination);
+
+			//Compute arc angle clip points
+			//var clip1 = value_earth.clone().normalize().multiplyScalar(sphere_radius);
+			//var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
+
+			//Draw Arc
+			//incl_arc.rotation.x = Math.PI/2;
+			scene.remove(incl_arc);
+			incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
+			incl_arc.position.set( 0, 0, 0 );
+			scene.add(incl_arc);
+
+			var incl_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( -1, 0, 0 ),Math.PI/2);
+
+			var axis_z = new THREE.Vector3(1,0,0);
+
+			var incl_inst_rot = new THREE.Quaternion().setFromUnitVectors( axis_z, value_earth.clone().normalize() );
+
+			incl_arc.quaternion.copy(incl_inst_rot.multiply(incl_offset));
+			incl_arc.matrixWorldNeedsUpdate = true;
+			incl_arc.updateMatrix();
+		}
+	}
+	//-----------------------------------------------------------------------------------------------------------------------
 	//			SUN UPDATE
 	//-----------------------------------------------------------------------------------------------------------------------
 	if(show_sun){

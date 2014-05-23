@@ -280,14 +280,6 @@ function init()
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			REFERENCE PLANES
 	//-----------------------------------------------------------------------------------------------------------------------
-	var plane_orb;	
-
-	var planes_width = sphere_radius-(sphere_radius/5);
-	var plane_xy_color = 0xFF0000;
-	var plane_orb_color = 0x00FF00;
-	var plane_theta_seg = 30;
-	var plane_phi_seg = 10;
-	// IMPLEMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	if(show_planes){
 		//XY plane
@@ -301,11 +293,37 @@ function init()
 		var material_plane_orb = new THREE.MeshPhongMaterial({color: plane_orb_color, transparent: true, depthWrite: false, depthTest: false, alphaTest: 0.1, opacity: 0.2, side: THREE.DoubleSide });
 		plane_orb = new THREE.Mesh( new THREE.RingGeometry( planes_width, sphere_radius, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_orb );
 		plane_orb.position.set( 0, 0, 0 );
-		plane_orb.rotation.x += 0.3;
+
+		//Compute inclination quaternion
+		var norm_orbital_plane = value_velocity.clone().normalize().cross(value_earth.clone().normalize());
+		var norm_rotation_earth = new THREE.Vector3(0,0,1);
+		var incl_quat = new THREE.Quaternion().setFromUnitVectors( norm_rotation_earth, norm_orbital_plane );
+
+		//Rotate orbital plane
+		plane_orb.quaternion.copy(incl_quat);
+		plane_orb.matrixWorldNeedsUpdate = true;
+		plane_orb.updateMatrix();
+
+		if(show_inclination){
+			//Compute instant inclination angle
+			var inclination = Math.asin(value_earth.z/value_earth.length());
+			//console.debug(inclination);
+
+			//Compute arc angle clip points
+			//var clip1 = value_earth.clone().normalize().multiplyScalar(sphere_radius);
+			//var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
+
+			//Draw Arc
+			mat_arc = new THREE.MeshPhongMaterial( { color: 0xFFFF00, metal: true, transparent: false, opacity: 1.0, side: THREE.BackSide } );
+			incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
+			incl_arc.position.set( 0, 0, 0 );
+			//incl_arc.rotation.y = Math.PI/2;
+
+			scene.add( incl_arc );
+		} 
+
+		//plane_orb.rotation.x += 0.3;
 		scene.add( plane_orb );
-
-
-
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------

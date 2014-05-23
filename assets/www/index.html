@@ -66,9 +66,9 @@ This three.js demo is part of a collection at
 	var container, scene, camera, renderer, controls, stats, light, sunLight, lineSun, spriteSun, contextSun, contextEarth, lineEarth, spriteEarth;
 	//var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
-	var sun, sunGlow, earth, spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
+	var sun, sunGlow, earth, spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a, plane_orb, incl_arc;
 	var origin = new THREE.Vector3(0,0,0);
-	var fontsizeSun, borderColorSun, borderThicknessSun, backgroundColorSun, fontColorSun;
+	var fontsizeSun, borderColorSun, borderThicknessSun, backgroundColorSun, fontColorSun, mat_arc;
 	var fontsizeEarth, borderColorEarth, borderThicknessEarth, backgroundColorEarth, fontColorEarth;
 	var fps_update_counter = 0;
 	var miniSphereX,miniSphereXX,miniSphereY,miniSphereYY,miniSphereZ,miniSphereZZ;
@@ -88,6 +88,12 @@ This three.js demo is part of a collection at
 	var miniSphere_margin = 4;
 	var torus_radius = sphere_radius;
 	var torus_tube = 0.5;
+	var arc_radius = sphere_radius+3;
+	var arc_tube = 0.9;
+
+	var planes_width = sphere_radius-(sphere_radius/5);
+	var plane_theta_seg = 30;
+	var plane_phi_seg = 10;
 	
 	var sc_scale = 1.5;
 
@@ -143,13 +149,17 @@ This three.js demo is part of a collection at
 	var show_fps = true;//Show FPS stats in Android
 	var fps_update_skips = 60;
 
-	var show_sky = true;
+	var show_sky = false;//REVERT
 	var show_sphere = true;
 	var show_mini_spheres = true;
 	var show_circles = true;
 	var show_axis = true;
 	var show_axis_labels = true;
+
 	var show_planes = true;
+	var plane_xy_color = 0xFF0000;
+	var plane_orb_color = 0x00FF00;
+	var show_inclination = true;//XGGDEBUG: add these preferences in android
 	
 	var show_spacecraft = true;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
 	var show_sc_axis = true;
@@ -158,7 +168,7 @@ This three.js demo is part of a collection at
 	var show_sun = true;
 	var sun_rotates = true;
 	var sun_rotation_speed = 5;//Rotation speed multiplier [0->9]
-	var show_sun_texture = true;
+	var show_sun_texture = false;//REVERT
 	var sun_simple_glow = true;//Recomended to not use the shader glow, problems in android
 	var sun_show_line = true;
 	var sun_show_dist = true;
@@ -166,7 +176,7 @@ This three.js demo is part of a collection at
 	var show_earth = true;
 	var earth_rotates = true;
 	var earth_rotation_speed = 2;//Rotation speed multiplier [0->9]
-	var show_earth_texture = true;
+	var show_earth_texture = false;//REVERT
 	var earth_show_line = true;
 	var earth_show_dist = true;
 	
@@ -184,10 +194,10 @@ This three.js demo is part of a collection at
 	var color_vector_a = 0x00fffa;
 	var limit_vector_a = 25; //In the same units as the provided values
 	var show_direction_a = false;
-	var color_direction_a = 0xffff00;
+	var color_direction_a = 0xffff00;Math.asin
 	
-	
-	var performance_level = 3;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
+	//REVERT to 3
+	var performance_level = 1;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
 	
 	getInitialization();//If used in Android, update the init params with the Android configuration
 	
@@ -205,6 +215,8 @@ This three.js demo is part of a collection at
 	var miniSphere_seg = 7 * segments_scale;
 	var torus_seg_r = 4 * segments_scale;
 	var torus_seg_t = 32 * segments_scale;
+	var arc_seg_r = 4 * segments_scale;
+	var arc_seg_t = 32 * segments_scale;
 	var arrow_segments = 4 * segments_scale;
 	var momentum_segments = 4 * segments_scale;
 	var target_segments = 8 * segments_scale;
@@ -214,7 +226,7 @@ This three.js demo is part of a collection at
 	
 	var value_attitude  = new THREE.Quaternion(0,0,0,1);
 	var value_sun  = new THREE.Vector3(87000000,87000000,87000000); //Km
-	var value_earth  = new THREE.Vector3(36000,12000,5); //Km
+	var value_earth  = new THREE.Vector3(36000,12000,2500); //Km
 	var value_velocity  = new THREE.Vector3(0,0,-15); //Km/s
 	var value_acceleration  = new THREE.Vector3(-5,0,0); //Km/s2
 	var value_momentum  = new THREE.Vector3(-5,0,-5); // direction --> will be normalized

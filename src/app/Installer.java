@@ -175,7 +175,7 @@ public class Installer {
 		mission.description="GEO mission example";
 		mission.initial_orbit.a=4.2164E7;
 		mission.initial_orbit.e=0.0;
-		mission.initial_orbit.i=0.0;
+		mission.initial_orbit.i=0.4;
 		
 		values = new ContentValues();
 		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);

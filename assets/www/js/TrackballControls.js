@@ -30,8 +30,7 @@ this.staticMoving = false;
 this.dynamicDampingFactor = 0.2;
 
 this.minDistance = 0;
-//this.maxDistance = Infinity;
-this.maxDistance = 2000;//XGGDEBUG: changed to limit zoom
+this.maxDistance = Infinity;
 
 this.keys = [ 65 /*A*/, 83 /*S*/, 68 /*D*/ ];
 
