@@ -45,10 +45,10 @@ function update()
 
 	//Ligts
 	light.position.set(camera.position.x,camera.position.y,camera.position.z);
-	if ( keyboard.pressed("z") ) 
+	/*if ( keyboard.pressed("z") ) 
 	{ 
 		// do something
-	}
+	}*/
 	var delta = clock.getDelta();
 	
 	if(show_spacecraft && sc_show_eng_texture){
