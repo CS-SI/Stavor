@@ -1,4 +1,5 @@
-//element 0: others | 1: sun | 2: earth | 3: GUI view
+
+//element 0: others | 1: sun | 2: earth | 3: GUI view | 4: inclination
 function makeTextSprite(element, message, parameters )
 {
 	if ( parameters === undefined ) parameters = {};
@@ -80,6 +81,14 @@ function makeTextSprite(element, message, parameters )
 			{ map: texture, useScreenCoordinates: true, alignment: THREE.SpriteAlignment.bottomRight } );
 		sprite = new THREE.Sprite( spriteMaterial );
 		sprite.scale.set(64,64,1.0);
+	}else if(element==4){//Inclination
+		contextInclination = context;
+		fontsizeInclination = fontsize;
+		borderColorInclination = borderColor;
+		borderThicknessInclination = borderThickness; 
+		backgroundColorInclination = backgroundColor;
+		fontColorInclination = fontColor;
+		sprite.scale.set(20,10,1.0);
 	}else{//Axis labels
 		sprite.scale.set(20,10,1.0);
 	}

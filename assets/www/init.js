@@ -284,14 +284,14 @@ function init()
 	if(show_planes){
 		//XY plane
 		var material_plane_xy = new THREE.MeshPhongMaterial({color: plane_xy_color, transparent: true, depthWrite: false, depthTest: false, alphaTest: 0.1, opacity: 0.2, side: THREE.DoubleSide });
-		var plane_xy = new THREE.Mesh( new THREE.RingGeometry( planes_width, sphere_radius, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_xy );
+		var plane_xy = new THREE.Mesh( new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_xy );
 		plane_xy.position.set( 0, 0, 0 );
 		scene.add( plane_xy );
 
 
 		//Orbital plane
 		var material_plane_orb = new THREE.MeshPhongMaterial({color: plane_orb_color, transparent: true, depthWrite: false, depthTest: false, alphaTest: 0.1, opacity: 0.2, side: THREE.DoubleSide });
-		plane_orb = new THREE.Mesh( new THREE.RingGeometry( planes_width, sphere_radius, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_orb );
+		plane_orb = new THREE.Mesh( new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_orb );
 		plane_orb.position.set( 0, 0, 0 );
 
 		//Compute inclination quaternion
@@ -318,6 +318,13 @@ function init()
 			incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
 			incl_arc.position.set( 0, 0, 0 );
 			//incl_arc.rotation.y = Math.PI/2;
+
+
+			//Sprite
+			spriteInclination = makeTextSprite( 4, " i = ", 
+				{ fontsize: 40, borderColor: {r:255, g:255, b:255, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:255, a:1.0} } );
+			spriteInclination.position.set( 0, 0, 0);
+			scene.add(spriteInclination);
 
 			scene.add( incl_arc );
 		} 

@@ -63,13 +63,14 @@ This three.js demo is part of a collection at
 	//		GLOBAL VARIABLES
 	//***********************************************************************************************************************
 	setLoadingProgress(5);
-	var container, scene, camera, renderer, controls, stats, light, sunLight, lineSun, spriteSun, contextSun, contextEarth, lineEarth, spriteEarth;
+	var container, scene, camera, renderer, controls, stats, light, sunLight, lineSun, spriteSun, contextSun, contextEarth, lineEarth, spriteEarth, spriteInclination, contextInclination;
 	//var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
 	var sun, sunGlow, earth, spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a, plane_orb, incl_arc;
 	var origin = new THREE.Vector3(0,0,0);
 	var fontsizeSun, borderColorSun, borderThicknessSun, backgroundColorSun, fontColorSun, mat_arc;
 	var fontsizeEarth, borderColorEarth, borderThicknessEarth, backgroundColorEarth, fontColorEarth;
+	var fontsizeInclination, borderColorInclination, borderThicknessInclination, backgroundColorInclination, fontColorInclination;
 	var fps_update_counter = 0;
 	var miniSphereX,miniSphereXX,miniSphereY,miniSphereYY,miniSphereZ,miniSphereZZ;
 	var gui, parameters;
@@ -88,12 +89,6 @@ This three.js demo is part of a collection at
 	var miniSphere_margin = 4;
 	var torus_radius = sphere_radius;
 	var torus_tube = 0.5;
-	var arc_radius = sphere_radius+3;
-	var arc_tube = 0.9;
-
-	var planes_width = sphere_radius-(sphere_radius/5);
-	var plane_theta_seg = 30;
-	var plane_phi_seg = 10;
 	
 	var sc_scale = 1.5;
 
@@ -125,6 +120,14 @@ This three.js demo is part of a collection at
 	var earth_radius = 8;
 	var earth_solid_color = 0x00bfff ;//For when not using textures
 	var earth_obj_dist = sphere_radius + earth_radius;
+
+	var planes_width = sphere_radius+earth_radius*2;
+	var plane_theta_seg = 30;
+	var plane_phi_seg = 10;
+
+	var arc_radius = sphere_radius+earth_radius*2;
+	var arc_sprite_radius = arc_radius+3;
+	var arc_tube = 0.5;
 	
 	var arrow_head_length = 9;
 	var arrow_head_width = 5;
