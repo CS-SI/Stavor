@@ -90,62 +90,14 @@ function update()
 
 		//Rotate orbital plane
 		plane_orb.quaternion.copy(incl_quat);
-		plane_orb.matrixWorldNeedsUpdate = true;
-		plane_orb.updateMatrix();
 
 		if(show_inclination){
 			//Compute instant inclination angle
 			var inclination = Math.asin(value_earth.z/value_earth.length());
-			//console.debug(inclination);
 
-			//Compute arc angle clip points
-			//var clip1 = value_earth.clone().normalize().multiplyScalar(sphere_radius);
-			//var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
+			updateInclinationArc(inclination);
 
-			//Draw Arc
-			//incl_arc.rotation.x = Math.PI/2;
-			scene.remove(incl_arc);
-			incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
-			incl_arc.position.set( 0, 0, 0 );
-			
-
-			var incl_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( -1, 0, 0 ),Math.PI/2);
-
-			var axis_z = new THREE.Vector3(1,0,0);
-
-			var incl_inst_rot = new THREE.Quaternion().setFromUnitVectors( axis_z, value_earth.clone().normalize() );
-
-			incl_arc.quaternion.copy(incl_inst_rot.multiply(incl_offset));
-			incl_arc.matrixWorldNeedsUpdate = true;
-			incl_arc.updateMatrix();
-
-			scene.add(incl_arc);
-
-
-
-			//Update Sprite
-			var messageInclination = " "+parseFloat(Math.round(inclination * 180) / Math.PI).toFixed(1)+"º ";
-			contextInclination.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
-			contextInclination.fill(); // FILL THE CONTEXT
-			// get size data (height depends only on font size)
-			var metricsInclination = contextInclination.measureText( messageInclination );
-			var textWidthInclination = metricsInclination.width;
-			// background color
-			contextInclination.fillStyle   = "rgba(" + backgroundColorInclination.r + "," + backgroundColorInclination.g + ","
-										  + backgroundColorInclination.b + "," + backgroundColorInclination.a + ")";
-			// border color
-			contextInclination.strokeStyle = "rgba(" + borderColorInclination.r + "," + borderColorInclination.g + ","
-										  + borderColorInclination.b + "," + borderColorInclination.a + ")";
-			contextInclination.lineWidth = borderThicknessInclination;
-			roundRect(contextInclination, borderThicknessInclination/2, borderThicknessInclination/2, textWidthInclination + borderThicknessInclination, fontsizeInclination * 1.4 + borderThicknessInclination, 6);
-			// 1.4 is extra height factor for text below baseline: g,j,p,q.
-			// text color
-			contextInclination.fillStyle   = "rgba(" + fontColorInclination.r + "," + fontColorInclination.g + ","
-										  + fontColorInclination.b + "," + fontColorInclination.a + ")";
-			contextInclination.fillText( messageInclination, borderThicknessInclination, fontsizeInclination + borderThicknessInclination);
-			spriteInclination.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
-			spriteInclination.position = value_earth.clone().setZ(0).normalize().multiplyScalar(arc_sprite_radius);
-
+			updateInclinationSprite(inclination);
 		}
 	}
 	//-----------------------------------------------------------------------------------------------------------------------
@@ -283,4 +235,43 @@ function update()
 		//direction_a.setColor(color_direction_a);
 	}
 
+}
+function updateInclinationSprite(inclination){
+	//Update Sprite
+	var messageInclination = " i="+parseFloat(Math.round(inclination * 180) / Math.PI).toFixed(1)+"º ";
+	contextInclination.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
+	contextInclination.fill(); // FILL THE CONTEXT
+	// get size data (height depends only on font size)
+	var metricsInclination = contextInclination.measureText( messageInclination );
+	var textWidthInclination = metricsInclination.width;
+	// background color
+	contextInclination.fillStyle   = "rgba(" + backgroundColorInclination.r + "," + backgroundColorInclination.g + ","
+								  + backgroundColorInclination.b + "," + backgroundColorInclination.a + ")";
+	// border color
+	contextInclination.strokeStyle = "rgba(" + borderColorInclination.r + "," + borderColorInclination.g + ","
+								  + borderColorInclination.b + "," + borderColorInclination.a + ")";
+	contextInclination.lineWidth = borderThicknessInclination;
+	roundRect(contextInclination, borderThicknessInclination/2, borderThicknessInclination/2, textWidthInclination + borderThicknessInclination, fontsizeInclination * 1.4 + borderThicknessInclination, 6);
+	// 1.4 is extra height factor for text below baseline: g,j,p,q.
+	// text color
+	contextInclination.fillStyle   = "rgba(" + fontColorInclination.r + "," + fontColorInclination.g + ","
+								  + fontColorInclination.b + "," + fontColorInclination.a + ")";
+	contextInclination.fillText( messageInclination, borderThicknessInclination, fontsizeInclination + borderThicknessInclination);
+	spriteInclination.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
+	spriteInclination.position = value_earth.clone().setZ(0).normalize().multiplyScalar(arc_sprite_radius);
+}
+function updateInclinationArc(inclination){
+	//ReDraw Arc
+	scene.remove(incl_arc);
+
+	incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
+	//incl_arc.position.set( 0, 0, 0 );
+
+	var incl_inst_rot = new THREE.Quaternion().setFromUnitVectors( axis_x, value_earth.clone().normalize() );
+
+	incl_arc.quaternion.copy(incl_inst_rot.multiply(incl_offset));
+	//incl_arc.matrixWorldNeedsUpdate = true;
+	//incl_arc.updateMatrix();
+
+	scene.add(incl_arc);
 }

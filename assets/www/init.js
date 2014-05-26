@@ -291,7 +291,28 @@ function init()
 
 		//Orbital plane
 		var material_plane_orb = new THREE.MeshPhongMaterial({color: plane_orb_color, transparent: true/*, depthWrite: false, depthTest: false, alphaTest: 0.1*/, opacity: 0.2, side: THREE.DoubleSide });
-		plane_orb = new THREE.Mesh( new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_orb );
+		var ring_geom = new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 )
+		plane_orb = new THREE.Mesh( ring_geom, material_plane_orb );
+		
+		/*var vertices = [];
+		for (var i = 0; i < ring_geom.vertices.length ; i++) {
+			vertices.push(ring_geom.vertices[i].clone());		
+		}
+		var orb_plane_shape = new THREE.Shape(vertices);
+		// extrude options
+		var options = { 
+			amount: 1,              // default 100, only used when path is null
+			bevelEnabled: false, 
+			bevelSegments: 2, 
+			steps: 1,                // default 1, try 3 if path defined
+			extrudePath: null        // or path
+		};
+		    
+		// geometry
+		var geometry = new THREE.ExtrudeGeometry( orb_plane_shape, options );
+		    
+		plane_orb = new THREE.Mesh(geometry, material_plane_orb);
+*/
 		plane_orb.position.set( 0, 0, 0 );
 
 		//Compute inclination quaternion
@@ -317,7 +338,9 @@ function init()
 			mat_arc = new THREE.MeshPhongMaterial( { color: 0xFFFF00, metal: true, transparent: false, opacity: 1.0, side: THREE.BackSide } );
 			incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
 			incl_arc.position.set( 0, 0, 0 );
-			//incl_arc.rotation.y = Math.PI/2;
+
+			//Used for update()
+			incl_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( -1, 0, 0 ),Math.PI/2);
 
 
 			//Sprite
