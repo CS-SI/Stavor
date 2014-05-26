@@ -176,6 +176,7 @@ public class Installer {
 		mission.initial_orbit.a=4.2164E7;
 		mission.initial_orbit.e=0.0;
 		mission.initial_orbit.i=0.4;
+		mission.initial_orbit.raan=Math.PI/2;
 		
 		values = new ContentValues();
 		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);

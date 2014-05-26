@@ -94,7 +94,6 @@ function update()
 		if(show_inclination){
 			//Compute instant inclination angle
 			var inclination = Math.asin(value_earth.z/value_earth.length());
-
 			updateInclinationArc(inclination);
 
 			updateInclinationSprite(inclination);
@@ -265,13 +264,10 @@ function updateInclinationArc(inclination){
 	scene.remove(incl_arc);
 
 	incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
-	//incl_arc.position.set( 0, 0, 0 );
 
 	var incl_inst_rot = new THREE.Quaternion().setFromUnitVectors( axis_x, value_earth.clone().normalize() );
 
 	incl_arc.quaternion.copy(incl_inst_rot.multiply(incl_offset));
-	//incl_arc.matrixWorldNeedsUpdate = true;
-	//incl_arc.updateMatrix();
 
 	scene.add(incl_arc);
 }

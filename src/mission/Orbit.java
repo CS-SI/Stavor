@@ -33,7 +33,7 @@ public class Orbit implements Serializable{
 	/**
 	 * Right ascension of ascending node
 	 */
-	public double raan = Math.toRadians(261);
+	public double raan = Math.toRadians(0);
 	/**
 	 * Mean anomaly
 	 */
