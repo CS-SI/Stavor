@@ -99,6 +99,58 @@ function update()
 			updateInclinationSprite(inclination);
 		}
 	}
+	if(show_spheric_coords){
+		
+		var sphcoord_vector;
+		switch(spheric_coords_selection){
+			case "Earth"://Earth
+				sphcoord_vector = value_earth.clone();
+				break;
+			case "Sun"://Earth
+				sphcoord_vector = value_sun.clone();
+				break;
+			case "Velocity"://Earth
+				sphcoord_vector = value_velocity.clone();
+				break;
+			case "Acceleration"://Earth
+				sphcoord_vector = value_acceleration.clone();
+				break;
+			case "Momentum"://Earth
+				sphcoord_vector = value_momentum.clone();
+				break;
+			default:
+				sphcoord_vector = value_velocity.clone();
+				break;
+		}
+
+		sphcoord_vector = sphcoord_vector.normalize();
+		var lat=Math.atan2(sphcoord_vector.z,1);
+		var lng=Math.atan2(sphcoord_vector.y,sphcoord_vector.x);
+
+		/*var lat=Math.atan2(sphcoord_vector.z,Math.sqrt(sphcoord_vector.y*sphcoord_vector.y+sphcoord_vector.x*sphcoord_vector.x));
+		var lng=Math.atan2(sphcoord_vector.x,sphcoord_vector.y);
+*/
+		//modify longitude arc
+		scene.remove( long_arc );
+		long_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_sphcoord_radius, arc_tube, arc_seg_r, arc_seg_t, lng ), mat_arc );
+		scene.add( long_arc );
+
+		updateLongitudeSprite(lng);
+
+		//create latittude arc
+		scene.remove(lat_arc);
+		lat_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_sphcoord_radius, arc_tube, arc_seg_r, arc_seg_t, lat ), mat_arc );
+		
+		//Rotate arc
+		var lat_offset_i = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 0, 0, 1 ),lng);
+		
+		lat_arc.quaternion.copy(lat_offset_i.multiply(lat_offset));
+		scene.add( lat_arc );
+
+		//Set latittude arc sprite
+		updateLatitudeSprite(lat);
+		lat_sprite.position = sphcoord_vector.clone().multiplyScalar(arc_sphcoord_radius);
+	}
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			SUN UPDATE
 	//-----------------------------------------------------------------------------------------------------------------------
@@ -237,7 +289,7 @@ function update()
 }
 function updateInclinationSprite(inclination){
 	//Update Sprite
-	var messageInclination = " i="+parseFloat(Math.round(inclination * 180) / Math.PI).toFixed(1)+"º ";
+	var messageInclination = " i="+parseFloat((inclination * 180) / Math.PI).toFixed(1)+"º ";
 	contextInclination.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
 	contextInclination.fill(); // FILL THE CONTEXT
 	// get size data (height depends only on font size)
@@ -270,4 +322,51 @@ function updateInclinationArc(inclination){
 	incl_arc.quaternion.copy(incl_inst_rot.multiply(incl_offset));
 
 	scene.add(incl_arc);
+}
+function updateLatitudeSprite(lat){
+	//Update Sprite
+	var messageLatitude = " "+parseFloat((lat * 180) / Math.PI).toFixed(1)+"º ";
+	contextLatitude.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
+	contextLatitude.fill(); // FILL THE CONTEXT
+	// get size data (height depends only on font size)
+	var metricsLatitude = contextLatitude.measureText( messageLatitude );
+	var textWidthLatitude = metricsLatitude.width;
+	// background color
+	contextLatitude.fillStyle   = "rgba(" + backgroundColorLatitude.r + "," + backgroundColorLatitude.g + ","
+								  + backgroundColorLatitude.b + "," + backgroundColorLatitude.a + ")";
+	// border color
+	contextLatitude.strokeStyle = "rgba(" + borderColorLatitude.r + "," + borderColorLatitude.g + ","
+								  + borderColorLatitude.b + "," + borderColorLatitude.a + ")";
+	contextLatitude.lineWidth = borderThicknessLatitude;
+	roundRect(contextLatitude, borderThicknessLatitude/2, borderThicknessLatitude/2, textWidthLatitude + borderThicknessLatitude, fontsizeLatitude * 1.4 + borderThicknessLatitude, 6);
+	// 1.4 is extra height factor for text below baseline: g,j,p,q.
+	// text color
+	contextLatitude.fillStyle   = "rgba(" + fontColorLatitude.r + "," + fontColorLatitude.g + ","
+								  + fontColorLatitude.b + "," + fontColorLatitude.a + ")";
+	contextLatitude.fillText( messageLatitude, borderThicknessLatitude, fontsizeLatitude + borderThicknessLatitude);
+	lat_sprite.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
+	lat_sprite.position = value_earth.clone().setZ(0).normalize().multiplyScalar(arc_sprite_radius);
+}
+function updateLongitudeSprite(lng){
+	//Update Sprite
+	var messageLongitude = " "+parseFloat((lng * 180) / Math.PI).toFixed(1)+"º ";
+	contextLongitude.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
+	contextLongitude.fill(); // FILL THE CONTEXT
+	// get size data (height depends only on font size)
+	var metricsLongitude = contextLongitude.measureText( messageLongitude );
+	var textWidthLongitude = metricsLongitude.width;
+	// background color
+	contextLongitude.fillStyle   = "rgba(" + backgroundColorLongitude.r + "," + backgroundColorLongitude.g + ","
+								  + backgroundColorLongitude.b + "," + backgroundColorLongitude.a + ")";
+	// border color
+	contextLongitude.strokeStyle = "rgba(" + borderColorLongitude.r + "," + borderColorLongitude.g + ","
+								  + borderColorLongitude.b + "," + borderColorLongitude.a + ")";
+	contextLongitude.lineWidth = borderThicknessLongitude;
+	roundRect(contextLongitude, borderThicknessLongitude/2, borderThicknessLongitude/2, textWidthLongitude + borderThicknessLongitude, fontsizeLongitude * 1.4 + borderThicknessLongitude, 6);
+	// 1.4 is extra height factor for text below baseline: g,j,p,q.
+	// text color
+	contextLongitude.fillStyle   = "rgba(" + fontColorLongitude.r + "," + fontColorLongitude.g + ","
+								  + fontColorLongitude.b + "," + fontColorLongitude.a + ")";
+	contextLongitude.fillText( messageLongitude, borderThicknessLongitude, fontsizeLongitude + borderThicknessLongitude);
+	long_sprite.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
 }

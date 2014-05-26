@@ -55,22 +55,28 @@ This three.js demo is part of a collection at
 <!--<input type="button" value="Say hello" onClick="showAndroidToast('Hello Android!')" />-->
 
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
-<!--<div id="SimulatorTop">TEST</div>
-<div id="SimulatorBottom">TEST2</div>-->
 <script>
 	// MAIN
 	//***********************************************************************************************************************
 	//		GLOBAL VARIABLES
 	//***********************************************************************************************************************
 	setLoadingProgress(5);
-	var container, scene, camera, renderer, controls, stats, light, sunLight, lineSun, spriteSun, contextSun, contextEarth, lineEarth, spriteEarth, spriteInclination, contextInclination;
+	var container, scene, camera, renderer, controls, stats, light;
+	var sun, sunGlow, sunLight, lineSun, spriteSun, contextSun;
+	var earth, contextEarth, lineEarth, spriteEarth;
+	var plane_orb, incl_arc, incl_offset, spriteInclination, contextInclination;
 	//var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
-	var sun, sunGlow, earth, spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a, plane_orb, incl_arc, incl_offset;
+	var spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
+	var long_arc, lat_arc, long_sprite, lat_sprite, lat_offset;
 	var origin = new THREE.Vector3(0,0,0);
+
 	var fontsizeSun, borderColorSun, borderThicknessSun, backgroundColorSun, fontColorSun, mat_arc;
 	var fontsizeEarth, borderColorEarth, borderThicknessEarth, backgroundColorEarth, fontColorEarth;
 	var fontsizeInclination, borderColorInclination, borderThicknessInclination, backgroundColorInclination, fontColorInclination;
+	var fontsizeLongitude, borderColorLongitude, borderThicknessLongitude, backgroundColorLongitude, fontColorLongitude;
+	var fontsizeLatitude, borderColorLatitude, borderThicknessLatitude, backgroundColorLatitude, fontColorLatitude;
+
 	var fps_update_counter = 0;
 	var miniSphereX,miniSphereXX,miniSphereY,miniSphereYY,miniSphereZ,miniSphereZZ;
 	var gui, parameters;
@@ -127,8 +133,10 @@ This three.js demo is part of a collection at
 	var plane_phi_seg = 10;
 
 	var arc_radius = sphere_radius+earth_radius*2;
+	var arc_sphcoord_radius = 3*sphere_radius/4;
 	var arc_sprite_radius = arc_radius+3;
 	var arc_tube = 0.5;
+	var arc_color = 0xFFFF00;
 	
 	var arrow_head_length = 9;
 	var arrow_head_width = 5;
@@ -160,10 +168,22 @@ This three.js demo is part of a collection at
 	var show_axis = true;
 	var show_axis_labels = true;
 
-	var show_planes = true;
+
+
+	var show_planes = false;//XGGDEBUG in android also false
+
+	var show_orbital_plane = false;
 	var plane_xy_color = 0xFF0000;
 	var plane_orb_color = 0x00FF00;
 	var show_inclination = true;// depends on show_planes, called: show orbit-xy planes //XGGDEBUG: add these preferences in android
+
+	var show_spheric_coords = true;
+	var spheric_coords_selection = "Earth";//Any of the basic indicators except for the attitude
+
+	var show_vectors_angle = true;
+	var vectors_angle_sel1 = "Earth"
+	var vectors_angle_sel2 = "Velocity"
+
 	
 	var show_spacecraft = true;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
 	var show_sc_axis = true;

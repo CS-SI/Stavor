@@ -89,6 +89,22 @@ function makeTextSprite(element, message, parameters )
 		backgroundColorInclination = backgroundColor;
 		fontColorInclination = fontColor;
 		sprite.scale.set(20,10,1.0);
+	}else if(element==5){//Longitude
+		contextLongitude = context;
+		fontsizeLongitude = fontsize;
+		borderColorLongitude = borderColor;
+		borderThicknessLongitude = borderThickness; 
+		backgroundColorLongitude = backgroundColor;
+		fontColorLongitude = fontColor;
+		sprite.scale.set(20,10,1.0);
+	}else if(element==6){//Latitude
+		contextLatitude = context;
+		fontsizeLatitude = fontsize;
+		borderColorLatitude = borderColor;
+		borderThicknessLatitude = borderThickness; 
+		backgroundColorLatitude = backgroundColor;
+		fontColorLatitude = fontColor;
+		sprite.scale.set(20,10,1.0);
 	}else{//Axis labels
 		sprite.scale.set(20,10,1.0);
 	}

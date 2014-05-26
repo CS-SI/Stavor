@@ -267,19 +267,23 @@ function init()
 	if(show_axis_labels){
 		var sprite_X = makeTextSprite( 0, " X ", 
 		{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:174, b:0, a:1.0} } );
-		miniSphereX.add( sprite_X );
+		sprite_X.position.set( sphere_radius+miniSphere_margin, 0, 0 );
+		scene.add( sprite_X );
 		
-		var sprite_X = makeTextSprite( 0, " Y ", 
+		var sprite_Y = makeTextSprite( 0, " Y ", 
 		{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:16, g:219, b:2, a:1.0} } );
-		miniSphereY.add( sprite_X );
+		sprite_Y.position.set( 0, sphere_radius+miniSphere_margin, 0 );
+		scene.add( sprite_Y );
 		
 		var sprite_Z = makeTextSprite( 0, " Z ", 
 		{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:50, g:119, b:255, a:1.0} } );
-		miniSphereZ.add( sprite_Z );
+		sprite_Z.position.set( 0, 0, sphere_radius+miniSphere_margin );
+		scene.add( sprite_Z );
 	}
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			REFERENCE PLANES
 	//-----------------------------------------------------------------------------------------------------------------------
+	mat_arc = new THREE.MeshPhongMaterial( { color: arc_color, metal: true, transparent: false, opacity: 1.0, side: THREE.DoubleSide } );
 
 	if(show_planes){
 		//XY plane
@@ -335,12 +339,12 @@ function init()
 			//var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
 
 			//Draw Arc
-			mat_arc = new THREE.MeshPhongMaterial( { color: 0xFFFF00, metal: true, transparent: false, opacity: 1.0, side: THREE.BackSide } );
+			
 			incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
 			incl_arc.position.set( 0, 0, 0 );
 
 			//Used for update()
-			incl_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( -1, 0, 0 ),Math.PI/2);
+			incl_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 1, 0, 0 ),-Math.PI/2);
 
 
 			//Sprite
@@ -354,6 +358,44 @@ function init()
 
 		//plane_orb.rotation.x += 0.3;
 		scene.add( plane_orb );
+	}
+
+	//Spheric coordinates
+	if(show_spheric_coords){
+
+		var sphcoord_vector = new THREE.Vector3(1,0,0);
+
+		sphcoord_vector = sphcoord_vector.normalize();
+		var lat=Math.atan2(sphcoord_vector.z,1);
+		var lng=Math.atan2(sphcoord_vector.y,sphcoord_vector.x);
+
+		//create longitude arc
+		long_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_sphcoord_radius, arc_tube, arc_seg_r, arc_seg_t, lng ), mat_arc );
+				
+		scene.add( long_arc );
+
+		//Set longitude arc sprite
+		long_sprite = makeTextSprite( 5, " "+parseFloat(Math.round(lng * 180) / Math.PI).toFixed(1)+"º ", 
+				{ fontsize: 40, borderColor: {r:255, g:255, b:255, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:255, a:1.0} } );
+		long_sprite.position.set( arc_sphcoord_radius, 0, 0);
+		scene.add(long_sprite);
+
+		//create latittude arc
+		lat_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_sphcoord_radius, arc_tube, arc_seg_r, arc_seg_t, lat ), mat_arc );
+		
+		//Rotate arc
+		lat_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 1, 0, 0 ),Math.PI/2);
+		var lat_offset_i = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 0, 0, 1 ),lng);
+		
+		lat_arc.quaternion.copy(lat_offset_i.multiply(lat_offset));
+		scene.add( lat_arc );
+
+		//Set latittude arc sprite
+		lat_sprite = makeTextSprite( 6, " "+parseFloat(Math.round(lat * 180) / Math.PI).toFixed(1)+"º ", 
+				{ fontsize: 40, borderColor: {r:255, g:255, b:255, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:255, a:1.0} } );
+		lat_sprite.position = sphcoord_vector.clone().multiplyScalar(arc_sphcoord_radius);
+		scene.add(lat_sprite);
+
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------
