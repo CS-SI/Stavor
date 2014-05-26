@@ -384,7 +384,10 @@ public class MainActivity extends ActionBarActivity implements
     public void onDestroy() {
         super.onDestroy();
         // store the data in the fragment
-        dataFragment.setData(this.simulator);
+        if(isFinishing())
+        	simulator.disconnect();
+        else
+        	dataFragment.setData(this.simulator);
         db_help.close();
         //XWalk
         if (mXwalkView != null) {
