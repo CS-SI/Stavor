@@ -78,9 +78,9 @@ public class ModelConfiguration {
 		plane_xy_color = sharedPref.getInt(ctx.getString(R.string.pref_key_plane_xy_color), plane_xy_color);
 		plane_orb_color = sharedPref.getInt(ctx.getString(R.string.pref_key_plane_orb_color), plane_orb_color);
 		
-		spheric_coords_selection = BasicInds.values()[Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_spheric_coords_selection), spheric_coords_selection.toString()))];
-		vectors_angle_sel1 = BasicInds.values()[Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_vectors_angle_sel1), vectors_angle_sel1.toString()))];
-		vectors_angle_sel2 = BasicInds.values()[Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_vectors_angle_sel2), vectors_angle_sel2.toString()))];
+		spheric_coords_selection = BasicInds.values()[Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_spheric_coords_selection), "0"))];
+		vectors_angle_sel1 = BasicInds.values()[Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_vectors_angle_sel1), "0"))];
+		vectors_angle_sel2 = BasicInds.values()[Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_vectors_angle_sel2), "2"))];
 
 	}
 	
