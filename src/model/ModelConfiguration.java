@@ -130,7 +130,7 @@ public class ModelConfiguration {
 	//Velocity
 	public boolean show_velocity = true;
 	public int color_velocity = 0x001dff;
-	public float limit_velocity = 15;//Km/s
+	public float limit_velocity = 10;//Km/s
 	//Acceleration
 	public boolean show_acceleration = true;
 	public int color_acceleration = 0xfc00b0;

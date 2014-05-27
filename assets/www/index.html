@@ -214,10 +214,10 @@ This three.js demo is part of a collection at
 	
 	var show_velocity = true;
 	var color_velocity = 0x001dff;
-	var limit_velocity = 15; //Km/s value corresponding to the full length arrow (touching the sphere)
+	var limit_velocity = 10; //Km/s value corresponding to the full length arrow (touching the sphere)
 	var show_acceleration = true;
 	var color_acceleration = 0xfc00b0;
-	var limit_acceleration = 15; //Km/s2 value corresponding to the full length arrow (touching the sphere)
+	var limit_acceleration = 5; //Km/s2 value corresponding to the full length arrow (touching the sphere)
 	var show_momentum = true;
 	var color_momentum = 0x00fc19;
 	var show_target_a = false;
@@ -259,11 +259,11 @@ This three.js demo is part of a collection at
 //-----------------------------------------------------------------------------------------------------------------------
 	
 	var value_attitude  = new THREE.Quaternion(0,0,0,1);
-	var value_sun  = new THREE.Vector3(87000000,87000000,87000000); //Km
-	var value_earth  = new THREE.Vector3(36000,12000,2500); //Km
-	var value_velocity  = new THREE.Vector3(0,0,-15); //Km/s
-	var value_acceleration  = new THREE.Vector3(-5,0,0); //Km/s2
-	var value_momentum  = new THREE.Vector3(-5,0,-5); // direction --> will be normalized
+	var value_sun  = new THREE.Vector3(-1.1414775124432093E7,-1.464188429948789E8,7716114.240559303); //Km
+	var value_earth  = new THREE.Vector3(7.337791634217176E-12,42164.0,-2.010800849831316E-12); //Km
+	var value_velocity  = new THREE.Vector3(2.83195518282009,-5.49945264687097E-16,-1.1973314470667253); //Km/s
+	var value_acceleration  = new THREE.Vector3(-4.517719883627554E-4,0.22420886513859567,1.9100613309698625E-4); //Km/s2
+	var value_momentum  = new THREE.Vector3(5.048428313412141E10,-3.091270787372526E-6,1.1940655832842628E11); // direction --> will be normalized
 	
 //-----------------------------------------------------------------------------------------------------------------------
 

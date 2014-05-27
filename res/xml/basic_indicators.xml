@@ -18,7 +18,7 @@
             android:key="@string/pref_key_velocity_limit"
             android:summary="@string/pref_summary_velocity_limit"
             android:title="@string/pref_title_velocity_limit"
-            android:defaultValue="15"
+            android:defaultValue="10"
             android:numeric="decimal" />
     </PreferenceCategory>
     <PreferenceCategory 
@@ -38,7 +38,7 @@
             android:key="@string/pref_key_acceleration_limit"
             android:summary="@string/pref_summary_acceleration_limit"
             android:title="@string/pref_title_acceleration_limit"
-            android:defaultValue="15"
+            android:defaultValue="5"
             android:numeric="decimal" />
     </PreferenceCategory>
     <PreferenceCategory 
