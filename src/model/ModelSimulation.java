@@ -163,7 +163,7 @@ public class ModelSimulation {
 			new_info.acceleration = acceleration.getNorm();
 			debg += "Accel: "+new_state.value_acceleration[0]+","+new_state.value_acceleration[1]+","+new_state.value_acceleration[2]+"|";
 		}
-		Log.d("SIMU", debg);
+		//Log.d("SIMU", debg);
 		
 		//Update temporal variables for acceleration computation
     	tmp_vel = velocity;

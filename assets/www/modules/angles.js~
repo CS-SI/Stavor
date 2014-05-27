@@ -116,14 +116,45 @@ function initAngles(){
 		scene.add(lat_sprite);
 
 	}
-	
+	if(show_vectors_angle){
+		
+		var angle_vector1 = axis_x.clone();//X
+		var angle_vector2 = new THREE.Vector3(1,1,1);//Earth
 
+		angle_vector1 = angle_vector1.normalize();
+		angle_vector2 = angle_vector2.normalize();
+
+		
+		var norm_vectors = angle_vector1.clone().cross( angle_vector2 );
+
+		var dist_angle = angle_vector1.clone().angleTo(angle_vector2);
+		//console.debug("dist_angle: "+dist_angle);
+
+
+		//create arc
+		vectors_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_vectors_radius, arc_tube, arc_seg_r, arc_seg_t, dist_angle ), mat_arc );
+		
+		//Rotate arc
+		var vec_incl_quat = new THREE.Quaternion().setFromUnitVectors( axis_z, norm_vectors );
+		//vectors_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 1, 0, 0 ),Math.PI/2);
+		//var vectors_offset_i = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 0, 0, 1 ),lng);
+		
+		vectors_arc.quaternion.copy(vec_incl_quat);
+		scene.add( vectors_arc );
+
+		//Set latittude arc sprite
+		/*lat_sprite = makeTextSprite( 6, " "+parseFloat(Math.round(lat * 180) / Math.PI).toFixed(1)+"º ", 
+				{ fontsize: 40, borderColor: {r:255, g:255, b:255, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:255, a:1.0} } );
+		lat_sprite.position = sphcoord_vector.clone().multiplyScalar(arc_sphcoord_radius);
+		scene.add(lat_sprite);*/
+
+	}
 }
 function updateAngles(){
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			PLANES UPDATE
 	//-----------------------------------------------------------------------------------------------------------------------
-	if(show_planes){
+	if(show_orbital_plane){
 		//Compute inclination quaternion
 		var norm_orbital_plane = value_velocity.clone().normalize().cross(value_earth.clone().normalize());
 		var norm_rotation_earth = new THREE.Vector3(0,0,1);
@@ -191,6 +222,40 @@ function updateAngles(){
 		//Set latittude arc sprite
 		updateLatitudeSprite(lat);
 		lat_sprite.position = sphcoord_vector.clone().multiplyScalar(arc_sphcoord_radius);
+	}
+	if(show_vectors_angle){
+		
+		var angle_vector1 = axis_x.clone();//X
+		var angle_vector2 = value_earth.clone();//Earth
+
+		angle_vector1 = angle_vector1.normalize();
+		angle_vector2 = angle_vector2.normalize();
+
+		
+		var norm_vectors = angle_vector1.clone().cross( angle_vector2 );
+
+		var dist_angle = angle_vector1.clone().angleTo(angle_vector2);
+		//console.debug("dist_angle: "+dist_angle);
+
+
+		//create arc
+		scene.remove(vectors_arc);
+		vectors_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_vectors_radius, arc_tube, arc_seg_r, arc_seg_t, dist_angle ), mat_arc );
+		
+		//Rotate arc
+		var vec_incl_quat = new THREE.Quaternion().setFromUnitVectors( axis_z, norm_vectors );
+		//vectors_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 1, 0, 0 ),Math.PI/2);
+		//var vectors_offset_i = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 0, 0, 1 ),lng);
+		
+		//vectors_arc.quaternion.copy(vec_incl_quat);
+		scene.add( vectors_arc );
+
+		//Set latittude arc sprite
+		/*lat_sprite = makeTextSprite( 6, " "+parseFloat(Math.round(lat * 180) / Math.PI).toFixed(1)+"º ", 
+				{ fontsize: 40, borderColor: {r:255, g:255, b:255, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:255, a:1.0} } );
+		lat_sprite.position = sphcoord_vector.clone().multiplyScalar(arc_sphcoord_radius);
+		scene.add(lat_sprite);*/
+
 	}
 
 }
