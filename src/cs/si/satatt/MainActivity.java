@@ -16,6 +16,7 @@ import dialogs.WelcomeDialogFragment;
 import settings.SettingsBasicFragment;
 import settings.SettingsExtraFragment;
 import settings.SettingsGeneralFragment;
+import settings.SettingsMeasuresFragment;
 import settings.SettingsModelsFragment;
 import simulator.Simulator;
 import fragments.NavigationDrawerFragment;
@@ -162,14 +163,20 @@ public class MainActivity extends ActionBarActivity implements
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsModelsFragment.newInstance(position +1)).commit();
+	        		SettingsMeasuresFragment.newInstance(position +1)).commit();
 		}else if(position==5){
+			// Display the fragment as the main content.
+	        fragmentManager
+	        .beginTransaction()
+	        .replace(R.id.container, 
+	        		SettingsModelsFragment.newInstance(position +1)).commit();
+		}else if(position==6){
 			// Display the fragment as the main content.
 	        fragmentManager    
 	        .beginTransaction()
 	        .replace(R.id.container, 
 	        		SettingsGeneralFragment.newInstance(position +1)).commit();
-		}else if(position==6){
+		}else if(position==7){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
@@ -201,6 +208,9 @@ public class MainActivity extends ActionBarActivity implements
 			break;
 		case 7:
 			mTitle = getString(R.string.title_section7);
+			break;
+		case 8:
+			mTitle = getString(R.string.title_section8);
 			break;
 		}
 	}

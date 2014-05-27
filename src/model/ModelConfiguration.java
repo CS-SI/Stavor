@@ -19,6 +19,18 @@ public class ModelConfiguration {
 			limit_velocity = Float.parseFloat(sharedPref.getString(ctx.getString(R.string.pref_key_velocity_limit), Float.toString(limit_velocity)));
 			limit_acceleration = Float.parseFloat(sharedPref.getString(ctx.getString(R.string.pref_key_acceleration_limit), Float.toString(limit_acceleration)));
 			limit_vector_a = Float.parseFloat(sharedPref.getString(ctx.getString(R.string.pref_key_vector_a_limit), Float.toString(limit_vector_a)));
+			
+			value_target_a[0] = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_target_a_x), Double.toString(value_target_a[0])));
+			value_target_a[1] = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_target_a_y), Double.toString(value_target_a[1])));
+			value_target_a[2] = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_target_a_z), Double.toString(value_target_a[2])));
+			
+			value_vector_a[0] = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_vector_a_x), Double.toString(value_vector_a[0])));
+			value_vector_a[1] = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_vector_a_y), Double.toString(value_vector_a[1])));
+			value_vector_a[2] = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_vector_a_z), Double.toString(value_vector_a[2])));
+			
+			value_direction_a[0] = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_direction_a_x), Double.toString(value_direction_a[0])));
+			value_direction_a[1] = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_direction_a_y), Double.toString(value_direction_a[1])));
+			value_direction_a[2] = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_direction_a_z), Double.toString(value_direction_a[2])));
 		}catch(NumberFormatException e){
 			System.err.println("Error loading configuration parameter: "+e.getMessage());
 		}
@@ -28,6 +40,12 @@ public class ModelConfiguration {
 		show_mini_spheres = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_mini_spheres), show_mini_spheres);
 		show_circles = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_circles), show_circles);
 		show_planes = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_planes), show_planes);
+		
+		show_orbital_plane = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_orbital_plane), show_orbital_plane);
+		show_inclination = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_inclination), show_inclination);
+		show_spheric_coords = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_spheric_coords), show_spheric_coords);
+		show_vectors_angle = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_vectors_angle), show_vectors_angle);
+		
 		show_axis = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_axis), show_axis);
 		show_axis_labels = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_axis_labels), show_axis_labels);
 		show_spacecraft = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_spacecraft), show_spacecraft);
@@ -57,6 +75,13 @@ public class ModelConfiguration {
 		color_target_a = sharedPref.getInt(ctx.getString(R.string.pref_key_target_a_color), color_target_a);
 		color_vector_a = sharedPref.getInt(ctx.getString(R.string.pref_key_vector_a_color), color_vector_a);
 		color_direction_a = sharedPref.getInt(ctx.getString(R.string.pref_key_direction_a_color), color_direction_a);
+		plane_xy_color = sharedPref.getInt(ctx.getString(R.string.pref_key_plane_xy_color), plane_xy_color);
+		plane_orb_color = sharedPref.getInt(ctx.getString(R.string.pref_key_plane_orb_color), plane_orb_color);
+		
+		spheric_coords_selection = BasicInds.values()[Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_spheric_coords_selection), spheric_coords_selection.toString()))];
+		vectors_angle_sel1 = BasicInds.values()[Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_vectors_angle_sel1), vectors_angle_sel1.toString()))];
+		vectors_angle_sel2 = BasicInds.values()[Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_vectors_angle_sel2), vectors_angle_sel2.toString()))];
+
 	}
 	
 	
@@ -70,6 +95,16 @@ public class ModelConfiguration {
 	public boolean show_mini_spheres = true;
 	public boolean show_circles = true;
 	public boolean show_planes = true;
+	//Angles
+	public boolean show_orbital_plane = false;
+	public int plane_xy_color = 0xff0094;
+	public int plane_orb_color = 0x65ff00;
+	public boolean show_inclination = true;// depends on show_planes, called: show orbit-xy planes 
+	public boolean show_spheric_coords = false;
+	public BasicInds spheric_coords_selection = BasicInds.Earth;//Any of the basic indicators except for the attitude
+	public boolean show_vectors_angle = false;
+	public BasicInds vectors_angle_sel1 = BasicInds.Earth;
+	public BasicInds vectors_angle_sel2 = BasicInds.Velocity;
 	//Axis
 	public boolean show_axis = true;
 	public boolean show_axis_labels = true;
@@ -104,13 +139,16 @@ public class ModelConfiguration {
 	public boolean show_momentum = true;
 	public int color_momentum = 0x00fc19;
 	//Targets
-	public boolean show_target_a = true;
+	public boolean show_target_a = false;
 	public int color_target_a = 0xff0000;
+	public double[] value_target_a = {-5,-5,-5};
 	//Vectors
 	public boolean show_vector_a = false;
 	public int color_vector_a = 0x00fffa;
 	public float limit_vector_a = 25;//Same units as value
+	public double[] value_vector_a = {-7,-5,-5};
 	//Directions
 	public boolean show_direction_a = false;
 	public int color_direction_a = 0xffff00;
+	public double[] value_direction_a = {-5,-5,-7};
 }

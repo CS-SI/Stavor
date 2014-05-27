@@ -8,13 +8,31 @@
             android:key="@string/pref_key_target_a_show"
             android:summary="@string/pref_summary_target_a_show"
             android:title="@string/pref_title_target_a_show"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="@string/pref_key_target_a_color"
             android:persistent="true"
             android:summary="@string/pref_summary_target_a_color"
             android:title="@string/pref_title_target_a_color"
             android:defaultValue="@color/pref_def_target_a" />
+        <EditTextPreference
+            android:key="@string/pref_key_target_a_x"
+            android:summary="@string/pref_summary_target_a_x"
+            android:title="@string/pref_title_target_a_x"
+            android:defaultValue="-5"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_target_a_y"
+            android:summary="@string/pref_summary_target_a_y"
+            android:title="@string/pref_title_target_a_y"
+            android:defaultValue="-5"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_target_a_z"
+            android:summary="@string/pref_summary_target_a_z"
+            android:title="@string/pref_title_target_a_z"
+            android:defaultValue="-5"
+            android:numeric="decimal" />
     </PreferenceCategory>
     <PreferenceCategory 
         android:title="@string/pref_vector_a"
@@ -36,6 +54,24 @@
             android:title="@string/pref_title_vector_a_limit"
             android:defaultValue="25"
             android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_vector_a_x"
+            android:summary="@string/pref_summary_vector_a_x"
+            android:title="@string/pref_title_vector_a_x"
+            android:defaultValue="-5"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_vector_a_y"
+            android:summary="@string/pref_summary_vector_a_y"
+            android:title="@string/pref_title_vector_a_y"
+            android:defaultValue="-5"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_vector_a_z"
+            android:summary="@string/pref_summary_vector_a_z"
+            android:title="@string/pref_title_vector_a_z"
+            android:defaultValue="-5"
+            android:numeric="decimal" />
     </PreferenceCategory>
     <PreferenceCategory 
         android:title="@string/pref_direction_a"
@@ -51,5 +87,23 @@
             android:summary="@string/pref_summary_direction_a_color"
             android:title="@string/pref_title_direction_a_color"
             android:defaultValue="@color/pref_def_direction_a" />
+        <EditTextPreference
+            android:key="@string/pref_key_direction_a_x"
+            android:summary="@string/pref_summary_direction_a_x"
+            android:title="@string/pref_title_direction_a_x"
+            android:defaultValue="-5"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_direction_a_y"
+            android:summary="@string/pref_summary_direction_a_y"
+            android:title="@string/pref_title_direction_a_y"
+            android:defaultValue="-5"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_direction_a_z"
+            android:summary="@string/pref_summary_direction_a_z"
+            android:title="@string/pref_title_direction_a_z"
+            android:defaultValue="-5"
+            android:numeric="decimal" />
     </PreferenceCategory>
 </PreferenceScreen>

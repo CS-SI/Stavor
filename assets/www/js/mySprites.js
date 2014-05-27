@@ -129,3 +129,86 @@ function roundRect(ctx, x, y, w, h, r)
     ctx.fill();
 	ctx.stroke();   
 }
+function updateInclinationSprite(inclination){
+	//Update Sprite
+	var messageInclination = " i="+parseFloat((inclination * 180) / Math.PI).toFixed(1)+"º ";
+	contextInclination.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
+	contextInclination.fill(); // FILL THE CONTEXT
+	// get size data (height depends only on font size)
+	var metricsInclination = contextInclination.measureText( messageInclination );
+	var textWidthInclination = metricsInclination.width;
+	// background color
+	contextInclination.fillStyle   = "rgba(" + backgroundColorInclination.r + "," + backgroundColorInclination.g + ","
+								  + backgroundColorInclination.b + "," + backgroundColorInclination.a + ")";
+	// border color
+	contextInclination.strokeStyle = "rgba(" + borderColorInclination.r + "," + borderColorInclination.g + ","
+								  + borderColorInclination.b + "," + borderColorInclination.a + ")";
+	contextInclination.lineWidth = borderThicknessInclination;
+	roundRect(contextInclination, borderThicknessInclination/2, borderThicknessInclination/2, textWidthInclination + borderThicknessInclination, fontsizeInclination * 1.4 + borderThicknessInclination, 6);
+	// 1.4 is extra height factor for text below baseline: g,j,p,q.
+	// text color
+	contextInclination.fillStyle   = "rgba(" + fontColorInclination.r + "," + fontColorInclination.g + ","
+								  + fontColorInclination.b + "," + fontColorInclination.a + ")";
+	contextInclination.fillText( messageInclination, borderThicknessInclination, fontsizeInclination + borderThicknessInclination);
+	spriteInclination.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
+	spriteInclination.position = value_earth.clone().setZ(0).normalize().multiplyScalar(arc_sprite_radius);
+}
+function updateInclinationArc(inclination){
+	//ReDraw Arc
+	scene.remove(incl_arc);
+
+	incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
+
+	var incl_inst_rot = new THREE.Quaternion().setFromUnitVectors( axis_x, value_earth.clone().normalize() );
+
+	incl_arc.quaternion.copy(incl_inst_rot.multiply(incl_offset));
+
+	scene.add(incl_arc);
+}
+function updateLatitudeSprite(lat){
+	//Update Sprite
+	var messageLatitude = " "+parseFloat((lat * 180) / Math.PI).toFixed(1)+"º ";
+	contextLatitude.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
+	contextLatitude.fill(); // FILL THE CONTEXT
+	// get size data (height depends only on font size)
+	var metricsLatitude = contextLatitude.measureText( messageLatitude );
+	var textWidthLatitude = metricsLatitude.width;
+	// background color
+	contextLatitude.fillStyle   = "rgba(" + backgroundColorLatitude.r + "," + backgroundColorLatitude.g + ","
+								  + backgroundColorLatitude.b + "," + backgroundColorLatitude.a + ")";
+	// border color
+	contextLatitude.strokeStyle = "rgba(" + borderColorLatitude.r + "," + borderColorLatitude.g + ","
+								  + borderColorLatitude.b + "," + borderColorLatitude.a + ")";
+	contextLatitude.lineWidth = borderThicknessLatitude;
+	roundRect(contextLatitude, borderThicknessLatitude/2, borderThicknessLatitude/2, textWidthLatitude + borderThicknessLatitude, fontsizeLatitude * 1.4 + borderThicknessLatitude, 6);
+	// 1.4 is extra height factor for text below baseline: g,j,p,q.
+	// text color
+	contextLatitude.fillStyle   = "rgba(" + fontColorLatitude.r + "," + fontColorLatitude.g + ","
+								  + fontColorLatitude.b + "," + fontColorLatitude.a + ")";
+	contextLatitude.fillText( messageLatitude, borderThicknessLatitude, fontsizeLatitude + borderThicknessLatitude);
+	lat_sprite.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
+	lat_sprite.position = value_earth.clone().setZ(0).normalize().multiplyScalar(arc_sprite_radius);
+}
+function updateLongitudeSprite(lng){
+	//Update Sprite
+	var messageLongitude = " "+parseFloat((lng * 180) / Math.PI).toFixed(1)+"º ";
+	contextLongitude.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
+	contextLongitude.fill(); // FILL THE CONTEXT
+	// get size data (height depends only on font size)
+	var metricsLongitude = contextLongitude.measureText( messageLongitude );
+	var textWidthLongitude = metricsLongitude.width;
+	// background color
+	contextLongitude.fillStyle   = "rgba(" + backgroundColorLongitude.r + "," + backgroundColorLongitude.g + ","
+								  + backgroundColorLongitude.b + "," + backgroundColorLongitude.a + ")";
+	// border color
+	contextLongitude.strokeStyle = "rgba(" + borderColorLongitude.r + "," + borderColorLongitude.g + ","
+								  + borderColorLongitude.b + "," + borderColorLongitude.a + ")";
+	contextLongitude.lineWidth = borderThicknessLongitude;
+	roundRect(contextLongitude, borderThicknessLongitude/2, borderThicknessLongitude/2, textWidthLongitude + borderThicknessLongitude, fontsizeLongitude * 1.4 + borderThicknessLongitude, 6);
+	// 1.4 is extra height factor for text below baseline: g,j,p,q.
+	// text color
+	contextLongitude.fillStyle   = "rgba(" + fontColorLongitude.r + "," + fontColorLongitude.g + ","
+								  + fontColorLongitude.b + "," + fontColorLongitude.a + ")";
+	contextLongitude.fillText( messageLongitude, borderThicknessLongitude, fontsizeLongitude + borderThicknessLongitude);
+	long_sprite.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
+}

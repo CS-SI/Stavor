@@ -12,6 +12,7 @@ import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
 import org.xwalk.core.XWalkView;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -97,28 +98,34 @@ public class ModelSimulation {
     private TimeScale utc;
     private Frame sunFrame;
     public void updateSimulation(SpacecraftState scs, int sim_progress){
+    	String debg = "";
+    	
     	ModelState new_state = new ModelState();
     	ModelInfo new_info = new ModelInfo();
     	
     	Attitude sc_att = scs.getAttitude();
     	new_state.value_attitude = new Quat(sc_att.getOrientation().getRotation());
     	
+    	debg += "Attitude: "+new_state.value_attitude.w+","+new_state.value_attitude.x+","+new_state.value_attitude.y+","+new_state.value_attitude.z+"|";
+    	
     	Vector3D velocity = scs.getPVCoordinates().getVelocity();
     	new_state.value_velocity[0] = velocity.getX()/1000;
     	new_state.value_velocity[1] = velocity.getY()/1000;
     	new_state.value_velocity[2] = velocity.getZ()/1000;
     	new_info.velocity = scs.getPVCoordinates().getVelocity().getNorm()/1000;
-    	//XGGDEBUG: vector, direction, target
+    	debg += "Velocity: "+new_state.value_velocity[0]+","+new_state.value_velocity[1]+","+new_state.value_velocity[2]+"|";
     	
     	new_state.value_momentum[0] = scs.getPVCoordinates().getMomentum().getX();
     	new_state.value_momentum[1] = scs.getPVCoordinates().getMomentum().getY();
     	new_state.value_momentum[2] = scs.getPVCoordinates().getMomentum().getZ();
+    	debg += "Momentum: "+new_state.value_momentum[0]+","+new_state.value_momentum[1]+","+new_state.value_momentum[2]+"|";
     	
     	Vector3D earth = scs.getPVCoordinates().getPosition().negate();
     	new_state.value_earth[0] = earth.getX()/1000;
     	new_state.value_earth[1] = earth.getY()/1000;
     	new_state.value_earth[2] = earth.getZ()/1000;
     	new_info.orbit_radium = earth.getNorm()/1000;
+    	debg += "Earth: "+new_state.value_earth[0]+","+new_state.value_earth[1]+","+new_state.value_earth[2]+"|";
     	
     	try {
     		Vector3D sun = scs.getPVCoordinates(sunFrame).getPosition().negate();
@@ -126,6 +133,7 @@ public class ModelSimulation {
 			new_state.value_sun[0] = sun.getX()/1000;
 	    	new_state.value_sun[1] = sun.getY()/1000;
 	    	new_state.value_sun[2] = sun.getZ()/1000;
+	    	debg += "Sun: "+new_state.value_sun[0]+","+new_state.value_sun[1]+","+new_state.value_sun[2]+"|";
 		} catch (OrekitException e) {
 			e.printStackTrace();
 			activity.showErrorDialog(activity.getString(R.string.error_computing_orekit), false);
@@ -139,6 +147,8 @@ public class ModelSimulation {
     	
 		AbsoluteDate date = sc_att.getDate();
 		new_info.time = date.getComponents(utc).toString();
+		
+		debg += "Time: "+new_info.time+"|";
 
 		//Compute acceleration
 		if(tmp_time != null){
@@ -151,7 +161,9 @@ public class ModelSimulation {
 			new_state.value_acceleration[1] = acceleration.getY();
 			new_state.value_acceleration[2] = acceleration.getZ();
 			new_info.acceleration = acceleration.getNorm();
+			debg += "Accel: "+new_state.value_acceleration[0]+","+new_state.value_acceleration[1]+","+new_state.value_acceleration[2]+"|";
 		}
+		Log.d("SIMU", debg);
 		
 		//Update temporal variables for acceleration computation
     	tmp_vel = velocity;

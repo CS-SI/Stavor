@@ -6,6 +6,7 @@
     <string name="pref_screen_models">pref_screen_models</string>
     <string name="pref_screen_basic_indicators">pref_screen_basic_indicators</string>
     <string name="pref_screen_extra_indicators">pref_screen_extra_indicators</string>
+    <string name="pref_screen_measures">pref_screen_measures</string>
     <string name="pref_key_apk_install">pref_key_apk_install</string>
     <string name="pref_key_data_installed">pref_key_data_installed</string>
     <string name="pref_key_database_installed">pref_key_database_installed</string>
@@ -36,6 +37,29 @@
     <string name="pref_key_show_mini_spheres">pre_key_show_mini_spheres</string>
     <string name="pref_key_show_circles">pref_key_show_circles</string>
     <string name="pref_key_show_planes">pref_key_show_planes</string>
+    
+    <string name="pref_key_target_a_x">pref_key_target_a_x</string>
+    <string name="pref_key_target_a_y">pref_key_target_a_y</string>
+    <string name="pref_key_target_a_z">pref_key_target_a_z</string>
+    <string name="pref_key_vector_a_x">pref_key_vector_a_x</string>
+    <string name="pref_key_vector_a_y">pref_key_vector_a_y</string>
+    <string name="pref_key_vector_a_z">pref_key_vector_a_z</string>
+    <string name="pref_key_direction_a_x">pref_key_direction_a_x</string>
+    <string name="pref_key_direction_a_y">pref_key_direction_a_y</string>
+    <string name="pref_key_direction_a_z">pref_key_direction_a_z</string>
+    <string name="pref_key_show_orbital_plane">pref_key_show_orbital_plane</string>
+    <string name="pref_key_show_inclination">pref_key_show_inclination</string>
+    <string name="pref_key_show_spheric_coords">pref_key_show_spheric_coords</string>
+    <string name="pref_key_show_vectors_angle">pref_key_show_vectors_angle</string>
+    <string name="pref_key_plane_xy_color">pref_key_plane_xy_color</string>
+    <string name="pref_key_plane_orb_color">pref_key_plane_orb_color</string>
+    <string name="pref_key_spheric_coords_selection">pref_key_spheric_coords_selection</string>
+    <string name="pref_key_vectors_angle_sel1">pref_key_vectors_angle_sel1</string>
+    <string name="pref_key_vectors_angle_sel2">pref_key_vectors_angle_sel2</string>
+    <string name="pref_key_inclination">pref_key_inclination</string>
+    <string name="pref_key_spherical_coords">pref_key_spherical_coords</string>
+    <string name="pref_key_angle">pref_key_angle</string>
+    
     <string name="pref_key_show_axis">pref_key_show_axis</string>
     <string name="pref_key_show_axis_labels">pref_key_show_axis_labels</string>
     <string name="pref_key_show_spacecraft">pref_key_show_spacecraft</string>

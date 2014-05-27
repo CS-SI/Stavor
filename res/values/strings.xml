@@ -51,9 +51,10 @@
     <string name="title_section2">HUD</string>
     <string name="title_section3">Basic indicators</string>
     <string name="title_section4">Extra indicators</string>
-    <string name="title_section5">Models</string>
-    <string name="title_section6">Preferences</string>
-    <string name="title_section7">WebGL test</string>
+    <string name="title_section5">Measures</string>
+    <string name="title_section6">Models</string>
+    <string name="title_section7">Preferences</string>
+    <string name="title_section8">WebGL test</string>
     <string name="dialog_welcome">Welcome</string>
     <string name="dialog_error">Error</string>
     <string name="dialog_exit">Exit</string>
@@ -168,6 +169,11 @@
     <string name="pref_target_a">Target</string>
     <string name="pref_vector_a">Vector</string>
     <string name="pref_direction_a">Direction</string>
+    
+    <string name="pref_inclination">Inclination</string>
+    <string name="pref_spherical_coords">Spherical coordinates</string>
+    <string name="pref_angle">Angle</string>
+    
     <string name="pref_title_database_installed">Missions database is already installed</string>
     <string name="pref_summary_database_installed">Flag to know if the Missions database has been already installed</string>
     <string name="pref_title_data_installed">Orekit data is already installed</string>
@@ -260,6 +266,47 @@
     <string name="pref_summary_direction_a_show">Show direction</string>
     <string name="pref_title_direction_a_color">Color</string>
     <string name="pref_summary_direction_a_color">Direction color</string>
+    
+    
+    <string name="pref_title_target_a_x">Target X</string>
+    <string name="pref_title_target_a_y">Target Y</string>
+    <string name="pref_title_target_a_z">Target Z</string>
+    <string name="pref_title_vector_a_x">Vector X</string>
+    <string name="pref_title_vector_a_y">Vector Y</string>
+    <string name="pref_title_vector_a_z">Vector Z</string>
+    <string name="pref_title_direction_a_x">Direction X</string>
+    <string name="pref_title_direction_a_y">Direction Y</string>
+    <string name="pref_title_direction_a_z">Direction Z</string>
+    <string name="pref_title_show_orbital_plane">Show orbital plane</string>
+    <string name="pref_title_show_inclination">Show inclination angle</string>
+    <string name="pref_title_show_spheric_coords">Show spherical coordinates</string>
+    <string name="pref_title_show_vectors_angle">Show angle between indicators</string>
+    <string name="pref_title_plane_xy_color">XY-Plane color</string>
+    <string name="pref_title_plane_orb_color">Orbital plane color</string>
+    <string name="pref_title_spheric_coords_selection">Selection</string>
+    <string name="pref_title_vectors_angle_sel1">Selection 1</string>
+    <string name="pref_title_vectors_angle_sel2">Selection 2</string>
+    
+    <string name="pref_summary_target_a_x">Target component X</string>
+    <string name="pref_summary_target_a_y">Target component Y</string>
+    <string name="pref_summary_target_a_z">Target component Z</string>
+    <string name="pref_summary_vector_a_x">Vector component X</string>
+    <string name="pref_summary_vector_a_y">Vector component Y</string>
+    <string name="pref_summary_vector_a_z">Vector component Z</string>
+    <string name="pref_summary_direction_a_x">Direction component X</string>
+    <string name="pref_summary_direction_a_y">Direction component Y</string>
+    <string name="pref_summary_direction_a_z">Direction component Z</string>
+    <string name="pref_summary_show_orbital_plane">Show orbital and Earth-rotation plane</string>
+    <string name="pref_summary_show_inclination">Show instant inclination angle</string>
+    <string name="pref_summary_show_spheric_coords">Show spherical coordinates of an indicator</string>
+    <string name="pref_summary_show_vectors_angle">Show angle between indicators</string>
+    <string name="pref_summary_plane_xy_color">XY-Plane color</string>
+    <string name="pref_summary_plane_orb_color">Orbital plane color</string>
+    <string name="pref_summary_spheric_coords_selection">Indicator selection for the coordinates</string>
+    <string name="pref_summary_vectors_angle_sel1">Indicator selection for the angle</string>
+    <string name="pref_summary_vectors_angle_sel2">Indicator selection for the angle</string>
+    
+    
     
     <string name="error_installing_missions_database">Installation of the missions database failed.</string>
     <string name="error_installing_orekit_default_data">Installation of the default Orekit data failed.</string>

@@ -20,7 +20,4 @@ public class ModelState implements Serializable{
 	public double[] value_velocity = {0,0,-5};
 	public double[] value_acceleration = {-5,0,0};
 	public double[] value_momentum = {-5,0,-5};
-	public double[] value_target_a = {-5,-5,-5};
-	public double[] value_vector_a = {-7,-5,-5};
-	public double[] value_direction_a = {-5,-5,-7};
 }
