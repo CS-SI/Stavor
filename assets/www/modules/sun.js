@@ -110,7 +110,7 @@ function initSun(){
 			var vertArraySun = lineGeometrySun.vertices;
 			vertArraySun.push( new THREE.Vector3(sun.position.x,sun.position.y,sun.position.z), new THREE.Vector3(0, 0, 0) );
 			lineGeometrySun.computeLineDistances();
-			var lineMaterialSun = new THREE.LineDashedMaterial( { color: 0xffd800, dashSize: 2, gapSize: 2 } );
+			var lineMaterialSun = new THREE.LineDashedMaterial( { color: 0xffa100, dashSize: 2, gapSize: 2 } );
 			lineSun = new THREE.Line( lineGeometrySun, lineMaterialSun );
 			scene.add(lineSun);
 		}
@@ -118,7 +118,7 @@ function initSun(){
 		if(sun_show_dist){
 			// Sun Sprite
 			spriteSun = makeTextSprite( 1, " 1.05 AU ", 
-				{ fontsize: 24, borderColor: {r:255, g:255, b:255, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:1.5}, fontColor: {r:255, g:255, b:255, a:1.0} } );
+				{ fontsize: 24, borderColor: {r:252, g:186, b:45, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:1.5}, fontColor: {r:252, g:186, b:45, a:1.0} } );
 			sun.add( spriteSun );
 		}
 	}

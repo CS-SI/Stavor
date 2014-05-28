@@ -9,13 +9,13 @@ function initIndicators() {
 	// BASIC
 	if(show_velocity){
 		direction = new THREE.Vector3().subVectors(value_velocity, origin).normalize();		
-		arrow_vel = new THREE.ArrowHelper(direction, origin, arrow_max_length, color_velocity, arrow_head_length, arrow_head_width, arrow_segments, canvas_mode);
+		arrow_vel = new THREE.VectorHelper(direction, origin, arrow_max_length, color_velocity, arrow_head_length, arrow_head_width, arrow_segments, canvas_mode);
 		scene.add(arrow_vel);
 	}
 	
 	if(show_acceleration){
 		direction = new THREE.Vector3().subVectors(value_acceleration, origin).normalize();
-		arrow_accel = new THREE.ArrowHelper(direction, origin, arrow_max_length, color_acceleration, arrow_head_length, arrow_head_width, arrow_segments, canvas_mode);
+		arrow_accel = new THREE.VectorHelper(direction, origin, arrow_max_length, color_acceleration, arrow_head_length, arrow_head_width, arrow_segments, canvas_mode);
 		scene.add(arrow_accel);
 	}
 	
@@ -34,7 +34,7 @@ function initIndicators() {
 	
 	if(show_vector_a){
 		direction = new THREE.Vector3().subVectors(value_vector_a, origin).normalize();
-		vector_a = new THREE.ArrowHelper(direction, origin, arrow_max_length, color_vector_a, arrow_head_length, arrow_head_width, arrow_segments, canvas_mode);
+		vector_a = new THREE.VectorHelper(direction, origin, arrow_max_length, color_vector_a, arrow_head_length, arrow_head_width, arrow_segments, canvas_mode);
 		scene.add(vector_a);
 	}
 	

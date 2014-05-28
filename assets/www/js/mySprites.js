@@ -105,6 +105,14 @@ function makeTextSprite(element, message, parameters )
 		backgroundColorLatitude = backgroundColor;
 		fontColorLatitude = fontColor;
 		sprite.scale.set(20,10,1.0);
+	}else if(element==7){//Angles between vectors
+		contextAngles = context;
+		fontsizeAngles = fontsize;
+		borderColorAngles = borderColor;
+		borderThicknessAngles = borderThickness; 
+		backgroundColorAngles = backgroundColor;
+		fontColorAngles = fontColor;
+		sprite.scale.set(20,10,1.0);
 	}else{//Axis labels
 		sprite.scale.set(20,10,1.0);
 	}
@@ -211,4 +219,28 @@ function updateLongitudeSprite(lng){
 								  + fontColorLongitude.b + "," + fontColorLongitude.a + ")";
 	contextLongitude.fillText( messageLongitude, borderThicknessLongitude, fontsizeLongitude + borderThicknessLongitude);
 	long_sprite.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
+}
+function updateAnglesSprite(angle){
+	//Update Sprite
+	var messageAngles = " "+parseFloat((angle * 180) / Math.PI).toFixed(1)+"º ";
+	contextAngles.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
+	contextAngles.fill(); // FILL THE CONTEXT
+	// get size data (height depends only on font size)
+	var metricsAngles = contextAngles.measureText( messageAngles );
+	var textWidthAngles = metricsAngles.width;
+	// background color
+	contextAngles.fillStyle   = "rgba(" + backgroundColorAngles.r + "," + backgroundColorAngles.g + ","
+								  + backgroundColorAngles.b + "," + backgroundColorAngles.a + ")";
+
+	// border color
+	contextAngles.strokeStyle = "rgba(" + borderColorAngles.r + "," + borderColorAngles.g + ","
+								  + borderColorAngles.b + "," + borderColorAngles.a + ")";
+	contextAngles.lineWidth = borderThicknessAngles;
+	roundRect(contextAngles, borderThicknessAngles/2, borderThicknessAngles/2, textWidthAngles + borderThicknessAngles, fontsizeAngles * 1.4 + borderThicknessAngles, 6);
+	// 1.4 is extra height factor for text below baseline: g,j,p,q.
+	// text color
+	contextAngles.fillStyle   = "rgba(" + fontColorAngles.r + "," + fontColorAngles.g + ","
+								  + fontColorAngles.b + "," + fontColorAngles.a + ")";
+	contextAngles.fillText( messageAngles, borderThicknessAngles, fontsizeAngles + borderThicknessAngles);
+	vectors_sprite.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
 }
