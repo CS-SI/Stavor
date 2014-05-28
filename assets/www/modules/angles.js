@@ -2,21 +2,65 @@ function initAngles(){
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			REFERENCE PLANES
 	//-----------------------------------------------------------------------------------------------------------------------
-	mat_arc = new THREE.MeshPhongMaterial( { color: arc_color, metal: true, transparent: false, opacity: 1.0, side: THREE.DoubleSide } );
 
 	if(show_orbital_plane){
-		//XY plane
-		var material_plane_xy = new THREE.MeshPhongMaterial({color: plane_xy_color, transparent: true/*, depthWrite: false, depthTest: false, alphaTest: 0.1*/, opacity: 0.2, side: THREE.DoubleSide });
-		var plane_xy = new THREE.Mesh( new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_xy );
-		plane_xy.position.set( 0, 0, 0 );
+
+		// points that define shape
+		var pts = [], hls = [];
+		var radius = sphere_radius;
+		var radius_ext = planes_width;
+
+		for ( i = 0; i < plane_resolution; i ++ ) {
+			var a = 2*Math.PI * i / plane_resolution;
+			pts.push( new THREE.Vector2 ( Math.cos( a ) * radius_ext, Math.sin( a ) * radius_ext ) );
+			hls.push( new THREE.Vector2 ( Math.cos( a ) * radius, Math.sin( a ) * radius ) );
+		}
+
+		// shape to extrude
+		var shape = new THREE.Shape( pts );
+		var holesPath = new THREE.Path(hls);
+		shape.holes.push(holesPath);
+
+		// extrude options
+		var options = { 
+			amount: 1,              // default 100, only used when path is null
+			bevelEnabled: false, 
+			bevelSegments: 2, 
+			steps: 1,                // default 1, try 3 if path defined
+			extrudePath: null        // or path
+		};
+
+		// geometry
+		var geometry = new THREE.ExtrudeGeometry( shape, options );
+
+		// mesh
+		var plane_xy = new THREE.Mesh( 
+			geometry, 
+			new THREE.MeshBasicMaterial( { color: plane_xy_color, transparent: true, opacity: 0.2 } )
+		);
 		scene.add( plane_xy );
+
+		// mesh
+		plane_orb = new THREE.Mesh( 
+			geometry, 
+			new THREE.MeshBasicMaterial( { color: plane_orb_color, transparent: true, opacity: 0.2 } )
+		);
+		scene.add( plane_orb );
+
+
+
+		//XY plane
+		//var material_plane_xy = new THREE.MeshPhongMaterial({color: plane_xy_color, transparent: true/*, depthWrite: false, depthTest: false, alphaTest: 0.1*/, opacity: 0.2, side: THREE.DoubleSide });
+		/*var plane_xy = new THREE.Mesh( new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_xy );
+		plane_xy.position.set( 0, 0, 0 );
+		scene.add( plane_xy );*/
 
 
 		//Orbital plane
-		var material_plane_orb = new THREE.MeshPhongMaterial({color: plane_orb_color, transparent: true/*, depthWrite: false, depthTest: false, alphaTest: 0.1*/, opacity: 0.2, side: THREE.DoubleSide });
-		var ring_geom = new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 )
+		//var material_plane_orb = new THREE.MeshPhongMaterial({color: plane_orb_color, transparent: true/*, depthWrite: false, depthTest: false, alphaTest: 0.1*/, opacity: 0.2, side: THREE.DoubleSide });
+		/*var ring_geom = new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 )
 		plane_orb = new THREE.Mesh( ring_geom, material_plane_orb );
-		plane_orb.position.set( 0, 0, 0 );
+		plane_orb.position.set( 0, 0, 0 );*/
 
 		//Compute inclination quaternion
 		var norm_orbital_plane = value_velocity.clone().normalize().cross(value_earth.clone().normalize());
@@ -206,6 +250,7 @@ function updateAngles(){
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			PLANES UPDATE
 	//-----------------------------------------------------------------------------------------------------------------------
+
 	if(show_orbital_plane){
 		//Compute inclination quaternion
 		var norm_orbital_plane = value_velocity.clone().normalize().cross(value_earth.clone().normalize());

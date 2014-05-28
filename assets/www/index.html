@@ -79,7 +79,7 @@ This three.js demo is part of a collection at
 	var vectors_arc, vectors_sprite;
 	var origin = new THREE.Vector3(0,0,0);
 
-	var fontsizeSun, borderColorSun, borderThicknessSun, backgroundColorSun, fontColorSun, mat_arc;
+	var fontsizeSun, borderColorSun, borderThicknessSun, backgroundColorSun, fontColorSun;
 	var fontsizeEarth, borderColorEarth, borderThicknessEarth, backgroundColorEarth, fontColorEarth;
 	var fontsizeInclination, borderColorInclination, borderThicknessInclination, backgroundColorInclination, fontColorInclination;
 	var fontsizeLongitude, borderColorLongitude, borderThicknessLongitude, backgroundColorLongitude, fontColorLongitude;
@@ -138,8 +138,8 @@ This three.js demo is part of a collection at
 	var earth_obj_dist = sphere_radius + earth_radius;
 
 	var planes_width = sphere_radius+earth_radius*2;
-	var plane_theta_seg = 30;
-	var plane_phi_seg = 10;
+	//var plane_theta_seg = 30;
+	//var plane_phi_seg = 10;
 
 	var arc_radius = sphere_radius+earth_radius*2;
 	var arc_sphcoord_radius = 3*sphere_radius/4;
@@ -259,6 +259,7 @@ This three.js demo is part of a collection at
 	var target_segments = 8 * segments_scale;
 	// smooth my curve over this many points
 	var arc_resolution = 50*performance_level;
+	var plane_resolution = 20*performance_level;
 //-----------------------------------------------------------------------------------------------------------------------
 //			DYNAMIC VALUES (Updated at each cycle)
 //-----------------------------------------------------------------------------------------------------------------------
