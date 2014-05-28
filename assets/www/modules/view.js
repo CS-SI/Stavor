@@ -30,17 +30,17 @@ function changeView(view_mode){
 	switch(view_mode){
 		case "XYZ"://xyz
 			camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
-			camera.up = new THREE.Vector3(-0.577,0.577,-0.577);
+			camera.up = new THREE.Vector3(-0.577,-0.577,0.577);
 			break;
 		case "X"://+X
 			miniSphereX.visible=false;
 			camera.position = new THREE.Vector3(getCamDistance(),0,0);
-			camera.up = new THREE.Vector3(0,1,0);
+			camera.up = new THREE.Vector3(0,0,1);
 			break;
 		case "-X"://-X
 			miniSphereXX.visible=false;
 			camera.position = new THREE.Vector3(-getCamDistance(),0,0);
-			camera.up = new THREE.Vector3(0,1,0);
+			camera.up = new THREE.Vector3(0,0,1);
 			break;
 		case "Y"://+Y
 			miniSphereY.visible=false;
@@ -64,11 +64,13 @@ function changeView(view_mode){
 			break;
 		case "Earth"://Earth
 			earth.visible = false;
+			camera.up = new THREE.Vector3(0,0,1);
 			camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
 			break;
 		case "Sun"://Sun
 			sun.visible = false;
 			sunGlow.visible=false;
+			camera.up = new THREE.Vector3(0,0,1);
 			camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());
 			break;
 		case "S/C-XYZ"://Spacecraft
@@ -101,6 +103,7 @@ function changeView(view_mode){
 			break;
 		default://xyz
 			camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
+			camera.up = new THREE.Vector3(-0.577,-0.577,0.577);
 			break;
 	}
 	selected_view = view_mode;
@@ -121,7 +124,7 @@ function onWindowResize() {
 function updateView() {
 	switch(selected_view){
 		case "Earth"://Earth
-			camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
+			camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());	
 			break;
 		case "Sun"://Sun
 			camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());

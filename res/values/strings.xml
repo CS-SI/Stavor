@@ -6,7 +6,7 @@
     <string name="menu_views_ref_frame_x">X</string>
     <string name="menu_views_ref_frame_xx">-X</string>
     <string name="menu_views_ref_frame_y">Y</string>
-    <string name="menu_views_ref_frame_yy">-y</string>
+    <string name="menu_views_ref_frame_yy">-Y</string>
     <string name="menu_views_ref_frame_z">Z</string>
     <string name="menu_views_ref_frame_zz">-Z</string>
     <string name="menu_views_spacecraft">Spacecraft</string>

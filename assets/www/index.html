@@ -108,8 +108,8 @@ This three.js demo is part of a collection at
 	
 	var sc_scale = 1.5;
 
-	var init_sc_dir_xyz = new THREE.Vector3(-0.577,0.577,-0.577);
-	var init_sc_up_xyz = new THREE.Vector3(0.577,0.577,0.577);
+	var init_sc_dir_xyz = new THREE.Vector3(0.577350269,0.577350269,0.577350269);
+	var init_sc_up_xyz = new THREE.Vector3(-0.577350269,-0.577350269,0.577350269);
 	var init_sc_dir_rear = new THREE.Vector3(0,0,-1);
 	var init_sc_up_rear = new THREE.Vector3(0,1,0);
 	var init_sc_dir_front = new THREE.Vector3(0,0,1);
@@ -119,9 +119,9 @@ This three.js demo is part of a collection at
 	var init_sc_dir_bottom = new THREE.Vector3(0,-1,0);
 	var init_sc_up_bottom = new THREE.Vector3(0,0,1);
 	var init_sc_dir_left = new THREE.Vector3(1,0,0);
-	var init_sc_up_left = new THREE.Vector3(0,1,0);
+	var init_sc_up_left = new THREE.Vector3(0,0,1);
 	var init_sc_dir_right = new THREE.Vector3(-1,0,0);
-	var init_sc_up_right = new THREE.Vector3(0,1,0);
+	var init_sc_up_right = new THREE.Vector3(0,0,1);
 
 	var sc_axis_lenght = sphere_radius*0.4;
 	var sc_body_color = 0xDDDDDD;
