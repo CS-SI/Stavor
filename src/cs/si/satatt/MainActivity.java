@@ -260,6 +260,11 @@ public class MainActivity extends ActionBarActivity implements
 		Intent myIntent = new Intent(MainActivity.this, AboutActivity.class);
 		MainActivity.this.startActivity(myIntent);
 	}
+	
+	public void showMissionEditor() {
+		Intent myIntent = new Intent(MainActivity.this, MissionActivity.class);
+		MainActivity.this.startActivity(myIntent);
+	}
 
 	public void showSection(final int sel) {
 		runOnUiThread( new Runnable() {

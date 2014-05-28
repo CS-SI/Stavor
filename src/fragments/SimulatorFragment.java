@@ -3,7 +3,9 @@ package fragments;
 import mission.Mission;
 import simulator.Simulator;
 import simulator.SimulatorStatus;
+import cs.si.satatt.AboutActivity;
 import cs.si.satatt.MainActivity;
+import cs.si.satatt.MissionActivity;
 import cs.si.satatt.R;
 import database.MissionReaderDbHelper;
 import database.MissionReaderContract.MissionEntry;
@@ -16,6 +18,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -199,6 +202,15 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 				}else{
 					showDeleteMissionDialog(activeMissionId, activeMissionName);
 				}
+			}
+    		
+    	});
+    	
+    	Button button_new = (Button)rootView.findViewById(R.id.buttonMissionNew);
+    	button_new.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				((MainActivity)getActivity()).showMissionEditor();
 			}
     		
     	});

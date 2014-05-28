@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <string name="mission_name">Name:</string>
+    <string name="mission_description">Description:</string>
+    <string name="mission_time">Time:</string>
+    <string name="mission_date">Date:</string>
+    <string name="mission_duration">Simulation duration:</string>
+    <string name="mission_step">Simulation step:</string>
+    <string name="mission_orbit">Orbit</string>
+    <string name="mission_a">Semi-major axis:</string>
+    <string name="mission_e">Eccentricity:</string>
+    <string name="mission_i">Inclination:</string>
+    <string name="mission_omega">Arg. periapsis:</string>
+    <string name="mission_raan">R.A.A.N:</string>
+    <string name="mission_lm">Mean anomaly:</string>
+    
     <string name="menu_views_ref_frame">Ref.Frame</string>
     <string name="menu_views_ref_frame_xyz">XYZ</string>
     <string name="menu_views_ref_frame_x">X</string>
