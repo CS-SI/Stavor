@@ -71,11 +71,11 @@ This three.js demo is part of a collection at
 	var container, scene, camera, renderer, controls, stats, light, delta;
 	var sun, sunGlow, sunLight, lineSun, spriteSun, contextSun;
 	var earth, contextEarth, lineEarth, spriteEarth;
-	var plane_orb, incl_arc, incl_offset, spriteInclination, contextInclination;
+	var plane_orb, incl_arc, spriteInclination, contextInclination;
 	//var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
 	var spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
-	var long_arc, lat_arc, long_sprite, lat_sprite, lat_offset;
+	var long_arc, lat_arc, long_sprite, lat_sprite, lineAngle, lineSpheric;
 	var vectors_arc, vectors_sprite;
 	var origin = new THREE.Vector3(0,0,0);
 
@@ -183,7 +183,7 @@ This three.js demo is part of a collection at
 	var show_planes = false;//XGGDEBUG UNUSED
 
 	//Angles and planes
-	var show_orbital_plane = true;
+	var show_orbital_plane = false;
 	var plane_xy_color = 0xff0094;
 	var plane_orb_color = 0x65ff00;
 	var show_inclination = true;// depends on show_planes, called: show orbit-xy planes 

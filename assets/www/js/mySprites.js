@@ -162,7 +162,7 @@ function updateInclinationSprite(inclination){
 }
 function updateLatitudeSprite(lat){
 	//Update Sprite
-	var messageLatitude = " "+parseFloat((lat * 180) / Math.PI).toFixed(1)+"º ";
+	var messageLatitude = " φ="+parseFloat((lat * 180) / Math.PI).toFixed(1)+"º ";
 	contextLatitude.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
 	contextLatitude.fill(); // FILL THE CONTEXT
 	// get size data (height depends only on font size)
@@ -182,11 +182,10 @@ function updateLatitudeSprite(lat){
 								  + fontColorLatitude.b + "," + fontColorLatitude.a + ")";
 	contextLatitude.fillText( messageLatitude, borderThicknessLatitude, fontsizeLatitude + borderThicknessLatitude);
 	lat_sprite.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
-	lat_sprite.position = value_earth.clone().setZ(0).normalize().multiplyScalar(arc_sprite_radius);
 }
 function updateLongitudeSprite(lng){
 	//Update Sprite
-	var messageLongitude = " "+parseFloat((lng * 180) / Math.PI).toFixed(1)+"º ";
+	var messageLongitude = " λ="+parseFloat((lng * 180) / Math.PI).toFixed(1)+"º ";
 	contextLongitude.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
 	contextLongitude.fill(); // FILL THE CONTEXT
 	// get size data (height depends only on font size)
@@ -209,7 +208,7 @@ function updateLongitudeSprite(lng){
 }
 function updateAnglesSprite(angle){
 	//Update Sprite
-	var messageAngles = " "+parseFloat((angle * 180) / Math.PI).toFixed(1)+"º ";
+	var messageAngles = " α="+parseFloat((angle * 180) / Math.PI).toFixed(1)+"º ";
 	contextAngles.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
 	contextAngles.fill(); // FILL THE CONTEXT
 	// get size data (height depends only on font size)

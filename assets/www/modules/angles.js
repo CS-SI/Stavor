@@ -16,26 +16,6 @@ function initAngles(){
 		var material_plane_orb = new THREE.MeshPhongMaterial({color: plane_orb_color, transparent: true/*, depthWrite: false, depthTest: false, alphaTest: 0.1*/, opacity: 0.2, side: THREE.DoubleSide });
 		var ring_geom = new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 )
 		plane_orb = new THREE.Mesh( ring_geom, material_plane_orb );
-		
-		/*var vertices = [];
-		for (var i = 0; i < ring_geom.vertices.length ; i++) {
-			vertices.push(ring_geom.vertices[i].clone());		
-		}
-		var orb_plane_shape = new THREE.Shape(vertices);
-		// extrude options
-		var options = { 
-			amount: 1,              // default 100, only used when path is null
-			bevelEnabled: false, 
-			bevelSegments: 2, 
-			steps: 1,                // default 1, try 3 if path defined
-			extrudePath: null        // or path
-		};
-		    
-		// geometry
-		var geometry = new THREE.ExtrudeGeometry( orb_plane_shape, options );
-		    
-		plane_orb = new THREE.Mesh(geometry, material_plane_orb);
-*/
 		plane_orb.position.set( 0, 0, 0 );
 
 		//Compute inclination quaternion
@@ -93,37 +73,73 @@ function initAngles(){
 	//Spheric coordinates
 	if(show_spheric_coords){
 
-		var sphcoord_vector = new THREE.Vector3(1,0,0);
+		var sphcoord_target = value_earth.clone().normalize().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_cross = sphcoord_target.clone().setZ(0).normalize().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_ref = axis_x.clone().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_long_mid = sphcoord_ref.clone().add(sphcoord_cross.clone());
+		var sphcoord_lat_mid = sphcoord_cross.clone().add(sphcoord_target.clone());  
 
-		sphcoord_vector = sphcoord_vector.normalize();
-		var lat=Math.atan2(sphcoord_vector.z,1);
-		var lng=Math.atan2(sphcoord_vector.y,sphcoord_vector.x);
+		var lat=Math.atan2(sphcoord_target.z,1);
+		var lng=Math.atan2(sphcoord_target.y,sphcoord_target.x);
+
+		//Set discontinued lines
+		var lineGeometry = new THREE.Geometry();
+		var vertArray = lineGeometry.vertices;
+		vertArray.push( sphcoord_target.clone(), new THREE.Vector3(0, 0, 0) );
+		lineGeometry.computeLineDistances();
+		var lineMaterial = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
+		lineSpheric = new THREE.Line( lineGeometry, lineMaterial );
+		scene.add(lineSpheric);
 
 		//create longitude arc
-		long_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_sphcoord_radius, arc_tube, arc_seg_r, arc_seg_t, lng ), mat_arc );
-				
+
+		var spline = new THREE.QuadraticBezierCurve3(sphcoord_cross.clone(),
+		   sphcoord_long_mid.clone(),
+		   sphcoord_ref.clone());
+
+		var material = new THREE.LineBasicMaterial({
+		    color: arc_color,
+		});
+
+		var geometry = new THREE.Geometry();
+		var splinePoints = spline.getPoints(arc_resolution);
+
+		for(var i = 0; i < splinePoints.length; i++){
+		    geometry.vertices.push(splinePoints[i]);  
+		}
+
+		long_arc = new THREE.Line(geometry, material);
 		scene.add( long_arc );
 
 		//Set longitude arc sprite
 		long_sprite = makeTextSprite( 5, " "+parseFloat(Math.round(lng * 180) / Math.PI).toFixed(1)+"º ", 
-				{ fontsize: 40, borderColor: {r:255, g:255, b:255, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:255, a:1.0} } );
-		long_sprite.position.set( arc_sphcoord_radius, 0, 0);
+				{ fontsize: 40, borderColor: {r:255, g:255, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
+		long_sprite.position.set( sphcoord_long_mid.x, sphcoord_long_mid.y, sphcoord_long_mid.z);
 		scene.add(long_sprite);
 
 		//create latittude arc
-		lat_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_sphcoord_radius, arc_tube, arc_seg_r, arc_seg_t, lat ), mat_arc );
-		
-		//Rotate arc
-		lat_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 1, 0, 0 ),Math.PI/2);
-		var lat_offset_i = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 0, 0, 1 ),lng);
-		
-		lat_arc.quaternion.copy(lat_offset_i.multiply(lat_offset));
+		var spline = new THREE.QuadraticBezierCurve3(sphcoord_target.clone(),
+		   sphcoord_lat_mid.clone(),
+		   sphcoord_cross.clone());
+
+		var material = new THREE.LineBasicMaterial({
+		    color: arc_color,
+		});
+
+		var geometry = new THREE.Geometry();
+		var splinePoints = spline.getPoints(arc_resolution);
+
+		for(var i = 0; i < splinePoints.length; i++){
+		    geometry.vertices.push(splinePoints[i]);  
+		}
+
+		lat_arc = new THREE.Line(geometry, material);
 		scene.add( lat_arc );
 
 		//Set latittude arc sprite
 		lat_sprite = makeTextSprite( 6, " "+parseFloat(Math.round(lat * 180) / Math.PI).toFixed(1)+"º ", 
-				{ fontsize: 40, borderColor: {r:255, g:255, b:255, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:255, a:1.0} } );
-		lat_sprite.position = sphcoord_vector.clone().multiplyScalar(arc_sphcoord_radius);
+				{ fontsize: 40, borderColor: {r:255, g:255, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
+		lat_sprite.position = sphcoord_lat_mid.clone();
 		scene.add(lat_sprite);
 
 	}
@@ -202,7 +218,7 @@ function updateAngles(){
 			//Compute arc angle clip points
 			var clip1 = value_earth.clone().normalize().multiplyScalar(sphere_radius);
 			var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
-			var clip_mid = clip1.clone().add(clip2.clone()).multiplyScalar(0.65);
+			var clip_mid = clip1.clone().add(clip2.clone()).normalize().multiplyScalar(sphere_radius);
 
 			//Draw Arc
 			var spline = new THREE.QuadraticBezierCurve3(clip1.clone(),
@@ -224,60 +240,92 @@ function updateAngles(){
 			scene.add( incl_arc );
 
 			updateInclinationSprite(inclination);
-			spriteInclination.position = clip_mid.clone();
+			spriteInclination.position = clip_mid.clone().multiplyScalar(1.15);
 		}
 	}
 	if(show_spheric_coords){
 		
-		var sphcoord_vector;
+		var sphcoord_target;
 		switch(spheric_coords_selection){
 			case "Earth":
-				sphcoord_vector = value_earth.clone();
+				sphcoord_target = value_earth.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 				break;
 			case "Sun":
-				sphcoord_vector = value_sun.clone();
+				sphcoord_target = value_sun.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 				break;
 			case "Velocity":
-				sphcoord_vector = value_velocity.clone();
+				sphcoord_target = value_velocity.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 				break;
 			case "Acceleration":
-				sphcoord_vector = value_acceleration.clone();
+				sphcoord_target = value_acceleration.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 				break;
 			case "Momentum":
-				sphcoord_vector = value_momentum.clone();
+				sphcoord_target = value_momentum.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 				break;
 			default:
-				sphcoord_vector = value_velocity.clone();
+				sphcoord_target = value_velocity.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 				break;
 		}
 
-		sphcoord_vector = sphcoord_vector.normalize();
-		var lat=Math.atan2(sphcoord_vector.z,1);
-		var lng=Math.atan2(sphcoord_vector.y,sphcoord_vector.x);
 
-		/*var lat=Math.atan2(sphcoord_vector.z,Math.sqrt(sphcoord_vector.y*sphcoord_vector.y+sphcoord_vector.x*sphcoord_vector.x));
-		var lng=Math.atan2(sphcoord_vector.x,sphcoord_vector.y);
-*/
-		//modify longitude arc
+		var sphcoord_cross = sphcoord_target.clone().setZ(0).normalize().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_ref = axis_x.clone().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_long_mid = sphcoord_ref.clone().add(sphcoord_cross.clone()).normalize().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_lat_mid = sphcoord_cross.clone().add(sphcoord_target.clone()).normalize().multiplyScalar(arc_sphcoord_radius);  
+
+		var lat=Math.atan2(sphcoord_target.z,1);
+		var lng=Math.atan2(sphcoord_target.y,sphcoord_target.x);
+
+		// LINES
+		lineSpheric.geometry.vertices[0].set(sphcoord_target.x,sphcoord_target.y,sphcoord_target.z);
+		lineSpheric.geometry.computeLineDistances();
+		lineSpheric.geometry.verticesNeedUpdate = true;
+
+		//update longitude arc
 		scene.remove( long_arc );
-		long_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_sphcoord_radius, arc_tube, arc_seg_r, arc_seg_t, lng ), mat_arc );
+		var spline = new THREE.QuadraticBezierCurve3(sphcoord_cross.clone(),
+		   sphcoord_long_mid.clone(),
+		   sphcoord_ref.clone());
+
+		var material = new THREE.LineBasicMaterial({
+		    color: arc_color,
+		});
+
+		var geometry = new THREE.Geometry();
+		var splinePoints = spline.getPoints(arc_resolution);
+
+		for(var i = 0; i < splinePoints.length; i++){
+		    geometry.vertices.push(splinePoints[i]);  
+		}
+
+		long_arc = new THREE.Line(geometry, material);
 		scene.add( long_arc );
 
 		updateLongitudeSprite(lng);
+		long_sprite.position = sphcoord_long_mid.clone();
 
 		//create latittude arc
-		scene.remove(lat_arc);
-		lat_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_sphcoord_radius, arc_tube, arc_seg_r, arc_seg_t, lat ), mat_arc );
-		
-		//Rotate arc
-		var lat_offset_i = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 0, 0, 1 ),lng);
-		
-		lat_arc.quaternion.copy(lat_offset_i.multiply(lat_offset));
+		scene.remove( lat_arc );
+		var spline = new THREE.QuadraticBezierCurve3(sphcoord_target.clone(),
+		   sphcoord_lat_mid.clone(),
+		   sphcoord_cross.clone());
+
+		var material = new THREE.LineBasicMaterial({
+		    color: arc_color,
+		});
+
+		var geometry = new THREE.Geometry();
+		var splinePoints = spline.getPoints(arc_resolution);
+
+		for(var i = 0; i < splinePoints.length; i++){
+		    geometry.vertices.push(splinePoints[i]);  
+		}
+
+		lat_arc = new THREE.Line(geometry, material);
 		scene.add( lat_arc );
 
-		//Set latittude arc sprite
 		updateLatitudeSprite(lat);
-		lat_sprite.position = sphcoord_vector.clone().multiplyScalar(arc_sphcoord_radius);
+		lat_sprite.position = sphcoord_lat_mid.clone();
 	}
 	if(show_vectors_angle){
 		var angle_vector_start;
@@ -322,7 +370,7 @@ function updateAngles(){
 				angle_vector_end = value_earth.clone().normalize().multiplyScalar(arc_vectors_radius);
 				break;
 		}
-		var angle_vector_mid = angle_vector_start.clone().add(angle_vector_end.clone());
+		var angle_vector_mid = angle_vector_start.clone().add(angle_vector_end.clone()).normalize().multiplyScalar(arc_vectors_radius);
 
 		var dist_angle = angle_vector_start.clone().angleTo(angle_vector_end);
 
