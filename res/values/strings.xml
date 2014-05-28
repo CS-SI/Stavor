@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <string name="mission_editor">Mission editor</string>
     <string name="mission_name">Name:</string>
     <string name="mission_description">Description:</string>
     <string name="mission_time">Time:</string>

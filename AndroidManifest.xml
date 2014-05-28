@@ -41,5 +41,10 @@
             android:screenOrientation="portrait"
              >
         </activity>
+        <activity
+            android:name="cs.si.satatt.MissionActivity"
+            android:label="@string/mission_editor"
+             >
+        </activity>
     </application>
 </manifest>

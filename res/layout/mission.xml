@@ -71,10 +71,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="@string/mission_time" />
+                    android:text="@string/mission_date" />
 
                 <DatePicker
                     android:id="@+id/datePicker1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/mission_time" />
+
+                <TimePicker
+                    android:id="@+id/timePicker1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
