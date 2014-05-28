@@ -26,7 +26,7 @@ function initEarth(){
 		if(earth_show_dist){
 			// Earth Sprite
 			spriteEarth = makeTextSprite( 2, " 36150 Km ", 
-				{ fontsize: 20, borderColor: {r:95, g:247, b:252, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:95, g:247, b:252, a:1.0} } );
+				{ fontsize: 20, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:95, g:247, b:252, a:1.0} } );
 			earth.add( spriteEarth );
 		}
 	}

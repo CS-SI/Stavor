@@ -118,7 +118,7 @@ function initSun(){
 		if(sun_show_dist){
 			// Sun Sprite
 			spriteSun = makeTextSprite( 1, " 1.05 AU ", 
-				{ fontsize: 24, borderColor: {r:252, g:186, b:45, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:1.5}, fontColor: {r:252, g:186, b:45, a:1.0} } );
+				{ fontsize: 24, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:1.5}, fontColor: {r:252, g:186, b:45, a:1.0} } );
 			sun.add( spriteSun );
 		}
 	}
