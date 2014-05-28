@@ -90,6 +90,14 @@ function initAngles(){
 		var lineMaterial = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
 		lineSpheric = new THREE.Line( lineGeometry, lineMaterial );
 		scene.add(lineSpheric);
+		//Set discontinued lines
+		var lineGeometry = new THREE.Geometry();
+		var vertArray = lineGeometry.vertices;
+		vertArray.push( sphcoord_cross.clone(), new THREE.Vector3(0, 0, 0) );
+		lineGeometry.computeLineDistances();
+		var lineMaterial = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
+		lineSpheric2 = new THREE.Line( lineGeometry, lineMaterial );
+		scene.add(lineSpheric2);
 
 		//create longitude arc
 
@@ -280,6 +288,10 @@ function updateAngles(){
 		lineSpheric.geometry.vertices[0].set(sphcoord_target.x,sphcoord_target.y,sphcoord_target.z);
 		lineSpheric.geometry.computeLineDistances();
 		lineSpheric.geometry.verticesNeedUpdate = true;
+
+		lineSpheric2.geometry.vertices[0].set(sphcoord_cross.x,sphcoord_cross.y,sphcoord_cross.z);
+		lineSpheric2.geometry.computeLineDistances();
+		lineSpheric2.geometry.verticesNeedUpdate = true;
 
 		//update longitude arc
 		scene.remove( long_arc );
