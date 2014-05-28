@@ -159,19 +159,6 @@ function updateInclinationSprite(inclination){
 								  + fontColorInclination.b + "," + fontColorInclination.a + ")";
 	contextInclination.fillText( messageInclination, borderThicknessInclination, fontsizeInclination + borderThicknessInclination);
 	spriteInclination.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
-	spriteInclination.position = value_earth.clone().setZ(0).normalize().multiplyScalar(arc_sprite_radius);
-}
-function updateInclinationArc(inclination){
-	//ReDraw Arc
-	scene.remove(incl_arc);
-
-	incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
-
-	var incl_inst_rot = new THREE.Quaternion().setFromUnitVectors( axis_x, value_earth.clone().normalize() );
-
-	incl_arc.quaternion.copy(incl_inst_rot.multiply(incl_offset));
-
-	scene.add(incl_arc);
 }
 function updateLatitudeSprite(lat){
 	//Update Sprite

@@ -54,22 +54,33 @@ function initAngles(){
 			//console.debug(inclination);
 
 			//Compute arc angle clip points
-			//var clip1 = value_earth.clone().normalize().multiplyScalar(sphere_radius);
-			//var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
+			var clip1 = value_earth.clone().normalize().multiplyScalar(sphere_radius);
+			var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
+			var clip_mid = clip1.clone().add(clip2.clone());
 
 			//Draw Arc
-			
-			incl_arc = new THREE.Mesh( new THREE.TorusGeometry( arc_radius, arc_tube, arc_seg_r, arc_seg_t, inclination ), mat_arc );
-			incl_arc.position.set( 0, 0, 0 );
+			var spline = new THREE.QuadraticBezierCurve3(clip1.clone(),
+			   clip_mid.clone(),
+			   clip2.clone());
 
-			//Used for update()
-			incl_offset = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3( 1, 0, 0 ),-Math.PI/2);
+			var material = new THREE.LineBasicMaterial({
+			    color: arc_color,
+			});
 
+			var geometry = new THREE.Geometry();
+			var splinePoints = spline.getPoints(arc_resolution);
+
+			for(var i = 0; i < splinePoints.length; i++){
+			    geometry.vertices.push(splinePoints[i]);  
+			}
+
+			incl_arc = new THREE.Line(geometry, material);
+			scene.add( incl_arc );
 
 			//Sprite
-			spriteInclination = makeTextSprite( 4, " i = ", 
-				{ fontsize: 40, borderColor: {r:255, g:255, b:255, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:255, a:1.0} } );
-			spriteInclination.position.set( 0, 0, 0);
+			spriteInclination = makeTextSprite( 4, " i=0º ", 
+				{ fontsize: 40, borderColor: {r:255, g:255, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
+			spriteInclination.position = clip_mid.clone();
 			scene.add(spriteInclination);
 
 			scene.add( incl_arc );
@@ -183,9 +194,37 @@ function updateAngles(){
 		if(show_inclination){
 			//Compute instant inclination angle
 			var inclination = Math.asin(value_earth.z/value_earth.length());
-			updateInclinationArc(inclination);
+			
+			//ReDraw Arc
+			scene.remove(incl_arc);
+
+			
+			//Compute arc angle clip points
+			var clip1 = value_earth.clone().normalize().multiplyScalar(sphere_radius);
+			var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
+			var clip_mid = clip1.clone().add(clip2.clone()).multiplyScalar(0.65);
+
+			//Draw Arc
+			var spline = new THREE.QuadraticBezierCurve3(clip1.clone(),
+			   clip_mid.clone(),
+			   clip2.clone());
+
+			var material = new THREE.LineBasicMaterial({
+			    color: arc_color,
+			});
+
+			var geometry = new THREE.Geometry();
+			var splinePoints = spline.getPoints(arc_resolution);
+
+			for(var i = 0; i < splinePoints.length; i++){
+			    geometry.vertices.push(splinePoints[i]);  
+			}
+
+			incl_arc = new THREE.Line(geometry, material);
+			scene.add( incl_arc );
 
 			updateInclinationSprite(inclination);
+			spriteInclination.position = clip_mid.clone();
 		}
 	}
 	if(show_spheric_coords){
