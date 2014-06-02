@@ -1,5 +1,10 @@
 package simulator;
 
+import org.orekit.attitudes.AttitudeProvider;
+import org.orekit.attitudes.NadirPointing;
+import org.orekit.bodies.BodyShape;
+import org.orekit.bodies.CelestialBodyFactory;
+import org.orekit.bodies.OneAxisEllipsoid;
 import org.orekit.errors.OrekitException;
 import org.orekit.errors.PropagationException;
 import org.orekit.frames.Frame;
@@ -177,19 +182,21 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 				break;
 		}*/
 		Orbit initialOrbit = new KeplerianOrbit(mission.initial_orbit.a, mission.initial_orbit.e, mission.initial_orbit.i, mission.initial_orbit.omega, mission.initial_orbit.raan, mission.initial_orbit.lM, PositionAngle.MEAN, inertialFrame, mission.initial_date, mission.initial_orbit.mu);
+		BodyShape earth = new OneAxisEllipsoid(1,1,CelestialBodyFactory.getEarth().getBodyOrientedFrame());
+		AttitudeProvider attitudeProvider = new NadirPointing(earth);
 		
 		SpacecraftState old_st;
 		switch(mission.propagatorType){
 			case Keplerian://FIXME:PROPAGATOR implement other propagators and put a flag to use each one
 				//kepler = new KeplerianPropagator(initialOrbit,null,mission.initial_orbit.mu,mission.initial_mass);
-				propagator = new KeplerianPropagator(initialOrbit,mission.initial_orbit.mu);
+				propagator = new KeplerianPropagator(initialOrbit,attitudeProvider,mission.initial_orbit.mu, mission.initial_mass);
 				propagator.setSlaveMode();
 				old_st = propagator.getInitialState();
 				propagator.resetInitialState(new SpacecraftState(old_st.getOrbit(), old_st.getAttitude() , mission.initial_mass));
 				break;
 			default:
 				//kepler = new KeplerianPropagator(initialOrbit,"DEFAULT_LAW",mission.initial_orbit.mu,mission.initial_mass);
-				propagator = new KeplerianPropagator(initialOrbit,mission.initial_orbit.mu);
+				propagator = new KeplerianPropagator(initialOrbit,attitudeProvider,mission.initial_orbit.mu, mission.initial_mass);
 				propagator.setSlaveMode();
 				old_st = propagator.getInitialState();
 				propagator.resetInitialState(new SpacecraftState(old_st.getOrbit(), old_st.getAttitude() , mission.initial_mass));
