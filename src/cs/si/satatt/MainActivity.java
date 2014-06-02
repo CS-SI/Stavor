@@ -2,6 +2,9 @@ package cs.si.satatt;
 
 /*import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkUIClient;*/
+import mission.Mission;
+import mission.MissionAndId;
+
 import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkUIClient;
 import org.xwalk.core.XWalkView;
@@ -261,8 +264,16 @@ public class MainActivity extends ActionBarActivity implements
 		MainActivity.this.startActivity(myIntent);
 	}
 	
-	public void showMissionEditor() {
+	public void showMissionCreator() {
 		Intent myIntent = new Intent(MainActivity.this, MissionActivity.class);
+		MainActivity.this.startActivity(myIntent);
+	}
+	
+	public void showMissionEditor(MissionAndId mission){
+		Intent myIntent = new Intent(MainActivity.this, MissionActivity.class);
+		Bundle b = new Bundle();
+		b.putSerializable("MISSION",mission);
+		myIntent.putExtras(b);
 		MainActivity.this.startActivity(myIntent);
 	}
 

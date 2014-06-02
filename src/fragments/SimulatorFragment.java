@@ -1,6 +1,7 @@
 package fragments;
 
 import mission.Mission;
+import mission.MissionAndId;
 import simulator.Simulator;
 import simulator.SimulatorStatus;
 import cs.si.satatt.AboutActivity;
@@ -154,37 +155,12 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	            		simulator.connect();
             		}else{
             			//Set mission
-            			String[] projection = {
-            					MissionEntry._ID,
-            				    MissionEntry.COLUMN_NAME_CLASS
-            				    };
-
-            			Cursor c = ((MainActivity)getActivity()).db
-            				.query(
-            						MissionEntry.TABLE_NAME,  // The table to query
-            					    projection,                               // The columns to return
-            					    MissionEntry._ID+" = ?",                                // The columns for the WHERE clause
-            					    new String[]{Integer.toString(activeMissionId)},                            // The values for the WHERE clause
-            					    "",                                     // don't group the rows
-            					    "",                                     // don't filter by row groups
-            					    null                                 // The sort order
-            					    );
-            			if (c != null && c.getCount() > 0) {
-            				c.moveToFirst();
-            				int idIndex = c.getColumnIndex(MissionEntry._ID);
-            				int nameIndex = c.getColumnIndex(MissionEntry.COLUMN_NAME_CLASS);
-            				//this.itemId = cursor.getLong(idIndex);
-            				byte[] mission_serie = c.getBlob(nameIndex);
-            				int mission_id = c.getInt(idIndex);
-            				Mission mis = SerializationUtil.deserialize(mission_serie);
-            				if(mis!=null){
-		            			simulator.setSelectedMission(mis, mission_id);
-		            			simulator.connect();
-            				}else{
-            					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
-            				}
+            			MissionAndId mis = getSelectedMission();
+            			if(mis!=null){
+                			simulator.setSelectedMission(mis.mission, mis.id);
+                			simulator.connect();
             			}else{
-            				Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_find_selected_mission_in_db), Toast.LENGTH_LONG).show();
+            				Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
             			}
             		}
             	}
@@ -210,12 +186,58 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	button_new.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				((MainActivity)getActivity()).showMissionEditor();
+				((MainActivity)getActivity()).showMissionCreator();
+			}
+    		
+    	});
+    	
+    	Button button_edit = (Button)rootView.findViewById(R.id.buttonMissionEdit);
+    	button_edit.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+
+    			MissionAndId mis = getSelectedMission();
+    			if(mis!=null){
+    				((MainActivity)getActivity()).showMissionEditor(mis);
+    			}else{
+    				Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
+    			}
 			}
     		
     	});
     	
 		return rootView;
+	}
+	
+	private MissionAndId getSelectedMission(){
+		String[] projection = {
+				MissionEntry._ID,
+			    MissionEntry.COLUMN_NAME_CLASS
+			    };
+
+		Cursor c = ((MainActivity)getActivity()).db
+			.query(
+					MissionEntry.TABLE_NAME,  // The table to query
+				    projection,                               // The columns to return
+				    MissionEntry._ID+" = ?",                                // The columns for the WHERE clause
+				    new String[]{Integer.toString(activeMissionId)},                            // The values for the WHERE clause
+				    "",                                     // don't group the rows
+				    "",                                     // don't filter by row groups
+				    null                                 // The sort order
+				    );
+		if (c != null && c.getCount() > 0) {
+			c.moveToFirst();
+			int idIndex = c.getColumnIndex(MissionEntry._ID);
+			int nameIndex = c.getColumnIndex(MissionEntry.COLUMN_NAME_CLASS);
+			//this.itemId = cursor.getLong(idIndex);
+			byte[] mission_serie = c.getBlob(nameIndex);
+			int mission_id = c.getInt(idIndex);
+			Mission mis = SerializationUtil.deserialize(mission_serie);
+			return new MissionAndId(mis, mission_id);
+		}else{
+			Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_find_selected_mission_in_db), Toast.LENGTH_LONG).show();
+			return null;
+		}
 	}
     
 	public void showDeleteMissionDialog(int id, String name) {

@@ -3,61 +3,100 @@ package cs.si.satatt;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import org.orekit.errors.OrekitException;
+import org.orekit.time.DateComponents;
+import org.orekit.time.DateTimeComponents;
+import org.orekit.time.TimeScale;
+import org.orekit.time.TimeScalesFactory;
+
+import mission.Mission;
+import mission.MissionAndId;
 import cs.si.satatt.R;
 import cs.si.satatt.R.id;
 import cs.si.satatt.R.layout;
 import android.app.Activity;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import app.Parameters;
 
-public class MissionActivity extends Activity {
+public class MissionActivity extends Activity{
 
+	boolean isEdit = false;
+	EditText tx_name, tx_description, tx_duration, tx_step, tx_orbit_a, tx_orbit_e, tx_orbit_i, tx_orbit_omega, tx_orbit_raan, tx_orbit_lm;
+	DatePicker datePicker;
+	TimePicker timePicker;
+	MissionAndId mission;
+	TimeScale utc;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.mission);
-		/*		
-		TextView tx_package = (TextView) findViewById(R.id.TextViewVersionPackage);
-		TextView tx_license = (TextView) findViewById(R.id.TextViewProjectLicense);
-		TextView tx_start_date = (TextView) findViewById(R.id.TextViewProjectStart);
-		TextView tx_install_date = (TextView) findViewById(R.id.TextViewVersionInstallDate);
-		TextView tx_version_date = (TextView) findViewById(R.id.TextViewVersionDate);
-		TextView tx_version_num = (TextView) findViewById(R.id.TextViewVersionNum);
-		TextView tx_version_orekit = (TextView) findViewById(R.id.TextViewVersionOrekit);
-		TextView tx_version_xwalk = (TextView) findViewById(R.id.TextViewVersionXwalk);
-		TextView tx_version_three = (TextView) findViewById(R.id.TextViewVersionThree);
-		TextView tx_version_gson = (TextView) findViewById(R.id.TextViewVersionGson);
-		TextView tx_version_color = (TextView) findViewById(R.id.TextViewVersionColor);
-		TextView tx_version_loader = (TextView) findViewById(R.id.TextViewVersionLoader);
 		
-		try {
-			tx_package.setText(getPackageManager().getPackageInfo(getPackageName(), 0).packageName);
-			tx_version_num.setText(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
-			tx_start_date.setText(Parameters.About.project_start_date);
-			tx_license.setText(Parameters.About.project_license);
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-	        Date resultdate = new Date(getPackageManager().getPackageInfo(getPackageName(), 0).lastUpdateTime);
-			tx_version_date.setText(sdf.format(resultdate));
-			
-			Date resultdate2 = new Date(getPackageManager().getPackageInfo(getPackageName(), 0).firstInstallTime);
-			tx_install_date.setText(sdf.format(resultdate2));
-			
-			tx_version_orekit.setText(Parameters.About.version_orekit);
-			tx_version_xwalk.setText(Parameters.About.version_xwalk);
-			tx_version_three.setText(Parameters.About.version_threejs);
-			tx_version_gson.setText(Parameters.About.version_gson);
-			tx_version_color.setText(Parameters.About.version_androidcolorpicker);
-			tx_version_loader.setText(Parameters.About.version_loader);
-			
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
+		Bundle b = this.getIntent().getExtras();
+		if(b!=null){
+		    mission = (MissionAndId) b.getSerializable("MISSION");
+		    isEdit = true;
+		}else{
+			mission = new MissionAndId(new Mission(), -1);
+			isEdit=false;
 		}
-		*/
+		
+		if(utc==null){
+			try {
+				utc = TimeScalesFactory.getUTC();
+			} catch (OrekitException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				onBackPressed();
+			}
+		}
+		
+		tx_name = (EditText) findViewById(R.id.editTextMissionName);
+		tx_description = (EditText) findViewById(R.id.editTextMissionDescription);
+		tx_duration = (EditText) findViewById(R.id.editTextMissionDuration);
+		tx_step = (EditText) findViewById(R.id.editTextMissionStep);
+		
+		datePicker = (DatePicker) findViewById(R.id.datePicker1);
+		datePicker.setCalendarViewShown(false);
+
+		timePicker = (TimePicker) findViewById(R.id.timePicker1);
+		timePicker.setIs24HourView(true);
+		
+		tx_orbit_a = (EditText) findViewById(R.id.EditTextMissionA);
+		tx_orbit_e = (EditText) findViewById(R.id.EditTextMissionE);
+		tx_orbit_i = (EditText) findViewById(R.id.EditTextMissionI);
+		tx_orbit_omega = (EditText) findViewById(R.id.EditTextMissionOmega);
+		tx_orbit_raan = (EditText) findViewById(R.id.EditTextMissionRaan);
+		tx_orbit_lm = (EditText) findViewById(R.id.editTextMissionLm);
+		
+		if(isEdit){
+			tx_name.setText(mission.mission.name);
+			tx_description.setText(mission.mission.description);
+			tx_duration.setText(Double.toString(mission.mission.sim_duration));
+			tx_step.setText(Double.toString(mission.mission.sim_step));
+			
+			DateTimeComponents dateComps = mission.mission.initial_date.getComponents(utc);
+			
+			datePicker.updateDate(dateComps.getDate().getYear(), dateComps.getDate().getMonth(), dateComps.getDate().getDay());
+			timePicker.setCurrentHour(dateComps.getTime().getHour());
+			timePicker.setCurrentMinute(dateComps.getTime().getMinute());
+			
+			tx_orbit_a.setText(Double.toString(mission.mission.initial_orbit.a));
+			tx_orbit_e.setText(Double.toString(mission.mission.initial_orbit.e));
+			tx_orbit_i.setText(Double.toString(mission.mission.initial_orbit.i));
+			tx_orbit_omega.setText(Double.toString(mission.mission.initial_orbit.omega));
+			tx_orbit_raan.setText(Double.toString(mission.mission.initial_orbit.raan));
+			tx_orbit_lm.setText(Double.toString(mission.mission.initial_orbit.lM));
+			
+		}
+
 	}
 	
 	@Override
