@@ -8,16 +8,20 @@
     <string name="mission_description">Description:</string>
     <string name="mission_time">Time:</string>
     <string name="mission_date">Date:</string>
-    <string name="mission_duration">Simulation duration:</string>
-    <string name="mission_step">Simulation step:</string>
+    <string name="mission_duration">Simulation duration (s):</string>
+    <string name="mission_step">Simulation step (s):</string>
     <string name="mission_orbit">Orbit</string>
-    <string name="mission_a">Semi-major axis:</string>
+    <string name="mission_a">Semi-major axis (m):</string>
+    <string name="mission_speed">Aprox. simulation speed (s'/s):</string>
     <string name="mission_e">Eccentricity:</string>
-    <string name="mission_i">Inclination:</string>
-    <string name="mission_omega">Arg. periapsis:</string>
-    <string name="mission_raan">R.A.A.N:</string>
-    <string name="mission_lm">Mean anomaly:</string>
+    <string name="mission_i">Inclination (rad):</string>
+    <string name="mission_omega">Arg. periapsis (rad):</string>
+    <string name="mission_raan">R.A.A.N (rad):</string>
+    <string name="mission_lm">Mean anomaly (rad):</string>
     <string name="mission_format_error">Format error: review the fields</string>
+    <string name="mission_error_create">Error creating mission in database</string>
+    <string name="mission_error_edit">Error editing mission in database</string>
+    <string name="mission_name_is_mandatory">The mission name is mandatory</string>
     
     <string name="menu_views_ref_frame">Ref.Frame</string>
     <string name="menu_views_ref_frame_xyz">XYZ</string>

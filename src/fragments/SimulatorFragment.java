@@ -8,6 +8,7 @@ import cs.si.satatt.AboutActivity;
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.MissionActivity;
 import cs.si.satatt.R;
+import cs.si.satatt.SatAttApplication;
 import database.MissionReaderDbHelper;
 import database.MissionReaderContract.MissionEntry;
 import database.SerializationUtil;
@@ -215,7 +216,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			    MissionEntry.COLUMN_NAME_CLASS
 			    };
 
-		Cursor c = ((MainActivity)getActivity()).db
+		Cursor c = ((SatAttApplication)((MainActivity)getActivity()).getApplication()).db
 			.query(
 					MissionEntry.TABLE_NAME,  // The table to query
 				    projection,                               // The columns to return
@@ -300,7 +301,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		MissionReaderDbHelper db_help = ((MainActivity)getActivity()).db_help;
+		MissionReaderDbHelper db_help = ((SatAttApplication)((MainActivity)getActivity()).getApplication()).db_help;
 		
 	    String sql="SELECT _ID, name, description FROM "+MissionEntry.TABLE_NAME+" ORDER BY name ASC;";
 	    String[] params = null;
@@ -317,7 +318,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	String activeMissionName = "";
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		((MainActivity)getActivity()).loader=(SQLiteCursorLoader)loader;
+		((SatAttApplication)((MainActivity)getActivity()).getApplication()).loader=(SQLiteCursorLoader)loader;
 	    adapter.changeCursor(cursor);
 		
 		if (cursor != null && cursor.getCount() > 0) {

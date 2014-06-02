@@ -20,6 +20,7 @@
         android:targetSdkVersion="19" />
 
     <application
+        android:name=".SatAttApplication"
         android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"

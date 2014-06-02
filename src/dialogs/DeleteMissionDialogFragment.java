@@ -2,6 +2,7 @@ package dialogs;
 
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
+import cs.si.satatt.SatAttApplication;
 import database.MissionReaderContract.MissionEntry;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -53,7 +54,7 @@ public class DeleteMissionDialogFragment extends DialogFragment {
 	private void deleteMission(int mission_id) {
 		MainActivity act = ((MainActivity)getActivity());
 		//XGGDEBUG:solve, this query is not well formed
-		act.loader.delete(MissionEntry.TABLE_NAME, MissionEntry._ID+"="+mission_id, null);
+		((SatAttApplication)act.getApplication()).loader.delete(MissionEntry.TABLE_NAME, MissionEntry._ID+"="+mission_id, null);
 	}
 
 }

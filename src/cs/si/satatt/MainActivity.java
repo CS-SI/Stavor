@@ -66,9 +66,7 @@ public class MainActivity extends ActionBarActivity implements
 		return simulator;
 	}
     public XWalkView mXwalkView;
-    public MissionReaderDbHelper db_help;
-    public SQLiteCursorLoader loader = null;
-    public SQLiteDatabase db;
+    
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +77,8 @@ public class MainActivity extends ActionBarActivity implements
 		
 		OrekitInit.init(Installer.getOrekitDataRoot(this));
 		
-		db_help = Installer.installApkDatabase(this);
-		db = db_help.getWritableDatabase();
+		((SatAttApplication)getApplication()).db_help = Installer.installApkDatabase(this);
+		((SatAttApplication)getApplication()).db = ((SatAttApplication)getApplication()).db_help.getWritableDatabase();
 
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
@@ -414,7 +412,7 @@ public class MainActivity extends ActionBarActivity implements
         	simulator.disconnect();
         else
         	dataFragment.setData(this.simulator);
-        db_help.close();
+        ((SatAttApplication)getApplication()).db_help.close();
         //XWalk
         if (mXwalkView != null) {
             mXwalkView.onDestroy();
