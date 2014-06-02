@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 import org.orekit.errors.OrekitException;
+import org.orekit.time.AbsoluteDate;
 import org.orekit.time.DateComponents;
 import org.orekit.time.DateTimeComponents;
 import org.orekit.time.TimeScale;
@@ -17,10 +18,14 @@ import cs.si.satatt.R.layout;
 import android.app.Activity;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import app.Parameters;
 
 public class MissionActivity extends Activity{
@@ -29,6 +34,7 @@ public class MissionActivity extends Activity{
 	EditText tx_name, tx_description, tx_duration, tx_step, tx_orbit_a, tx_orbit_e, tx_orbit_i, tx_orbit_omega, tx_orbit_raan, tx_orbit_lm;
 	DatePicker datePicker;
 	TimePicker timePicker;
+	Button button;
 	MissionAndId mission;
 	TimeScale utc;
 	
@@ -57,6 +63,44 @@ public class MissionActivity extends Activity{
 				onBackPressed();
 			}
 		}
+		button = (Button) findViewById(R.id.buttonMissionSave);
+		button.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				try{
+					mission.mission.name = tx_name.getText().toString();
+					mission.mission.description = tx_description.getText().toString();
+					
+					mission.mission.sim_duration = Double.parseDouble(tx_duration.getText().toString());
+					mission.mission.sim_step = Double.parseDouble(tx_step.getText().toString());
+					
+					mission.mission.initial_date = new AbsoluteDate(
+							datePicker.getYear(),
+							datePicker.getMonth(),
+							datePicker.getDayOfMonth(),
+							timePicker.getCurrentHour(),
+							timePicker.getCurrentMinute(),0.0,utc);
+					
+					mission.mission.initial_orbit.a = Double.parseDouble(tx_orbit_a.getText().toString());
+					mission.mission.initial_orbit.e = Double.parseDouble(tx_orbit_e.getText().toString());
+					mission.mission.initial_orbit.i = Double.parseDouble(tx_orbit_i.getText().toString());
+					mission.mission.initial_orbit.omega = Double.parseDouble(tx_orbit_omega.getText().toString());
+					mission.mission.initial_orbit.raan = Double.parseDouble(tx_orbit_raan.getText().toString());
+					mission.mission.initial_orbit.lM = Double.parseDouble(tx_orbit_lm.getText().toString());
+					
+					if(isEdit){
+						//Update register with new name and serialized
+					}else{
+						//Create new register in db
+					}
+					
+					
+				}catch(Exception e){
+					Toast.makeText(getApplicationContext(), getString(R.string.mission_format_error), Toast.LENGTH_LONG).show();
+				}
+			}
+    		
+    	});
 		
 		tx_name = (EditText) findViewById(R.id.editTextMissionName);
 		tx_description = (EditText) findViewById(R.id.editTextMissionDescription);
@@ -77,6 +121,8 @@ public class MissionActivity extends Activity{
 		tx_orbit_lm = (EditText) findViewById(R.id.editTextMissionLm);
 		
 		if(isEdit){
+			button.setText(getString(R.string.mission_edit));
+			
 			tx_name.setText(mission.mission.name);
 			tx_description.setText(mission.mission.description);
 			tx_duration.setText(Double.toString(mission.mission.sim_duration));
@@ -95,6 +141,8 @@ public class MissionActivity extends Activity{
 			tx_orbit_raan.setText(Double.toString(mission.mission.initial_orbit.raan));
 			tx_orbit_lm.setText(Double.toString(mission.mission.initial_orbit.lM));
 			
+		}else{
+			button.setText(getString(R.string.mission_create));
 		}
 
 	}

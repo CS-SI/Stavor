@@ -2,6 +2,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <string name="mission_editor">Mission editor</string>
+    <string name="mission_edit">Edit</string>
+    <string name="mission_create">Create</string>
     <string name="mission_name">Name:</string>
     <string name="mission_description">Description:</string>
     <string name="mission_time">Time:</string>
@@ -15,6 +17,7 @@
     <string name="mission_omega">Arg. periapsis:</string>
     <string name="mission_raan">R.A.A.N:</string>
     <string name="mission_lm">Mean anomaly:</string>
+    <string name="mission_format_error">Format error: review the fields</string>
     
     <string name="menu_views_ref_frame">Ref.Frame</string>
     <string name="menu_views_ref_frame_xyz">XYZ</string>
