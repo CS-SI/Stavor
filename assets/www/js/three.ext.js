@@ -1,4 +1,3 @@
-//XGGDEBUG: MyFunctions ******************************************************************************************************
 
 /**
  * @author Xavier Gibert-González
@@ -360,8 +359,5 @@ THREE.VectorHelper.prototype.setColor = function ( color ) {
 	this.cone.material.color.set( color );
 
 };
-
-
-//XGGDEBUG: END -------------------------------------------------------------------------------------------------------------
 
 
