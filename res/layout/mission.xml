@@ -185,7 +185,7 @@
                 android:layout_height="wrap_content" >
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical" >
 
@@ -210,7 +210,7 @@
 
                         <EditText
                             android:id="@+id/EditTextMissionA"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
@@ -230,7 +230,7 @@
 
                         <EditText
                             android:id="@+id/EditTextMissionE"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
@@ -250,7 +250,7 @@
 
                         <EditText
                             android:id="@+id/EditTextMissionI"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
@@ -270,7 +270,7 @@
 
                         <EditText
                             android:id="@+id/EditTextMissionOmega"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
@@ -290,7 +290,7 @@
 
                         <EditText
                             android:id="@+id/EditTextMissionRaan"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
@@ -310,7 +310,7 @@
 
                         <EditText
                             android:id="@+id/editTextMissionLm"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
