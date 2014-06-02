@@ -44,6 +44,7 @@
         <activity
             android:name="cs.si.satatt.MissionActivity"
             android:label="@string/mission_editor"
+        	android:theme="@style/nonSplashScreenTheme"
              >
         </activity>
     </application>

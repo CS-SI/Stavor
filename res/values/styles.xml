@@ -21,6 +21,9 @@
     <style name="splashScreenTheme" parent="@style/AppTheme">
     	<item name="android:windowBackground">@drawable/loading</item>
 	</style>
+	<style name="nonSplashScreenTheme" parent="@style/AppTheme">
+    	<item name="android:windowBackground">@color/black</item>
+	</style>
 	
 	
     <style name="MooSpinnerItem" parent="android:Widget.TextView.SpinnerItem">
