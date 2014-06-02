@@ -153,8 +153,44 @@ THREE.TargetHelper = function ( dir, origin, length, hex, headLength, headWidth,
 	this.line.matrixAutoUpdate = false;
 	this.add( this.line );
 
-	var coneGeometry = new THREE.CylinderGeometry( headLength, headLength, headWidth, segments, 1 );
-	coneGeometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, - 0.5, 0 ) );
+	//var coneGeometry = new THREE.CylinderGeometry( headLength, headLength, headWidth, segments, 1 );
+	//Cross shape for target
+	// points that define shape
+	var pts = [];
+	var cross_scale = 0.3;
+	pts.push( new THREE.Vector2 (0, 2*cross_scale));
+	pts.push( new THREE.Vector2 (-5*cross_scale, 7*cross_scale));
+	pts.push( new THREE.Vector2 (-7*cross_scale, 5*cross_scale));
+	pts.push( new THREE.Vector2 (-2*cross_scale, 0));
+	pts.push( new THREE.Vector2 (-7*cross_scale, -5*cross_scale));
+	pts.push( new THREE.Vector2 (-5*cross_scale, -7*cross_scale));
+	pts.push( new THREE.Vector2 (0, -2*cross_scale));
+	pts.push( new THREE.Vector2 (5*cross_scale, -7*cross_scale));
+	pts.push( new THREE.Vector2 (7*cross_scale, -5*cross_scale));
+	pts.push( new THREE.Vector2 (2*cross_scale, 0));
+	pts.push( new THREE.Vector2 (7*cross_scale, 5*cross_scale));
+	pts.push( new THREE.Vector2 (5*cross_scale, 7*cross_scale));
+
+	// shape to extrude
+	var shape = new THREE.Shape( pts );
+
+	// extrude options
+	var options = { 
+		amount: headWidth,              // default 100, only used when path is null
+		bevelEnabled: false, 
+		bevelSegments: 2, 
+		steps: 1,                // default 1, try 3 if path defined
+		extrudePath: null        // or path
+	};
+
+	// geometry
+	var coneGeometry = new THREE.ExtrudeGeometry( shape, options );
+
+	coneGeometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, - 0.5, 0 ).makeRotationX( Math.PI/2 ) );
+	//End of cross shape definition
+	
+
+	//coneGeometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, - 0.5, 0 ) );
 
 	if(!canvas_mode)
 		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: hex, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } ) );
