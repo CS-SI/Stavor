@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-
+	
+    <string name="app_name">SatAtt</string>
+    <string name="dummy"></string>
+    <string name="app_exit_prevent_message">Press back again to close this app</string>
+    <string name="title_section1">Simulator</string>
+    <string name="title_section2">HUD</string>
+    <string name="title_section3">Basic indicators</string>
+    <string name="title_section4">Extra indicators</string>
+    <string name="title_section5">Measures</string>
+    <string name="title_section6">Models</string>
+    <string name="title_section7">Preferences</string>
+    <string name="title_section8">WebGL test</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_screenshot">About</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_reset_conf">Reset Conf.</string>
+    <string name="action_reset_db">Reset Missions</string>
+    <string name="action_about">About</string>
+    
+    
     <string name="mission_editor">Mission editor</string>
     <string name="mission_edit">Edit</string>
     <string name="mission_create">Create</string>
@@ -44,9 +64,7 @@
     <string name="menu_views_earth">Earth</string>
     <string name="menu_views_sun">Sun</string>
     
-    <string name="app_name">SatAtt</string>
     <string name="about">About</string>
-    <string name="dummy"></string>
     <string name="cs_site">http://c-s.fr/</string>
     <string name="about_table_project">Project</string>
     <string name="about_project_license">Project license:</string>
@@ -70,15 +88,7 @@
     <string name="about_install_date">Install date:</string>
     <string name="about1">This application is a product of CS Systèmes d\'Information.</string>
     <string name="about2">With the integration of the following projects:</string>
-    <string name="app_exit_prevent_message">Press back again to close this app</string>
-    <string name="title_section1">Simulator</string>
-    <string name="title_section2">HUD</string>
-    <string name="title_section3">Basic indicators</string>
-    <string name="title_section4">Extra indicators</string>
-    <string name="title_section5">Measures</string>
-    <string name="title_section6">Models</string>
-    <string name="title_section7">Preferences</string>
-    <string name="title_section8">WebGL test</string>
+    
     <string name="dialog_welcome">Welcome</string>
     <string name="dialog_error">Error</string>
     <string name="dialog_exit">Exit</string>
@@ -106,13 +116,7 @@
     <string name="basic_indicator_momentum">Momentum</string>
     <string name="basic_indicator_acceleration">Acceleration</string>
     <string name="basic_indicator_attitude">Attitude</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_screenshot">About</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_reset_conf">Reset Conf.</string>
-    <string name="action_reset_db">Reset Missions</string>
-    <string name="action_about">About</string>
+    
     <string name="title_simulator">Simulator</string>
     <string name="title_sim_local">Local</string>
     <string name="title_sim_remote">Remote</string>
@@ -150,6 +154,7 @@
     <string name="test_2">Test 2</string>
     <string name="test_3">Test 3</string>
     <string name="powered_by">Powered by:</string>
+    
     <string name="sim_connect">Connect</string>
     <string name="sim_disconnect">Disconnect</string>
     <string name="sim_remote_host">Host:</string>
@@ -331,8 +336,6 @@
     <string name="pref_summary_vectors_angle_sel1">Indicator selection for the angle</string>
     <string name="pref_summary_vectors_angle_sel2">Indicator selection for the angle</string>
     
-    
-    
     <string name="error_installing_missions_database">Installation of the missions database failed.</string>
     <string name="error_installing_orekit_default_data">Installation of the default Orekit data failed.</string>
     <string name="error_installing_orekit_default_data_external_storage_not_accessible">Installation of the default Orekit data failed due to external storage not accessible.</string>
@@ -353,7 +356,6 @@
     <string name="color4_title">Color 4</string>
     <string name="color4_summary">color set with HEX code in xml</string>
 
-    
     <bool name="true_value">true</bool>
 
 </resources>

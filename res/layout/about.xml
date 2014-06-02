@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:gravity="right"
-                android:text="TextView"
+                android:text="@string/dummy"
                 android:textColor="@color/white" />
         </LinearLayout>
 
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:gravity="right"
-                android:text="TextView"
+                android:text="@string/dummy"
                 android:textColor="@color/white" />
         </LinearLayout>
 
@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:gravity="right"
-                android:text="TextView"
+                android:text="@string/dummy"
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
@@ -218,7 +218,7 @@
 
         <ScrollView
             android:id="@+id/scrollprojectsAbout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fillViewport="true"
             android:scrollbars="horizontal|vertical" >
@@ -298,7 +298,7 @@
                         android:id="@+id/TextViewVersionOrekit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Small Text"
+                        android:text="@string/dummy"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/grey1" />
                 </TableRow>
@@ -334,7 +334,7 @@
                         android:id="@+id/TextViewVersionXwalk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Small Text"
+                        android:text="@string/dummy"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/grey1" />
                 </TableRow>
@@ -370,7 +370,7 @@
                         android:id="@+id/TextViewVersionThree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Small Text"
+                        android:text="@string/dummy"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/grey1" />
                 </TableRow>
@@ -406,7 +406,7 @@
                         android:id="@+id/TextViewVersionGson"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Small Text"
+                        android:text="@string/dummy"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/grey1" />
                 </TableRow>
@@ -442,7 +442,7 @@
                         android:id="@+id/TextViewVersionColor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Small Text"
+                        android:text="@string/dummy"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/grey1" />
                 </TableRow>
@@ -478,7 +478,7 @@
                         android:id="@+id/TextViewVersionLoader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Small Text"
+                        android:text="@string/dummy"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/grey1" />
                 </TableRow>
