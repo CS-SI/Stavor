@@ -196,13 +196,19 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	button_edit.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-
-    			MissionAndId mis = getSelectedMission();
-    			if(mis!=null){
-    				((MainActivity)getActivity()).showMissionEditor(mis);
-    			}else{
-    				Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
-    			}
+				if(activeMissionId==-1){
+					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
+				}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2 ){
+					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_editable), Toast.LENGTH_LONG).show();
+				}else{
+					MissionAndId mis = getSelectedMission();
+	    			if(mis!=null){
+	    				((MainActivity)getActivity()).showMissionEditor(mis);
+	    			}else{
+	    				Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
+	    			}
+				}
+    			
 			}
     		
     	});

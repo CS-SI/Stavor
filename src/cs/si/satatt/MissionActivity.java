@@ -22,6 +22,8 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -41,6 +43,7 @@ public class MissionActivity extends Activity{
 	Button button;
 	MissionAndId mission;
 	TimeScale utc;
+	TextView speed, duration;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,9 @@ public class MissionActivity extends Activity{
 				onBackPressed();
 			}
 		}
+		speed = (TextView) findViewById(R.id.textViewSpeed);
+		duration = (TextView) findViewById(R.id.textViewDuration);
+		
 		button = (Button) findViewById(R.id.buttonMissionSave);
 		button.setOnClickListener(new OnClickListener(){
 			@Override
@@ -143,7 +149,21 @@ public class MissionActivity extends Activity{
 		tx_orbit_lm = (EditText) findViewById(R.id.editTextMissionLm);
 		
 		tx_duration.setText(Double.toString(mission.mission.sim_duration));
+		tx_duration.addTextChangedListener(new TextWatcher(){
+	        public void afterTextChanged(Editable s) {
+	        	updateSpeedAndDuration();
+	        }
+	        public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+	        public void onTextChanged(CharSequence s, int start, int before, int count){}
+	    });
 		tx_step.setText(Double.toString(mission.mission.sim_step));
+		tx_step.addTextChangedListener(new TextWatcher(){
+	        public void afterTextChanged(Editable s) {
+	        	updateSpeedAndDuration();
+	        }
+	        public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+	        public void onTextChanged(CharSequence s, int start, int before, int count){}
+	    }); 
 
 		tx_orbit_a.setText(Double.toString(mission.mission.initial_orbit.a));
 		tx_orbit_e.setText(Double.toString(mission.mission.initial_orbit.e));
@@ -168,11 +188,45 @@ public class MissionActivity extends Activity{
 		}else{
 			button.setText(getString(R.string.mission_create));
 		}
-
+		updateSpeedAndDuration();
+	}
+	
+	private void updateSpeedAndDuration(){
+		try{
+			double step = Double.parseDouble(tx_step.getText().toString());
+			double aprox_speed = step/(Parameters.Simulator.min_hud_model_refreshing_interval_ns/1e9);
+			double mission_dur = Double.parseDouble(tx_duration.getText().toString());
+			double sim_duration = mission_dur/aprox_speed;
+			speed.setText(Double.toString(aprox_speed));
+			duration.setText(Double.toString(sim_duration));
+		}catch(Exception e){
+			speed.setText(getString(R.string.mission_no_val));
+			duration.setText(getString(R.string.mission_no_val));
+		}		
 	}
 	
 	private boolean editMission(){
-		return true;
+		ContentValues values = new ContentValues();
+		values.put(MissionEntry.COLUMN_NAME_NAME, mission.mission.name);
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, mission.mission.description);
+		
+		try {
+			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission.mission));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// Insert the new row, returning the primary key value of the new row
+		long newRowId;
+		newRowId = ((SatAttApplication)getApplication()).db.update(
+				MissionEntry.TABLE_NAME,
+				values,
+				"_id "+"="+mission.id, 
+				null);
+		if(newRowId==-1)
+			return false;
+		else
+			return true;
 	}
 	
 	private boolean addMission(){

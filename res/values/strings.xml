@@ -8,11 +8,12 @@
     <string name="mission_description">Description:</string>
     <string name="mission_time">Time:</string>
     <string name="mission_date">Date:</string>
-    <string name="mission_duration">Simulation duration (s):</string>
+    <string name="mission_duration">Mission duration (s\'):</string>
     <string name="mission_step">Simulation step (s):</string>
     <string name="mission_orbit">Orbit</string>
     <string name="mission_a">Semi-major axis (m):</string>
-    <string name="mission_speed">Aprox. simulation speed (s'/s):</string>
+    <string name="mission_speed">Aprox. simulation speed (s\'/s):</string>
+    <string name="mission_dur">Aprox. simulation duration (s):</string>
     <string name="mission_e">Eccentricity:</string>
     <string name="mission_i">Inclination (rad):</string>
     <string name="mission_omega">Arg. periapsis (rad):</string>
@@ -22,6 +23,7 @@
     <string name="mission_error_create">Error creating mission in database</string>
     <string name="mission_error_edit">Error editing mission in database</string>
     <string name="mission_name_is_mandatory">The mission name is mandatory</string>
+    <string name="mission_no_val">---</string>
     
     <string name="menu_views_ref_frame">Ref.Frame</string>
     <string name="menu_views_ref_frame_xyz">XYZ</string>
@@ -158,6 +160,7 @@
     <string name="sim_local_edit">Edit</string>
     <string name="sim_local_remove">Remove</string>
     <string name="sim_local_mission_not_removable">This mission cannot be deleted</string>
+    <string name="sim_local_mission_not_editable">This mission cannot be edited</string>
     <string name="sim_local_select_first_a_mission">Select a mission first</string>
     <string name="sim_local_simulator_connected">Simulator connected!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Error, cannot deserialize selected mission</string>

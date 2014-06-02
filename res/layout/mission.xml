@@ -145,6 +145,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mission_speed" />
+
+                <TextView
+                    android:id="@+id/textViewSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/mission_no_val" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mission_dur" />
+
+                <TextView
+                    android:id="@+id/textViewDuration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:text="@string/mission_no_val" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
