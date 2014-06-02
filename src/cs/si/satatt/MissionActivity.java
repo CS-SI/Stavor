@@ -1,12 +1,9 @@
 package cs.si.satatt;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 import org.orekit.errors.OrekitException;
 import org.orekit.time.AbsoluteDate;
-import org.orekit.time.DateComponents;
 import org.orekit.time.DateTimeComponents;
 import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
@@ -14,13 +11,10 @@ import org.orekit.time.TimeScalesFactory;
 import mission.Mission;
 import mission.MissionAndId;
 import cs.si.satatt.R;
-import cs.si.satatt.R.id;
-import cs.si.satatt.R.layout;
 import database.SerializationUtil;
 import database.MissionReaderContract.MissionEntry;
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;

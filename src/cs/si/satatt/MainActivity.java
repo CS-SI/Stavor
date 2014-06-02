@@ -2,16 +2,14 @@ package cs.si.satatt;
 
 /*import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkUIClient;*/
-import mission.Mission;
+
 import mission.MissionAndId;
 
 import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkUIClient;
 import org.xwalk.core.XWalkView;
 
-import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
 
-import database.MissionReaderDbHelper;
 import dialogs.ErrorDialogFragment;
 import dialogs.ResetAppDialogFragment;
 import dialogs.ResetDbDialogFragment;
@@ -32,7 +30,6 @@ import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.Menu;
