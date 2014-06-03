@@ -16,6 +16,11 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+/**
+ * Simulator object
+ * @author Xavier Gibert
+ *
+ */
 public class Simulator {
 	private SimulatorStatus simulatorStatus = SimulatorStatus.Disconnected;
 	private SimulationStatus simulationStatus = SimulationStatus.Pause;

@@ -14,6 +14,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+/**
+ * Dialog to prevent unwilling resets of app configuration
+ * @author Xavier Gibert
+ *
+ */
 public class ResetAppDialogFragment extends DialogFragment {
 	
 	public static ResetAppDialogFragment newInstance() {	

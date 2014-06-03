@@ -24,6 +24,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import app.Parameters;
 
+/**
+ * Local simulator thread
+ * @author Xavier Gibert
+ *
+ */
 public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
  
 	private Simulator simulator;

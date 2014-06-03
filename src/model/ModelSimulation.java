@@ -21,6 +21,11 @@ import com.google.gson.Gson;
 import cs.si.satatt.MainActivity;
 import cs.si.satatt.R;
 
+/**
+ * Contains and handles both the model information and configuration
+ * @author Xavier Gibert
+ *
+ */
 public class ModelSimulation {
 	private Gson gson = new Gson();
     private ModelConfiguration config;

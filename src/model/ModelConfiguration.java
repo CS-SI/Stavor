@@ -5,6 +5,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+/**
+ * Initialization parameters of the WebGL model
+ * @author Xavier Gibert
+ *
+ */
 public class ModelConfiguration {
 	
 	public ModelConfiguration(Context ctx){

@@ -10,6 +10,11 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+/**
+ * Dialog to prevent unwilling mission removals
+ * @author Xavier Gibert
+ *
+ */
 public class DeleteMissionDialogFragment extends DialogFragment {
 	private static final String ARG_NAME = "mission_name";
 	private static final String ARG_ID = "mission_id";

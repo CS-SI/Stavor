@@ -4,6 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Reader of missions database information
+ * @author Xavier Gibert
+ *
+ */
 public class MissionReaderDbHelper extends SQLiteOpenHelper {
 	// If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;

@@ -6,6 +6,11 @@ import mission.Orbit;
 
 import org.orekit.time.AbsoluteDate;
 
+/**
+ * Mission object
+ * @author Xavier Gibert
+ *
+ */
 public class Mission implements Serializable{
 	/**
 	 * 

@@ -8,6 +8,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import app.Installer;
 
+/**
+ * Welcome dialog to inform of the installation paths
+ * @author Xavier Gibert
+ *
+ */
 public class WelcomeDialogFragment extends DialogFragment {
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

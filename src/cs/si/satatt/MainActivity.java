@@ -40,6 +40,11 @@ import app.Installer;
 import app.OrekitInit;
 import app.Parameters;
 
+/**
+ * Main activity of the application, managing persistent objects and fragments
+ * @author Xavier Gibert
+ *
+ */
 public class MainActivity extends ActionBarActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 

@@ -7,6 +7,11 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+/**
+ * Dialog to sho errors
+ * @author Xavier Gibert
+ *
+ */
 public class ErrorDialogFragment extends DialogFragment {
 	private static final String ARG_MESSAGE = "error_message";
 	private static final String ARG_IGNORE = "can_be_ignored";

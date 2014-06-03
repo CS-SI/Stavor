@@ -8,9 +8,8 @@ import java.io.ObjectOutputStream;
 import mission.Mission;
  
 /**
- * A simple class with generic serialize and deserialize method implementations
- *
- * @author pankaj
+ * Provides functions to serialize and deserialize the missions that will be stored or loaded from the database
+ * @author Xavier Gibert
  *
  */
 public class SerializationUtil {

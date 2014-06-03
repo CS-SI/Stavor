@@ -16,6 +16,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+/**
+ * Dialog to prevent unwilling resets of mission database
+ * @author Xavier Gibert
+ *
+ */
 public class ResetDbDialogFragment extends DialogFragment {
 	
 	public static ResetDbDialogFragment newInstance() {	

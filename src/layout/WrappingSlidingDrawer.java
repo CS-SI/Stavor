@@ -5,7 +5,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.SlidingDrawer;
 
-
+/**
+ * 
+ * @author Xavier Gibert
+ *
+ */
 @SuppressWarnings("deprecation")
 public class WrappingSlidingDrawer extends SlidingDrawer {
 

@@ -42,7 +42,9 @@ import android.widget.ViewSwitcher;
 import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
 
 /**
- * A simulator fragment containing a web view.
+ * Fragment to show all the simulator configurations
+ * @author Xavier Gibert
+ *
  */
 public final class SimulatorFragment extends Fragment implements LoaderCallbacks<Cursor> {
 	/**

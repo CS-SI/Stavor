@@ -12,6 +12,11 @@ import android.widget.Toast;
 //import org.chromium.content.browser.JavascriptInterface;
 import org.xwalk.core.JavascriptInterface;
 
+/**
+ * Javascript-to-Android bridge functions
+ * @author Xavier Gibert
+ *
+ */
 public class WebAppInterface {
     Activity activity;
     private ModelSimulation sim;

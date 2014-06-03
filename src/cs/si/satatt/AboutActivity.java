@@ -9,6 +9,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 import app.Parameters;
 
+/**
+ * Activity to show the app About screen
+ * @author Xavier Gibert
+ *
+ */
 public class AboutActivity extends Activity {
 
 	@Override

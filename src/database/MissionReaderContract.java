@@ -2,6 +2,11 @@ package database;
 
 import android.provider.BaseColumns;
 
+/**
+ * Definition of missions database structure
+ * @author Xavier Gibert
+ *
+ */
 public final class MissionReaderContract {
 	public MissionReaderContract(){}
 	

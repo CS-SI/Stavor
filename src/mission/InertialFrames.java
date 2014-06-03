@@ -2,7 +2,7 @@ package mission;
 
 /**
  * Inertial Reference Frames to propagate the orbit.
- * @author XavierGibert
+ * @author Xavier Gibert
  *
  */
 public enum InertialFrames {

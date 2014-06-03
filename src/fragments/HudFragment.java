@@ -29,7 +29,9 @@ import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import app.Parameters;
 
 /**
- * A sphere fragment containing a web view.
+ * Fragment with the visualization browser and hud panel
+ * @author Xavier Gibert
+ *
  */
 public final class HudFragment extends Fragment {
 	/**

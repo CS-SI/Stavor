@@ -2,6 +2,11 @@ package mission;
 
 import java.io.Serializable;
 
+/**
+ * Includes the mission object and the database id
+ * @author Xavier Gibert
+ *
+ */
 public class MissionAndId implements Serializable{
 	/**
 	 * 

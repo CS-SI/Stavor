@@ -1,8 +1,8 @@
 package mission;
 
 /**
- * Types of propagator available
- * @author XavierGibert
+ * Types of propagator available for the mission
+ * @author Xavier Gibert
  *
  */
 public enum PropagatorType {

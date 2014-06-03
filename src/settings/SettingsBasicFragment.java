@@ -9,6 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Settings of the basic indicators
+ * @author Xavier Gibert
+ *
+ */
 public class SettingsBasicFragment extends PreferenceFragment {
 	/**
 	 * The fragment argument representing the section number for this

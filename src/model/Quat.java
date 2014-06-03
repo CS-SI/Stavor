@@ -2,6 +2,11 @@ package model;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 
+/**
+ * Object representing a Quaternion
+ * @author Xavier Gibert
+ *
+ */
 public class Quat {
 	public double w = 1;
 	public double x = 0;

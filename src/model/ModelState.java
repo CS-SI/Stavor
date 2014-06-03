@@ -5,8 +5,8 @@ import java.io.Serializable;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 
 /**
- * Parameters for the model representation.
- * @author xavier
+ * Parameters for the periodic model representation.
+ * @author Xavier Gibert
  *
  */
 public class ModelState implements Serializable{

@@ -3,8 +3,8 @@ package mission;
 import java.io.Serializable;
 
 /**
- * Contains all the values of a Mission.
- * @author XavierGibert
+ * Contains all the values of an orbit for a mission.
+ * @author Xavier Gibert
  *
  */
 public class Orbit implements Serializable{

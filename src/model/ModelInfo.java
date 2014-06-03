@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Parameters for the information panel of the HUD.
- * @author xavier
+ * @author Xavier Gibert
  *
  */
 public class ModelInfo  implements Serializable{

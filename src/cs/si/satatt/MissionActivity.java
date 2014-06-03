@@ -28,6 +28,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import app.Parameters;
 
+/**
+ * Activity to edit or create the missions of the database
+ * @author Xavier Gibert
+ *
+ */
 public class MissionActivity extends Activity{
 
 	boolean isEdit = false;

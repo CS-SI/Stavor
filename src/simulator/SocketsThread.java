@@ -16,6 +16,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import app.Parameters;
 
+/**
+ * Remote simulator thread
+ * @author Xavier Gibert
+ *
+ */
 public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
  
 	private String dstAddress;

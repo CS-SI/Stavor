@@ -18,7 +18,9 @@ import android.widget.LinearLayout;
 import app.Parameters;
 
 /**
- * A test fragment containing a web view.
+ * Fragment with browser to test WebGL compatibility
+ * @author Xavier Gibert
+ *
  */
 public final class TestFragment extends Fragment {
 	/**

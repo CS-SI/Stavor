@@ -1,5 +1,10 @@
 package app;
 
+/**
+ * Global app configuration parameters
+ * @author Xavier Gibert
+ *
+ */
 public class Parameters {
 	public static class App {
 		public static final long splash_min_time_ns = 1000000000;//[ns] 1.0s min

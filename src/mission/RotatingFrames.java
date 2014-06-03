@@ -2,7 +2,7 @@ package mission;
 
 /**
  * Rotating Reference Frames to compute the position of the Spacecraft.
- * @author XavierGibert
+ * @author Xavier Gibert
  *
  */
 public enum RotatingFrames {

@@ -6,6 +6,11 @@ import database.MissionReaderDbHelper;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ * Application
+ * @author Xavier Gibert
+ *
+ */
 public class SatAttApplication extends Application {
 	private String searchTerm = "";
 	

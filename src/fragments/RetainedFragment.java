@@ -4,6 +4,11 @@ import android.app.Fragment;
 import android.os.Bundle;
 import simulator.Simulator;
 
+/**
+ * Fragment to store information when restarting app (e.g. rotating device)
+ * @author Xavier Gibert
+ *
+ */
 public class RetainedFragment extends Fragment {
 	// data object we want to retain
     private Simulator data;

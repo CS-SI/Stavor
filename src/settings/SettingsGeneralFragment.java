@@ -9,6 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * General settings of the application
+ * @author Xavier Gibert
+ *
+ */
 public class SettingsGeneralFragment extends PreferenceFragment {
 	/**
 	 * The fragment argument representing the section number for this

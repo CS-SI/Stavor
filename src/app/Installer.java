@@ -21,6 +21,11 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+/**
+ * Provides initial app installation functions
+ * @author Xavier Gibert
+ *
+ */
 public class Installer {
 	/* Checks if external storage is available for read and write */
 	private static boolean isExternalStorageWritable() {
