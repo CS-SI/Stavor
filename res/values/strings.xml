@@ -133,13 +133,6 @@
     <string name="static_vector">Static Vector</string>
     <string name="dynamic_vector">Dynamic Vector</string>
     <string name="units_km">[Km]</string>
-    <string name="view_x">+X</string>
-    <string name="view_y">+Y</string>
-    <string name="view_z">+Z</string>
-    <string name="view_nx">-X</string>
-    <string name="view_ny">-Y</string>
-    <string name="view_nz">-Z</string>
-    <string name="view_xyz">XYZ</string>
     <string name="fps_zero">0 FPS</string>
     <string name="eg_sim_time">0000-00-00  00:00:00.000</string>
     <string name="eg_vel">Vel. 0,00 Km/s</string>
