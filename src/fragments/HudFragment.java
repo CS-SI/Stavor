@@ -176,51 +176,61 @@ public final class HudFragment extends Fragment {
         	@Override
             public boolean onMenuItemClick(MenuItem item) {
         		String com_view = (String)item.getTitle();
+        		String command;
                 switch (item.getItemId()) {
                     case R.id.menu_views_earth:
+                    	command = getString(R.string.key_views_earth);
                     	break;
                     case R.id.menu_views_sun:
+                    	command = getString(R.string.key_views_sun);
                     	break;
                     case R.id.menu_views_ref_frame_xyz:
+                    	command = getString(R.string.key_views_ref_frame_xyz);
                     	break;
                     case R.id.menu_views_ref_frame_x:
+                    	command = getString(R.string.key_views_ref_frame_x);
                     	break;
                     case R.id.menu_views_ref_frame_xx:
+                    	command = getString(R.string.key_views_ref_frame_xx);
                     	break;
                     case R.id.menu_views_ref_frame_y:
+                    	command = getString(R.string.key_views_ref_frame_y);
                     	break;
                     case R.id.menu_views_ref_frame_yy:
+                    	command = getString(R.string.key_views_ref_frame_yy);
                     	break;
                     case R.id.menu_views_ref_frame_z:
+                    	command = getString(R.string.key_views_ref_frame_z);
                     	break;
                     case R.id.menu_views_ref_frame_zz:
+                    	command = getString(R.string.key_views_ref_frame_zz);
                     	break;
                     case R.id.menu_views_spacecraft_xyz:
-                    	com_view = "S/C-" + com_view;
+                    	command = getString(R.string.key_views_spacecraft_xyz);
                     	break;
                     case R.id.menu_views_spacecraft_rear:
-                    	com_view = "S/C-" + com_view;
+                    	command = getString(R.string.key_views_spacecraft_rear);
                     	break;
                     case R.id.menu_views_spacecraft_front:
-                    	com_view = "S/C-" + com_view;
+                    	command = getString(R.string.key_views_spacecraft_front);
                     	break;
                     case R.id.menu_views_spacecraft_top:
-                    	com_view = "S/C-" + com_view;
+                    	command = getString(R.string.key_views_spacecraft_top);
                     	break;
                     case R.id.menu_views_spacecraft_bottom:
-                    	com_view = "S/C-" + com_view;
+                    	command = getString(R.string.key_views_spacecraft_bottom);
                     	break;
                     case R.id.menu_views_spacecraft_left:
-                    	com_view = "S/C-" + com_view;
+                    	command = getString(R.string.key_views_spacecraft_left);
                     	break;
                     case R.id.menu_views_spacecraft_right:
-                    	com_view = "S/C-" + com_view;
+                    	command = getString(R.string.key_views_spacecraft_right);
                     	break;
                     default:
                         return false;
                 }
                 views_menu.setText(com_view);
-                browser.load("javascript:changeView('"+com_view+"')", null);
+                browser.load("javascript:changeView('"+command+"')", null);
                 return true;
             }
         });

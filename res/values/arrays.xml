@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="views_array">
-        <item>XYZ</item>
-        <item>X</item>
-        <item>-X</item>
-        <item>Y</item>
-        <item>-Y</item>
-        <item>Z</item>
-        <item>-Z</item>
-        <item>Earth</item>
-        <item>Sun</item>
-        <item>S/C-xyz</item>
-        <item>S/C-rear</item>
-        <item>S/C-front</item>
-        <item>S/C-top</item>
-        <item>S/C-bottom</item>
-        <item>S/C-left</item>
-        <item>S/C-right</item>
-    </string-array>
     <string-array name="basicinds">
         <item>Earth</item>
         <item>Sun</item>

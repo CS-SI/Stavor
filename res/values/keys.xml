@@ -92,5 +92,22 @@
     <string name="pref_key_vector_a_color">pref_key_vector_a_color</string>
     <string name="pref_key_vector_a_limit">pref_key_vector_a_limit</string>
     <string name="pref_key_direction_a_show">pref_key_direction_a_show</string>
-    <string name="pref_key_direction_a_color">pref_key_direction_a_color</string> 
+    <string name="pref_key_direction_a_color">pref_key_direction_a_color</string>
+    
+    <string name="key_views_ref_frame_xyz">XYZ</string>
+    <string name="key_views_ref_frame_x">X</string>
+    <string name="key_views_ref_frame_xx">-X</string>
+    <string name="key_views_ref_frame_y">Y</string>
+    <string name="key_views_ref_frame_yy">-Y</string>
+    <string name="key_views_ref_frame_z">Z</string>
+    <string name="key_views_ref_frame_zz">-Z</string>
+    <string name="key_views_spacecraft_xyz">S/C-XYZ</string>
+    <string name="key_views_spacecraft_rear">S/C-Rear</string>
+    <string name="key_views_spacecraft_front">S/C-Front</string>
+    <string name="key_views_spacecraft_top">S/C-Top</string>
+    <string name="key_views_spacecraft_bottom">S/C-Bottom</string>
+    <string name="key_views_spacecraft_left">S/C-Left</string>
+    <string name="key_views_spacecraft_right">S/C-Right</string>
+    <string name="key_views_earth">Earth</string>
+    <string name="key_views_sun">Sun</string>
 </resources>

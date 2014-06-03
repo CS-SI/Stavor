@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/view_selector"
             android:minHeight="30dp"
-            android:text="@string/view_xyz"
+            android:text="@string/menu_views_ref_frame_xyz"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </FrameLayout>
 
