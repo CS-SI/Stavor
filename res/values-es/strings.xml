@@ -16,19 +16,19 @@
     <string name="navigation_drawer_close">Cierra el menú de navegación</string>
     <string name="action_screenshot">Acerca de</string>
     <string name="action_reset_conf">Resetear Config.</string>
-    <string name="action_reset_db">Resetear Missiones</string>
+    <string name="action_reset_db">Resetear Misiones</string>
     <string name="action_about">Acerca de</string>
     
     
-    <string name="mission_editor">Editor de mission</string>
+    <string name="mission_editor">Editor de mision</string>
     <string name="mission_edit">Editar</string>
     <string name="mission_create">Crear</string>
     <string name="mission_name">Nombre:</string>
     <string name="mission_description">Descripción:</string>
     <string name="mission_time">Tiempo:</string>
     <string name="mission_date">Fecha:</string>
-    <string name="mission_duration">Duración de missión (s\'):</string>
-    <string name="mission_step">Step de simulación (s):</string>
+    <string name="mission_duration">Duración de misión (s\'):</string>
+    <string name="mission_step">Étapa de simulación (s):</string>
     <string name="mission_orbit">Orbita</string>
     <string name="mission_a">Semieje mayor (m):</string>
     <string name="mission_speed">Velocidad de simulación aprox. (s\'/s):</string>
@@ -39,9 +39,9 @@
     <string name="mission_raan">R.A.A.N (rad):</string>
     <string name="mission_lm">Anomalía media (rad):</string>
     <string name="mission_format_error">Error de formato: revise los campos</string>
-    <string name="mission_error_create">Error creando missión en base de datos</string>
-    <string name="mission_error_edit">Error editando missión en base de datos</string>
-    <string name="mission_name_is_mandatory">El nombre de la missión es obligatorio</string>
+    <string name="mission_error_create">Error creando misión en base de datos</string>
+    <string name="mission_error_edit">Error editando misión en base de datos</string>
+    <string name="mission_name_is_mandatory">El nombre de la misión es obligatorio</string>
     <string name="mission_no_val">---</string>
     
     <string name="menu_views_ref_frame">Marco Ref.</string>
@@ -95,18 +95,18 @@
     <string name="dialog_continue">Continuar</string>
     <string name="dialog_install_message">Los modelos y datos por defecto para el simulador han sido instalados en la raiz de datos de Orekit:</string>
     
-    <string name="dialog_delete_title">Eliminar Missión</string>
-    <string name="dialog_delete_message">Se dispone a eliminar la missión: </string>
+    <string name="dialog_delete_title">Eliminar Misión</string>
+    <string name="dialog_delete_message">Se dispone a eliminar la misión: </string>
     <string name="dialog_delete_confirm">Eliminar</string>
     <string name="dialog_delete_cancel">Cancelar</string>
     
     <string name="dialog_reset_title">Resetear Config.</string>
-    <string name="dialog_reset_message">Se dispone a resetear toda configuración y datos a los valores por defecto (Las missiones se guardarán)</string>
+    <string name="dialog_reset_message">Se dispone a resetear toda configuración y datos a los valores por defecto (Las misiones se guardarán)</string>
     <string name="dialog_reset_confirm">Resetear</string>
     <string name="dialog_reset_cancel">Cancelar</string>
     
-    <string name="dialog_reset_db_title">Resetear Missiones</string>
-    <string name="dialog_reset_db_message">Se dispone a resetear la base de datos de missiones a su estado original</string>
+    <string name="dialog_reset_db_title">Resetear Misiones</string>
+    <string name="dialog_reset_db_message">Se dispone a resetear la base de datos de misiones a su estado original</string>
     <string name="dialog_reset_db_confirm">Resetear</string>
     <string name="dialog_reset_db_cancel">Cancelar</string>
     
@@ -159,12 +159,12 @@
     <string name="sim_local_new">Nuevo</string>
     <string name="sim_local_edit">Editar</string>
     <string name="sim_local_remove">Eliminar</string>
-    <string name="sim_local_mission_not_removable">Esta missión no puede ser eliminada</string>
-    <string name="sim_local_mission_not_editable">Esta missión no puede ser editada</string>
-    <string name="sim_local_select_first_a_mission">Seleccione una missión primero</string>
+    <string name="sim_local_mission_not_removable">Esta misión no puede ser eliminada</string>
+    <string name="sim_local_mission_not_editable">Esta misión no puede ser editada</string>
+    <string name="sim_local_select_first_a_mission">Seleccione una misión primero</string>
     <string name="sim_local_simulator_connected">Simulador conectado!</string>
-    <string name="sim_local_cannot_deserialize_selected_mission">Error, no se pudo deserializar la missión seleccionada</string>
-    <string name="sim_local_cannot_find_selected_mission_in_db">Error, no se pudo encontrar la missión seleccionada en la base de datos</string>
+    <string name="sim_local_cannot_deserialize_selected_mission">Error, no se pudo deserializar la misión seleccionada</string>
+    <string name="sim_local_cannot_find_selected_mission_in_db">Error, no se pudo encontrar la misión seleccionada en la base de datos</string>
     <string name="sim_orekit_init_error">Error de inicialización del simulador</string>
     <string name="sim_orekit_prop_error">Error de propagación del simulador</string>
     <string name="sim_remote_simulator_connected">Simulador remoto conectado!</string>
@@ -172,8 +172,8 @@
     <string name="sim_unknown_host">Host desconocido</string>
     <string name="sim_io_error">Error IO de simulador</string>
     <string name="sim_error">Error de simulador</string>
-    <string name="sim_mission_ended">Missión terminada</string>
-    <string name="sim_mis_mission">Missión:</string>
+    <string name="sim_mission_ended">Misión terminada</string>
+    <string name="sim_mis_mission">Misión:</string>
     <string name="sim_mis_description">Descripción:</string>
     
     
@@ -199,8 +199,8 @@
     <string name="pref_spherical_coords">Coordenadas esféricas</string>
     <string name="pref_angle">Ángulos</string>
     
-    <string name="pref_title_database_installed">La base de datos de missiones ya está instalada</string>
-    <string name="pref_summary_database_installed">Flag to know if the Missions database has been already installed</string>
+    <string name="pref_title_database_installed">La base de datos de misiones ya está instalada</string>
+    <string name="pref_summary_database_installed">Flag to know if the Misions database has been already installed</string>
     <string name="pref_title_data_installed">Los datos de Orekit ya están instalados</string>
     <string name="pref_summary_data_installed">Flag to know if the Orekit data has been already installed</string>
     <string name="pref_title_sim_global_remote">Simulador remoto</string>
@@ -331,7 +331,7 @@
     <string name="pref_summary_vectors_angle_sel1">Selección de indicador para el ángulo</string>
     <string name="pref_summary_vectors_angle_sel2">Selección de indicador para el ángulo</string>
     
-    <string name="error_installing_missions_database">La instalación de la base de datos de missiones ha fallado.</string>
+    <string name="error_installing_missions_database">La instalación de la base de datos de misiones ha fallado.</string>
     <string name="error_installing_orekit_default_data">La instalación de los datos por defecto de Orekit ha fallado.</string>
     <string name="error_installing_orekit_default_data_external_storage_not_accessible">La instalación de los datos por defecto de Orekit ha fallado debido a almacenamiento externo no accesible.</string>
     <string name="error_initializing_orekit">Error inicializando simulador, están los datos requeridos instalados?</string>
