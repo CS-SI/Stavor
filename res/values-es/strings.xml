@@ -122,7 +122,7 @@
     <string name="button_sim_play">Play</string>
     <string name="button_sim_pause">Pausa</string>
     <string name="button_sim_stop">Stop</string>
-    <string name="name_">Nambre:</string>
+    <string name="name_">Nombre:</string>
     <string name="type_">Tipo:</string>
     <string name="color_">Color:</string>
     <string name="units_">Unidades:</string>
@@ -134,17 +134,21 @@
     <string name="units_km">[Km]</string>
     <string name="fps_zero">0 FPS</string>
     <string name="eg_sim_time">0000-00-00  00:00:00.000</string>
-    <string name="eg_vel">Vel. 0,00 Km/s</string><!-- Check -->
-    <string name="eg_accel">Accel. 0,00 Km/s2</string><!-- Check -->
+    <string name="eg_vel">Vel. 0,00 Km/s</string>
+    <string name="eg_accel">Acel. 0,00 Km/s2</string>
     <string name="eg_roll">Roll: 0,0º</string>
     <string name="eg_pitch">Pitch: 0,0º</string>
     <string name="eg_yaw">Yaw: 0,0º</string>
-    <string name="eg_radium">Orbit radium: 0,0 Km</string><!-- Check -->
-    <string name="eg_mass">Mass: 0,000 Kg</string><!-- Check -->
+    <string name="eg_radium">Radio orbital: 0,0 Km</string>
+    <string name="eg_mass">Masa: 0,000 Kg</string>
     <string name="test_1">Test 1</string>
     <string name="test_2">Test 2</string>
     <string name="test_3">Test 3</string>
-    <string name="powered_by">Powered by:</string><!-- Check -->
+    <string name="powered_by">Impulsado por:</string>
+    <string name="panel_vel">Vel.</string>
+    <string name="panel_accel">Acel.</string>
+    <string name="panel_radium">Radio orbital:</string>
+    <string name="panel_mass">Masa:</string>
     
     <string name="sim_connect">Conectar</string>
     <string name="sim_disconnect">Desconectar</string>
@@ -174,7 +178,7 @@
     
     
     <string name="pref_apk_install">Application install</string>
-    <string name="pref_performance">Performance</string>
+    <string name="pref_performance">Rendimiento</string>
     <string name="pref_general">General</string>
     <string name="pref_sim_global">Global</string>
     <string name="pref_sim_remote">Remoto</string>
@@ -193,14 +197,14 @@
     
     <string name="pref_inclination">Inclinación</string>
     <string name="pref_spherical_coords">Coordenadas esféricas</string>
-    <string name="pref_angle">Angulos</string>
+    <string name="pref_angle">Ángulos</string>
     
     <string name="pref_title_database_installed">La base de datos de missiones ya está instalada</string>
     <string name="pref_summary_database_installed">Flag to know if the Missions database has been already installed</string>
     <string name="pref_title_data_installed">Los datos de Orekit ya están instalados</string>
     <string name="pref_summary_data_installed">Flag to know if the Orekit data has been already installed</string>
     <string name="pref_title_sim_global_remote">Simulador remoto</string>
-    <string name="pref_summary_sim_global_remote">Utilizar un simulador remoto connectado con sockets</string>
+    <string name="pref_summary_sim_global_remote">Utilizar un simulador remoto conectado con sockets</string>
     <string name="pref_title_sim_remote_host">Host</string>
     <string name="pref_summary_sim_remote_host">Host del servidor socket</string>
     <string name="pref_title_sim_remote_port">Puerto</string>
@@ -231,7 +235,7 @@
     <string name="pref_summary_show_sc_axis">Mostrar ejes de referencia de la nave</string>
     <string name="pref_title_show_engine_texture">Mostrar textura de motor</string>
     <string name="pref_summary_show_engine_texture">Mostrar textura de motor de la nave</string>
-    <string name="pref_title_sun_simple_glow">Effecto brillo simple</string>
+    <string name="pref_title_sun_simple_glow">Efecto brillo simple</string>
     <string name="pref_summary_sun_simple_glow">Utilizar un effecto de brillo simple para el Sol</string>
     <string name="pref_title_sun_rotates">Sol rota</string>
     <string name="pref_summary_sun_rotates">El modelo del Sol rota</string>
@@ -258,7 +262,7 @@
     <string name="pref_title_show_sun_distance">Mostrar distancia</string>
     <string name="pref_summary_show_sun_distance">Mostrar etiqueta de distancia al Sol</string>
     <string name="pref_title_acceleration_limit">Limite</string>
-    <string name="pref_summary_acceleration_limit">valor de aceleración que corresponde al radio de la esfera de referencia</string>
+    <string name="pref_summary_acceleration_limit">Valor de aceleración que corresponde al radio de la esfera de referencia</string>
     <string name="pref_title_acceleration_show">Mostrar</string>
     <string name="pref_summary_acceleration_show">Mostrar vector aceleración</string>
     <string name="pref_title_acceleration_color">Color</string>
@@ -330,12 +334,12 @@
     <string name="error_installing_missions_database">La instalación de la base de datos de missiones ha fallado.</string>
     <string name="error_installing_orekit_default_data">La instalación de los datos por defecto de Orekit ha fallado.</string>
     <string name="error_installing_orekit_default_data_external_storage_not_accessible">La instalación de los datos por defecto de Orekit ha fallado debido a almacenamiento externo no accesible.</string>
-    <string name="error_initializing_orekit">Error inicializando simulador, están los dator requeridos instalados?</string>
-    <string name="error_computing_orekit">Error calculando paso de simulación, están los dator requeridos instalados correctamente?</string>
+    <string name="error_initializing_orekit">Error inicializando simulador, están los datos requeridos instalados?</string>
+    <string name="error_computing_orekit">Error calculando paso de simulación, están los datos requeridos instalados correctamente?</string>
     
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
-    <string name="press_color_to_apply">Pressione un Color para applicar</string>    
+    <string name="press_color_to_apply">Pressione un Color para aplicar</string>    
     <!-- Color Picker Preferences -->
     <string name="pref_category">Categoria</string>
     <string name="color1_title">Color 1</string>

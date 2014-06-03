@@ -174,23 +174,23 @@ public class ModelSimulation {
     		if(panel_progress != null)
     			panel_progress.setProgress(info.progress);
     		if(panel_vel != null){
-    			panel_vel.setText("Vel. "+String.format("%.2f", info.velocity)+" Km/s");
+    			panel_vel.setText(activity.getString(R.string.panel_vel)+" "+String.format("%.2f", info.velocity)+" Km/s");
     			if(info.velocity>config.limit_velocity)
     				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
     			else
     				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_value));
     		}
     		if(panel_accel != null){
-    			panel_accel.setText("Accel. "+String.format("%.2f", info.acceleration)+" Km/s2");
+    			panel_accel.setText(activity.getString(R.string.panel_accel)+" "+String.format("%.2f", info.acceleration)+" Km/s2");
     			if(info.acceleration>config.limit_acceleration)
     				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
     			else
     				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_value));
     		}
     		if(panel_radium != null)
-    			panel_radium.setText("Orbit radium: "+String.format("%.1f", info.orbit_radium)+" Km");
+    			panel_radium.setText(activity.getString(R.string.panel_radium)+" "+String.format("%.1f", info.orbit_radium)+" Km");
     		if(panel_mass != null)
-    			panel_mass.setText("Mass: "+String.format("%.1f", info.mass)+" Kg");
+    			panel_mass.setText(activity.getString(R.string.panel_mass)+" "+String.format("%.1f", info.mass)+" Kg");
     		if(panel_roll != null)
     			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"º");
     		if(panel_pitch != null)
