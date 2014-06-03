@@ -14,10 +14,10 @@
     <string name="title_section8">Essayes WebGL</string>
     <string name="navigation_drawer_open">Ouvrez le menu de navigation</string>
     <string name="navigation_drawer_close">Ferme le menu de navigation</string>
-    <string name="action_screenshot">Acerca de</string><!-- Check -->
+    <string name="action_screenshot">À propos</string>
     <string name="action_reset_conf">Réinitialiser Config.</string>
     <string name="action_reset_db">Réinitialiser Missions</string>
-    <string name="action_about">Acerca de</string><!-- Check -->
+    <string name="action_about">À propos</string>
     
     
     <string name="mission_editor">Éditeur de mission</string>
@@ -34,7 +34,7 @@
     <string name="mission_speed">Vitesse de simulation aprox. (s\'/s):</string>
     <string name="mission_dur">Durée de la siulation aprox. (s):</string>
     <string name="mission_e">Excentricité:</string>
-    <string name="mission_i">Inclinaison (rad):</string><!-- Check -->
+    <string name="mission_i">Inclinaison (rad):</string>
     <string name="mission_omega">Arg. périastre (rad):</string>
     <string name="mission_raan">R.A.A.N (rad):</string>
     <string name="mission_lm">Anomalie moyenne (rad):</string>
@@ -56,14 +56,14 @@
     <string name="menu_views_spacecraft_xyz">XYZ</string>
     <string name="menu_views_spacecraft_rear">Derrière</string>
     <string name="menu_views_spacecraft_front">Avant</string>
-    <string name="menu_views_spacecraft_top">Au-dessous</string><!-- Check -->
-    <string name="menu_views_spacecraft_bottom">Dessous</string><!-- Check -->
+    <string name="menu_views_spacecraft_top">Au-dessous</string>
+    <string name="menu_views_spacecraft_bottom">Dessous</string>
     <string name="menu_views_spacecraft_left">Gauche</string>
     <string name="menu_views_spacecraft_right">Droit</string>
     <string name="menu_views_earth">Terre</string>
     <string name="menu_views_sun">Soleil</string>
     
-    <string name="about">Acerca de</string><!-- Check -->
+    <string name="about">À propos</string>
     <string name="cs_site">http://c-s.fr/</string>
     <string name="about_table_project">Projet</string>
     <string name="about_project_license">Licence du projet:</string>
@@ -93,7 +93,7 @@
     <string name="dialog_exit">Quitter</string>
     <string name="dialog_ignore">Ignorer</string>
     <string name="dialog_continue">Continuer</string>
-    <string name="dialog_install_message">Les modèles et données par défaut pur le simulateur ont été installés dans le racine de données d\'Orekit:</string><!-- Check -->
+    <string name="dialog_install_message">Les modèles et données par défaut pur le simulateur ont été installés dans la racine de données d\'Orekit:</string>
     
     <string name="dialog_delete_title">Supprimer Mission</string>
     <string name="dialog_delete_message">Vous êtes en train de supprimer la mission: </string>
@@ -128,7 +128,7 @@
     <string name="units_">Unités:</string>
     <string name="color">Couleur</string>
     <string name="ok">OK</string>
-    <string name="target">Target</string><!-- Check -->
+    <string name="target">Cible</string>
     <string name="static_vector">Vecteur Statique</string>
     <string name="dynamic_vector">Vecteur Dynamique</string>
     <string name="units_km">[Km]</string>
@@ -139,7 +139,7 @@
     <string name="eg_roll">Roll: 0,0º</string>
     <string name="eg_pitch">Pitch: 0,0º</string>
     <string name="eg_yaw">Yaw: 0,0º</string>
-    <string name="eg_radium">Rayon orbital: 0,0 Km</string><!-- Check -->
+    <string name="eg_radium">Rayon orbital: 0,0 Km</string>
     <string name="eg_mass">Masse: 0,000 Kg</string>
     <string name="test_1">Essai 1</string>
     <string name="test_2">Essai 2</string>
@@ -147,18 +147,18 @@
     <string name="powered_by">Propulsé par:</string><!-- Check -->
     <string name="panel_vel">Vit.</string>
     <string name="panel_accel">Accél.</string>
-    <string name="panel_radium">Rayon orbital:</string><!-- Check -->
+    <string name="panel_radium">Rayon orbital:</string>
     <string name="panel_mass">Masse:</string>
     
     <string name="sim_connect">Connecter</string>
     <string name="sim_disconnect">Déconnecter</string>
-    <string name="sim_remote_host">Host:</string><!-- Check -->
+    <string name="sim_remote_host">Hôte:</string>
     <string name="sim_remote_host_eg">192.168.43.10</string>
-    <string name="sim_remote_port">Port:</string><!-- Check -->
+    <string name="sim_remote_port">Port:</string>
     <string name="sim_remote_port_eg">1520</string>
     <string name="sim_local_new">Nouveau</string>
     <string name="sim_local_edit">Modifier</string>
-    <string name="sim_local_remove">Supprimer</string>
+    <string name="sim_local_remove">Enlever</string>
     <string name="sim_local_mission_not_removable">Cette mission ne peut pas être supprimé</string>
     <string name="sim_local_mission_not_editable">Cette mission ne peut pas être modifié</string>
     <string name="sim_local_select_first_a_mission">Sélectionnez premier la mission</string>
@@ -169,7 +169,7 @@
     <string name="sim_orekit_prop_error">Erreur de propagation du simulateur</string>
     <string name="sim_remote_simulator_connected">Simulateur éloigné connecté!</string><!-- Check -->
     <string name="sim_remote_disconnected">Simulateur éloigné déconnecté</string><!-- Check -->
-    <string name="sim_unknown_host">Host inconnu</string><!-- Check -->
+    <string name="sim_unknown_host">Hôte inconnu</string>
     <string name="sim_io_error">Erreur IO du simulateur</string>
     <string name="sim_error">Erreur du simulateur</string>
     <string name="sim_mission_ended">Mission terminée</string>
@@ -191,11 +191,11 @@
     <string name="pref_velocity">Vitesse</string>
     <string name="pref_acceleration">Accélération</string>
     <string name="pref_momentum">Moment</string>
-    <string name="pref_target_a">Target</string><!-- Check -->
+    <string name="pref_target_a">Cible</string>
     <string name="pref_vector_a">Vecteur</string>
     <string name="pref_direction_a">Direction</string>
     
-    <string name="pref_inclination">Tilt</string>
+    <string name="pref_inclination">Inclinaison</string>
     <string name="pref_spherical_coords">Coordonnées sphériques</string>
     <string name="pref_angle">Angles</string>
     
@@ -205,10 +205,10 @@
     <string name="pref_summary_data_installed">Flag to know if the Orekit data has been already installed</string>
     <string name="pref_title_sim_global_remote">Simulateur éloigné</string><!-- Check -->
     <string name="pref_summary_sim_global_remote">Utilisez un simulateur éloigné connecté avec sockets</string><!-- Check -->
-    <string name="pref_title_sim_remote_host">Host</string><!-- Check -->
-    <string name="pref_summary_sim_remote_host">Host du serveur socket</string><!-- Check -->
-    <string name="pref_title_sim_remote_port">Port</string><!-- Check -->
-    <string name="pref_summary_sim_remote_port">Port de communication socket</string><!-- Check -->
+    <string name="pref_title_sim_remote_host">Hôte</string>
+    <string name="pref_summary_sim_remote_host">Hôte du serveur socket</string>
+    <string name="pref_title_sim_remote_port">Port</string>
+    <string name="pref_summary_sim_remote_port">Port de communication socket</string>
     <string name="pref_title_detail_level">Niveau de détail</string>
     <string name="pref_summary_detail_level">Niveau de détail des graphiques [1–9]</string>
     <string name="pref_title_fps_update_skips">FPS sautes de mise à jour</string>
@@ -278,9 +278,9 @@
     <string name="pref_title_momentum_color">Couleur</string>
     <string name="pref_summary_momentum_color">Couleur de la direction du moment</string>
     <string name="pref_title_target_a_show">Afficher</string>
-    <string name="pref_summary_target_a_show">Afficher le target</string><!-- Check -->
+    <string name="pref_summary_target_a_show">Afficher la cible</string>
     <string name="pref_title_target_a_color">Couleur</string>
-    <string name="pref_summary_target_a_color">Couleur du target</string><!-- Check -->
+    <string name="pref_summary_target_a_color">Couleur de la cible</string>
     <string name="pref_title_vector_a_show">Afficher</string>
     <string name="pref_summary_vector_a_show">Afficher le vecteur</string>
     <string name="pref_title_vector_a_color">Couleur</string>
@@ -293,9 +293,9 @@
     <string name="pref_summary_direction_a_color">Couleur de la direction</string>
     
     
-    <string name="pref_title_target_a_x">Target X</string><!-- Check -->
-    <string name="pref_title_target_a_y">Target Y</string><!-- Check -->
-    <string name="pref_title_target_a_z">Target Z</string><!-- Check -->
+    <string name="pref_title_target_a_x">Cible X</string>
+    <string name="pref_title_target_a_y">Cible Y</string>
+    <string name="pref_title_target_a_z">Cible Z</string>
     <string name="pref_title_vector_a_x">Vecteur X</string>
     <string name="pref_title_vector_a_y">Vecteur Y</string>
     <string name="pref_title_vector_a_z">Vecteur Z</string>
@@ -303,7 +303,7 @@
     <string name="pref_title_direction_a_y">Direction Y</string>
     <string name="pref_title_direction_a_z">Direction Z</string>
     <string name="pref_title_show_orbital_plane">Afficher plan orbital</string>
-    <string name="pref_title_show_inclination">Afficher angle de tilt</string>
+    <string name="pref_title_show_inclination">Afficher angle d\'inclinaison</string>
     <string name="pref_title_show_spheric_coords">Afficher coordonnées sphériques</string>
     <string name="pref_title_show_vectors_angle">Afficher angle entre indicateurs</string>
     <string name="pref_title_plane_xy_color">Couleur du plan XY</string>
@@ -312,9 +312,9 @@
     <string name="pref_title_vectors_angle_sel1">Sélection 1</string>
     <string name="pref_title_vectors_angle_sel2">Sélection 2</string>
     
-    <string name="pref_summary_target_a_x">Composant X du target</string><!-- Check -->
-    <string name="pref_summary_target_a_y">Composant Y du target</string><!-- Check -->
-    <string name="pref_summary_target_a_z">Composant Z du target</string><!-- Check -->
+    <string name="pref_summary_target_a_x">Composant X de la cible</string>
+    <string name="pref_summary_target_a_y">Composant Y de la cible</string>
+    <string name="pref_summary_target_a_z">Composant Z de la cible</string>
     <string name="pref_summary_vector_a_x">Composant X du vector</string>
     <string name="pref_summary_vector_a_y">Composant Y du vector</string>
     <string name="pref_summary_vector_a_z">Composant Z du vector</string>
@@ -322,7 +322,7 @@
     <string name="pref_summary_direction_a_y">Composant Y de la dirección</string>
     <string name="pref_summary_direction_a_z">Composant Z de la dirección</string>
     <string name="pref_summary_show_orbital_plane">Afficher le plan orbital et le plan de rotation de la Terre</string>
-    <string name="pref_summary_show_inclination">Afficher l\'angle de tilt instantanée</string><!-- Check -->
+    <string name="pref_summary_show_inclination">Afficher l\'angle d\'inclinaison instantanée</string>
     <string name="pref_summary_show_spheric_coords">Afficher les coordonnées sphériques d\'un indicateur</string>
     <string name="pref_summary_show_vectors_angle">Afficher l\'angle entre indicateurs</string>
     <string name="pref_summary_plane_xy_color">Couleur du plan XY</string>

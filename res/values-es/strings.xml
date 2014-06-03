@@ -128,7 +128,7 @@
     <string name="units_">Unidades:</string>
     <string name="color">Color</string>
     <string name="ok">OK</string>
-    <string name="target">Target</string><!-- Check -->
+    <string name="target">Blanco</string>
     <string name="static_vector">Vector Estático</string>
     <string name="dynamic_vector">Vector Dinámico</string>
     <string name="units_km">[Km]</string>
@@ -191,7 +191,7 @@
     <string name="pref_velocity">Velocidad</string>
     <string name="pref_acceleration">Aceleración</string>
     <string name="pref_momentum">Momento</string>
-    <string name="pref_target_a">Target</string><!-- Check -->
+    <string name="pref_target_a">Blanco</string>
     <string name="pref_vector_a">Vector</string>
     <string name="pref_direction_a">Dirección</string>
     
@@ -278,9 +278,9 @@
     <string name="pref_title_momentum_color">Color</string>
     <string name="pref_summary_momentum_color">Color de la dirección del momento</string>
     <string name="pref_title_target_a_show">Mostrar</string>
-    <string name="pref_summary_target_a_show">Mostrar target</string><!-- Check -->
+    <string name="pref_summary_target_a_show">Mostrar blanco</string>
     <string name="pref_title_target_a_color">Color</string>
-    <string name="pref_summary_target_a_color">Color del target</string><!-- Check -->
+    <string name="pref_summary_target_a_color">Color del blanco</string>
     <string name="pref_title_vector_a_show">Mostrar</string>
     <string name="pref_summary_vector_a_show">Mostrar vector</string>
     <string name="pref_title_vector_a_color">Color</string>
@@ -293,9 +293,9 @@
     <string name="pref_summary_direction_a_color">Color de dirección</string>
     
     
-    <string name="pref_title_target_a_x">Target X</string><!-- Check -->
-    <string name="pref_title_target_a_y">Target Y</string><!-- Check -->
-    <string name="pref_title_target_a_z">Target Z</string><!-- Check -->
+    <string name="pref_title_target_a_x">Blanco X</string>
+    <string name="pref_title_target_a_y">Blanco Y</string>
+    <string name="pref_title_target_a_z">Blanco Z</string>
     <string name="pref_title_vector_a_x">Vector X</string>
     <string name="pref_title_vector_a_y">Vector Y</string>
     <string name="pref_title_vector_a_z">Vector Z</string>
@@ -312,9 +312,9 @@
     <string name="pref_title_vectors_angle_sel1">Selección 1</string>
     <string name="pref_title_vectors_angle_sel2">Selección 2</string>
     
-    <string name="pref_summary_target_a_x">Componente X de target</string><!-- Check -->
-    <string name="pref_summary_target_a_y">Componente Y de target</string><!-- Check -->
-    <string name="pref_summary_target_a_z">Componente Z de target</string><!-- Check -->
+    <string name="pref_summary_target_a_x">Componente X de blanco</string>
+    <string name="pref_summary_target_a_y">Componente Y de blanco</string>
+    <string name="pref_summary_target_a_z">Componente Z de blanco</string>
     <string name="pref_summary_vector_a_x">Componente X de vector</string>
     <string name="pref_summary_vector_a_y">Componente Y de vector</string>
     <string name="pref_summary_vector_a_z">Componente Z de vector</string>
