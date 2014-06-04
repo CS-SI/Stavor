@@ -21,7 +21,8 @@ public class AboutActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.about);
-				
+		
+		//Load Views
 		TextView tx_package = (TextView) findViewById(R.id.TextViewVersionPackage);
 		TextView tx_license = (TextView) findViewById(R.id.TextViewProjectLicense);
 		TextView tx_start_date = (TextView) findViewById(R.id.TextViewProjectStart);
@@ -35,6 +36,7 @@ public class AboutActivity extends Activity {
 		TextView tx_version_color = (TextView) findViewById(R.id.TextViewVersionColor);
 		TextView tx_version_loader = (TextView) findViewById(R.id.TextViewVersionLoader);
 		
+		//Fill Views
 		try {
 			tx_package.setText(getPackageManager().getPackageInfo(getPackageName(), 0).packageName);
 			tx_version_num.setText(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);

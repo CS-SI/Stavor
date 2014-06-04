@@ -39,25 +39,8 @@ public class Orbit implements Serializable{
 	 */
 	public double lM = 0;
 	
-	public String serialize(){
-		return mu+"-"+a+"-"+e+"-"+i+"-"+omega+"-"+raan+"-"+lM;
-	}
 	public Orbit(){
 		
-	}
-	public Orbit(String serialized){
-		try{
-			String[] series = serialized.split("-");
-			mu=Double.parseDouble(series[0]);
-			a=Double.parseDouble(series[1]);
-			e=Double.parseDouble(series[2]);
-			i=Double.parseDouble(series[3]);
-			omega=Double.parseDouble(series[4]);
-			raan=Double.parseDouble(series[5]);
-			lM=Double.parseDouble(series[6]);
-		}catch(Exception e){
-			System.err.println("Orbit serialized constructor: error of format("+e.getMessage()+")");
-		}
 	}
 	public Orbit(double o_mu,double o_a,double o_e,double o_i,double o_omega,double o_raan,double o_lM){
 		mu=o_mu;

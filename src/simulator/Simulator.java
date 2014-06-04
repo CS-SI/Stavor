@@ -35,26 +35,54 @@ public class Simulator {
 	private Mission mission;
 	private int mission_id=-1;
 	
+	/**
+	 * Sets the mission before connecting the simulator
+	 * @param mis
+	 * @param id
+	 */
 	public void setSelectedMission(Mission mis, int id){
 		mission = mis;
 		mission_id = id;
 	}
 
+	/**
+	 * Set no mission selected
+	 */
 	public void resetSelectedMissionId() {
 		mission_id=-1;
 	}
+	
+	/**
+	 * Returns the selected mission id
+	 * @return
+	 */
 	public int getSelectedMissionid(){
 		return mission_id;
 	}
 	
+	/**
+	 * Set connect button View
+	 * @param bt
+	 */
 	public void setButtonConnect(Button bt){
 		buttonConnect=bt;
 		updateConnectButtonText();
 	}
+	
+	/**
+	 * Set local/remote switch View
+	 * @param st
+	 */
 	public void setSwitchSelector(Switch st){
 		switchSelector=st;
 		updateSwitchEnabled();
 	}
+	
+	/**
+	 * Sets the Hud and browser view
+	 * @param v
+	 * @param x
+	 */
 	public void setHudView(View v, XWalkView x){
 		simulation.setHud(v,x);
 	}
@@ -74,17 +102,34 @@ public class Simulator {
 		simulation = new ModelSimulation(act);
 	}
 	
+	/**
+	 * Returns the simulation step results
+	 * @return
+	 */
 	public ModelSimulation getSimulationResults(){
 		return simulation;
 	}
 	
+	/**
+	 * Returns the simulator status (Connected/Disconnected)
+	 * @return
+	 */
 	public SimulatorStatus getSimulatorStatus(){
 		return simulatorStatus;
 	}
+	
+	/**
+	 * Returns the simulation status (Play/Pause)
+	 * @return
+	 */
 	public SimulationStatus getSimulationStatus(){
 		return simulationStatus;
 	}
 	
+	/**
+	 * Connects the simulator
+	 * @return
+	 */
 	public SimulatorStatus connect(){
 		if(simulatorStatus.equals(SimulatorStatus.Disconnected)){
 			simulationStatus = SimulationStatus.Pause;
@@ -94,6 +139,10 @@ public class Simulator {
 		return simulatorStatus;
 	}
 	
+	/**
+	 * Disconnects the simulator
+	 * @return
+	 */
 	public SimulatorStatus disconnect(){
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
 			resetSelectedMissionId();
@@ -102,6 +151,10 @@ public class Simulator {
 		return simulatorStatus;
 	}
 	
+	/**
+	 * Play teh simulator
+	 * @return
+	 */
 	public SimulationStatus play(){
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
 			if(simulationStatus.equals(SimulationStatus.Pause)){
@@ -113,6 +166,10 @@ public class Simulator {
 		return simulationStatus;
 	}
 	
+	/**
+	 * Pause the simulator
+	 * @return
+	 */
 	public SimulationStatus pause(){
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
 			if(simulationStatus.equals(SimulationStatus.Play)){
@@ -124,6 +181,10 @@ public class Simulator {
 		return simulationStatus;
 	}
 	
+	/**
+	 * Stop the simulator
+	 * @return
+	 */
 	public SimulationStatus stop(){
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
 			play();
@@ -132,9 +193,13 @@ public class Simulator {
 		return simulationStatus;
 	}
 	protected boolean reset = false;
-	protected ConditionVariable playCondition;
+	protected ConditionVariable playCondition;//Play/Pause condition
 	protected boolean cancel = false;
 	
+	/**
+	 * Sets the simulator connecting progress
+	 * @param prog
+	 */
 	private void setProgress(final int prog){
 		try{
 			activity.runOnUiThread( new Runnable() {
@@ -147,6 +212,9 @@ public class Simulator {
 		}
 	}
 
+	/**
+	 * Connects the thread corresponding to user selection (Local/Remote)
+	 */
 	private void connectThread() {
 		if(buttonConnect!=null){
 			activity.runOnUiThread( new Runnable() {
@@ -189,6 +257,9 @@ public class Simulator {
 		}
 	}
 	
+	/**
+	 * Disconnects simulator thread
+	 */
 	private void disconnectThread() {
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
@@ -216,6 +287,10 @@ public class Simulator {
 		}
 	}
 
+	/**
+	 * Sets the simulator status (Connected/Disconnected)
+	 * @param new_status
+	 */
 	public void setSimulatorStatus(SimulatorStatus new_status) {
 		simulatorStatus = new_status;
 		updateConnectButtonText();
@@ -224,6 +299,9 @@ public class Simulator {
 		setProgress(100 * 100);
 	}
 	
+	/**
+	 * Sets the correct text in simulator button according to its status (Connected/Disconnected)
+	 */
 	private void updateConnectButtonText(){
 		if(buttonConnect!=null){
 			activity.runOnUiThread( new Runnable() {
@@ -238,6 +316,9 @@ public class Simulator {
 		}
 	}
 	
+	/**
+	 * Enable or disable the simulator mode switch according to its status (Connected/Disconnected)
+	 */
 	private void updateSwitchEnabled(){
 		if(switchSelector!=null){
 			activity.runOnUiThread( new Runnable() {
@@ -290,6 +371,11 @@ public class Simulator {
         });
 
 	}
+	
+	/**
+	 * Change the play/pause icon according to simulation status
+	 * and enable or disable the controls depending on simulator status
+	 */
 	public void setCorrectSimulatorControls() {
 		if(but_play!=null && but_stop!=null){
 			activity.runOnUiThread( new Runnable() {

@@ -56,6 +56,10 @@ public class DeleteMissionDialogFragment extends DialogFragment {
         return builder.create();
     }
 	
+	/**
+	 * Delete Mission from database
+	 * @param mission_id
+	 */
 	private void deleteMission(int mission_id) {
 		MainActivity act = ((MainActivity)getActivity());
 		((SatAttApplication)act.getApplication()).loader.delete(MissionEntry.TABLE_NAME, MissionEntry._ID+"="+mission_id, null);

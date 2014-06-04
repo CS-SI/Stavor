@@ -50,6 +50,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     protected Boolean doInBackground(ModelSimulation... params) {
     	
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
+    		//Connect remote simulator
     		try {
         		socket = new Socket();
         		socket.connect(new InetSocketAddress(dstAddress, dstPort), Parameters.Simulator.remote_connection_timeout_ms);
@@ -70,7 +71,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	}
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
 		    try {
-				while (true){
+				while (true){//Infinite simulation loop
 					SpacecraftState sstate = (SpacecraftState) inputOStream.readObject();
 					if(sstate!=null){
 						simulator.getSimulationResults().updateSimulation(sstate, 0);

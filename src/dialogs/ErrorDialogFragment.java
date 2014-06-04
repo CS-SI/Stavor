@@ -37,7 +37,6 @@ public class ErrorDialogFragment extends DialogFragment {
         		.setCancelable(false)
                .setPositiveButton(getString(R.string.dialog_exit), new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                       // Dummy
                 	   getActivity().finish();
                    }
                });

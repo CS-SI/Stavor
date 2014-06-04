@@ -167,6 +167,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
             }
         });
     	
+    	//Delete
     	Button button_delete = (Button)rootView.findViewById(R.id.buttonMissionDelete);
     	button_delete.setOnClickListener(new OnClickListener(){
 			@Override
@@ -182,6 +183,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     		
     	});
     	
+    	//New
     	Button button_new = (Button)rootView.findViewById(R.id.buttonMissionNew);
     	button_new.setOnClickListener(new OnClickListener(){
 			@Override
@@ -191,6 +193,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     		
     	});
     	
+    	//Edit
     	Button button_edit = (Button)rootView.findViewById(R.id.buttonMissionEdit);
     	button_edit.setOnClickListener(new OnClickListener(){
 			@Override
@@ -215,6 +218,10 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		return rootView;
 	}
 	
+	/**
+	 * Returns the selected Mission from the database
+	 * @return
+	 */
 	private MissionAndId getSelectedMission(){
 		String[] projection = {
 				MissionEntry._ID,
@@ -246,12 +253,20 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		}
 	}
     
+	/**
+	 * Shows the delete mission confirmation dialog
+	 * @param id Mission id
+	 * @param name Mission name
+	 */
 	public void showDeleteMissionDialog(int id, String name) {
     	DialogFragment newFragment = DeleteMissionDialogFragment.newInstance(id, name);
     	newFragment.setCancelable(true);
     	newFragment.show(getFragmentManager(), "delete");
     }
 
+	/**
+	 * Change the text color of the missions in list that is selected
+	 */
 	private void restoreMissionsBackground() {
 		if(missionsList!=null){
 			for(int i = 0; i < missionsList.getChildCount(); i++){
@@ -268,6 +283,10 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		}
 	}
 
+	/**
+	 * load local or remote simulator view
+	 * @param view
+	 */
 	private void loadCorrectSimulatorScreen(View view) {
 		boolean remote = sharedPref.getBoolean(view.getContext().getString(R.string.pref_key_sim_global_remote), false);
     	switch_remote.setChecked(remote);

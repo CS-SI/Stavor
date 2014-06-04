@@ -43,6 +43,7 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     protected Boolean doInBackground(ModelSimulation... params) {
     	Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
+    		//initialize simulation
     		try {
     			setSimulationParameters();
 				setConnected();
@@ -56,7 +57,7 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	}
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
 		    try {
-				while (true){
+				while (true){//Infinite simulation loop
 					if(simulator.reset){
 						simulator.reset=false;
 						setSimulationParameters();
@@ -68,6 +69,7 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 		                break;
 		            }
 					
+					//Fix simulation speed to desired FPS
 					long dur = (System.nanoTime()-time_tmp_data);
 					if(dur<(Parameters.Simulator.min_hud_model_refreshing_interval_ns-Parameters.Simulator.model_refreshing_interval_safe_guard_ns)){
 						try {
@@ -151,6 +153,10 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     private Frame inertialFrame, rotatingFrame;
     private Propagator propagator;
     private AbsoluteDate extrapDate, finalDate;
+    /**
+     * Initialize simulation
+     * @throws OrekitException
+     */
     private void setSimulationParameters() throws OrekitException{
 		switch(mission.inertialFrame){
 			case GCRF:
@@ -220,6 +226,11 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 			
 	}
     
+    /**
+     * Propagate simulation
+     * @return
+     * @throws PropagationException
+     */
     private SpacecraftState propagate() throws PropagationException{
 		if(extrapDate.compareTo(finalDate) <= 0){
 			SpacecraftState currentState = propagator.propagate(extrapDate);

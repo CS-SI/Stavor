@@ -44,6 +44,10 @@ public class ModelSimulation {
     	info = new ModelInfo();
     }
     
+    /**
+     * Initialize the required elements for the simulation, 
+     * before the simulator is played to save time
+     */
     public void preInitialize(){
     	try {
 			if(sunFrame==null){
@@ -58,6 +62,11 @@ public class ModelSimulation {
 		}
     }
     
+    /**
+     * Establish the Hud View
+     * @param hud
+     * @param mBrowser
+     */
     public void setHud(View hud, XWalkView mBrowser){
     	view = hud;
     	browser = mBrowser;
@@ -65,15 +74,27 @@ public class ModelSimulation {
     	
     }
     
+    /**
+     * Set the loaded status of the browser
+     * @param is
+     */
     public void setBrowserloaded(boolean is) {
     	isBrowserLoaded = is;
 	}
 
+    /**
+     * Returns the Initialization for the WebGL model in a JavaScript readable format
+     * @return
+     */
 	public synchronized String getInitializationJSON() {
     	config = new ModelConfiguration(activity.getApplicationContext());
         return gson.toJson(config);
     }
     
+	/**
+     * Returns the simulation step for the WebGL model in a JavaScript readable format
+     * @return
+     */
     public synchronized String getStateJSON() {
         return gson.toJson(state);
     }
@@ -87,6 +108,9 @@ public class ModelSimulation {
     	state = st;
     }
     
+    /**
+     * Pushes the new simulation step to the WebGL model
+     */
     public void pushSimulationModel(){
     	if(browser!=null && state!=null && isBrowserLoaded){
     		browser.load("javascript:updateModelState('"+gson.toJson(state)+"')",null);
@@ -106,6 +130,7 @@ public class ModelSimulation {
     	ModelState new_state = new ModelState();
     	ModelInfo new_info = new ModelInfo();
     	
+    	//Basic indicators and Attitude
     	Attitude sc_att = scs.getAttitude();
     	new_state.value_attitude = new Quat(sc_att.getOrientation().getRotation());
     	
@@ -173,6 +198,10 @@ public class ModelSimulation {
     	updateState(new_state);
     	updateInfo(new_info);
     }
+    
+    /**
+     * Update the Hud panel with the new simulation step values
+     */
     public synchronized void updateHUD(){
     		if(panel_time != null)
     			panel_time.setText(info.time.replace("T", "  "));

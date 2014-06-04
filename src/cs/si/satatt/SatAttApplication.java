@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class SatAttApplication extends Application {
 	private String searchTerm = "";
 	
+	//Global database objects (for multi-activity access)
 	public MissionReaderDbHelper db_help;
     public SQLiteCursorLoader loader = null;
     public SQLiteDatabase db;

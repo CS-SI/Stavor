@@ -60,13 +60,28 @@ public class MainActivity extends ActionBarActivity implements
 	 */
 	private CharSequence mTitle;
 	
+	/**
+	 * Used to store information during application restart due to configuration
+	 * changes
+	 */
 	private RetainedFragment dataFragment;
 
-	
+	/**
+	 * Simulator object
+	 */
 	private Simulator simulator;
+	
+	/**
+	 * Returns the simulator object
+	 * @return
+	 */
 	public Simulator getSimulator(){
 		return simulator;
 	}
+	
+	/**
+	 * WebView from XWalk project to increase compatibility of WebGL
+	 */
     public XWalkView mXwalkView;
     
     
@@ -74,18 +89,23 @@ public class MainActivity extends ActionBarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		long start_time = System.nanoTime();
-
+		
+		//Install Orekit default files if not installed yet
 		Installer.installApkData(this);
 		
+		//Initialize Orekit with the data files
 		OrekitInit.init(Installer.getOrekitDataRoot(this));
 		
+		//Install the Missions database if not installed yet and store database objects
 		((SatAttApplication)getApplication()).db_help = Installer.installApkDatabase(this);
 		((SatAttApplication)getApplication()).db = ((SatAttApplication)getApplication()).db_help.getWritableDatabase();
 
+		//Configure application window
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
 		setProgressBarVisibility(true);
 		
+		//Initialize WebView
 		mXwalkView = new XWalkView(this.getApplicationContext(), this);
 		mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
         mXwalkView.setUIClient(new MyUIClient(mXwalkView));
@@ -118,6 +138,7 @@ public class MainActivity extends ActionBarActivity implements
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		
+		//Wait a minimum amount of time to display the splash screen
 		long diff_time = System.nanoTime()-start_time;
 		if(diff_time<Parameters.App.splash_min_time_ns){
 			try {
@@ -141,10 +162,6 @@ public class MainActivity extends ActionBarActivity implements
 			.replace(R.id.container,
 					SimulatorFragment.newInstance(position + 1)).commit();
 		}else if(position==1){
-			/*fragmentManager
-			.beginTransaction()
-			.replace(R.id.container,
-					PlaceholderFragment.newInstance(position + 1)).commit();*/
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
@@ -189,6 +206,9 @@ public class MainActivity extends ActionBarActivity implements
 		}
 	}
 
+	/**
+	 * Updates the title of the section
+	 */
 	public void onSectionAttached(int number) {
 		switch (number) {
 		case 1:
@@ -259,16 +279,25 @@ public class MainActivity extends ActionBarActivity implements
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * Start the About activity
+	 */
 	public void showAbout() {
 		Intent myIntent = new Intent(MainActivity.this, AboutActivity.class);
 		MainActivity.this.startActivity(myIntent);
 	}
 	
+	/**
+	 * Starts the Mission editor activity in create mode
+	 */
 	public void showMissionCreator() {
 		Intent myIntent = new Intent(MainActivity.this, MissionActivity.class);
 		MainActivity.this.startActivity(myIntent);
 	}
 	
+	/**
+	 * Starts the Mission editor activity in edit mode
+	 */
 	public void showMissionEditor(MissionAndId mission){
 		Intent myIntent = new Intent(MainActivity.this, MissionActivity.class);
 		Bundle b = new Bundle();
@@ -277,6 +306,10 @@ public class MainActivity extends ActionBarActivity implements
 		MainActivity.this.startActivity(myIntent);
 	}
 
+	/**
+	 * GoTo specified section of the navigation menu
+	 * @param sel
+	 */
 	public void showSection(final int sel) {
 		runOnUiThread( new Runnable() {
 			public void run() {    
@@ -287,6 +320,9 @@ public class MainActivity extends ActionBarActivity implements
 		});
 	}
 	
+	/**
+	 * GoTo previously selected section of the navigation menu
+	 */
 	public void showSection() {
 		showSection(mNavigationDrawerFragment.getSelectedPosition());
 	}
@@ -297,47 +333,60 @@ public class MainActivity extends ActionBarActivity implements
 
     @Override
     public void onBackPressed() {
-    	if (!mNavigationDrawerFragment.isDrawerOpen()) {
+    	if (!mNavigationDrawerFragment.isDrawerOpen()) {//If the navigation menu is not opened
 	    	int sel = mNavigationDrawerFragment.getSelectedPosition();
-	    	if(sel>1){
+	    	if(sel>1){//If it is currently in a configuration section, goto Hud
 	    		showSection(1);
-	    	}else if (sel==1){
+	    	}else if (sel==1){//If it is in Hud, goto simulator screen
 	    		showSection(0);
-	    	}else if (sel==0){
-		    	if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
+	    	}else if (sel==0){//If it is in Simulator, warn user before exit
+		    	if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {//Wait some time for confirmation
 		    		toast = Toast.makeText(this, getString(R.string.app_exit_prevent_message), 4000);
 		    		toast.show();
 		    		this.lastBackPressTime = System.currentTimeMillis();
-		    	} else {
+		    	} else {//Exit application
 		    		if (toast != null) {
 		    			toast.cancel();
 		    		}
 		    		super.onBackPressed();
 		    	}
 	    	}
-    	}else{
+    	}else{//If the navigation menu is open, close it
     		showSection();	
 	    }
     }
     
-    // Dialogs
+    /**
+     * Displays the Welcome dialog
+     */
     public void showWelcomeMessage() {
         DialogFragment newFragment = new WelcomeDialogFragment();
         newFragment.show(getFragmentManager(), "welcome");
     }
     
+    /**
+     * Displays an error dialog
+     * @param message
+     * @param canIgnore
+     */
     public void showErrorDialog(String message, boolean canIgnore) {
     	DialogFragment newFragment = ErrorDialogFragment.newInstance(message, canIgnore);
     	newFragment.setCancelable(false);
     	newFragment.show(getFragmentManager(), "error");
     }
     
+    /**
+     * Displays a confirmation dialog for reseting application configuration
+     */
     private void resetUserConfigShowDialog() {
     	DialogFragment newFragment = ResetAppDialogFragment.newInstance();
     	newFragment.setCancelable(true);
     	newFragment.show(getFragmentManager(), "reset");
 	}
     
+    /**
+     * Displays a confirmation dialog for reseting Missions database
+     */
     private void resetMissionsDbShowDialog() {
     	DialogFragment newFragment = ResetDbDialogFragment.newInstance();
     	newFragment.setCancelable(true);
@@ -347,6 +396,11 @@ public class MainActivity extends ActionBarActivity implements
     
     //XWalk
     
+    /**
+     * XWalk client class
+     * @author Xavier Gibert
+     *
+     */
     class MyResourceClient extends XWalkResourceClient {
         MyResourceClient(XWalkView view) {
             super(view);
@@ -365,6 +419,11 @@ public class MainActivity extends ActionBarActivity implements
   		}*/
     }
 	
+    /**
+     * XWalk client class
+     * @author Xavier Gibert
+     *
+     */
     class MyUIClient extends XWalkUIClient {
         MyUIClient(XWalkView view) {
             super(view);
@@ -372,7 +431,7 @@ public class MainActivity extends ActionBarActivity implements
     }
     
     @Override
-    protected void onPause() {
+    protected void onPause() {//Pause simulator and browser
         super.onPause();
         if (mXwalkView != null) {
             mXwalkView.pauseTimers();
@@ -384,7 +443,7 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume() {//Resume browser
         super.onResume();
         if (mXwalkView != null) {
             mXwalkView.resumeTimers();
@@ -407,7 +466,7 @@ public class MainActivity extends ActionBarActivity implements
     }
 	
 	@Override
-    public void onDestroy() {
+    public void onDestroy() {//Disconnect simulator, close database and browser
         super.onDestroy();
         // store the data in the fragment
         if(isFinishing())

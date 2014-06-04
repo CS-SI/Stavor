@@ -26,7 +26,6 @@ public class Mission implements Serializable{
 	public double initial_mass = 2000;
 	public InertialFrames inertialFrame = InertialFrames.EME2000;
 	//public RotatingFrames rotatingFrame = RotatingFrames.GTOD;
-	//public UtcDate initial_date = new UtcDate();
 	public AbsoluteDate initial_date = new AbsoluteDate();
 	public Orbit initial_orbit = new Orbit();
 }

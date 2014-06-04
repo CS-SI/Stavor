@@ -13,7 +13,7 @@ import android.widget.Toast;
 import org.xwalk.core.JavascriptInterface;
 
 /**
- * Javascript-to-Android bridge functions
+ * JavaScript-to-Android bridge functions
  * @author Xavier Gibert
  *
  */
@@ -65,7 +65,7 @@ public class WebAppInterface {
         return sim.getInitializationJSON();
     }
     
-    /** get model staten */
+    /** get model state */
     @JavascriptInterface
     public String getStateJSON() {
         return sim.getStateJSON();

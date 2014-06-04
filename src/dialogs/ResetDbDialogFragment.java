@@ -53,6 +53,11 @@ public class ResetDbDialogFragment extends DialogFragment {
         // Create the AlertDialog object and return it
         return builder.create();
     }
+	
+	/**
+	 * Deletes the database and restarts the application so it is installed again with
+	 * default values
+	 */
 	private void resetDb() {
 		//Delete database
 		((SatAttApplication)((MainActivity)getActivity()).getApplication()).db.delete(MissionEntry.TABLE_NAME, "1", null);
@@ -61,6 +66,11 @@ public class ResetDbDialogFragment extends DialogFragment {
 		preferences.edit().putBoolean(getString(R.string.pref_key_database_installed), false).commit();
 		resetApplication();
 	}
+	
+	/**
+	 * Restarts the application in order to install the database if it has been
+	 * deleted
+	 */
 	private void resetApplication(){
 		Context context = getActivity().getBaseContext();
 		Intent mStartActivity = new Intent(context, MainActivity.class);

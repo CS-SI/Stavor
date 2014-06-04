@@ -50,7 +50,7 @@ public class MissionActivity extends Activity{
 
 		setContentView(R.layout.mission);
 		
-
+		//Load mission, in case of edit mode, and the mode flag
 		Bundle b = this.getIntent().getExtras();
 		if(b!=null){
 		    mission = (MissionAndId) b.getSerializable("MISSION");
@@ -60,6 +60,7 @@ public class MissionActivity extends Activity{
 			isEdit=false;
 		}
 		
+		//Load the utc TimeScale for Orekit
 		if(utc==null){
 			try {
 				utc = TimeScalesFactory.getUTC();
@@ -79,6 +80,7 @@ public class MissionActivity extends Activity{
 				if(tx_name.getText().toString().isEmpty()){
 					Toast.makeText(getApplicationContext(), getString(R.string.mission_name_is_mandatory), Toast.LENGTH_LONG).show();
 				}else{
+					//Save Mission
 					try{
 						mission.mission.name = tx_name.getText().toString();
 						mission.mission.description = tx_description.getText().toString();
@@ -127,6 +129,7 @@ public class MissionActivity extends Activity{
     		
     	});
 		
+		//Load Views
 		tx_name = (EditText) findViewById(R.id.editTextMissionName);
 		tx_name.requestFocus();
 		
@@ -164,6 +167,7 @@ public class MissionActivity extends Activity{
 	        public void onTextChanged(CharSequence s, int start, int before, int count){}
 	    }); 
 
+		//Fill Views
 		tx_orbit_a.setText(Double.toString(mission.mission.initial_orbit.a));
 		tx_orbit_e.setText(Double.toString(mission.mission.initial_orbit.e));
 		tx_orbit_i.setText(Double.toString(mission.mission.initial_orbit.i));

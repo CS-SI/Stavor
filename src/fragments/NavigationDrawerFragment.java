@@ -287,6 +287,10 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
     
+    /**
+     * Select a different section
+     * @param position
+     */
     public void select(int position){
     	selectItem(position);
     }

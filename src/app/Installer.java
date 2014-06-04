@@ -47,6 +47,11 @@ public class Installer {
 	    return false;
 	}
 	
+	/**
+	 * Returns the File pointing to the root of the Orekit data in the device storage
+	 * @param activity
+	 * @return
+	 */
 	public static File getOrekitDataRoot(Activity activity){
 		return new File(activity.getExternalFilesDir(null)+File.separator+orekitDataPath);
 	}
@@ -60,6 +65,11 @@ public class Installer {
 		"MSAFE",
 		"Potential"
 	};
+	
+	/**
+	 * Installs the default Orekit data files in the device
+	 * @param activity
+	 */
 	public static void installApkData(MainActivity activity){
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
 		if(!prefs.getBoolean(activity.getString(R.string.pref_key_data_installed), false)){
@@ -122,6 +132,11 @@ public class Installer {
 	    }
 	}
 	
+	/**
+	 * Installs the missions database including some examples
+	 * @param activity
+	 * @return
+	 */
 	public static MissionReaderDbHelper installApkDatabase(MainActivity activity){
 		MissionReaderDbHelper mDbHelper = new MissionReaderDbHelper(activity.getApplicationContext());
 		SQLiteDatabase db = mDbHelper.getWritableDatabase();

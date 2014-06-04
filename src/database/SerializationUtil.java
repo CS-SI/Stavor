@@ -14,7 +14,11 @@ import mission.Mission;
  */
 public class SerializationUtil {
  
-    // deserialize to Object from given file
+	/**
+	 * Deserialize from byte array to Mission object
+	 * @param serialized
+	 * @return
+	 */
     public static Mission deserialize(byte[] serialized) {
     	try {
     	     //byte b[] = serialized.getBytes(); 
@@ -29,7 +33,12 @@ public class SerializationUtil {
     	 }
     }
  
-    // serialize the given object and save it to file
+    /**
+     * Serialize the given object to byte array
+     * @param obj
+     * @return
+     * @throws IOException
+     */
     public static byte[] serialize(Object obj)//str.getBytes("UTF-8")
             throws IOException {
         ByteArrayOutputStream fos = new ByteArrayOutputStream();

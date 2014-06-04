@@ -38,7 +38,6 @@ public class ResetAppDialogFragment extends DialogFragment {
         		.setCancelable(true)
                .setPositiveButton(getString(R.string.dialog_reset_confirm), new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                       // Dummy
                 	   resetUserConfig();
                    }
 
@@ -51,6 +50,10 @@ public class ResetAppDialogFragment extends DialogFragment {
         // Create the AlertDialog object and return it
         return builder.create();
     }
+	
+	/**
+	 * Resets the application configuration to default values
+	 */
 	private void resetUserConfig() {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
 		boolean prev_value = preferences.getBoolean(getString(R.string.pref_key_database_installed), false);
@@ -58,6 +61,10 @@ public class ResetAppDialogFragment extends DialogFragment {
 		preferences.edit().putBoolean(getString(R.string.pref_key_database_installed), prev_value).commit();
 		resetApplication();
 	}
+	
+	/**
+	 * Restarts the application in order to reload all configurations
+	 */
 	private void resetApplication(){
 		Context context = getActivity().getBaseContext();
 		Intent mStartActivity = new Intent(context, MainActivity.class);

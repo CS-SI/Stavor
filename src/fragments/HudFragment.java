@@ -68,6 +68,7 @@ public final class HudFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.hud_display, container,
 				false);
 		
+		//Hud Panel
 		SlidingDrawer drawer = (SlidingDrawer) rootView.findViewById(R.id.slidingDrawer1);
         drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
             public void onDrawerOpened() {
@@ -92,13 +93,12 @@ public final class HudFragment extends Fragment {
             }
         });
         
-        
-		
 		slider_content = (LinearLayout) rootView.findViewById(R.id.content);
 		
 		TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
 		fps.setAlpha((float)0.0);
 		
+		//Browser initialization and reference passing to the simulator
 		browser = ((MainActivity)getActivity()).mXwalkView;
 		browser = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
 		
@@ -163,13 +163,20 @@ public final class HudFragment extends Fragment {
 				ARG_SECTION_NUMBER));
 	}
 
+	/**
+	 * Updates the FPS stats of the visualization
+	 * @param stats
+	 */
 	public void updateFPS(String stats) {
-		// TODO Auto-generated method stub
 		TextView fps = ((TextView) this.getView().findViewById(R.id.textViewFPS));
 		fps.setText(stats);
 		fps.setAlpha((float)1.0);
 	}
 	
+	/**
+	 * Shows the visualization Views menu
+	 * @param v
+	 */
     private void showPopup(View v) {
     	PopupMenu popup = new PopupMenu(getActivity(), v);
 
