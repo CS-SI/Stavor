@@ -34,7 +34,7 @@
         android:layout_below="@+id/nav_item_icon"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -162,6 +162,29 @@
                 android:text="@string/dummy"
                 android:textColor="@color/white" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_lang"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="@string/about_langs"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
@@ -170,7 +193,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/linearLayout1"
         android:layout_below="@+id/linearLayout1"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="6dp"
         android:text="@string/about1"
         android:textColor="@color/white" />
 

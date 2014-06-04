@@ -87,6 +87,8 @@
     <string name="about_install_date">Fecha instalación:</string>
     <string name="about1">Esta applicación es un producto de CS Systèmes d\'Information.</string>
     <string name="about2">Con la integración de los siguientes proyectos:</string>
+    <string name="about_lang">Idiomas:</string>
+    <string name="about_langs">EN FR -ES-</string>
     
     <string name="dialog_welcome">Bienvenido</string>
     <string name="dialog_error">Error</string>
