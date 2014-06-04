@@ -138,12 +138,12 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     }
     
     private void setConnected(){
-    	Log.d("Sim",System.currentTimeMillis()+": "+"Simulator connected");
+    	//Log.d("Sim",System.currentTimeMillis()+": "+"Simulator connected");
     	simulator.setSimulatorStatus(SimulatorStatus.Connected);
     }
     
     public void setDisconnected(){
-		Log.d("Sim",System.currentTimeMillis()+": "+"Simulator disconnected");
+		//Log.d("Sim",System.currentTimeMillis()+": "+"Simulator disconnected");
     	simulator.setSimulatorStatus(SimulatorStatus.Disconnected);
     	simulator.resetSelectedMissionId();
     }

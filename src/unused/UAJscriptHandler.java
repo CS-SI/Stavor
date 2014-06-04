@@ -13,12 +13,12 @@ public class UAJscriptHandler {
 	private Context context = null;
 
 	public UAJscriptHandler(Context context) {
-		Log.i(tag,"script handler created");
+		//Log.i(tag,"script handler created");
 		this.context = context;
 	}
 	
 	public void Log(String s) {
-		Log.i(tag,s);
+		//Log.i(tag,s);
 	}
 	
 	public void Info(String s) {
@@ -26,7 +26,7 @@ public class UAJscriptHandler {
 	}
 	
 	public void PlaceCall(String number) {
-		Log.i(tag,"Placing a phone call to [" + number + "]");
+		//Log.i(tag,"Placing a phone call to [" + number + "]");
 		String url = "tel:" + number;
 		Intent callIntent = new Intent(Intent.ACTION_DIAL,Uri.parse(url));
 		context.startActivity(callIntent);

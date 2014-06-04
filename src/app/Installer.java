@@ -63,22 +63,22 @@ public class Installer {
 	public static void installApkData(MainActivity activity){
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
 		if(!prefs.getBoolean(activity.getString(R.string.pref_key_data_installed), false)){
-			Log.d("INSTALLER", "Installing Orekit data files...");
+			//Log.d("INSTALLER", "Installing Orekit data files...");
 			if(isExternalStorageWritable()){
 				if(copyAssets(activity)){
 					prefs.edit().putBoolean(activity.getString(R.string.pref_key_data_installed), true).commit();
-					Log.d("INSTALLER", "Installing Orekit data files... OK");
+					//Log.d("INSTALLER", "Installing Orekit data files... OK");
 					activity.showWelcomeMessage();
 				}else{
-					Log.d("INSTALLER", "Installing Orekit data files... FAIL");
+					//Log.d("INSTALLER", "Installing Orekit data files... FAIL");
 					activity.showErrorDialog(activity.getString(R.string.error_installing_orekit_default_data), true);
 				}
 			}else{
-				Log.d("INSTALLER", "Cannot install Orekit data files, external storage not accessible");
+				//Log.d("INSTALLER", "Cannot install Orekit data files, external storage not accessible");
 				activity.showErrorDialog(activity.getString(R.string.error_installing_orekit_default_data_external_storage_not_accessible), true);
 			}
 		}else{
-			Log.d("INSTALLER", "Orekit data files are already installed...");
+			//Log.d("INSTALLER", "Orekit data files are already installed...");
 		}
 	}
 	private static boolean copyAssets(Activity activity) {
@@ -89,7 +89,7 @@ public class Installer {
 		    try {
 		        files = assetManager.list(orekitDataPath+File.separator+foldername);
 		    } catch (IOException e) {
-		        Log.e("tag", "Failed to get asset file list.", e);
+		        //Log.e("tag", "Failed to get asset file list.", e);
 		        installed=false;
 		    }
 		    for(String filename : files) {
@@ -107,7 +107,7 @@ public class Installer {
 		          out.close();
 		          out = null;
 		        } catch(IOException e) {
-		            Log.e("tag", "Failed to copy asset file: " + filename, e);
+		            //Log.e("tag", "Failed to copy asset file: " + filename, e);
 		            installed=false;
 		        }       
 		    }
@@ -128,18 +128,17 @@ public class Installer {
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
 		if(!prefs.getBoolean(activity.getString(R.string.pref_key_database_installed), false)){
-			Log.d("INSTALLER", "Installing Missions database...");
+			//Log.d("INSTALLER", "Installing Missions database...");
 			
 			if(addMissionEntry(db)){
 				prefs.edit().putBoolean(activity.getString(R.string.pref_key_database_installed), true).commit();
-				Log.d("INSTALLER", "Installing Missions database... OK");
-				//activity.showWelcomeMessage();
+				//Log.d("INSTALLER", "Installing Missions database... OK");
 			}else{
-				Log.d("INSTALLER", "Installing Missions database... FAIL");
+				//Log.d("INSTALLER", "Installing Missions database... FAIL");
 				activity.showErrorDialog(activity.getString(R.string.error_installing_missions_database), true);
 			}
 		}else{
-			Log.d("INSTALLER", "Missions database is already installed...");
+			//Log.d("INSTALLER", "Missions database is already installed...");
 		}
 		
 		return mDbHelper;
