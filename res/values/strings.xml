@@ -89,6 +89,7 @@
     <string name="about2">With the integration of the following projects:</string>
     <string name="about_lang">Languages:</string>
     <string name="about_langs">-EN- FR ES</string>
+    <string name="about_platform">Architecture:</string>
     
     <string name="dialog_welcome">Welcome</string>
     <string name="dialog_error">Error</string>
