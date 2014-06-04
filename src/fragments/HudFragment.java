@@ -59,6 +59,7 @@ public final class HudFragment extends Fragment {
 	XWalkView browser;
 	LinearLayout browserLayout, slider_content;
 	Button views_menu;
+	SlidingDrawer drawer;
 	
 	@SuppressWarnings("deprecation")
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
@@ -69,7 +70,7 @@ public final class HudFragment extends Fragment {
 				false);
 		
 		//Hud Panel
-		SlidingDrawer drawer = (SlidingDrawer) rootView.findViewById(R.id.slidingDrawer1);
+		drawer = (SlidingDrawer) rootView.findViewById(R.id.slidingDrawer1);
         drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
             public void onDrawerOpened() {
             	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
@@ -102,6 +103,7 @@ public final class HudFragment extends Fragment {
 		browser = ((MainActivity)getActivity()).mXwalkView;
 		browser = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
 		
+        
     	XWalkSettings browserSettings = browser.getSettings();
     	
     	browserSettings.setJavaScriptEnabled(true);
@@ -127,7 +129,7 @@ public final class HudFragment extends Fragment {
     	
     	browserLayout.addView(browser);
     	
-    	browser.load(Parameters.Web.STARTING_PAGE,null);
+    	//browser.load(Parameters.Web.STARTING_PAGE,null);
     	
     	views_menu = (Button) rootView.findViewById(R.id.buttonMissionNew);
     	views_menu.setOnClickListener(new OnClickListener(){
@@ -144,8 +146,21 @@ public final class HudFragment extends Fragment {
     	simulator.setControlButtons(but_play,but_stop);
     	simulator.setCorrectSimulatorControls();
     	
-    	if(Parameters.Hud.start_panel_open)
-    		drawer.getHandle().callOnClick();
+    	/*if(Parameters.Hud.start_panel_open)
+    		drawer.getHandle().callOnClick();*/
+
+		//needs to have browser defined but not loaded yet
+    	rootView.post(new Runnable()
+    	{
+    	    @Override
+    	    public void run()
+    	    {
+    	    	if(Parameters.Hud.start_panel_open)
+    	    		drawer.open();
+    	        browser.load(Parameters.Web.STARTING_PAGE,null);
+    	    }
+    	});
+    	
 		return rootView;
 	}
 	
