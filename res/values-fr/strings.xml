@@ -147,7 +147,7 @@
     <string name="test_1">Essai 1</string>
     <string name="test_2">Essai 2</string>
     <string name="test_3">Essai 3</string>
-    <string name="powered_by">Propulsé par:</string><!-- Check -->
+    <string name="powered_by">Moteur sim.:</string>
     <string name="panel_vel">Vit.</string>
     <string name="panel_accel">Accél.</string>
     <string name="panel_radium">Rayon orbital:</string>
