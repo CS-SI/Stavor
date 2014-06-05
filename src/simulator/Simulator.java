@@ -28,6 +28,7 @@ public class Simulator {
 	private Context context;
 	private Activity activity;
 	private SocketsThread thread;
+	@SuppressWarnings("unused")
 	private SimulatorThread sthread;
 	private ModelSimulation simulation;
 	private Button buttonConnect;

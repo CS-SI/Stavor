@@ -21,7 +21,6 @@ import cs.si.satatt.R;
 import mission.Mission;
 import model.ModelSimulation;
 import android.os.AsyncTask;
-import android.util.Log;
 import app.Parameters;
 
 /**
@@ -150,7 +149,8 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	simulator.resetSelectedMissionId();
     }
     
-    private Frame inertialFrame, rotatingFrame;
+    private Frame inertialFrame; 
+    //private Frame rotatingFrame;
     private Propagator propagator;
     private AbsoluteDate extrapDate, finalDate;
     /**
@@ -193,7 +193,7 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
 				break;
 		}*/
 		Orbit initialOrbit = new KeplerianOrbit(mission.initial_orbit.a, mission.initial_orbit.e, mission.initial_orbit.i, mission.initial_orbit.omega, mission.initial_orbit.raan, mission.initial_orbit.lM, PositionAngle.MEAN, inertialFrame, mission.initial_date, mission.initial_orbit.mu);
-		BodyShape earth = new OneAxisEllipsoid(1,1,CelestialBodyFactory.getEarth().getBodyOrientedFrame());
+		BodyShape earth = new OneAxisEllipsoid(org.orekit.utils.Constants.WGS84_EARTH_EQUATORIAL_RADIUS,org.orekit.utils.Constants.WGS84_EARTH_FLATTENING,CelestialBodyFactory.getEarth().getBodyOrientedFrame());
 		AttitudeProvider attitudeProvider = new NadirPointing(earth);
 		
 		SpacecraftState old_st;

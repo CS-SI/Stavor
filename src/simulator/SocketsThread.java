@@ -13,7 +13,6 @@ import org.orekit.propagation.SpacecraftState;
 import cs.si.satatt.R;
 import model.ModelSimulation;
 import android.os.AsyncTask;
-import android.util.Log;
 import app.Parameters;
 
 /**

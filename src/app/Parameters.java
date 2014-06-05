@@ -55,7 +55,7 @@ public class Parameters {
 	 */
 	public static class Web {
 		public static final String STARTING_PAGE = "file:///android_asset/www/index.html";
-		//public static final String STARTING_PAGE = "http://stemkoski.github.io/Three.js/Labeled-Geometry.html";
+		//public static final String TEST_PAGE_1 = "http://stemkoski.github.io/Three.js/Labeled-Geometry.html";
 		public static final String TEST_PAGE_1 = "http://get.webgl.org/";
 		public static final String TEST_PAGE_2 = "http://doesmybrowsersupportwebgl.com/";
 		public static final String TEST_PAGE_3 = "http://www.khronos.org/registry/webgl/sdk/tests/webgl-conformance-tests.html";

@@ -5,11 +5,10 @@ import cs.si.satatt.SatAttApplication;
 import android.content.Intent;
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 
 public class UAJscriptHandler {
-	private String tag = "UAJscriptHandler";
+	//private String tag = "UAJscriptHandler";
 	private Context context = null;
 
 	public UAJscriptHandler(Context context) {

@@ -19,7 +19,6 @@ import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 /**
  * Provides initial app installation functions
