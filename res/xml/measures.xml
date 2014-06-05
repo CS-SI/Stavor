@@ -42,7 +42,7 @@
             android:key="@string/pref_key_spheric_coords_selection"
             android:title="@string/pref_title_spheric_coords_selection"
             android:summary="@string/pref_summary_spheric_coords_selection"
-            android:entries="@array/basicinds"
+            android:entries="@array/basicindsstr"
             android:entryValues="@array/basicindsvalues"
             android:defaultValue="0"
             android:dependency="@string/pref_key_show_spheric_coords" />
@@ -59,7 +59,7 @@
             android:key="@string/pref_key_vectors_angle_sel1"
             android:title="@string/pref_title_vectors_angle_sel1"
             android:summary="@string/pref_summary_vectors_angle_sel1"
-            android:entries="@array/basicinds"
+            android:entries="@array/basicindsstr"
             android:entryValues="@array/basicindsvalues"
             android:defaultValue="0"
             android:dependency="@string/pref_key_show_vectors_angle" />
@@ -67,7 +67,7 @@
             android:key="@string/pref_key_vectors_angle_sel2"
             android:title="@string/pref_title_vectors_angle_sel2"
             android:summary="@string/pref_summary_vectors_angle_sel2"
-            android:entries="@array/basicinds"
+            android:entries="@array/basicindsstr"
             android:entryValues="@array/basicindsvalues"
             android:defaultValue="2"
             android:dependency="@string/pref_key_show_vectors_angle" />

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="basicindsstr">
-        <item>Earth</item>
-        <item>Sun</item>
-        <item>Velocity</item>
-        <item>Acceleration</item>
-        <item>Momentum</item>
+        <item>Terre</item>
+        <item>Soleil</item>
+        <item>Vitesse</item>
+        <item>Accélération</item>
+        <item>Moment</item>
     </string-array>
     <string-array name="basicindsvalues">
         <item>0</item>
