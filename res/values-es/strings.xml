@@ -5,7 +5,7 @@
     <string name="dummy"></string>
     <string name="app_exit_prevent_message">Presione atrás otra vez para cerrar la aplicación</string>
     <string name="title_section1">Simulador</string>
-    <string name="title_section2">HUD</string>
+    <string name="title_section2">Display</string>
     <string name="title_section3">Indicadores básicos</string>
     <string name="title_section4">Indicadores extra</string>
     <string name="title_section5">Medidas</string>
