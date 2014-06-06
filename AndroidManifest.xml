@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cs.si.stavor"
-    android:versionCode="070"
-    android:versionName="0.7" >
+    android:versionCode="080"
+    android:versionName="0.8" >
     <!-- VersionCode: [2]version+[1]architecture e.g 1.0arm is 100, 1.0x86 is 101  -->
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
