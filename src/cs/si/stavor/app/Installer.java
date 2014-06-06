@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.orekit.errors.OrekitException;
+import org.orekit.time.AbsoluteDate;
+import org.orekit.time.TimeScalesFactory;
+
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.database.MissionReaderDbHelper;
@@ -164,7 +168,7 @@ public class Installer {
 		
 		Mission mission = new Mission();
 		mission.name="Example GTO";
-		mission.description="GTO mission example";
+		mission.description="GTO mission example.";
 		mission.initial_orbit.a=2.4396159E7;
 		mission.initial_orbit.e=0.72831215;
 		
@@ -195,6 +199,15 @@ public class Installer {
 		mission.initial_orbit.e=0.0;
 		mission.initial_orbit.i=0.4;
 		mission.initial_orbit.raan=Math.PI/2;
+		try {
+			mission.initial_date = new AbsoluteDate(2008,7,4,0,0,0.0,TimeScalesFactory.getUTC());
+		} catch (IllegalArgumentException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (OrekitException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		values = new ContentValues();
 		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);
@@ -216,13 +229,22 @@ public class Installer {
 		//Third Example
 		mission = new Mission();
 		mission.name="Example LEO-Polar";
-		mission.description="polar LEO mission example";
+		mission.description="Polar LEO mission example";
 		mission.initial_orbit.a=7.0E6;
 		mission.initial_orbit.e=0.0;
 		mission.initial_orbit.i=1.57;
 		mission.initial_orbit.raan=0.0;
 		mission.sim_duration=100000.0;
 		mission.sim_step=10.0;
+		try {
+			mission.initial_date = new AbsoluteDate(2008,1,3,0,0,0.0,TimeScalesFactory.getUTC());
+		} catch (IllegalArgumentException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (OrekitException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		values = new ContentValues();
 		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);

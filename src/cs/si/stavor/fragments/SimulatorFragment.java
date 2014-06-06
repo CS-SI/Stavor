@@ -78,6 +78,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	AutoCompleteTextView host_view;
 	EditText port_view;
 	ListView missionsList;
+	int last_mission_selection = -1;
 
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -98,6 +99,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 					long arg3) {
 				restoreMissionsBackground();
 				if(arg1!=null){
+					last_mission_selection = arg2;
 					arg1.setBackgroundResource(R.drawable.mission_item_sel);
 					activeMissionId = Integer.parseInt((String) ((TextView)arg1.findViewById(R.id.textViewMissionId)).getText());
 					activeMissionName=(String) ((TextView)arg1.findViewById(R.id.textViewMission)).getText();
@@ -139,8 +141,9 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	button_connect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
+            		int tmp_sel = last_mission_selection;
             		simulator.disconnect();
-            		selectFirstMissionInList();
+            		selectMissionInList(tmp_sel);
             	}else{
             		boolean remote = sharedPref.getBoolean(v.getContext().getString(R.string.pref_key_sim_global_remote), false);
             		if(remote){
@@ -311,7 +314,11 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	}
 	
 	private void selectFirstMissionInList(){
-		int mActivePosition = 0;
+		selectMissionInList(0);
+	}
+	
+	private void selectMissionInList(int position){
+		int mActivePosition = position;
     	missionsList.setSelection(mActivePosition);
 		missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
 	}
@@ -327,7 +334,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		MissionReaderDbHelper db_help = ((StavorApplication)((MainActivity)getActivity()).getApplication()).db_help;
 		
-	    String sql="SELECT _ID, name, description FROM "+MissionEntry.TABLE_NAME+" ORDER BY name ASC;";
+	    String sql="SELECT _ID, name, description FROM "+MissionEntry.TABLE_NAME+" ORDER BY name COLLATE NOCASE ASC;";
 	    String[] params = null;
 	    SQLiteCursorLoader loader = new SQLiteCursorLoader(
 	    		getActivity().getApplicationContext(),
@@ -353,9 +360,11 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		        public void run() {
 		        	boolean remote = sharedPref.getBoolean(getString(R.string.pref_key_sim_global_remote), false);
 		        	if(!remote){
-			        	int mActivePosition = 0;
-				    	missionsList.setSelection(mActivePosition);
-						missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
+		        		if(last_mission_selection!=-1){
+		        			selectMissionInList(last_mission_selection);
+		        		}else{
+		        			selectFirstMissionInList();
+		        		}
 		        	}
 		        }    
 		    });
@@ -367,4 +376,5 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	public void onLoaderReset(Loader<Cursor> arg0) {
 		adapter.changeCursor(null);
 	}
+	
 }
