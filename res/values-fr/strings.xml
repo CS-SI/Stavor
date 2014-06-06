@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 	
-    <string name="app_name">SatAtt</string>
+    <string name="app_name">STAVOR</string>
     <string name="dummy"></string>
     <string name="app_exit_prevent_message">Appuyez de nouveau pour fermer l\'application</string>
     <string name="title_section1">Simulateur</string>
@@ -90,6 +90,9 @@
     <string name="about_lang">Langues:</string>
     <string name="about_langs">EN -FR- ES</string>
     <string name="about_platform">Architecture:</string>
+    <string name="about_app">App:</string>
+    <string name="about_appname">Spacecraft Three-dimensional Attitude Visualization using ORekit library</string>
+    
     
     <string name="dialog_welcome">Bienvenue</string>
     <string name="dialog_error">Erreur</string>

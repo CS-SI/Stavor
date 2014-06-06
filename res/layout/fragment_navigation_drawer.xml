@@ -10,7 +10,7 @@
     android:dividerHeight="2dp"
     android:drawSelectorOnTop="false"
     android:listSelector="@android:color/transparent"
-    tools:context="fragments.NavigationDrawerFragment" >
+    tools:context="cs.si.stavor.fragments.NavigationDrawerFragment" >
 
 </ListView>
 

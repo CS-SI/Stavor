@@ -51,7 +51,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" >
 
-        <layout.WrappingSlidingDrawer
+        <cs.si.stavor.layout.WrappingSlidingDrawer
             android:id="@+id/slidingDrawer1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -170,7 +170,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/white" />
             </LinearLayout>
-        </layout.WrappingSlidingDrawer>
+        </cs.si.stavor.layout.WrappingSlidingDrawer>
     </FrameLayout>
 
     <FrameLayout

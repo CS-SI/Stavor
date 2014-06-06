@@ -1,7 +1,6 @@
 package unused;
 
-import cs.si.satatt.SatAttApplication;
-
+import cs.si.stavor.StavorApplication;
 import android.content.Intent;
 import android.content.Context;
 import android.net.Uri;
@@ -31,7 +30,7 @@ public class UAJscriptHandler {
 		context.startActivity(callIntent);
 	}
 	public void SetSearchTerm(String searchTerm) {
-		SatAttApplication app = (SatAttApplication) context.getApplicationContext();
+		StavorApplication app = (StavorApplication) context.getApplicationContext();
 		app.setSearchTerm(searchTerm);
 	}
 	
