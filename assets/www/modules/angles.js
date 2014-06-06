@@ -269,14 +269,30 @@ function updateAngles(){
 
 			
 			//Compute arc angle clip points
-			var clip1 = value_earth.clone().normalize().multiplyScalar(sphere_radius);
-			var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
-			var clip_mid = clip1.clone().add(clip2.clone()).normalize().multiplyScalar(sphere_radius);
+			var clip1 = value_earth.clone().normalize().multiplyScalar(arc_inclination_radius);
+			var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(arc_inclination_radius);
+			var clip_mid = clip1.clone().add(clip2.clone()).normalize().multiplyScalar(arc_inclination_radius);
+
+
+			var clip_pre = clip1.clone().add(clip_mid.clone()).normalize().multiplyScalar(arc_inclination_radius); 
+			var clip_post = clip_mid.clone().add(clip2.clone()).normalize().multiplyScalar(arc_inclination_radius); 
+			var clip_preA = clip1.clone().add(clip_pre.clone()).normalize().multiplyScalar(arc_inclination_radius); 
+			var clip_preB = clip_pre.clone().add(clip_mid.clone()).normalize().multiplyScalar(arc_inclination_radius);
+			var clip_postA = clip_mid.clone().add(clip_post.clone()).normalize().multiplyScalar(arc_inclination_radius); 
+			var clip_postB = clip_post.clone().add(clip2.clone()).normalize().multiplyScalar(arc_inclination_radius);
 
 			//Draw Arc
-			var spline = new THREE.QuadraticBezierCurve3(clip1.clone(),
-			   clip_mid.clone(),
-			   clip2.clone());
+			var spline = new THREE.SplineCurve3([
+				clip1.clone(),
+				clip_preA.clone(),
+				clip_pre.clone(),
+				clip_preB.clone(),
+			   	clip_mid.clone(),
+				clip_postA.clone(),
+				clip_post.clone(),
+				clip_postB.clone(),
+			   	clip2.clone()]
+			);
 
 			var material = new THREE.LineBasicMaterial({
 			    color: arc_color,
@@ -293,7 +309,7 @@ function updateAngles(){
 			scene.add( incl_arc );
 
 			updateInclinationSprite(inclination);
-			spriteInclination.position = clip_mid.clone().multiplyScalar(1.15);
+			spriteInclination.position = clip_mid.clone().normalize().multiplyScalar(arc_radius);
 		}
 	}
 	if(show_spheric_coords){
