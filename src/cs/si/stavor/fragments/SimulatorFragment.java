@@ -174,7 +174,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			public void onClick(View arg0) {
 				if(activeMissionId==-1){
 					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
-				}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2 ){
+				}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2 || activeMissionId==3 ){
 					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_removable), Toast.LENGTH_LONG).show();
 				}else{
 					showDeleteMissionDialog(activeMissionId, activeMissionName);
@@ -200,7 +200,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			public void onClick(View arg0) {
 				if(activeMissionId==-1){
 					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
-				}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2 ){
+				}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2  ||activeMissionId==3){
 					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_editable), Toast.LENGTH_LONG).show();
 				}else{
 					MissionAndId mis = getSelectedMission();

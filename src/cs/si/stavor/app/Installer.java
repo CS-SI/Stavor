@@ -213,6 +213,34 @@ public class Installer {
 		if(newRowId==-1)
 			result=false;
 		
+		//Third Example
+		mission = new Mission();
+		mission.name="Example LEO-Polar";
+		mission.description="polar LEO mission example";
+		mission.initial_orbit.a=7.0E6;
+		mission.initial_orbit.e=0.0;
+		mission.initial_orbit.i=1.57;
+		mission.initial_orbit.raan=0.0;
+		mission.sim_duration=100000.0;
+		mission.sim_step=10.0;
+		
+		values = new ContentValues();
+		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, mission.description);
+		try {
+			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				MissionEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId==-1)
+			result=false;
+		
 		
 		return result;
 	}
