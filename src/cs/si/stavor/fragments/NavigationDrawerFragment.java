@@ -162,7 +162,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.measures_s);
 		        	    	break;
 		        	    case 5:
-		        	    	iconView.setImageResource(R.drawable.preferences_s);
+		        	    	iconView.setImageResource(R.drawable.model_s);
 		        	    	break;
 		        	    case 6:
 		        	    	iconView.setImageResource(R.drawable.preferences_s);
@@ -190,7 +190,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.measures);
 		        	    	break;
 		        	    case 5:
-		        	    	iconView.setImageResource(R.drawable.preferences);
+		        	    	iconView.setImageResource(R.drawable.model);
 		        	    	break;
 		        	    case 6:
 		        	    	iconView.setImageResource(R.drawable.preferences);
