@@ -324,7 +324,21 @@ function updateAngles(){
 		var sphcoord_cross = sphcoord_target.clone().setZ(0).normalize().multiplyScalar(arc_sphcoord_radius);
 		var sphcoord_ref = axis_x.clone().multiplyScalar(arc_sphcoord_radius);
 		var sphcoord_long_mid = sphcoord_ref.clone().add(sphcoord_cross.clone()).normalize().multiplyScalar(arc_sphcoord_radius);
-		var sphcoord_lat_mid = sphcoord_cross.clone().add(sphcoord_target.clone()).normalize().multiplyScalar(arc_sphcoord_radius);  
+		var sphcoord_lat_mid = sphcoord_cross.clone().add(sphcoord_target.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+
+		var sphcoord_long_pre = sphcoord_ref.clone().add(sphcoord_long_mid.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var sphcoord_long_post = sphcoord_long_mid.clone().add(sphcoord_cross.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var sphcoord_long_preA = sphcoord_ref.clone().add(sphcoord_long_pre.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var sphcoord_long_preB = sphcoord_long_pre.clone().add(sphcoord_long_mid.clone()).normalize().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_long_postA = sphcoord_long_mid.clone().add(sphcoord_long_post.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var sphcoord_long_postB = sphcoord_long_post.clone().add(sphcoord_cross.clone()).normalize().multiplyScalar(arc_sphcoord_radius);
+
+		var sphcoord_lat_pre = sphcoord_cross.clone().add(sphcoord_lat_mid.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var sphcoord_lat_post = sphcoord_lat_mid.clone().add(sphcoord_target.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var sphcoord_lat_preA = sphcoord_cross.clone().add(sphcoord_lat_pre.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var sphcoord_lat_preB = sphcoord_lat_pre.clone().add(sphcoord_lat_mid.clone()).normalize().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_lat_postA = sphcoord_lat_mid.clone().add(sphcoord_lat_post.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var sphcoord_lat_postB = sphcoord_lat_post.clone().add(sphcoord_target.clone()).normalize().multiplyScalar(arc_sphcoord_radius);
 
 		var lat=Math.atan2(sphcoord_target.z,1);
 		var lng=Math.atan2(sphcoord_target.y,sphcoord_target.x);
@@ -340,9 +354,17 @@ function updateAngles(){
 
 		//update longitude arc
 		scene.remove( long_arc );
-		var spline = new THREE.QuadraticBezierCurve3(sphcoord_cross.clone(),
-		   sphcoord_long_mid.clone(),
-		   sphcoord_ref.clone());
+		var spline = new THREE.SplineCurve3([
+			sphcoord_cross.clone(),
+			sphcoord_long_postB.clone(),
+			sphcoord_long_post.clone(),
+			sphcoord_long_postA.clone(),
+		   	sphcoord_long_mid.clone(),
+			sphcoord_long_preB.clone(),
+			sphcoord_long_pre.clone(),
+			sphcoord_long_preA.clone(),
+		   	sphcoord_ref.clone()
+		]);
 
 		var material = new THREE.LineBasicMaterial({
 		    color: arc_color,
@@ -363,9 +385,17 @@ function updateAngles(){
 
 		//create latittude arc
 		scene.remove( lat_arc );
-		var spline = new THREE.QuadraticBezierCurve3(sphcoord_target.clone(),
-		   sphcoord_lat_mid.clone(),
-		   sphcoord_cross.clone());
+		var spline = new THREE.SplineCurve3([
+			sphcoord_target.clone(),
+			sphcoord_lat_postB.clone(),
+			sphcoord_lat_post.clone(),
+			sphcoord_lat_postA.clone(),
+		   	sphcoord_lat_mid.clone(),
+			sphcoord_lat_preB.clone(),
+			sphcoord_lat_pre.clone(),
+			sphcoord_lat_preA.clone(),
+		   	sphcoord_cross.clone()
+		]);
 
 		var material = new THREE.LineBasicMaterial({
 		    color: arc_color,
@@ -429,6 +459,14 @@ function updateAngles(){
 		}
 		var angle_vector_mid = angle_vector_start.clone().add(angle_vector_end.clone()).normalize().multiplyScalar(arc_vectors_radius);
 
+		var angle_vector_pre = angle_vector_start.clone().add(angle_vector_mid.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var angle_vector_post = angle_vector_mid.clone().add(angle_vector_end.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var angle_vector_preA = angle_vector_start.clone().add(angle_vector_pre.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var angle_vector_preB = angle_vector_pre.clone().add(angle_vector_mid.clone()).normalize().multiplyScalar(arc_sphcoord_radius);
+		var angle_vector_postA = angle_vector_mid.clone().add(angle_vector_post.clone()).normalize().multiplyScalar(arc_sphcoord_radius); 
+		var angle_vector_postB = angle_vector_post.clone().add(angle_vector_end.clone()).normalize().multiplyScalar(arc_sphcoord_radius);
+
+
 		var dist_angle = angle_vector_start.clone().angleTo(angle_vector_end);
 
 		// LINES
@@ -441,9 +479,17 @@ function updateAngles(){
 		lineAngle2.geometry.verticesNeedUpdate = true;
 
 		scene.remove( vectors_arc );
-		var spline = new THREE.QuadraticBezierCurve3(angle_vector_start.clone(),
-		   angle_vector_mid.clone(),
-		   angle_vector_end.clone());
+		var spline = new THREE.SplineCurve3([
+			angle_vector_start.clone(),
+			angle_vector_preA.clone(),
+			angle_vector_pre.clone(),
+			angle_vector_preB.clone(),
+		   	angle_vector_mid.clone(),
+			angle_vector_postA.clone(),
+			angle_vector_post.clone(),
+			angle_vector_postB.clone(),
+		   	angle_vector_end.clone()
+		]);
 
 		var material = new THREE.LineBasicMaterial({
 		    color: arc_color,
@@ -460,7 +506,7 @@ function updateAngles(){
 		scene.add( vectors_arc );
 
 		updateAnglesSprite(dist_angle);
-		vectors_sprite.position = angle_vector_mid.clone().multiplyScalar(0.7);
+		vectors_sprite.position = angle_vector_mid.clone();
 
 	}
 
