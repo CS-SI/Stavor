@@ -273,7 +273,7 @@ THREE.TargetHelper.prototype.setColor = function ( hex ) {
  *  headWidth - Number
  */
 
-THREE.VectorHelper = function ( dir, origin, length, color, headLength, headWidth ) {
+THREE.VectorHelper = function ( dir, origin, length, color, headLength, headWidth, segments ) {
 
 	// dir is assumed to be normalized
 
@@ -294,10 +294,16 @@ THREE.VectorHelper = function ( dir, origin, length, color, headLength, headWidt
 	this.line.matrixAutoUpdate = false;
 	this.add( this.line );
 
-	var coneGeometry = new THREE.CylinderGeometry( 0, 0.5, 1, 5, 1 );
+	var coneGeometry = new THREE.CylinderGeometry( 0, 0.5, 1, segments, 1 );
 	coneGeometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, - 0.5, 0 ) );
 
-	this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: color } ) );
+	//this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: color } ) );
+	if(!canvas_mode)
+		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: color, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } ) );
+	else
+		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: color } ) );
+
+
 	this.cone.matrixAutoUpdate = false;
 	this.add( this.cone );
 
