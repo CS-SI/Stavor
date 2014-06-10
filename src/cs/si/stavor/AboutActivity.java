@@ -37,6 +37,7 @@ public class AboutActivity extends Activity {
 		TextView tx_version_gson = (TextView) findViewById(R.id.TextViewVersionGson);
 		TextView tx_version_color = (TextView) findViewById(R.id.TextViewVersionColor);
 		TextView tx_version_loader = (TextView) findViewById(R.id.TextViewVersionLoader);
+		TextView tx_xwalk_package = (TextView) findViewById(R.id.TextView08);
 		
 		//Fill Views
 		try {
@@ -46,8 +47,10 @@ public class AboutActivity extends Activity {
 			String code = Integer.toString(versionCode);
 			if(code.substring(code.length()-1).equals("0")){
 				tx_platform.setText("ARM");
+				tx_xwalk_package.setText(getString(R.string.about_table_crosswalk)+"ARM");
 			}else{
 				tx_platform.setText("x86");
+				tx_xwalk_package.setText(getString(R.string.about_table_crosswalk)+"x86");
 			}
 			tx_start_date.setText(Parameters.About.project_start_date);
 			tx_license.setText(Parameters.About.project_license);

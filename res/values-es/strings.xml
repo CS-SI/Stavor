@@ -72,7 +72,7 @@
     <string name="about_table_apache2_license">Apache 2.0</string>
     <string name="about_table_mit_license">MIT</string>
     <string name="about_table_bsd_license">BSD</string>
-    <string name="about_table_crosswalk">Crosswalk-Webview-ARM</string>
+    <string name="about_table_crosswalk">Crosswalk-Webview-</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
     <string name="about_table_threejs">ThreeJS</string>
