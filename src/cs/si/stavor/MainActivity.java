@@ -15,10 +15,13 @@ import org.xwalk.core.XWalkView;
 
 
 
+
+
 import cs.si.stavor.R;
 import cs.si.stavor.app.Installer;
 import cs.si.stavor.app.OrekitInit;
 import cs.si.stavor.app.Parameters;
+import cs.si.stavor.database.MissionReaderDbHelper;
 import cs.si.stavor.dialogs.ErrorDialogFragment;
 import cs.si.stavor.dialogs.ResetAppDialogFragment;
 import cs.si.stavor.dialogs.ResetDbDialogFragment;
@@ -40,6 +43,8 @@ import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.Menu;
@@ -86,10 +91,7 @@ public class MainActivity extends ActionBarActivity implements
 		return simulator;
 	}
 	
-	/**
-	 * WebView from XWalk project to increase compatibility of WebGL
-	 */
-    public XWalkView mXwalkView;
+	
     
     
 	@Override
@@ -103,20 +105,10 @@ public class MainActivity extends ActionBarActivity implements
 		//Initialize Orekit with the data files
 		OrekitInit.init(Installer.getOrekitDataRoot(this));
 		
-		//Install the Missions database if not installed yet and store database objects
-		((StavorApplication)getApplication()).db_help = Installer.installApkDatabase(this);
-		((StavorApplication)getApplication()).db = ((StavorApplication)getApplication()).db_help.getWritableDatabase();
-
 		//Configure application window
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
 		setProgressBarVisibility(true);
-		
-		//Initialize WebView
-		mXwalkView = new XWalkView(this.getApplicationContext(), this);
-		mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
-        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
-
 		
 		// find the retained fragment on activity restarts
         FragmentManager fm = getFragmentManager();
@@ -127,12 +119,26 @@ public class MainActivity extends ActionBarActivity implements
             // add the fragment
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();
-            // load the data from the web
-            dataFragment.setData(new Simulator(this));
+            
+            MissionReaderDbHelper db_help_tmp;
+            SQLiteDatabase db_tmp;
+            db_help_tmp = Installer.installApkDatabase(this);
+            db_tmp = db_help_tmp.getWritableDatabase();
+            
+            dataFragment.setData(
+            		new Simulator(this),
+            		db_help_tmp,
+            		db_tmp
+            		);
         }
 
         // the data is available in dataFragment.getData()
-        this.simulator = dataFragment.getData();
+        this.simulator = dataFragment.getSim();
+        
+		//Install the Missions database if not installed yet and store database objects
+		((StavorApplication)getApplication()).db_help = dataFragment.getDbHelp();
+		((StavorApplication)getApplication()).db = dataFragment.getDb();
+
 		
         
         // NAVIGATION
@@ -400,50 +406,9 @@ public class MainActivity extends ActionBarActivity implements
     	newFragment.show(getFragmentManager(), "reset_db");
 	}
     
-    
-    //XWalk
-    
-    /**
-     * XWalk client class
-     * @author Xavier Gibert
-     *
-     */
-    class MyResourceClient extends XWalkResourceClient {
-        MyResourceClient(XWalkView view) {
-            super(view);
-        }
-        /*@Override
-  		public void onProgressChanged(XWalkView view, int progress) {
-  			// Activities and WebViews measure progress with different scales.
-  			// The progress meter will automatically disappear when we reach 100%
-  			try{
-  				if(progress==100)
-  					simulator.setBrowserLoaded(true);
-  				setProgress(progress * 100);
-  			}catch(NullPointerException nulle){
-  				
-  			}
-  		}*/
-    }
-	
-    /**
-     * XWalk client class
-     * @author Xavier Gibert
-     *
-     */
-    class MyUIClient extends XWalkUIClient {
-        MyUIClient(XWalkView view) {
-            super(view);
-        }
-    }
-    
     @Override
     protected void onPause() {//Pause simulator and browser
         super.onPause();
-        if (mXwalkView != null) {
-            mXwalkView.pauseTimers();
-            mXwalkView.onHide();
-        }
         if(simulator!=null){
         	simulator.pause();
         }
@@ -452,38 +417,29 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     protected void onResume() {//Resume browser
         super.onResume();
-        if (mXwalkView != null) {
-            mXwalkView.resumeTimers();
-            mXwalkView.onShow();
-        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (mXwalkView != null) {
-            mXwalkView.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
-        if (mXwalkView != null) {
-            mXwalkView.onNewIntent(intent);
-        }
     }
 	
 	@Override
     public void onDestroy() {//Disconnect simulator, close database and browser
         super.onDestroy();
         // store the data in the fragment
-        if(isFinishing())
+        if(isFinishing()){
         	simulator.disconnect();
-        else
-        	dataFragment.setData(this.simulator);
-        ((StavorApplication)getApplication()).db_help.close();
-        //XWalk
-        if (mXwalkView != null) {
-            mXwalkView.onDestroy();
+            ((StavorApplication)getApplication()).db_help.close();
+        }else{
+        	dataFragment.setData(
+        			this.simulator,
+        			((StavorApplication)getApplication()).db_help,
+        			((StavorApplication)getApplication()).db
+        			);
         }
     }
 

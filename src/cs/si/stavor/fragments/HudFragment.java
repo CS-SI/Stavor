@@ -6,6 +6,9 @@ import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
+import cs.si.stavor.StavorApplication;
+import cs.si.stavor.web.MyResourceClient;
+import cs.si.stavor.web.MyUIClient;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.WebAppInterface;
@@ -13,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,10 +60,14 @@ public final class HudFragment extends Fragment {
 	}
 	
 	private Simulator simulator;
-	XWalkView browser;
 	LinearLayout browserLayout, slider_content;
 	Button views_menu;
 	SlidingDrawer drawer;
+	
+	/**
+	 * WebView from XWalk project to increase compatibility of WebGL
+	 */
+    public XWalkView mXwalkView;
 	
 	@SuppressWarnings("deprecation")
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
@@ -69,28 +77,35 @@ public final class HudFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.hud_display, container,
 				false);
 		
+		//Browser
+		//Initialize WebView
+		if(mXwalkView==null){
+			mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
+			mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
+	        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
+		}
 		//Hud Panel
 		drawer = (SlidingDrawer) rootView.findViewById(R.id.slidingDrawer1);
         drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
             public void onDrawerOpened() {
-            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
+            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mXwalkView.getLayoutParams());
             	if(getResources().getConfiguration().orientation==android.content.res.Configuration.ORIENTATION_PORTRAIT){
-                	layoutParams.height = browser.getHeight()-slider_content.getHeight();
+                	layoutParams.height = mXwalkView.getHeight()-slider_content.getHeight();
                 	layoutParams.width = LayoutParams.MATCH_PARENT;
             	}else{
-            		layoutParams.width = browser.getWidth()-slider_content.getWidth();
+            		layoutParams.width = mXwalkView.getWidth()-slider_content.getWidth();
                 	layoutParams.height = LayoutParams.MATCH_PARENT;
             	}
-            	browser.setLayoutParams(layoutParams);
+            	mXwalkView.setLayoutParams(layoutParams);
             }
         });
        
         drawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
             public void onDrawerClosed() {
-            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
+            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mXwalkView.getLayoutParams());
             	layoutParams.height = LayoutParams.MATCH_PARENT;
             	layoutParams.width = LayoutParams.MATCH_PARENT;
-            	browser.setLayoutParams(layoutParams);
+            	mXwalkView.setLayoutParams(layoutParams);
             }
         });
         
@@ -99,12 +114,7 @@ public final class HudFragment extends Fragment {
 		TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
 		fps.setAlpha((float)0.0);
 		
-		//Browser initialization and reference passing to the simulator
-		browser = ((MainActivity)getActivity()).mXwalkView;
-		browser = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
-		
-        
-    	XWalkSettings browserSettings = browser.getSettings();
+    	XWalkSettings browserSettings = mXwalkView.getSettings();
     	
     	browserSettings.setJavaScriptEnabled(true);
     	browserSettings.setUseWideViewPort(false);
@@ -115,19 +125,19 @@ public final class HudFragment extends Fragment {
     	//browserSettings.setDisplayZoomControls(true);
     	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener
     	
-    	browser.clearCache(true);
+    	mXwalkView.clearCache(true);
     	
     	simulator = ((MainActivity)getActivity()).getSimulator();
-    	simulator.setHudView(rootView, browser);
+    	simulator.setHudView(rootView, mXwalkView);
     	
-    	browser.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
+    	mXwalkView.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
     	
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-    	browser.setLayoutParams(browser_params);
+    	mXwalkView.setLayoutParams(browser_params);
     	
-    	browserLayout.addView(browser);
+    	browserLayout.addView(mXwalkView);
     	
     	//browser.load(Parameters.Web.STARTING_PAGE,null);
     	
@@ -157,7 +167,7 @@ public final class HudFragment extends Fragment {
     	    {
     	    	if(Parameters.Hud.start_panel_open)
     	    		drawer.open();
-    	        browser.load(Parameters.Web.STARTING_PAGE,null);
+    	        mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
     	    }
     	});
     	
@@ -254,7 +264,7 @@ public final class HudFragment extends Fragment {
                         return false;
                 }
                 views_menu.setText(com_view);
-                browser.load("javascript:changeView('"+command+"')", null);
+                mXwalkView.load("javascript:changeView('"+command+"')", null);
                 return true;
             }
         });
@@ -262,4 +272,56 @@ public final class HudFragment extends Fragment {
         popup.show();
 
     }
+    
+    @Override
+	public void onPause() {//Pause simulator and browser
+        super.onPause();
+        if (mXwalkView != null) {
+            mXwalkView.pauseTimers();
+            mXwalkView.onHide();
+        }
+    }
+
+    @Override
+	public void onResume() {//Resume browser
+        super.onResume();
+        if (mXwalkView != null) {
+            mXwalkView.resumeTimers();
+            mXwalkView.onShow();
+        }
+    }
+
+    @Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+        if (mXwalkView != null) {
+            mXwalkView.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    /*@Override
+    protected void onNewIntent(Intent intent) {
+        if (mXwalkView != null) {
+            mXwalkView.onNewIntent(intent);
+        }
+    }*/
+	
+	@Override
+    public void onDestroy() {//Disconnect simulator, close database and browser
+        super.onDestroy();
+        // store the data in the fragment
+        //XWalk
+        /*if (mXwalkView != null) {
+            mXwalkView.onDestroy();
+        }*/
+    }
+	
+	@Override
+	public void onDetach() {
+		//XWalk
+        if (mXwalkView != null) {
+            mXwalkView.onDestroy();
+        }
+	    super.onDetach();
+	}
 }

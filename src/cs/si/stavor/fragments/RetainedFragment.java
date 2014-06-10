@@ -1,7 +1,9 @@
 package cs.si.stavor.fragments;
 
+import cs.si.stavor.database.MissionReaderDbHelper;
 import cs.si.stavor.simulator.Simulator;
 import android.app.Fragment;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 /**
@@ -11,7 +13,9 @@ import android.os.Bundle;
  */
 public class RetainedFragment extends Fragment {
 	// data object we want to retain
-    private Simulator data;
+    private Simulator sim;
+    private MissionReaderDbHelper db_help;
+    private SQLiteDatabase db;
 
     // this method is only called once for this fragment
     @Override
@@ -21,12 +25,22 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setData(Simulator data) {
-        this.data = data;
+    public void setData(Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase) {
+        this.sim = data;
+        this.db_help = missionReaderDbHelper;
+        this.db = sqLiteDatabase;
     }
 
-    public Simulator getData() {
-        return data;
+    public Simulator getSim() {
+        return sim;
     }
+
+	public MissionReaderDbHelper getDbHelp() {
+		return db_help;
+	}
+
+	public SQLiteDatabase getDb() {
+		return db;
+	}
 
 }

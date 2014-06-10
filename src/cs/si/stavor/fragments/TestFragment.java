@@ -7,10 +7,13 @@ import org.xwalk.core.XWalkView;
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.app.Parameters;
+import cs.si.stavor.web.MyResourceClient;
+import cs.si.stavor.web.MyUIClient;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +47,10 @@ public final class TestFragment extends Fragment {
 	public TestFragment() {
 	}
 	
-	XWalkView browser;
+	/**
+	 * WebView from XWalk project to increase compatibility of WebGL
+	 */
+    public XWalkView mXwalkView;
 
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -53,13 +59,21 @@ public final class TestFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.test, container,
 				false);
 		
+		//Browser
+		//Initialize WebView
+		if(mXwalkView==null){
+			mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
+			mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
+	        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
+		}
+		
 		Button button1 = ((Button) rootView.findViewById(R.id.buttonTest1));
 		button1.setOnClickListener(new View.OnClickListener() {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
 			   //browser.loadUrl(Parameters.Web.TEST_PAGE_1);
-			   browser.load(Parameters.Web.TEST_PAGE_1,null);
+			   mXwalkView.load(Parameters.Web.TEST_PAGE_1,null);
 		   }
 		  });
 		Button button2 = ((Button) rootView.findViewById(R.id.buttonTest2));
@@ -67,7 +81,7 @@ public final class TestFragment extends Fragment {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
-			   browser.load(Parameters.Web.TEST_PAGE_2,null);
+			   mXwalkView.load(Parameters.Web.TEST_PAGE_2,null);
 		   }
 		  });
 		Button button3 = ((Button) rootView.findViewById(R.id.buttonTest3));
@@ -75,13 +89,13 @@ public final class TestFragment extends Fragment {
 		   @Override
 		   public void onClick(View v) {
 			   // button 1 was clicked!
-			   browser.load(Parameters.Web.TEST_PAGE_3,null);
+			   mXwalkView.load(Parameters.Web.TEST_PAGE_3,null);
 		   }
 		  });
 		
-		browser = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
+		mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
 		
-    	XWalkSettings browserSettings = browser.getSettings();
+    	XWalkSettings browserSettings = mXwalkView.getSettings();
     	
     	browserSettings.setJavaScriptEnabled(true);
     	browserSettings.setUseWideViewPort(false);
@@ -92,12 +106,12 @@ public final class TestFragment extends Fragment {
     	//browserSettings.setDisplayZoomControls(true);
     	//browserSettings.setSupportZoom(true);
     	
-    	browser.clearCache(true);
+    	mXwalkView.clearCache(true);
     	
     	LinearLayout browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
-    	browserLayout.addView(browser);
+    	browserLayout.addView(mXwalkView);
     	
-    	browser.load(Parameters.Web.TEST_PAGE_1,"");
+    	mXwalkView.load(Parameters.Web.TEST_PAGE_1,"");
     	
 		return rootView;
 	}
@@ -107,5 +121,57 @@ public final class TestFragment extends Fragment {
 		super.onAttach(activity);
 		((MainActivity) activity).onSectionAttached(getArguments().getInt(
 				ARG_SECTION_NUMBER));
+	}
+	
+    @Override
+	public void onPause() {//Pause simulator and browser
+        super.onPause();
+        if (mXwalkView != null) {
+            mXwalkView.pauseTimers();
+            mXwalkView.onHide();
+        }
+    }
+
+    @Override
+	public void onResume() {//Resume browser
+        super.onResume();
+        if (mXwalkView != null) {
+            mXwalkView.resumeTimers();
+            mXwalkView.onShow();
+        }
+    }
+
+    @Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+        if (mXwalkView != null) {
+            mXwalkView.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    /*@Override
+    protected void onNewIntent(Intent intent) {
+        if (mXwalkView != null) {
+            mXwalkView.onNewIntent(intent);
+        }
+    }*/
+	
+	@Override
+    public void onDestroy() {//Disconnect simulator, close database and browser
+        super.onDestroy();
+        // store the data in the fragment
+        //XWalk
+        /*if (mXwalkView != null) {
+            mXwalkView.onDestroy();
+        }*/
+    }
+	
+	@Override
+	public void onDetach() {
+		//XWalk
+        if (mXwalkView != null) {
+            mXwalkView.onDestroy();
+        }
+	    super.onDetach();
 	}
 }
