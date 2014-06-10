@@ -102,17 +102,19 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/eg_roll"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/white" />
 					<View style="@style/VDivider"/>
+
                     <TextView
                         android:id="@+id/textViewPanelPitch"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/eg_pitch"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/white" />
+
 					<View style="@style/VDivider"/>
                     <TextView
                         android:id="@+id/textViewPanelYaw"
@@ -120,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/eg_yaw"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/white" />
                 </LinearLayout>
 				<View
@@ -137,28 +139,32 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/eg_vel"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/white" />
 					<View style="@style/VDivider"/>
+
                     <TextView
                         android:id="@+id/textViewPanelAccel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="1.2"
                         android:text="@string/eg_accel"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/white" />
+
                 </LinearLayout>
                 <View
 				    style="@style/HDivider"
 				    android:layout_width="250dp" />
+
                 <TextView
                     android:id="@+id/textViewPanelRadium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/eg_radium"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/white" />
+
                 <View
 				    style="@style/HDivider"
 				    android:layout_width="250dp" />
@@ -167,7 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/eg_mass"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/white" />
             </LinearLayout>
         </cs.si.stavor.layout.WrappingSlidingDrawer>
