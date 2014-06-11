@@ -16,7 +16,9 @@ function restoreMiniSpheres(){
 }
 function restorePlanets(){
 	if(show_earth){
-		earth.visible=true;
+		earth.material.opacity = 1;
+		earth.material.transparent = false;
+		//earth.visible=true;
 	}
 	if(show_sun){
 		sun.visible=true;
@@ -63,15 +65,21 @@ function changeView(view_mode){
 			camera.up = new THREE.Vector3(0,1,0);
 			break;
 		case "Earth"://Earth
-			earth.visible = false;
+			if(show_earth){
+				//earth.visible = false;
+				earth.material.opacity = 0.2;
+				earth.material.transparent = true;
+			}
 			camera.up = new THREE.Vector3(0,0,1);
-			camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());
+			camera.position = value_earth.clone().normalize().multiplyScalar(getCamDistance());
 			break;
 		case "Sun"://Sun
-			sun.visible = false;
-			sunGlow.visible=false;
+			if(show_sun){
+				sun.visible = false;
+				sunGlow.visible=false;
+			}
 			camera.up = new THREE.Vector3(0,0,1);
-			camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());
+			camera.position = value_sun.clone().normalize().multiplyScalar(getCamDistance());
 			break;
 		case "S/C-XYZ"://Spacecraft
 			camera.position = init_sc_dir_xyz.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
@@ -124,10 +132,10 @@ function onWindowResize() {
 function updateView() {
 	switch(selected_view){
 		case "Earth"://Earth
-			camera.position = earth.position.clone().normalize().multiplyScalar(getCamDistance());	
+			camera.position = value_earth.clone().normalize().multiplyScalar(getCamDistance());	
 			break;
 		case "Sun"://Sun
-			camera.position = sun.position.clone().normalize().multiplyScalar(getCamDistance());
+			camera.position = value_sun.clone().normalize().multiplyScalar(getCamDistance());
 			break;
 		case "S/C-XYZ"://Spacecraft
 			camera.position = init_sc_dir_xyz.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
