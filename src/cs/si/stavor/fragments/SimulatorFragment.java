@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -283,9 +284,13 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 				TextView text_id = (TextView)lay.findViewById(R.id.textViewMissionId);
 				TextView text_name = (TextView)lay.findViewById(R.id.textViewMission);
 				if(simulator.getSelectedMissionid()==Integer.parseInt(text_id.getText().toString())){
-					text_name.setTextColor(getResources().getColor(R.color.red));
+					text_name.setTextColor(getResources().getColor(R.color.selected_mission));
+					//String htmlString="<u>This text will be underlined</u>";
+					//text_name.setText(Html.fromHtml("<u>"++"</u>"));
+					text_name.setPaintFlags(text_name.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 				}else{
 					text_name.setTextColor(getResources().getColor(R.color.white));
+					text_name.setPaintFlags(text_name.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
 				}
 			}
 		}

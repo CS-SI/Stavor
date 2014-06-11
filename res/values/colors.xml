@@ -20,5 +20,6 @@
     <color name="grey5">#2A2A2A</color>
     <color name="black">#000000</color>
     <color name="red">#FF0000</color>
+    <color name="selected_mission">#c4ddff</color>
     <color name="navigation">#424242</color>
 </resources>
