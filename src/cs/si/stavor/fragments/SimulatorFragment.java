@@ -3,6 +3,7 @@ package cs.si.stavor.fragments;
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.StavorApplication;
+import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.MissionReaderDbHelper;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
@@ -134,6 +135,10 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	
     	host_view = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompleteTextViewHost);
     	port_view = (EditText) rootView.findViewById(R.id.editTextPort);
+    	String host = sharedPref.getString(getString(R.string.pref_key_sim_remote_host), Parameters.Simulator.Remote.default_host);
+		String port = sharedPref.getString(getString(R.string.pref_key_sim_remote_port), Parameters.Simulator.Remote.default_port);
+		host_view.setText(host);
+		port_view.setText(port);
     	
     	button_connect = (Button) rootView.findViewById(R.id.buttonConnect);
     	simulator.setButtonConnect(button_connect);

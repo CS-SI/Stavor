@@ -4,6 +4,7 @@ import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
+import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import cs.si.stavor.model.ModelSimulation;
 import android.app.Activity;
@@ -237,8 +238,8 @@ public class Simulator {
 			// Remote
 			try{
 				setProgress(20 * 100);
-				String host = sharedPref.getString(context.getString(R.string.pref_key_sim_remote_host), "127.0.0.1");
-				int port = Integer.parseInt(sharedPref.getString(context.getString(R.string.pref_key_sim_remote_port), "1520"));
+				String host = sharedPref.getString(context.getString(R.string.pref_key_sim_remote_host), Parameters.Simulator.Remote.default_host);
+				int port = Integer.parseInt(sharedPref.getString(context.getString(R.string.pref_key_sim_remote_port), Parameters.Simulator.Remote.default_port));
 				setProgress(30 * 100);
 				simulation = new ModelSimulation((MainActivity)activity);
 				setProgress(40 * 100);

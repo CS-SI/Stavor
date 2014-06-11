@@ -52,7 +52,7 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     		//Connect remote simulator
     		try {
         		socket = new Socket();
-        		socket.connect(new InetSocketAddress(dstAddress, dstPort), Parameters.Simulator.remote_connection_timeout_ms);
+        		socket.connect(new InetSocketAddress(dstAddress, dstPort), Parameters.Simulator.Remote.remote_connection_timeout_ms);
         	    inputStream = socket.getInputStream();
 				inputOStream = new ObjectInputStream( inputStream );
 				setConnected();
