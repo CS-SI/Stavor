@@ -10,7 +10,7 @@ function initScene(){
 	camera.lookAt(scene.position);	
 	// RENDERER
 	if ( Detector.webgl ){
-		renderer = new THREE.WebGLRenderer( {antialias:true} );
+		renderer = new THREE.WebGLRenderer( {antialias:true, clearColor: 0x000000, clearAlpha: 1 } );
 	}else{
 		renderer = new THREE.CanvasRenderer();
 		alert('WebGL not supported in this device');

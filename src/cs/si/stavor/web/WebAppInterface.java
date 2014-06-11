@@ -20,7 +20,7 @@ import org.xwalk.core.JavascriptInterface;
  * @author Xavier Gibert
  *
  */
-public class WebAppInterface {
+public final class WebAppInterface {
     Activity activity;
     private ModelSimulation sim;
 
