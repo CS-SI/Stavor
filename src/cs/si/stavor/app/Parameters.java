@@ -21,7 +21,6 @@ public class Parameters {
 	 */
 	public static class About {
 		public static final String project_start_date = "2014/04/01";
-		public static final String project_license = "Undef";
 		public static final String version_orekit = "6.1";
 		public static final String version_xwalk = "7.36.149.0c";
 		public static final String version_threejs = "r67";
@@ -55,8 +54,8 @@ public class Parameters {
 	 */
 	public static class Web {
 		public static final String STARTING_PAGE = "file:///android_asset/www/index.html";
-		//public static final String TEST_PAGE_1 = "http://stemkoski.github.io/Three.js/Labeled-Geometry.html";
-		public static final String TEST_PAGE_1 = "http://get.webgl.org/";
+		public static final String TEST_PAGE_1 = "http://stemkoski.github.io/Three.js/Labeled-Geometry.html";
+		//public static final String TEST_PAGE_1 = "http://get.webgl.org/";
 		public static final String TEST_PAGE_2 = "http://doesmybrowsersupportwebgl.com/";
 		public static final String TEST_PAGE_3 = "http://www.khronos.org/registry/webgl/sdk/tests/webgl-conformance-tests.html";
 	}

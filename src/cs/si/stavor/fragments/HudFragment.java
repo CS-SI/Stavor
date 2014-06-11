@@ -81,6 +81,7 @@ public final class HudFragment extends Fragment {
 		//Initialize WebView
 		if(mXwalkView==null){
 			mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
+			mXwalkView.setBackgroundResource(R.color.black);
 			mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
 	        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
 		}
@@ -97,6 +98,7 @@ public final class HudFragment extends Fragment {
                 	layoutParams.height = LayoutParams.MATCH_PARENT;
             	}
             	mXwalkView.setLayoutParams(layoutParams);
+            	((MainActivity)getActivity()).setHudPanelOpen(true);
             }
         });
        
@@ -106,6 +108,7 @@ public final class HudFragment extends Fragment {
             	layoutParams.height = LayoutParams.MATCH_PARENT;
             	layoutParams.width = LayoutParams.MATCH_PARENT;
             	mXwalkView.setLayoutParams(layoutParams);
+            	((MainActivity)getActivity()).setHudPanelOpen(false);
             }
         });
         
@@ -165,7 +168,7 @@ public final class HudFragment extends Fragment {
     	    @Override
     	    public void run()
     	    {
-    	    	if(Parameters.Hud.start_panel_open)
+    	    	if(((MainActivity)getActivity()).getHudPanelOpen())
     	    		drawer.open();
     	        mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
     	    }

@@ -16,6 +16,7 @@ public class RetainedFragment extends Fragment {
     private Simulator sim;
     private MissionReaderDbHelper db_help;
     private SQLiteDatabase db;
+    private boolean hud_panel_open;
 
     // this method is only called once for this fragment
     @Override
@@ -25,10 +26,11 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setData(Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase) {
+    public void setData(Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
         this.sim = data;
         this.db_help = missionReaderDbHelper;
         this.db = sqLiteDatabase;
+        this.hud_panel_open = hud_panel_is_open;
     }
 
     public Simulator getSim() {
@@ -41,6 +43,10 @@ public class RetainedFragment extends Fragment {
 
 	public SQLiteDatabase getDb() {
 		return db;
+	}
+	
+	public boolean getHudPanelOpen(){
+		return hud_panel_open;
 	}
 
 }

@@ -128,7 +128,8 @@ public class MainActivity extends ActionBarActivity implements
             dataFragment.setData(
             		new Simulator(this),
             		db_help_tmp,
-            		db_tmp
+            		db_tmp,
+            		Parameters.Hud.start_panel_open
             		);
         }
 
@@ -139,7 +140,7 @@ public class MainActivity extends ActionBarActivity implements
 		((StavorApplication)getApplication()).db_help = dataFragment.getDbHelp();
 		((StavorApplication)getApplication()).db = dataFragment.getDb();
 
-		
+		hud_panel_open = dataFragment.getHudPanelOpen();
         
         // NAVIGATION
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
@@ -438,11 +439,18 @@ public class MainActivity extends ActionBarActivity implements
         	dataFragment.setData(
         			this.simulator,
         			((StavorApplication)getApplication()).db_help,
-        			((StavorApplication)getApplication()).db
+        			((StavorApplication)getApplication()).db,
+        			hud_panel_open
         			);
         }
     }
 
-
+	private boolean hud_panel_open;
+	public boolean getHudPanelOpen(){
+		return hud_panel_open;
+	}
+	public void setHudPanelOpen(boolean open){
+		hud_panel_open = open;
+	}
 
 }
