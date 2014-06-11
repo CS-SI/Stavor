@@ -8,7 +8,6 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.widget.TextView;
 
 /**
@@ -22,13 +21,7 @@ public class WelcomeDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
 		String data_path = Installer.getOrekitDataRoot(this.getActivity()).getPath();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        
-        // Get the layout inflater
-        //LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        //builder.setView(inflater.inflate(R.layout.welcome, null));
         builder.setIcon(R.drawable.ic_launcher);
         TextView tx_path = new TextView(getActivity());
         tx_path.setText(data_path);

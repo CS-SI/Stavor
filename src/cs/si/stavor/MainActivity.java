@@ -1,22 +1,5 @@
 package cs.si.stavor;
 
-/*import org.xwalk.core.XWalkResourceClient;
-import org.xwalk.core.XWalkUIClient;*/
-
-import org.xwalk.core.XWalkResourceClient;
-import org.xwalk.core.XWalkUIClient;
-import org.xwalk.core.XWalkView;
-
-
-
-
-
-
-
-
-
-
-
 import cs.si.stavor.R;
 import cs.si.stavor.app.Installer;
 import cs.si.stavor.app.OrekitInit;
@@ -44,7 +27,6 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.BitmapFactory;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.Menu;

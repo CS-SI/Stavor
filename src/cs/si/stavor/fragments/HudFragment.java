@@ -6,7 +6,6 @@ import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
-import cs.si.stavor.StavorApplication;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
 import cs.si.stavor.app.Parameters;
@@ -37,6 +36,7 @@ import android.widget.SlidingDrawer.OnDrawerOpenListener;
  * @author Xavier Gibert
  *
  */
+@SuppressWarnings("deprecation")
 public final class HudFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
@@ -69,7 +69,6 @@ public final class HudFragment extends Fragment {
 	 */
     public XWalkView mXwalkView;
 	
-	@SuppressWarnings("deprecation")
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
