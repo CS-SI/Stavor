@@ -67,7 +67,8 @@
     <string name="cs_site">http://c-s.fr/</string>
     <string name="about_table_project">Projet</string>
     <string name="about_project_license">Licence du projet:</string>
-    <string name="about_project_license_value">Indéterminée</string>
+    <!-- <string name="about_project_license_value">Indéterminée</string> -->
+    <string name="about_project_license_value">Gratuit</string>
     <string name="about_table_orekit">Orekit</string>
     <string name="about_table_apache2_license">Apache 2.0</string>
     <string name="about_table_mit_license">MIT</string>

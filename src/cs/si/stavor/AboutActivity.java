@@ -53,7 +53,7 @@ public class AboutActivity extends Activity {
 				tx_xwalk_package.setText(getString(R.string.about_table_crosswalk)+"x86");
 			}
 			tx_start_date.setText(Parameters.About.project_start_date);
-			tx_license.setText(Parameters.About.project_license);
+			tx_license.setText(getString(R.string.about_project_license_value));
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
