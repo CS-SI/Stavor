@@ -13,6 +13,8 @@ public class Parameters {
 	 */
 	public static class App {
 		public static final long splash_min_time_ns = 1000000000;//[ns] 1.0s min
+		public static final boolean show_tutorial = true;
+		public static final boolean show_tests_section = false;
 	}
 	/**
 	 * About screen information
@@ -45,6 +47,7 @@ public class Parameters {
 		public static final long min_hud_panel_refreshing_interval_ns = 500000000;//[ns] 2Hz max
 		public static final long min_hud_model_refreshing_interval_ns = 40000000;//[ns] 25Hz max
 		public static final long model_refreshing_interval_safe_guard_ns = 5000000;//[ns] 5ms
+		
 		public static class Remote{
 			public static final int remote_connection_timeout_ms = 5000;//[ms]
 			public static final String default_host = "192.168.1.2";
@@ -58,8 +61,9 @@ public class Parameters {
 	 */
 	public static class Web {
 		public static final String STARTING_PAGE = "file:///android_asset/www/index.html";
-		public static final String TEST_PAGE_1 = "http://stemkoski.github.io/Three.js/Labeled-Geometry.html";
-		//public static final String TEST_PAGE_1 = "http://get.webgl.org/";
+		//public static final String TEST_PAGE_1 = "file:///android_asset/www/index.html";
+		//public static final String TEST_PAGE_1 = "http://stemkoski.github.io/Three.js/Labeled-Geometry.html";
+		public static final String TEST_PAGE_1 = "http://get.webgl.org/";
 		public static final String TEST_PAGE_2 = "http://doesmybrowsersupportwebgl.com/";
 		public static final String TEST_PAGE_3 = "http://www.khronos.org/registry/webgl/sdk/tests/webgl-conformance-tests.html";
 	}

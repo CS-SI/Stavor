@@ -378,7 +378,7 @@ public class MainActivity extends ActionBarActivity implements
     public void showTutorialSimulator(){
     	String key = getString(R.string.pref_key_tutorial_simulator);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    	if(sharedPref.getBoolean(key, true)){
+    	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
 	    	String title = getString(R.string.tutorial_title_simulator);
 	    	String message = getString(R.string.tutorial_message_simulator);
 	    	showTutorialDialog(key, title, message);
@@ -391,7 +391,7 @@ public class MainActivity extends ActionBarActivity implements
     public void showTutorialDisplay(){
     	String key = getString(R.string.pref_key_tutorial_display);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    	if(sharedPref.getBoolean(key, true)){
+    	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
 	    	String title = getString(R.string.tutorial_title_display);
 	    	String message = getString(R.string.tutorial_message_display);
 	    	showTutorialDialog(key, title, message);
@@ -400,7 +400,7 @@ public class MainActivity extends ActionBarActivity implements
     public void showTutorialConfig(){
     	String key = getString(R.string.pref_key_tutorial_config);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    	if(sharedPref.getBoolean(key, true)){
+    	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
 	    	String title = getString(R.string.tutorial_title_config);
 	    	String message = getString(R.string.tutorial_message_config);
 	    	showTutorialDialog(key, title, message);
