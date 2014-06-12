@@ -17,8 +17,8 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -89,7 +89,9 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		View rootView = inflater.inflate(R.layout.sim, container,
 				false);
 		
-		sharedPref = this.getActivity().getSharedPreferences("cs.si.stavor", Context.MODE_PRIVATE);
+		((MainActivity)getActivity()).showTutorialSimulator();
+		
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 		
 		simulator = ((MainActivity)getActivity()).getSimulator();
 		

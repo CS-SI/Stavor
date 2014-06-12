@@ -45,6 +45,8 @@ public class SettingsExtraFragment extends PreferenceFragment {
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.extra_indicators);
+        
+        ((MainActivity)getActivity()).showTutorialConfig();
     }
     
     @Override

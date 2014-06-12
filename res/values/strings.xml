@@ -94,6 +94,15 @@
     <string name="about_app">App:</string>
     <string name="about_appname">Spacecraft Three-dimensional Attitude Visualization using ORekit library</string>
     
+    <string name="tutorial_continue">Continue</string>
+    <string name="tutorial_dont_show_again">Don\'t show again</string>
+    <string name="tutorial_title_simulator">Tutorial Simulator</string>
+    <string name="tutorial_message_simulator">You are in the Simulator screen, in here you can chose between the local simulator or the remote client. In the first one you will find a list of missions; you can create, edit and select the mission for the simulator. The remote client connects with an external simulator over a network. Once you connect the simulator, the application will redirect you to the Display screen.</string>
+    <string name="tutorial_title_display">Tutorial Display</string>
+    <string name="tutorial_message_display">You are now in the Display screen, in here you can visualize the simulation. You will find the controls of the simulation, a button to select the view and a retractable panel with detailed information.</string>
+    <string name="tutorial_title_config">Tutorial Configurations</string>
+    <string name="tutorial_message_config">You entered one of the Configuration screens, they contain all the user options. The Basic and Extra Indicators sections are to personalize the visualization of those indicators (Velocity, Acceleration, Momentum...). The Measures section is used to select the visualization of measures like angles. The section Models contains options of the objects like the Earth and the Sun. The section of Preferences contains all the other, more general, options.</string>
+    
     <string name="dialog_welcome">Welcome</string>
     <string name="dialog_error">Error</string>
     <string name="dialog_exit">Exit</string>

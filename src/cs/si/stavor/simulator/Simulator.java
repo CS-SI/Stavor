@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.ConditionVariable;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -99,7 +100,7 @@ public class Simulator {
 	
 	public Simulator(MainActivity act){
 		activity = act;
-		sharedPref = activity.getSharedPreferences("cs.si.stavor", Context.MODE_PRIVATE);
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
 		context = activity.getApplicationContext();
 		simulation = new ModelSimulation(act);
 	}

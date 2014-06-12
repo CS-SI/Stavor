@@ -45,6 +45,8 @@ public class SettingsModelsFragment extends PreferenceFragment {
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.models);
+        
+        ((MainActivity)getActivity()).showTutorialConfig();
     }
     
     @Override

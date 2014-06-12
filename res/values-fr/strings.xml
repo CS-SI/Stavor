@@ -5,7 +5,7 @@
     <string name="dummy"></string>
     <string name="app_exit_prevent_message">Appuyez de nouveau pour fermer l\'application</string>
     <string name="title_section1">Simulateur</string>
-    <string name="title_section2">Display</string>
+    <string name="title_section2">Visualisation</string>
     <string name="title_section3">Indicateurs basiques</string>
     <string name="title_section4">Indicateurs extra</string>
     <string name="title_section5">Mesures</string>
@@ -94,6 +94,14 @@
     <string name="about_app">App:</string>
     <string name="about_appname">Spacecraft Three-dimensional Attitude Visualization using ORekit library</string>
     
+    <string name="tutorial_continue">Continuer</string>
+    <string name="tutorial_dont_show_again">Ne pas afficher de nouveau</string>
+    <string name="tutorial_title_simulator">Tutoriel Simulateur</string>
+    <string name="tutorial_message_simulator">Vous êtes sur ​​l'écran du simulateur, ici vous pouvez choisir entre un simulateur local ou éloigné. Dans le premier, vous trouverez une liste de missions; vous pouvez créer, modifier et sélectionnez la mission pour le simulateur. Le client éloigné se connecte à un simulateur externe par la réseau. Une fois connecté au simulateur, l'application va vous rediriger vers l'écran de Visualisation.</string>
+    <string name="tutorial_title_display">Tutoriel Visualisation</string>
+    <string name="tutorial_message_display">Vous êtes actuellement sur l'écran de visualisation, ici vous pouvez voir la simulation. Vous trouverez les commandes de simulation, un bouton pour sélectionner la vue et un panneau rétractable avec des informations détaillées.</string>
+    <string name="tutorial_title_config">Tutoriel Configurations</string>
+    <string name="tutorial_message_config">Vous avez entré un des écrans de configuration, ils contiennent toutes les options de l'utilisateur. Les sections d'Indicateurs basiques et extra servent à personnaliser l'affichage de ces indicateurs (Vitesse, Accélération, Moment...). La section sur Mesures est utilisé pour sélectionner l'affichage de mesures telles que les angles. La section Modèles contient des d'options pour les objets comme la Terre et le Soleil. La section Préférences, toutes les autres options générales.</string>
     
     <string name="dialog_welcome">Bienvenue</string>
     <string name="dialog_error">Erreur</string>

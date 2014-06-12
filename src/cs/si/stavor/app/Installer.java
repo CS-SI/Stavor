@@ -81,7 +81,8 @@ public class Installer {
 				if(copyAssets(activity)){
 					prefs.edit().putBoolean(activity.getString(R.string.pref_key_data_installed), true).commit();
 					//Log.d("INSTALLER", "Installing Orekit data files... OK");
-					activity.showWelcomeMessage();
+					//activity.showWelcomeMessage();
+					activity.flag_show_welcome=true;
 				}else{
 					//Log.d("INSTALLER", "Installing Orekit data files... FAIL");
 					activity.showErrorDialog(activity.getString(R.string.error_installing_orekit_default_data), true);

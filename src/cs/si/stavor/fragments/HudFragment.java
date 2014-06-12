@@ -76,6 +76,8 @@ public final class HudFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.hud_display, container,
 				false);
 		
+		((MainActivity)getActivity()).showTutorialDisplay();
+		
 		//Browser
 		//Initialize WebView
 		if(mXwalkView==null){

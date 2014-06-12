@@ -8,6 +8,7 @@ import cs.si.stavor.database.MissionReaderDbHelper;
 import cs.si.stavor.dialogs.ErrorDialogFragment;
 import cs.si.stavor.dialogs.ResetAppDialogFragment;
 import cs.si.stavor.dialogs.ResetDbDialogFragment;
+import cs.si.stavor.dialogs.TutorialDialogFragment;
 import cs.si.stavor.dialogs.WelcomeDialogFragment;
 import cs.si.stavor.fragments.HudFragment;
 import cs.si.stavor.fragments.NavigationDrawerFragment;
@@ -26,9 +27,11 @@ import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -74,7 +77,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
 	
 	
-    
+    public boolean flag_show_welcome = false;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -369,6 +372,44 @@ public class MainActivity extends ActionBarActivity implements
     	DialogFragment newFragment = ErrorDialogFragment.newInstance(message, canIgnore);
     	newFragment.setCancelable(false);
     	newFragment.show(getFragmentManager(), "error");
+    }
+    
+    
+    public void showTutorialSimulator(){
+    	String key = getString(R.string.pref_key_tutorial_simulator);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    	if(sharedPref.getBoolean(key, true)){
+	    	String title = getString(R.string.tutorial_title_simulator);
+	    	String message = getString(R.string.tutorial_message_simulator);
+	    	showTutorialDialog(key, title, message);
+    	}
+    	if(flag_show_welcome){
+    		flag_show_welcome=false;
+    		showWelcomeMessage();
+    	}
+    }
+    public void showTutorialDisplay(){
+    	String key = getString(R.string.pref_key_tutorial_display);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    	if(sharedPref.getBoolean(key, true)){
+	    	String title = getString(R.string.tutorial_title_display);
+	    	String message = getString(R.string.tutorial_message_display);
+	    	showTutorialDialog(key, title, message);
+    	}
+    }
+    public void showTutorialConfig(){
+    	String key = getString(R.string.pref_key_tutorial_config);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    	if(sharedPref.getBoolean(key, true)){
+	    	String title = getString(R.string.tutorial_title_config);
+	    	String message = getString(R.string.tutorial_message_config);
+	    	showTutorialDialog(key, title, message);
+    	}
+    }
+    private void showTutorialDialog(String key, String title, String message) {
+    	DialogFragment newFragment = TutorialDialogFragment.newInstance(key, title, message);
+    	newFragment.setCancelable(true);
+    	newFragment.show(getFragmentManager(), "tutorial-"+title);
     }
     
     /**
