@@ -2,6 +2,7 @@ package cs.si.stavor.fragments;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
+import cs.si.stavor.app.Parameters;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -108,12 +109,20 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                R.layout.nav_item,
-                R.id.nav_item_text,
-                new String[]{
+        final String[] sections;
+        if(Parameters.App.show_tests_section){
+        	sections = new String[]{
+                    getString(R.string.title_section1),
+                    getString(R.string.title_section2),
+                    getString(R.string.title_section3),
+                    getString(R.string.title_section4),
+                    getString(R.string.title_section5),
+                    getString(R.string.title_section6),
+                    getString(R.string.title_section7),
+                    getString(R.string.title_section8),
+                };
+        }else{
+        	sections = new String[]{
                     getString(R.string.title_section1),
                     getString(R.string.title_section2),
                     getString(R.string.title_section3),
@@ -122,7 +131,14 @@ public class NavigationDrawerFragment extends Fragment {
                     getString(R.string.title_section6),
                     getString(R.string.title_section7),
                     /*getString(R.string.title_section8),*/
-                }){
+                };
+        }
+        
+        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+                getActionBar().getThemedContext(),
+                R.layout.nav_item,
+                R.id.nav_item_text,
+                sections){
         	@Override
         	public View getView(int position, View convertView, ViewGroup parent)
         	{
@@ -131,17 +147,7 @@ public class NavigationDrawerFragment extends Fragment {
         	    RelativeLayout layout = (RelativeLayout) rowView.findViewById(R.id.nav_item_layout);
         	    TextView textView = (TextView) rowView.findViewById(R.id.nav_item_text);
         	    ImageView iconView = (ImageView) rowView.findViewById(R.id.nav_item_icon);
-        	    String[] values = new String[]{
-        	            getString(R.string.title_section1),
-        	            getString(R.string.title_section2),
-        	            getString(R.string.title_section3),
-        	            getString(R.string.title_section4),
-        	            getString(R.string.title_section5),
-        	            getString(R.string.title_section6),
-        	            getString(R.string.title_section7),
-        	            /*getString(R.string.title_section8),*/
-        	        };
-        	    textView.setText(values[position]);
+        	    textView.setText(sections[position]);
         	    
         	    if (position == mCurrentSelectedPosition) 
         	    { 
