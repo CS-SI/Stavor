@@ -58,7 +58,10 @@ function initSun(){
 				fragmentShader: THREE.ShaderSun.fragmentShader
 			}   );
 		}else{//Not using texture, solid color instead
-			var customMaterialSun = new THREE.MeshPhongMaterial( { color: sun_solid_color, metal: true } );
+			if(!canvas_mode)
+				var customMaterialSun = new THREE.MeshPhongMaterial( { color: sun_solid_color, metal: true } );
+			else
+				var customMaterialSun = new THREE.MeshBasicMaterial( { color: sun_solid_color } );
 		}
 		
 		var sunGeometry = new THREE.SphereGeometry( sun_radius, sun_seg, sun_seg );
@@ -135,7 +138,8 @@ function updateSun() {
 		var sun_obj_pos = value_sun.clone().normalize().multiplyScalar(sun_obj_dist);
 		sun.position = sun_obj_pos;
 		// change the direction this spotlight is facing
-		sunLight.position.set(sun.position.x,sun.position.y,sun.position.z);
+		if(!canvas_mode)
+			sunLight.position.set(sun.position.x,sun.position.y,sun.position.z);
 		if(sun_show_line){
 			// SUN LINE
 			lineSun.geometry.vertices[0] = new THREE.Vector3(sun.position.x,sun.position.y,sun.position.z);

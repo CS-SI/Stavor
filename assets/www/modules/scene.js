@@ -14,10 +14,12 @@ function initScene(){
 		//renderer.autoClear = true;
 		//renderer.autoClearColor = true;
 		//renderer.setClearColor(0xff0000, 1);
+		if(performance_level<=2)
+			canvasMode(performance_level);
 	}else{
 		renderer = new THREE.CanvasRenderer();
 		alert('WebGL not supported in this device');
-		canvasMode();
+		canvasMode(1);
 	}
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	container = document.getElementById( 'ThreeJS' );

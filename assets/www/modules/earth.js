@@ -7,7 +7,10 @@ function initEarth(){
 		if(show_earth_texture){	 
 			var earth_material = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'textures/earth/Land_ocean_ice_cloud_2048.jpg' ), overdraw: true } )
 		}else{
-			var earth_material = new THREE.MeshPhongMaterial( { color: earth_solid_color, metal: true } );
+			if(!canvas_mode)
+				var earth_material = new THREE.MeshPhongMaterial( { color: earth_solid_color, metal: true } );
+			else
+				var earth_material = new THREE.MeshBasicMaterial( { color: earth_solid_color } );
 		}
 		earth = new THREE.Mesh( earth_geometry, earth_material ) ;
 		earth.position.set(75, 0, 75);//Don't remove or the dashed material is not created

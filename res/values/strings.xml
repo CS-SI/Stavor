@@ -226,7 +226,7 @@
     <string name="pref_title_sim_remote_port">Port</string>
     <string name="pref_summary_sim_remote_port">Socket communication port</string>
     <string name="pref_title_detail_level">Detail level</string>
-    <string name="pref_summary_detail_level">Detail level of the graphics [1–9]</string>
+    <string name="pref_summary_detail_level">Detail level of the graphics [1–9]. Lv3+: ++Poligons detail. Lv2: -Textures -Reflective materials -Models rotation. Lv1: -Sky -Sphere.</string>
     <string name="pref_title_fps_update_skips">FPS update skips</string>
     <string name="pref_summary_fps_update_skips">Number of cycles to avoid refreshing the FPS stats [0–999]</string>
     <string name="pref_title_show_fps">Show FPS</string>

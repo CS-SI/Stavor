@@ -225,7 +225,7 @@
     <string name="pref_title_sim_remote_port">Puerto</string>
     <string name="pref_summary_sim_remote_port">Puerto de comunicación socket</string>
     <string name="pref_title_detail_level">Nivel de detalle</string>
-    <string name="pref_summary_detail_level">Nivel de detalle de gráficos [1–9]</string>
+    <string name="pref_summary_detail_level">Nivel de detalle de gráficos [1–9]. Nv3+: ++Detalle poligonos. Nv2: -Texturas -Materiales reflectivos -Rotación de modelos. Nv1: -Cielo -Esfera.</string>
     <string name="pref_title_fps_update_skips">FPS saltos en actualización</string>
     <string name="pref_summary_fps_update_skips">Número de ciclos para evitar refrescar las estadísticas de FPS [0–999]</string>
     <string name="pref_title_show_fps">Mostrar FPS</string>

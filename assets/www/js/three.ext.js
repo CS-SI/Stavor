@@ -49,7 +49,7 @@ THREE.MomentumHelper = function ( dir, origin, length, hex, headLength, headWidt
 	if(!canvas_mode)
 		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: hex, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } ) );
 	else
-		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: hex } ) );
+		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: hex } ) );
 	//this.cone = THREE.SceneUtils.createMultiMaterialObject( coneGeometry, materials );
 	this.cone.matrixAutoUpdate = false;
 	this.add( this.cone );
@@ -194,7 +194,7 @@ THREE.TargetHelper = function ( dir, origin, length, hex, headLength, headWidth,
 	if(!canvas_mode)
 		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: hex, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } ) );
 	else
-		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: hex } ) );
+		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: hex } ) );
 	this.cone.matrixAutoUpdate = false;
 	this.add( this.cone );
 
@@ -301,7 +301,7 @@ THREE.VectorHelper = function ( dir, origin, length, color, headLength, headWidt
 	if(!canvas_mode)
 		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: color, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } ) );
 	else
-		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: color } ) );
+		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: color } ) );
 
 
 	this.cone.matrixAutoUpdate = false;

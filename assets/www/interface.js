@@ -92,59 +92,69 @@ function getInitialization(){
 	  }
    }
 }
-function canvasMode(){
+function canvasMode(perfo){
 	canvas_mode = true;//To prevent putting reflective materials
 
-	show_sky = false;
-	show_sphere = false;
+	if(perfo<1)
+		perfo=1;
+
+	if(perfo==1){
+		show_sky = false;
+		show_sphere = false;
+	}
 	//show_mini_spheres = true;
-	show_circles = true;
-	show_axis = true;
-	show_axis_labels = true;
-	show_planes = false;
+	//show_circles = true;
+	//show_axis = true;
+	//show_axis_labels = true;
+	//show_planes = false;
 
 	//Angles and planes
-	show_orbital_plane = false;
-	show_spheric_coords = false;
-	show_vectors_angle = false;
+	//show_orbital_plane = false;
+	//show_spheric_coords = false;
+	//show_vectors_angle = false;
 
 	//show_spacecraft = true;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
-	show_sc_axis = true;		
+	//show_sc_axis = true;		
 	sc_show_eng_texture = false;
-	
-	show_sun = false;
+
+	//show_sun = false;
 	sun_rotates = false;
 	sun_rotation_speed = 0;
 	show_sun_texture = false;
 	sun_simple_glow = true;//Recomended to not use the shader glow, problems in android
-	sun_show_line = false;
-	sun_show_dist = false;
+	//sun_show_line = false;
+	//sun_show_dist = false;
 
-	show_earth = false;
+	//show_earth = false;
 	earth_rotates = false;
 	earth_rotation_speed = 0;
 	show_earth_texture = false;
-	earth_show_line = false;
-	earth_show_dist = false;
-	
+	//earth_show_line = false;
+	//earth_show_dist = false;
 
-	performance_level = 1;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
+
+	performance_level = perfo;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
 	
 	// Segments
-	segments_scale = performance_level;//Multiply segments of all geometries: 
-	sc_body_segments = 4 * segments_scale;
-	sc_window_segments = 8 * segments_scale;
-	sc_engine_segments = 8 * segments_scale;
-	sc_eng_disk_segments = sc_engine_segments;
-	sun_seg = 10 * segments_scale;
-	earth_seg = 12 * segments_scale;
-	sphere_segments = 20 * segments_scale;
-	miniSphere_seg = 7 * segments_scale;
-	torus_seg_r = 4 * segments_scale;
-	torus_seg_t = 32 * segments_scale;
-	arrow_segments = 4 * segments_scale;
-	momentum_segments = 4 * segments_scale;
-	target_segments = 8 * segments_scale;
+	var segments_scale = performance_level;//Multiply segments of all geometries: 
+	var sc_body_segments = 8 * segments_scale;
+	var sc_window_segments = 10 * segments_scale;
+	var sc_engine_segments = 10 * segments_scale;
+	var sc_eng_disk_segments = sc_engine_segments;
+	var sun_seg = 10 * segments_scale;
+	var earth_seg = 12 * segments_scale;
+	var sphere_segments = 20 * segments_scale;
+	var miniSphere_seg = 7 * segments_scale;
+	var torus_seg_r = 4 * segments_scale;
+	var torus_seg_t = 32 * segments_scale;
+	var arc_seg_r = 4 * segments_scale;
+	var arc_seg_t = 32 * segments_scale;
+	var arrow_segments = 4 * segments_scale;
+	var momentum_segments = 4 * segments_scale;
+	var target_segments = 8 * segments_scale;
+	// smooth my curve over this many points
+	var arc_resolution = 30*performance_level;
+	var plane_resolution = 20*performance_level;
 }
 function updateModelState(new_state){
 	//if (typeof Android != "undefined"){ // check the bridge 
