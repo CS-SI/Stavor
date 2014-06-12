@@ -63,6 +63,7 @@ public final class TestFragment extends Fragment {
 		//Initialize WebView
 		if(mXwalkView==null){
 			mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
+			mXwalkView.setBackgroundColor(0);
 			mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
 	        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
 		}
@@ -93,7 +94,7 @@ public final class TestFragment extends Fragment {
 		   }
 		  });
 		
-		mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
+		//mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
 		
     	XWalkSettings browserSettings = mXwalkView.getSettings();
     	

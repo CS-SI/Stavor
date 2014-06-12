@@ -82,7 +82,8 @@ public final class HudFragment extends Fragment {
 		//Initialize WebView
 		if(mXwalkView==null){
 			mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
-			mXwalkView.setBackgroundResource(R.color.black);
+			//mXwalkView.setBackgroundResource(R.color.black);
+			mXwalkView.setBackgroundColor(0x00000000);
 			mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
 	        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
 		}
@@ -142,7 +143,6 @@ public final class HudFragment extends Fragment {
     	mXwalkView.setLayoutParams(browser_params);
     	
     	browserLayout.addView(mXwalkView);
-    	
     	//browser.load(Parameters.Web.STARTING_PAGE,null);
     	
     	views_menu = (Button) rootView.findViewById(R.id.buttonMissionNew);

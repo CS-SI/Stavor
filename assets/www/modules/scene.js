@@ -10,7 +10,10 @@ function initScene(){
 	camera.lookAt(scene.position);	
 	// RENDERER
 	if ( Detector.webgl ){
-		renderer = new THREE.WebGLRenderer( {antialias:true, clearColor: 0x000000, clearAlpha: 1 } );
+		renderer = new THREE.WebGLRenderer( { antialias:true } );
+		//renderer.autoClear = true;
+		//renderer.autoClearColor = true;
+		//renderer.setClearColor(0xff0000, 1);
 	}else{
 		renderer = new THREE.CanvasRenderer();
 		alert('WebGL not supported in this device');
@@ -19,6 +22,7 @@ function initScene(){
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	container = document.getElementById( 'ThreeJS' );
 	container.appendChild( renderer.domElement );
+	
 	// EVENTS
 	//THREEx.WindowResize(renderer, camera);
 	//THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
