@@ -33,6 +33,8 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -515,6 +517,15 @@ public class MainActivity extends ActionBarActivity implements
         			((StavorApplication)getApplication()).db,
         			hud_panel_open
         			);
+
+            BitmapDrawable bd = (BitmapDrawable)getWindow().getDecorView().getBackground();
+            Bitmap mBitmap = bd.getBitmap();
+            if (mBitmap != null && !mBitmap.isRecycled()) {
+            	getWindow().getDecorView().setBackgroundResource(0);
+                bd.setCallback(null);
+                mBitmap.recycle();
+                mBitmap = null; 
+            }
         }
     }
 
