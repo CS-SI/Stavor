@@ -1,5 +1,7 @@
 package cs.si.stavor.fragments;
 
+import org.xwalk.core.XWalkView;
+
 import cs.si.stavor.database.MissionReaderDbHelper;
 import cs.si.stavor.simulator.Simulator;
 import android.app.Fragment;
@@ -13,6 +15,9 @@ import android.os.Bundle;
  */
 public class RetainedFragment extends Fragment {
 	// data object we want to retain
+	private XWalkView mXwalkView;
+	//Flag used to not reload the browser if only device orientation changed 
+    private boolean loadBrowser;
     private Simulator sim;
     private MissionReaderDbHelper db_help;
     private SQLiteDatabase db;
@@ -26,11 +31,21 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setData(Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
-        this.sim = data;
+    public void setData(XWalkView xwalkView, boolean load, Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
+        this.mXwalkView = xwalkView;
+        this.loadBrowser = load;
+    	this.sim = data;
         this.db_help = missionReaderDbHelper;
         this.db = sqLiteDatabase;
         this.hud_panel_open = hud_panel_is_open;
+    }
+    
+    public XWalkView getBrowser() {
+        return mXwalkView;
+    }
+    
+    public boolean getLoadBrowser(){
+    	return loadBrowser;
     }
 
     public Simulator getSim() {

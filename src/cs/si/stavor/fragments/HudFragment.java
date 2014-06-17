@@ -15,7 +15,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -67,7 +66,7 @@ public final class HudFragment extends Fragment {
 	/**
 	 * WebView from XWalk project to increase compatibility of WebGL
 	 */
-    public XWalkView mXwalkView;
+    private XWalkView mXwalkView;
 	
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -82,11 +81,7 @@ public final class HudFragment extends Fragment {
 		//Initialize WebView
 		
 		if(mXwalkView==null){
-			mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
-			//mXwalkView.setBackgroundResource(R.color.black);
-			mXwalkView.setBackgroundColor(0x00000000);
-			mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
-	        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
+			mXwalkView = ((MainActivity)getActivity()).getBrowser();
 		}
 		//Hud Panel
 		drawer = (SlidingDrawer) rootView.findViewById(R.id.slidingDrawer1);
@@ -170,27 +165,19 @@ public final class HudFragment extends Fragment {
     	    @Override
     	    public void run()
     	    {
+    	    	getActivity().setProgress(0);
     	    	if(((MainActivity)getActivity()).getHudPanelOpen())
     	    		drawer.open();
-    	        mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+    	    	if(((MainActivity)getActivity()).getLoadBrowserFlag()){
+    	    		mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+    	    		((MainActivity)getActivity()).resetLoadBrowserFlag();
+    	    	}else{
+    	    		mXwalkView.load("javascript:setLoaded()",null);
+    	    	}
     	    }
     	});
     	
 		return rootView;
-	}
-	
-	@Override
-	public void onDestroyView(){
-		simulator.setBrowserLoaded(false);
-		simulator.pause();
-		super.onDestroyView();
-	}
-
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(getArguments().getInt(
-				ARG_SECTION_NUMBER));
 	}
 
 	/**
@@ -278,38 +265,20 @@ public final class HudFragment extends Fragment {
 
     }
     
-    @Override
-	public void onPause() {//Pause simulator and browser
-        super.onPause();
-        if (mXwalkView != null) {
-            mXwalkView.pauseTimers();
-            mXwalkView.onHide();
-        }
-    }
+	
+	@Override
+	public void onDestroyView(){
+		simulator.setBrowserLoaded(false);
+		//simulator.pause();
+		super.onDestroyView();
+	}
 
-    @Override
-	public void onResume() {//Resume browser
-        super.onResume();
-        if (mXwalkView != null) {
-            mXwalkView.resumeTimers();
-            mXwalkView.onShow();
-        }
-    }
-
-    @Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	super.onActivityResult(requestCode, resultCode, data);
-        if (mXwalkView != null) {
-            mXwalkView.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    /*@Override
-    protected void onNewIntent(Intent intent) {
-        if (mXwalkView != null) {
-            mXwalkView.onNewIntent(intent);
-        }
-    }*/
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		((MainActivity) activity).onSectionAttached(getArguments().getInt(
+				ARG_SECTION_NUMBER));
+	}
 	
 	@Override
     public void onDestroy() {//Disconnect simulator, close database and browser
@@ -321,12 +290,37 @@ public final class HudFragment extends Fragment {
         }*/
     }
 	
+    @Override
+	public void onPause() {//Pause simulator and browser
+        super.onPause();
+        if(simulator!=null){
+        	simulator.temporaryPause();
+        }
+        if (mXwalkView != null) {
+            //mXwalkView.pauseTimers();
+            //mXwalkView.onHide();
+        }
+    }
+
+    @Override
+	public void onResume() {//Resume browser
+        super.onResume();
+        if (mXwalkView != null) {
+            //mXwalkView.resumeTimers();
+            //mXwalkView.onShow();
+        }
+        if(simulator!=null){
+        	simulator.resumeTemporaryPause();
+        }
+    }
+	
 	@Override
 	public void onDetach() {
 		//XWalk
         if (mXwalkView != null) {
-            mXwalkView.onDestroy();
-			System.gc();
+            //mXwalkView.onDestroy();
+			//System.gc();
+        	browserLayout.removeView(mXwalkView);
         }
 	    super.onDetach();
 	}

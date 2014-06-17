@@ -37,6 +37,35 @@ public class Simulator {
 	private Switch switchSelector;
 	private Mission mission;
 	private int mission_id=-1;
+	private boolean wasPlaying = false;//Flag to restore playing if fragment has paused-resumed while playing
+	
+	/**
+	 * Pauses the simulator but keeping the previous status (playing/paused)
+	 */
+	public void temporaryPause(){
+		if(simulatorStatus.equals(SimulatorStatus.Connected)){
+			if(simulationStatus.equals(SimulationStatus.Play)){
+				wasPlaying = true;
+				pause();
+			}else{
+				wasPlaying = false;
+			}
+		}
+	}
+	/**
+	 * restores the status of the simulator to the previous one before calling temporaryPause()
+	 */
+	public void resumeTemporaryPause(){
+		if(wasPlaying){
+			play();
+		}
+	}
+	/**
+	 * Resets the flag of the temporary pause, for when the simulator is reconnected.
+	 */
+	public void resetTemporaryPause(){
+		wasPlaying = false;
+	}
 	
 	/**
 	 * Sets the mission before connecting the simulator
@@ -134,6 +163,7 @@ public class Simulator {
 	 * @return
 	 */
 	public SimulatorStatus connect(){
+		resetTemporaryPause();
 		if(simulatorStatus.equals(SimulatorStatus.Disconnected)){
 			simulationStatus = SimulationStatus.Pause;
 			playCondition = new ConditionVariable(false);
@@ -147,6 +177,7 @@ public class Simulator {
 	 * @return
 	 */
 	public SimulatorStatus disconnect(){
+		resetTemporaryPause();
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
 			resetSelectedMissionId();
 			disconnectThread();

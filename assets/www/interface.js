@@ -12,6 +12,13 @@ function setLoadingProgress(progress) {// from 0 to 100
 		  }
    	}
 }
+function setLoaded() {// from 0 to 100 
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.setProgress!= "undefined") { // check the method
+			 Android.setProgress(100);
+		  }
+   	}
+}
 function updateFPS(){
 	if (typeof Android != "undefined"){ // check the bridge 
 		  if (Android.updateFPS!= "undefined") { // check the method

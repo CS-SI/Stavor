@@ -1,5 +1,7 @@
 package cs.si.stavor;
 
+import org.xwalk.core.XWalkView;
+
 import cs.si.stavor.R;
 import cs.si.stavor.app.Installer;
 import cs.si.stavor.app.OrekitInit;
@@ -22,6 +24,8 @@ import cs.si.stavor.settings.SettingsGeneralFragment;
 import cs.si.stavor.settings.SettingsMeasuresFragment;
 import cs.si.stavor.settings.SettingsModelsFragment;
 import cs.si.stavor.simulator.Simulator;
+import cs.si.stavor.web.MyResourceClient;
+import cs.si.stavor.web.MyUIClient;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
@@ -76,6 +80,28 @@ public class MainActivity extends ActionBarActivity implements
 		return simulator;
 	}
 	
+	/**
+	 * Browser object
+	 */
+	private XWalkView mXwalkView;
+	private boolean loadBrowser;
+	/**
+	 * Returns the simulator object
+	 * @return
+	 */
+	public XWalkView getBrowser(){
+		return mXwalkView;
+	}
+	public boolean getLoadBrowserFlag(){
+		return loadBrowser;
+	}
+	public void resetLoadBrowserFlag(){
+		loadBrowser = false;
+	}
+	public void raiseLoadBrowserFlag(){
+		loadBrowser = true;
+	}
+	
 	
     public boolean flag_show_welcome = false;
     
@@ -105,18 +131,29 @@ public class MainActivity extends ActionBarActivity implements
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();
             
+            XWalkView xwalkView = new XWalkView(this.getApplicationContext(), this);
+			//mXwalkView.setBackgroundResource(R.color.black);
+			xwalkView.setBackgroundColor(0x00000000);
+			xwalkView.setResourceClient(new MyResourceClient(xwalkView));
+	        xwalkView.setUIClient(new MyUIClient(xwalkView));
+	        
             MissionReaderDbHelper db_help_tmp;
             SQLiteDatabase db_tmp;
             db_help_tmp = Installer.installApkDatabase(this);
             db_tmp = db_help_tmp.getWritableDatabase();
             
             dataFragment.setData(
+            		xwalkView,
+            		true,
             		new Simulator(this),
             		db_help_tmp,
             		db_tmp,
             		Parameters.Hud.start_panel_open
             		);
         }
+        
+        this.mXwalkView = dataFragment.getBrowser();
+        this.loadBrowser = dataFragment.getLoadBrowser();
 
         // the data is available in dataFragment.getData()
         this.simulator = dataFragment.getSim();
@@ -152,7 +189,9 @@ public class MainActivity extends ActionBarActivity implements
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
-
+		//Reset flag to not start playing when the browser has to reload.
+		simulator.resetTemporaryPause();
+		raiseLoadBrowserFlag();
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
 		if(position==0){// selection of tabs content
@@ -433,9 +472,9 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     protected void onPause() {//Pause simulator and browser
         super.onPause();
-        if(simulator!=null){
+        /*if(simulator!=null){
         	simulator.pause();
-        }
+        }*/
     }
 
     @Override
@@ -444,11 +483,18 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+        if (mXwalkView != null) {
+            mXwalkView.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
+        if (mXwalkView != null) {
+            mXwalkView.onNewIntent(intent);
+        }
     }
 	
 	@Override
@@ -458,8 +504,11 @@ public class MainActivity extends ActionBarActivity implements
         if(isFinishing()){
         	simulator.disconnect();
             ((StavorApplication)getApplication()).db_help.close();
+            mXwalkView.onDestroy();
         }else{
         	dataFragment.setData(
+        			this.mXwalkView,
+        			this.loadBrowser,
         			this.simulator,
         			((StavorApplication)getApplication()).db_help,
         			((StavorApplication)getApplication()).db,
