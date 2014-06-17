@@ -190,7 +190,8 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		//Reset flag to not start playing when the browser has to reload.
-		simulator.resetTemporaryPause();
+		if(simulator!=null)
+			simulator.resetTemporaryPause();
 		raiseLoadBrowserFlag();
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
