@@ -16,12 +16,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -80,6 +82,7 @@ public final class HudFragment extends Fragment {
 		
 		//Browser
 		//Initialize WebView
+		
 		if(mXwalkView==null){
 			mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
 			//mXwalkView.setBackgroundResource(R.color.black);
@@ -325,7 +328,9 @@ public final class HudFragment extends Fragment {
 		//XWalk
         if (mXwalkView != null) {
             mXwalkView.onDestroy();
+			System.gc();
         }
 	    super.onDetach();
 	}
+	
 }
