@@ -323,11 +323,10 @@ public final class HudFragment extends Fragment {
         	browserLayout.removeView(mXwalkView);
         }
         //unbindDrawables(getView());
-        //System.gc();
 	    super.onDetach();
 	}
 	
-	private void unbindDrawables(View view) {
+	/*private void unbindDrawables(View view) {
         if (view.getBackground() != null) {
         view.getBackground().setCallback(null);
         }
@@ -337,6 +336,6 @@ public final class HudFragment extends Fragment {
             }
         ((ViewGroup) view).removeAllViews();
         }
-    }
+    }*/
 	
 }
