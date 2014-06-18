@@ -6,8 +6,6 @@ import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
-import cs.si.stavor.web.MyResourceClient;
-import cs.si.stavor.web.MyUIClient;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.WebAppInterface;
