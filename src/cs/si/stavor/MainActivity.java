@@ -104,7 +104,8 @@ public class MainActivity extends ActionBarActivity implements
 	public void raiseLoadBrowserFlag(){
 		loadBrowser = true;
 	}
-	
+	// to know when the oncreate and onresume are triggered for the first time
+	private boolean flagActivityFirstExec = false;
 	
     public boolean flag_show_welcome = false;
     
@@ -130,6 +131,7 @@ public class MainActivity extends ActionBarActivity implements
 
         // create the fragment and data the first time
         if (dataFragment == null) {
+        	flagActivityFirstExec=true;
             // add the fragment
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();
@@ -484,7 +486,10 @@ public class MainActivity extends ActionBarActivity implements
     protected void onResume() {//Resume browser
         super.onResume();
         mXwalkView.addJavascriptInterface(new WebAppInterface(this, simulator.getSimulationResults()), "Android");
-        mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+        if(flagActivityFirstExec){
+        	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+        	flagActivityFirstExec=false;
+        }
     }
 
     @Override
