@@ -180,7 +180,13 @@ public class ModelSimulation {
 					(velocity.getZ()-tmp_vel.getZ())/delay);
 			new_state.value_acceleration[0] = acceleration.getX();
 			new_state.value_acceleration[1] = acceleration.getY();
-			new_state.value_acceleration[2] = acceleration.getZ();
+			new_state.value_acceleration[2] = acceleration.getZ(); 
+			if(Double.isNaN(new_state.value_acceleration[0]))
+				new_state.value_acceleration[0]=0.0;
+			if(Double.isNaN(new_state.value_acceleration[1]))
+				new_state.value_acceleration[1]=0.0;
+			if(Double.isNaN(new_state.value_acceleration[2]))
+				new_state.value_acceleration[2]=0.0;
 			new_info.acceleration = acceleration.getNorm();
 		}
 		
