@@ -105,7 +105,7 @@ public class MissionActivity extends Activity{
 						if(isEdit){
 							//Update register with new name and serialized
 							if(editMission()){
-								((StavorApplication)getApplication()).loader.reset();
+								//((StavorApplication)getApplication()).loader.reset();
 								finish();
 							}else{
 								Toast.makeText(getApplicationContext(), getString(R.string.mission_error_edit), Toast.LENGTH_LONG).show();
@@ -113,7 +113,7 @@ public class MissionActivity extends Activity{
 						}else{
 							//Create new register in db
 							if(addMission()){
-								((StavorApplication)getApplication()).loader.reset();
+								//((StavorApplication)getApplication()).loader.reset();
 								finish();
 							}else{
 								Toast.makeText(getApplicationContext(), getString(R.string.mission_error_create), Toast.LENGTH_LONG).show();
@@ -219,17 +219,13 @@ public class MissionActivity extends Activity{
 			e.printStackTrace();
 		}
 		
-		// Insert the new row, returning the primary key value of the new row
-		long newRowId;
-		newRowId = ((StavorApplication)getApplication()).db.update(
+		// Edit the row
+		((StavorApplication)getApplication()).loader.update(
 				MissionEntry.TABLE_NAME,
 				values,
 				"_id "+"="+mission.id, 
 				null);
-		if(newRowId==-1)
-			return false;
-		else
-			return true;
+		return true;
 	}
 	
 	private boolean addMission(){
@@ -243,16 +239,12 @@ public class MissionActivity extends Activity{
 			e.printStackTrace();
 		}
 		
-		// Insert the new row, returning the primary key value of the new row
-		long newRowId;
-		newRowId = ((StavorApplication)getApplication()).db.insert(
+		// Insert the new row
+		((StavorApplication)getApplication()).loader.insert(
 				MissionEntry.TABLE_NAME,
 				null,
 		         values);
-		if(newRowId==-1)
-			return false;
-		else
-			return true;
+		return true;
 		
 	}
 	
