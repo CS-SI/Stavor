@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cs.si.stavor"
-    android:versionCode="090"
-    android:versionName="0.9" >
-    <!-- VersionCode: [2]version+[1]architecture e.g 1.0arm is 100, 1.0x86 is 101  -->
+    android:versionCode="0910"
+    android:versionName="0.9.1" >
+    <!-- VersionCode: [3]version+[1]architecture e.g 1.0.2arm is 1020, 1.1.3x86 is 1131  -->
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.INTERNET" />
