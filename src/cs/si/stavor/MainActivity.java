@@ -182,7 +182,6 @@ public class MainActivity extends ActionBarActivity implements
 			try {
 				Thread.sleep((Parameters.App.splash_min_time_ns-diff_time)/1000000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

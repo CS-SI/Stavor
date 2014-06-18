@@ -93,7 +93,7 @@ public class ModelConfiguration {
 	//Performances
 	public int performance_level = 3;//1(simple) to 9(detailed)
 	public boolean show_fps = true;
-	public int fps_update_skips = 60;
+	public int fps_update_skips = 20;
 	//General
 	public boolean show_sky = true;
 	public boolean show_sphere = true;
