@@ -132,6 +132,7 @@ public class MainActivity extends ActionBarActivity implements
         // create the fragment and data the first time
         if (dataFragment == null) {
         	flagActivityFirstExec=true;
+        	((StavorApplication)getApplication()).modelViewId = R.id.menu_views_ref_frame_xyz;
             // add the fragment
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();
