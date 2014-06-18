@@ -26,6 +26,7 @@ import cs.si.stavor.settings.SettingsModelsFragment;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
+import cs.si.stavor.web.WebAppInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
@@ -482,6 +483,8 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     protected void onResume() {//Resume browser
         super.onResume();
+        mXwalkView.addJavascriptInterface(new WebAppInterface(this, simulator.getSimulationResults()), "Android");
+        mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
     }
 
     @Override

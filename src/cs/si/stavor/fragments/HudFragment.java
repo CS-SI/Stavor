@@ -6,6 +6,7 @@ import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
+import cs.si.stavor.StavorApplication;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.WebAppInterface;
@@ -129,7 +130,7 @@ public final class HudFragment extends Fragment {
     	simulator = ((MainActivity)getActivity()).getSimulator();
     	simulator.setHudView(rootView, mXwalkView);
     	
-    	mXwalkView.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
+    	//mXwalkView.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
     	
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
@@ -147,6 +148,8 @@ public final class HudFragment extends Fragment {
 			}
     		
     	});
+    	
+    	views_menu.setText(titleOfViewId(((StavorApplication)getActivity().getApplication()).modelViewId));
     	
     	//Play/Pause/Stop buttons
     	ImageButton but_play = (ImageButton)rootView.findViewById(R.id.imageButtonPlay);
@@ -167,7 +170,8 @@ public final class HudFragment extends Fragment {
     	    	if(((MainActivity)getActivity()).getHudPanelOpen())
     	    		drawer.open();
     	    	if(((MainActivity)getActivity()).getLoadBrowserFlag()){
-    	    		mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+    	    		//mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+    	    		mXwalkView.load("javascript:reloadModel()",null);
     	    		((MainActivity)getActivity()).resetLoadBrowserFlag();
     	    	}else{
     	    		mXwalkView.load("javascript:setLoaded()",null);
@@ -188,6 +192,45 @@ public final class HudFragment extends Fragment {
 		fps.setAlpha((float)1.0);
 	}
 	
+	private String titleOfViewId(int id){
+		switch (id) {
+	        case R.id.menu_views_earth:
+	        	return getString(R.string.menu_views_earth);
+	        case R.id.menu_views_sun:
+	        	return getString(R.string.menu_views_sun);
+	        case R.id.menu_views_ref_frame_xyz:
+	        	return getString(R.string.menu_views_ref_frame_xyz);
+	        case R.id.menu_views_ref_frame_x:
+	        	return getString(R.string.menu_views_ref_frame_x);
+	        case R.id.menu_views_ref_frame_xx:
+	        	return getString(R.string.menu_views_ref_frame_xx);
+	        case R.id.menu_views_ref_frame_y:
+	        	return getString(R.string.menu_views_ref_frame_y);
+	        case R.id.menu_views_ref_frame_yy:
+	        	return getString(R.string.menu_views_ref_frame_yy);
+	        case R.id.menu_views_ref_frame_z:
+	        	return getString(R.string.menu_views_ref_frame_z);
+	        case R.id.menu_views_ref_frame_zz:
+	        	return getString(R.string.menu_views_ref_frame_zz);
+	        case R.id.menu_views_spacecraft_xyz:
+	        	return getString(R.string.menu_views_spacecraft_xyz);
+	        case R.id.menu_views_spacecraft_rear:
+	        	return getString(R.string.menu_views_spacecraft_rear);
+	        case R.id.menu_views_spacecraft_front:
+	        	return getString(R.string.menu_views_spacecraft_front);
+	        case R.id.menu_views_spacecraft_top:
+	        	return getString(R.string.menu_views_spacecraft_top);
+	        case R.id.menu_views_spacecraft_bottom:
+	        	return getString(R.string.menu_views_spacecraft_bottom);
+	        case R.id.menu_views_spacecraft_left:
+	        	return getString(R.string.menu_views_spacecraft_left);
+	        case R.id.menu_views_spacecraft_right:
+	        	return getString(R.string.menu_views_spacecraft_right);
+	        default:
+	        	return getString(R.string.menu_views_ref_frame_xyz);
+	    }
+	}
+	
 	/**
 	 * Shows the visualization Views menu
 	 * @param v
@@ -201,6 +244,7 @@ public final class HudFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
         		String com_view = (String)item.getTitle();
         		String command;
+            	((StavorApplication)getActivity().getApplication()).modelViewId = item.getItemId();
                 switch (item.getItemId()) {
                     case R.id.menu_views_earth:
                     	command = getString(R.string.key_views_earth);

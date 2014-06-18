@@ -26,6 +26,29 @@ function updateFPS(){
 		  }
 	}
 }
+function reloadModel(){
+	var l = scene.children.length;
+
+	//remove everything
+	while (l--) {
+		if(scene.children[l] instanceof THREE.Camera) continue; //leave camera in the scene
+		if(scene.children[l] instanceof THREE.PointLight) continue; //leave light in the scene
+		scene.remove(scene.children[l]);
+	}
+	getInitialization();
+
+	setLoadingProgress(35);
+	initReference();
+	initAngles();
+	setLoadingProgress(65);
+	initIndicators();
+	setLoadingProgress(75);
+	initSun();
+	setLoadingProgress(85);
+	initEarth();
+	changeView(selected_view);
+	setLoadingProgress(100);
+}
 function getInitialization(){
 	if (typeof Android != "undefined"){ // check the bridge 
 	  if (Android.getInitializationJSON!= "undefined") { // check the method
@@ -96,6 +119,29 @@ function getInitialization(){
 		value_direction_a = new THREE.Vector3(config.value_direction_a[0],config.value_direction_a[1],config.value_direction_a[2]);
 
 		performance_level = config.performance_level;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
+
+		// Segments
+		if(performance_level<1)
+			performance_level=1;
+		var segments_scale = performance_level;//Multiply segments of all geometries: 
+		var sc_body_segments = 8 * segments_scale;
+		var sc_window_segments = 10 * segments_scale;
+		var sc_engine_segments = 10 * segments_scale;
+		var sc_eng_disk_segments = sc_engine_segments;
+		var sun_seg = 10 * segments_scale;
+		var earth_seg = 12 * segments_scale;
+		var sphere_segments = 20 * segments_scale;
+		var miniSphere_seg = 7 * segments_scale;
+		var torus_seg_r = 4 * segments_scale;
+		var torus_seg_t = 32 * segments_scale;
+		var arc_seg_r = 4 * segments_scale;
+		var arc_seg_t = 32 * segments_scale;
+		var arrow_segments = 4 * segments_scale;
+		var momentum_segments = 4 * segments_scale;
+		var target_segments = 8 * segments_scale;
+		// smooth my curve over this many points
+		var arc_resolution = 30*performance_level;
+		var plane_resolution = 20*performance_level;
 	  }
    }
 }
