@@ -125,6 +125,9 @@
     <string name="dialog_reset_db_confirm">Resetear</string>
     <string name="dialog_reset_db_cancel">Cancelar</string>
     
+    <string name="dialog_simulator_title">Simulador</string>
+    <string name="dialog_simulator_message">Conectando...</string>
+    
     <string name="basic_indicator_position">Posición</string>
     <string name="basic_indicator_velocity">Velocidad</string>
     <string name="basic_indicator_momentum">Momento</string>

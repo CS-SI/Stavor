@@ -181,6 +181,7 @@ public class MainActivity extends ActionBarActivity implements
 
         // the data is available in dataFragment.getData()
         this.simulator = dataFragment.getSim();
+        this.simulator.reconstruct(this);
         
         //Update javascriptInterface
         ((StavorApplication)getApplication()).jsInterface.reconstruct(this, simulator.getSimulationResults());
@@ -545,7 +546,7 @@ public class MainActivity extends ActionBarActivity implements
         			((StavorApplication)getApplication()).db,
         			hud_panel_open
         			);
-
+        	//Recycle background
             BitmapDrawable bd = (BitmapDrawable)getWindow().getDecorView().getBackground();
             Bitmap mBitmap = bd.getBitmap();
             if (mBitmap != null && !mBitmap.isRecycled()) {

@@ -8,6 +8,7 @@ import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import cs.si.stavor.model.ModelSimulation;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.ConditionVariable;
@@ -128,10 +129,13 @@ public class Simulator {
 	}
 	
 	public Simulator(MainActivity act){
-		activity = act;
-		sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+		reconstruct(act);
 		context = activity.getApplicationContext();
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 		simulation = new ModelSimulation(act);
+	}
+	public void reconstruct(MainActivity act){
+		activity = act;
 	}
 	
 	/**
@@ -230,19 +234,40 @@ public class Simulator {
 	protected ConditionVariable playCondition;//Play/Pause condition
 	protected boolean cancel = false;
 	
+	private ProgressDialog progress;
 	/**
 	 * Sets the simulator connecting progress
 	 * @param prog
 	 */
-	private void setProgress(final int prog){
-		try{
-			activity.runOnUiThread( new Runnable() {
-				public void run() {
-					activity.setProgress(prog);
-		        }
-			});
-		}catch(NullPointerException nulle){
-			
+	public void setProgress(final int prog){
+		if(prog==10000 && progress==null){//Case of disconnecting simulator
+		}else{
+			if(progress==null){
+				progress = new ProgressDialog(activity);
+				progress.setTitle(context.getString(R.string.dialog_simulator_title));
+				progress.setMax(10000);
+				progress.setMessage(context.getString(R.string.dialog_simulator_message));
+				progress.setCancelable(false);
+				progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				progress.setCanceledOnTouchOutside(false);
+				progress.setIndeterminate(false);
+				if(!activity.isFinishing())
+					progress.show();
+			} 
+			progress.setProgress(prog);
+			if(prog==10000){
+				progress.dismiss();
+				progress = null;
+			}
+			/*try{
+				activity.runOnUiThread( new Runnable() {
+					public void run() {
+						activity.setProgress(prog);
+			        }
+				});
+			}catch(NullPointerException nulle){
+				
+			}*/
 		}
 	}
 
@@ -250,6 +275,7 @@ public class Simulator {
 	 * Connects the thread corresponding to user selection (Local/Remote)
 	 */
 	private void connectThread() {
+		setProgress(10 * 100);
 		if(buttonConnect!=null){
 			activity.runOnUiThread( new Runnable() {
 				public void run() {
@@ -264,7 +290,6 @@ public class Simulator {
 		        }
 			});
 		}
-		setProgress(10 * 100);
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
@@ -276,6 +301,7 @@ public class Simulator {
 				simulation = new ModelSimulation((MainActivity)activity);
 				setProgress(40 * 100);
 				simulation.preInitialize();
+				setProgress(50 * 100);
 				thread = (SocketsThread) new SocketsThread(this,host,port).execute(simulation);
 			}catch(NumberFormatException nfe){
 				setSimulatorStatus(SimulatorStatus.Disconnected);
@@ -285,7 +311,8 @@ public class Simulator {
 			setProgress(30 * 100);
 			simulation = new ModelSimulation((MainActivity)activity);
 			setProgress(40 * 100);
-			simulation.preInitialize();    
+			simulation.preInitialize(); 
+			setProgress(50 * 100);
 			sthread = (SimulatorThread) new SimulatorThread(((MainActivity)activity).getSimulator(), mission).execute(simulation);
 		    
 		}
@@ -429,9 +456,9 @@ public class Simulator {
 							but_stop.setEnabled(true);
 							if(getSimulationStatus().equals(SimulationStatus.Play)){
 								//set pause drawable
-								but_play.setImageDrawable(activity.getResources().getDrawable(R.drawable.pause));
+								but_play.setImageDrawable(context.getResources().getDrawable(R.drawable.pause));
 							}else{
-								but_play.setImageDrawable(activity.getResources().getDrawable(R.drawable.play));
+								but_play.setImageDrawable(context.getResources().getDrawable(R.drawable.play));
 							}
 						}
 					}

@@ -51,10 +51,12 @@ public class SocketsThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
     		//Connect remote simulator
     		try {
+    			simulator.setProgress(60 * 100);
         		socket = new Socket();
         		socket.connect(new InetSocketAddress(dstAddress, dstPort), Parameters.Simulator.Remote.remote_connection_timeout_ms);
         	    inputStream = socket.getInputStream();
 				inputOStream = new ObjectInputStream( inputStream );
+    			simulator.setProgress(80 * 100);
 				setConnected();
 				simulator.goToHud();
         	    simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_simulator_connected));

@@ -44,7 +44,9 @@ public class SimulatorThread extends AsyncTask<ModelSimulation, Void, Boolean>{
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
     		//initialize simulation
     		try {
+    			simulator.setProgress(60 * 100);
     			setSimulationParameters();
+    			simulator.setProgress(80 * 100);
 				setConnected();
 				simulator.goToHud();
         	    simulator.showMessage(simulator.getContext().getString(R.string.sim_local_simulator_connected));
