@@ -1,5 +1,6 @@
 package cs.si.stavor;
 
+import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
@@ -137,11 +138,28 @@ public class MainActivity extends ActionBarActivity implements
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();
             
+            Simulator simu = new Simulator(this);
+            
             XWalkView xwalkView = new XWalkView(this.getApplicationContext(), this);
 			//mXwalkView.setBackgroundResource(R.color.black);
 			xwalkView.setBackgroundColor(0x00000000);
 			xwalkView.setResourceClient(new MyResourceClient(xwalkView));
 	        xwalkView.setUIClient(new MyUIClient(xwalkView));
+	        xwalkView.clearCache(true);
+	        
+	        XWalkSettings browserSettings = xwalkView.getSettings();
+	    	
+	    	browserSettings.setJavaScriptEnabled(true);
+	    	browserSettings.setUseWideViewPort(false);
+	    	//browserSettings.setLoadWithOverviewMode(true);
+	    	browserSettings.setAllowFileAccessFromFileURLs(true); //Maybe you don't need this rule
+	    	browserSettings.setAllowUniversalAccessFromFileURLs(true);
+	    	//browserSettings.setBuiltInZoomControls(true);
+	    	//browserSettings.setDisplayZoomControls(true);
+	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener
+	    	
+	    	((StavorApplication)getApplication()).jsInterface = new WebAppInterface(this, simu.getSimulationResults());
+	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
 	        
             MissionReaderDbHelper db_help_tmp;
             SQLiteDatabase db_tmp;
@@ -151,7 +169,7 @@ public class MainActivity extends ActionBarActivity implements
             dataFragment.setData(
             		xwalkView,
             		true,
-            		new Simulator(this),
+            		simu,
             		db_help_tmp,
             		db_tmp,
             		Parameters.Hud.start_panel_open
@@ -163,6 +181,9 @@ public class MainActivity extends ActionBarActivity implements
 
         // the data is available in dataFragment.getData()
         this.simulator = dataFragment.getSim();
+        
+        //Update javascriptInterface
+        ((StavorApplication)getApplication()).jsInterface.reconstruct(this, simulator.getSimulationResults());
         
 		//Install the Missions database if not installed yet and store database objects
 		((StavorApplication)getApplication()).db_help = dataFragment.getDbHelp();
@@ -486,7 +507,6 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     protected void onResume() {//Resume browser
         super.onResume();
-        mXwalkView.addJavascriptInterface(new WebAppInterface(this, simulator.getSimulationResults()), "Android");
         if(flagActivityFirstExec){
         	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
         	flagActivityFirstExec=false;

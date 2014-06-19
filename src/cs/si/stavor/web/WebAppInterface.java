@@ -73,6 +73,12 @@ public final class WebAppInterface {
     public String getStateJSON() {
         return sim.getStateJSON();
     }
+
+	public void reconstruct(Activity act,
+			ModelSimulation s) {
+		activity = act;
+        sim = s;
+	}
     
     
 }

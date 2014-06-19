@@ -30,7 +30,7 @@ function updateFPS(){
 }
 function reloadModel(){
 	var l = scene.children.length;
-
+	setLoadingProgress(10);
 	//remove everything
 	while (l--) {
 		if(scene.children[l] instanceof THREE.Camera) continue; //leave camera in the scene

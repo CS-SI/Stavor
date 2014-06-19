@@ -1,7 +1,6 @@
 package cs.si.stavor.fragments;
 
 
-import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
@@ -75,8 +74,6 @@ public final class HudFragment extends Fragment {
 		((MainActivity)getActivity()).showTutorialDisplay();
 		
 		//Browser
-		//Initialize WebView
-		
 		if(mXwalkView==null){
 			mXwalkView = ((MainActivity)getActivity()).getBrowser();
 		}
@@ -112,31 +109,14 @@ public final class HudFragment extends Fragment {
 		TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
 		fps.setAlpha((float)0.0);
 		
-    	XWalkSettings browserSettings = mXwalkView.getSettings();
-    	
-    	browserSettings.setJavaScriptEnabled(true);
-    	browserSettings.setUseWideViewPort(false);
-    	//browserSettings.setLoadWithOverviewMode(true);
-    	browserSettings.setAllowFileAccessFromFileURLs(true); //Maybe you don't need this rule
-    	browserSettings.setAllowUniversalAccessFromFileURLs(true);
-    	//browserSettings.setBuiltInZoomControls(true);
-    	//browserSettings.setDisplayZoomControls(true);
-    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener
-    	
-    	mXwalkView.clearCache(true);
-    	
     	simulator = ((MainActivity)getActivity()).getSimulator();
     	simulator.setHudView(rootView, mXwalkView);
-    	
-    	//mXwalkView.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
-    	
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     	mXwalkView.setLayoutParams(browser_params);
     	
     	browserLayout.addView(mXwalkView);
-    	//browser.load(Parameters.Web.STARTING_PAGE,null);
     	
     	views_menu = (Button) rootView.findViewById(R.id.buttonMissionNew);
     	views_menu.setOnClickListener(new OnClickListener(){
@@ -154,9 +134,6 @@ public final class HudFragment extends Fragment {
     	ImageButton but_stop = (ImageButton)rootView.findViewById(R.id.imageButtonStop);
     	simulator.setControlButtons(but_play,but_stop);
     	simulator.setCorrectSimulatorControls();
-    	
-    	/*if(Parameters.Hud.start_panel_open)
-    		drawer.getHandle().callOnClick();*/
 
 		//needs to have browser defined but not loaded yet
     	rootView.post(new Runnable()
@@ -310,7 +287,6 @@ public final class HudFragment extends Fragment {
 	@Override
 	public void onDestroyView(){
 		simulator.setBrowserLoaded(false);
-		//simulator.pause();
 		super.onDestroyView();
 	}
 
@@ -322,13 +298,8 @@ public final class HudFragment extends Fragment {
 	}
 	
 	@Override
-    public void onDestroy() {//Disconnect simulator, close database and browser
+    public void onDestroy() {
         super.onDestroy();
-        // store the data in the fragment
-        //XWalk
-        /*if (mXwalkView != null) {
-            mXwalkView.onDestroy();
-        }*/
     }
 	
     @Override
