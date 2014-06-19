@@ -36,7 +36,10 @@ function reloadModel(){
 		scene.remove(scene.children[l]);
 	}
 	getInitialization();
-
+	if(performance_level<=2)
+		canvasMode(performance_level);
+	else
+		canvas_mode = false;
 	setLoadingProgress(35);
 	initReference();
 	initAngles();
