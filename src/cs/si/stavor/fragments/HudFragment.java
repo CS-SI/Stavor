@@ -169,6 +169,7 @@ public final class HudFragment extends Fragment {
     	    		drawer.open();
     	    	if(((MainActivity)getActivity()).getLoadBrowserFlag()){
     	    		//mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+    	    		//mXwalkView.load("javascript:showLoadingScreen()",null);
     	    		mXwalkView.load("javascript:reloadModel()",null);
     	    		((MainActivity)getActivity()).resetLoadBrowserFlag();
     	    	}else{

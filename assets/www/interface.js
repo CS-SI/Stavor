@@ -6,6 +6,8 @@ function showAndroidToast(toast) {
    	}
 }
 function setLoadingProgress(progress) {// from 0 to 100 
+	/*if(progress==100)
+		hideLoadingScreen();*/
 	if (typeof Android != "undefined"){ // check the bridge 
 		  if (Android.setProgress!= "undefined") { // check the method
 			 Android.setProgress(progress);
