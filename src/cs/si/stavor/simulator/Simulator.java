@@ -244,6 +244,7 @@ public class Simulator {
 		}else{
 			if(progress==null){
 				progress = new ProgressDialog(activity);
+				progress.setProgressNumberFormat("");
 				progress.setTitle(context.getString(R.string.dialog_simulator_title));
 				progress.setMax(10000);
 				progress.setMessage(context.getString(R.string.dialog_simulator_message));
