@@ -43,7 +43,8 @@ public final class WebAppInterface {
     		((MainActivity)activity).getSimulator().setBrowserLoaded(true);
     	activity.runOnUiThread( new Runnable() {
 	        public void run() {
-            	activity.setProgress(progress * 100);
+	        	((MainActivity)activity).setBrowserProgressValue(progress * 100);
+            	//activity.setProgress(progress * 100);
 	        }
 	    });
     }

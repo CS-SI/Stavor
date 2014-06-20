@@ -42,7 +42,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 /**
@@ -110,6 +115,38 @@ public class MainActivity extends ActionBarActivity implements
 	
     public boolean flag_show_welcome = false;
     
+    private ProgressBar browserProgressBar = null;
+    private FrameLayout browserProgressLayout = null;
+    public void setBrowserProgressBar(ProgressBar bar, FrameLayout fr){
+    	browserProgressLayout = fr;
+    	browserProgressBar = bar;
+    }
+    public void resetBrowserProgressBar(){
+    	browserProgressLayout = null;
+    	browserProgressBar = null;
+    }
+    public void setBrowserProgressValue(int progr){
+    	if(browserProgressLayout!=null && browserProgressBar!=null){
+	    	browserProgressBar.setProgress(progr);
+	    	if(progr<10000){
+	    		browserProgressLayout.setVisibility(View.VISIBLE);
+	    	}else{
+	    		Animation fadeOut = new AlphaAnimation(1.00f, 0.00f);
+                fadeOut.setDuration(1500);
+                fadeOut.setAnimationListener(new AnimationListener() {
+                    public void onAnimationStart(Animation animation) {}
+                    public void onAnimationRepeat(Animation animation) {}
+                    public void onAnimationEnd(Animation animation) {
+                    	browserProgressLayout.setVisibility(View.GONE);
+                    }
+                });
+
+                browserProgressLayout.startAnimation(fadeOut);
+	    		
+	    	}
+    	}
+    }
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -122,9 +159,9 @@ public class MainActivity extends ActionBarActivity implements
 		OrekitInit.init(Installer.getOrekitDataRoot(this));
 		
 		//Configure application window
-		requestWindowFeature(Window.FEATURE_PROGRESS);
+		//requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
-		setProgressBarVisibility(true);
+		//setProgressBarVisibility(true);
 		
 		// find the retained fragment on activity restarts
         FragmentManager fm = getFragmentManager();

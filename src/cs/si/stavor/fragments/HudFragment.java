@@ -18,9 +18,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.SlidingDrawer.OnDrawerCloseListener;
@@ -134,14 +136,19 @@ public final class HudFragment extends Fragment {
     	ImageButton but_stop = (ImageButton)rootView.findViewById(R.id.imageButtonStop);
     	simulator.setControlButtons(but_play,but_stop);
     	simulator.setCorrectSimulatorControls();
-
+    	
+    	ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBarBrowser);
+    	FrameLayout progressBarLayout = (FrameLayout) rootView.findViewById(R.id.frameLayoutProgress);
+    	progressBar.setProgress(0);
+    	((MainActivity)getActivity()).setBrowserProgressBar(progressBar,progressBarLayout);
+    	
 		//needs to have browser defined but not loaded yet
     	rootView.post(new Runnable()
     	{
     	    @Override
     	    public void run()
     	    {
-    	    	getActivity().setProgress(0);
+    	    	//getActivity().setProgress(0);
     	    	if(((MainActivity)getActivity()).getHudPanelOpen())
     	    		drawer.open();
     	    	if(((MainActivity)getActivity()).getLoadBrowserFlag()){
@@ -328,6 +335,7 @@ public final class HudFragment extends Fragment {
 	
 	@Override
 	public void onDetach() {
+		((MainActivity)getActivity()).resetBrowserProgressBar();
 		//XWalk
         if (mXwalkView != null) {
             //mXwalkView.onDestroy();
