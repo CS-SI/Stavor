@@ -126,7 +126,7 @@
     <string name="dialog_reset_db_cancel">Annuler</string>
     
     <string name="dialog_simulator_title">Simulateur</string>
-    <string name="dialog_simulator_message">Chargement...</string>
+    <string name="dialog_simulator_message">Se connectant...</string>
     
     <string name="basic_indicator_position">Position</string>
     <string name="basic_indicator_velocity">Vitesse</string>
