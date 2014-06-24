@@ -15,6 +15,7 @@ import cs.si.stavor.dialogs.TutorialDialogFragment;
 import cs.si.stavor.dialogs.WelcomeDialogFragment;
 import cs.si.stavor.fragments.HudFragment;
 import cs.si.stavor.fragments.NavigationDrawerFragment;
+import cs.si.stavor.fragments.OrbitFragment;
 import cs.si.stavor.fragments.RetainedFragment;
 import cs.si.stavor.fragments.SimulatorFragment;
 import cs.si.stavor.fragments.TestFragment;

@@ -67,11 +67,11 @@ public final class OrbitFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.orb_display, container,
 				false);
 		
-		((MainActivity)getActivity()).showTutorialOrbitDisplay();
+		((MainActivity)getActivity()).showTutorialDisplay();
 		
 		//Browser
 		if(mXwalkView==null){
-			mXwalkView = ((MainActivity)getActivity()).getOrbitBrowser();
+			mXwalkView = ((MainActivity)getActivity()).getBrowser();
 		}
 		TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
 		fps.setAlpha((float)0.0);
@@ -103,11 +103,11 @@ public final class OrbitFragment extends Fragment {
     	    @Override
     	    public void run()
     	    {
-    	    	if(((MainActivity)getActivity()).getLoadOrbitBrowserFlag()){
+    	    	if(((MainActivity)getActivity()).getLoadBrowserFlag()){
     	    		//mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
     	    		//mXwalkView.load("javascript:showLoadingScreen()",null);
     	    		mXwalkView.load("javascript:reloadModel()",null);
-    	    		((MainActivity)getActivity()).resetLoadOrbitBrowserFlag();
+    	    		((MainActivity)getActivity()).resetLoadBrowserFlag();
     	    	}else{
     	    		mXwalkView.load("javascript:setLoaded()",null);
     	    	}
@@ -129,7 +129,7 @@ public final class OrbitFragment extends Fragment {
 	
 	@Override
 	public void onDestroyView(){
-		simulator.setOrbitBrowserLoaded(false);
+		simulator.setBrowserLoaded(false);
 		super.onDestroyView();
 	}
 
