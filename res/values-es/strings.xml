@@ -3,13 +3,14 @@
 	
     <string name="app_exit_prevent_message">Presione atrás otra vez para cerrar la aplicación</string>
     <string name="title_section1">Simulador</string>
-    <string name="title_section2">Visualización</string>
-    <string name="title_section3">Indicadores básicos</string>
-    <string name="title_section4">Indicadores extra</string>
-    <string name="title_section5">Medidas</string>
-    <string name="title_section6">Modelos</string>
-    <string name="title_section7">Preferencias</string>
-    <string name="title_section8">Test WebGL</string>
+    <string name="title_section2">Actitud</string>
+    <string name="title_section3">Órbita</string>
+    <string name="title_section4">Indicadores básicos</string>
+    <string name="title_section5">Indicadores extra</string>
+    <string name="title_section6">Medidas</string>
+    <string name="title_section7">Modelos</string>
+    <string name="title_section8">Preferencias</string>
+    <string name="title_section9">Test WebGL</string>
     <string name="navigation_drawer_open">Abre el menú de navegación</string>
     <string name="navigation_drawer_close">Cierra el menú de navegación</string>
     <string name="action_screenshot">Acerca de</string>

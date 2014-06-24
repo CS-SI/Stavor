@@ -274,32 +274,38 @@ public class MainActivity extends ActionBarActivity implements
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsBasicFragment.newInstance(position +1)).commit();
+	        		OrbitFragment.newInstance(position +1)).commit();
 		}else if(position==3){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsExtraFragment.newInstance(position +1)).commit();
+	        		SettingsBasicFragment.newInstance(position +1)).commit();
 		}else if(position==4){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsMeasuresFragment.newInstance(position +1)).commit();
+	        		SettingsExtraFragment.newInstance(position +1)).commit();
 		}else if(position==5){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsModelsFragment.newInstance(position +1)).commit();
+	        		SettingsMeasuresFragment.newInstance(position +1)).commit();
 		}else if(position==6){
+			// Display the fragment as the main content.
+	        fragmentManager
+	        .beginTransaction()
+	        .replace(R.id.container, 
+	        		SettingsModelsFragment.newInstance(position +1)).commit();
+		}else if(position==7){
 			// Display the fragment as the main content.
 	        fragmentManager    
 	        .beginTransaction()
 	        .replace(R.id.container, 
 	        		SettingsGeneralFragment.newInstance(position +1)).commit();
-		}else if(position==7){
+		}else if(position==8){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
@@ -337,6 +343,9 @@ public class MainActivity extends ActionBarActivity implements
 			break;
 		case 8:
 			mTitle = getString(R.string.title_section8);
+			break;
+		case 9:
+			mTitle = getString(R.string.title_section9);
 			break;
 		}
 	}
@@ -438,7 +447,9 @@ public class MainActivity extends ActionBarActivity implements
     public void onBackPressed() {
     	if (!mNavigationDrawerFragment.isDrawerOpen()) {//If the navigation menu is not opened
 	    	int sel = mNavigationDrawerFragment.getSelectedPosition();
-	    	if(sel>1){//If it is currently in a configuration section, goto Hud
+	    	if(sel>2){//If it is currently in a configuration section, goto Hud
+	    		showSection(2);
+	    	}else if (sel==2){//If it is in Hud, goto simulator screen
 	    		showSection(1);
 	    	}else if (sel==1){//If it is in Hud, goto simulator screen
 	    		showSection(0);
