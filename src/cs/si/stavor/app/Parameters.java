@@ -60,7 +60,7 @@ public class Parameters {
 	 *
 	 */
 	public static class Web {
-		public static final String STARTING_PAGE = "file:///android_asset/www/index.html";
+		public static final String STARTING_PAGE = "file:///android_asset/www/attitude/index.html";
 		//public static final String TEST_PAGE_1 = "file:///android_asset/www/index.html";
 		//public static final String TEST_PAGE_1 = "http://stemkoski.github.io/Three.js/Labeled-Geometry.html";
 		public static final String TEST_PAGE_1 = "http://get.webgl.org/";
