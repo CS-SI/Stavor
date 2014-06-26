@@ -1,5 +1,26 @@
 package cs.si.stavor;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.nikkii.embedhttp.HttpServer;
+import org.nikkii.embedhttp.handler.HttpRequestHandler;
+import org.nikkii.embedhttp.handler.HttpStaticFileHandler;
+import org.nikkii.embedhttp.handler.HttpStaticJarFileHandler;
+import org.nikkii.embedhttp.impl.HttpRequest;
+import org.nikkii.embedhttp.impl.HttpResponse;
+import org.nikkii.embedhttp.impl.HttpStatus;
 import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
@@ -28,19 +49,25 @@ import cs.si.stavor.settings.SettingsModelsFragment;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
+import cs.si.stavor.web.NanoHTTPD;
+import cs.si.stavor.web.ServerRunner;
 import cs.si.stavor.web.WebAppInterface;
+import cs.si.stavor.web.NanoHTTPD.Response;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -148,6 +175,8 @@ public class MainActivity extends ActionBarActivity implements
     	}
     }
     
+    private WebServer server;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -163,6 +192,80 @@ public class MainActivity extends ActionBarActivity implements
 		//requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_main);
 		//setProgressBarVisibility(true);
+		
+		
+        server = new WebServer();
+        try {
+            server.start();
+        } catch(IOException ioe) {
+            Log.w("Httpd", "The server could not start.");
+        }
+        Log.w("Httpd", "Web server initialized.");
+        
+		
+		// Setup a new instance
+		/*HttpServer server = new HttpServer();
+		server.addRequestHandler(new HttpRequestHandler() {
+		    @Override
+		    public HttpResponse handleRequest(HttpRequest request) {
+		    	String documentRoot = "www/orbit";
+		    	//String documentRootPath = null;
+				String uri = request.getUri();
+				InputStream iStream = null;
+				try {
+					uri = URLDecoder.decode(uri, "UTF-8");
+				} catch (UnsupportedEncodingException e1) {
+					uri = uri.replace("%20", " ");
+				}
+				if(uri.equals("/"))
+					uri = "/index.html";
+				try {
+					System.out.println("GET: "+documentRoot+uri);
+					iStream = getAssets().open(documentRoot+uri);
+					//File file = new File(iStream);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}*/
+				//File file = new File(documentRoot, uri);
+				/*if (file.exists() && !file.isDirectory()) {
+					try {
+						if (documentRootPath == null) {
+							documentRootPath = documentRoot.getAbsolutePath();
+							if (documentRootPath.endsWith("/") || documentRootPath.endsWith(".")) {
+								documentRootPath = documentRootPath.substring(0, documentRootPath.length() - 1);
+							}
+						}
+						String requestPath = file.getCanonicalPath();
+						if (requestPath.endsWith("/")) {
+							requestPath = requestPath.substring(0, requestPath.length() - 1);
+						}
+						if (!requestPath.startsWith(documentRootPath)) {
+							return new HttpResponse(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.toString());
+						}
+					} catch (IOException e) {
+						return new HttpResponse(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.toString());
+					}*/
+					/*try {
+						HttpResponse res = new HttpResponse(HttpStatus.OK, iStream);
+						res.setResponseLength(iStream.available());
+						return res;
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				//}
+				return null;
+		    }
+		});*/
+		// Bind it to port 8081
+		/*try {
+			server.bind(8080);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
+		// Start the server thread
+		//server.start();
 		
 		// find the retained fragment on activity restarts
         FragmentManager fm = getFragmentManager();
@@ -614,5 +717,64 @@ public class MainActivity extends ActionBarActivity implements
 	public void setHudPanelOpen(boolean open){
 		hud_panel_open = open;
 	}
+	
+	private class WebServer extends NanoHTTPD {
+		public static final String MIME_JAVASCRIPT = "text/javascript";
+		public static final String MIME_CSS = "text/css";
+		public static final String MIME_JPEG = "image/jpeg";
+		public static final String MIME_PNG = "image/png";
+		public static final String MIME_SVG = "image/svg+xml";
+		public static final String MIME_JSON = "application/json";
+		
+	    public WebServer() {
+	        super(8081);
+	    }
 
+	    @Override public Response serve(IHTTPSession session) {
+        	String mime_type = NanoHTTPD.MIME_HTML;
+	        Method method = session.getMethod();
+	        String uri = session.getUri();
+	        System.out.println(method + " '" + uri + "' ");
+        	InputStream descriptor = null;
+	        if(method.toString().equalsIgnoreCase("GET")){
+	        	String path;
+	        	if(uri.equals("/")){
+	        		path="/index.html";
+	        	}else{
+	        		path = uri;
+	        		try{
+	        			if(path.endsWith(".js")){
+	        				mime_type = MIME_JAVASCRIPT;
+	        			}else if(path.endsWith(".css")){
+	        				mime_type = MIME_CSS;
+	        			}else if(path.endsWith(".html")){
+	        				mime_type = MIME_HTML;
+	        			}else if(path.endsWith(".jpeg")){
+	        				mime_type = MIME_JPEG;
+	        			}else if(path.endsWith(".png")){
+	        				mime_type = MIME_PNG;
+	        			}else if(path.endsWith(".jpg")){
+	        				mime_type = MIME_JPEG;
+	        			}else if(path.endsWith(".svg")){
+	        				mime_type = MIME_SVG;
+	        			}else if(path.endsWith(".json")){
+	        				mime_type = MIME_JSON;
+	        			}
+	        		}catch(Exception e){
+	        			
+	        		}
+	        	}
+		        try {
+		            // Open file from SD Card
+		        	descriptor = getAssets().open("www/attitude"+path);
+
+		        } catch(IOException ioe) {
+		            Log.w("Httpd", ioe.toString());
+		        }
+	        }
+	        return new NanoHTTPD.Response( Response.Status.OK,mime_type,descriptor);
+	        
+	    }
+
+	}
 }

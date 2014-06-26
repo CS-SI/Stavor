@@ -14,7 +14,7 @@ public class Parameters {
 	public static class App {
 		public static final long splash_min_time_ns = 1000000000;//[ns] 1.0s min
 		public static final boolean show_tutorial = true;
-		public static final boolean show_tests_section = false;
+		public static final boolean show_tests_section = true;
 	}
 	/**
 	 * About screen information
@@ -60,11 +60,13 @@ public class Parameters {
 	 *
 	 */
 	public static class Web {
-		public static final String STARTING_PAGE = "file:///android_asset/www/attitude/index.html";
+		public static final String STARTING_PAGE = "file:///android_asset/www/attitude/index_orbit.html";
 		//public static final String TEST_PAGE_1 = "file:///android_asset/www/index.html";
-		//public static final String TEST_PAGE_1 = "http://stemkoski.github.io/Three.js/Labeled-Geometry.html";
-		public static final String TEST_PAGE_1 = "http://get.webgl.org/";
+		public static final String TEST_PAGE_1 = "http://localhost:8081/";
+		//public static final String TEST_PAGE_1 = "http://webglreport.com";
+		//public static final String TEST_PAGE_1 = "http://get.webgl.org/";
 		public static final String TEST_PAGE_2 = "http://doesmybrowsersupportwebgl.com/";
 		public static final String TEST_PAGE_3 = "http://www.khronos.org/registry/webgl/sdk/tests/webgl-conformance-tests.html";
+		public static final String LOCALHOST = "http://localhost:8080/";
 	}
 }
