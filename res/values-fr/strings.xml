@@ -101,14 +101,14 @@
     <string name="tutorial_title_display">Tutoriel Visualisation</string>
     <string name="tutorial_message_display">Vous êtes actuellement sur l\'écran de visualisation, ici vous pouvez voir la simulation. Vous trouverez les commandes de simulation, un bouton pour sélectionner la vue et un panneau rétractable avec des informations détaillées.</string>
     <string name="tutorial_title_config">Tutoriel Configurations</string>
-    <string name="tutorial_message_config">Vous avez entré un des écrans de configuration, ils contiennent toutes les options de l\'utilisateur. Les sections d\'Indicateurs basiques et extra servent à personnaliser l\'affichage de ces indicateurs (Vitesse, Accélération, Moment...). La section Mesures est utilisé pour sélectionner l\'affichage de mesures telles que les angles. La section Modèles contient des d\'options pour les objets comme la Terre et le Soleil. La section Préférences, toutes les autres options générales.</string>
+    <string name="tutorial_message_config">Vous êtes dans l\'un des écrans de configuration, ils contiennent toutes les options de l\'utilisateur. Les sections d\'Indicateurs basiques et extra servent à personnaliser l\'affichage de ces indicateurs (Vitesse, Accélération, Moment...). La section Mesures est utilisée pour sélectionner l\'affichage de mesures telles que les angles. La section Modèles contient des d\'options pour les objets comme la Terre et le Soleil. La section Préférences contient toutes les autres options générales.</string>
     
     <string name="dialog_welcome">Bienvenue</string>
     <string name="dialog_error">Erreur</string>
     <string name="dialog_exit">Quitter</string>
     <string name="dialog_ignore">Ignorer</string>
     <string name="dialog_continue">Continuer</string>
-    <string name="dialog_install_message">Les modèles et données par défaut pur le simulateur ont été installés dans la racine de données d\'Orekit:</string>
+    <string name="dialog_install_message">Les modèles et données par défaut pour le simulateur ont été installés dans la racine de données d\'Orekit:</string>
     
     <string name="dialog_delete_title">Supprimer Mission</string>
     <string name="dialog_delete_message">Vous êtes en train de supprimer la mission: </string>
@@ -279,13 +279,13 @@
     <string name="pref_summary_show_sun_line">Afficher la ligne de direction du Soleil</string>
     <string name="pref_title_show_sun_distance">Afficher distance</string>
     <string name="pref_summary_show_sun_distance">Afficher l\'étiquette de distance au Soleil</string>
-    <string name="pref_title_acceleration_limit">Limit</string>
+    <string name="pref_title_acceleration_limit">Limite</string>
     <string name="pref_summary_acceleration_limit">Valeur d\'accélération correspondant au rayon de la sphère de référence</string>
     <string name="pref_title_acceleration_show">Afficher</string>
     <string name="pref_summary_acceleration_show">Afficher le vecteur accélération</string>
     <string name="pref_title_acceleration_color">Couleur</string>
     <string name="pref_summary_acceleration_color">Couleur du vecteur accélération</string>
-    <string name="pref_title_velocity_limit">Limit</string>
+    <string name="pref_title_velocity_limit">Limite</string>
     <string name="pref_summary_velocity_limit">Valeur de vitesse correspondant au rayon de la sphère de référence</string>
     <string name="pref_title_velocity_show">Afficher</string>
     <string name="pref_summary_velocity_show">Afficher le vecteur vitesse</string>
@@ -303,7 +303,7 @@
     <string name="pref_summary_vector_a_show">Afficher le vecteur</string>
     <string name="pref_title_vector_a_color">Couleur</string>
     <string name="pref_summary_vector_a_color">Couleur du vecteur</string>
-    <string name="pref_title_vector_a_limit">Limit</string>
+    <string name="pref_title_vector_a_limit">Limite</string>
     <string name="pref_summary_vector_a_limit">Valeur de vitesse correspondant au rayon de la sphère de référence</string>
     <string name="pref_title_direction_a_show">Afficher</string>
     <string name="pref_summary_direction_a_show">Afficher la direction</string>
