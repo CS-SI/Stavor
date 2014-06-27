@@ -14,7 +14,7 @@ public class Parameters {
 	public static class App {
 		public static final long splash_min_time_ns = 1000000000;//[ns] 1.0s min
 		public static final boolean show_tutorial = true;
-		public static final boolean show_tests_section = true;
+		public static final boolean show_tests_section = false;
 	}
 	/**
 	 * About screen information
@@ -60,7 +60,8 @@ public class Parameters {
 	 *
 	 */
 	public static class Web {
-		public static final String STARTING_PAGE = "file:///android_asset/www/huds/index_orbit.html";
+		public static final String STARTING_PAGE = "file:///android_asset/www/huds/index.html";
+		public static final String STARTING_PAGE_ORBIT = "file:///android_asset/www/huds/index_orbit.html";
 		//public static final String TEST_PAGE_1 = "file:///android_asset/www/index.html";
 		//public static final String TEST_PAGE_1 = "http://127.0.0.1:8081/";
 		//public static final String TEST_PAGE_1 = "http://webglreport.com";

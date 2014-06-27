@@ -6,6 +6,7 @@ import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
+import cs.si.stavor.model.Browsers;
 import cs.si.stavor.model.ModelSimulation;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -116,8 +117,8 @@ public class Simulator {
 	 * @param v
 	 * @param x
 	 */
-	public void setHudView(View v, XWalkView x){
-		simulation.setHud(v,x);
+	public void setHudView(Browsers type, View v, XWalkView x){
+		simulation.setHud(type, v,x);
 	}
 	
 	public void setBrowserLoaded(boolean is){

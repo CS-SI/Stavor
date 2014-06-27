@@ -6,6 +6,7 @@ import org.xwalk.core.XWalkView;
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.StavorApplication;
+import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -67,17 +68,17 @@ public final class OrbitFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.orb_display, container,
 				false);
 		
-		((MainActivity)getActivity()).showTutorialDisplay();
+		((MainActivity)getActivity()).showTutorialOrbit();
 		
 		//Browser
 		if(mXwalkView==null){
-			mXwalkView = ((MainActivity)getActivity()).getBrowser();
+			mXwalkView = ((MainActivity)getActivity()).getBrowserOrbit();
 		}
 		TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
 		fps.setAlpha((float)0.0);
 		
     	simulator = ((MainActivity)getActivity()).getSimulator();
-    	simulator.setHudView(rootView, mXwalkView);//XGGDEBUG: set to null? new method???
+    	simulator.setHudView(Browsers.Orbit,rootView, mXwalkView);//XGGDEBUG: set to null? new method???
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -103,11 +104,12 @@ public final class OrbitFragment extends Fragment {
     	    @Override
     	    public void run()
     	    {
-    	    	if(((MainActivity)getActivity()).getLoadBrowserFlag()){
+    	    	if(((MainActivity)getActivity()).getLoadBrowserFlagOrbit()){
     	    		//mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
     	    		//mXwalkView.load("javascript:showLoadingScreen()",null);
+    	    		
     	    		mXwalkView.load("javascript:reloadModel()",null);
-    	    		((MainActivity)getActivity()).resetLoadBrowserFlag();
+    	    		((MainActivity)getActivity()).resetLoadBrowserFlagOrbit();
     	    	}else{
     	    		mXwalkView.load("javascript:setLoaded()",null);
     	    	}

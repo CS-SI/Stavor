@@ -84,8 +84,6 @@ function getInitialization(){
 		vectors_angle_sel1 = config.vectors_angle_sel1;
 		vectors_angle_sel2 = config.vectors_angle_sel2;
 
-		//Option blocked for robustness (S/C will show the attitude and a view will follow it)
-		//show_spacecraft = config.show_spacecraft;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
 		show_sc_axis = config.show_sc_axis;
 		sc_show_eng_texture = config.sc_show_eng_texture;
 		
@@ -171,7 +169,6 @@ function canvasMode(perfo){
 	//show_spheric_coords = false;
 	//show_vectors_angle = false;
 
-	//show_spacecraft = true;//If set to false, instead of a S/C it will be a miniSphere in the reference position.
 	//show_sc_axis = true;		
 	sc_show_eng_texture = false;
 

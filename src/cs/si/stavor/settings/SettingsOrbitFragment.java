@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Settings of the basic indicators
+ * Orbit display settings of the application
  * @author Xavier Gibert
  *
  */
-public class SettingsBasicFragment extends PreferenceFragment {
+public class SettingsOrbitFragment extends PreferenceFragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -24,8 +24,8 @@ public class SettingsBasicFragment extends PreferenceFragment {
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static SettingsBasicFragment newInstance(int sectionNumber) {	
-		SettingsBasicFragment fragment = new SettingsBasicFragment();
+	public static SettingsOrbitFragment newInstance(int sectionNumber) {	
+		SettingsOrbitFragment fragment = new SettingsOrbitFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
@@ -37,15 +37,15 @@ public class SettingsBasicFragment extends PreferenceFragment {
 		super.onAttach(activity);
 		((MainActivity) activity).onSectionAttached(getArguments().getInt(
 				ARG_SECTION_NUMBER));
-		((MainActivity) activity).raiseLoadBrowserFlag();
+		((MainActivity) activity).raiseLoadBrowserFlagOrbit();
 	}
-    
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.basic_indicators);
+        addPreferencesFromResource(R.xml.orbit);
         
         ((MainActivity)getActivity()).showTutorialConfig();
     }
@@ -57,5 +57,4 @@ public class SettingsBasicFragment extends PreferenceFragment {
 
         return view;
     }
-    
 }

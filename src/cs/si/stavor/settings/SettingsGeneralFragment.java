@@ -37,6 +37,8 @@ public class SettingsGeneralFragment extends PreferenceFragment {
 		super.onAttach(activity);
 		((MainActivity) activity).onSectionAttached(getArguments().getInt(
 				ARG_SECTION_NUMBER));
+		((MainActivity) activity).raiseLoadBrowserFlag();
+		((MainActivity) activity).raiseLoadBrowserFlagOrbit();
 	}
 	
     @Override

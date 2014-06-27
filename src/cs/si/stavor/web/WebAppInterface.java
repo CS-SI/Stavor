@@ -63,6 +63,12 @@ public final class WebAppInterface {
 	    });
     }
     
+    /** get orbit model initialization */
+    @JavascriptInterface
+    public String getInitializationOrbitJSON() {
+        return sim.getInitializationOrbitJSON();
+    }
+    
     /** get model initialization */
     @JavascriptInterface
     public String getInitializationJSON() {
@@ -70,10 +76,10 @@ public final class WebAppInterface {
     }
     
     /** get model state */
-    @JavascriptInterface
+    /*@JavascriptInterface
     public String getStateJSON() {
         return sim.getStateJSON();
-    }
+    }*/
 
 	public void reconstruct(Activity act,
 			ModelSimulation s) {

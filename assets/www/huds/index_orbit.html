@@ -57,7 +57,7 @@
 	var planes_radius = axis_radius;
 	var planes_width = axis_radius*4;
 	
-	var spacecraft_radius = 0.07;
+	var spacecraft_radius = 0.03;
 	
 	
 	
@@ -121,11 +121,11 @@
 	setLoadingProgress(30);
 	setXYplane();
 	setLoadingProgress(40);
-	includeOrbit();
-	setLoadingProgress(60);
 	includeSpacecraft();
-	setLoadingProgress(80);
+	setLoadingProgress(60);
 	includeProjection();
+	setLoadingProgress(80);
+	includeOrbit();
 	setLoadingProgress(100);
 	
 	//////////////////////////////////////////////////////////////////////////////////
@@ -150,6 +150,7 @@
 		delta = clock.getDelta();
 		
 		controls.update();
+
 		// call each update function
 		onRenderFcts.forEach(function(onRenderFct){
 			//onRenderFct(deltaMsec/1000, nowMsec/1000)
@@ -215,8 +216,8 @@ function includeSpacecraft(){
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Spacecraft						//
 	//////////////////////////////////////////////////////////////////////////////////
-	if(show_spacecraft){
-		if(!spacecraft_init){
+	//if(show_spacecraft){
+		//if(!spacecraft_init){
 			var material = new THREE.MeshBasicMaterial({color:spacecraft_color, opacity:1});
 			var geometry	= new THREE.SphereGeometry(spacecraft_radius, spacecraft_seg, spacecraft_seg);
 			spacecraft	= new THREE.Mesh(geometry, material );
@@ -227,10 +228,10 @@ function includeSpacecraft(){
 					value_spacecraft.x*dist_scale,
 					value_spacecraft.y*dist_scale,
 					value_spacecraft.z*dist_scale
-				);		
+				);					
 			});
-		}
-	}
+		//}
+	//}
 }
 
 

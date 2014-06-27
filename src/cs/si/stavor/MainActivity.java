@@ -121,13 +121,18 @@ public class MainActivity extends ActionBarActivity implements
 	 * Browser object
 	 */
 	private XWalkView mXwalkView;
+	private XWalkView mXwalkViewOrbit;
 	private boolean loadBrowser;
+	private boolean loadBrowserOrbit;
 	/**
 	 * Returns the simulator object
 	 * @return
 	 */
 	public XWalkView getBrowser(){
 		return mXwalkView;
+	}
+	public XWalkView getBrowserOrbit(){
+		return mXwalkViewOrbit;
 	}
 	public boolean getLoadBrowserFlag(){
 		return loadBrowser;
@@ -136,6 +141,15 @@ public class MainActivity extends ActionBarActivity implements
 		loadBrowser = false;
 	}
 	public void raiseLoadBrowserFlag(){
+		loadBrowser = true;
+	}
+	public boolean getLoadBrowserFlagOrbit(){
+		return loadBrowser;
+	}
+	public void resetLoadBrowserFlagOrbit(){
+		loadBrowser = false;
+	}
+	public void raiseLoadBrowserFlagOrbit(){
 		loadBrowser = true;
 	}
 	// to know when the oncreate and onresume are triggered for the first time
@@ -299,9 +313,29 @@ public class MainActivity extends ActionBarActivity implements
 	    	//browserSettings.setDisplayZoomControls(true);
 	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener
 	    	
+	    	//Orbit browser
+	    	XWalkView xwalkViewOrbit = new XWalkView(this.getApplicationContext(), this);
+			//mXwalkView.setBackgroundResource(R.color.black);
+			xwalkViewOrbit.setBackgroundColor(0x00000000);
+			xwalkViewOrbit.setResourceClient(new MyResourceClient(xwalkViewOrbit));
+	        xwalkViewOrbit.setUIClient(new MyUIClient(xwalkViewOrbit));
+	        xwalkViewOrbit.clearCache(true);
+	        
+	        XWalkSettings browserSettingsOrbit = xwalkViewOrbit.getSettings();
+	    	
+	    	browserSettingsOrbit.setJavaScriptEnabled(true);
+	    	browserSettingsOrbit.setUseWideViewPort(false);
+	    	//browserSettings.setLoadWithOverviewMode(true);
+	    	browserSettingsOrbit.setAllowFileAccessFromFileURLs(true); //Maybe you don't need this rule
+	    	browserSettingsOrbit.setAllowUniversalAccessFromFileURLs(true);
+	    	//browserSettings.setBuiltInZoomControls(true);
+	    	//browserSettings.setDisplayZoomControls(true);
+	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener
+	    	
 	    	((StavorApplication)getApplication()).jsInterface = new WebAppInterface(this, simu.getSimulationResults());
 	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
-	        
+	    	xwalkViewOrbit.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
+	    	
             MissionReaderDbHelper db_help_tmp;
             SQLiteDatabase db_tmp;
             db_help_tmp = Installer.installApkDatabase(this);
@@ -309,6 +343,8 @@ public class MainActivity extends ActionBarActivity implements
             
             dataFragment.setData(
             		xwalkView,
+            		true,
+            		xwalkViewOrbit,
             		true,
             		simu,
             		db_help_tmp,
@@ -318,7 +354,9 @@ public class MainActivity extends ActionBarActivity implements
         }
         
         this.mXwalkView = dataFragment.getBrowser();
+        this.mXwalkViewOrbit = dataFragment.getBrowserOrbit();
         this.loadBrowser = dataFragment.getLoadBrowser();
+        this.loadBrowserOrbit = dataFragment.getLoadBrowserOrbit();
 
         // the data is available in dataFragment.getData()
         this.simulator = dataFragment.getSim();
@@ -360,7 +398,6 @@ public class MainActivity extends ActionBarActivity implements
 		//Reset flag to not start playing when the browser has to reload.
 		if(simulator!=null)
 			simulator.resetTemporaryPause();
-		raiseLoadBrowserFlag();
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
 		if(position==0){// selection of tabs content
@@ -616,6 +653,16 @@ public class MainActivity extends ActionBarActivity implements
 	    	showTutorialDialog(key, title, message);
     	}
     }
+    public void showTutorialOrbit(){
+    	String key = getString(R.string.pref_key_tutorial_orbit);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
+    		//TODO
+	    	//String title = getString(R.string.tutorial_title_display);
+	    	//String message = getString(R.string.tutorial_message_display);
+	    	//showTutorialDialog(key, title, message);
+    	}
+    }
     public void showTutorialConfig(){
     	String key = getString(R.string.pref_key_tutorial_config);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -662,6 +709,7 @@ public class MainActivity extends ActionBarActivity implements
         super.onResume();
         if(flagActivityFirstExec){
         	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+        	mXwalkViewOrbit.load(Parameters.Web.STARTING_PAGE_ORBIT,null);
         	flagActivityFirstExec=false;
         }
     }
@@ -672,12 +720,18 @@ public class MainActivity extends ActionBarActivity implements
         if (mXwalkView != null) {
             mXwalkView.onActivityResult(requestCode, resultCode, data);
         }
+        if (mXwalkViewOrbit != null) {
+            mXwalkViewOrbit.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         if (mXwalkView != null) {
             mXwalkView.onNewIntent(intent);
+        }
+        if (mXwalkViewOrbit != null) {
+            mXwalkViewOrbit.onNewIntent(intent);
         }
     }
 	
@@ -689,10 +743,13 @@ public class MainActivity extends ActionBarActivity implements
         	simulator.disconnect();
             ((StavorApplication)getApplication()).db_help.close();
             mXwalkView.onDestroy();
+            mXwalkViewOrbit.onDestroy();
         }else{
         	dataFragment.setData(
         			this.mXwalkView,
         			this.loadBrowser,
+        			this.mXwalkViewOrbit,
+        			this.loadBrowserOrbit,
         			this.simulator,
         			((StavorApplication)getApplication()).db_help,
         			((StavorApplication)getApplication()).db,

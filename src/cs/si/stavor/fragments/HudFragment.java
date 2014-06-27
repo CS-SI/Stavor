@@ -6,6 +6,7 @@ import org.xwalk.core.XWalkView;
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.StavorApplication;
+import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -112,7 +113,7 @@ public final class HudFragment extends Fragment {
 		fps.setAlpha((float)0.0);
 		
     	simulator = ((MainActivity)getActivity()).getSimulator();
-    	simulator.setHudView(rootView, mXwalkView);
+    	simulator.setHudView(Browsers.Attitude,rootView, mXwalkView);
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);

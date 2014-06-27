@@ -3,6 +3,7 @@
     <string name="pref_key_tutorial_simulator">pref_key_tutorial_simulator</string>
     <string name="pref_key_tutorial_display">pref_key_tutorial_display</string>
     <string name="pref_key_tutorial_config">pref_key_tutorial_config</string>
+    <string name="pref_key_tutorial_orbit">pref_key_tutorial_orbit</string>
     
     <string name="pref_screen_apk">pref_screen_apk</string>
     <string name="pref_screen_simulator">pref_screen_simulator</string>
@@ -66,7 +67,6 @@
     
     <string name="pref_key_show_axis">pref_key_show_axis</string>
     <string name="pref_key_show_axis_labels">pref_key_show_axis_labels</string>
-    <string name="pref_key_show_spacecraft">pref_key_show_spacecraft</string>
     <string name="pref_key_show_sc_axis">pref_key_show_sc_axis</string>
     <string name="pref_key_show_engine_texture">pref_key_show_engine_texture</string>
     <string name="pref_key_show_sun">pref_key_show_sun</string>
@@ -98,6 +98,16 @@
     <string name="pref_key_direction_a_show">pref_key_direction_a_show</string>
     <string name="pref_key_direction_a_color">pref_key_direction_a_color</string>
     
+    <string name="pref_key_show_earth_axis">pref_key_show_earth_axis</string>
+    <string name="pref_key_show_earth_atmosphere">pref_key_show_earth_atmosphere</string>
+    <string name="pref_key_show_earth_clouds">pref_key_show_earth_clouds</string>
+    <string name="pref_key_show_xy_plane">pref_key_show_xy_plane</string>
+    <string name="pref_key_color_xy_plane">pref_key_color_xy_plane</string>
+    <string name="pref_key_show_spacecraft">pref_key_show_spacecraft</string>
+    <string name="pref_key_spacecraft_color">pref_key_spacecraft_color</string>
+    <string name="pref_key_show_projection">pref_key_show_projection</string>
+    <string name="pref_key_orbit_color">pref_key_orbit_color</string>
+    
     <string name="key_views_ref_frame_xyz">XYZ</string>
     <string name="key_views_ref_frame_x">X</string>
     <string name="key_views_ref_frame_xx">-X</string>
@@ -114,4 +124,6 @@
     <string name="key_views_spacecraft_right">S/C-Right</string>
     <string name="key_views_earth">Earth</string>
     <string name="key_views_sun">Sun</string>
+    
+    
 </resources>

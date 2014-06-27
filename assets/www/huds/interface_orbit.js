@@ -29,7 +29,7 @@ function updateFPS(){
 	}
 }
 function reloadModel(){
-	var l = scene.children.length;
+	/*var l = scene.children.length;
 	setLoadingProgress(20);
 	//remove everything
 	while (l--) {
@@ -54,7 +54,7 @@ function reloadModel(){
 	setLoadingProgress(70);
 	includeSpacecraft();
 	setLoadingProgress(80);
-	includeProjection();
+	includeProjection();*/
 	setLoadingProgress(100);
 }
 function getInitialization(){
@@ -121,7 +121,6 @@ function updateModelState(new_state){
 	//if (typeof Android != "undefined"){ // check the bridge 
 	  //if (Android.getStateJSON!= "undefined") { // check the method
 		var state = JSON.parse(new_state);
-		
 		value_earth_rotation = new THREE.Quaternion(state.value_earth_rotation.x,state.value_earth_rotation.y,state.value_earth_rotation.z,state.value_earth_rotation.w);	
 		value_spacecraft  = new THREE.Vector3( state.value_spacecraft[0], state.value_spacecraft[1], state.value_spacecraft[2] ); //Km
 		value_orbit_a = state.value_orbit_a;

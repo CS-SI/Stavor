@@ -19,4 +19,7 @@ public class Quat {
 		y = rot.getQ2();
 		z = rot.getQ3();
 	}
+
+	public Quat() {
+	}
 }
