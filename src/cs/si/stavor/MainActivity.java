@@ -175,7 +175,7 @@ public class MainActivity extends ActionBarActivity implements
     	}
     }
     
-    private WebServer server;
+    //private WebServer server;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -193,7 +193,7 @@ public class MainActivity extends ActionBarActivity implements
 		setContentView(R.layout.activity_main);
 		//setProgressBarVisibility(true);
 		
-		
+		/* end of file server
         server = new WebServer();
         try {
             server.start();
@@ -201,7 +201,7 @@ public class MainActivity extends ActionBarActivity implements
             Log.w("Httpd", "The server could not start.");
         }
         Log.w("Httpd", "Web server initialized.");
-        
+        */
 		
 		// Setup a new instance
 		/*HttpServer server = new HttpServer();
@@ -717,7 +717,7 @@ public class MainActivity extends ActionBarActivity implements
 	public void setHudPanelOpen(boolean open){
 		hud_panel_open = open;
 	}
-	
+	/*
 	private class WebServer extends NanoHTTPD {
 		public static final String MIME_JAVASCRIPT = "text/javascript";
 		public static final String MIME_CSS = "text/css";
@@ -776,5 +776,5 @@ public class MainActivity extends ActionBarActivity implements
 	        
 	    }
 
-	}
+	}*/
 }
