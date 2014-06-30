@@ -96,7 +96,7 @@ public final class OrbitFragment extends Fragment {
     	ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBarBrowser);
     	FrameLayout progressBarLayout = (FrameLayout) rootView.findViewById(R.id.frameLayoutProgress);
     	progressBar.setProgress(0);
-    	((MainActivity)getActivity()).setBrowserProgressBar(progressBar,progressBarLayout);
+    	((MainActivity)getActivity()).setBrowserProgressBarOrbit(progressBar,progressBarLayout);
     	
 		//needs to have browser defined but not loaded yet
     	rootView.post(new Runnable()
@@ -173,7 +173,7 @@ public final class OrbitFragment extends Fragment {
 	
 	@Override
 	public void onDetach() {
-		((MainActivity)getActivity()).resetBrowserProgressBar();
+		((MainActivity)getActivity()).resetBrowserProgressBarOrbit();
 		//XWalk
         if (mXwalkView != null) {
             //mXwalkView.onDestroy();

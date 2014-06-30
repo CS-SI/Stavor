@@ -190,6 +190,39 @@ public class MainActivity extends ActionBarActivity implements
     	}
     }
     
+    
+    private ProgressBar browserProgressBarOrbit = null;
+    private FrameLayout browserProgressLayoutOrbit = null;
+    public void setBrowserProgressBarOrbit(ProgressBar bar, FrameLayout fr){
+    	browserProgressLayoutOrbit = fr;
+    	browserProgressBarOrbit = bar;
+    }
+    public void resetBrowserProgressBarOrbit(){
+    	browserProgressLayoutOrbit = null;
+    	browserProgressBarOrbit = null;
+    }
+    public void setBrowserProgressValueOrbit(int progr){
+    	if(browserProgressLayoutOrbit!=null && browserProgressBarOrbit!=null){
+	    	browserProgressBarOrbit.setProgress(progr);
+	    	if(progr<10000){
+	    		browserProgressLayoutOrbit.setVisibility(View.VISIBLE);
+	    	}else{
+	    		Animation fadeOut = new AlphaAnimation(1.00f, 0.00f);
+                fadeOut.setDuration(1500);
+                fadeOut.setAnimationListener(new AnimationListener() {
+                    public void onAnimationStart(Animation animation) {}
+                    public void onAnimationRepeat(Animation animation) {}
+                    public void onAnimationEnd(Animation animation) {
+                    	browserProgressLayoutOrbit.setVisibility(View.GONE);
+                    }
+                });
+
+                browserProgressLayoutOrbit.startAnimation(fadeOut);
+	    		
+	    	}
+    	}
+    }
+    
     //private WebServer server;
     
 	@Override
@@ -371,6 +404,12 @@ public class MainActivity extends ActionBarActivity implements
 		((StavorApplication)getApplication()).db = dataFragment.getDb();
 
 		hud_panel_open = dataFragment.getHudPanelOpen();
+		
+		if(flagActivityFirstExec){
+        	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+        	mXwalkViewOrbit.load(Parameters.Web.STARTING_PAGE_ORBIT,null);
+        	flagActivityFirstExec=false;
+        }
         
         // NAVIGATION
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
@@ -714,11 +753,7 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     protected void onResume() {//Resume browser
         super.onResume();
-        if(flagActivityFirstExec){
-        	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
-        	mXwalkViewOrbit.load(Parameters.Web.STARTING_PAGE_ORBIT,null);
-        	flagActivityFirstExec=false;
-        }
+        
     }
 
     @Override
