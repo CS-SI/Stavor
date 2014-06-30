@@ -4,13 +4,14 @@
     <string name="app_exit_prevent_message">Press back again to close this app</string>
     <string name="title_section1">Simulator</string>
     <string name="title_section2">Attitude</string>
-    <string name="title_section3">Orbit</string>
-    <string name="title_section4">Basic indicators</string>
-    <string name="title_section5">Extra indicators</string>
-    <string name="title_section6">Measures</string>
-    <string name="title_section7">Models</string>
-    <string name="title_section8">Preferences</string>
-    <string name="title_section9">WebGL test</string>
+    <string name="title_section3">Basic indicators</string>
+    <string name="title_section4">Extra indicators</string>
+    <string name="title_section5">Measures</string>
+    <string name="title_section6">Models</string>
+    <string name="title_section7">Orbit</string>
+    <string name="title_section8">Models</string>
+    <string name="title_section9">Preferences</string>
+    <string name="title_section10">WebGL test</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_screenshot">About</string>
@@ -307,6 +308,24 @@
     <string name="pref_title_direction_a_color">Color</string>
     <string name="pref_summary_direction_a_color">Direction color</string>
     
+    <string name="pref_category_earth">Earth</string>
+    <string name="pref_summary_show_earth_axis">Show the Earth axis in a body-fixed reference frame</string>
+    <string name="pref_title_show_earth_axis">Show Earth axis</string>
+    <string name="pref_summary_show_earth_atmosphere">Show the Earth atmosphere glow</string>
+    <string name="pref_title_show_earth_atmosphere">Show atmosphere</string>
+    <string name="pref_summary_show_earth_clouds">Show the Earth clouds</string>
+    <string name="pref_title_show_earth_clouds">Show clouds</string>
+    <string name="pref_category_ref">Reference</string>
+    <string name="pref_summary_show_xy_plane">Show the plane XY in an inertial reference frame</string>
+    <string name="pref_title_show_xy_plane">Show XY plane</string>
+    <string name="pref_summary_color_xy_plane">Color of the XY-plane</string>
+    <string name="pref_title_color_xy_plane">XY-plane color</string>
+    <string name="pref_category_spacecraft">Spacecraft</string>
+    <string name="pref_summary_spacecraft_color">Color of the spacecraft marker</string>
+    <string name="pref_title_spacecraft_color">Spacecraft color</string>
+    <string name="pref_category_orbit">Orbit</string>
+    <string name="pref_summary_orbit_color">Orbit line color</string>
+    <string name="pref_title_orbit_color">Orbit color</string>
     
     <string name="pref_title_target_a_x">Target X</string>
     <string name="pref_title_target_a_y">Target Y</string>

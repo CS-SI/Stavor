@@ -121,6 +121,7 @@ public class NavigationDrawerFragment extends Fragment {
                     getString(R.string.title_section7),
                     getString(R.string.title_section8),
                     getString(R.string.title_section9),
+                    getString(R.string.title_section10),
                 };
         }else{
         	sections = new String[]{
@@ -132,7 +133,8 @@ public class NavigationDrawerFragment extends Fragment {
                     getString(R.string.title_section6),
                     getString(R.string.title_section7),
                     getString(R.string.title_section8),
-                    /*getString(R.string.title_section9),*/
+                    getString(R.string.title_section9),
+                    /*getString(R.string.title_section10),*/
                 };
         }
         
@@ -161,24 +163,27 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.visualization_s);
 		        	    	break;
 		        	    case 2:
-		        	    	iconView.setImageResource(R.drawable.visualization_s);
+		        	    	iconView.setImageResource(R.drawable.indicators_s);
 		        	    	break;
 		        	    case 3:
 		        	    	iconView.setImageResource(R.drawable.indicators_s);
 		        	    	break;
 		        	    case 4:
-		        	    	iconView.setImageResource(R.drawable.indicators_s);
-		        	    	break;
-		        	    case 5:
 		        	    	iconView.setImageResource(R.drawable.measures_s);
 		        	    	break;
-		        	    case 6:
+		        	    case 5:
 		        	    	iconView.setImageResource(R.drawable.model_s);
 		        	    	break;
+		        	    case 6:
+		        	    	iconView.setImageResource(R.drawable.visualization_s);
+		        	    	break;
 		        	    case 7:
-		        	    	iconView.setImageResource(R.drawable.preferences_s);
+		        	    	iconView.setImageResource(R.drawable.model_s);
 		        	    	break;
 		        	    case 8:
+		        	    	iconView.setImageResource(R.drawable.preferences_s);
+		        	    	break;
+		        	    case 9:
 		        	    	iconView.setImageResource(R.drawable.test_s);
 		        	    	break;
 	        	    }
@@ -192,24 +197,27 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.visualization);
 		        	    	break;
 		        	    case 2:
-		        	    	iconView.setImageResource(R.drawable.visualization);
+		        	    	iconView.setImageResource(R.drawable.indicators);
 		        	    	break;
 		        	    case 3:
 		        	    	iconView.setImageResource(R.drawable.indicators);
 		        	    	break;
 		        	    case 4:
-		        	    	iconView.setImageResource(R.drawable.indicators);
-		        	    	break;
-		        	    case 5:
 		        	    	iconView.setImageResource(R.drawable.measures);
 		        	    	break;
-		        	    case 6:
+		        	    case 5:
 		        	    	iconView.setImageResource(R.drawable.model);
 		        	    	break;
+		        	    case 6:
+		        	    	iconView.setImageResource(R.drawable.visualization);
+		        	    	break;
 		        	    case 7:
-		        	    	iconView.setImageResource(R.drawable.preferences);
+		        	    	iconView.setImageResource(R.drawable.model);
 		        	    	break;
 		        	    case 8:
+		        	    	iconView.setImageResource(R.drawable.preferences);
+		        	    	break;
+		        	    case 9:
 		        	    	iconView.setImageResource(R.drawable.test);
 		        	    	break;
 	        	    }

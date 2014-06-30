@@ -25,6 +25,6 @@
         android1:layout_alignParentTop="true"
         android1:layout_toRightOf="@+id/nav_item_icon"
         android1:paddingLeft="5dp"
-        android1:textAppearance="?android:attr/textAppearanceLarge" />
+        android1:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

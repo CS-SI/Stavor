@@ -4,13 +4,14 @@
     <string name="app_exit_prevent_message">Appuyez de nouveau pour fermer l\'application</string>
     <string name="title_section1">Simulateur</string>
     <string name="title_section2">Attitude</string>
-    <string name="title_section3">Orbite</string>
-    <string name="title_section4">Indicateurs basiques</string>
-    <string name="title_section5">Indicateurs extra</string>
-    <string name="title_section6">Mesures</string>
-    <string name="title_section7">Modèles</string>
-    <string name="title_section8">Paramètres</string>
-    <string name="title_section9">Essayes WebGL</string>
+    <string name="title_section3">Indicateurs basiques</string>
+    <string name="title_section4">Indicateurs extra</string>
+    <string name="title_section5">Mesures</string>
+    <string name="title_section6">Modèles</string>
+    <string name="title_section7">Orbite</string>
+    <string name="title_section8">Modèles</string>
+    <string name="title_section9">Paramètres</string>
+    <string name="title_section10">Essayes WebGL</string>
     <string name="navigation_drawer_open">Ouvrez le menu de navigation</string>
     <string name="navigation_drawer_close">Ferme le menu de navigation</string>
     <string name="action_screenshot">À propos</string>
@@ -307,6 +308,24 @@
     <string name="pref_title_direction_a_color">Couleur</string>
     <string name="pref_summary_direction_a_color">Couleur de la direction</string>
     
+    <string name="pref_category_earth">La Terre</string>
+    <string name="pref_summary_show_earth_axis">Afficher les axes de la Terre fixes à sa rotation</string>
+    <string name="pref_title_show_earth_axis">Afficher les axes de la Terre</string>
+    <string name="pref_summary_show_earth_atmosphere">Afficher le reflète de l\'atmosphère de la Terre</string>
+    <string name="pref_title_show_earth_atmosphere">Afficher atmosphère</string>
+    <string name="pref_summary_show_earth_clouds">Afficher les nuages ​​de la Terre</string>
+    <string name="pref_title_show_earth_clouds">Afficher nuages</string>
+    <string name="pref_category_ref">Référence</string>
+    <string name="pref_summary_show_xy_plane">Afficher plan XY en cadre de référence inertiel</string>
+    <string name="pref_title_show_xy_plane">Afficher plan XY</string>
+    <string name="pref_summary_color_xy_plane">Couleur du plan XY</string>
+    <string name="pref_title_color_xy_plane">Couleur plan XY</string>
+    <string name="pref_category_spacecraft">Vaisseau</string>
+    <string name="pref_summary_spacecraft_color">Couleur du marqueur du vaisseau</string>
+    <string name="pref_title_spacecraft_color">Couleur vaisseau</string>
+    <string name="pref_category_orbit">Orbite</string>
+    <string name="pref_summary_orbit_color">Couleur de la ligne d\'orbite</string>
+    <string name="pref_title_orbit_color">couleur d\'orbite</string>
     
     <string name="pref_title_target_a_x">Cible X</string>
     <string name="pref_title_target_a_y">Cible Y</string>

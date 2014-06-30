@@ -4,13 +4,14 @@
     <string name="app_exit_prevent_message">Presione atrás otra vez para cerrar la aplicación</string>
     <string name="title_section1">Simulador</string>
     <string name="title_section2">Actitud</string>
-    <string name="title_section3">Órbita</string>
-    <string name="title_section4">Indicadores básicos</string>
-    <string name="title_section5">Indicadores extra</string>
-    <string name="title_section6">Medidas</string>
-    <string name="title_section7">Modelos</string>
-    <string name="title_section8">Preferencias</string>
-    <string name="title_section9">Test WebGL</string>
+    <string name="title_section3">Indicadores básicos</string>
+    <string name="title_section4">Indicadores extra</string>
+    <string name="title_section5">Medidas</string>
+    <string name="title_section6">Modelos</string>
+    <string name="title_section7">Órbita</string>
+    <string name="title_section8">Modelos</string>
+    <string name="title_section9">Preferencias</string>
+    <string name="title_section10">Test WebGL</string>
     <string name="navigation_drawer_open">Abre el menú de navegación</string>
     <string name="navigation_drawer_close">Cierra el menú de navegación</string>
     <string name="action_screenshot">Acerca de</string>
@@ -28,7 +29,7 @@
     <string name="mission_date">Fecha/Tiempo:</string>
     <string name="mission_duration">Duración de misión (s\'):</string>
     <string name="mission_step">Étapa de simulación (s):</string>
-    <string name="mission_orbit">Orbita</string>
+    <string name="mission_orbit">Órbita</string>
     <string name="mission_a">Semieje mayor (m):</string>
     <string name="mission_speed">Velocidad de simulación aprox. (s\'/s):</string>
     <string name="mission_dur">Duración de siulación aprox. (s):</string>
@@ -306,6 +307,24 @@
     <string name="pref_title_direction_a_color">Color</string>
     <string name="pref_summary_direction_a_color">Color de dirección</string>
     
+    <string name="pref_category_earth">La Tierra</string>
+    <string name="pref_summary_show_earth_axis">Mostrar los ejes de la Tierra fijos a su rotación</string>
+    <string name="pref_title_show_earth_axis">Mostrar ejes de la Tierra</string>
+    <string name="pref_summary_show_earth_atmosphere">Mostrar el reflejo de la atmósfera de la Tierra</string>
+    <string name="pref_title_show_earth_atmosphere">Mostrar atmósfera</string>
+    <string name="pref_summary_show_earth_clouds">Mostrar las nubes de la Tierra</string>
+    <string name="pref_title_show_earth_clouds">Mostrar nubes</string>
+    <string name="pref_category_ref">Referencia</string>
+    <string name="pref_summary_show_xy_plane">Mostrar plano XY en marco de referencia inercial</string>
+    <string name="pref_title_show_xy_plane">Mostrar plano XY</string>
+    <string name="pref_summary_color_xy_plane">Color del plano XY</string>
+    <string name="pref_title_color_xy_plane">Color plano XY</string>
+    <string name="pref_category_spacecraft">Nave</string>
+    <string name="pref_summary_spacecraft_color">Color del marcador de la nave</string>
+    <string name="pref_title_spacecraft_color">Color nave</string>
+    <string name="pref_category_orbit">Órbita</string>
+    <string name="pref_summary_orbit_color">Color de la línea de órbita</string>
+    <string name="pref_title_orbit_color">color de órbita</string>
     
     <string name="pref_title_target_a_x">Blanco X</string>
     <string name="pref_title_target_a_y">Blanco Y</string>

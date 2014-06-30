@@ -46,6 +46,7 @@ import cs.si.stavor.settings.SettingsExtraFragment;
 import cs.si.stavor.settings.SettingsGeneralFragment;
 import cs.si.stavor.settings.SettingsMeasuresFragment;
 import cs.si.stavor.settings.SettingsModelsFragment;
+import cs.si.stavor.settings.SettingsOrbitFragment;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
@@ -415,38 +416,44 @@ public class MainActivity extends ActionBarActivity implements
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		OrbitFragment.newInstance(position +1)).commit();
+	        		SettingsBasicFragment.newInstance(position +1)).commit();
 		}else if(position==3){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsBasicFragment.newInstance(position +1)).commit();
+	        		SettingsExtraFragment.newInstance(position +1)).commit();
 		}else if(position==4){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsExtraFragment.newInstance(position +1)).commit();
+	        		SettingsMeasuresFragment.newInstance(position +1)).commit();
 		}else if(position==5){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsMeasuresFragment.newInstance(position +1)).commit();
+	        		SettingsModelsFragment.newInstance(position +1)).commit();
 		}else if(position==6){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsModelsFragment.newInstance(position +1)).commit();
+	        		OrbitFragment.newInstance(position +1)).commit();
 		}else if(position==7){
+			// Display the fragment as the main content.
+	        fragmentManager
+	        .beginTransaction()
+	        .replace(R.id.container, 
+	        		SettingsOrbitFragment.newInstance(position +1)).commit();
+		}else if(position==8){
 			// Display the fragment as the main content.
 	        fragmentManager    
 	        .beginTransaction()
 	        .replace(R.id.container, 
 	        		SettingsGeneralFragment.newInstance(position +1)).commit();
-		}else if(position==8){
+		}else if(position==9){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
@@ -588,11 +595,11 @@ public class MainActivity extends ActionBarActivity implements
     public void onBackPressed() {
     	if (!mNavigationDrawerFragment.isDrawerOpen()) {//If the navigation menu is not opened
 	    	int sel = mNavigationDrawerFragment.getSelectedPosition();
-	    	if(sel>2){//If it is currently in a configuration section, goto Hud
+	    	if(sel==7){//If it is currently in a configuration section, goto Hud
 	    		showSection(2);
-	    	}else if (sel==2){//If it is in Hud, goto simulator screen
+	    	}else if (sel>1 && sel<6){//If it is in Hud, goto simulator screen
 	    		showSection(1);
-	    	}else if (sel==1){//If it is in Hud, goto simulator screen
+	    	}else if (sel==1 || sel==6 || sel==8){//If it is in Hud, goto simulator screen
 	    		showSection(0);
 	    	}else if (sel==0){//If it is in Simulator, warn user before exit
 		    	if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {//Wait some time for confirmation
