@@ -9,15 +9,15 @@ function setLoadingProgress(progress) {// from 0 to 100
 	/*if(progress==100)
 		hideLoadingScreen();*/
 	if (typeof Android != "undefined"){ // check the bridge 
-		  if (Android.setProgress!= "undefined") { // check the method
-			 Android.setProgress(progress);
+		  if (Android.setProgressOrbit!= "undefined") { // check the method
+			 Android.setProgressOrbit(progress);
 		  }
    	}
 }
 function setLoaded() {// from 0 to 100 
 	if (typeof Android != "undefined"){ // check the bridge 
-		  if (Android.setProgress!= "undefined") { // check the method
-			 Android.setProgress(100);
+		  if (Android.setProgressOrbit!= "undefined") { // check the method
+			 Android.setProgressOrbit(100);
 		  }
    	}
 }
@@ -29,32 +29,58 @@ function updateFPS(){
 	}
 }
 function reloadModel(){
-	/*var l = scene.children.length;
+	var l = scene.children.length;
 	setLoadingProgress(20);
+	getInitialization();
+	setLoadingProgress(30);
 	//remove everything
 	while (l--) {
 		if(scene.children[l] instanceof THREE.Camera) continue; //leave camera in the scene
-		if(scene.children[l] instanceof THREE.PointLight) continue; //leave light in the scene
+		if(scene.children[l] instanceof THREE.AmbientLight) continue; //leave light in the scene
+		if(scene.children[l].name == "STARS"){ 
+			scene.children[l].visible = show_sky;
+			continue; //leave sky
+		}
+		if(scene.children[l].name == "PROJECTION"){ 
+			scene.children[l].visible = show_projection;
+			continue; //leave sky
+		}
+		if(scene.children[l].name == "SPACECRAFT"){ 
+			scene.children[l].visible = show_spacecraft;
+			continue; //leave sky
+		}
+		if(scene.children[l].name == "EARTH"){ 
+			scene.children[l].visible = show_earth;
+			scene.children[l].getObjectByName("EARTH-PLANET",true).visible = show_earth;
+			if(show_earth){
+				scene.children[l].getObjectByName("EARTH-AXIS",true).visible = show_earth_axis;
+				scene.children[l].getObjectByName("EARTH-ATM-1",true).visible = show_earth_atmosphere;
+				scene.children[l].getObjectByName("EARTH-ATM-2",true).visible = show_earth_atmosphere;
+				scene.children[l].getObjectByName("EARTH-CLOUDS",true).visible = show_earth_clouds;
+			}else{
+				scene.children[l].getObjectByName("EARTH-AXIS",true).visible = false;
+				scene.children[l].getObjectByName("EARTH-ATM-1",true).visible = false;
+				scene.children[l].getObjectByName("EARTH-ATM-2",true).visible = false;
+				scene.children[l].getObjectByName("EARTH-CLOUDS",true).visible = false;
+			}
+			continue; //leave earth
+		}
 		scene.remove(scene.children[l]);
 	}
-	getInitialization();
 	if(performance_level<=2)
 		canvasMode(performance_level);
 	else
 		canvas_mode = false;
-	setLoadingProgress(30);
-	setSky();
-	setAxis();
 	setLoadingProgress(40);
-	includeEarth();
-	setLoadingProgress(50);
-	setXYplane();
+	//setSky();
+	setAxis();
+	//includeEarth();
 	setLoadingProgress(60);
-	includeOrbit();
-	setLoadingProgress(70);
-	includeSpacecraft();
+	setXYplane();
 	setLoadingProgress(80);
-	includeProjection();*/
+	includeOrbit();
+	//includeSpacecraft();
+	//includeProjection();
 	setLoadingProgress(100);
 }
 function getInitialization(){
@@ -71,6 +97,7 @@ function getInitialization(){
 		show_axis = config.show_axis;
 		show_axis_labels = config.show_axis_labels;
 
+		show_earth = config.show_earth;
 		show_earth_axis = config.show_earth_axis;
 		show_earth_atmosphere = config.show_earth_atmosphere;
 		show_earth_clouds = config.show_earth_clouds;

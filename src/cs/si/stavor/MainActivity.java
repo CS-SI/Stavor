@@ -50,25 +50,19 @@ import cs.si.stavor.settings.SettingsOrbitFragment;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
-import cs.si.stavor.web.NanoHTTPD;
-import cs.si.stavor.web.ServerRunner;
 import cs.si.stavor.web.WebAppInterface;
-import cs.si.stavor.web.NanoHTTPD.Response;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.AssetFileDescriptor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -145,13 +139,13 @@ public class MainActivity extends ActionBarActivity implements
 		loadBrowser = true;
 	}
 	public boolean getLoadBrowserFlagOrbit(){
-		return loadBrowser;
+		return loadBrowserOrbit;
 	}
 	public void resetLoadBrowserFlagOrbit(){
-		loadBrowser = false;
+		loadBrowserOrbit = false;
 	}
 	public void raiseLoadBrowserFlagOrbit(){
-		loadBrowser = true;
+		loadBrowserOrbit = true;
 	}
 	// to know when the oncreate and onresume are triggered for the first time
 	private boolean flagActivityFirstExec = false;
@@ -391,7 +385,7 @@ public class MainActivity extends ActionBarActivity implements
         this.mXwalkViewOrbit = dataFragment.getBrowserOrbit();
         this.loadBrowser = dataFragment.getLoadBrowser();
         this.loadBrowserOrbit = dataFragment.getLoadBrowserOrbit();
-
+        
         // the data is available in dataFragment.getData()
         this.simulator = dataFragment.getSim();
         this.simulator.reconstruct(this);
@@ -420,6 +414,7 @@ public class MainActivity extends ActionBarActivity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		
 		
 		//Wait a minimum amount of time to display the splash screen
 		long diff_time = System.nanoTime()-start_time;

@@ -26,9 +26,9 @@
 
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px; background-color:black"></div>
 <script>
-	var orbit_init = false, orbit;
-	var spacecraft_init = false, spacecraft;
-	var projection_init = false, projection;
+	var orbit;
+	var spacecraft;
+	var projection, starSphere, containerEarth;
 	// MAIN
 	//***********************************************************************************************************************
 	//		GLOBAL VARIABLES
@@ -73,6 +73,7 @@
 	var show_axis = true;
 	var show_axis_labels = true;
 
+	var show_earth = true;
 	var show_earth_axis = true;
 	var show_earth_atmosphere = true;
 	var show_earth_clouds = true;
@@ -80,7 +81,7 @@
 	var color_xy_plane = 0xff0094;
 	
 	var show_spacecraft = true;
-	var spacecraft_color = 0x008800;
+	var spacecraft_color = 0xfff200;
 	var show_projection = true;
 	
 	var orbit_color = 0x00ff00;
@@ -113,20 +114,23 @@
 
 	setLoadingProgress(1);
 	initScene();
-	setLoadingProgress(10);
+	setLoadingProgress(3);
 	setSky();
 	setAxis();
-	setLoadingProgress(20);
+	setLoadingProgress(6);
 	includeEarth();
-	setLoadingProgress(30);
+	setLoadingProgress(8);
 	setXYplane();
-	setLoadingProgress(40);
+	setLoadingProgress(10);
 	includeSpacecraft();
-	setLoadingProgress(60);
+	setLoadingProgress(14);
 	includeProjection();
-	setLoadingProgress(80);
+	setLoadingProgress(18);
 	includeOrbit();
-	setLoadingProgress(100);
+
+
+	//setLoadingProgress(100);
+//reloadModel();//XGGDEBUG: delete
 	
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the scene						//
@@ -177,7 +181,7 @@ function includeOrbit(){
 	*/
 	
 	
-	if(!orbit_init){
+	//if(!orbit_init){
 		
 		createOrbit();
 		orbit_init = true;
@@ -185,7 +189,7 @@ function includeOrbit(){
 			scene.remove(orbit);
 			createOrbit();
 		});
-	}
+	//}
 }
 
 function createOrbit(){
@@ -216,22 +220,20 @@ function includeSpacecraft(){
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Spacecraft						//
 	//////////////////////////////////////////////////////////////////////////////////
-	//if(show_spacecraft){
-		//if(!spacecraft_init){
-			var material = new THREE.MeshBasicMaterial({color:spacecraft_color, opacity:1});
-			var geometry	= new THREE.SphereGeometry(spacecraft_radius, spacecraft_seg, spacecraft_seg);
-			spacecraft	= new THREE.Mesh(geometry, material );
-			scene.add(spacecraft);
-			spacecraft_init=true;
-			onRenderFcts.push(function(delta, now){
-				spacecraft.position = new THREE.Vector3(
-					value_spacecraft.x*dist_scale,
-					value_spacecraft.y*dist_scale,
-					value_spacecraft.z*dist_scale
-				);					
-			});
-		//}
-	//}
+	var material = new THREE.MeshBasicMaterial({color:spacecraft_color, opacity:1});
+	var geometry	= new THREE.SphereGeometry(spacecraft_radius, spacecraft_seg, spacecraft_seg);
+	spacecraft	= new THREE.Mesh(geometry, material );
+	spacecraft.name = "SPACECRAFT";
+	scene.add(spacecraft);
+	spacecraft_init=true;
+	onRenderFcts.push(function(delta, now){
+		spacecraft.position = new THREE.Vector3(
+			value_spacecraft.x*dist_scale,
+			value_spacecraft.y*dist_scale,
+			value_spacecraft.z*dist_scale
+		);					
+	});
+	spacecraft.visible = show_spacecraft;
 }
 
 
@@ -239,23 +241,21 @@ function includeProjection(){
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Projection						//
 	//////////////////////////////////////////////////////////////////////////////////
-	if(show_projection){
-		if(!projection_init){
-			var lineGeometry = new THREE.Geometry();
-			var vertArray = lineGeometry.vertices;
-			vertArray.push( new THREE.Vector3(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z), new THREE.Vector3(0, 0, 0) );
-			lineGeometry.computeLineDistances();
-			var lineMaterial = new THREE.LineDashedMaterial( { color: spacecraft_color, dashSize: 0.03, gapSize: 0.03 } );
-			projection = new THREE.Line( lineGeometry, lineMaterial );
-			scene.add(projection);
-			projection_init = true;
-			onRenderFcts.push(function(delta, now){
-				projection.geometry.vertices[0].set(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z);
-				projection.geometry.computeLineDistances();
-				projection.geometry.verticesNeedUpdate = true;
-			});	
-		}
-	}
+		var lineGeometry = new THREE.Geometry();
+		var vertArray = lineGeometry.vertices;
+		vertArray.push( new THREE.Vector3(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z), new THREE.Vector3(0, 0, 0) );
+		lineGeometry.computeLineDistances();
+		var lineMaterial = new THREE.LineDashedMaterial( { color: spacecraft_color, dashSize: 0.05, gapSize: 0.05 } );
+		projection = new THREE.Line( lineGeometry, lineMaterial );
+		projection.name = "PROJECTION";
+		scene.add(projection);
+		projection_init = true;
+		onRenderFcts.push(function(delta, now){
+			projection.geometry.vertices[0].set(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z);
+			projection.geometry.computeLineDistances();
+			projection.geometry.verticesNeedUpdate = true;
+		});
+		projection.visible = show_projection;
 }
 
 function setXYplane(){
@@ -299,12 +299,17 @@ function setXYplane(){
 
 function includeEarth(){
 	
-	var containerEarth	= new THREE.Object3D();
+	containerEarth	= new THREE.Object3D();
 	containerEarth.rotateX(Math.PI/2);
 	containerEarth.rotateZ(-23.4 * Math.PI/180);
 	containerEarth.position.z	= 0;
+	containerEarth.name = "EARTH";
 	scene.add(containerEarth);
-
+	if(show_earth){
+		containerEarth.visible = true;
+	}else{
+		containerEarth.visible = false;
+	}
 	/*
 	var geometry	= new THREE.SphereGeometry(1737000*dist_scale, 32, 32);
 	var material	= new THREE.MeshPhongMaterial({
@@ -332,49 +337,69 @@ function includeEarth(){
 	
 	earthMesh.receiveShadow	= true
 	earthMesh.castShadow	= true
+	earthMesh.name = "EARTH-PLANET";
 	containerEarth.add(earthMesh)
 	onRenderFcts.push(function(delta, now){
 		earthMesh.rotation.y += 1/32 * delta * accel_time;		
 	})
 
+	//Earth axis
+	var axis_earth = new THREE.AxisHelper( axis_earth_radius );
+	axis_earth.rotation.x = -Math.PI/2;
+	axis_earth.position.set( 0, 0, 0 );
+	axis_earth.name = "EARTH-AXIS"
+	earthMesh.add(axis_earth);
 	if(show_earth_axis){
-		var axis_earth = new THREE.AxisHelper( axis_earth_radius );
-		axis_earth.rotation.x = -Math.PI/2;
-		axis_earth.position.set( 0, 0, 0 );
-		earthMesh.add(axis_earth);
+		axis_earth.visible = true;
+	}else{
+		axis_earth.visible = false;
 	}
 
+	//Earth atmosphere
+	var geometry	= new THREE.SphereGeometry(earth_radius, earth_seg, earth_seg);
+	var material	= THREEx.createAtmosphereMaterial();
+	material.uniforms.glowColor.value.set(0x00b3ff);
+	material.uniforms.coeficient.value	= 0.8;
+	material.uniforms.power.value		= 2.0;
+	var mesh	= new THREE.Mesh(geometry, material );
+	mesh.scale.multiplyScalar(1.01);
+	mesh.name = "EARTH-ATM-1";
+	containerEarth.add( mesh );
+	// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
+	
+	var geometry	= new THREE.SphereGeometry(earth_radius, earth_seg, earth_seg);
+	var material	= THREEx.createAtmosphereMaterial();
+	material.side	= THREE.BackSide;
+	material.uniforms.glowColor.value.set(0x00b3ff);
+	material.uniforms.coeficient.value	= 0.5;
+	material.uniforms.power.value		= 4.0;
+	var mesh2	= new THREE.Mesh(geometry, material );
+	mesh2.scale.multiplyScalar(1.15);
+	mesh2.name = "EARTH-ATM-2";
+	containerEarth.add( mesh2 );
+	// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
 	if(show_earth_atmosphere){
-		var geometry	= new THREE.SphereGeometry(earth_radius, earth_seg, earth_seg);
-		var material	= THREEx.createAtmosphereMaterial();
-		material.uniforms.glowColor.value.set(0x00b3ff);
-		material.uniforms.coeficient.value	= 0.8;
-		material.uniforms.power.value		= 2.0;
-		var mesh	= new THREE.Mesh(geometry, material );
-		mesh.scale.multiplyScalar(1.01);
-		containerEarth.add( mesh );
-		// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
-		
-		var geometry	= new THREE.SphereGeometry(earth_radius, earth_seg, earth_seg);
-		var material	= THREEx.createAtmosphereMaterial();
-		material.side	= THREE.BackSide;
-		material.uniforms.glowColor.value.set(0x00b3ff);
-		material.uniforms.coeficient.value	= 0.5;
-		material.uniforms.power.value		= 4.0;
-		var mesh	= new THREE.Mesh(geometry, material );
-		mesh.scale.multiplyScalar(1.15);
-		containerEarth.add( mesh );
-		// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
+		mesh.visible=true;
+		mesh2.visible=true;
+	}else{
+		mesh.visible=false;
+		mesh2.visible=false;
 	}
 	
+	//Earth clouds
+	var earthCloud	= THREEx.Planets.createEarthCloud();
+	earthCloud.receiveShadow	= true;
+	earthCloud.castShadow	= true;
+	earthCloud.name = "EARTH-CLOUDS";
+	containerEarth.add(earthCloud);
+	onRenderFcts.push(function(delta, now){
+		earthCloud.rotation.y += 1/8 * delta * accel_time;		
+	});
+
 	if(show_earth_clouds){
-		var earthCloud	= THREEx.Planets.createEarthCloud()
-		earthCloud.receiveShadow	= true
-		earthCloud.castShadow	= true
-		containerEarth.add(earthCloud)
-		onRenderFcts.push(function(delta, now){
-			earthCloud.rotation.y += 1/8 * delta * accel_time;		
-		})
+		earthCloud.visible = true;
+	}else{
+		earthCloud.visible = false;
 	}
 }
 
@@ -406,9 +431,14 @@ function setAxis(){
 }
 
 function setSky(){
-	if(show_sky){
-		var starSphere	= THREEx.Planets.createStarfield()
-		scene.add(starSphere)
+	
+	starSphere = THREEx.Planets.createStarfield();
+	starSphere.name = "STARS";
+	scene.add(starSphere);
+	if(!show_sky){
+		starSphere.visible = false;
+	}else{
+		starSphere.visible = true;
 	}
 }
 
