@@ -326,6 +326,10 @@
     <string name="pref_category_orbit">Orbite</string>
     <string name="pref_summary_orbit_color">Couleur de la ligne d\'orbite</string>
     <string name="pref_title_orbit_color">couleur d\'orbite</string>
+    <string name="pref_summary_show_earth_orbit">Afficher la planète Terre</string>
+    <string name="pref_title_show_earth_orbit">Afficher la Terre</string>
+    <string name="pref_summary_show_projection_line">Afficher la ligne de projection du vaisseau</string>
+    <string name="pref_title_show_projection_line">Afficher projection</string>
     
     <string name="pref_title_target_a_x">Cible X</string>
     <string name="pref_title_target_a_y">Cible Y</string>

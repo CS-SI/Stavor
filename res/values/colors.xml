@@ -9,7 +9,7 @@
     <color name="pref_def_plane_orb">#65ff00</color>
     <color name="pref_def_plane_xy">#ff0094</color>
     <color name="pref_def_orbit_color">#00ff00</color>
-    <color name="pref_def_spacecraft_color">#008800</color>
+    <color name="pref_def_spacecraft_color">#fff200</color>
     <color name="pref_def_color_xy_plane">#ff0094</color>
     
     <color name="panel_clock">#00c100</color>

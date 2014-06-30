@@ -326,6 +326,10 @@
     <string name="pref_category_orbit">Orbit</string>
     <string name="pref_summary_orbit_color">Orbit line color</string>
     <string name="pref_title_orbit_color">Orbit color</string>
+    <string name="pref_summary_show_earth_orbit">Show the Earth planet</string>
+    <string name="pref_title_show_earth_orbit">Show Earth</string>
+    <string name="pref_summary_show_projection_line">Show the spacecraft projection line</string>
+    <string name="pref_title_show_projection_line">Show projection</string>
     
     <string name="pref_title_target_a_x">Target X</string>
     <string name="pref_title_target_a_y">Target Y</string>

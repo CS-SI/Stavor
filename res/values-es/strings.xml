@@ -324,7 +324,11 @@
     <string name="pref_title_spacecraft_color">Color nave</string>
     <string name="pref_category_orbit">Órbita</string>
     <string name="pref_summary_orbit_color">Color de la línea de órbita</string>
-    <string name="pref_title_orbit_color">color de órbita</string>
+    <string name="pref_title_orbit_color">Color de órbita</string>
+    <string name="pref_summary_show_earth_orbit">Mostrar el planeta Tierra</string>
+    <string name="pref_title_show_earth_orbit">Mostrar la Tierra</string>
+    <string name="pref_summary_show_projection_line">Mostrar la línea de proyección de la nave</string>
+    <string name="pref_title_show_projection_line">Mostrar proyección</string>
     
     <string name="pref_title_target_a_x">Blanco X</string>
     <string name="pref_title_target_a_y">Blanco Y</string>

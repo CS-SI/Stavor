@@ -28,6 +28,7 @@ public class ModelConfigurationOrbit {
 		show_axis = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_axis), show_axis);
 		show_axis_labels = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_axis_labels), show_axis_labels);
 		
+		show_earth = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_earth_orbit), show_earth);
 		show_earth_axis = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_earth_axis), show_earth_axis);
 		show_earth_atmosphere = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_earth_atmosphere), show_earth_atmosphere);
 		show_earth_clouds = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_earth_clouds), show_earth_clouds);
@@ -61,15 +62,16 @@ public class ModelConfigurationOrbit {
 	public boolean show_axis = true;
 	public boolean show_axis_labels = true;
 	
+	public boolean show_earth = true;
 	public boolean show_earth_axis = true;
 	public boolean show_earth_atmosphere = true;
 	public boolean show_earth_clouds = true;
 	
-	public boolean show_xy_plane = true;
+	public boolean show_xy_plane = false;
 	public int color_xy_plane = 0xff0094;
 	
 	public boolean show_spacecraft = true;
-	public int spacecraft_color = 0x008800;
+	public int spacecraft_color = 0xfff200;
 	public boolean show_projection = true;
 	
 	public int orbit_color = 0x00ff00;
