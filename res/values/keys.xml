@@ -110,7 +110,6 @@
     <string name="pref_key_color_xy_plane">pref_key_color_xy_plane</string>
     <string name="pref_key_show_spacecraft">pref_key_show_spacecraft</string>
     <string name="pref_key_spacecraft_color">pref_key_spacecraft_color</string>
-    <string name="pref_key_show_projection">pref_key_show_projection</string>
     <string name="pref_key_orbit_color">pref_key_orbit_color</string>
     <string name="pref_key_show_earth_orbit">pref_key_show_earth_orbit</string>
     <string name="pref_key_show_projection_line">pref_key_show_projection_line</string>

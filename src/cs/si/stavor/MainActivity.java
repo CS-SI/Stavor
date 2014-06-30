@@ -1,26 +1,5 @@
 package cs.si.stavor;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.nikkii.embedhttp.HttpServer;
-import org.nikkii.embedhttp.handler.HttpRequestHandler;
-import org.nikkii.embedhttp.handler.HttpStaticFileHandler;
-import org.nikkii.embedhttp.handler.HttpStaticJarFileHandler;
-import org.nikkii.embedhttp.impl.HttpRequest;
-import org.nikkii.embedhttp.impl.HttpResponse;
-import org.nikkii.embedhttp.impl.HttpStatus;
 import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 

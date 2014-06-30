@@ -5,7 +5,6 @@ import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
-import cs.si.stavor.StavorApplication;
 import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
 import android.annotation.SuppressLint;
@@ -13,16 +12,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 

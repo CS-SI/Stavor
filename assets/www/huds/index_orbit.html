@@ -245,7 +245,7 @@ function includeProjection(){
 		var vertArray = lineGeometry.vertices;
 		vertArray.push( new THREE.Vector3(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z), new THREE.Vector3(0, 0, 0) );
 		lineGeometry.computeLineDistances();
-		var lineMaterial = new THREE.LineDashedMaterial( { color: spacecraft_color, dashSize: 0.05, gapSize: 0.05 } );
+		var lineMaterial = new THREE.LineDashedMaterial( { color: spacecraft_color, dashSize: 0.02, gapSize: 0.04 } );
 		projection = new THREE.Line( lineGeometry, lineMaterial );
 		projection.name = "PROJECTION";
 		scene.add(projection);

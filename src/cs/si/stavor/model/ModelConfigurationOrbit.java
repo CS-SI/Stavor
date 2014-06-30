@@ -41,7 +41,7 @@ public class ModelConfigurationOrbit {
 		
 		show_spacecraft = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_spacecraft), show_spacecraft);
 		spacecraft_color = sharedPref.getInt(ctx.getString(R.string.pref_key_spacecraft_color), spacecraft_color);
-		show_projection = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_projection), show_projection);
+		show_projection = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_projection_line), show_projection);
 		
 		orbit_color = sharedPref.getInt(ctx.getString(R.string.pref_key_orbit_color), orbit_color);
 		
