@@ -147,7 +147,16 @@ public class NavigationDrawerFragment extends Fragment {
         	public View getView(int position, View convertView, ViewGroup parent)
         	{
         		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        	    View rowView = inflater.inflate(R.layout.nav_item, parent, false);
+        		View rowView;
+        		if(position==0 ||
+        				position==1 ||
+        				position==6 ||
+        				position==8){
+        			rowView = inflater.inflate(R.layout.nav_item, parent, false);
+        		}else{
+        			rowView = inflater.inflate(R.layout.nav_item2, parent, false);
+        		}
+        	    
         	    RelativeLayout layout = (RelativeLayout) rowView.findViewById(R.id.nav_item_layout);
         	    TextView textView = (TextView) rowView.findViewById(R.id.nav_item_text);
         	    ImageView iconView = (ImageView) rowView.findViewById(R.id.nav_item_icon);
@@ -221,7 +230,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.test);
 		        	    	break;
 	        	    }
-        	    	layout.setBackgroundResource(R.drawable.navigation_section);
+        	    	//layout.setBackgroundResource(R.drawable.navigation_section);
         	    }
         	    return rowView;
         	}
