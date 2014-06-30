@@ -596,7 +596,7 @@ public class MainActivity extends ActionBarActivity implements
     	if (!mNavigationDrawerFragment.isDrawerOpen()) {//If the navigation menu is not opened
 	    	int sel = mNavigationDrawerFragment.getSelectedPosition();
 	    	if(sel==7){//If it is currently in a configuration section, goto Hud
-	    		showSection(2);
+	    		showSection(6);
 	    	}else if (sel>1 && sel<6){//If it is in Hud, goto simulator screen
 	    		showSection(1);
 	    	}else if (sel==1 || sel==6 || sel==8){//If it is in Hud, goto simulator screen

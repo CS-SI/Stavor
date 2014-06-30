@@ -148,10 +148,11 @@ public class NavigationDrawerFragment extends Fragment {
         	{
         		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         		View rowView;
-        		if(position==0 ||
+        		boolean first_level = (position==0 ||
         				position==1 ||
         				position==6 ||
-        				position==8){
+        				position==8);
+        		if(first_level){
         			rowView = inflater.inflate(R.layout.nav_item, parent, false);
         		}else{
         			rowView = inflater.inflate(R.layout.nav_item2, parent, false);
@@ -169,7 +170,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.simulator_s);
 		        	    	break;
 		        	    case 1:
-		        	    	iconView.setImageResource(R.drawable.visualization_s);
+		        	    	iconView.setImageResource(R.drawable.attitude_s);
 		        	    	break;
 		        	    case 2:
 		        	    	iconView.setImageResource(R.drawable.indicators_s);
@@ -184,7 +185,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.model_s);
 		        	    	break;
 		        	    case 6:
-		        	    	iconView.setImageResource(R.drawable.visualization_s);
+		        	    	iconView.setImageResource(R.drawable.orbit_s);
 		        	    	break;
 		        	    case 7:
 		        	    	iconView.setImageResource(R.drawable.model_s);
@@ -196,14 +197,18 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.test_s);
 		        	    	break;
 	        	    }
-        	    	layout.setBackgroundResource(R.drawable.navigation_selector);
+        	    	if(first_level){
+        	    		layout.setBackgroundResource(R.drawable.navigation_selector);
+            		}else{
+            			layout.setBackgroundResource(R.drawable.navigation_selector2);
+            		}
         	    }else{
         	    	switch(position){
 		        	    case 0:
 		        	    	iconView.setImageResource(R.drawable.simulator);
 		        	    	break;
 		        	    case 1:
-		        	    	iconView.setImageResource(R.drawable.visualization);
+		        	    	iconView.setImageResource(R.drawable.attitude);
 		        	    	break;
 		        	    case 2:
 		        	    	iconView.setImageResource(R.drawable.indicators);
@@ -218,7 +223,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.model);
 		        	    	break;
 		        	    case 6:
-		        	    	iconView.setImageResource(R.drawable.visualization);
+		        	    	iconView.setImageResource(R.drawable.orbit);
 		        	    	break;
 		        	    case 7:
 		        	    	iconView.setImageResource(R.drawable.model);
@@ -230,7 +235,11 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.test);
 		        	    	break;
 	        	    }
-        	    	//layout.setBackgroundResource(R.drawable.navigation_section);
+        	    	if(first_level){
+        	    		layout.setBackgroundResource(R.drawable.navigation_section);
+            		}else{
+            			layout.setBackgroundResource(R.drawable.navigation_section2);
+            		}
         	    }
         	    return rowView;
         	}
