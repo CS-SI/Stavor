@@ -10,8 +10,9 @@
     <string name="title_section6">Modelos</string>
     <string name="title_section7">Órbita</string>
     <string name="title_section8">Modelos</string>
-    <string name="title_section9">Preferencias</string>
-    <string name="title_section10">Test WebGL</string>
+    <string name="title_section9">Mapa</string>
+    <string name="title_section10">Preferencias</string>
+    <string name="title_section11">Test WebGL</string>
     <string name="navigation_drawer_open">Abre el menú de navegación</string>
     <string name="navigation_drawer_close">Cierra el menú de navegación</string>
     <string name="action_screenshot">Acerca de</string>
