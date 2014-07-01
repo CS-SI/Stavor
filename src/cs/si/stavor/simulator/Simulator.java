@@ -364,7 +364,7 @@ public class Simulator {
 	/**
 	 * Sets the correct text in simulator button according to its status (Connected/Disconnected)
 	 */
-	private void updateConnectButtonText(){
+	public void updateConnectButtonText(){
 		if(buttonConnect!=null){
 			activity.runOnUiThread( new Runnable() {
 				public void run() {

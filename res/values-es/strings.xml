@@ -19,14 +19,14 @@
     <string name="action_reset_db">Resetear Misiones</string>
     <string name="action_about">Acerca de</string>
     
-    
+    <string name="mission_parsing_angle_error">Error transformando ángulos</string>
     <string name="mission_editor">Editor de mision</string>
     <string name="mission_edit">Editar</string>
     <string name="mission_create">Crear</string>
     <string name="mission_name">Nombre:</string>
     <string name="mission_description">Descripción:</string>
     <string name="mission_time">Tiempo:</string>
-    <string name="mission_date">Fecha:</string>
+    <string name="mission_date">Fecha/Tiempo:</string>
     <string name="mission_duration">Duración de misión (s\'):</string>
     <string name="mission_step">Étapa de simulación (s):</string>
     <string name="mission_orbit">Orbita</string>
@@ -34,6 +34,10 @@
     <string name="mission_speed">Velocidad de simulación aprox. (s\'/s):</string>
     <string name="mission_dur">Duración de siulación aprox. (s):</string>
     <string name="mission_e">Eccentricidad:</string>
+    <string name="mission_i_deg">Inclinación (deg):</string>
+    <string name="mission_omega_deg">Arg. periastro (deg):</string>
+    <string name="mission_raan_deg">R.A.A.N (deg):</string>
+    <string name="mission_lm_deg">Anomalía media (deg):</string>
     <string name="mission_i">Inclinación (rad):</string>
     <string name="mission_omega">Arg. periastro (rad):</string>
     <string name="mission_raan">R.A.A.N (rad):</string>

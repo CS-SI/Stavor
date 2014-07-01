@@ -22,11 +22,15 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 /**
  * Activity to edit or create the missions of the database
@@ -43,6 +47,8 @@ public class MissionActivity extends Activity{
 	MissionAndId mission;
 	TimeScale utc;
 	TextView speed, duration;
+	Switch switch_angles;
+	TextView text_i, text_omega, text_raan, text_lm;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,11 @@ public class MissionActivity extends Activity{
 				onBackPressed();
 			}
 		}
+		text_i = (TextView) findViewById(R.id.TextView03);
+		text_omega = (TextView) findViewById(R.id.TextView02);
+		text_raan = (TextView) findViewById(R.id.TextView01);
+		text_lm = (TextView) findViewById(R.id.textView7);
+		
 		speed = (TextView) findViewById(R.id.textViewSpeed);
 		duration = (TextView) findViewById(R.id.textViewDuration);
 		
@@ -97,11 +108,18 @@ public class MissionActivity extends Activity{
 						
 						mission.mission.initial_orbit.a = Double.parseDouble(tx_orbit_a.getText().toString());
 						mission.mission.initial_orbit.e = Double.parseDouble(tx_orbit_e.getText().toString());
-						mission.mission.initial_orbit.i = Double.parseDouble(tx_orbit_i.getText().toString());
-						mission.mission.initial_orbit.omega = Double.parseDouble(tx_orbit_omega.getText().toString());
-						mission.mission.initial_orbit.raan = Double.parseDouble(tx_orbit_raan.getText().toString());
-						mission.mission.initial_orbit.lM = Double.parseDouble(tx_orbit_lm.getText().toString());
 						
+						if(switch_angles.isChecked()){
+							mission.mission.initial_orbit.i = Double.parseDouble(tx_orbit_i.getText().toString())*Math.PI/180;
+							mission.mission.initial_orbit.omega = Double.parseDouble(tx_orbit_omega.getText().toString())*Math.PI/180;
+							mission.mission.initial_orbit.raan = Double.parseDouble(tx_orbit_raan.getText().toString())*Math.PI/180;
+							mission.mission.initial_orbit.lM = Double.parseDouble(tx_orbit_lm.getText().toString())*Math.PI/180;
+						}else{
+							mission.mission.initial_orbit.i = Double.parseDouble(tx_orbit_i.getText().toString());
+							mission.mission.initial_orbit.omega = Double.parseDouble(tx_orbit_omega.getText().toString());
+							mission.mission.initial_orbit.raan = Double.parseDouble(tx_orbit_raan.getText().toString());
+							mission.mission.initial_orbit.lM = Double.parseDouble(tx_orbit_lm.getText().toString());
+						}
 						if(isEdit){
 							//Update register with new name and serialized
 							if(editMission()){
@@ -139,13 +157,13 @@ public class MissionActivity extends Activity{
 		
 		datePicker = (DatePicker) findViewById(R.id.datePicker1);
 		datePicker.setCalendarViewShown(false);
-		datePicker.setScaleX((float) 0.5);
-		datePicker.setScaleY((float) 0.5);
+		datePicker.setScaleX((float) 0.9);
+		datePicker.setScaleY((float) 0.9);
 
 		timePicker = (TimePicker) findViewById(R.id.timePicker1);
 		timePicker.setIs24HourView(true);
-		timePicker.setScaleX((float) 0.5);
-		timePicker.setScaleY((float) 0.5);
+		timePicker.setScaleX((float) 0.9);
+		timePicker.setScaleY((float) 0.9);
 		
 		tx_orbit_a = (EditText) findViewById(R.id.EditTextMissionA);
 		tx_orbit_e = (EditText) findViewById(R.id.EditTextMissionE);
@@ -178,7 +196,50 @@ public class MissionActivity extends Activity{
 		tx_orbit_omega.setText(Double.toString(mission.mission.initial_orbit.omega));
 		tx_orbit_raan.setText(Double.toString(mission.mission.initial_orbit.raan));
 		tx_orbit_lm.setText(Double.toString(mission.mission.initial_orbit.lM));
-		
+				
+		//Switch local/remote
+    	switch_angles = (Switch) findViewById(R.id.switch1);
+    	switch_angles.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+    	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    	    	try{
+    	    		double i_tmp = Double.parseDouble(tx_orbit_i.getText().toString());
+    	    		double omega_tmp = Double.parseDouble(tx_orbit_omega.getText().toString());
+    	    		double raan_tmp = Double.parseDouble(tx_orbit_raan.getText().toString());
+    	    		double lm_tmp = Double.parseDouble(tx_orbit_lm.getText().toString());
+	    	    	if(isChecked){
+	    	    		//Convert form radians to degrees
+	    	    		i_tmp=i_tmp*180/Math.PI;
+	    	    		omega_tmp=omega_tmp*180/Math.PI;
+	    	    		raan_tmp=raan_tmp*180/Math.PI;
+	    	    		lm_tmp=lm_tmp*180/Math.PI;
+	    	    		
+	    	    		text_i.setText(getResources().getString(R.string.mission_i_deg));
+	    	    		text_omega.setText(getResources().getString(R.string.mission_omega_deg));
+	    	    		text_raan.setText(getResources().getString(R.string.mission_raan_deg));
+	    	    		text_lm.setText(getResources().getString(R.string.mission_lm_deg));
+	    	    	}else{
+	    	    		//Convert from degrees to radians
+	    	    		i_tmp=i_tmp*Math.PI/180;
+	    	    		omega_tmp=omega_tmp*Math.PI/180;
+	    	    		raan_tmp=raan_tmp*Math.PI/180;
+	    	    		lm_tmp=lm_tmp*Math.PI/180;
+	    	    		
+	    	    		text_i.setText(getResources().getString(R.string.mission_i));
+	    	    		text_omega.setText(getResources().getString(R.string.mission_omega));
+	    	    		text_raan.setText(getResources().getString(R.string.mission_raan));
+	    	    		text_lm.setText(getResources().getString(R.string.mission_lm));
+	    	    	}
+	    	    	tx_orbit_i.setText(Double.toString(i_tmp));
+	    	    	tx_orbit_omega.setText(Double.toString(omega_tmp));
+	    	    	tx_orbit_raan.setText(Double.toString(raan_tmp));
+	    	    	tx_orbit_lm.setText(Double.toString(lm_tmp));
+    	    	}catch(Exception e){
+    	    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.mission_parsing_angle_error),
+    		                Toast.LENGTH_LONG).show();
+    	    	}
+    	    }
+    	});
+
 		if(isEdit){
 			button.setText(getString(R.string.mission_edit));
 			

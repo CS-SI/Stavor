@@ -303,6 +303,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	 * @param view
 	 */
 	private void loadCorrectSimulatorScreen(View view) {
+		simulator.updateConnectButtonText();
 		boolean remote = sharedPref.getBoolean(view.getContext().getString(R.string.pref_key_sim_global_remote), false);
     	switch_remote.setChecked(remote);
     	if(remote){

@@ -20,13 +20,14 @@
     <string name="action_about">À propos</string>
     
     
+    <string name="mission_parsing_angle_error">Erreur transformant angles</string>
     <string name="mission_editor">Éditeur de mission</string>
     <string name="mission_edit">Modifier</string>
     <string name="mission_create">Créer</string>
     <string name="mission_name">Nom:</string>
     <string name="mission_description">Description:</string>
     <string name="mission_time">Temps:</string>
-    <string name="mission_date">Date:</string>
+    <string name="mission_date">Date/Temps:</string>
     <string name="mission_duration">Durée de la mission (s\'):</string>
     <string name="mission_step">Étape de simulation (s):</string>
     <string name="mission_orbit">Orbit</string>
@@ -34,6 +35,10 @@
     <string name="mission_speed">Vitesse de simulation aprox. (s\'/s):</string>
     <string name="mission_dur">Durée de la siulation aprox. (s):</string>
     <string name="mission_e">Excentricité:</string>
+    <string name="mission_i_deg">Inclinaison (deg):</string>
+    <string name="mission_omega_deg">Arg. périastre (deg):</string>
+    <string name="mission_raan_deg">R.A.A.N (deg):</string>
+    <string name="mission_lm_deg">Anomalie moyenne (deg):</string>
     <string name="mission_i">Inclinaison (rad):</string>
     <string name="mission_omega">Arg. périastre (rad):</string>
     <string name="mission_raan">R.A.A.N (rad):</string>
