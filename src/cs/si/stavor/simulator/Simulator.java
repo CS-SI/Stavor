@@ -377,9 +377,9 @@ public class Simulator {
 				    		buttonConnect.setText(context.getString(R.string.sim_connect));
 					}else{
 						if(simulatorStatus.equals(SimulatorStatus.Connected))
-				    		buttonConnect.setText(context.getString(R.string.sim_start));
-				    	else
 				    		buttonConnect.setText(context.getString(R.string.sim_stop));
+				    	else
+				    		buttonConnect.setText(context.getString(R.string.sim_start));
 					}
 		        }
 			});
