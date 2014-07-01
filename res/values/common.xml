@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 	
+    <string name="app_name">STAVOR</string>
+    <string name="dummy"></string>
+    
     <string name="mission_deg">Deg</string>
     <string name="mission_rad">Rad</string>
+    <string name="mission_no_val">---</string>
+    
+    <string name="about_table_apache2_license">Apache 2.0</string>
+    <string name="about_table_mit_license">MIT</string>
+    <string name="about_table_bsd_license">BSD</string>
+    <string name="about_start_date_value">04/2014</string>
+    
+    <string name="eg_sim_time">0000-00-00  00:00:00.000</string>
+    
+    <string name="sim_remote_host_eg">192.168.43.10</string>
+    <string name="sim_remote_port_eg">1520</string>
+    
+    <bool name="true_value">true</bool>
 
 </resources>

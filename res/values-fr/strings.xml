@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 	
-    <string name="app_name">STAVOR</string>
-    <string name="dummy"></string>
     <string name="app_exit_prevent_message">Appuyez de nouveau pour fermer l\'application</string>
     <string name="title_section1">Simulateur</string>
     <string name="title_section2">Visualisation</string>
@@ -47,7 +45,6 @@
     <string name="mission_error_create">Erreur de création de mission dans la base de données</string>
     <string name="mission_error_edit">Erreur d\'édittion de mission en base de données</string>
     <string name="mission_name_is_mandatory">Le nom de la mission est obligatoire</string>
-    <string name="mission_no_val">---</string>
     
     <string name="menu_views_ref_frame">Syst.Ref.</string>
     <string name="menu_views_ref_frame_xyz">XYZ</string>
@@ -72,12 +69,8 @@
     <string name="cs_site">http://c-s.fr/</string>
     <string name="about_table_project">Projet</string>
     <string name="about_project_license">Licence du projet:</string>
-    <!-- <string name="about_project_license_value">Indéterminée</string> -->
     <string name="about_project_license_value">Gratuit</string>
     <string name="about_table_orekit">Orekit</string>
-    <string name="about_table_apache2_license">Apache 2.0</string>
-    <string name="about_table_mit_license">MIT</string>
-    <string name="about_table_bsd_license">BSD</string>
     <string name="about_table_crosswalk">Crosswalk-Webview-</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
@@ -87,7 +80,6 @@
     <string name="about_table_license">Licence</string>
     <string name="about_package">Paquet:</string>
     <string name="about_start_date">Date de début du projet:</string>
-    <string name="about_start_date_value">04/2014</string>
     <string name="about_version">Version actuelle:</string>
     <string name="about_version_date">Date de dernière mise à jour:</string>
     <string name="about_install_date">Date installation:</string>
@@ -156,7 +148,6 @@
     <string name="dynamic_vector">Vecteur Dynamique</string>
     <string name="units_km">[Km]</string>
     <string name="fps_zero">0 FPS</string>
-    <string name="eg_sim_time">0000-00-00  00:00:00.000</string>
     <string name="eg_vel">Vit. 0,00 Km/s</string>
     <string name="eg_accel">Accél. 0,00 Km/s2</string>
     <string name="eg_roll">Roll: 0,0º</string>
@@ -178,9 +169,7 @@
     <string name="sim_connect">Connecter</string>
     <string name="sim_disconnect">Déconnecter</string>
     <string name="sim_remote_host">Hôte:</string>
-    <string name="sim_remote_host_eg">192.168.43.10</string>
     <string name="sim_remote_port">Port:</string>
-    <string name="sim_remote_port_eg">1520</string>
     <string name="sim_local_new">Nouveau</string>
     <string name="sim_local_edit">Modifier</string>
     <string name="sim_local_remove">Enlever</string>
@@ -376,6 +365,5 @@
     <string name="color4_title">Couleur 4</string>
     <string name="color4_summary">couleur établi avec code HEX en xml</string>
 
-    <bool name="true_value">true</bool>
 
 </resources>
