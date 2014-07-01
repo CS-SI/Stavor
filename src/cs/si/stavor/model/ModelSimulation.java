@@ -6,6 +6,7 @@ import org.orekit.attitudes.Attitude;
 import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
+import org.orekit.orbits.KeplerianOrbit;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.time.AbsoluteDate;
 import org.orekit.time.TimeScale;
@@ -230,8 +231,6 @@ public class ModelSimulation {
     		
     		//TODO
     		new_state.value_earth_rotation = new Quat();
-    		new_state.value_orbit_w = Math.PI;
-	    	new_state.value_orbit_raan = 0;
 	    	//XGGDEBUG: correct values
     		
     		Vector3D spacecraft = scs.getPVCoordinates().getPosition();
@@ -242,8 +241,9 @@ public class ModelSimulation {
 	    	new_state.value_orbit_a = scs.getA();
 	    	new_state.value_orbit_e = scs.getE();
 	    	new_state.value_orbit_i = scs.getI();
-	    	
-
+	    	KeplerianOrbit keplerOrb = ((KeplerianOrbit)scs.getOrbit());
+	    	new_state.value_orbit_w = keplerOrb.getPerigeeArgument();
+	    	new_state.value_orbit_raan = keplerOrb.getRightAscensionOfAscendingNode();
     		
     		updateStateOrbit(new_state);
     	}
