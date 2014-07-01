@@ -95,9 +95,11 @@
     <string name="tutorial_continue">Continuar</string>
     <string name="tutorial_dont_show_again">No volver a mostrar</string>
     <string name="tutorial_title_simulator">Tutorial Simulador</string>
-    <string name="tutorial_message_simulator">Usted se encuentra en la pantalla del Simulador, aquí puede escoger entre el simulador local o el cliente remoto. En el primero, usted encontrará una lista de misiones; puede crear, editar y seleccionar la mision para el simulador. El cliente remoto conecta con un simulador externo a través de la red. Una vez conectado el simulador, la aplicación le redigirá a la pantalla de Visualización.</string>
-    <string name="tutorial_title_display">Tutorial Visualización</string>
-    <string name="tutorial_message_display">Usted se encuentra ahora en la pantalla de Visualización, aquí puede ver la simulación. Encontrará los controles de la simulación, un botón para seleccionar la vista y un panel retractable con información detallada.</string>
+    <string name="tutorial_message_simulator">Usted se encuentra en la pantalla del Simulador, aquí puede escoger entre el simulador local o el cliente remoto. En el primero, usted encontrará una lista de misiones; puede crear, editar y seleccionar la mision para el simulador. El cliente remoto conecta con un simulador externo a través de la red. Una vez conectado el simulador, la aplicación le redigirá a la pantalla de Actitud.</string>
+    <string name="tutorial_title_display">Tutorial Actitud</string>
+    <string name="tutorial_message_display">Usted se encuentra ahora en la pantalla de Actitud, aquí puede ver la actitud simulada. Encontrará los controles de la simulación, un botón para seleccionar la vista y un panel retractable con información detallada.</string>
+    <string name="tutorial_title_orbit">Tutorial Órbita</string>
+    <string name="tutorial_message_orbit">Usted se encuentra ahora en la pantalla de Órbita, aquí puede ver la órbita simulada y controlar la simulación</string>
     <string name="tutorial_title_config">Tutorial Configuraciones</string>
     <string name="tutorial_message_config">Usted ha entrado en una de las pantallas de configuración, éstas continenen todas las opciones de usuario. Las secciones de Indicadores básicos y extra sirven para personalizar la visualización de esos indicadores (Velocidad, Aceleración, Momento...). La sección de Medidas se utiliza para seleccionar la visualización de medidas como ángulos. La sección Modelos contiene opciones de los objetos como la Tierra y el Sol. La sección de preferencias, todos las otras opciones más generales.</string>
     
