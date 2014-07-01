@@ -29,7 +29,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.ViewSwitcher;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 /**
@@ -71,7 +70,6 @@ public class MissionActivity extends Activity{
 			try {
 				utc = TimeScalesFactory.getUTC();
 			} catch (OrekitException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				onBackPressed();
 			}

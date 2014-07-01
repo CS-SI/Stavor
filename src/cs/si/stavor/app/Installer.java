@@ -203,10 +203,8 @@ public class Installer {
 		try {
 			mission.initial_date = new AbsoluteDate(2008,7,4,0,0,0.0,TimeScalesFactory.getUTC());
 		} catch (IllegalArgumentException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (OrekitException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -240,10 +238,8 @@ public class Installer {
 		try {
 			mission.initial_date = new AbsoluteDate(2008,1,3,0,0,0.0,TimeScalesFactory.getUTC());
 		} catch (IllegalArgumentException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (OrekitException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
