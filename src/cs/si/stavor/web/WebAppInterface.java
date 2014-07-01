@@ -3,9 +3,11 @@ package cs.si.stavor.web;
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.fragments.HudFragment;
+import cs.si.stavor.fragments.OrbitFragment;
 import cs.si.stavor.model.ModelSimulation;
 import android.app.Activity;
 import android.widget.Toast;
+
 
 
 
@@ -69,6 +71,11 @@ public final class WebAppInterface {
 	        public void run() {
 	        	try{
 	        		((HudFragment)activity.getFragmentManager().findFragmentById(R.id.container)).updateFPS(stats);
+	        	}catch(Exception e){
+	        		
+	        	}
+	        	try{
+	        		((OrbitFragment)activity.getFragmentManager().findFragmentById(R.id.container)).updateFPS(stats);
 	        	}catch(Exception e){
 	        		
 	        	}
