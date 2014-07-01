@@ -606,10 +606,9 @@ public class MainActivity extends ActionBarActivity implements
     	String key = getString(R.string.pref_key_tutorial_orbit);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
-    		//TODO
-	    	//String title = getString(R.string.tutorial_title_display);
-	    	//String message = getString(R.string.tutorial_message_display);
-	    	//showTutorialDialog(key, title, message);
+	    	String title = getString(R.string.tutorial_title_orbit);
+	    	String message = getString(R.string.tutorial_message_orbit);
+	    	showTutorialDialog(key, title, message);
     	}
     }
     public void showTutorialConfig(){
