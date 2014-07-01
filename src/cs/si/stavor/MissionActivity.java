@@ -16,7 +16,9 @@ import cs.si.stavor.mission.Mission;
 import cs.si.stavor.mission.MissionAndId;
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -48,6 +50,7 @@ public class MissionActivity extends Activity{
 	TextView speed, duration;
 	Switch switch_angles;
 	TextView text_i, text_omega, text_raan, text_lm;
+	SharedPreferences sharedPref;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class MissionActivity extends Activity{
 			mission = new MissionAndId(new Mission(), -1);
 			isEdit=false;
 		}
+		
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		
 		//Load the utc TimeScale for Orekit
 		if(utc==null){
@@ -199,6 +204,7 @@ public class MissionActivity extends Activity{
     	switch_angles = (Switch) findViewById(R.id.switch1);
     	switch_angles.setOnCheckedChangeListener(new OnCheckedChangeListener() {
     	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    	    	sharedPref.edit().putBoolean(buttonView.getContext().getString(R.string.pref_key_mission_degrees), isChecked).commit();
     	    	try{
     	    		double i_tmp = Double.parseDouble(tx_orbit_i.getText().toString());
     	    		double omega_tmp = Double.parseDouble(tx_orbit_omega.getText().toString());
@@ -255,6 +261,11 @@ public class MissionActivity extends Activity{
 			button.setText(getString(R.string.mission_create));
 		}
 		updateSpeedAndDuration();
+		
+		boolean degrees = sharedPref.getBoolean(getString(R.string.pref_key_mission_degrees), false);
+		if(degrees){
+			switch_angles.setChecked(degrees);
+		}
 	}
 	
 	private void updateSpeedAndDuration(){
