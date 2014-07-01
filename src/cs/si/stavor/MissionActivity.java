@@ -139,9 +139,13 @@ public class MissionActivity extends Activity{
 		
 		datePicker = (DatePicker) findViewById(R.id.datePicker1);
 		datePicker.setCalendarViewShown(false);
+		datePicker.setScaleX((float) 0.5);
+		datePicker.setScaleY((float) 0.5);
 
 		timePicker = (TimePicker) findViewById(R.id.timePicker1);
 		timePicker.setIs24HourView(true);
+		timePicker.setScaleX((float) 0.5);
+		timePicker.setScaleY((float) 0.5);
 		
 		tx_orbit_a = (EditText) findViewById(R.id.EditTextMissionA);
 		tx_orbit_e = (EditText) findViewById(R.id.EditTextMissionE);

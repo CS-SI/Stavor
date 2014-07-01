@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -35,7 +34,6 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:maxLines="1" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -60,7 +58,6 @@
 
                     <requestFocus />
                 </EditText>
-
             </LinearLayout>
 
             <LinearLayout
@@ -76,9 +73,8 @@
 
                 <DatePicker
                     android:id="@+id/datePicker1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -94,9 +90,8 @@
 
                 <TimePicker
                     android:id="@+id/timePicker1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -117,7 +112,6 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="numberDecimal" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -138,7 +132,6 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="numberDecimal" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -157,7 +150,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:text="@string/mission_no_val" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -177,7 +169,6 @@
                     android:layout_gravity="right"
                     android:gravity="right"
                     android:text="@string/mission_no_val" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -189,13 +180,35 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical" >
 
-                    <TextView
-                        android:id="@+id/textView6"
+                    <RelativeLayout
+                        android:id="@+id/layHorizRads"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="@string/mission_orbit"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:gravity="right" >
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="82dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/switch1"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_toLeftOf="@+id/switch1"
+                            android:layout_weight="1.62"
+                            android:text="@string/mission_orbit"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <Switch
+                            android:id="@+id/switch1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:textOff="@string/mission_rad"
+                            android:textOn="@string/mission_deg" />
+
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -316,9 +329,7 @@
                             android:ems="10"
                             android:inputType="numberDecimal" />
                     </LinearLayout>
-
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -334,9 +345,7 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="2dp"
                     android:text="Button" />
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 
