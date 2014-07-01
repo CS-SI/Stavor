@@ -369,10 +369,18 @@ public class Simulator {
 			activity.runOnUiThread( new Runnable() {
 				public void run() {
 					buttonConnect.setEnabled(true);
-					if(simulatorStatus.equals(SimulatorStatus.Connected))
-			    		buttonConnect.setText(context.getString(R.string.sim_disconnect));
-			    	else
-			    		buttonConnect.setText(context.getString(R.string.sim_connect));
+					boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
+					if(remote){
+						if(simulatorStatus.equals(SimulatorStatus.Connected))
+				    		buttonConnect.setText(context.getString(R.string.sim_disconnect));
+				    	else
+				    		buttonConnect.setText(context.getString(R.string.sim_connect));
+					}else{
+						if(simulatorStatus.equals(SimulatorStatus.Connected))
+				    		buttonConnect.setText(context.getString(R.string.sim_start));
+				    	else
+				    		buttonConnect.setText(context.getString(R.string.sim_stop));
+					}
 		        }
 			});
 		}

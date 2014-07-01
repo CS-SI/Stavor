@@ -168,6 +168,8 @@
     <string name="panel_radium">Rayon orbital:</string>
     <string name="panel_mass">Masse:</string>
     
+    <string name="sim_start">Lancer</string>
+    <string name="sim_stop">Arrêter</string>
     <string name="sim_connect">Connecter</string>
     <string name="sim_disconnect">Déconnecter</string>
     <string name="sim_remote_host">Hôte:</string>

@@ -169,6 +169,8 @@
     <string name="panel_radium">Orbit radius:</string>
     <string name="panel_mass">Mass:</string>
     
+    <string name="sim_start">Start</string>
+    <string name="sim_stop">Stop</string>
     <string name="sim_connect">Connect</string>
     <string name="sim_disconnect">Disconnect</string>
     <string name="sim_remote_host">Host:</string>
