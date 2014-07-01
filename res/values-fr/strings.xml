@@ -178,7 +178,7 @@
     <string name="sim_local_mission_not_removable">Cette mission ne peut pas être supprimé</string>
     <string name="sim_local_mission_not_editable">Cette mission ne peut pas être modifié</string>
     <string name="sim_local_select_first_a_mission">Sélectionnez premier la mission</string>
-    <string name="sim_local_simulator_connected">Simulateur connecté!</string>
+    <string name="sim_local_simulator_connected">Simulateur lancé!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Erreur , ne pouvait pas désérialiser la mission sélectionnée</string>
     <string name="sim_local_cannot_find_selected_mission_in_db">Erreur , n\'a pas pu trouver la Mission sélectionné dans la base de données</string>
     <string name="sim_orekit_init_error">Erreur d\'initialisation du simulateur</string>
