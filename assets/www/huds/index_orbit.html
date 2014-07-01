@@ -206,7 +206,7 @@ function createOrbit(){
 	ellipseGeometry.computeTangents();
 	orbit = new THREE.Line(ellipseGeometry, material);
 	// Argument of the perigee
-	orbit.rotation.z = value_orbit_w+Math.PI/2;
+	orbit.rotation.z = value_orbit_w+Math.PI/2+value_orbit_raan;
 	//Inclination
 	var nodeA = new THREE.Vector3(Math.cos(value_orbit_raan),Math.sin(value_orbit_raan),0);
 	var quat = new THREE.Quaternion();
