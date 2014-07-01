@@ -1,16 +1,19 @@
 package cs.si.stavor.model;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.RotationOrder;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.orekit.attitudes.Attitude;
 import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
+import org.orekit.frames.FramesFactory;
 import org.orekit.orbits.KeplerianOrbit;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.time.AbsoluteDate;
 import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
+import org.orekit.utils.IERSConventions;
 import org.xwalk.core.XWalkView;
 
 import android.view.View;
@@ -58,6 +61,9 @@ public class ModelSimulation {
     	try {
 			if(sunFrame==null){
 				sunFrame = CelestialBodyFactory.getSun().getInertiallyOrientedFrame();
+			}
+			if(earthFixedFrame==null){
+				earthFixedFrame = CelestialBodyFactory.getEarth().getBodyOrientedFrame();
 			}
 			if(utc==null){
 				utc = TimeScalesFactory.getUTC();
@@ -147,7 +153,7 @@ public class ModelSimulation {
     private AbsoluteDate tmp_time;
     private Vector3D tmp_vel;
     private TimeScale utc;
-    private Frame sunFrame;
+    private Frame sunFrame, earthFixedFrame;
     public void updateSimulation(SpacecraftState scs, int sim_progress){
     	if(selectedBrowser.equals(Browsers.Attitude)){
 	    	ModelState new_state = new ModelState();
@@ -229,8 +235,17 @@ public class ModelSimulation {
     	}else if(selectedBrowser.equals(Browsers.Orbit)){
     		ModelStateOrbit new_state = new ModelStateOrbit();
     		
-    		//TODO
-    		new_state.value_earth_rotation = new Quat();
+
+			AbsoluteDate date = scs.getAttitude().getDate();
+    		
+    		try {
+    			//Frame fix_frame = FramesFactory.getITRF(IERSConventions.IERS_2010, true);
+    			//Frame fix_frame = FramesFactory.getITRF2008(true);
+				Rotation rot = scs.getFrame().getTransformTo(earthFixedFrame, date).getRotation();
+	    		new_state.value_earth_rotation = new Quat(rot);
+			} catch (OrekitException e) {
+				e.printStackTrace();
+			}
 	    	//XGGDEBUG: correct values
     		
     		Vector3D spacecraft = scs.getPVCoordinates().getPosition();

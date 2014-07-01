@@ -300,8 +300,8 @@ function setXYplane(){
 function includeEarth(){
 	
 	containerEarth	= new THREE.Object3D();
-	containerEarth.rotateX(Math.PI/2);
-	containerEarth.rotateZ(-23.4 * Math.PI/180);
+	//containerEarth.rotateX(Math.PI/2);
+	//containerEarth.rotateZ(-23.4 * Math.PI/180);
 	containerEarth.position.z	= 0;
 	containerEarth.name = "EARTH";
 	scene.add(containerEarth);
@@ -340,7 +340,9 @@ function includeEarth(){
 	earthMesh.name = "EARTH-PLANET";
 	containerEarth.add(earthMesh)
 	onRenderFcts.push(function(delta, now){
-		earthMesh.rotation.y += 1/32 * delta * accel_time;		
+		//earthMesh.rotation.y += 1/32 * delta * accel_time;
+		var offset_quat = new THREE.Quaternion().setFromUnitVectors( new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,1) );
+		earthMesh.quaternion.multiplyQuaternions(value_earth_rotation,offset_quat);
 	})
 
 	//Earth axis
