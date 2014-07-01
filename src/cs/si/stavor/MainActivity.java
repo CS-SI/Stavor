@@ -394,6 +394,12 @@ public class MainActivity extends ActionBarActivity implements
 	        		SettingsGeneralFragment.newInstance(position +1)).commit();
 		}else if(position==9){
 			// Display the fragment as the main content.
+	        fragmentManager    
+	        .beginTransaction()
+	        .replace(R.id.container, 
+	        		SettingsGeneralFragment.newInstance(position +1)).commit();
+		}else if(position==10){
+			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, TestFragment.newInstance(position + 1)).commit();
@@ -436,6 +442,9 @@ public class MainActivity extends ActionBarActivity implements
 			break;
 		case 10:
 			mTitle = getString(R.string.title_section10);
+			break;
+		case 11:
+			mTitle = getString(R.string.title_section11);
 			break;
 		}
 	}
@@ -541,7 +550,7 @@ public class MainActivity extends ActionBarActivity implements
 	    		showSection(6);
 	    	}else if (sel>1 && sel<6){//If it is in Hud, goto simulator screen
 	    		showSection(1);
-	    	}else if (sel==1 || sel==6 || sel==8){//If it is in Hud, goto simulator screen
+	    	}else if (sel==1 || sel==6 || sel==8 || sel==9){//If it is in Hud, goto simulator screen
 	    		showSection(0);
 	    	}else if (sel==0){//If it is in Simulator, warn user before exit
 		    	if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {//Wait some time for confirmation

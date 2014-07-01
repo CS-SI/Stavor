@@ -10,8 +10,9 @@
     <string name="title_section6">Modèles</string>
     <string name="title_section7">Orbite</string>
     <string name="title_section8">Modèles</string>
-    <string name="title_section9">Paramètres</string>
-    <string name="title_section10">Essayes WebGL</string>
+    <string name="title_section9">Carte</string>
+    <string name="title_section10">Paramètres</string>
+    <string name="title_section11">Essayes WebGL</string>
     <string name="navigation_drawer_open">Ouvrez le menu de navigation</string>
     <string name="navigation_drawer_close">Ferme le menu de navigation</string>
     <string name="action_screenshot">À propos</string>

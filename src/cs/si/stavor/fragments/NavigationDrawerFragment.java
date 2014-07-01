@@ -122,6 +122,7 @@ public class NavigationDrawerFragment extends Fragment {
                     getString(R.string.title_section8),
                     getString(R.string.title_section9),
                     getString(R.string.title_section10),
+                    getString(R.string.title_section11),
                 };
         }else{
         	sections = new String[]{
@@ -134,7 +135,8 @@ public class NavigationDrawerFragment extends Fragment {
                     getString(R.string.title_section7),
                     getString(R.string.title_section8),
                     getString(R.string.title_section9),
-                    /*getString(R.string.title_section10),*/
+                    getString(R.string.title_section10),
+                    /*getString(R.string.title_section11),*/
                 };
         }
         
@@ -151,7 +153,8 @@ public class NavigationDrawerFragment extends Fragment {
         		boolean first_level = (position==0 ||
         				position==1 ||
         				position==6 ||
-        				position==8);
+        				position==8 ||
+        				position==9);
         		if(first_level){
         			rowView = inflater.inflate(R.layout.nav_item, parent, false);
         		}else{
@@ -194,6 +197,9 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.preferences_s);
 		        	    	break;
 		        	    case 9:
+		        	    	iconView.setImageResource(R.drawable.preferences_s);
+		        	    	break;
+		        	    case 10:
 		        	    	iconView.setImageResource(R.drawable.test_s);
 		        	    	break;
 	        	    }
@@ -232,6 +238,9 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.preferences);
 		        	    	break;
 		        	    case 9:
+		        	    	iconView.setImageResource(R.drawable.preferences);
+		        	    	break;
+		        	    case 10:
 		        	    	iconView.setImageResource(R.drawable.test);
 		        	    	break;
 	        	    }
