@@ -24,7 +24,7 @@ public class Parameters {
 	public static class About {
 		public static final String project_start_date = "2014/04/01";
 		public static final String version_orekit = "6.1";
-		public static final String version_xwalk = "7.36.154.1b";
+		public static final String version_xwalk = "7.36.154.6b";
 		public static final String version_threejs = "r67";
 		public static final String version_gson = "2.2.4";
 		public static final String version_androidcolorpicker = "1.0";
