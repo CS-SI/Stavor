@@ -34,6 +34,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -142,10 +143,12 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		String port = sharedPref.getString(getString(R.string.pref_key_sim_remote_port), Parameters.Simulator.Remote.default_port);
 		host_view.setText(host);
 		port_view.setText(port);
+		
+		RelativeLayout localSimLayout = (RelativeLayout) rootView.findViewById(R.id.RelativeLayoutLocalSim);
     	
     	button_connect = (Button) rootView.findViewById(R.id.buttonConnect);
     	simulator.setButtonConnect(button_connect);
-    	simulator.setSwitchSelector(switch_remote);
+    	simulator.setSwitchAndListSelector(switch_remote,localSimLayout);
     	button_connect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){

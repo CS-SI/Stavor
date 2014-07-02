@@ -15,8 +15,11 @@ import android.content.SharedPreferences;
 import android.os.ConditionVariable;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -26,19 +29,31 @@ import android.widget.Toast;
  *
  */
 public class Simulator {
-	private SimulatorStatus simulatorStatus = SimulatorStatus.Disconnected;
-	private SimulationStatus simulationStatus = SimulationStatus.Pause;
+	//General
 	private SharedPreferences sharedPref;
 	private Context context;
 	private Activity activity;
+	
+	//Simulation core
+	private SimulatorStatus simulatorStatus = SimulatorStatus.Disconnected;
+	private SimulationStatus simulationStatus = SimulationStatus.Pause;
 	private SocketsThread thread;
 	@SuppressWarnings("unused")
 	private SimulatorThread sthread;
+	
+	//Results
 	private ModelSimulation simulation;
+	
+	//GUI views
 	private Button buttonConnect;
 	private Switch switchSelector;
+	private RelativeLayout localSimLayout;
+	
+	//Mission
 	private Mission mission;
 	private int mission_id=-1;
+	
+	//Flags
 	private boolean wasPlaying = false;//Flag to restore playing if fragment has paused-resumed while playing
 	
 	/**
@@ -107,9 +122,10 @@ public class Simulator {
 	 * Set local/remote switch View
 	 * @param st
 	 */
-	public void setSwitchSelector(Switch st){
+	public void setSwitchAndListSelector(Switch st, RelativeLayout localSim){
 		switchSelector=st;
-		updateSwitchEnabled();
+		localSimLayout = localSim;
+		updateSwitchAndListEnabled();
 	}
 	
 	/**
@@ -357,7 +373,7 @@ public class Simulator {
 	public void setSimulatorStatus(SimulatorStatus new_status) {
 		simulatorStatus = new_status;
 		updateConnectButtonText();
-		updateSwitchEnabled();
+		updateSwitchAndListEnabled();
 		setCorrectSimulatorControls();
 		setProgress(100 * 100);
 	}
@@ -388,19 +404,39 @@ public class Simulator {
 	}
 	
 	/**
-	 * Enable or disable the simulator mode switch according to its status (Connected/Disconnected)
+	 * Enable or disable the simulator mode switch and controls according to its status (Connected/Disconnected)
 	 */
-	private void updateSwitchEnabled(){
-		if(switchSelector!=null){
+	private void updateSwitchAndListEnabled(){
 			activity.runOnUiThread( new Runnable() {
 				public void run() {
-					if(simulatorStatus.equals(SimulatorStatus.Connected))
-			    		switchSelector.setEnabled(false);
-			    	else
-			    		switchSelector.setEnabled(true);
+					if(switchSelector!=null){
+						if(simulatorStatus.equals(SimulatorStatus.Connected))
+				    		switchSelector.setEnabled(false);
+				    	else
+				    		switchSelector.setEnabled(true);
+					}
+					if(localSimLayout!=null){
+						if(simulatorStatus.equals(SimulatorStatus.Connected)){
+							enableView(localSimLayout, false);
+							//localSimLayout.setEnabled(false);
+						}else{
+							enableView(localSimLayout, true);
+				    		//localSimLayout.setEnabled(true);
+						}
+					}
 		        }
 			});
-		}
+	}
+	private static void enableView(ViewGroup layout, boolean enabled) {
+	    layout.setEnabled(false);
+	    for (int i = 0; i < layout.getChildCount(); i++) {
+	        View child = layout.getChildAt(i);
+	        if (child instanceof ViewGroup && !(child instanceof ListView) ) {
+	            enableView((ViewGroup) child, enabled);
+	        } else {
+	            child.setEnabled(enabled);
+	        }
+	    }
 	}
 
 	private String message = "";

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RelativeLayout1"
+    android:id="@+id/RelativeLayoutLocalSim"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey5"
@@ -53,7 +53,8 @@
         android:layout_below="@+id/linearLayout1"
         android:layout_margin="5dp"
         android:background="@color/grey3"
-        android:choiceMode="singleChoice" >
+        android:choiceMode="singleChoice"
+        android:clickable="true" >
 
     </ListView>
 
