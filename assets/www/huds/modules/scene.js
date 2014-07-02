@@ -24,6 +24,16 @@ function initScene(){
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	container = document.getElementById( 'ThreeJS' );
 	container.appendChild( renderer.domElement );
+	renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
+	    event.preventDefault();
+	    // animationID would have been set by your call to requestAnimationFrame
+	    cancelAnimationFrame(); 
+	}, false);
+
+	renderer.context.canvas.addEventListener("webglcontextrestored", function(event) {
+	   // Do something 
+		alert("WebGL Context Lost");
+	}, false);
 	
 	// EVENTS
 	//THREEx.WindowResize(renderer, camera);

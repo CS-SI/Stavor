@@ -31,13 +31,17 @@ function updateFPS(){
 function reloadModel(){
 	var l = scene.children.length;
 	setLoadingProgress(20);
+	getInitialization();
 	//remove everything
 	while (l--) {
 		if(scene.children[l] instanceof THREE.Camera) continue; //leave camera in the scene
 		if(scene.children[l] instanceof THREE.PointLight) continue; //leave light in the scene
+		if(scene.children[l].name == "SKY"){ 
+			scene.children[l].visible = show_sky;
+			continue; //leave sky
+		}
 		scene.remove(scene.children[l]);
 	}
-	getInitialization();
 	if(performance_level<=2)
 		canvasMode(performance_level);
 	else

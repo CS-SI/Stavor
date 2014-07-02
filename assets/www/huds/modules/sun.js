@@ -4,20 +4,32 @@ function initSun(){
 	//-----------------------------------------------------------------------------------------------------------------------
 	if(show_sun){
 		if(show_sun_texture){
+			if(typeof textureSun === 'undefined'){
+			   // your code here.
+				textureSun= new THREE.ImageUtils.loadTexture( 'textures/lava/lava.jpg' );
+			};
+			if(typeof textureSun2 === 'undefined'){
+			   // your code here.
+				textureSun2= new THREE.ImageUtils.loadTexture( 'textures/lava/cloud.png' );
+			};
+			if(typeof textureSun3 === 'undefined'){
+			   // your code here.
+				textureSun3= new THREE.ImageUtils.loadTexture( 'textures/lava/lava.jpg' );
+			};
 			// base image texture for mesh
-			var lavaTexture = new THREE.ImageUtils.loadTexture( 'textures/lava/lava.jpg');
+			var lavaTexture = textureSun;
 			lavaTexture.wrapS = lavaTexture.wrapT = THREE.RepeatWrapping; 
 			// multiplier for distortion speed 		
 			var baseSpeed = 0.02;
 			// number of times to repeat texture in each direction
 			var repeatS = repeatT = 2.0;
 			// texture used to generate "randomness", distort all other textures
-			var noiseTexture = new THREE.ImageUtils.loadTexture( 'textures/lava/cloud.png' );
+			var noiseTexture = textureSun2;
 			noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping; 
 			// magnitude of noise effect
 			var noiseScale = 0.5;
 			// texture to additively blend with base image texture
-			var blendTexture = new THREE.ImageUtils.loadTexture( 'textures/lava/lava.jpg' );
+			var blendTexture = textureSun3;
 			blendTexture.wrapS = blendTexture.wrapT = THREE.RepeatWrapping; 
 			// multiplier for distortion speed 
 			var blendSpeed = 0.08;
@@ -95,9 +107,13 @@ function initSun(){
 		}else{
 			// SUPER SIMPLE GLOW EFFECT
 			// use sprite because it appears the same from all angles
+			if(typeof textureSun4 === 'undefined'){
+			   // your code here.
+				textureSun4= new THREE.ImageUtils.loadTexture( 'textures/lava/glow.png' );
+			};
 			var spriteMaterial = new THREE.SpriteMaterial( 
 			{ 
-				map: new THREE.ImageUtils.loadTexture( 'textures/lava/glow.png' ), 
+				map: textureSun4, 
 				useScreenCoordinates: false,// alignment: THREE.SpriteAlignment.center,
 				color: 0xf79216, transparent: false, blending: THREE.AdditiveBlending
 			});

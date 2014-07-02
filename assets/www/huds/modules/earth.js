@@ -5,7 +5,11 @@ function initEarth(){
 	if(show_earth){
 		var earth_geometry = new THREE.SphereGeometry( earth_radius, earth_seg, earth_seg ) ;
 		if(show_earth_texture){	 
-			var earth_material = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'textures/earth/Land_ocean_ice_cloud_2048.jpg' ), overdraw: true } )
+			if(typeof textureEarth === 'undefined'){
+			   // your code here.
+				textureEarth= new THREE.ImageUtils.loadTexture( 'textures/earth/Land_ocean_ice_cloud_2048.jpg' );
+			};
+			var earth_material = new THREE.MeshBasicMaterial( { map: textureEarth, overdraw: true } )
 		}else{
 			if(!canvas_mode)
 				var earth_material = new THREE.MeshPhongMaterial( { color: earth_solid_color, metal: true } );
