@@ -125,7 +125,7 @@ public class Simulator {
 	public void setSwitchAndListSelector(Switch st, RelativeLayout localSim){
 		switchSelector=st;
 		localSimLayout = localSim;
-		updateSwitchAndListEnabled();
+		enableCorrectSimulatorViews();
 	}
 	
 	/**
@@ -140,6 +140,46 @@ public class Simulator {
 	public void setBrowserLoaded(boolean is){
 		simulation.setBrowserloaded(is);
 	}
+	
+
+	private ProgressDialog progress;
+	/**
+	 * Sets the simulator connecting progress
+	 * @param prog
+	 */
+	public void setProgress(final int prog){
+		if(prog==10000 && progress==null){//Case of disconnecting simulator
+		}else{
+			if(progress==null){
+				progress = new ProgressDialog(activity);
+				progress.setProgressNumberFormat("");
+				progress.setTitle(context.getString(R.string.dialog_simulator_title));
+				progress.setMax(10000);
+				progress.setMessage(context.getString(R.string.dialog_simulator_message));
+				progress.setCancelable(false);
+				progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				progress.setCanceledOnTouchOutside(false);
+				progress.setIndeterminate(false);
+				if(!activity.isFinishing())
+					progress.show();
+			} 
+			progress.setProgress(prog);
+			if(prog==10000){
+				progress.dismiss();
+				progress = null;
+			}
+			/*try{
+				activity.runOnUiThread( new Runnable() {
+					public void run() {
+						activity.setProgress(prog);
+			        }
+				});
+			}catch(NullPointerException nulle){
+				
+			}*/
+		}
+	}
+
 	
 	public Context getContext(){
 		return context;
@@ -251,44 +291,6 @@ public class Simulator {
 	protected ConditionVariable playCondition;//Play/Pause condition
 	protected boolean cancel = false;
 	
-	private ProgressDialog progress;
-	/**
-	 * Sets the simulator connecting progress
-	 * @param prog
-	 */
-	public void setProgress(final int prog){
-		if(prog==10000 && progress==null){//Case of disconnecting simulator
-		}else{
-			if(progress==null){
-				progress = new ProgressDialog(activity);
-				progress.setProgressNumberFormat("");
-				progress.setTitle(context.getString(R.string.dialog_simulator_title));
-				progress.setMax(10000);
-				progress.setMessage(context.getString(R.string.dialog_simulator_message));
-				progress.setCancelable(false);
-				progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-				progress.setCanceledOnTouchOutside(false);
-				progress.setIndeterminate(false);
-				if(!activity.isFinishing())
-					progress.show();
-			} 
-			progress.setProgress(prog);
-			if(prog==10000){
-				progress.dismiss();
-				progress = null;
-			}
-			/*try{
-				activity.runOnUiThread( new Runnable() {
-					public void run() {
-						activity.setProgress(prog);
-			        }
-				});
-			}catch(NullPointerException nulle){
-				
-			}*/
-		}
-	}
-
 	/**
 	 * Connects the thread corresponding to user selection (Local/Remote)
 	 */
@@ -373,7 +375,7 @@ public class Simulator {
 	public void setSimulatorStatus(SimulatorStatus new_status) {
 		simulatorStatus = new_status;
 		updateConnectButtonText();
-		updateSwitchAndListEnabled();
+		enableCorrectSimulatorViews();
 		setCorrectSimulatorControls();
 		setProgress(100 * 100);
 	}
@@ -406,7 +408,7 @@ public class Simulator {
 	/**
 	 * Enable or disable the simulator mode switch and controls according to its status (Connected/Disconnected)
 	 */
-	private void updateSwitchAndListEnabled(){
+	private void enableCorrectSimulatorViews(){
 			activity.runOnUiThread( new Runnable() {
 				public void run() {
 					if(switchSelector!=null){
