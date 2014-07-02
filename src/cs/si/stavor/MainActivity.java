@@ -14,6 +14,7 @@ import cs.si.stavor.dialogs.ResetDbDialogFragment;
 import cs.si.stavor.dialogs.TutorialDialogFragment;
 import cs.si.stavor.dialogs.WelcomeDialogFragment;
 import cs.si.stavor.fragments.HudFragment;
+import cs.si.stavor.fragments.MapFragment;
 import cs.si.stavor.fragments.NavigationDrawerFragment;
 import cs.si.stavor.fragments.OrbitFragment;
 import cs.si.stavor.fragments.RetainedFragment;
@@ -391,7 +392,7 @@ public class MainActivity extends ActionBarActivity implements
 	        fragmentManager    
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsGeneralFragment.newInstance(position +1)).commit();
+	        		MapFragment.newInstance(position +1)).commit();
 		}else if(position==9){
 			// Display the fragment as the main content.
 	        fragmentManager    
