@@ -25,6 +25,7 @@ import org.xwalk.core.XWalkView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.webkit.WebView;
 
 import com.google.gson.Gson;
 
@@ -46,6 +47,7 @@ public class ModelSimulation {
     private MainActivity activity;
     private View view;
     private XWalkView browser;
+    private WebView browser2;
     private boolean isBrowserLoaded;
     private Browsers selectedBrowser = Browsers.None;
     
@@ -85,15 +87,19 @@ public class ModelSimulation {
      * @param hud
      * @param mBrowser
      */
-    public void setHud(Browsers type, View hud, XWalkView mBrowser){
+    public void setHud(Browsers type, View hud, View mBrowser){
     	selectedBrowser = type;
 		view = hud;
     	if(selectedBrowser.equals(Browsers.Attitude)){
         	initViews();
-    	}else{
+        	browser = (XWalkView)mBrowser;
+    	}else if(selectedBrowser.equals(Browsers.Orbit)){
     		uninitViews();
+        	browser = (XWalkView)mBrowser;
+    	}else if(selectedBrowser.equals(Browsers.Map)){
+    		uninitViews();
+        	browser2 = (WebView)mBrowser;
     	}
-    	browser = mBrowser;
     }
     
     public void clearHud(){
@@ -101,6 +107,7 @@ public class ModelSimulation {
       	view = null;
       	uninitViews();
     	browser = null;
+    	browser2 = null;
     }
     
     /**
@@ -147,7 +154,9 @@ public class ModelSimulation {
     			browser.load("javascript:updateModelState('"+gson.toJson(state)+"')",null);
     		else if(state_orbit!=null && selectedBrowser.equals(Browsers.Orbit)){
     			browser.load("javascript:updateModelState('"+gson.toJson(state_orbit)+"')",null);
-    		}else if(selectedBrowser.equals(Browsers.Map)){
+    		}
+    	}else if(browser2!=null && isBrowserLoaded){
+    		if(selectedBrowser.equals(Browsers.Map)){
     			if(mapPathBuffer.size()!=0){
     				browser.load("javascript:updateModelState('"+gson.toJson(getMapPathBuffer())+"')",null);
     			}

@@ -49,6 +49,8 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -97,7 +99,7 @@ public class MainActivity extends ActionBarActivity implements
 	 */
 	private XWalkView mXwalkView;
 	private XWalkView mXwalkViewOrbit;
-	private XWalkView mXwalkViewMap;
+	private WebView mXwalkViewMap;
 	private boolean loadBrowser;
 	private boolean loadBrowserOrbit;
 	private boolean loadBrowserMap;
@@ -111,7 +113,7 @@ public class MainActivity extends ActionBarActivity implements
 	public XWalkView getBrowserOrbit(){
 		return mXwalkViewOrbit;
 	}
-	public XWalkView getBrowserMap(){
+	public WebView getBrowserMap(){
 		return mXwalkViewMap;
 	}
 	public boolean getLoadBrowserFlag(){
@@ -307,14 +309,14 @@ public class MainActivity extends ActionBarActivity implements
 	    	browserSettingsOrbit.setAllowUniversalAccessFromFileURLs(true);
 	    	
 	    	//Orbit browser
-	    	XWalkView xwalkViewMap = new XWalkView(this.getApplicationContext(), this);
+	    	WebView xwalkViewMap = new WebView(this.getApplicationContext());
 			//mXwalkView.setBackgroundResource(R.color.black);
 			xwalkViewMap.setBackgroundColor(0x00000000);
-			xwalkViewMap.setResourceClient(new MyResourceClient(xwalkViewOrbit));
-	        xwalkViewMap.setUIClient(new MyUIClient(xwalkViewOrbit));
+			//xwalkViewMap.setResourceClient(new MyResourceClient(xwalkViewOrbit));
+	        //xwalkViewMap.setUIClient(new MyUIClient(xwalkViewOrbit));
 	        xwalkViewMap.clearCache(true);
 	        
-	        XWalkSettings browserSettingsMap = xwalkViewMap.getSettings();
+	        WebSettings browserSettingsMap = xwalkViewMap.getSettings();
 	    	
 	    	browserSettingsMap.setJavaScriptEnabled(true);
 	    	browserSettingsMap.setUseWideViewPort(false);
@@ -368,7 +370,7 @@ public class MainActivity extends ActionBarActivity implements
 		if(flagActivityFirstExec){
         	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
         	mXwalkViewOrbit.load(Parameters.Web.STARTING_PAGE_ORBIT,null);
-        	mXwalkViewMap.load(Parameters.Web.STARTING_PAGE_MAP,null);
+        	mXwalkViewMap.loadUrl(Parameters.Web.STARTING_PAGE_MAP);
         	flagActivityFirstExec=false;
         }
         
@@ -739,7 +741,7 @@ public class MainActivity extends ActionBarActivity implements
             mXwalkViewOrbit.onActivityResult(requestCode, resultCode, data);
         }
         if (mXwalkViewMap != null) {
-            mXwalkViewMap.onActivityResult(requestCode, resultCode, data);
+            //mXwalkViewMap.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -752,7 +754,7 @@ public class MainActivity extends ActionBarActivity implements
             mXwalkViewOrbit.onNewIntent(intent);
         }
         if (mXwalkViewMap != null) {
-            mXwalkViewMap.onNewIntent(intent);
+            //mXwalkViewMap.onNewIntent(intent);
         }
     }
 	
@@ -765,7 +767,7 @@ public class MainActivity extends ActionBarActivity implements
             ((StavorApplication)getApplication()).db_help.close();
             mXwalkView.onDestroy();
             mXwalkViewOrbit.onDestroy();
-            mXwalkViewMap.onDestroy();
+            //mXwalkViewMap.onDestroy();
         }else{
         	dataFragment.setData(
         			this.mXwalkView,
