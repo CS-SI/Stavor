@@ -64,6 +64,19 @@ public final class WebAppInterface {
 	    });
     }
     
+    /** Set loading progress (0-100) from the web page */
+    @JavascriptInterface
+    public void setProgressMap(final int progress) {
+    	if(progress==100)
+    		((MainActivity)activity).getSimulator().setBrowserLoaded(true);
+    	activity.runOnUiThread( new Runnable() {
+	        public void run() {
+	        	((MainActivity)activity).setBrowserProgressValueMap(progress * 100);
+            	//activity.setProgress(progress * 100);
+	        }
+	    });
+    }
+    
     /** Update the stats of the web page */
     @JavascriptInterface
     public void updateFPS(final String stats) {

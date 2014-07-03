@@ -228,6 +228,10 @@ public class Simulator {
 	public SimulatorStatus connect(){
 		resetTemporaryPause();
 		if(simulatorStatus.equals(SimulatorStatus.Disconnected)){
+			//ResetMap
+			((MainActivity) activity).raiseLoadBrowserFlagMap();
+			simulation.resetMapPathBuffer();
+			
 			simulationStatus = SimulationStatus.Pause;
 			playCondition = new ConditionVariable(false);
 			connectThread();
@@ -284,6 +288,10 @@ public class Simulator {
 	 */
 	public SimulationStatus stop(){
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
+			//ResetMap
+			((MainActivity) activity).raiseLoadBrowserFlagMap();
+			simulation.resetMapPathBuffer();
+			
 			play();
 			reset=true;
 		}

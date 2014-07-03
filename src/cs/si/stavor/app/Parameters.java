@@ -62,6 +62,7 @@ public class Parameters {
 	public static class Web {
 		public static final String STARTING_PAGE = "file:///android_asset/www/huds/index.html";
 		public static final String STARTING_PAGE_ORBIT = "file:///android_asset/www/huds/index_orbit.html";
+		public static final String STARTING_PAGE_MAP = "file:///android_asset/www/map/index.html";
 		//public static final String TEST_PAGE_1 = "file:///android_asset/www/index.html";
 		//public static final String TEST_PAGE_1 = "http://127.0.0.1:8081/";
 		//public static final String TEST_PAGE_1 = "http://webglreport.com";

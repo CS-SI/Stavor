@@ -21,6 +21,9 @@ public class RetainedFragment extends Fragment {
     private XWalkView mXwalkViewOrbit;
 	//Flag used to not reload the browser if only device orientation changed 
     private boolean loadBrowserOrbit;
+    private XWalkView mXwalkViewMap;
+	//Flag used to not reload the browser if only device orientation changed 
+    private boolean loadBrowserMap;
     private Simulator sim;
     private MissionReaderDbHelper db_help;
     private SQLiteDatabase db;
@@ -34,11 +37,13 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setData(XWalkView xwalkView, boolean load, XWalkView xwalkViewOrbit, boolean loadOrbit, Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
+    public void setData(XWalkView xwalkView, boolean load, XWalkView xwalkViewOrbit, boolean loadOrbit, XWalkView xwalkViewMap, boolean loadMap, Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
         this.mXwalkView = xwalkView;
         this.loadBrowser = load;
         this.mXwalkViewOrbit = xwalkViewOrbit;
         this.loadBrowserOrbit = loadOrbit;
+        this.mXwalkViewMap = xwalkViewMap;
+        this.loadBrowserMap = loadMap;
     	this.sim = data;
         this.db_help = missionReaderDbHelper;
         this.db = sqLiteDatabase;
@@ -59,6 +64,14 @@ public class RetainedFragment extends Fragment {
     
     public boolean getLoadBrowserOrbit(){
     	return loadBrowserOrbit;
+    }
+    
+    public XWalkView getBrowserMap() {
+        return mXwalkViewMap;
+    }
+    
+    public boolean getLoadBrowserMap(){
+    	return loadBrowserMap;
     }
 
     public Simulator getSim() {

@@ -22,11 +22,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * Fragment with the visualization browser for the orbit
+ * Fragment with the visualization browser for the map
  * @author Xavier Gibert
  *
  */
-public final class OrbitFragment extends Fragment {
+public final class MapFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -37,15 +37,15 @@ public final class OrbitFragment extends Fragment {
 	 * Returns a new instance of this fragment for the given section number.
 	 * @param simulation 
 	 */
-	public static OrbitFragment newInstance(int sectionNumber) {	
-		OrbitFragment fragment = new OrbitFragment();
+	public static MapFragment newInstance(int sectionNumber) {	
+		MapFragment fragment = new MapFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
 		return fragment;
 	}
 
-	public OrbitFragment() {
+	public MapFragment() {
 	}
 	
 	private Simulator simulator;
@@ -62,18 +62,21 @@ public final class OrbitFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.orb_display, container,
 				false);
-		
-		((MainActivity)getActivity()).showTutorialOrbit();
+		//XGGDEBUG:Implemet 
+		//TODO
+		//((MainActivity)getActivity()).showTutorialMap();
 		
 		//Browser
 		if(mXwalkView==null){
-			mXwalkView = ((MainActivity)getActivity()).getBrowserOrbit();
+			mXwalkView = ((MainActivity)getActivity()).getBrowserMap();
 		}
-		TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
-		fps.setAlpha((float)0.0);
+		//TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
+		//fps.setAlpha((float)0.0);
 		
     	simulator = ((MainActivity)getActivity()).getSimulator();
-    	simulator.setHudView(Browsers.Orbit,rootView, mXwalkView);
+    	simulator.setHudView(Browsers.Map,rootView, mXwalkView);
+    	//XGGDEBUG:MODIFY method
+    	//TODO
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -91,7 +94,7 @@ public final class OrbitFragment extends Fragment {
     	ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBarBrowser);
     	FrameLayout progressBarLayout = (FrameLayout) rootView.findViewById(R.id.frameLayoutProgress);
     	progressBar.setProgress(0);
-    	((MainActivity)getActivity()).setBrowserProgressBarOrbit(progressBar,progressBarLayout);
+    	((MainActivity)getActivity()).setBrowserProgressBarMap(progressBar,progressBarLayout);
     	
 		//needs to have browser defined but not loaded yet
     	rootView.post(new Runnable()
@@ -99,12 +102,12 @@ public final class OrbitFragment extends Fragment {
     	    @Override
     	    public void run()
     	    {
-    	    	if(((MainActivity)getActivity()).getLoadBrowserFlagOrbit()){
+    	    	if(((MainActivity)getActivity()).getLoadBrowserFlagMap()){
     	    		//mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
     	    		//mXwalkView.load("javascript:showLoadingScreen()",null);
     	    		
     	    		mXwalkView.load("javascript:reloadModel()",null);
-    	    		((MainActivity)getActivity()).resetLoadBrowserFlagOrbit();
+    	    		((MainActivity)getActivity()).resetLoadBrowserFlagMap();
     	    	}else{
     	    		mXwalkView.load("javascript:setLoaded()",null);
     	    	}
@@ -112,16 +115,6 @@ public final class OrbitFragment extends Fragment {
     	});
     	
 		return rootView;
-	}
-
-	/**
-	 * Updates the FPS stats of the visualization
-	 * @param stats
-	 */
-	public void updateFPS(String stats) {
-		TextView fps = ((TextView) this.getView().findViewById(R.id.textViewFPS));
-		fps.setText(stats);
-		fps.setAlpha((float)1.0);
 	}
 	
 	@Override

@@ -1,10 +1,17 @@
 package cs.si.stavor.model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Queue;
+
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.RotationOrder;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.orekit.attitudes.Attitude;
 import org.orekit.bodies.CelestialBodyFactory;
+import org.orekit.bodies.GeodeticPoint;
+import org.orekit.bodies.OneAxisEllipsoid;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
 import org.orekit.orbits.KeplerianOrbit;
@@ -12,6 +19,7 @@ import org.orekit.propagation.SpacecraftState;
 import org.orekit.time.AbsoluteDate;
 import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
+import org.orekit.utils.Constants;
 import org.xwalk.core.XWalkView;
 
 import android.view.View;
@@ -139,6 +147,10 @@ public class ModelSimulation {
     			browser.load("javascript:updateModelState('"+gson.toJson(state)+"')",null);
     		else if(state_orbit!=null && selectedBrowser.equals(Browsers.Orbit)){
     			browser.load("javascript:updateModelState('"+gson.toJson(state_orbit)+"')",null);
+    		}else if(selectedBrowser.equals(Browsers.Map)){
+    			if(mapPathBuffer.size()!=0){
+    				browser.load("javascript:updateModelState('"+gson.toJson(getMapPathBuffer())+"')",null);
+    			}
     		}
     	}
 	}
@@ -255,6 +267,18 @@ public class ModelSimulation {
 	    	new_state.value_orbit_raan = keplerOrb.getRightAscensionOfAscendingNode();
     		
     		updateStateOrbit(new_state);
+    	}else if(selectedBrowser.equals(Browsers.Map)){
+    		
+    		OneAxisEllipsoid earth = new OneAxisEllipsoid(
+    				Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
+    		 		Constants.WGS84_EARTH_FLATTENING,
+    		 		earthFixedFrame);
+    		 try {
+    		 	GeodeticPoint gp = earth.transform(scs.getPVCoordinates().getPosition(), scs.getFrame(), scs.getDate());
+    		 	addToMapPathBuffer(gp.getLatitude(), gp.getLongitude());
+    		} catch (OrekitException e) {
+    			e.printStackTrace();
+    		}
     	}
     }
     
@@ -327,6 +351,20 @@ public class ModelSimulation {
 		panel_roll = null;
 		panel_pitch = null;
 		panel_yaw = null;
+	}
+
+	private ArrayList<double[]> mapPathBuffer = new ArrayList<double[]>();
+	public synchronized void resetMapPathBuffer() {
+		mapPathBuffer.clear();
+	}
+	public synchronized void addToMapPathBuffer(double lat, double lon) {
+		mapPathBuffer.add(new double[]{lat,lon});
+	}
+	public synchronized double[][] getMapPathBuffer(){
+		double[][] r =
+				  (double[][])mapPathBuffer.toArray(new double[mapPathBuffer.size()][]);
+		resetMapPathBuffer();
+		return r;
 	}
 
 	
