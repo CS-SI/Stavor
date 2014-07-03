@@ -1,7 +1,6 @@
 <html><body>
   <div id="mapdiv"></div>
   <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
-<script type='text/javascript' src="interface.js"></script>
   <script>
     	map = new OpenLayers.Map("mapdiv");
     	map.addLayer(new OpenLayers.Layer.OSM());
@@ -69,5 +68,35 @@
 		var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
 		lineLayer.addFeatures([lineFeature]);
 	}
+
+function reloadModel(){
+	//clearPath();
+	setLoadingProgress(100);
+}
+function updateModelState(new_state){
+	var state = JSON.parse(new_state);
+	addPoints(new_state);
+}
+function showAndroidToast(toast) {
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.showToast!= "undefined") { // check the method
+			 Android.showToast(toast);
+		  }
+   	}
+}
+function setLoadingProgress(progress) {// from 0 to 100 
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.setProgressMap!= "undefined") { // check the method
+			 Android.setProgressMap(progress);
+		  }
+   	}
+}
+function setLoaded() {// from 0 to 100 
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.setProgressMap!= "undefined") { // check the method
+			 Android.setProgressMap(100);
+		  }
+   	}
+}
   </script>
 </body></html>
