@@ -1,6 +1,7 @@
 <html><body>
   <div id="mapdiv"></div>
   <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script type='text/javascript' src="interface.js"></script>
   <script>
     	map = new OpenLayers.Map("mapdiv");
     	map.addLayer(new OpenLayers.Layer.OSM());
@@ -52,6 +53,14 @@
 	}
 	function addPoint(lat, lon){
 		points.push(new OpenLayers.Geometry.Point(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+		reDraw();
+	}
+	function addPoints(points_ext){
+		var points_ext_ol = new Array();
+		for (var arrayIndex in points_ext) {
+			points_ext_ol.push(new OpenLayers.Geometry.Point(points_ext[arrayIndex][1], points_ext[arrayIndex][0]).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+		}
+		points = points.concat(points_ext_ol);
 		reDraw();
 	}
 	function reDraw(){
