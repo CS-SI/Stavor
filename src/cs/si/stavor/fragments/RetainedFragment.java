@@ -7,6 +7,7 @@ import cs.si.stavor.simulator.Simulator;
 import android.app.Fragment;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.webkit.WebView;
 
 /**
  * Fragment to store information when restarting app (e.g. rotating device)
@@ -21,7 +22,7 @@ public class RetainedFragment extends Fragment {
     private XWalkView mXwalkViewOrbit;
 	//Flag used to not reload the browser if only device orientation changed 
     private boolean loadBrowserOrbit;
-    private XWalkView mXwalkViewMap;
+    private WebView mXwalkViewMap;
 	//Flag used to not reload the browser if only device orientation changed 
     private boolean loadBrowserMap;
     private Simulator sim;
@@ -37,7 +38,7 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setData(XWalkView xwalkView, boolean load, XWalkView xwalkViewOrbit, boolean loadOrbit, XWalkView xwalkViewMap, boolean loadMap, Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
+    public void setData(XWalkView xwalkView, boolean load, XWalkView xwalkViewOrbit, boolean loadOrbit, WebView xwalkViewMap, boolean loadMap, Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
         this.mXwalkView = xwalkView;
         this.loadBrowser = load;
         this.mXwalkViewOrbit = xwalkViewOrbit;
@@ -66,7 +67,7 @@ public class RetainedFragment extends Fragment {
     	return loadBrowserOrbit;
     }
     
-    public XWalkView getBrowserMap() {
+    public WebView getBrowserMap() {
         return mXwalkViewMap;
     }
     

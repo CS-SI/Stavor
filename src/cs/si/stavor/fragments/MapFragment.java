@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -54,7 +55,7 @@ public final class MapFragment extends Fragment {
 	/**
 	 * WebView from XWalk project to increase compatibility of WebGL
 	 */
-    private XWalkView mXwalkView;
+    private WebView mXwalkView;
 	
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -106,10 +107,10 @@ public final class MapFragment extends Fragment {
     	    		//mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
     	    		//mXwalkView.load("javascript:showLoadingScreen()",null);
     	    		
-    	    		mXwalkView.load("javascript:reloadModel()",null);
+    	    		mXwalkView.loadUrl("javascript:reloadModel()");
     	    		((MainActivity)getActivity()).resetLoadBrowserFlagMap();
     	    	}else{
-    	    		mXwalkView.load("javascript:setLoaded()",null);
+    	    		mXwalkView.loadUrl("javascript:setLoaded()");
     	    	}
     	    }
     	});
