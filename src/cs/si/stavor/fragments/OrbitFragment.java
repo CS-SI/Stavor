@@ -169,6 +169,7 @@ public final class OrbitFragment extends Fragment {
 	@Override
 	public void onDetach() {
 		((MainActivity)getActivity()).resetBrowserProgressBarOrbit();
+		simulator.clearHud();
 		//XWalk
         if (mXwalkView != null) {
             //mXwalkView.onDestroy();

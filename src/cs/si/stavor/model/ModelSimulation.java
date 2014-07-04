@@ -39,7 +39,7 @@ public class ModelSimulation {
     private View view;
     private XWalkView browser;
     private boolean isBrowserLoaded;
-    private Browsers selectedBrowser = Browsers.Attitude;
+    private Browsers selectedBrowser = Browsers.None;
     
     public ModelSimulation(MainActivity acv){
     	isBrowserLoaded = false;
@@ -88,6 +88,13 @@ public class ModelSimulation {
     	browser = mBrowser;
     }
     
+    public void clearHud(){
+      	selectedBrowser = Browsers.None;
+      	view = null;
+      	uninitViews();
+    	browser = null;
+    }
+    
     /**
      * Set the loaded status of the browser
      * @param is
@@ -109,14 +116,6 @@ public class ModelSimulation {
 		config_orbit = new ModelConfigurationOrbit(activity.getApplicationContext());
         return gson.toJson(config_orbit);
 	}
-    
-	/**
-     * Returns the simulation step for the WebGL model in a JavaScript readable format
-     * @return
-     */
-    /*public synchronized String getStateJSON() {
-        return gson.toJson(state);
-    }*/
     
     /**
      * Method used by the simulator to update the simulation state. 
@@ -237,14 +236,11 @@ public class ModelSimulation {
 			AbsoluteDate date = scs.getAttitude().getDate();
     		
     		try {
-    			//Frame fix_frame = FramesFactory.getITRF(IERSConventions.IERS_2010, true);
-    			//Frame fix_frame = FramesFactory.getITRF2008(true);
 				Rotation rot = scs.getFrame().getTransformTo(earthFixedFrame, date).getRotation();
 	    		new_state.value_earth_rotation = new Quat(rot);
 			} catch (OrekitException e) {
 				e.printStackTrace();
 			}
-	    	//XGGDEBUG: correct values
     		
     		Vector3D spacecraft = scs.getPVCoordinates().getPosition();
 	    	new_state.value_spacecraft[0] = spacecraft.getX();

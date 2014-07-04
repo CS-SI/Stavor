@@ -337,6 +337,7 @@ public final class HudFragment extends Fragment {
 	@Override
 	public void onDetach() {
 		((MainActivity)getActivity()).resetBrowserProgressBar();
+		simulator.clearHud();
 		//XWalk
         if (mXwalkView != null) {
             //mXwalkView.onDestroy();

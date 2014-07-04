@@ -137,6 +137,10 @@ public class Simulator {
 		simulation.setHud(type, v,x);
 	}
 	
+	public void clearHud(){
+		simulation.clearHud();
+	}
+	
 	public void setBrowserLoaded(boolean is){
 		simulation.setBrowserloaded(is);
 	}
