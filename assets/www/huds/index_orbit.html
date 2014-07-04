@@ -395,7 +395,7 @@ function includeEarth(){
 	earthCloud.name = "EARTH-CLOUDS";
 	containerEarth.add(earthCloud);
 	onRenderFcts.push(function(delta, now){
-		earthCloud.rotation.y += 1/8 * delta * accel_time;		
+		earthCloud.rotation.z += 1/32 * delta * accel_time;		
 	});
 
 	if(show_earth_clouds){
