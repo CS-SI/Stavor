@@ -192,6 +192,7 @@
     <string name="sim_mission_ended">Mission ended</string>
     <string name="sim_mis_mission">Mission:</string>
     <string name="sim_mis_description">Description:</string>
+    <string name="sim_stop_simulator_first">Stop the simulator first</string>
     
     
     <string name="pref_apk_install">Application install</string>

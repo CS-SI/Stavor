@@ -15,11 +15,8 @@ import android.content.SharedPreferences;
 import android.os.ConditionVariable;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -47,7 +44,6 @@ public class Simulator {
 	//GUI views
 	private Button buttonConnect;
 	private Switch switchSelector;
-	private RelativeLayout localSimLayout;
 	
 	//Mission
 	private Mission mission;
@@ -122,9 +118,8 @@ public class Simulator {
 	 * Set local/remote switch View
 	 * @param st
 	 */
-	public void setSwitchAndListSelector(Switch st, RelativeLayout localSim){
+	public void setSwitchView(Switch st){
 		switchSelector=st;
-		localSimLayout = localSim;
 		enableCorrectSimulatorViews();
 	}
 	
@@ -421,18 +416,10 @@ public class Simulator {
 				    	else
 				    		switchSelector.setEnabled(true);
 					}
-					if(localSimLayout!=null){
-						if(simulatorStatus.equals(SimulatorStatus.Connected)){
-							enableView(localSimLayout, false);
-							//localSimLayout.setEnabled(false);
-						}else{
-							enableView(localSimLayout, true);
-				    		//localSimLayout.setEnabled(true);
-						}
-					}
 		        }
 			});
 	}
+	/*
 	private static void enableView(ViewGroup layout, boolean enabled) {
 	    layout.setEnabled(false);
 	    for (int i = 0; i < layout.getChildCount(); i++) {
@@ -443,7 +430,7 @@ public class Simulator {
 	            child.setEnabled(enabled);
 	        }
 	    }
-	}
+	}*/
 
 	private String message = "";
 	public void showMessage(String string) {
