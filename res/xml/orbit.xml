@@ -34,7 +34,7 @@
             android:key="@string/pref_key_show_xy_plane"
             android:summary="@string/pref_summary_show_xy_plane"
             android:title="@string/pref_title_show_xy_plane"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="@string/pref_key_color_xy_plane"
             android:summary="@string/pref_summary_color_xy_plane"
