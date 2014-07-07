@@ -1,8 +1,6 @@
 package cs.si.stavor.fragments;
 
 
-import org.xwalk.core.XWalkView;
-
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.model.Browsers;
@@ -20,7 +18,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 /**
  * Fragment with the visualization browser for the map
