@@ -158,7 +158,7 @@ public class ModelSimulation {
     	}else if(browser2!=null && isBrowserLoaded){
     		if(selectedBrowser.equals(Browsers.Map)){
     			if(mapPathBuffer.size()!=0){
-    				browser.load("javascript:updateModelState('"+gson.toJson(getMapPathBuffer())+"')",null);
+    				browser2.loadUrl("javascript:updateModelState('"+gson.toJson(getMapPathBuffer())+"')");
     			}
     		}
     	}

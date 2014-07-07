@@ -92,10 +92,15 @@
 //------------------------------------------------------------------------------
 
 	function reDraw(){
+		console.log("0")
 		line = new OpenLayers.Geometry.LineString(points);
+		console.log("1")
 		lineLayer.removeAllFeatures();
+		console.log("3")
 		var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
-		lineLayer.addFeatures([lineFeature]);
+		console.log("4")
+		lineLayer.addFeatures([lineFeature]);//ERROR AQUÍ
+		console.log("5")
 	}
 	function clearPath(){
 		points = new Array();

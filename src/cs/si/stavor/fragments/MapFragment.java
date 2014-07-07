@@ -114,7 +114,7 @@ public final class MapFragment extends Fragment {
     	
     	ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBarBrowser);
     	FrameLayout progressBarLayout = (FrameLayout) rootView.findViewById(R.id.frameLayoutProgress);
-    	progressBar.setProgress(0);
+    	progressBar.setProgress(10);
     	((MainActivity)getActivity()).setBrowserProgressBarMap(progressBar,progressBarLayout);
     	
 		//needs to have browser defined but not loaded yet
