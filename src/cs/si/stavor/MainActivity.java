@@ -51,6 +51,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -312,6 +313,7 @@ public class MainActivity extends ActionBarActivity implements
 	    	WebView xwalkViewMap = new WebView(this.getApplicationContext());
 			//mXwalkView.setBackgroundResource(R.color.black);
 			xwalkViewMap.setBackgroundColor(0x00000000);
+			xwalkViewMap.setWebViewClient(new WebViewClient());
 			//xwalkViewMap.setResourceClient(new MyResourceClient(xwalkViewOrbit));
 	        //xwalkViewMap.setUIClient(new MyUIClient(xwalkViewOrbit));
 	        xwalkViewMap.clearCache(true);

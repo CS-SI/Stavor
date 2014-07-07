@@ -1,7 +1,15 @@
-<html><body>
+<html>
+    <head>
+        <title>OpenLayers Mobile</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  	<script type='text/javascript' src="interface.js"></script>
+  	<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    </head>
+<body>
   <div id="mapdiv"></div>
-  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
   <script>
+
     	map = new OpenLayers.Map("mapdiv");
     	map.addLayer(new OpenLayers.Layer.OSM());
 
@@ -46,6 +54,12 @@
 	var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
 	lineLayer.addFeatures([lineFeature]);
 
+	function reDraw(){
+		line = new OpenLayers.Geometry.LineString(points);
+		lineLayer.removeAllFeatures();
+		var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
+		lineLayer.addFeatures([lineFeature]);
+	}
 	function clearPath(){
 		points = new Array();
 		reDraw();
@@ -62,41 +76,7 @@
 		points = points.concat(points_ext_ol);
 		reDraw();
 	}
-	function reDraw(){
-		line = new OpenLayers.Geometry.LineString(points);
-		lineLayer.removeAllFeatures();
-		var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
-		lineLayer.addFeatures([lineFeature]);
-	}
 
-function reloadModel(){
-	//clearPath();
-	setLoadingProgress(100);
-}
-function updateModelState(new_state){
-	var state = JSON.parse(new_state);
-	addPoints(new_state);
-}
-function showAndroidToast(toast) {
-	if (typeof Android != "undefined"){ // check the bridge 
-		  if (Android.showToast!= "undefined") { // check the method
-			 Android.showToast(toast);
-		  }
-   	}
-}
-function setLoadingProgress(progress) {// from 0 to 100 
-	if (typeof Android != "undefined"){ // check the bridge 
-		  if (Android.setProgressMap!= "undefined") { // check the method
-			 Android.setProgressMap(progress);
-		  }
-   	}
-}
-function setLoaded() {// from 0 to 100 
-	if (typeof Android != "undefined"){ // check the bridge 
-		  if (Android.setProgressMap!= "undefined") { // check the method
-			 Android.setProgressMap(100);
-		  }
-   	}
-}
+
   </script>
 </body></html>
