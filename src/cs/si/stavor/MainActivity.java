@@ -31,6 +31,7 @@ import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
 import cs.si.stavor.web.WebAppInterface;
+import cs.si.stavor.web.WebAppInterfaceXwalk;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
@@ -325,9 +326,10 @@ public class MainActivity extends ActionBarActivity implements
 	    	browserSettingsMap.setAllowFileAccessFromFileURLs(true);
 	    	browserSettingsMap.setAllowUniversalAccessFromFileURLs(true);
 	    	
-	    	((StavorApplication)getApplication()).jsInterface = new WebAppInterface(this, simu.getSimulationResults());
-	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
-	    	xwalkViewOrbit.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
+	    	((StavorApplication)getApplication()).jsInterfaceXwalk = new WebAppInterfaceXwalk(this, simu.getSimulationResults());
+	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterfaceXwalk, "Android");
+	    	xwalkViewOrbit.addJavascriptInterface(((StavorApplication)getApplication()).jsInterfaceXwalk, "Android");
+	    	((StavorApplication)getApplication()).jsInterface = new WebAppInterface(this);
 	    	xwalkViewMap.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
 	    	
             MissionReaderDbHelper db_help_tmp;
@@ -361,7 +363,7 @@ public class MainActivity extends ActionBarActivity implements
         this.simulator.reconstruct(this);
         
         //Update javascriptInterface
-        ((StavorApplication)getApplication()).jsInterface.reconstruct(this, simulator.getSimulationResults());
+        ((StavorApplication)getApplication()).jsInterfaceXwalk.reconstruct(this, simulator.getSimulationResults());
         
 		//Install the Missions database if not installed yet and store database objects
 		((StavorApplication)getApplication()).db_help = dataFragment.getDbHelp();

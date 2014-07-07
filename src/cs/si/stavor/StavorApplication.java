@@ -4,6 +4,7 @@ import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
 
 import cs.si.stavor.database.MissionReaderDbHelper;
 import cs.si.stavor.web.WebAppInterface;
+import cs.si.stavor.web.WebAppInterfaceXwalk;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -22,6 +23,7 @@ public class StavorApplication extends Application {
     
     public int modelViewId = R.id.menu_views_ref_frame_xyz;
     
+    WebAppInterfaceXwalk jsInterfaceXwalk;
     WebAppInterface jsInterface;
 	
 	public void setSearchTerm(String searchTerm) {
