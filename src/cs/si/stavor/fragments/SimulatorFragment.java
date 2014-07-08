@@ -183,9 +183,9 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	button_delete.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
-					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_stop_simulator_first), Toast.LENGTH_LONG).show();
-				}else{
+				//if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
+					//Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_stop_simulator_first), Toast.LENGTH_LONG).show();
+				//}else{
 					if(activeMissionId==-1){
 						Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
 					}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2 || activeMissionId==3 ){
@@ -193,7 +193,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 					}else{
 						showDeleteMissionDialog(activeMissionId, activeMissionName);
 					}
-				}
+				//}
 			}
     		
     	});
@@ -203,11 +203,11 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	button_new.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
-					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_stop_simulator_first), Toast.LENGTH_LONG).show();
-				}else{
+				//if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
+					//Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_stop_simulator_first), Toast.LENGTH_LONG).show();
+				//}else{
 					((MainActivity)getActivity()).showMissionCreator();
-				}
+				//}
 			}
     		
     	});
@@ -217,9 +217,9 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	button_edit.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
-					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_stop_simulator_first), Toast.LENGTH_LONG).show();
-				}else{
+				//if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
+					//Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_stop_simulator_first), Toast.LENGTH_LONG).show();
+				//}else{
 					if(activeMissionId==-1){
 						Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
 					}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2  ||activeMissionId==3){
@@ -232,7 +232,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		    				Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
 		    			}
 					}
-				}
+				//}
 			}
     		
     	});

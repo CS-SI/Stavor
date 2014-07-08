@@ -13,6 +13,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.ConditionVariable;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
@@ -34,9 +35,9 @@ public class Simulator {
 	//Simulation core
 	private SimulatorStatus simulatorStatus = SimulatorStatus.Disconnected;
 	private SimulationStatus simulationStatus = SimulationStatus.Pause;
-	private SocketsThread thread;
-	@SuppressWarnings("unused")
-	private SimulatorThread sthread;
+	private ThreadRemote thread_remote;
+	private ThreadLocal thread_local;
+	private Handler handler_remote, handler_local;
 	
 	//Results
 	private ModelSimulation simulation;
@@ -189,6 +190,8 @@ public class Simulator {
 		context = activity.getApplicationContext();
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 		simulation = new ModelSimulation(act);
+		handler_remote = new Handler();
+		handler_local = new Handler();
 	}
 	public void reconstruct(MainActivity act){
 		activity = act;
@@ -321,7 +324,8 @@ public class Simulator {
 				setProgress(40 * 100);
 				simulation.preInitialize();
 				setProgress(50 * 100);
-				thread = (SocketsThread) new SocketsThread(this,host,port).execute(simulation);
+				thread_remote = new ThreadRemote(handler_remote,this,host,port);
+				thread_remote.start();
 			}catch(NumberFormatException nfe){
 				setSimulatorStatus(SimulatorStatus.Disconnected);
 			}
@@ -332,8 +336,8 @@ public class Simulator {
 			setProgress(40 * 100);
 			simulation.preInitialize(); 
 			setProgress(50 * 100);
-			sthread = (SimulatorThread) new SimulatorThread(((MainActivity)activity).getSimulator(), mission).execute(simulation);
-		    
+			thread_local = new ThreadLocal(handler_local, ((MainActivity)activity).getSimulator(), mission);
+			thread_local.start();
 		}
 	}
 	
@@ -344,7 +348,7 @@ public class Simulator {
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
-			thread.closeSocket();
+			thread_remote.closeSocket();
 			
 		}else{
 			// Local
