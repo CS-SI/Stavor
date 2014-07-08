@@ -8,5 +8,5 @@
                 android:angle="90" />
    <stroke
       android:width="2dp"
-      android:color="#545454" />
+      android:color="#949494" />
  </shape>
