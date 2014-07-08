@@ -35,26 +35,6 @@
             android:summary="@string/pref_summary_show_sky"
             android:title="@string/pref_title_show_sky"
             android:defaultValue="true" />
-        <CheckBoxPreference
-            android:key="@string/pref_key_show_sphere"
-            android:summary="@string/pref_summary_show_sphere"
-            android:title="@string/pref_title_show_sphere"
-            android:defaultValue="true" />
-        <CheckBoxPreference
-            android:key="@string/pref_key_show_mini_spheres"
-            android:summary="@string/pref_summary_show_mini_spheres"
-            android:title="@string/pref_title_show_mini_spheres"
-            android:defaultValue="true" />
-        <CheckBoxPreference
-            android:key="@string/pref_key_show_circles"
-            android:summary="@string/pref_summary_show_circles"
-            android:title="@string/pref_title_show_circles"
-            android:defaultValue="true" />
-        <!-- <CheckBoxPreference
-            android:key="@string/pref_key_show_planes"
-            android:summary="@string/pref_summary_show_planes"
-            android:title="@string/pref_title_show_planes"
-            android:defaultValue="true" /> -->
     </PreferenceCategory>
     <PreferenceCategory 
         android:title="@string/pref_axis"
