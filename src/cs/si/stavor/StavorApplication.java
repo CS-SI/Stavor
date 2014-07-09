@@ -24,7 +24,6 @@ public class StavorApplication extends Application {
     public int modelViewId = R.id.menu_views_ref_frame_xyz;
     
     WebAppInterfaceXwalk jsInterfaceXwalk;
-    WebAppInterface jsInterface;
 	
 	public void setSearchTerm(String searchTerm) {
 		this.searchTerm = searchTerm;
