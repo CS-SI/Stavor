@@ -4,40 +4,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   	<script type='text/javascript' src="interface.js"></script>
-  	<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
-        <link rel="stylesheet" href="theme/default/style.mobile.css" type="text/css">
-        <!--<script src="OpenLayers.mobile.js"></script>-->
-        <style>
-            html, body {
-                margin  : 0;
-                padding : 0;
-                height  : 100%;
-                width   : 100%;
-            }
-            @media only screen and (max-width: 600px) {
-                html, body {
-                    height  : 117%;
-                }
-            }
-            #map {
-                width    : 100%;
-                position : relative;
-                height   : 100%;
-            }
-            .olControlAttribution {
-                position      : absolute;
-                font-size     : 10px;
-                bottom        : 0 !important;
-                right         : 0 !important;
-                background    : rgba(0,0,0,0.1);
-                font-family   : Arial;
-                padding       : 2px 4px;
-                border-radius : 5px 0 0 0;
-            }
-            #title, #tags, #shortdesc {
-                display: none;
-            }
-        </style>
+  	<!--<script src="http://www.openlayers.org/api/OpenLayers.js"></script>-->
+	<script src="OpenLayers.mobile.js"></script>
     </head>
 <body>
   <div id="map"></div>
@@ -69,13 +37,15 @@
 
 	map.addLayer(lineLayer);                    
 	map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path));                                     
-	var points = new Array(
+	/*var points = new Array(
 	   new OpenLayers.Geometry.Point(1.0, 1.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 	   new OpenLayers.Geometry.Point(20.0, 20.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 	   new OpenLayers.Geometry.Point(20.0, 30.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 	   new OpenLayers.Geometry.Point(20.0, 40.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 	   new OpenLayers.Geometry.Point(40.0, 40.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject())
-	);
+	);*/
+
+	var points = new Array();
 
 	var line = new OpenLayers.Geometry.LineString(points);
 
@@ -92,15 +62,10 @@
 //------------------------------------------------------------------------------
 
 	function reDraw(){
-		console.log("0")
 		line = new OpenLayers.Geometry.LineString(points);
-		console.log("1")
 		lineLayer.removeAllFeatures();
-		console.log("3")
 		var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
-		console.log("4")
 		lineLayer.addFeatures([lineFeature]);//ERROR AQUÍ
-		console.log("5")
 	}
 	function clearPath(){
 		points = new Array();
@@ -112,8 +77,8 @@
 	}
 	function addPoints(points_ext){
 		var points_ext_ol = new Array();
-		for (var arrayIndex in points_ext) {
-			points_ext_ol.push(new OpenLayers.Geometry.Point(points_ext[arrayIndex][1], points_ext[arrayIndex][0]).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+		for (var arrayIndex in points_ext) {		
+			points_ext_ol.push(new OpenLayers.Geometry.Point(points_ext[arrayIndex].longitude, points_ext[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
 		}
 		points = points.concat(points_ext_ol);
 		reDraw();

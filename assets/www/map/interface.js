@@ -7,7 +7,7 @@ function setLoadingProgress(progress) {// from 0 to 100
 }
 function updateModelState(new_state){
 	var state = JSON.parse(new_state);
-	addPoints(new_state);
+	addPoints(state);
 }
 function showAndroidToast(toast) {
 	if (typeof Android != "undefined"){ // check the bridge 

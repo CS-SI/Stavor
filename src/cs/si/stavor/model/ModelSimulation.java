@@ -22,6 +22,7 @@ import org.orekit.time.TimeScalesFactory;
 import org.orekit.utils.Constants;
 import org.xwalk.core.XWalkView;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -284,7 +285,10 @@ public class ModelSimulation {
     		 		earthFixedFrame);
     		 try {
     		 	GeodeticPoint gp = earth.transform(scs.getPVCoordinates().getPosition(), scs.getFrame(), scs.getDate());
-    		 	addToMapPathBuffer(gp.getLatitude(), gp.getLongitude());
+    		 	double lat = gp.getLatitude()*180/Math.PI;
+    		 	double lon = gp.getLongitude()*180/Math.PI;
+    		 	if(!Double.isNaN(lat)&&!Double.isNaN(lon))
+    		 		addToMapPathBuffer(lat, lon);
     		} catch (OrekitException e) {
     			e.printStackTrace();
     		}
@@ -362,18 +366,27 @@ public class ModelSimulation {
 		panel_yaw = null;
 	}
 
-	private ArrayList<double[]> mapPathBuffer = new ArrayList<double[]>();
+	private ArrayList<MapPoint> mapPathBuffer = new ArrayList<MapPoint>();
 	public synchronized void resetMapPathBuffer() {
 		mapPathBuffer.clear();
 	}
 	public synchronized void addToMapPathBuffer(double lat, double lon) {
-		mapPathBuffer.add(new double[]{lat,lon});
+		mapPathBuffer.add(new MapPoint(lat,lon));
 	}
-	public synchronized double[][] getMapPathBuffer(){
-		double[][] r =
-				  (double[][])mapPathBuffer.toArray(new double[mapPathBuffer.size()][]);
+	public synchronized MapPoint[] getMapPathBuffer(){
+		MapPoint[] r =
+				  (MapPoint[])mapPathBuffer.toArray(new MapPoint[mapPathBuffer.size()]);
 		resetMapPathBuffer();
 		return r;
+	}
+	
+	class MapPoint{
+		public MapPoint(double lat, double lon){
+			latitude = lat;
+			longitude = lon;
+		}
+		double latitude = 0;
+		double longitude = 0;
 	}
 
 	

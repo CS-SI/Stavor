@@ -81,7 +81,7 @@ public final class MapFragment extends Fragment {
 		//xwalkViewMap.setResourceClient(new MyResourceClient(xwalkViewOrbit));
         //xwalkViewMap.setUIClient(new MyUIClient(xwalkViewOrbit));
 		browser.clearCache(true);
-        
+		
         WebSettings browserSettingsMap = browser.getSettings();
     	
     	browserSettingsMap.setJavaScriptEnabled(true);
@@ -192,6 +192,8 @@ public final class MapFragment extends Fragment {
             //mXwalkView.onDestroy();
 			//System.gc();
         	browserLayout.removeView(browser);
+        	browser.destroyDrawingCache();
+        	browser.destroy();
         }
         //unbindDrawables(getView());
 	    super.onDetach();
