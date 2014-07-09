@@ -296,8 +296,8 @@ public class MainActivity extends ActionBarActivity implements
 	    	browserSettingsOrbit.setAllowUniversalAccessFromFileURLs(true);
 
 	    	((StavorApplication)getApplication()).jsInterfaceXwalk = new WebAppInterfaceXwalk(this, simu.getSimulationResults());
-	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
-	    	xwalkViewOrbit.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
+	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterfaceXwalk, "Android");
+	    	xwalkViewOrbit.addJavascriptInterface(((StavorApplication)getApplication()).jsInterfaceXwalk, "Android");
 	    	
             MissionReaderDbHelper db_help_tmp;
             SQLiteDatabase db_tmp;

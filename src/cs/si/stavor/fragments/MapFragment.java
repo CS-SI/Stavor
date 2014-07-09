@@ -96,8 +96,6 @@ public final class MapFragment extends Fragment {
     	
 		
     	simulator.setHudView(Browsers.Map,rootView, browser);
-    	//XGGDEBUG:MODIFY method
-    	//TODO
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
