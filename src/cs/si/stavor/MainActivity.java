@@ -30,7 +30,6 @@ import cs.si.stavor.settings.SettingsOrbitFragment;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
-import cs.si.stavor.web.WebAppInterface;
 import cs.si.stavor.web.WebAppInterfaceXwalk;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -295,8 +294,8 @@ public class MainActivity extends ActionBarActivity implements
 	    	browserSettingsOrbit.setUseWideViewPort(false);
 	    	browserSettingsOrbit.setAllowFileAccessFromFileURLs(true);
 	    	browserSettingsOrbit.setAllowUniversalAccessFromFileURLs(true);
-	    	
-	    	((StavorApplication)getApplication()).jsInterface = new WebAppInterface(this, simu.getSimulationResults());
+
+	    	((StavorApplication)getApplication()).jsInterfaceXwalk = new WebAppInterfaceXwalk(this, simu.getSimulationResults());
 	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
 	    	xwalkViewOrbit.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
 	    	

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
+
 /**
  * JavaScript-to-Android bridge functions
  * @author Xavier Gibert
@@ -38,7 +39,7 @@ public final class WebAppInterface {
 	    });
     }
 
-
+    
 	public void reconstruct(Activity act,
 			ModelSimulation s) {
 		activity = act;

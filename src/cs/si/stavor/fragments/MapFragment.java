@@ -3,11 +3,11 @@ package cs.si.stavor.fragments;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
-import cs.si.stavor.StavorApplication;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.WebAppInterface;
+import cs.si.stavor.web.WebAppInterfaceXwalk;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -92,7 +92,7 @@ public final class MapFragment extends Fragment {
 
     	simulator = ((MainActivity)getActivity()).getSimulator();
     	
-    	browser.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
+    	browser.addJavascriptInterface(new WebAppInterface(getActivity()), "Android");
     	
 		
     	simulator.setHudView(Browsers.Map,rootView, browser);
