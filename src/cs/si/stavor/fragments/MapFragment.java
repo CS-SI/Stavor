@@ -3,8 +3,11 @@ package cs.si.stavor.fragments;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
+import cs.si.stavor.StavorApplication;
+import cs.si.stavor.app.Parameters;
 import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
+import cs.si.stavor.web.WebAppInterface;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -52,7 +57,7 @@ public final class MapFragment extends Fragment {
 	/**
 	 * WebView from XWalk project to increase compatibility of WebGL
 	 */
-    private WebView mXwalkView;
+    private WebView browser;
 	
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -65,22 +70,40 @@ public final class MapFragment extends Fragment {
 		//((MainActivity)getActivity()).showTutorialMap();
 		
 		//Browser
-		if(mXwalkView==null){
+		/*if(mXwalkView==null){
 			mXwalkView = ((MainActivity)getActivity()).getBrowserMap();
-		}
-		//TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
-		//fps.setAlpha((float)0.0);
+		}*/
 		
+		browser = new WebView(getActivity().getApplicationContext());
+		//mXwalkView.setBackgroundResource(R.color.black);
+		browser.setBackgroundColor(0x00000000);
+		browser.setWebViewClient(new WebViewClient());
+		//xwalkViewMap.setResourceClient(new MyResourceClient(xwalkViewOrbit));
+        //xwalkViewMap.setUIClient(new MyUIClient(xwalkViewOrbit));
+		browser.clearCache(true);
+        
+        WebSettings browserSettingsMap = browser.getSettings();
+    	
+    	browserSettingsMap.setJavaScriptEnabled(true);
+    	browserSettingsMap.setUseWideViewPort(false);
+    	browserSettingsMap.setAllowFileAccessFromFileURLs(true);
+    	browserSettingsMap.setAllowUniversalAccessFromFileURLs(true);
+    	
+
     	simulator = ((MainActivity)getActivity()).getSimulator();
-    	simulator.setHudView(Browsers.Map,rootView, mXwalkView);
+    	
+    	browser.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
+    	
+		
+    	simulator.setHudView(Browsers.Map,rootView, browser);
     	//XGGDEBUG:MODIFY method
     	//TODO
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-    	mXwalkView.setLayoutParams(browser_params);
+    	browser.setLayoutParams(browser_params);
     	
-    	browserLayout.addView(mXwalkView);
+    	browserLayout.addView(browser);
     	
     	
     	//Play/Pause/Stop buttons
@@ -100,6 +123,7 @@ public final class MapFragment extends Fragment {
     	    @Override
     	    public void run()
     	    {
+    	    	/*
     	    	if(((MainActivity)getActivity()).getLoadBrowserFlagMap()){
     	    		//mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
     	    		//mXwalkView.load("javascript:showLoadingScreen()",null);
@@ -108,7 +132,9 @@ public final class MapFragment extends Fragment {
     	    		((MainActivity)getActivity()).resetLoadBrowserFlagMap();
     	    	}else{
     	    		mXwalkView.loadUrl("javascript:setLoaded()");
-    	    	}
+    	    	}*/
+
+            	browser.loadUrl(Parameters.Web.STARTING_PAGE_MAP);
     	    }
     	});
     	
@@ -139,7 +165,7 @@ public final class MapFragment extends Fragment {
         if(simulator!=null){
         	simulator.temporaryPause();
         }
-        if (mXwalkView != null) {
+        if (browser != null) {
             //mXwalkView.pauseTimers();
             //mXwalkView.onHide();
         }
@@ -148,7 +174,7 @@ public final class MapFragment extends Fragment {
     @Override
 	public void onResume() {//Resume browser
         super.onResume();
-        if (mXwalkView != null) {
+        if (browser != null) {
             //mXwalkView.resumeTimers();
             //mXwalkView.onShow();
         }
@@ -162,10 +188,10 @@ public final class MapFragment extends Fragment {
 		((MainActivity)getActivity()).resetBrowserProgressBarOrbit();
 		simulator.clearHud();
 		//XWalk
-        if (mXwalkView != null) {
+        if (browser != null) {
             //mXwalkView.onDestroy();
 			//System.gc();
-        	browserLayout.removeView(mXwalkView);
+        	browserLayout.removeView(browser);
         }
         //unbindDrawables(getView());
 	    super.onDetach();

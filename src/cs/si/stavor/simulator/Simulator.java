@@ -229,7 +229,8 @@ public class Simulator {
 		resetTemporaryPause();
 		if(simulatorStatus.equals(SimulatorStatus.Disconnected)){
 			//ResetMap
-			((MainActivity) activity).raiseLoadBrowserFlagMap();
+			//TODO
+			//XGGDEBUG: clear path
 			simulation.resetMapPathBuffer();
 			
 			simulationStatus = SimulationStatus.Pause;
@@ -289,7 +290,9 @@ public class Simulator {
 	public SimulationStatus stop(){
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
 			//ResetMap
-			((MainActivity) activity).raiseLoadBrowserFlagMap();
+			//ResetMap
+			//TODO
+			//XGGDEBUG: clear path
 			simulation.resetMapPathBuffer();
 			
 			play();

@@ -5,17 +5,6 @@ function setLoadingProgress(progress) {// from 0 to 100
 		  }
    	}
 }
-function reloadModel(){
-	//clearPath();
-	setLoadingProgress(100);
-}
-function setLoaded() {// from 0 to 100 
-	if (typeof Android != "undefined"){ // check the bridge 
-		  if (Android.setProgressMap!= "undefined") { // check the method
-			 Android.setProgressMap(100);
-		  }
-   	}
-}
 function updateModelState(new_state){
 	var state = JSON.parse(new_state);
 	addPoints(new_state);
