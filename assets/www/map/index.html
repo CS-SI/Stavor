@@ -11,7 +11,7 @@
   <div id="map"></div>
   <script>
 	setLoadingProgress(10);
-	var param_path_max_length = 2000;
+	var param_path_max_length = 200;
 
     	map = new OpenLayers.Map("map");
     	map.addLayer(new OpenLayers.Layer.OSM());
@@ -36,11 +36,9 @@
     
 */
 	var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
-	var pointLayer = new OpenLayers.Layer.Vector("Point Layer");
 	
 	map.addLayers([lineLayer, pointLayer]);                    
-	map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path));    
-	map.addControl(new OpenLayers.Control.DrawFeature(pointLayer, OpenLayers.Handler.Point));                                 
+	map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path));                                   
 	/*var points = new Array(
 	   new OpenLayers.Geometry.Point(1.0, 1.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 	   new OpenLayers.Geometry.Point(20.0, 20.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
@@ -62,20 +60,6 @@
 	var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
 	lineLayer.addFeatures([lineFeature]);
 
-
-	var spacecraft = new Array();
-	
-	var line_sc = new OpenLayers.Geometry.LineString(spacecraft);
-
-	var style_sc = { 
-	  strokeColor: '#ff1100', 
-	  strokeOpacity: 0.5,
-	  strokeWidth: 6
-	};
-
-	var scFeature = new OpenLayers.Feature.Vector(line_sc, null, style_sc);
-	pointLayer.addFeatures([scFeature]);
-
 	setLoadingProgress(100);
 
 //------------------------------------------------------------------------------
@@ -85,15 +69,9 @@
 		lineLayer.removeAllFeatures();
 		var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
 		lineLayer.addFeatures([lineFeature]);
-
-		line_sc = new OpenLayers.Geometry.LineString(spacecraft);
-		pointLayer.removeAllFeatures();
-		var scFeature = new OpenLayers.Feature.Vector(line_sc, null, style_sc);
-		pointLayer.addFeatures([scFeature]);
 	}
 	function clearPath(){
 		points = new Array();
-		spacecraft = new Array();
 		reDraw();
 	}
 	/*function addPoint(lat, lon){
@@ -110,8 +88,6 @@
 		if(points.length>param_path_max_length){
 			points = points.slice(points.length-param_path_max_length);
 		}
-		//Set Spacecraft		
-		spacecraft = new Array(points_ext_ol[points_ext_ol.length]);
 		reDraw();
 	}
 
