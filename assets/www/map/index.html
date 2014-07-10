@@ -3,25 +3,58 @@
         <title>OpenLayers Mobile</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="theme/default/style.mobile.css" type="text/css">
   	<script type='text/javascript' src="interface.js"></script>
   	<!--<script src="http://www.openlayers.org/api/OpenLayers.js"></script>-->
 	<script src="OpenLayers.mobile.js"></script>
+        <script src="mobile.js"></script>
+	<style>
+            html, body {
+                margin  : 0;
+                padding : 0;
+                height  : 100%;
+                width   : 100%;
+            }
+            @media only screen and (max-width: 600px) {
+                html, body {
+                    height  : 117%;
+                }
+            }
+            #map {
+                width    : 100%;
+                position : relative;
+                height   : 100%;
+            }
+            .olControlAttribution {
+                position      : absolute;
+                font-size     : 10px;
+                bottom        : 0 !important;
+                right         : 0 !important;
+                background    : rgba(0,0,0,0.1);
+                font-family   : Arial;
+                padding       : 2px 4px;
+                border-radius : 5px 0 0 0;
+            }
+            #title, #tags, #shortdesc {
+                display: none;
+            }
+        </style>
     </head>
 <body>
   <div id="map"></div>
   <script>
 	setLoadingProgress(10);
-	var param_path_max_length = 200;
+	var param_path_max_length = 5000;
 
-    	map = new OpenLayers.Map("map");
-    	map.addLayer(new OpenLayers.Layer.OSM());
+	init();
 
  	
-	    var lonLat = new OpenLayers.LonLat( 0.0 ,0.0 )
-		  .transform(
-		    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-		    map.getProjectionObject() // to Spherical Mercator Projection
-		  );
+    	var lonLat = new OpenLayers.LonLat( 0.0 ,0.0 )
+	  .transform(
+	    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+	    map.getProjectionObject() // to Spherical Mercator Projection
+	  );
  
    	var zoom=0;
 
