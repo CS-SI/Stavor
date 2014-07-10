@@ -1,8 +1,8 @@
 package cs.si.stavor.dialogs;
 
-import cs.si.stavor.R;
-import cs.si.stavor.MainActivity;
-import cs.si.stavor.StavorApplication;
+import cs.si.satcor.MainActivity;
+import cs.si.satcor.R;
+import cs.si.satcor.StavorApplication;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
 import android.app.AlertDialog;
 import android.app.Dialog;

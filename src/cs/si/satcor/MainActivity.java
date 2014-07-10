@@ -1,9 +1,6 @@
-package cs.si.stavor;
+package cs.si.satcor;
 
-import org.xwalk.core.XWalkSettings;
-import org.xwalk.core.XWalkView;
-
-import cs.si.stavor.R;
+import cs.si.satcor.R;
 import cs.si.stavor.app.Installer;
 import cs.si.stavor.app.OrekitInit;
 import cs.si.stavor.app.Parameters;
@@ -13,24 +10,17 @@ import cs.si.stavor.dialogs.ResetAppDialogFragment;
 import cs.si.stavor.dialogs.ResetDbDialogFragment;
 import cs.si.stavor.dialogs.TutorialDialogFragment;
 import cs.si.stavor.dialogs.WelcomeDialogFragment;
-import cs.si.stavor.fragments.HudFragment;
 import cs.si.stavor.fragments.MapFragment;
 import cs.si.stavor.fragments.NavigationDrawerFragment;
-import cs.si.stavor.fragments.OrbitFragment;
 import cs.si.stavor.fragments.RetainedFragment;
 import cs.si.stavor.fragments.SimulatorFragment;
-import cs.si.stavor.fragments.TestFragment;
 import cs.si.stavor.mission.MissionAndId;
 import cs.si.stavor.settings.SettingsBasicFragment;
 import cs.si.stavor.settings.SettingsExtraFragment;
 import cs.si.stavor.settings.SettingsGeneralFragment;
 import cs.si.stavor.settings.SettingsMeasuresFragment;
 import cs.si.stavor.settings.SettingsModelsFragment;
-import cs.si.stavor.settings.SettingsOrbitFragment;
 import cs.si.stavor.simulator.Simulator;
-import cs.si.stavor.web.MyResourceClient;
-import cs.si.stavor.web.MyUIClient;
-import cs.si.stavor.web.WebAppInterfaceXwalk;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
@@ -49,9 +39,6 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -95,110 +82,7 @@ public class MainActivity extends ActionBarActivity implements
 		return simulator;
 	}
 	
-	/**
-	 * Browser object
-	 */
-	private XWalkView mXwalkView;
-	private XWalkView mXwalkViewOrbit;
-	private boolean loadBrowser;
-	private boolean loadBrowserOrbit;
-	/**
-	 * Returns the simulator object
-	 * @return
-	 */
-	public XWalkView getBrowser(){
-		return mXwalkView;
-	}
-	public XWalkView getBrowserOrbit(){
-		return mXwalkViewOrbit;
-	}
-	public boolean getLoadBrowserFlag(){
-		return loadBrowser;
-	}
-	public void resetLoadBrowserFlag(){
-		loadBrowser = false;
-	}
-	public void raiseLoadBrowserFlag(){
-		loadBrowser = true;
-	}
-	public boolean getLoadBrowserFlagOrbit(){
-		return loadBrowserOrbit;
-	}
-	public void resetLoadBrowserFlagOrbit(){
-		loadBrowserOrbit = false;
-	}
-	public void raiseLoadBrowserFlagOrbit(){
-		loadBrowserOrbit = true;
-	}
-	// to know when the oncreate and onresume are triggered for the first time
-	private boolean flagActivityFirstExec = false;
-	
     public boolean flag_show_welcome = false;
-    
-    private ProgressBar browserProgressBar = null;
-    private FrameLayout browserProgressLayout = null;
-    public void setBrowserProgressBar(ProgressBar bar, FrameLayout fr){
-    	browserProgressLayout = fr;
-    	browserProgressBar = bar;
-    }
-    public void resetBrowserProgressBar(){
-    	browserProgressLayout = null;
-    	browserProgressBar = null;
-    }
-    public void setBrowserProgressValue(int progr){
-    	if(browserProgressLayout!=null && browserProgressBar!=null){
-	    	browserProgressBar.setProgress(progr);
-	    	if(progr<10000){
-	    		browserProgressLayout.setVisibility(View.VISIBLE);
-	    	}else{
-	    		Animation fadeOut = new AlphaAnimation(1.00f, 0.00f);
-                fadeOut.setDuration(1500);
-                fadeOut.setAnimationListener(new AnimationListener() {
-                    public void onAnimationStart(Animation animation) {}
-                    public void onAnimationRepeat(Animation animation) {}
-                    public void onAnimationEnd(Animation animation) {
-                    	browserProgressLayout.setVisibility(View.GONE);
-                    }
-                });
-
-                browserProgressLayout.startAnimation(fadeOut);
-	    		
-	    	}
-    	}
-    }
-    
-    
-    private ProgressBar browserProgressBarOrbit = null;
-    private FrameLayout browserProgressLayoutOrbit = null;
-    public void setBrowserProgressBarOrbit(ProgressBar bar, FrameLayout fr){
-    	browserProgressLayoutOrbit = fr;
-    	browserProgressBarOrbit = bar;
-    }
-    public void resetBrowserProgressBarOrbit(){
-    	browserProgressLayoutOrbit = null;
-    	browserProgressBarOrbit = null;
-    }
-    public void setBrowserProgressValueOrbit(int progr){
-    	if(browserProgressLayoutOrbit!=null && browserProgressBarOrbit!=null){
-	    	browserProgressBarOrbit.setProgress(progr);
-	    	if(progr<10000){
-	    		browserProgressLayoutOrbit.setVisibility(View.VISIBLE);
-	    	}else{
-	    		Animation fadeOut = new AlphaAnimation(1.00f, 0.00f);
-                fadeOut.setDuration(1500);
-                fadeOut.setAnimationListener(new AnimationListener() {
-                    public void onAnimationStart(Animation animation) {}
-                    public void onAnimationRepeat(Animation animation) {}
-                    public void onAnimationEnd(Animation animation) {
-                    	browserProgressLayoutOrbit.setVisibility(View.GONE);
-                    }
-                });
-
-                browserProgressLayoutOrbit.startAnimation(fadeOut);
-	    		
-	    	}
-    	}
-    }
     
     private ProgressBar browserProgressBarMap = null;
     private FrameLayout browserProgressLayoutMap = null;
@@ -254,7 +138,6 @@ public class MainActivity extends ActionBarActivity implements
 
         // create the fragment and data the first time
         if (dataFragment == null) {
-        	flagActivityFirstExec=true;
         	((StavorApplication)getApplication()).modelViewId = R.id.menu_views_ref_frame_xyz;
             // add the fragment
             dataFragment = new RetainedFragment();
@@ -262,53 +145,12 @@ public class MainActivity extends ActionBarActivity implements
             
             Simulator simu = new Simulator(this);
             
-            XWalkView xwalkView = new XWalkView(this.getApplicationContext(), this);
-			//mXwalkView.setBackgroundResource(R.color.black);
-			xwalkView.setBackgroundColor(0x00000000);
-			xwalkView.setResourceClient(new MyResourceClient(xwalkView));
-	        xwalkView.setUIClient(new MyUIClient(xwalkView));
-	        xwalkView.clearCache(true);
-	        
-	        XWalkSettings browserSettings = xwalkView.getSettings();
-	    	
-	    	browserSettings.setJavaScriptEnabled(true);
-	    	browserSettings.setUseWideViewPort(false);
-	    	//browserSettings.setLoadWithOverviewMode(true);
-	    	browserSettings.setAllowFileAccessFromFileURLs(true); //Maybe you don't need this rule
-	    	browserSettings.setAllowUniversalAccessFromFileURLs(true);
-	    	//browserSettings.setBuiltInZoomControls(true);
-	    	//browserSettings.setDisplayZoomControls(true);
-	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener
-	    	
-	    	//Orbit browser
-	    	XWalkView xwalkViewOrbit = new XWalkView(this.getApplicationContext(), this);
-			//mXwalkView.setBackgroundResource(R.color.black);
-			xwalkViewOrbit.setBackgroundColor(0x00000000);
-			xwalkViewOrbit.setResourceClient(new MyResourceClient(xwalkViewOrbit));
-	        xwalkViewOrbit.setUIClient(new MyUIClient(xwalkViewOrbit));
-	        xwalkViewOrbit.clearCache(true);
-	        
-	        XWalkSettings browserSettingsOrbit = xwalkViewOrbit.getSettings();
-	    	
-	    	browserSettingsOrbit.setJavaScriptEnabled(true);
-	    	browserSettingsOrbit.setUseWideViewPort(false);
-	    	browserSettingsOrbit.setAllowFileAccessFromFileURLs(true);
-	    	browserSettingsOrbit.setAllowUniversalAccessFromFileURLs(true);
-
-	    	((StavorApplication)getApplication()).jsInterfaceXwalk = new WebAppInterfaceXwalk(this, simu.getSimulationResults());
-	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterfaceXwalk, "Android");
-	    	xwalkViewOrbit.addJavascriptInterface(((StavorApplication)getApplication()).jsInterfaceXwalk, "Android");
-	    	
             MissionReaderDbHelper db_help_tmp;
             SQLiteDatabase db_tmp;
             db_help_tmp = Installer.installApkDatabase(this);
             db_tmp = db_help_tmp.getWritableDatabase();
             
             dataFragment.setData(
-            		xwalkView,
-            		true,
-            		xwalkViewOrbit,
-            		true,
             		simu,
             		db_help_tmp,
             		db_tmp,
@@ -316,29 +158,15 @@ public class MainActivity extends ActionBarActivity implements
             		);
         }
         
-        this.mXwalkView = dataFragment.getBrowser();
-        this.mXwalkViewOrbit = dataFragment.getBrowserOrbit();
-        this.loadBrowser = dataFragment.getLoadBrowser();
-        this.loadBrowserOrbit = dataFragment.getLoadBrowserOrbit();
-        
         // the data is available in dataFragment.getData()
         this.simulator = dataFragment.getSim();
         this.simulator.reconstruct(this);
-        
-        //Update javascriptInterface
-        ((StavorApplication)getApplication()).jsInterfaceXwalk.reconstruct(this, simulator.getSimulationResults());
         
 		//Install the Missions database if not installed yet and store database objects
 		((StavorApplication)getApplication()).db_help = dataFragment.getDbHelp();
 		((StavorApplication)getApplication()).db = dataFragment.getDb();
 
 		hud_panel_open = dataFragment.getHudPanelOpen();
-		
-		if(flagActivityFirstExec){
-        	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
-        	mXwalkViewOrbit.load(Parameters.Web.STARTING_PAGE_ORBIT,null);
-        	flagActivityFirstExec=false;
-        }
         
         // NAVIGATION
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
@@ -379,7 +207,7 @@ public class MainActivity extends ActionBarActivity implements
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
-					HudFragment.newInstance(position + 1)).commit();
+					MapFragment.newInstance(position + 1)).commit();
 		}else if(position==2){
 			// Display the fragment as the main content.
 	        fragmentManager
@@ -406,33 +234,15 @@ public class MainActivity extends ActionBarActivity implements
 	        		SettingsModelsFragment.newInstance(position +1)).commit();
 		}else if(position==6){
 			// Display the fragment as the main content.
-	        fragmentManager
-	        .beginTransaction()
-	        .replace(R.id.container, 
-	        		OrbitFragment.newInstance(position +1)).commit();
-		}else if(position==7){
-			// Display the fragment as the main content.
-	        fragmentManager
-	        .beginTransaction()
-	        .replace(R.id.container, 
-	        		SettingsOrbitFragment.newInstance(position +1)).commit();
-		}else if(position==8){
-			// Display the fragment as the main content.
-	        fragmentManager    
-	        .beginTransaction()
-	        .replace(R.id.container, 
-	        		MapFragment.newInstance(position +1)).commit();
-		}else if(position==9){
-			// Display the fragment as the main content.
 	        fragmentManager    
 	        .beginTransaction()
 	        .replace(R.id.container, 
 	        		SettingsGeneralFragment.newInstance(position +1)).commit();
-		}else if(position==10){
+		}else if(position==7){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
-	        .replace(R.id.container, TestFragment.newInstance(position + 1)).commit();
+	        .replace(R.id.container, SettingsGeneralFragment.newInstance(position + 1)).commit();
 		}else{
 			
 		}
@@ -466,15 +276,6 @@ public class MainActivity extends ActionBarActivity implements
 			break;
 		case 8:
 			mTitle = getString(R.string.title_section8);
-			break;
-		case 9:
-			mTitle = getString(R.string.title_section9);
-			break;
-		case 10:
-			mTitle = getString(R.string.title_section10);
-			break;
-		case 11:
-			mTitle = getString(R.string.title_section11);
 			break;
 		}
 	}
@@ -700,22 +501,11 @@ public class MainActivity extends ActionBarActivity implements
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	super.onActivityResult(requestCode, resultCode, data);
-        if (mXwalkView != null) {
-            mXwalkView.onActivityResult(requestCode, resultCode, data);
-        }
-        if (mXwalkViewOrbit != null) {
-            mXwalkViewOrbit.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
-        if (mXwalkView != null) {
-            mXwalkView.onNewIntent(intent);
-        }
-        if (mXwalkViewOrbit != null) {
-            mXwalkViewOrbit.onNewIntent(intent);
-        }
+    	super.onNewIntent(intent);
     }
 	
 	@Override
@@ -725,15 +515,8 @@ public class MainActivity extends ActionBarActivity implements
         if(isFinishing()){
         	simulator.disconnect();
             ((StavorApplication)getApplication()).db_help.close();
-            mXwalkView.onDestroy();
-            mXwalkViewOrbit.onDestroy();
-            //mXwalkViewMap.onDestroy();
         }else{
         	dataFragment.setData(
-        			this.mXwalkView,
-        			this.loadBrowser,
-        			this.mXwalkViewOrbit,
-        			this.loadBrowserOrbit,
         			this.simulator,
         			((StavorApplication)getApplication()).db_help,
         			((StavorApplication)getApplication()).db,

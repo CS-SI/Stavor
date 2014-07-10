@@ -1,7 +1,7 @@
 package cs.si.stavor.dialogs;
 
-import cs.si.stavor.R;
-import cs.si.stavor.MainActivity;
+import cs.si.satcor.MainActivity;
+import cs.si.satcor.R;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;

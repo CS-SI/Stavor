@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cs.si.stavor"
+    package="cs.si.satcor"
     android:versionCode="1120"
     android:versionName="1.1.2" >
     <!-- VersionCode: [3]version+[1]architecture e.g 1.0.2arm is 1020, 1.1.3x86 is 1131  -->
@@ -14,7 +14,7 @@
         android:targetSdkVersion="19" />
 
     <application
-        android:name="cs.si.stavor.StavorApplication"
+        android:name="cs.si.satcor.StavorApplication"
         android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:largeHeap="true"
@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:theme="@style/splashScreenTheme" >
         <activity
-            android:name="cs.si.stavor.MainActivity"
+            android:name="cs.si.satcor.MainActivity"
             android:label="@string/app_name"
              >
             <intent-filter>
@@ -32,13 +32,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cs.si.stavor.AboutActivity"
+            android:name="cs.si.satcor.AboutActivity"
             android:label="@string/about"
             android:screenOrientation="portrait"
              >
         </activity>
         <activity
-            android:name="cs.si.stavor.MissionActivity"
+            android:name="cs.si.satcor.MissionActivity"
             android:label="@string/mission_editor"
         	android:theme="@style/nonSplashScreenTheme"
              >

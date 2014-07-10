@@ -1,6 +1,6 @@
 package cs.si.stavor.dialogs;
 
-import cs.si.stavor.R;
+import cs.si.satcor.R;
 import cs.si.stavor.app.Installer;
 import android.app.AlertDialog;
 import android.app.Dialog;

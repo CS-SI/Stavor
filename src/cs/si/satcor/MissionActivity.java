@@ -1,4 +1,4 @@
-package cs.si.stavor;
+package cs.si.satcor;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import org.orekit.time.DateTimeComponents;
 import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
 
-import cs.si.stavor.R;
+import cs.si.satcor.R;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;

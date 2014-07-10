@@ -1,7 +1,7 @@
 package cs.si.stavor.settings;
 
-import cs.si.stavor.R;
-import cs.si.stavor.MainActivity;
+import cs.si.satcor.MainActivity;
+import cs.si.satcor.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
@@ -37,7 +37,6 @@ public class SettingsMeasuresFragment extends PreferenceFragment {
 		super.onAttach(activity);
 		((MainActivity) activity).onSectionAttached(getArguments().getInt(
 				ARG_SECTION_NUMBER));
-		((MainActivity) activity).raiseLoadBrowserFlag();
 	}
 	
     @Override

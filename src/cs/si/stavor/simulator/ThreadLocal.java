@@ -17,7 +17,7 @@ import org.orekit.propagation.SpacecraftState;
 import org.orekit.propagation.analytical.KeplerianPropagator;
 import org.orekit.time.AbsoluteDate;
 
-import cs.si.stavor.R;
+import cs.si.satcor.R;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import android.os.Handler;
@@ -113,7 +113,6 @@ public class ThreadLocal extends Thread{
     }
 
 	private long time_tmp_data = 0;
-    private long time_tmp_gui = 0;
 	private void publishProgress(){
         mHandler.post(new Runnable() {
             @Override
@@ -121,12 +120,6 @@ public class ThreadLocal extends Thread{
         		//Update model by push
             	simulator.getSimulationResults().pushSimulationModel();
             	
-            	//Update GUI HUD
-            	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
-            		
-            		time_tmp_gui = System.nanoTime();
-            		simulator.getSimulationResults().updateHUD();
-            	}
             }
         });
 	}

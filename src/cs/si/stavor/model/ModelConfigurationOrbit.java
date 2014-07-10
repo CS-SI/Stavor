@@ -1,6 +1,6 @@
 package cs.si.stavor.model;
 
-import cs.si.stavor.R;
+import cs.si.satcor.R;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;

@@ -3,16 +3,13 @@
 	
     <string name="app_exit_prevent_message">Press back again to close this app</string>
     <string name="title_section1">Simulator</string>
-    <string name="title_section2">Attitude</string>
+    <string name="title_section2">Map</string>
     <string name="title_section3">Basic indicators</string>
     <string name="title_section4">Extra indicators</string>
     <string name="title_section5">Measures</string>
     <string name="title_section6">Models</string>
-    <string name="title_section7">Orbit</string>
-    <string name="title_section8">Models</string>
-    <string name="title_section9">Map</string>
-    <string name="title_section10">Preferences</string>
-    <string name="title_section11">WebGL test</string>
+    <string name="title_section7">Preferences</string>
+    <string name="title_section8">WebGL test</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_screenshot">About</string>
@@ -73,10 +70,9 @@
     <string name="about_project_license">Project license:</string>
     <string name="about_project_license_value">Free</string>
     <string name="about_table_orekit">Orekit</string>
-    <string name="about_table_crosswalk">Crosswalk-Webview-</string>
+    <string name="about_table_openlayers">OpenLayers</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
-    <string name="about_table_threejs">ThreeJS</string>
     <string name="about_table_gson">GSON</string>
     <string name="about_table_version">Version</string>
     <string name="about_table_license">License</string>
@@ -91,7 +87,7 @@
     <string name="about_langs">-EN- FR ES</string>
     <string name="about_platform">Architecture:</string>
     <string name="about_app">App:</string>
-    <string name="about_appname">Spacecraft Three-dimensional Attitude Visualization using ORekit library</string>
+    <string name="about_appname">SAtellite Tracking and Coverage using ORekit library</string>
     
     <string name="tutorial_continue">Continue</string>
     <string name="tutorial_dont_show_again">Don\'t show again</string>

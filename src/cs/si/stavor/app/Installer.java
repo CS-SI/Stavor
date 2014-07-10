@@ -10,8 +10,8 @@ import org.orekit.errors.OrekitException;
 import org.orekit.time.AbsoluteDate;
 import org.orekit.time.TimeScalesFactory;
 
-import cs.si.stavor.R;
-import cs.si.stavor.MainActivity;
+import cs.si.satcor.MainActivity;
+import cs.si.satcor.R;
 import cs.si.stavor.database.MissionReaderDbHelper;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;

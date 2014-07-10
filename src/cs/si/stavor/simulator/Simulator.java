@@ -1,9 +1,7 @@
 package cs.si.stavor.simulator;
 
-import org.xwalk.core.XWalkView;
-
-import cs.si.stavor.R;
-import cs.si.stavor.MainActivity;
+import cs.si.satcor.MainActivity;
+import cs.si.satcor.R;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import cs.si.stavor.model.Browsers;
@@ -129,8 +127,8 @@ public class Simulator {
 	 * @param v
 	 * @param x
 	 */
-	public void setHudView(Browsers type, View v, View x){
-		simulation.setHud(type, v,x);
+	public void setHudView(Browsers type, View x){
+		simulation.setHud(type, x);
 	}
 	
 	public void clearHud(){

@@ -1,6 +1,6 @@
 package cs.si.stavor.web;
 
-import cs.si.stavor.MainActivity;
+import cs.si.satcor.MainActivity;
 import cs.si.stavor.model.ModelSimulation;
 import android.app.Activity;
 import android.webkit.JavascriptInterface;

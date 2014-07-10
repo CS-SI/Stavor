@@ -1,6 +1,6 @@
 package unused;
 
-import cs.si.stavor.StavorApplication;
+import cs.si.satcor.StavorApplication;
 import android.content.Intent;
 import android.content.Context;
 import android.net.Uri;

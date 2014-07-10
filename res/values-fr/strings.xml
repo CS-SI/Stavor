@@ -3,16 +3,13 @@
 	
     <string name="app_exit_prevent_message">Appuyez de nouveau pour fermer l\'application</string>
     <string name="title_section1">Simulateur</string>
-    <string name="title_section2">Attitude</string>
+    <string name="title_section2">Carte</string>
     <string name="title_section3">Indicateurs basiques</string>
     <string name="title_section4">Indicateurs extra</string>
     <string name="title_section5">Mesures</string>
     <string name="title_section6">Modèles</string>
-    <string name="title_section7">Orbite</string>
-    <string name="title_section8">Modèles</string>
-    <string name="title_section9">Carte</string>
-    <string name="title_section10">Paramètres</string>
-    <string name="title_section11">Essayes WebGL</string>
+    <string name="title_section7">Paramètres</string>
+    <string name="title_section8">Essayes WebGL</string>
     <string name="navigation_drawer_open">Ouvrez le menu de navigation</string>
     <string name="navigation_drawer_close">Ferme le menu de navigation</string>
     <string name="action_screenshot">À propos</string>
@@ -74,10 +71,9 @@
     <string name="about_project_license">Licence du projet:</string>
     <string name="about_project_license_value">Gratuit</string>
     <string name="about_table_orekit">Orekit</string>
-    <string name="about_table_crosswalk">Crosswalk-Webview-</string>
+    <string name="about_table_openlayers">OpenLayers</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
-    <string name="about_table_threejs">ThreeJS</string>
     <string name="about_table_gson">GSON</string>
     <string name="about_table_version">Version</string>
     <string name="about_table_license">Licence</string>
