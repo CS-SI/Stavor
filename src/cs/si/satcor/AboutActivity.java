@@ -25,7 +25,6 @@ public class AboutActivity extends Activity {
 		
 		//Load Views
 		TextView tx_package = (TextView) findViewById(R.id.TextViewVersionPackage);
-		TextView tx_platform = (TextView) findViewById(R.id.TextViewAboutPlatform);
 		TextView tx_license = (TextView) findViewById(R.id.TextViewProjectLicense);
 		TextView tx_start_date = (TextView) findViewById(R.id.TextViewProjectStart);
 		TextView tx_install_date = (TextView) findViewById(R.id.TextViewVersionInstallDate);
@@ -44,11 +43,6 @@ public class AboutActivity extends Activity {
 			tx_version_num.setText(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
 			int versionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
 			String code = Integer.toString(versionCode);
-			if(code.substring(code.length()-1).equals("0")){
-				tx_platform.setText("ARM");
-			}else{
-				tx_platform.setText("x86");
-			}
 			tx_openlayers_package.setText(getString(R.string.about_table_openlayers));
 			tx_start_date.setText(Parameters.About.project_start_date);
 			tx_license.setText(getString(R.string.about_project_license_value));

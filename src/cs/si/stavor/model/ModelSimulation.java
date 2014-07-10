@@ -12,6 +12,7 @@ import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
 import org.orekit.utils.Constants;
 
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 
 import cs.si.satcor.MainActivity;
 import cs.si.satcor.R;
+import cs.si.stavor.app.Parameters;
 
 /**
  * Contains and handles both the model information and configuration
@@ -44,19 +46,19 @@ public class ModelSimulation {
      * before the simulator is played to save time
      */
     public void preInitialize(){
-    	try {
-			if(sunFrame==null){
-				sunFrame = CelestialBodyFactory.getSun().getInertiallyOrientedFrame();
-			}
-			if(earthFixedFrame==null){
+    	try{
+	    	if(earthFixedFrame==null){
 				earthFixedFrame = CelestialBodyFactory.getEarth().getBodyOrientedFrame();
-			}
-			if(utc==null){
-				utc = TimeScalesFactory.getUTC();
+	    	}
+			if(earth==null && earthFixedFrame!=null){
+				earth = new OneAxisEllipsoid(
+	    				Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
+	    		 		Constants.WGS84_EARTH_FLATTENING,
+	    		 		earthFixedFrame);
 			}
     	} catch (OrekitException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			activity.showErrorDialog(activity.getString(R.string.error_initializing_orekit), false);
 		}
     }
     
@@ -107,15 +109,10 @@ public class ModelSimulation {
     	}
 	}
     
-    private TimeScale utc;
-    private Frame sunFrame, earthFixedFrame;
+    private OneAxisEllipsoid earth;
+    private Frame earthFixedFrame;
     public void updateSimulation(SpacecraftState scs, int sim_progress){
     	if(selectedBrowser.equals(Browsers.Map)){
-    		
-    		OneAxisEllipsoid earth = new OneAxisEllipsoid(
-    				Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
-    		 		Constants.WGS84_EARTH_FLATTENING,
-    		 		earthFixedFrame);
     		 try {
     		 	GeodeticPoint gp = earth.transform(scs.getPVCoordinates().getPosition(), scs.getFrame(), scs.getDate());
     		 	double lat = gp.getLatitude()*180/Math.PI;
@@ -133,8 +130,14 @@ public class ModelSimulation {
 	public synchronized void resetMapPathBuffer() {
 		mapPathBuffer.clear();
 	}
+	
+	private double tmp_lat=0, tmp_lon=0;
 	public synchronized void addToMapPathBuffer(double lat, double lon) {
-		mapPathBuffer.add(new MapPoint(lat,lon));
+		if(Math.abs(tmp_lat-lat)>Parameters.Map.marker_pos_threshold || Math.abs(tmp_lon-lon)>Parameters.Map.marker_pos_threshold){
+			tmp_lat = lat;
+			tmp_lon = lon;
+			mapPathBuffer.add(new MapPoint(lat,lon));
+		}
 	}
 	public synchronized MapPoint[] getMapPathBuffer(){
 		MapPoint[] r =

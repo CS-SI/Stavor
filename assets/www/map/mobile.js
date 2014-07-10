@@ -33,7 +33,7 @@ var init = function () {
                 transitionEffect: 'resize'
             })
         ],
-        center: new OpenLayers.LonLat(742000, 5861000),
-        zoom: 3
+        center: new OpenLayers.LonLat(0, 0),
+        zoom: 0
     });
 };

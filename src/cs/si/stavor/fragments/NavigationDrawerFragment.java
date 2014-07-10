@@ -166,7 +166,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.simulator_s);
 		        	    	break;
 		        	    case 1:
-		        	    	iconView.setImageResource(R.drawable.attitude_s);
+		        	    	iconView.setImageResource(R.drawable.map_s);
 		        	    	break;
 		        	    case 2:
 		        	    	iconView.setImageResource(R.drawable.indicators_s);
@@ -198,7 +198,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.simulator);
 		        	    	break;
 		        	    case 1:
-		        	    	iconView.setImageResource(R.drawable.attitude);
+		        	    	iconView.setImageResource(R.drawable.map);
 		        	    	break;
 		        	    case 2:
 		        	    	iconView.setImageResource(R.drawable.indicators);

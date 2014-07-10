@@ -72,4 +72,7 @@ public class Parameters {
 		public static final String TEST_PAGE_3 = "http://www.khronos.org/registry/webgl/sdk/tests/webgl-conformance-tests.html";
 		public static final String LOCALHOST = "http://localhost:8080/";
 	}
+	public static class Map {
+		public static final double marker_pos_threshold = 0.1;//In deg
+	}
 }
