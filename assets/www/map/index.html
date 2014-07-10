@@ -37,7 +37,7 @@
 */
 	var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
 	
-	map.addLayers([lineLayer, pointLayer]);                    
+	map.addLayer(lineLayer);                    
 	map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path));                                   
 	/*var points = new Array(
 	   new OpenLayers.Geometry.Point(1.0, 1.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
