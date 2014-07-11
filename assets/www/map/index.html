@@ -46,6 +46,9 @@
   <script>
 	setLoadingProgress(10);
 	
+	//DYNAMIC PARAMS
+	var follow_sc = false;
+
 	//CONFIG PARAMS
 	var payload_aperture = 5;//Degrees
 
@@ -63,7 +66,11 @@
 	var param_path_max_length = 5000;
 
 	//VOLATILE PARAMS
+	var sc_latitude = 0;
+	var sc_longitude = 0;
 	var sc_altitude = 0;
+
+	getInitialization();
 
 	init();
 
@@ -160,14 +167,24 @@
 
 		//Spacecraft
 		var radius = sc_altitude*Math.tan((payload_aperture*Math.PI/180)/2);
+		var sc_position = points[points.length-1];
 		var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
-		    points[points.length-1].getCentroid(),
+		    sc_position,
 		    radius,
 		    20 // According to the API you only need 20 sides to approximate a circle.
 		);
 		sc_layer.removeAllFeatures();
 		var sc_feature = new OpenLayers.Feature.Vector(circle, null, sc_style);
 		sc_layer.addFeatures([sc_feature]);
+		//Follow Spacecraft
+		if(follow_sc){
+		    	var lonLat = new OpenLayers.LonLat( sc_longitude ,sc_latitude )
+			  .transform(
+			    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+			    map.getProjectionObject() // to Spherical Mercator Projection
+			  );
+			map.setCenter(lonLat, map.getZoom());
+		}
 
 		//Stations		
 		stations_layer.removeAllFeatures();
@@ -200,6 +217,8 @@
 		if(points.length>param_path_max_length){
 			points = points.slice(points.length-param_path_max_length);
 		}
+		sc_latitude = points_ext[points_ext.length-1].latitude;
+		sc_longitude = points_ext[points_ext.length-1].longitude;
 		sc_altitude = points_ext[points_ext.length-1].altitude;
 		reDraw();
 	}
