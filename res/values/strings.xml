@@ -188,7 +188,9 @@
     <string name="sim_mis_description">Description:</string>
     <string name="sim_stop_simulator_first">Stop the simulator first</string>
     
-    
+    <string name="pref_payload">Payload</string>
+    <string name="pref_title_payload_aperture">Aperture angle</string>
+    <string name="pref_summary_payload_aperture">Aperture angle of the camera or antenna in degrees</string>
     <string name="pref_apk_install">Application install</string>
     <string name="pref_performance">Performance</string>
     <string name="pref_general">General</string>

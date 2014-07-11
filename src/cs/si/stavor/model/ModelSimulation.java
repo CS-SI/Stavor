@@ -16,6 +16,7 @@ import android.webkit.WebView;
 import com.google.gson.Gson;
 
 import cs.si.satcor.MainActivity;
+import cs.si.satcor.StavorApplication;
 import cs.si.stavor.app.Parameters;
 
 /**
@@ -25,7 +26,7 @@ import cs.si.stavor.app.Parameters;
  */
 public class ModelSimulation {
 	private Gson gson = new Gson();
-    private ModelConfiguration config;
+    private ModelConfigurationMap config;
     private MainActivity activity;
     private WebView browser;
     private boolean isBrowserLoaded;
@@ -34,7 +35,9 @@ public class ModelSimulation {
     public ModelSimulation(MainActivity acv){
     	isBrowserLoaded = false;
     	activity=acv;
-    	config = new ModelConfiguration(activity.getApplicationContext());
+    	config = new ModelConfigurationMap(activity.getApplicationContext(),
+    			getMapPathBuffer(),
+    			((StavorApplication)activity.getApplication()).follow_sc);
     }
     
     /**
@@ -87,8 +90,10 @@ public class ModelSimulation {
      * Returns the Initialization for the WebGL model in a JavaScript readable format
      * @return
      */
-	public synchronized String getInitializationJSON() {
-    	config = new ModelConfiguration(activity.getApplicationContext());
+	public synchronized String getInitializationMapJSON() {
+    	config = new ModelConfigurationMap(activity.getApplicationContext(),
+    			getMapPathBuffer(),
+    			((StavorApplication)activity.getApplication()).follow_sc);
         return gson.toJson(config);
     }
     
@@ -99,8 +104,16 @@ public class ModelSimulation {
     	if(browser!=null && isBrowserLoaded){
     		if(selectedBrowser.equals(Browsers.Map)){
     			if(mapPathBuffer.size()!=0){
-    				browser.loadUrl("javascript:updateModelState('"+gson.toJson(getMapPathBuffer())+"')");
+    				browser.loadUrl("javascript:updateModelState('"+gson.toJson(getMapPathBufferLast())+"')");
     			}
+    		}
+    	}
+	}
+    
+    private void clearSimulationModel(){
+    	if(browser!=null && isBrowserLoaded){
+    		if(selectedBrowser.equals(Browsers.Map)){
+				browser.loadUrl("javascript:clearPath()");
     		}
     	}
 	}
@@ -126,6 +139,7 @@ public class ModelSimulation {
 	private ArrayList<MapPoint> mapPathBuffer = new ArrayList<MapPoint>();
 	public synchronized void resetMapPathBuffer() {
 		mapPathBuffer.clear();
+		clearSimulationModel();
 	}
 	
 	private double tmp_lat=0, tmp_lon=0;
@@ -139,7 +153,11 @@ public class ModelSimulation {
 	public synchronized MapPoint[] getMapPathBuffer(){
 		MapPoint[] r =
 				  (MapPoint[])mapPathBuffer.toArray(new MapPoint[mapPathBuffer.size()]);
-		resetMapPathBuffer();
+		//resetMapPathBuffer();
+		return r;
+	}
+	public synchronized MapPoint[] getMapPathBufferLast(){
+		MapPoint[] r = {mapPathBuffer.get(mapPathBuffer.size())};
 		return r;
 	}
 	

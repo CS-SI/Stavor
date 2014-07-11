@@ -24,7 +24,8 @@ function getInitialization(){
 			
 		stations = config.stations;
 		payload_aperture = config.payload_aperture;
-		follow_sc = follow_sc;
+		follow_sc = config.follow_sc;
+		points = config.points;
 		
 	  }
    }

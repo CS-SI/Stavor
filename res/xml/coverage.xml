@@ -1,0 +1,14 @@
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_screen_coverage">
+    <PreferenceCategory 
+        android:title="@string/pref_payload"
+        android:key="@string/pref_key_payload">
+        <EditTextPreference
+            android:key="@string/pref_key_payload_aperture"
+            android:summary="@string/pref_summary_payload_aperture"
+            android:title="@string/pref_title_payload_aperture"
+            android:defaultValue="5"
+            android:numeric="decimal" />
+    </PreferenceCategory>
+</PreferenceScreen>

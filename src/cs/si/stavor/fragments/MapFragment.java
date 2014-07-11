@@ -91,7 +91,7 @@ public final class MapFragment extends Fragment {
 
     	simulator = ((MainActivity)getActivity()).getSimulator();
     	
-    	browser.addJavascriptInterface(new WebAppInterface(getActivity()), "Android");
+    	browser.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
     	
 		
     	simulator.setHudView(Browsers.Map, browser);

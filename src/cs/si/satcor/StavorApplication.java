@@ -19,7 +19,7 @@ public class StavorApplication extends Application {
     public SQLiteCursorLoader loader = null;
     public SQLiteDatabase db;
     
-    public int modelViewId = R.id.menu_views_ref_frame_xyz;
+    public boolean follow_sc = false;
 	
 	public void setSearchTerm(String searchTerm) {
 		this.searchTerm = searchTerm;

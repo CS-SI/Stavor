@@ -48,6 +48,7 @@
 	
 	//DYNAMIC PARAMS
 	var follow_sc = false;
+	var points = new Array();
 
 	//CONFIG PARAMS
 	var payload_aperture = 5;//Degrees
@@ -112,7 +113,6 @@
 	   new OpenLayers.Geometry.Point(40.0, 40.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject())
 	);*/
 
-	var points = new Array();
 
 	var line = new OpenLayers.Geometry.LineString(points);
 

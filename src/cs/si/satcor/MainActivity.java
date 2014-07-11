@@ -15,11 +15,8 @@ import cs.si.stavor.fragments.NavigationDrawerFragment;
 import cs.si.stavor.fragments.RetainedFragment;
 import cs.si.stavor.fragments.SimulatorFragment;
 import cs.si.stavor.mission.MissionAndId;
-import cs.si.stavor.settings.SettingsBasicFragment;
-import cs.si.stavor.settings.SettingsExtraFragment;
+import cs.si.stavor.settings.SettingsCoverageFragment;
 import cs.si.stavor.settings.SettingsGeneralFragment;
-import cs.si.stavor.settings.SettingsMeasuresFragment;
-import cs.si.stavor.settings.SettingsModelsFragment;
 import cs.si.stavor.simulator.Simulator;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -138,7 +135,7 @@ public class MainActivity extends ActionBarActivity implements
 
         // create the fragment and data the first time
         if (dataFragment == null) {
-        	((StavorApplication)getApplication()).modelViewId = R.id.menu_views_ref_frame_xyz;
+        	((StavorApplication)getApplication()).follow_sc = false;
             // add the fragment
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();
@@ -213,13 +210,13 @@ public class MainActivity extends ActionBarActivity implements
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsBasicFragment.newInstance(position +1)).commit();
+	        		SettingsCoverageFragment.newInstance(position +1)).commit();
 		}else if(position==3){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsExtraFragment.newInstance(position +1)).commit();
+	        		SettingsCoverageFragment.newInstance(position +1)).commit();
 		}else if(position==4){
 			// Display the fragment as the main content.
 	        fragmentManager    

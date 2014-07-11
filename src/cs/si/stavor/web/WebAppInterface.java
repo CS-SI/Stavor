@@ -14,10 +14,12 @@ import android.widget.Toast;
  */
 public final class WebAppInterface {
     Activity activity;
+    ModelSimulation sim;
 
     /** Instantiate the interface and set the context */
-    public WebAppInterface(Activity a) {
+    public WebAppInterface(Activity a, ModelSimulation simu) {
         activity = a;
+        sim = simu;
     }
 
     /** Show a toast from the web page */
@@ -39,6 +41,12 @@ public final class WebAppInterface {
 	    });
     }
 
+
+    /** get orbit model initialization */
+    @JavascriptInterface
+    public String getInitializationMapJSON() {
+        return sim.getInitializationMapJSON();
+    }
     
 	public void reconstruct(Activity act,
 			ModelSimulation s) {
