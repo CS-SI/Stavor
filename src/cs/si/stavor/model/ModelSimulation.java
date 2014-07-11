@@ -113,8 +113,9 @@ public class ModelSimulation {
     		 	GeodeticPoint gp = earth.transform(scs.getPVCoordinates().getPosition(), scs.getFrame(), scs.getDate());
     		 	double lat = gp.getLatitude()*180/Math.PI;
     		 	double lon = gp.getLongitude()*180/Math.PI;
+    		 	double alt = gp.getAltitude();
     		 	if(!Double.isNaN(lat)&&!Double.isNaN(lon))
-    		 		addToMapPathBuffer(lat, lon);
+    		 		addToMapPathBuffer(lat, lon, alt);
     		} catch (OrekitException e) {
     			e.printStackTrace();
     		}
@@ -128,11 +129,11 @@ public class ModelSimulation {
 	}
 	
 	private double tmp_lat=0, tmp_lon=0;
-	public synchronized void addToMapPathBuffer(double lat, double lon) {
+	public synchronized void addToMapPathBuffer(double lat, double lon, double alt) {
 		if(Math.abs(tmp_lat-lat)>Parameters.Map.marker_pos_threshold || Math.abs(tmp_lon-lon)>Parameters.Map.marker_pos_threshold){
 			tmp_lat = lat;
 			tmp_lon = lon;
-			mapPathBuffer.add(new MapPoint(lat,lon));
+			mapPathBuffer.add(new MapPoint(lat,lon,alt));
 		}
 	}
 	public synchronized MapPoint[] getMapPathBuffer(){
@@ -143,12 +144,14 @@ public class ModelSimulation {
 	}
 	
 	class MapPoint{
-		public MapPoint(double lat, double lon){
+		public MapPoint(double lat, double lon, double alt){
 			latitude = lat;
 			longitude = lon;
+			altitude = alt;
 		}
 		double latitude = 0;
 		double longitude = 0;
+		double altitude = 0;
 	}
 
 	
