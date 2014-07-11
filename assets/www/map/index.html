@@ -71,11 +71,8 @@
 	var sc_longitude = 0;
 	var sc_altitude = 0;
 
-	getInitialization();
-
 	init();
 
- 	
     	var lonLat = new OpenLayers.LonLat( 0.0 ,0.0 )
 	  .transform(
 	    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
@@ -103,6 +100,8 @@
 
 	var stations_layer = new OpenLayers.Layer.Vector("Stations Layer");
 	map.addLayer(stations_layer);
+
+	getInitialization();
 	//var polyOptions = {sides: 40};                              
 	//map.addControl(new OpenLayers.Control.DrawFeature(sc_layer, OpenLayers.Handler.RegularPolygon,{handlerOptions: polyOptions}));     
 	/*var points = new Array(
@@ -205,7 +204,6 @@
 		sc_layer.removeAllFeatures();
 		stations_layer.removeAllFeatures();
 		//reDraw();
-		console.log("clearPath");
 	}
 	/*function addPoint(lat, lon){
 		points.push(new OpenLayers.Geometry.Point(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
@@ -225,7 +223,6 @@
 		sc_longitude = points_ext[points_ext.length-1].longitude;
 		sc_altitude = points_ext[points_ext.length-1].altitude;
 		reDraw();
-		console.log("addPoints");
 	}
 
 

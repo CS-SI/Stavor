@@ -19,14 +19,14 @@ function showAndroidToast(toast) {
 function getInitialization(){
 	if (typeof Android != "undefined"){ // check the bridge 
 	  if (Android.getInitializationMapJSON!= "undefined") { // check the method
-		 
 		var config = JSON.parse(Android.getInitializationMapJSON());
 			
 		stations = config.stations;
 		payload_aperture = config.payload_aperture;
 		follow_sc = config.follow_sc;
-		points = config.points;
-		
+		if(config.points.length>0){
+			addPoints(config.points);
+		}
 	  }
    }
 }
