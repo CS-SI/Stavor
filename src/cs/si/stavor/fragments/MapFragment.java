@@ -3,6 +3,7 @@ package cs.si.stavor.fragments;
 
 import cs.si.satcor.MainActivity;
 import cs.si.satcor.R;
+import cs.si.satcor.StavorApplication;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
@@ -12,15 +13,19 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 
 /**
@@ -52,6 +57,7 @@ public final class MapFragment extends Fragment {
 	
 	private Simulator simulator;
 	LinearLayout browserLayout;
+	Button views_menu;
 	
 	/**
 	 * WebView from XWalk project to increase compatibility of WebGL
@@ -109,6 +115,19 @@ public final class MapFragment extends Fragment {
     	simulator.setControlButtons(but_play,but_stop);
     	simulator.setCorrectSimulatorControls();
     	
+    	views_menu = (Button) rootView.findViewById(R.id.buttonMissionNew);
+    	views_menu.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				showPopup(arg0);
+			}
+    		
+    	});
+    	
+    	views_menu.setText(titleOfViewId(((StavorApplication)getActivity().getApplication()).follow_sc));
+    	
+    	
+    	
     	ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBarBrowser);
     	FrameLayout progressBarLayout = (FrameLayout) rootView.findViewById(R.id.frameLayoutProgress);
     	progressBar.setProgress(10);
@@ -137,6 +156,53 @@ public final class MapFragment extends Fragment {
     	
 		return rootView;
 	}
+	
+
+	private String titleOfViewId(int id){
+		switch (id) {
+	        case R.id.menu_mapviews_free:
+	        	return getString(R.string.menu_mapviews_free);
+	        case R.id.menu_mapviews_locked:
+	        	return getString(R.string.menu_mapviews_locked);
+	        default:
+	        	return getString(R.string.menu_mapviews_locked);
+	    }
+	}
+	
+	/**
+	 * Shows the visualization Views menu
+	 * @param v
+	 */
+    private void showPopup(View v) {
+    	PopupMenu popup = new PopupMenu(getActivity(), v);
+
+        // This activity implements OnMenuItemClickListener
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        	@Override
+            public boolean onMenuItemClick(MenuItem item) {
+        		String com_view = (String)item.getTitle();
+        		String command;
+            	((StavorApplication)getActivity().getApplication()).follow_sc = item.getItemId();
+                switch (item.getItemId()) {
+                    case R.id.menu_mapviews_free:
+                    	command = getString(R.string.key_mapviews_free);
+                    	break;
+                    case R.id.menu_mapviews_locked:
+                    	command = getString(R.string.key_mapviews_locked);
+                    	break;
+                    default:
+                        return false;
+                }
+                views_menu.setText(com_view);
+                browser.loadUrl("javascript:changeView('"+command+"')");
+                return true;
+            }
+        });
+        popup.inflate(R.menu.views_map);
+        popup.show();
+
+    }
+    
 	
 	@Override
 	public void onDestroyView(){

@@ -225,6 +225,20 @@
 		reDraw();
 	}
 
+function changeView(view_mode){
+	switch(view_mode){
+		case "Free"://free
+			follow_sc = false;
+			break;
+		case "Locked"://locked
+			follow_sc = true;
+			break;
+		default://xyz
+			follow_sc = false;
+			break;
+	}
+}
+
 
   </script>
 </body></html>

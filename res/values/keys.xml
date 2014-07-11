@@ -137,5 +137,8 @@
     <string name="key_views_earth">Earth</string>
     <string name="key_views_sun">Sun</string>
     
+    <string name="key_mapviews_free">Free</string>
+    <string name="key_mapviews_locked">Locked</string>
+    
     
 </resources>

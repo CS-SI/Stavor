@@ -62,6 +62,9 @@
     <string name="menu_views_earth">Terre</string>
     <string name="menu_views_sun">Soleil</string>
     
+    <string name="menu_mapviews_free">Libre</string>
+    <string name="menu_mapviews_locked">Saisi</string>
+    
     <string name="about">À propos</string>
     <string name="cs_site">http://c-s.fr/</string>
     <string name="about_table_project">Projet</string>

@@ -13,7 +13,7 @@ import android.preference.PreferenceManager;
  */
 public class ModelConfigurationMap {
 	
-	public ModelConfigurationMap(Context ctx, MapPoint[] path, boolean follow_sc_view){
+	public ModelConfigurationMap(Context ctx, MapPoint[] path, int follow_sc_view){
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
 		try{
 			payload_aperture = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_payload_aperture), Double.toString(payload_aperture)));
@@ -22,7 +22,11 @@ public class ModelConfigurationMap {
 			System.err.println("Error loading configuration parameter: "+e.getMessage());
 		}
 		points = path;
-		follow_sc = follow_sc_view;
+		if(follow_sc_view == R.id.menu_mapviews_free)
+			follow_sc = false;
+		else if(follow_sc_view == R.id.menu_mapviews_locked){
+			follow_sc = true;
+		}
 		
 	}
 	

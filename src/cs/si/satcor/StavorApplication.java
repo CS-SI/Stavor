@@ -19,7 +19,7 @@ public class StavorApplication extends Application {
     public SQLiteCursorLoader loader = null;
     public SQLiteDatabase db;
     
-    public boolean follow_sc = false;
+    public int follow_sc = R.id.menu_mapviews_free;
 	
 	public void setSearchTerm(String searchTerm) {
 		this.searchTerm = searchTerm;
