@@ -162,10 +162,10 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.map_s);
 		        	    	break;
 		        	    case 2:
-		        	    	iconView.setImageResource(R.drawable.indicators_s);
+		        	    	iconView.setImageResource(R.drawable.fov_s);
 		        	    	break;
 		        	    case 3:
-		        	    	iconView.setImageResource(R.drawable.indicators_s);
+		        	    	iconView.setImageResource(R.drawable.station_s);
 		        	    	break;
 		        	    case 4:
 		        	    	iconView.setImageResource(R.drawable.preferences_s);
@@ -185,10 +185,10 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.map);
 		        	    	break;
 		        	    case 2:
-		        	    	iconView.setImageResource(R.drawable.indicators);
+		        	    	iconView.setImageResource(R.drawable.fov);
 		        	    	break;
 		        	    case 3:
-		        	    	iconView.setImageResource(R.drawable.indicators);
+		        	    	iconView.setImageResource(R.drawable.station);
 		        	    	break;
 		        	    case 4:
 		        	    	iconView.setImageResource(R.drawable.preferences);
