@@ -41,8 +41,8 @@ public class AboutActivity extends Activity {
 		try {
 			tx_package.setText(getPackageManager().getPackageInfo(getPackageName(), 0).packageName);
 			tx_version_num.setText(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
-			int versionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
-			String code = Integer.toString(versionCode);
+			//int versionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+			//String code = Integer.toString(versionCode);
 			tx_openlayers_package.setText(getString(R.string.about_table_openlayers));
 			tx_start_date.setText(Parameters.About.project_start_date);
 			tx_license.setText(getString(R.string.about_project_license_value));

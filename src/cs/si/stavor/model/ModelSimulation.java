@@ -8,18 +8,14 @@ import org.orekit.bodies.OneAxisEllipsoid;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
 import org.orekit.propagation.SpacecraftState;
-import org.orekit.time.TimeScale;
-import org.orekit.time.TimeScalesFactory;
 import org.orekit.utils.Constants;
 
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 
 import com.google.gson.Gson;
 
 import cs.si.satcor.MainActivity;
-import cs.si.satcor.R;
 import cs.si.stavor.app.Parameters;
 
 /**
