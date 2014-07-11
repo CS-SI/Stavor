@@ -16,3 +16,16 @@ function showAndroidToast(toast) {
 		  }
    	}
 }
+function getInitialization(){
+	if (typeof Android != "undefined"){ // check the bridge 
+	  if (Android.getInitializationMapJSON!= "undefined") { // check the method
+		 
+		var config = JSON.parse(Android.getInitializationMapJSON());
+			
+		stations = config.stations;
+		payload_aperture = config.payload_aperture;
+		follow_sc = follow_sc;
+		
+	  }
+   }
+}
