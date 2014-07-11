@@ -24,7 +24,7 @@ div.olControlZoom a {
     line-height: 28px;
     text-shadow: 0 0 3px rgba(0,0,0,0.8);
     background: #130085; /* fallback for IE - IE6 requires background shorthand*/
-    background: rgba(0, 60, 136, 0.5);
+    background: rgba(66, 66, 66, 0.5);
     filter: alpha(opacity=80);
 }
 a.olControlZoomIn {
@@ -35,12 +35,12 @@ a.olControlZoomOut {
 }
 div.olControlZoom a:hover {
     background: #130085; /* fallback for IE */
-    background: rgba(0, 60, 136, 0.7);
+    background: rgba(66, 66, 66, 0.7);
     filter: alpha(opacity=100);
 }
 @media only screen and (max-width: 600px) {
     div.olControlZoom a:hover {
-        background: rgba(0, 60, 136, 0.5);
+        background: rgba(66, 66, 66, 0.5);
     }
 }
 div.olMapViewport {
