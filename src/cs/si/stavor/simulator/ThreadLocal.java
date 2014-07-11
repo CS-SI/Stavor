@@ -59,6 +59,7 @@ public class ThreadLocal extends Thread{
 						simulator.reset=false;
 						setSimulationParameters();
 						simulator.pause();
+						clearBrowserPath();
 					}
 					simulator.playCondition.block();
 					if(simulator.cancel){
@@ -119,6 +120,17 @@ public class ThreadLocal extends Thread{
             public void run() {
         		//Update model by push
             	simulator.getSimulationResults().pushSimulationModel();
+            	
+            }
+        });
+	}
+	
+	private void clearBrowserPath(){
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+        		//Clear model by push
+            	simulator.getSimulationResults().resetMapPathBuffer();
             	
             }
         });

@@ -201,7 +201,11 @@
 	}
 	function clearPath(){
 		points = new Array();
-		reDraw();
+		lineLayer.removeAllFeatures();
+		sc_layer.removeAllFeatures();
+		stations_layer.removeAllFeatures();
+		//reDraw();
+		console.log("clearPath");
 	}
 	/*function addPoint(lat, lon){
 		points.push(new OpenLayers.Geometry.Point(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
@@ -221,6 +225,7 @@
 		sc_longitude = points_ext[points_ext.length-1].longitude;
 		sc_altitude = points_ext[points_ext.length-1].altitude;
 		reDraw();
+		console.log("addPoints");
 	}
 
 

@@ -157,7 +157,7 @@ public class ModelSimulation {
 		return r;
 	}
 	public synchronized MapPoint[] getMapPathBufferLast(){
-		MapPoint[] r = {mapPathBuffer.get(mapPathBuffer.size())};
+		MapPoint[] r = {mapPathBuffer.get(mapPathBuffer.size()-1)};
 		return r;
 	}
 	

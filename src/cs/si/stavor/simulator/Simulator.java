@@ -287,12 +287,7 @@ public class Simulator {
 	 */
 	public SimulationStatus stop(){
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
-			//ResetMap
-			//ResetMap
-			//TODO
-			//XGGDEBUG: clear path
-			simulation.resetMapPathBuffer();
-			
+			//simulation.resetMapPathBuffer();
 			play();
 			reset=true;
 		}
