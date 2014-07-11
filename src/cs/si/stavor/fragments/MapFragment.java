@@ -126,7 +126,15 @@ public final class MapFragment extends Fragment {
     	
     	views_menu.setText(titleOfViewId(((StavorApplication)getActivity().getApplication()).follow_sc));
     	
-    	
+    	ImageButton but_clear = (ImageButton)rootView.findViewById(R.id.imageButtonClear);
+    	but_clear.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				simulator.getSimulationResults().resetMapPathBuffer();
+            	browser.loadUrl("javascript:clearPath()");
+			}
+    		
+    	});
     	
     	ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBarBrowser);
     	FrameLayout progressBarLayout = (FrameLayout) rootView.findViewById(R.id.frameLayoutProgress);
@@ -229,6 +237,8 @@ public final class MapFragment extends Fragment {
         	simulator.temporaryPause();
         }
         if (browser != null) {
+        	browser.pauseTimers();
+        	browser.onPause();
             //mXwalkView.pauseTimers();
             //mXwalkView.onHide();
         }
@@ -238,6 +248,8 @@ public final class MapFragment extends Fragment {
 	public void onResume() {//Resume browser
         super.onResume();
         if (browser != null) {
+        	browser.resumeTimers();
+        	browser.onResume();
             //mXwalkView.resumeTimers();
             //mXwalkView.onShow();
         }
