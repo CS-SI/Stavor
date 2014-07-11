@@ -222,27 +222,10 @@ public class MainActivity extends ActionBarActivity implements
 	        		SettingsExtraFragment.newInstance(position +1)).commit();
 		}else if(position==4){
 			// Display the fragment as the main content.
-	        fragmentManager
-	        .beginTransaction()
-	        .replace(R.id.container, 
-	        		SettingsMeasuresFragment.newInstance(position +1)).commit();
-		}else if(position==5){
-			// Display the fragment as the main content.
-	        fragmentManager
-	        .beginTransaction()
-	        .replace(R.id.container, 
-	        		SettingsModelsFragment.newInstance(position +1)).commit();
-		}else if(position==6){
-			// Display the fragment as the main content.
 	        fragmentManager    
 	        .beginTransaction()
 	        .replace(R.id.container, 
 	        		SettingsGeneralFragment.newInstance(position +1)).commit();
-		}else if(position==7){
-			// Display the fragment as the main content.
-	        fragmentManager
-	        .beginTransaction()
-	        .replace(R.id.container, SettingsGeneralFragment.newInstance(position + 1)).commit();
 		}else{
 			
 		}
@@ -267,15 +250,6 @@ public class MainActivity extends ActionBarActivity implements
 			break;
 		case 5:
 			mTitle = getString(R.string.title_section5);
-			break;
-		case 6:
-			mTitle = getString(R.string.title_section6);
-			break;
-		case 7:
-			mTitle = getString(R.string.title_section7);
-			break;
-		case 8:
-			mTitle = getString(R.string.title_section8);
 			break;
 		}
 	}
@@ -377,11 +351,9 @@ public class MainActivity extends ActionBarActivity implements
     public void onBackPressed() {
     	if (!mNavigationDrawerFragment.isDrawerOpen()) {//If the navigation menu is not opened
 	    	int sel = mNavigationDrawerFragment.getSelectedPosition();
-	    	if(sel==7){//If it is currently in a configuration section, goto Hud
-	    		showSection(6);
-	    	}else if (sel>1 && sel<6){//If it is in Hud, goto simulator screen
+	    	if (sel>1 && sel<4){
 	    		showSection(1);
-	    	}else if (sel==1 || sel==6 || sel==8 || sel==9){//If it is in Hud, goto simulator screen
+	    	}else if (sel==1 || sel==4){//If it is in Map, goto simulator screen
 	    		showSection(0);
 	    	}else if (sel==0){//If it is in Simulator, warn user before exit
 		    	if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {//Wait some time for confirmation

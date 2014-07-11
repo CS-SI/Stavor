@@ -117,9 +117,6 @@ public class NavigationDrawerFragment extends Fragment {
                     getString(R.string.title_section3),
                     getString(R.string.title_section4),
                     getString(R.string.title_section5),
-                    getString(R.string.title_section6),
-                    getString(R.string.title_section7),
-                    getString(R.string.title_section8),
                 };
         }else{
         	sections = new String[]{
@@ -128,9 +125,6 @@ public class NavigationDrawerFragment extends Fragment {
                     getString(R.string.title_section3),
                     getString(R.string.title_section4),
                     getString(R.string.title_section5),
-                    getString(R.string.title_section6),
-                    getString(R.string.title_section7),
-                    /*getString(R.string.title_section8),*/
                 };
         }
         
@@ -146,8 +140,7 @@ public class NavigationDrawerFragment extends Fragment {
         		View rowView;
         		boolean first_level = (position==0 ||
         				position==1 ||
-        				position==6 ||
-        				position==7);
+        				position==4);
         		if(first_level){
         			rowView = inflater.inflate(R.layout.nav_item, parent, false);
         		}else{
@@ -175,16 +168,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.indicators_s);
 		        	    	break;
 		        	    case 4:
-		        	    	iconView.setImageResource(R.drawable.measures_s);
-		        	    	break;
-		        	    case 5:
-		        	    	iconView.setImageResource(R.drawable.model_s);
-		        	    	break;
-		        	    case 6:
 		        	    	iconView.setImageResource(R.drawable.preferences_s);
-		        	    	break;
-		        	    case 7:
-		        	    	iconView.setImageResource(R.drawable.test_s);
 		        	    	break;
 	        	    }
         	    	if(first_level){
@@ -207,16 +191,7 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.indicators);
 		        	    	break;
 		        	    case 4:
-		        	    	iconView.setImageResource(R.drawable.measures);
-		        	    	break;
-		        	    case 5:
-		        	    	iconView.setImageResource(R.drawable.model);
-		        	    	break;
-		        	    case 6:
 		        	    	iconView.setImageResource(R.drawable.preferences);
-		        	    	break;
-		        	    case 7:
-		        	    	iconView.setImageResource(R.drawable.test);
 		        	    	break;
 	        	    }
         	    	if(first_level){

@@ -4,12 +4,9 @@
     <string name="app_exit_prevent_message">Press back again to close this app</string>
     <string name="title_section1">Simulator</string>
     <string name="title_section2">Map</string>
-    <string name="title_section3">Basic indicators</string>
-    <string name="title_section4">Extra indicators</string>
-    <string name="title_section5">Measures</string>
-    <string name="title_section6">Models</string>
-    <string name="title_section7">Preferences</string>
-    <string name="title_section8">WebGL test</string>
+    <string name="title_section3">Coverage</string>
+    <string name="title_section4">Stations</string>
+    <string name="title_section5">Preferences</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_screenshot">About</string>
@@ -92,7 +89,7 @@
     <string name="tutorial_continue">Continue</string>
     <string name="tutorial_dont_show_again">Don\'t show again</string>
     <string name="tutorial_title_simulator">Tutorial Simulator</string>
-    <string name="tutorial_message_simulator">You are in the Simulator screen, in here you can chose between the local simulator or the remote client. In the first one you will find a list of missions; you can create, edit and select the mission for the simulator. The remote client connects with an external simulator over a network. Once you connect the simulator, the application will redirect you to the Attitude screen.</string>
+    <string name="tutorial_message_simulator">You are in the Simulator screen, in here you can chose between the local simulator or the remote client. In the first one you will find a list of missions; you can create, edit and select the mission for the simulator. The remote client connects with an external simulator over a network. Once you connect the simulator, the application will redirect you to the Mapa screen.</string>
     <string name="tutorial_title_display">Tutorial Attitude</string>
     <string name="tutorial_message_display">You are now in the Attitude screen, in here you can visualize the simulated attitude. You will find the controls of the simulation, a button to select the view and a retractable panel with detailed information.</string>
     <string name="tutorial_title_orbit">Tutorial Orbit</string>

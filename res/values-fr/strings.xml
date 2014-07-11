@@ -4,12 +4,9 @@
     <string name="app_exit_prevent_message">Appuyez de nouveau pour fermer l\'application</string>
     <string name="title_section1">Simulateur</string>
     <string name="title_section2">Carte</string>
-    <string name="title_section3">Indicateurs basiques</string>
-    <string name="title_section4">Indicateurs extra</string>
-    <string name="title_section5">Mesures</string>
-    <string name="title_section6">Modèles</string>
-    <string name="title_section7">Paramètres</string>
-    <string name="title_section8">Essayes WebGL</string>
+    <string name="title_section3">Couverture</string>
+    <string name="title_section4">Stations</string>
+    <string name="title_section5">Paramètres</string>
     <string name="navigation_drawer_open">Ouvrez le menu de navigation</string>
     <string name="navigation_drawer_close">Ferme le menu de navigation</string>
     <string name="action_screenshot">À propos</string>
@@ -93,7 +90,7 @@
     <string name="tutorial_continue">Continuer</string>
     <string name="tutorial_dont_show_again">Ne pas afficher de nouveau</string>
     <string name="tutorial_title_simulator">Tutoriel Simulateur</string>
-    <string name="tutorial_message_simulator">Vous êtes sur ​​l\'écran du simulateur, ici vous pouvez choisir entre un simulateur local ou éloigné. Dans le premier, vous trouverez une liste de missions; vous pouvez créer, modifier et sélectionnez la mission pour le simulateur. Le client éloigné se connecte à un simulateur externe par la réseau. Une fois connecté au simulateur, l\'application va vous rediriger vers l\'écran d\'Attitude.</string>
+    <string name="tutorial_message_simulator">Vous êtes sur ​​l\'écran du simulateur, ici vous pouvez choisir entre un simulateur local ou éloigné. Dans le premier, vous trouverez une liste de missions; vous pouvez créer, modifier et sélectionnez la mission pour le simulateur. Le client éloigné se connecte à un simulateur externe par la réseau. Une fois connecté au simulateur, l\'application va vous rediriger vers l\'écran de la Carte.</string>
     <string name="tutorial_title_display">Tutoriel Attitude</string>
     <string name="tutorial_message_display">Vous êtes actuellement sur l\'écran d\'Attitude, ici vous pouvez voir l\'attitude simulée. Vous trouverez les commandes de simulation, un bouton pour sélectionner la vue et un panneau rétractable avec des informations détaillées.</string>
     <string name="tutorial_title_orbit">Tutoriel Orbite</string>
