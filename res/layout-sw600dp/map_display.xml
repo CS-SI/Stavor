@@ -31,18 +31,18 @@
 
             <Button
                 android:id="@+id/buttonMissionNew"
-                android:layout_width="90dp"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/view_selector"
-                android:minHeight="30dp"
+                android:minHeight="45dp"
                 android:text="@string/menu_mapviews_free"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageButton
                 android:id="@+id/imageButtonClear"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginRight="15dp"
                 android:contentDescription="@string/dummy"
                 android:scaleType="fitCenter"
@@ -50,16 +50,16 @@
 
             <ImageButton
                 android:id="@+id/imageButtonPlay"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:contentDescription="@string/dummy"
                 android:scaleType="fitCenter"
                 android:src="@drawable/play" />
 
             <ImageButton
                 android:id="@+id/imageButtonStop"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:contentDescription="@string/dummy"
                 android:scaleType="fitCenter"
                 android:src="@drawable/stop" />
@@ -88,8 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
             android:indeterminate="false"
             android:indeterminateOnly="false"
             android:max="10000"
@@ -97,8 +97,8 @@
 
         <ImageView
             android:id="@+id/imageViewProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_marginBottom="100dp"
             android:scaleType="fitCenter"
