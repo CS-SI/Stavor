@@ -66,13 +66,21 @@ public class ResetAppDialogFragment extends DialogFragment {
 	 * Restarts the application in order to reload all configurations
 	 */
 	private void resetApplication(){
-		Context context = getActivity().getBaseContext();
+		/*Context context = getActivity().getBaseContext();
 		Intent mStartActivity = new Intent(context, MainActivity.class);
 		int mPendingIntentId = 123456;
 		PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId,    mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
 		AlarmManager mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 		mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
-		System.exit(0);
+		System.exit(0);*/
+		
+		
+		/*Intent i = getActivity().getBaseContext().getPackageManager()
+	             .getLaunchIntentForPackage( getActivity().getBaseContext().getPackageName() );
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(i);*/
+		
+		getActivity().recreate();
 	}
 
 }
