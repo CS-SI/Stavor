@@ -54,10 +54,12 @@
 	var payload_beamwidth = 5;//Degrees
 
 	var station_a = new Object();
+	station_a.name = "AAA";
 	station_a.latitude = 20;
 	station_a.longitude = 20;
 	station_a.beamwidth = 5;
 	var station_b = new Object();
+	station_b.name = "BBB";
 	station_b.latitude = -20;
 	station_b.longitude = -20;
 	station_b.beamwidth = 7;
@@ -98,7 +100,27 @@
 	var sc_layer = new OpenLayers.Layer.Vector("SC Layer");
 	map.addLayer(sc_layer);
 
-	var stations_layer = new OpenLayers.Layer.Vector("Stations Layer");
+
+	var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
+	renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
+
+	var polygonStyle = 
+		OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+	polygonStyle.strokeColor = "#00FF00";
+	polygonStyle.strokeOpacity = "0.4";
+	polygonStyle.strokeWidth = "0.1";
+	polygonStyle.fillColor = "#22FF00";
+	polygonStyle.fillOpacity = 0.2;
+	polygonStyle.strokeWidth = 1;
+	polygonStyle.label = "${label}";
+	polygonStyle.labelOutlineColor = "white";
+	polygonStyle.labelOutlineWidth = 3;
+	polygonStyle.fontSize="10px"
+
+	
+	var smap = new OpenLayers.StyleMap({"default": polygonStyle});
+
+	var stations_layer = new OpenLayers.Layer.Vector("Stations Layer", {"styleMap": smap});
 	map.addLayer(stations_layer);
 
 	getInitialization();
@@ -194,7 +216,10 @@
 			    radius,
 			    20 // According to the API you only need 20 sides to approximate a circle.
 			);
-			var station_feature = new OpenLayers.Feature.Vector(circle, null, station_style);
+			var station_feature = new OpenLayers.Feature.Vector(circle, null, polygonStyle);
+			station_feature.attributes = {
+				label:stations[arrayIndex].name
+			}
 			stations_layer.addFeatures([station_feature]);
 		}
 	}
