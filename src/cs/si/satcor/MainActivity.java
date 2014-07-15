@@ -14,10 +14,12 @@ import cs.si.stavor.fragments.MapFragment;
 import cs.si.stavor.fragments.NavigationDrawerFragment;
 import cs.si.stavor.fragments.RetainedFragment;
 import cs.si.stavor.fragments.SimulatorFragment;
+import cs.si.stavor.fragments.StationsFragment;
 import cs.si.stavor.mission.MissionAndId;
 import cs.si.stavor.settings.SettingsCoverageFragment;
 import cs.si.stavor.settings.SettingsGeneralFragment;
 import cs.si.stavor.simulator.Simulator;
+import cs.si.stavor.station.StationAndId;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
@@ -216,7 +218,7 @@ public class MainActivity extends ActionBarActivity implements
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
-	        		SettingsCoverageFragment.newInstance(position +1)).commit();
+	        		StationsFragment.newInstance(position +1)).commit();
 		}else if(position==4){
 			// Display the fragment as the main content.
 	        fragmentManager    
@@ -317,6 +319,29 @@ public class MainActivity extends ActionBarActivity implements
 		b.putSerializable("MISSION",mission);
 		myIntent.putExtras(b);
 		MainActivity.this.startActivity(myIntent);
+	}
+	
+	/**
+	 * Starts the Station editor activity in create mode
+	 */
+	public void showStationCreator() {
+		//TODO
+		//XGGDEBUG:IMPLEMENT
+		/*Intent myIntent = new Intent(MainActivity.this, StationActivity.class);
+		MainActivity.this.startActivity(myIntent);*/
+	}
+	
+	/**
+	 * Starts the Station editor activity in edit mode
+	 */
+	public void showStationEditor(StationAndId station){
+		//TODO
+		//XGGDEBUG:IMPLEMENT
+		/*Intent myIntent = new Intent(MainActivity.this, StationActivity.class);
+		Bundle b = new Bundle();
+		b.putSerializable("MISSION",mission);
+		myIntent.putExtras(b);
+		MainActivity.this.startActivity(myIntent);*/
 	}
 
 	/**

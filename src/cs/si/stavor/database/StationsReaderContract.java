@@ -13,6 +13,7 @@ public final class StationsReaderContract {
 	/* Inner class that defines the table contents */
     public static abstract class StationEntry implements BaseColumns {
         public static final String TABLE_NAME = "station";
+        public static final String COLUMN_NAME_ENABLED = "enabled";
         public static final String COLUMN_NAME_NAME = "name";
         public static final String COLUMN_NAME_LATITUDE = "latitude";
         public static final String COLUMN_NAME_LONGITUDE = "longitude";
@@ -21,6 +22,7 @@ public final class StationsReaderContract {
     }
 
     private static final String DOUBLE_TYPE = " DOUBLE";
+    private static final String BOOLEAN_TYPE = " BOOLEAN";
     private static final String TEXT_TYPE = " TEXT";
     //private static final String SERIALIZED_TYPE = " BLOB";
     private static final String COMMA_SEP = ",";
@@ -28,6 +30,7 @@ public final class StationsReaderContract {
     static final String SQL_CREATE_ENTRIES =
         "CREATE TABLE " + StationEntry.TABLE_NAME + " (" +
         		StationEntry._ID + " INTEGER PRIMARY KEY," +
+        		StationEntry.COLUMN_NAME_ENABLED + TEXT_TYPE + COMMA_SEP +
         		StationEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
         		StationEntry.COLUMN_NAME_LATITUDE + DOUBLE_TYPE + COMMA_SEP +
         		StationEntry.COLUMN_NAME_LONGITUDE + DOUBLE_TYPE + COMMA_SEP +

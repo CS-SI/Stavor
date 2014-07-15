@@ -22,7 +22,7 @@ function getInitialization(){
 		var config = JSON.parse(Android.getInitializationMapJSON());
 			
 		stations = config.stations;
-		payload_aperture = config.payload_aperture;
+		payload_beamwidth = config.payload_beamwidth;
 		follow_sc = config.follow_sc;
 		if(config.points.length>0){
 			addPoints(config.points);

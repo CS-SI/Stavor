@@ -107,6 +107,8 @@
     <string name="dialog_continue">Continue</string>
     <string name="dialog_install_message">The default models and data for the simulator have been installed in the Orekit data root:</string>
     
+    <string name="dialog_delete_title_station">Delete Ground Station</string>
+    <string name="dialog_delete_message_station">You are going to delete the ground station: </string>
     <string name="dialog_delete_title">Delete Mission</string>
     <string name="dialog_delete_message">You are going to delete the mission: </string>
     <string name="dialog_delete_confirm">Delete</string>
@@ -176,9 +178,11 @@
     <string name="sim_local_mission_not_removable">This mission cannot be deleted</string>
     <string name="sim_local_mission_not_editable">This mission cannot be edited</string>
     <string name="sim_local_select_first_a_mission">Select a mission first</string>
+    <string name="select_first_a_station">Select a station first</string>
     <string name="sim_local_simulator_connected">Simulator started!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Error, cannot deserialize selected mission</string>
     <string name="sim_local_cannot_find_selected_mission_in_db">Error, cannot find selected mission in database</string>
+    <string name="cannot_find_selected_station_in_db">Error, cannot find selected station in database</string>
     <string name="sim_orekit_init_error">Simulator initialization error</string>
     <string name="sim_orekit_prop_error">Simulator propagation error</string>
     <string name="sim_remote_simulator_connected">Remote simulator connected!</string>
@@ -192,8 +196,8 @@
     <string name="sim_stop_simulator_first">Stop the simulator first</string>
     
     <string name="pref_payload">Payload</string>
-    <string name="pref_title_payload_aperture">Aperture angle</string>
-    <string name="pref_summary_payload_aperture">Aperture angle of the camera or antenna in degrees</string>
+    <string name="pref_title_payload_beamwidth">Beam width angle</string>
+    <string name="pref_summary_payload_beamwidth">Beam width angle of the camera or antenna in degrees</string>
     <string name="pref_apk_install">Application install</string>
     <string name="pref_performance">Performance</string>
     <string name="pref_general">General</string>

@@ -51,16 +51,16 @@
 	var points = new Array();
 
 	//CONFIG PARAMS
-	var payload_aperture = 5;//Degrees
+	var payload_beamwidth = 5;//Degrees
 
 	var station_a = new Object();
 	station_a.latitude = 20;
 	station_a.longitude = 20;
-	station_a.aperture = 5;
+	station_a.beamwidth = 5;
 	var station_b = new Object();
 	station_b.latitude = -20;
 	station_b.longitude = -20;
-	station_b.aperture = 7;
+	station_b.beamwidth = 7;
 	var stations = new Array(station_a,station_b);
 
 	//HARD-CODED PARAMS
@@ -165,7 +165,7 @@
 		lineLayer.addFeatures([lineFeature]);
 
 		//Spacecraft
-		var radius = sc_altitude*Math.tan((payload_aperture*Math.PI/180)/2);
+		var radius = sc_altitude*Math.tan((payload_beamwidth*Math.PI/180)/2);
 		var sc_position = points[points.length-1];
 		var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
 		    sc_position,
@@ -188,7 +188,7 @@
 		//Stations		
 		stations_layer.removeAllFeatures();
 		for (var arrayIndex in stations){
-			var radius = sc_altitude*Math.tan((stations[arrayIndex].aperture*Math.PI/180)/2);
+			var radius = sc_altitude*Math.tan((stations[arrayIndex].beamwidth*Math.PI/180)/2);
 			var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
 			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 			    radius,

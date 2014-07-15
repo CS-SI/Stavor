@@ -12,12 +12,12 @@ import org.orekit.time.TimeScalesFactory;
 
 import cs.si.satcor.MainActivity;
 import cs.si.satcor.R;
-import cs.si.station.GroundStation;
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
 import cs.si.stavor.database.StationsReaderContract.StationEntry;
 import cs.si.stavor.mission.Mission;
+import cs.si.stavor.station.GroundStation;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
@@ -265,6 +265,7 @@ public class Installer {
 		//******** GROUND STATIONS ************
 		//First Example VIL-2
 		GroundStation gs = new GroundStation();
+		gs.enabled = true;
 		gs.name="ESA/ESAC VIL-2 S-Band";
 		gs.latitude=40.442592;
 		gs.longitude=-3.951583;
@@ -277,6 +278,7 @@ public class Installer {
 		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
 		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
 		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
+		values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
 
 		
 		// Insert the new row, returning the primary key value of the new row
@@ -289,6 +291,7 @@ public class Installer {
 		
 		//Second Example KRU
 		gs = new GroundStation();
+		gs.enabled = false;
 		gs.name="KOUROU S-Band";
 		gs.latitude=5.251439;
 		gs.longitude=-52.804664;
@@ -301,6 +304,7 @@ public class Installer {
 		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
 		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
 		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
+		values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
 
 		
 		// Insert the new row, returning the primary key value of the new row

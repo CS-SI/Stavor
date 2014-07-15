@@ -108,6 +108,8 @@
     <string name="dialog_continue">Continuer</string>
     <string name="dialog_install_message">Les modèles et données par défaut pour le simulateur ont été installés dans la racine de données d\'Orekit:</string>
     
+    <string name="dialog_delete_title_station">Supprimer Station Sol</string>
+    <string name="dialog_delete_message_station">Vous êtes en train de supprimer la station sol: </string>
     <string name="dialog_delete_title">Supprimer Mission</string>
     <string name="dialog_delete_message">Vous êtes en train de supprimer la mission: </string>
     <string name="dialog_delete_confirm">Supprimer</string>
@@ -177,9 +179,11 @@
     <string name="sim_local_mission_not_removable">Cette mission ne peut pas être supprimé</string>
     <string name="sim_local_mission_not_editable">Cette mission ne peut pas être modifié</string>
     <string name="sim_local_select_first_a_mission">Sélectionnez premier la mission</string>
+    <string name="select_first_a_station">Sélectionnez premier la station</string>
     <string name="sim_local_simulator_connected">Simulateur lancé!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Erreur , ne pouvait pas désérialiser la mission sélectionnée</string>
     <string name="sim_local_cannot_find_selected_mission_in_db">Erreur , n\'a pas pu trouver la Mission sélectionné dans la base de données</string>
+    <string name="cannot_find_selected_mission_in_db">Erreur , n\'a pas pu trouver la Station sélectionné dans la base de données</string>
     <string name="sim_orekit_init_error">Erreur d\'initialisation du simulateur</string>
     <string name="sim_orekit_prop_error">Erreur de propagation du simulateur</string>
     <string name="sim_remote_simulator_connected">Simulateur éloigné connecté!</string><!-- Check -->
@@ -193,8 +197,8 @@
     <string name="sim_stop_simulator_first">Arrêtez le simulateur avant</string>
     
     <string name="pref_payload">Charge utile</string>
-    <string name="pref_title_payload_aperture">Angle d\'ouverture</string>
-    <string name="pref_summary_payload_aperture">Angle d\'ouverture de la caméra ou de l\'antenne en degrés</string>
+    <string name="pref_title_payload_beamwidth">Angle d\'ouverture</string>
+    <string name="pref_summary_payload_beamwidth">Angle d\'ouverture de la caméra ou de l\'antenne en degrés</string>
     <string name="pref_apk_install">Application install</string>
     <string name="pref_performance">Performance</string>
     <string name="pref_general">Général</string>
