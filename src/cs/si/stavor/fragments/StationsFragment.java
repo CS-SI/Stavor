@@ -91,6 +91,7 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 		
 		//Load missions in list
 		stationsList = (ListView) rootView.findViewById(R.id.listView1);
+		
 		stationsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -109,14 +110,9 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 				}
 			}
 		});
-		/*adapter = new SimpleCursorAdapter(
-	    		this.getActivity().getApplicationContext(),
-	            R.layout.station_list_item, null,
-	            new String[] {"_id", "name", "enabled"},
-	            new int[] {R.id.textViewStationId, R.id.textViewStationName, R.id.checkBoxStationEnabled}, 0 );
-		*/
+		
 		adapter = new StationsCursorAdapter(
-	    		this.getActivity().getApplicationContext(), null);
+	    		this.getActivity().getApplicationContext(), null, ((StavorApplication)getActivity().getApplication()).loader);
 
 		
 		stationsList.setAdapter(adapter);

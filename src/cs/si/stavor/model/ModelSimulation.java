@@ -36,6 +36,7 @@ public class ModelSimulation {
     	isBrowserLoaded = false;
     	activity=acv;
     	config = new ModelConfigurationMap(activity.getApplicationContext(),
+    			((StavorApplication)activity.getApplication()).db,
     			getMapPathBuffer(),
     			((StavorApplication)activity.getApplication()).follow_sc);
     }
@@ -92,6 +93,7 @@ public class ModelSimulation {
      */
 	public synchronized String getInitializationMapJSON() {
     	config = new ModelConfigurationMap(activity.getApplicationContext(),
+    			((StavorApplication)activity.getApplication()).db,
     			getMapPathBuffer(),
     			((StavorApplication)activity.getApplication()).follow_sc);
         return gson.toJson(config);

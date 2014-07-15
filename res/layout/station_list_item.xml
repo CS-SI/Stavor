@@ -15,10 +15,10 @@
             android:id="@+id/textViewStationName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/checkBox1"
+            android:layout_alignBaseline="@+id/checkBoxStationEnabled"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/checkBox1"
+            android:layout_toLeftOf="@+id/checkBoxStationEnabled"
             android:text="TextView"
             android:textColor="@color/white" />
 
@@ -27,7 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:focusable="false" />
 
     </RelativeLayout>
 
