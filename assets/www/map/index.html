@@ -188,7 +188,7 @@
 		//Stations		
 		stations_layer.removeAllFeatures();
 		for (var arrayIndex in stations){
-			var radius = sc_altitude*Math.tan((stations[arrayIndex].beamwidth*Math.PI/180)/2);
+			var radius = (sc_altitude-stations[arrayIndex].ellipsoid_elevation)*Math.tan((stations[arrayIndex].beam_width*Math.PI/180)/2);
 			var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
 			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 			    radius,

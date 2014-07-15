@@ -63,7 +63,7 @@ public class ModelConfigurationMap {
 					    null                                 // The sort order
 					    );
 			if (c != null && c.getCount() > 0) {
-				for(int i = 0; i<=c.getCount(); i++){
+				for(int i = 0; i<c.getCount(); i++){
 					c.moveToPosition(i);
 					
 					String station_name = c.getString(c.getColumnIndex(StationEntry.COLUMN_NAME_NAME));
@@ -75,7 +75,7 @@ public class ModelConfigurationMap {
 					stationsList.add(gs);
 				}
 			}
-			stations = (GroundStation[]) stationsList.toArray();
+			stations = stationsList.toArray(new GroundStation[stationsList.size()]);
 		}
 	}
 	

@@ -266,7 +266,7 @@ public class Installer {
 		//First Example VIL-2
 		GroundStation gs = new GroundStation();
 		gs.enabled = true;
-		gs.name="ESA/ESAC VIL-2 S-Band";
+		gs.name="Villafranca S-Band";
 		gs.latitude=40.442592;
 		gs.longitude=-3.951583;
 		gs.beam_width=0.6;
@@ -292,7 +292,7 @@ public class Installer {
 		//Second Example KRU
 		gs = new GroundStation();
 		gs.enabled = false;
-		gs.name="KOUROU S-Band";
+		gs.name="Kourou S-Band";
 		gs.latitude=5.251439;
 		gs.longitude=-52.804664;
 		gs.beam_width=0.6;
@@ -314,7 +314,86 @@ public class Installer {
 		         values);
 		if(newRowId==-1)
 			result=false;
+		
+		//Third Example Cebreros
+		gs = new GroundStation();
+		gs.enabled = false;
+		gs.name="Cebreros X-Band";
+		gs.latitude=40.452689;
+		gs.longitude=-4.36755;
+		gs.beam_width=0.074;
+		gs.ellipsoid_elevation=-794.095;
+		
+		values = new ContentValues();
+		values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+		values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
+		values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
+
+		
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				StationEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId==-1)
+			result=false;
 	
+
+		//Fourth Example Kiruna
+		gs = new GroundStation();
+		gs.enabled = false;
+		gs.name="Kiruna S-Band";
+		gs.latitude=67.857128;
+		gs.longitude=20.964325;
+		gs.beam_width=0.65;
+		gs.ellipsoid_elevation=402.1724;
+		
+		values = new ContentValues();
+		values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+		values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
+		values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
+
+		
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				StationEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId==-1)
+			result=false;
+	
+		//Fifth Example Kiruna
+				gs = new GroundStation();
+				gs.enabled = false;
+				gs.name="Maspalomas S-Band";
+				gs.latitude=27.762889;
+				gs.longitude=-15.6338;
+				gs.beam_width=0.65;
+				gs.ellipsoid_elevation=205.1177;
+				
+				values = new ContentValues();
+				values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+				values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+				values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+				values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+				values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
+				values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
+
+				
+				// Insert the new row, returning the primary key value of the new row
+				newRowId = db.insert(
+						StationEntry.TABLE_NAME,
+						null,
+				         values);
+				if(newRowId==-1)
+					result=false;
+			
 		
 		return result;
 	}
