@@ -1,6 +1,6 @@
 package cs.si.stavor.fragments;
 
-import cs.si.stavor.database.MissionReaderDbHelper;
+import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.simulator.Simulator;
 import android.app.Fragment;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,7 +13,7 @@ import android.os.Bundle;
  */
 public class RetainedFragment extends Fragment {
     private Simulator sim;
-    private MissionReaderDbHelper db_help;
+    private ReaderDbHelper db_help;
     private SQLiteDatabase db;
     private boolean hud_panel_open;
 
@@ -25,7 +25,7 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setData(Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
+    public void setData(Simulator data, ReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
     	this.sim = data;
         this.db_help = missionReaderDbHelper;
         this.db = sqLiteDatabase;
@@ -36,7 +36,7 @@ public class RetainedFragment extends Fragment {
         return sim;
     }
 
-	public MissionReaderDbHelper getDbHelp() {
+	public ReaderDbHelper getDbHelp() {
 		return db_help;
 	}
 

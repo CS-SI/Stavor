@@ -4,7 +4,7 @@ import cs.si.satcor.MainActivity;
 import cs.si.satcor.R;
 import cs.si.satcor.StavorApplication;
 import cs.si.stavor.app.Parameters;
-import cs.si.stavor.database.MissionReaderDbHelper;
+import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
 import cs.si.stavor.dialogs.DeleteMissionDialogFragment;
@@ -356,7 +356,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		MissionReaderDbHelper db_help = ((StavorApplication)((MainActivity)getActivity()).getApplication()).db_help;
+		ReaderDbHelper db_help = ((StavorApplication)((MainActivity)getActivity()).getApplication()).db_help;
 		
 	    String sql="SELECT _ID, name, description FROM "+MissionEntry.TABLE_NAME+" ORDER BY name COLLATE NOCASE ASC;";
 	    String[] params = null;

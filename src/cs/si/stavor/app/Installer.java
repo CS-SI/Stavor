@@ -12,9 +12,11 @@ import org.orekit.time.TimeScalesFactory;
 
 import cs.si.satcor.MainActivity;
 import cs.si.satcor.R;
-import cs.si.stavor.database.MissionReaderDbHelper;
+import cs.si.station.GroundStation;
+import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
+import cs.si.stavor.database.StationsReaderContract.StationEntry;
 import cs.si.stavor.mission.Mission;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -141,8 +143,8 @@ public class Installer {
 	 * @param activity
 	 * @return
 	 */
-	public static MissionReaderDbHelper installApkDatabase(MainActivity activity){
-		MissionReaderDbHelper mDbHelper = new MissionReaderDbHelper(activity.getApplicationContext());
+	public static ReaderDbHelper installApkDatabase(MainActivity activity){
+		ReaderDbHelper mDbHelper = new ReaderDbHelper(activity.getApplicationContext());
 		SQLiteDatabase db = mDbHelper.getWritableDatabase();
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
@@ -260,6 +262,55 @@ public class Installer {
 		if(newRowId==-1)
 			result=false;
 		
+		//******** GROUND STATIONS ************
+		//First Example VIL-2
+		GroundStation gs = new GroundStation();
+		gs.name="ESA/ESAC VIL-2 S-Band";
+		gs.latitude=40.442592;
+		gs.longitude=-3.951583;
+		gs.beam_width=0.6;
+		gs.ellipsoid_elevation=664.8;
+		
+		values = new ContentValues();
+		values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+		values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
+
+		
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				StationEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId==-1)
+			result=false;
+		
+		//Second Example KRU
+		gs = new GroundStation();
+		gs.name="KOUROU S-Band";
+		gs.latitude=5.251439;
+		gs.longitude=-52.804664;
+		gs.beam_width=0.6;
+		gs.ellipsoid_elevation=-14.6709;
+		
+		values = new ContentValues();
+		values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+		values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
+
+		
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				StationEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId==-1)
+			result=false;
+	
 		
 		return result;
 	}

@@ -4,7 +4,7 @@ import cs.si.satcor.R;
 import cs.si.stavor.app.Installer;
 import cs.si.stavor.app.OrekitInit;
 import cs.si.stavor.app.Parameters;
-import cs.si.stavor.database.MissionReaderDbHelper;
+import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.dialogs.ErrorDialogFragment;
 import cs.si.stavor.dialogs.ResetAppDialogFragment;
 import cs.si.stavor.dialogs.ResetDbDialogFragment;
@@ -142,7 +142,7 @@ public class MainActivity extends ActionBarActivity implements
             
             Simulator simu = new Simulator(this);
             
-            MissionReaderDbHelper db_help_tmp;
+            ReaderDbHelper db_help_tmp;
             SQLiteDatabase db_tmp;
             db_help_tmp = Installer.installApkDatabase(this);
             db_tmp = db_help_tmp.getWritableDatabase();
