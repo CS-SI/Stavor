@@ -123,6 +123,9 @@
 	var stations_layer = new OpenLayers.Layer.Vector("Stations Layer", {"styleMap": smap});
 	map.addLayer(stations_layer);
 
+	var stations_name_layer = new OpenLayers.Layer.Vector("Stations Layer", {"styleMap": smap});
+	map.addLayer(stations_name_layer);
+
 	getInitialization();
 	//var polyOptions = {sides: 40};                              
 	//map.addControl(new OpenLayers.Control.DrawFeature(sc_layer, OpenLayers.Handler.RegularPolygon,{handlerOptions: polyOptions}));     
