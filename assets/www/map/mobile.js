@@ -19,14 +19,13 @@ var init = function () {
     map = new OpenLayers.Map({
         div: "map",
         theme: null,
+        numZoomLevels: 18,
         controls: [
-            new OpenLayers.Control.Attribution(),
             new OpenLayers.Control.TouchNavigation({
                 dragPanOptions: {
                     enableKinetic: true
                 }
-            }),
-            new OpenLayers.Control.Zoom()
+            })
         ],
         layers: [
             new OpenLayers.Layer.OSM("OpenStreetMap", null, {

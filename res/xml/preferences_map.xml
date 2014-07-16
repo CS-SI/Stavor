@@ -1,0 +1,16 @@
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_screen_preferences">
+    <PreferenceCategory 
+        android:title="@string/pref_performance"
+        android:key="@string/pref_key_performance">
+        <EditTextPreference
+            android:key="@string/pref_key_path_length"
+            android:summary="@string/pref_summary_path_length"
+            android:title="@string/pref_title_path_length"
+            android:defaultValue="5000"
+        	android:inputType="number" 
+        	android:maxLength="5"
+            android:numeric="integer" />
+    </PreferenceCategory>
+</PreferenceScreen>

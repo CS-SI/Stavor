@@ -1,6 +1,12 @@
 package cs.si.stavor.station;
 
-public class GroundStation {
+import java.io.Serializable;
+
+public class GroundStation  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7297608100756290938L;
 	public GroundStation(boolean station_enabled, String station_name,
 			double station_lat, double station_lon, double station_elev,
 			double station_bw) {

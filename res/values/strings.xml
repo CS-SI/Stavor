@@ -14,6 +14,19 @@
     <string name="action_reset_db">Reset Missions</string>
     <string name="action_about">About</string>
     
+    <string name="station_editor">Station editor</string>
+    <string name="station_name">Name:</string>
+    <string name="station_lat">Latitude (deg):</string>
+    <string name="station_lon">Longitude (deg):</string>
+    <string name="station_elev">Elevation (m):</string>
+    <string name="station_bw">Beamwidth (deg):</string>
+    <string name="station_edit">Edit</string>
+    <string name="station_create">Create</string>
+    <string name="station_format_error">Format error: review the fields</string>
+    <string name="station_error_create">Error creating station in database</string>
+    <string name="station_error_edit">Error editing station in database</string>
+    <string name="station_name_is_mandatory">The station name is mandatory</string>
+    
     <string name="mission_parsing_angle_error">Error parsing angles</string>
     <string name="mission_editor">Mission editor</string>
     <string name="mission_edit">Edit</string>
@@ -220,6 +233,9 @@
     <string name="pref_inclination">Inclination</string>
     <string name="pref_spherical_coords">Spherical coordinates</string>
     <string name="pref_angle">Angle</string>
+    
+    <string name="pref_title_path_length">Ground track length</string>
+    <string name="pref_summary_path_length">Maximum number of points in the satellite ground track</string>
     
     <string name="pref_title_database_installed">Missions database is already installed</string>
     <string name="pref_summary_database_installed">Flag to know if the Missions database has been already installed</string>

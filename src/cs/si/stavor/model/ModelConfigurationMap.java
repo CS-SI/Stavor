@@ -40,6 +40,7 @@ public class ModelConfigurationMap {
 		else if(follow_sc_view == R.id.menu_mapviews_locked){
 			follow_sc = true;
 		}
+		track_max_length = Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_path_length), Integer.toString(track_max_length)));
 		
 		//Load enabled stations:
 		if(db!=null){
@@ -83,5 +84,6 @@ public class ModelConfigurationMap {
 	public MapPoint[] points = null;
 	public boolean follow_sc = false;
 	public double payload_beamwidth = 5.0;
+	public int track_max_length = 5000;
 
 }

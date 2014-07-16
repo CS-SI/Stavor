@@ -14,7 +14,7 @@ import android.view.ViewGroup;
  * @author Xavier Gibert
  *
  */
-public class SettingsGeneralFragment extends PreferenceFragment {
+public class SettingsGeneralMapFragment extends PreferenceFragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -24,8 +24,8 @@ public class SettingsGeneralFragment extends PreferenceFragment {
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static SettingsGeneralFragment newInstance(int sectionNumber) {	
-		SettingsGeneralFragment fragment = new SettingsGeneralFragment();
+	public static SettingsGeneralMapFragment newInstance(int sectionNumber) {	
+		SettingsGeneralMapFragment fragment = new SettingsGeneralMapFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
@@ -44,7 +44,7 @@ public class SettingsGeneralFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.preferences);
+        addPreferencesFromResource(R.xml.preferences_map);
         
         ((MainActivity)getActivity()).showTutorialConfig();
     }

@@ -14,6 +14,18 @@
     <string name="action_reset_db">Réinitialiser Missions</string>
     <string name="action_about">À propos</string>
     
+    <string name="station_editor">Éditeur de station</string>
+    <string name="station_name">Nom:</string>
+    <string name="station_lat">Latitude (deg):</string>
+    <string name="station_lon">Longitude (deg):</string>
+    <string name="station_elev">Élévation (m):</string>
+    <string name="station_bw">Beamwidth (deg):</string>
+    <string name="station_edit">Modifier</string>
+    <string name="station_create">Créer</string>
+    <string name="station_format_error">Erreur de format: vérifier les champs</string>
+    <string name="station_error_create">Erreur de création de station dans la base de données</string>
+    <string name="station_error_edit">Erreur d\'édittion de station en base de données</string>
+    <string name="station_name_is_mandatory">Le nom de la station est obligatoire</string>
     
     <string name="mission_parsing_angle_error">Erreur transformant angles</string>
     <string name="mission_editor">Éditeur de mission</string>
@@ -221,6 +233,9 @@
     <string name="pref_inclination">Inclinaison</string>
     <string name="pref_spherical_coords">Coordonnées sphériques</string>
     <string name="pref_angle">Angles</string>
+    
+    <string name="pref_title_path_length">Longueur du trajectoire</string>
+    <string name="pref_summary_path_length">Nombre maximal de points dans la trajectoire terrestre du satellite</string>
     
     <string name="pref_title_database_installed">La base de données des missions est déjà installé</string>
     <string name="pref_summary_database_installed">Flag to know if the Missions database has been already installed</string>

@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <meta name="apple-mobile-web-app-capable" content="yes">
+    	<link rel="stylesheet" href="../theme/default/style.css" type="text/css">
         <link rel="stylesheet" href="theme/default/style.mobile.css" type="text/css">
   	<script type='text/javascript' src="interface.js"></script>
   	<!--<script src="http://www.openlayers.org/api/OpenLayers.js"></script>-->
@@ -23,7 +24,7 @@
             }
             #map {
                 width    : 100%;
-                position : relative;
+                position : absolute;
                 height   : 100%;
             }
             .olControlAttribution {
@@ -52,6 +53,7 @@
 
 	//CONFIG PARAMS
 	var payload_beamwidth = 5;//Degrees
+	var param_path_max_length = 5000;
 
 	var station_a = new Object();
 	station_a.name = "AAA";
@@ -66,7 +68,6 @@
 	var stations = new Array(station_a,station_b);
 
 	//HARD-CODED PARAMS
-	var param_path_max_length = 5000;
 
 	//VOLATILE PARAMS
 	var sc_latitude = 0;
