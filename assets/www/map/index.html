@@ -100,30 +100,34 @@
 	var sc_layer = new OpenLayers.Layer.Vector("SC Layer");
 	map.addLayer(sc_layer);
 
-
+/*
 	var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
-	renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
+	renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;*/
 
 	var polygonStyle = 
 		OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
-	polygonStyle.strokeColor = "#00FF00";
-	polygonStyle.strokeOpacity = "0.4";
+	polygonStyle.strokeColor = "#098700";
+	polygonStyle.strokeOpacity = "0.8";
 	polygonStyle.strokeWidth = "0.1";
-	polygonStyle.fillColor = "#22FF00";
-	polygonStyle.fillOpacity = 0.2;
+	polygonStyle.fillColor = "#00FF00";
+	polygonStyle.fillOpacity = 0.4;
 	polygonStyle.strokeWidth = 1;
 	polygonStyle.label = "${label}";
 	polygonStyle.labelOutlineColor = "white";
-	polygonStyle.labelOutlineWidth = 3;
-	polygonStyle.fontSize="10px"
+	polygonStyle.labelOutlineWidth = 0.3;
+	polygonStyle.fontSize="10px";
+	polygonStyle.fontWeight="bold";
+	polygonStyle.fontColor="#000000";
+	polygonStyle.pointRadius="1";
+	polygonStyle.labelYOffset="10";	
 
 	
 	var smap = new OpenLayers.StyleMap({"default": polygonStyle});
 
-	var stations_layer = new OpenLayers.Layer.Vector("Stations Layer", {"styleMap": smap});
+	var stations_layer = new OpenLayers.Layer.Vector("Stations Layer");
 	map.addLayer(stations_layer);
 
-	var stations_name_layer = new OpenLayers.Layer.Vector("Stations Layer", {"styleMap": smap});
+	var stations_name_layer = new OpenLayers.Layer.Vector("StationsName Layer", {"styleMap": smap});
 	map.addLayer(stations_name_layer);
 
 	getInitialization();
@@ -178,6 +182,16 @@
 	//sc_layer.addFeatures([sc_feature]);
 	//End stations ----------------------------------------------
 
+	//STATIONS NAME
+	for (var arrayIndex in stations){
+		var point = new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+		var station_name_feature = new OpenLayers.Feature.Vector(point, null, null);
+		station_name_feature.attributes = {
+			label:stations[arrayIndex].name
+		}
+		stations_name_layer.addFeatures([station_name_feature]);
+	}
+
 	setLoadingProgress(100);
 
 //------------------------------------------------------------------------------
@@ -219,10 +233,10 @@
 			    radius,
 			    20 // According to the API you only need 20 sides to approximate a circle.
 			);
-			var station_feature = new OpenLayers.Feature.Vector(circle, null, polygonStyle);
-			station_feature.attributes = {
+			var station_feature = new OpenLayers.Feature.Vector(circle, null, station_style);
+			/*station_feature.attributes = {
 				label:stations[arrayIndex].name
-			}
+			}*/
 			stations_layer.addFeatures([station_feature]);
 		}
 	}
