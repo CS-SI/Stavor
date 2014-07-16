@@ -1,40 +1,18 @@
 package cs.si.satcor;
 
-import java.io.IOException;
-
-import org.orekit.errors.OrekitException;
-import org.orekit.time.AbsoluteDate;
-import org.orekit.time.DateTimeComponents;
-import org.orekit.time.TimeScale;
-import org.orekit.time.TimeScalesFactory;
 
 import cs.si.satcor.R;
-import cs.si.stavor.app.Parameters;
-import cs.si.stavor.database.SerializationUtil;
-import cs.si.stavor.database.MissionReaderContract.MissionEntry;
 import cs.si.stavor.database.StationsReaderContract.StationEntry;
-import cs.si.stavor.mission.Mission;
-import cs.si.stavor.mission.MissionAndId;
 import cs.si.stavor.station.GroundStation;
 import cs.si.stavor.station.StationAndId;
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 /**
  * Activity to edit or create the stations of the database

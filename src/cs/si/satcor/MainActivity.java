@@ -423,30 +423,39 @@ public class MainActivity extends ActionBarActivity implements
     		showWelcomeMessage();
     	}
     }
-    public void showTutorialDisplay(){
-    	String key = getString(R.string.pref_key_tutorial_display);
+    public void showTutorialMap(){
+    	String key = getString(R.string.pref_key_tutorial_map);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
-	    	String title = getString(R.string.tutorial_title_display);
-	    	String message = getString(R.string.tutorial_message_display);
+	    	String title = getString(R.string.tutorial_title_map);
+	    	String message = getString(R.string.tutorial_message_map);
 	    	showTutorialDialog(key, title, message);
     	}
     }
-    public void showTutorialOrbit(){
-    	String key = getString(R.string.pref_key_tutorial_orbit);
+    public void showTutorialStations(){
+    	String key = getString(R.string.pref_key_tutorial_stations);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
-	    	String title = getString(R.string.tutorial_title_orbit);
-	    	String message = getString(R.string.tutorial_message_orbit);
+	    	String title = getString(R.string.tutorial_title_stations);
+	    	String message = getString(R.string.tutorial_message_stations);
 	    	showTutorialDialog(key, title, message);
     	}
     }
-    public void showTutorialConfig(){
-    	String key = getString(R.string.pref_key_tutorial_config);
+    public void showTutorialCoverage(){
+    	String key = getString(R.string.pref_key_tutorial_coverage);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
-	    	String title = getString(R.string.tutorial_title_config);
-	    	String message = getString(R.string.tutorial_message_config);
+	    	String title = getString(R.string.tutorial_title_coverage);
+	    	String message = getString(R.string.tutorial_message_coverage);
+	    	showTutorialDialog(key, title, message);
+    	}
+    }
+    public void showTutorialConfigMap(){
+    	String key = getString(R.string.pref_key_tutorial_config_map);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
+	    	String title = getString(R.string.tutorial_title_config_map);
+	    	String message = getString(R.string.tutorial_message_config_map);
 	    	showTutorialDialog(key, title, message);
     	}
     }

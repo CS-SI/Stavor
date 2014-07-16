@@ -3,48 +3,29 @@ package cs.si.stavor.fragments;
 import cs.si.satcor.MainActivity;
 import cs.si.satcor.R;
 import cs.si.satcor.StavorApplication;
-import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.ReaderDbHelper;
-import cs.si.stavor.database.SerializationUtil;
-import cs.si.stavor.database.MissionReaderContract.MissionEntry;
 import cs.si.stavor.database.StationsCursorAdapter;
 import cs.si.stavor.database.StationsReaderContract.StationEntry;
-import cs.si.stavor.dialogs.DeleteMissionDialogFragment;
 import cs.si.stavor.dialogs.DeleteStationDialogFragment;
-import cs.si.stavor.mission.Mission;
-import cs.si.stavor.mission.MissionAndId;
-import cs.si.stavor.simulator.Simulator;
-import cs.si.stavor.simulator.SimulatorStatus;
 import cs.si.stavor.station.GroundStation;
 import cs.si.stavor.station.StationAndId;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.app.Fragment;
 import android.content.Loader;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Switch;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
 import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
 
@@ -85,9 +66,7 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 		View rootView = inflater.inflate(R.layout.stations, container,
 				false);
 		
-		//((MainActivity)getActivity()).showTutorialStations();
-		//XGGDEBUG:IMplement
-		//TODO
+		((MainActivity)getActivity()).showTutorialStations();
 		
 		//Load missions in list
 		stationsList = (ListView) rootView.findViewById(R.id.listView1);

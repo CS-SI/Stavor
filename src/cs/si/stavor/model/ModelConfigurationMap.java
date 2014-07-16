@@ -2,14 +2,8 @@ package cs.si.stavor.model;
 
 import java.util.ArrayList;
 
-import cs.si.satcor.MainActivity;
 import cs.si.satcor.R;
-import cs.si.satcor.StavorApplication;
-import cs.si.stavor.database.SerializationUtil;
-import cs.si.stavor.database.MissionReaderContract.MissionEntry;
 import cs.si.stavor.database.StationsReaderContract.StationEntry;
-import cs.si.stavor.mission.Mission;
-import cs.si.stavor.mission.MissionAndId;
 import cs.si.stavor.model.ModelSimulation.MapPoint;
 import cs.si.stavor.station.GroundStation;
 import android.content.Context;
@@ -17,7 +11,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 /**
  * Initialization parameters of the WebGL model

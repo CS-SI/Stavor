@@ -1,17 +1,12 @@
 package cs.si.stavor.database;
 
-import java.io.IOException;
-
 import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
 
 import cs.si.satcor.R;
-import cs.si.satcor.StavorApplication;
-import cs.si.stavor.database.MissionReaderContract.MissionEntry;
 import cs.si.stavor.database.StationsReaderContract.StationEntry;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.LinearLayout;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class StationsCursorAdapter extends CursorAdapter {

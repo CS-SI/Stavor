@@ -22,7 +22,7 @@ public final class StationsReaderContract {
     }
 
     private static final String DOUBLE_TYPE = " DOUBLE";
-    private static final String BOOLEAN_TYPE = " BOOLEAN";
+    //private static final String BOOLEAN_TYPE = " BOOLEAN";
     private static final String TEXT_TYPE = " TEXT";
     //private static final String SERIALIZED_TYPE = " BLOB";
     private static final String COMMA_SEP = ",";

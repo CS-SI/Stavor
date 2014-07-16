@@ -48,6 +48,7 @@
             android:name="cs.si.satcor.StationActivity"
             android:label="@string/station_editor"
         	android:theme="@style/nonSplashScreenTheme"
+        	android:windowSoftInputMode="adjustPan"
              >
         </activity>
     </application>

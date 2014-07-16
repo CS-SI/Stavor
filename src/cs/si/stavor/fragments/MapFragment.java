@@ -70,9 +70,8 @@ public final class MapFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.map_display, container,
 				false);
-		//XGGDEBUG:Implemet 
-		//TODO
-		//((MainActivity)getActivity()).showTutorialMap();
+
+		((MainActivity)getActivity()).showTutorialMap();
 		
 		//Browser
 		/*if(mXwalkView==null){
