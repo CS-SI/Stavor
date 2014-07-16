@@ -249,7 +249,6 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 				MissionEntry._ID,
 			    MissionEntry.COLUMN_NAME_CLASS
 			    };
-
 		Cursor c = ((StavorApplication)((MainActivity)getActivity()).getApplication()).db
 			.query(
 					MissionEntry.TABLE_NAME,  // The table to query
