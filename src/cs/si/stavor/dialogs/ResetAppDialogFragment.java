@@ -2,14 +2,10 @@ package cs.si.stavor.dialogs;
 
 import cs.si.satcor.MainActivity;
 import cs.si.satcor.R;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;

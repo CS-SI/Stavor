@@ -26,7 +26,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="@string/mission_name" />
+                    android:text="@string/mission_name"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
                     android:id="@+id/editTextMissionName"
@@ -34,7 +35,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textAppearance="?android:attr/textAppearanceLargeInverse" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -46,7 +49,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="@string/mission_description" />
+                    android:text="@string/mission_description"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
                     android:id="@+id/editTextMissionDescription"
@@ -55,7 +59,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textMultiLine"
-                    android:lines="2" >
+                    android:lines="2"
+                    android:textAppearance="?android:attr/textAppearanceLargeInverse" >
 
                     <requestFocus />
                 </EditText>
@@ -70,7 +75,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="@string/mission_date" />
+                    android:text="@string/mission_date"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
             </LinearLayout>
 
             <HorizontalScrollView
@@ -80,7 +87,9 @@
  
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal" >
 
                     <DatePicker
                         android:id="@+id/datePicker1"
@@ -106,7 +115,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="@string/mission_duration" />
+                    android:text="@string/mission_duration"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
                     android:id="@+id/editTextMissionDuration"
@@ -114,7 +124,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -126,7 +138,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="@string/mission_step" />
+                    android:text="@string/mission_step"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
                     android:id="@+id/editTextMissionStep"
@@ -134,7 +147,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -146,14 +161,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="@string/mission_speed" />
+                    android:text="@string/mission_speed"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
                     android:id="@+id/textViewSpeed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="@string/mission_no_val" />
+                    android:text="@string/mission_no_val"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -165,7 +183,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="@string/mission_dur" />
+                    android:text="@string/mission_dur"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
                     android:id="@+id/textViewDuration"
@@ -173,7 +192,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:gravity="right"
-                    android:text="@string/mission_no_val" />
+                    android:text="@string/mission_no_val"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -202,7 +223,8 @@
                             android:layout_toLeftOf="@+id/switch1"
                             android:layout_weight="1.62"
                             android:text="@string/mission_orbit"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textStyle="bold" />
 
                         <Switch
                             android:id="@+id/switch1"
@@ -224,7 +246,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="20dp"
-                            android:text="@string/mission_a" />
+                            android:text="@string/mission_a"
+                    		android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
                             android:id="@+id/EditTextMissionA"
@@ -232,7 +255,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberDecimal" />
+                            android:inputType="numberDecimal"
+                    		android:textAppearance="?android:attr/textAppearanceLargeInverse" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -245,7 +269,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="20dp"
-                            android:text="@string/mission_e" />
+                            android:text="@string/mission_e"
+                    		android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
                             android:id="@+id/EditTextMissionE"
@@ -253,7 +278,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberDecimal" />
+                            android:inputType="numberDecimal"
+                    		android:textAppearance="?android:attr/textAppearanceLargeInverse" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -266,7 +292,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="20dp"
-                            android:text="@string/mission_i" />
+                            android:text="@string/mission_i"
+                    		android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
                             android:id="@+id/EditTextMissionI"
@@ -274,7 +301,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned|numberDecimal" />
+                            android:inputType="numberSigned|numberDecimal"
+                    		android:textAppearance="?android:attr/textAppearanceLargeInverse" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -287,7 +315,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="20dp"
-                            android:text="@string/mission_omega" />
+                            android:text="@string/mission_omega"
+                    		android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
                             android:id="@+id/EditTextMissionOmega"
@@ -295,7 +324,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned|numberDecimal" />
+                            android:inputType="numberSigned|numberDecimal"
+                    		android:textAppearance="?android:attr/textAppearanceLargeInverse" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -308,7 +338,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="20dp"
-                            android:text="@string/mission_raan" />
+                            android:text="@string/mission_raan"
+                    		android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
                             android:id="@+id/EditTextMissionRaan"
@@ -316,7 +347,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned|numberDecimal" />
+                            android:inputType="numberSigned|numberDecimal"
+                    		android:textAppearance="?android:attr/textAppearanceLargeInverse" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -329,7 +361,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="20dp"
-                            android:text="@string/mission_lm" />
+                            android:text="@string/mission_lm"
+                    		android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
                             android:id="@+id/editTextMissionLm"
@@ -337,7 +370,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned|numberDecimal" />
+                            android:inputType="numberSigned|numberDecimal"
+                    		android:textAppearance="?android:attr/textAppearanceLargeInverse" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -353,8 +387,10 @@
                     android:layout_marginBottom="3dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginTop="2dp"
-                    android:text="Button" />
+                    android:layout_marginTop="15dp"
+                    android:text="Button"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
