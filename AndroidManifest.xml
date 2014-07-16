@@ -41,6 +41,7 @@
             android:name="cs.si.stavor.MissionActivity"
             android:label="@string/mission_editor"
         	android:theme="@style/nonSplashScreenTheme"
+        	android:windowSoftInputMode="adjustPan"
              >
         </activity>
     </application>
