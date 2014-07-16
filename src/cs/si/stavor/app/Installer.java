@@ -265,7 +265,7 @@ public class Installer {
 		//******** GROUND STATIONS ************
 		//First Example VIL-2
 		GroundStation gs = new GroundStation();
-		gs.enabled = true;
+		gs.enabled = false;
 		gs.name="Villafranca S-Band";
 		gs.latitude=40.442592;
 		gs.longitude=-3.951583;
@@ -291,7 +291,7 @@ public class Installer {
 		
 		//Second Example KRU
 		gs = new GroundStation();
-		gs.enabled = false;
+		gs.enabled = true;
 		gs.name="Kourou S-Band";
 		gs.latitude=5.251439;
 		gs.longitude=-52.804664;
@@ -317,7 +317,7 @@ public class Installer {
 		
 		//Third Example Cebreros
 		gs = new GroundStation();
-		gs.enabled = false;
+		gs.enabled = true;
 		gs.name="Cebreros X-Band";
 		gs.latitude=40.452689;
 		gs.longitude=-4.36755;
@@ -344,7 +344,7 @@ public class Installer {
 
 		//Fourth Example Kiruna
 		gs = new GroundStation();
-		gs.enabled = false;
+		gs.enabled = true;
 		gs.name="Kiruna S-Band";
 		gs.latitude=67.857128;
 		gs.longitude=20.964325;
@@ -368,9 +368,9 @@ public class Installer {
 		if(newRowId==-1)
 			result=false;
 	
-		//Fifth Example Kiruna
+		//Fifth Example Maspalomas
 				gs = new GroundStation();
-				gs.enabled = false;
+				gs.enabled = true;
 				gs.name="Maspalomas S-Band";
 				gs.latitude=27.762889;
 				gs.longitude=-15.6338;

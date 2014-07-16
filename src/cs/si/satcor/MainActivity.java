@@ -283,14 +283,14 @@ public class MainActivity extends ActionBarActivity implements
 			showAbout();
 			return true;
 		}
-		if (id == R.id.action_reset_conf) {
+		/*if (id == R.id.action_reset_conf) {
 			resetUserConfigShowDialog();
 			return true;
 		}
 		if (id == R.id.action_reset_db) {
 			resetMissionsDbShowDialog();
 			return true;
-		}
+		}*/
 		return super.onOptionsItemSelected(item);
 	}
 
