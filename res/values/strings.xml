@@ -105,13 +105,22 @@
     <string name="tutorial_continue">Continue</string>
     <string name="tutorial_dont_show_again">Don\'t show again</string>
     <string name="tutorial_title_simulator">Tutorial Simulator</string>
-    <string name="tutorial_message_simulator">You are in the Simulator screen, in here you can chose between the local simulator or the remote client. In the first one you will find a list of missions; you can create, edit and select the mission for the simulator. The remote client connects with an external simulator over a network. Once you connect the simulator, the application will redirect you to the Mapa screen.</string>
+    <string name="tutorial_message_simulator">You are in the Simulator screen, in here you can chose between the local simulator or the remote client. In the first one you will find a list of missions; you can create, edit and select the mission for the simulator. The remote client connects with an external simulator over a network. Once you connect the simulator, the application will redirect you to the Map screen.</string>
     <string name="tutorial_title_display">Tutorial Attitude</string>
     <string name="tutorial_message_display">You are now in the Attitude screen, in here you can visualize the simulated attitude. You will find the controls of the simulation, a button to select the view and a retractable panel with detailed information.</string>
     <string name="tutorial_title_orbit">Tutorial Orbit</string>
     <string name="tutorial_message_orbit">You are now in the Orbit screen, in here you can visualize the simulated orbit and control the simulation. </string>
     <string name="tutorial_title_config">Tutorial Configurations</string>
     <string name="tutorial_message_config">You entered one of the Configuration screens, they contain all the user options. The Basic and Extra Indicators sections are to personalize the visualization of those indicators (Velocity, Acceleration, Momentum...). The Measures section is used to select the visualization of measures like angles. The section Models contains options of the objects like the Earth and the Sun. The section of Preferences contains all the other, more general, options.</string>
+    
+    <string name="tutorial_title_config_map">Tutorial Preferences</string>
+    <string name="tutorial_message_config_map">You entered the Preferences screen, it contains all the general options.</string>
+    <string name="tutorial_title_map">Tutorial Map</string>
+    <string name="tutorial_message_map">You entered the Map screen, it contains the map visualization that shows the satellite ground track and the ground stations. You will find all the controls of the simulation and visualization here.</string>
+    <string name="tutorial_title_stations">Tutorial Stations</string>
+    <string name="tutorial_message_stations">You entered the Stations screen, here you can choose and define the ground stations.</string>
+    <string name="tutorial_title_coverage">Tutorial Coverage</string>
+    <string name="tutorial_message_coverage">You entered the Coverage screen, here you can define the antenna/camera beamwidth to compute the field of view on the Earth.</string>
     
     <string name="dialog_welcome">Welcome</string>
     <string name="dialog_error">Error</string>

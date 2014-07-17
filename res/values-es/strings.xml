@@ -4,7 +4,7 @@
     <string name="app_exit_prevent_message">Presione atrás otra vez para cerrar la aplicación</string>
     <string name="title_section1">Simulador</string>
     <string name="title_section2">Mapa</string>
-    <string name="title_section3">Covertura</string>
+    <string name="title_section3">Cobertura</string>
     <string name="title_section4">Estaciones</string>
     <string name="title_section5">Preferencias</string>
     <string name="navigation_drawer_open">Abre el menú de navegación</string>
@@ -112,6 +112,15 @@
     <string name="tutorial_message_orbit">Usted se encuentra ahora en la pantalla de Órbita, aquí puede ver la órbita simulada y controlar la simulación</string>
     <string name="tutorial_title_config">Tutorial Configuraciones</string>
     <string name="tutorial_message_config">Usted ha entrado en una de las pantallas de configuración, éstas continenen todas las opciones de usuario. Las secciones de Indicadores básicos y extra sirven para personalizar la visualización de esos indicadores (Velocidad, Aceleración, Momento...). La sección de Medidas se utiliza para seleccionar la visualización de medidas como ángulos. La sección Modelos contiene opciones de los objetos como la Tierra y el Sol. La sección de preferencias, todos las otras opciones más generales.</string>
+    
+    <string name="tutorial_title_config_map">Tutorial Preferencias</string>
+    <string name="tutorial_message_config_map">Usted ha entrado en la pantalla de Preferencias, ésta contiene todas las opciones generales.</string>
+    <string name="tutorial_title_map">Tutorial Mapa</string>
+    <string name="tutorial_message_map">Usted ha entrado en la pantalla del Mapa, ésta contiene la visualización del mapa que muestra la trayectoria terrestre del satelite y las estaciones de tierra. Usted encontrará todos los controles de la simulación y visualización aquí.</string>
+    <string name="tutorial_title_stations">Tutorial Estaciones</string>
+    <string name="tutorial_message_stations">Usted ha entrado en la pantalla de Estaciones, aquí puede escoger y definir las estaciones de tierra.</string>
+    <string name="tutorial_title_coverage">Tutorial Cobertura</string>
+    <string name="tutorial_message_coverage">Usted ha entrado en la pantalla de Cobertura, aquí usted puede definir el ancho de haz (beamwidth) de la antena/cámara para computar el campo de visión sobre la Tierra.</string>
     
     <string name="dialog_welcome">Bienvenido</string>
     <string name="dialog_error">Error</string>

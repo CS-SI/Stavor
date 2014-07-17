@@ -113,6 +113,15 @@
     <string name="tutorial_title_config">Tutoriel Configurations</string>
     <string name="tutorial_message_config">Vous êtes dans l\'un des écrans de configuration, ils contiennent toutes les options de l\'utilisateur. Les sections d\'Indicateurs basiques et extra servent à personnaliser l\'affichage de ces indicateurs (Vitesse, Accélération, Moment...). La section Mesures est utilisée pour sélectionner l\'affichage de mesures telles que les angles. La section Modèles contient des d\'options pour les objets comme la Terre et le Soleil. La section Préférences contient toutes les autres options générales.</string>
     
+    <string name="tutorial_title_config_map">Tutoriel Préférences</string>
+    <string name="tutorial_message_config_map">Vous avez saisi dans l\'écran des Préférences, il contient toutes les options générales.</string>
+    <string name="tutorial_title_map">Tutoriel Carte</string>
+    <string name="tutorial_message_map">Vous êtes actuellement sur l\'écran de la Carte, il contient l\'affichage de la carte montrant la trace au sol du satellite et des stations terrestres. Vous trouverez tous les contrôles sur la simulation et la visualisation ici.</string>
+    <string name="tutorial_title_stations">Tutoriel Stations</string>
+    <string name="tutorial_message_stations">Vous êtes actuellement sur l\'écran des stations, ici vous pouvez choisir et définir les stations sol.</string>
+    <string name="tutorial_title_coverage">Tutoriel Couverture</string>
+    <string name="tutorial_message_coverage">Vous êtes sur l\'écran de couverture, ici vous pouvez définir la largeur du faisceau (beamwidth) de l\'antenne/caméra pour calculer le champ de vision sur la Terre.</string>
+    
     <string name="dialog_welcome">Bienvenue</string>
     <string name="dialog_error">Erreur</string>
     <string name="dialog_exit">Quitter</string>
