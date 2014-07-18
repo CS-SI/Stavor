@@ -66,6 +66,9 @@
     <string name="menu_views_earth">Earth</string>
     <string name="menu_views_sun">Sun</string>
     
+    <string name="menu_orbviews_free">Free</string>
+    <string name="menu_orbviews_locked">Locked</string>
+    
     <string name="about">About</string>
     <string name="cs_site">http://c-s.fr/</string>
     <string name="about_table_project">Project</string>

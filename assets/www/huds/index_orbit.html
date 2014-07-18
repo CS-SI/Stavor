@@ -109,6 +109,8 @@
 	var value_orbit_i = Math.PI/9;
 	var value_orbit_w = Math.PI;
 	var value_orbit_raan = 0;
+
+	var locked_view = false;
 	
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -138,7 +140,17 @@
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );		
 	})
-	
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		VIEWS        						        //
+	//////////////////////////////////////////////////////////////////////////////////
+	onRenderFcts.push(function(){
+		if(locked_view){
+			camera.position = value_spacecraft.clone().normalize().multiplyScalar(getCamDistance());			
+			camera.lookAt(scene.position);
+		}		
+	})	
+
 	//////////////////////////////////////////////////////////////////////////////////
 	//		loop runner							//
 	//////////////////////////////////////////////////////////////////////////////////

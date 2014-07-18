@@ -5,6 +5,7 @@ import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
+import cs.si.stavor.StavorApplication;
 import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
 import android.annotation.SuppressLint;
@@ -12,12 +13,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -50,6 +55,7 @@ public final class OrbitFragment extends Fragment {
 	
 	private Simulator simulator;
 	LinearLayout browserLayout;
+	Button views_menu;
 	
 	/**
 	 * WebView from XWalk project to increase compatibility of WebGL
@@ -81,6 +87,16 @@ public final class OrbitFragment extends Fragment {
     	
     	browserLayout.addView(mXwalkView);
     	
+    	views_menu = (Button) rootView.findViewById(R.id.buttonMissionNew);
+    	views_menu.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				showPopup(arg0);
+			}
+    		
+    	});
+
+    	views_menu.setText(titleOfViewId(((StavorApplication)getActivity().getApplication()).modelOrbitViewId));
     	
     	//Play/Pause/Stop buttons
     	ImageButton but_play = (ImageButton)rootView.findViewById(R.id.imageButtonPlay);
@@ -123,6 +139,52 @@ public final class OrbitFragment extends Fragment {
 		fps.setText(stats);
 		fps.setAlpha((float)1.0);
 	}
+	
+
+	private String titleOfViewId(int id){
+		switch (id) {
+	        case R.id.menu_orbviews_free:
+	        	return getString(R.string.menu_orbviews_free);
+	        case R.id.menu_orbviews_locked:
+	        	return getString(R.string.menu_orbviews_locked);
+	        default:
+	        	return getString(R.string.menu_orbviews_free);
+	    }
+	}
+	
+	/**
+	 * Shows the visualization Views menu
+	 * @param v
+	 */
+    private void showPopup(View v) {
+    	PopupMenu popup = new PopupMenu(getActivity(), v);
+
+        // This activity implements OnMenuItemClickListener
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        	@Override
+            public boolean onMenuItemClick(MenuItem item) {
+        		String com_view = (String)item.getTitle();
+        		String command;
+            	((StavorApplication)getActivity().getApplication()).modelOrbitViewId = item.getItemId();
+                switch (item.getItemId()) {
+                    case R.id.menu_orbviews_free:
+                    	command = getString(R.string.key_orbviews_free);
+                    	break;
+                    case R.id.menu_orbviews_locked:
+                    	command = getString(R.string.key_orbviews_locked);
+                    	break;
+                    default:
+                        return false;
+                }
+                views_menu.setText(com_view);
+                mXwalkView.load("javascript:changeView('"+command+"')", null);
+                return true;
+            }
+        });
+        popup.inflate(R.menu.views_orb);
+        popup.show();
+
+    }
 	
 	@Override
 	public void onDestroyView(){

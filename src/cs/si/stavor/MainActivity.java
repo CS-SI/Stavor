@@ -222,6 +222,7 @@ public class MainActivity extends ActionBarActivity implements
         if (dataFragment == null) {
         	flagActivityFirstExec=true;
         	((StavorApplication)getApplication()).modelViewId = R.id.menu_views_ref_frame_xyz;
+        	((StavorApplication)getApplication()).modelOrbitViewId = R.id.menu_orbviews_free;
             // add the fragment
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();

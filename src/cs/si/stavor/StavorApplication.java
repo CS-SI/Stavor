@@ -21,6 +21,7 @@ public class StavorApplication extends Application {
     public SQLiteDatabase db;
     
     public int modelViewId = R.id.menu_views_ref_frame_xyz;
+    public int modelOrbitViewId = R.id.menu_orbviews_free;
     
     WebAppInterface jsInterface;
 	
