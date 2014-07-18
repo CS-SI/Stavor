@@ -116,6 +116,11 @@
     <string name="dialog_delete_confirm">Supprimer</string>
     <string name="dialog_delete_cancel">Annuler</string>
     
+    <string name="dialog_copy_title">Copier Mission</string>
+    <string name="dialog_copy_message">Voulez-vous copier la mission</string>
+    <string name="dialog_copy_confirm">Copier</string>
+    <string name="dialog_copy_cancel">Annuler</string>
+    
     <string name="dialog_reset_title">Réinitialiser Config.</string>
     <string name="dialog_reset_message">Vous êtes en train de réinitialiser toute configuration et données avec les valeurs par défaut (Les missions sont sauvegardés)</string>
     <string name="dialog_reset_confirm">Réinitialiser</string>
