@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <meta name="apple-mobile-web-app-capable" content="yes">
-    	<link rel="stylesheet" href="../theme/default/style.css" type="text/css">
+    	<link rel="stylesheet" href="theme/default/style.css" type="text/css">
         <link rel="stylesheet" href="theme/default/style.mobile.css" type="text/css">
   	<script type='text/javascript' src="interface.js"></script>
   	<!--<script src="http://www.openlayers.org/api/OpenLayers.js"></script>-->
@@ -95,32 +95,7 @@
     
 */
 
-//******************************************************
-//         PATH
-//******************************************************
-	var style_path = { 
-		strokeColor: '#ff0000', 
-	  	strokeOpacity: 0.5,
-	  	strokeWidth: 3
-	};
 
-	var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
-	map.addLayer(lineLayer);                    
-	map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path)); 
-
-//******************************************************
-//         SPACECRAFT
-//******************************************************
-	var sc_style = {
-	      strokeColor: "#FF0000",
-	      strokeOpacity: 0.5,
-	      strokeWidth: 1,
-	      fillOpacity: 0.3,
-		fillColor: "#FF2200"
-	};
-
-	var sc_layer = new OpenLayers.Layer.Vector("SC Layer");
-	map.addLayer(sc_layer);
 
 //******************************************************
 //         STATION BW
@@ -142,11 +117,11 @@
 //******************************************************
 
 	var station_area_style = {
-	      strokeColor: "#00FF00",
-	      strokeOpacity: 0.3,
+	      strokeColor: "#009c00",
+	      strokeOpacity: 0.5,
 	      strokeWidth: 1,
 	      fillOpacity: 0.1,
-		fillColor: "#00FF33"
+		fillColor: "#00FF00"
 	};
 
 	var Rt = 6371000;
@@ -180,6 +155,33 @@
 	map.addLayer(stations_name_layer);
 
 //******************************************************
+//         PATH
+//******************************************************
+	var style_path = { 
+		strokeColor: '#ff0000', 
+	  	strokeOpacity: 0.5,
+	  	strokeWidth: 3
+	};
+
+	var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
+	map.addLayer(lineLayer);                    
+	map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path)); 
+
+//******************************************************
+//         SPACECRAFT
+//******************************************************
+	var sc_style = {
+	      strokeColor: "#FF0000",
+	      strokeOpacity: 0.5,
+	      strokeWidth: 1,
+	      fillOpacity: 0.3,
+		fillColor: "#FF2200"
+	};
+
+	var sc_layer = new OpenLayers.Layer.Vector("SC Layer");
+	map.addLayer(sc_layer);
+
+//******************************************************
 //---------------------- INIT --------------------------
 //******************************************************
 
@@ -211,6 +213,17 @@
 		lineLayer.removeAllFeatures();
 		var lineFeature = new OpenLayers.Feature.Vector(line, null, style_path);
 		lineLayer.addFeatures([lineFeature]);
+
+		//NEW SPACECRAFT
+		/*console.log("----------------");
+		var A = (Rt + sc_altitude)/Rt;
+		console.log(A);
+		var B = Math.tan((payload_beamwidth*Math.PI/180)/2);
+		console.log(B);
+		var radius = 2*Math.acos((2*A-Math.sqrt(4*A*A-4*(1+(1/B))*(A*A-(1/B))))/2*(1+(1/B)))*180/Math.PI;
+		console.log(radius);
+		radius = radius * OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'];
+		console.log(radius);*/
 
 		//Spacecraft
 		var radius = sc_altitude*Math.tan((payload_beamwidth*Math.PI/180)/2);
@@ -264,7 +277,8 @@
 		points = new Array();
 		lineLayer.removeAllFeatures();
 		sc_layer.removeAllFeatures();
-		stations_layer.removeAllFeatures();
+		//stations_layer.removeAllFeatures();
+		stations_area_layer.removeAllFeatures();
 		//reDraw();
 	}
 	function addPoints(points_ext){

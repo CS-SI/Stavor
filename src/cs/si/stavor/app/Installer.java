@@ -266,7 +266,7 @@ public class Installer {
 		//First Example VIL-2
 		GroundStation gs = new GroundStation();
 		gs.enabled = false;
-		gs.name="Villafranca S-Band";
+		gs.name="Villafranca";
 		gs.latitude=40.442592;
 		gs.longitude=-3.951583;
 		gs.ellipsoid_elevation=664.8;
@@ -290,7 +290,7 @@ public class Installer {
 		//Second Example KRU
 		gs = new GroundStation();
 		gs.enabled = true;
-		gs.name="Kourou S-Band";
+		gs.name="Kourou";
 		gs.latitude=5.251439;
 		gs.longitude=-52.804664;
 		gs.ellipsoid_elevation=-14.6709;
@@ -314,7 +314,7 @@ public class Installer {
 		//Third Example Cebreros
 		gs = new GroundStation();
 		gs.enabled = true;
-		gs.name="Cebreros X-Band";
+		gs.name="Cebreros";
 		gs.latitude=40.452689;
 		gs.longitude=-4.36755;
 		gs.ellipsoid_elevation=-794.095;
@@ -339,7 +339,7 @@ public class Installer {
 		//Fourth Example Kiruna
 		gs = new GroundStation();
 		gs.enabled = true;
-		gs.name="Kiruna S-Band";
+		gs.name="Kiruna";
 		gs.latitude=67.857128;
 		gs.longitude=20.964325;
 		gs.ellipsoid_elevation=402.1724;
@@ -363,10 +363,130 @@ public class Installer {
 		//Fifth Example Maspalomas
 				gs = new GroundStation();
 				gs.enabled = true;
-				gs.name="Maspalomas S-Band";
+				gs.name="Maspalomas";
 				gs.latitude=27.762889;
 				gs.longitude=-15.6338;
 				gs.ellipsoid_elevation=205.1177;
+				
+				values = new ContentValues();
+				values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+				values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+				values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+				values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+				values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
+
+				
+				// Insert the new row, returning the primary key value of the new row
+				newRowId = db.insert(
+						StationEntry.TABLE_NAME,
+						null,
+				         values);
+				if(newRowId==-1)
+					result=false;
+				
+				//sixth Example Poker flat
+				gs = new GroundStation();
+				gs.enabled = true;
+				gs.name="Poker Flat";
+				gs.latitude=65.116667;
+				gs.longitude=212.538333;
+				gs.ellipsoid_elevation=430.34;
+				
+				values = new ContentValues();
+				values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+				values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+				values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+				values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+				values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
+
+				
+				// Insert the new row, returning the primary key value of the new row
+				newRowId = db.insert(
+						StationEntry.TABLE_NAME,
+						null,
+				         values);
+				if(newRowId==-1)
+					result=false;
+				
+				//seventh Example Santiago, Chile
+				gs = new GroundStation();
+				gs.enabled = true;
+				gs.name="Santiago";
+				gs.latitude=-33.151794;
+				gs.longitude=289.332688;
+				gs.ellipsoid_elevation=730.0;
+				
+				values = new ContentValues();
+				values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+				values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+				values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+				values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+				values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
+
+				
+				// Insert the new row, returning the primary key value of the new row
+				newRowId = db.insert(
+						StationEntry.TABLE_NAME,
+						null,
+				         values);
+				if(newRowId==-1)
+					result=false;
+				
+				//eigth Example Canberra
+				gs = new GroundStation();
+				gs.enabled = true;
+				gs.name="Canberra";
+				gs.latitude=-39.018556;
+				gs.longitude=148.983058;
+				gs.ellipsoid_elevation=680.0;
+				
+				values = new ContentValues();
+				values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+				values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+				values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+				values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+				values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
+
+				
+				// Insert the new row, returning the primary key value of the new row
+				newRowId = db.insert(
+						StationEntry.TABLE_NAME,
+						null,
+				         values);
+				if(newRowId==-1)
+					result=false;
+				
+				//nineth Example Goldstone
+				gs = new GroundStation();
+				gs.enabled = true;
+				gs.name="Goldstone";
+				gs.latitude=35.339907;
+				gs.longitude=243.125198;
+				gs.ellipsoid_elevation=956.059;
+				
+				values = new ContentValues();
+				values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
+				values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
+				values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
+				values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
+				values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
+
+				
+				// Insert the new row, returning the primary key value of the new row
+				newRowId = db.insert(
+						StationEntry.TABLE_NAME,
+						null,
+				         values);
+				if(newRowId==-1)
+					result=false;
+				
+				//tenth Example Tokyo
+				gs = new GroundStation();
+				gs.enabled = true;
+				gs.name="Tokyo";
+				gs.latitude=35.708762;
+				gs.longitude=139.491778;
+				gs.ellipsoid_elevation=-641.245;
 				
 				values = new ContentValues();
 				values.put(StationEntry.COLUMN_NAME_NAME, gs.name);
