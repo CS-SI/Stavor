@@ -136,6 +136,11 @@
     <string name="dialog_delete_confirm">Eliminar</string>
     <string name="dialog_delete_cancel">Cancelar</string>
     
+    <string name="dialog_copy_title">Copiar Misión</string>
+    <string name="dialog_copy_message">Desea copiar la misión</string>
+    <string name="dialog_copy_confirm">Copiar</string>
+    <string name="dialog_copy_cancel">Cancelar</string>
+    
     <string name="dialog_reset_title">Resetear Config.</string>
     <string name="dialog_reset_message">Se dispone a resetear toda configuración y datos a los valores por defecto (Las misiones se guardarán)</string>
     <string name="dialog_reset_confirm">Resetear</string>

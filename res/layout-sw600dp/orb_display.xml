@@ -49,9 +49,25 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/spinnerlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/buttonMissionNew"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/view_selector"
+            android:minHeight="45dp"
+            android:text="@string/menu_views_ref_frame_xyz"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </FrameLayout>
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_below="@id/spinnerlayout"
         android:layout_marginTop="3dp" >
 
         <TextView
@@ -95,6 +111,5 @@
             android:src="@drawable/ic_launcher" />
 
     </FrameLayout>
-    
 
 </RelativeLayout>

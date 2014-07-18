@@ -7,6 +7,7 @@ import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
+import cs.si.stavor.dialogs.CopyMissionDialogFragment;
 import cs.si.stavor.dialogs.DeleteMissionDialogFragment;
 import cs.si.stavor.mission.Mission;
 import cs.si.stavor.mission.MissionAndId;
@@ -23,7 +24,11 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Paint;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -166,7 +171,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	            		simulator.connect();
             		}else{
             			//Set mission
-            			MissionAndId mis = getSelectedMission();
+            			MissionAndId mis = getMission(activeMissionId);
             			if(mis!=null){
                 			simulator.setSelectedMission(mis.mission, mis.id);
                 			simulator.connect();
@@ -225,7 +230,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 					}else if (activeMissionId==0 ||activeMissionId==1 ||activeMissionId==2  ||activeMissionId==3){
 						Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_editable), Toast.LENGTH_LONG).show();
 					}else{
-						MissionAndId mis = getSelectedMission();
+						MissionAndId mis = getMission(activeMissionId);
 		    			if(mis!=null){
 		    				((MainActivity)getActivity()).showMissionEditor(mis);
 		    			}else{
@@ -244,7 +249,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	 * Returns the selected Mission from the database
 	 * @return
 	 */
-	private MissionAndId getSelectedMission(){
+	private MissionAndId getMission(int id){
 		String[] projection = {
 				MissionEntry._ID,
 			    MissionEntry.COLUMN_NAME_CLASS
@@ -254,7 +259,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 					MissionEntry.TABLE_NAME,  // The table to query
 				    projection,                               // The columns to return
 				    MissionEntry._ID+" = ?",                                // The columns for the WHERE clause
-				    new String[]{Integer.toString(activeMissionId)},                            // The values for the WHERE clause
+				    new String[]{Integer.toString(id)},                            // The values for the WHERE clause
 				    "",                                     // don't group the rows
 				    "",                                     // don't filter by row groups
 				    null                                 // The sort order
@@ -283,6 +288,17 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	DialogFragment newFragment = DeleteMissionDialogFragment.newInstance(id, name);
     	newFragment.setCancelable(true);
     	newFragment.show(getFragmentManager(), "delete");
+    }
+	
+	/**
+	 * Shows the copy mission confirmation dialog
+	 * @param id Mission id
+	 * @param name Mission name
+	 */
+	public void showCopyMissionDialog(int id, String name, Mission mis) {
+    	DialogFragment newFragment = CopyMissionDialogFragment.newInstance(id, name, mis);
+    	newFragment.setCancelable(true);
+    	newFragment.show(getFragmentManager(), "copy");
     }
 
 	/**
@@ -398,6 +414,62 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	@Override
 	public void onLoaderReset(Loader<Cursor> arg0) {
 		adapter.changeCursor(null);
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+	    ContextMenuInfo menuInfo) {
+	  if (v.getId()==R.id.listView1) {
+	    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+	    String header = ((TextView)((ListView)v).getChildAt(info.position).findViewById(R.id.textViewMission)).getText().toString();
+	    menu.setHeaderTitle(header);
+	    String[] menuItems = getResources().getStringArray(R.array.missions_menu);
+	    for (int i = 0; i<menuItems.length; i++) {
+	      menu.add(Menu.NONE, i, i, menuItems[i]);
+	    }
+	  }
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	  AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+	  int menuItemIndex = item.getItemId();
+	  //String[] menuItems = getResources().getStringArray(R.array.missions_menu);
+	  //String menuItemName = menuItems[menuItemIndex];
+	  
+	  int listItemKey = -1;
+	  try{
+		  listItemKey = Integer.parseInt(((TextView)(missionsList.getChildAt(info.position).findViewById(R.id.textViewMissionId))).getText().toString());
+		  String listItemName = ((TextView)missionsList.getChildAt(info.position).findViewById(R.id.textViewMission)).getText().toString();
+		  if(menuItemIndex==0){
+				if(listItemKey==-1){
+					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
+				}else if (listItemKey==0 ||listItemKey==1 ||listItemKey==2 || listItemKey==3 ){
+					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_removable), Toast.LENGTH_LONG).show();
+				}else{
+					  showDeleteMissionDialog(listItemKey, listItemName);
+				}
+		  }else if(menuItemIndex==1){
+			  showCopyMissionDialog(listItemKey, listItemName, getMission(listItemKey).mission);
+		  }else if(menuItemIndex==2){
+				if(listItemKey==-1){
+					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
+				}else if (listItemKey==0 ||listItemKey==1 ||listItemKey==2  ||listItemKey==3){
+					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_editable), Toast.LENGTH_LONG).show();
+				}else{
+					MissionAndId mis = getMission(listItemKey);
+	    			if(mis!=null){
+	    				((MainActivity)getActivity()).showMissionEditor(mis);
+	    			}else{
+	    				Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
+	    			}
+				}
+		  }
+	  }catch(Exception e){
+		  
+	  }
+	  
+	  return true;
 	}
 	
 }

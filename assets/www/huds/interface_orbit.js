@@ -159,3 +159,16 @@ function updateModelState(new_state){
 	  //}
    //}
 }
+function changeView(view_mode){
+	switch(view_mode){
+		case "Free"://free
+			locked_view = false;
+			break;
+		case "Locked"://locked
+			locked_view = true;
+			break;
+	}
+}
+function getCamDistance(){
+	return Math.sqrt(camera.position.x*camera.position.x+camera.position.y*camera.position.y+camera.position.z*camera.position.z);
+}
