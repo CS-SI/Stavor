@@ -269,7 +269,6 @@ public class Installer {
 		gs.name="Villafranca S-Band";
 		gs.latitude=40.442592;
 		gs.longitude=-3.951583;
-		gs.beam_width=0.6;
 		gs.ellipsoid_elevation=664.8;
 		
 		values = new ContentValues();
@@ -277,7 +276,6 @@ public class Installer {
 		values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
 		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
 		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
-		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
 		values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
 
 		
@@ -295,7 +293,6 @@ public class Installer {
 		gs.name="Kourou S-Band";
 		gs.latitude=5.251439;
 		gs.longitude=-52.804664;
-		gs.beam_width=0.6;
 		gs.ellipsoid_elevation=-14.6709;
 		
 		values = new ContentValues();
@@ -303,7 +300,6 @@ public class Installer {
 		values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
 		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
 		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
-		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
 		values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
 
 		
@@ -321,7 +317,6 @@ public class Installer {
 		gs.name="Cebreros X-Band";
 		gs.latitude=40.452689;
 		gs.longitude=-4.36755;
-		gs.beam_width=0.074;
 		gs.ellipsoid_elevation=-794.095;
 		
 		values = new ContentValues();
@@ -329,7 +324,6 @@ public class Installer {
 		values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
 		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
 		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
-		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
 		values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
 
 		
@@ -348,7 +342,6 @@ public class Installer {
 		gs.name="Kiruna S-Band";
 		gs.latitude=67.857128;
 		gs.longitude=20.964325;
-		gs.beam_width=0.65;
 		gs.ellipsoid_elevation=402.1724;
 		
 		values = new ContentValues();
@@ -356,7 +349,6 @@ public class Installer {
 		values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
 		values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
 		values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
-		values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
 		values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
 
 		
@@ -374,7 +366,6 @@ public class Installer {
 				gs.name="Maspalomas S-Band";
 				gs.latitude=27.762889;
 				gs.longitude=-15.6338;
-				gs.beam_width=0.65;
 				gs.ellipsoid_elevation=205.1177;
 				
 				values = new ContentValues();
@@ -382,7 +373,6 @@ public class Installer {
 				values.put(StationEntry.COLUMN_NAME_LATITUDE, gs.latitude);
 				values.put(StationEntry.COLUMN_NAME_LONGITUDE, gs.longitude);
 				values.put(StationEntry.COLUMN_NAME_ELEVATION, gs.ellipsoid_elevation);
-				values.put(StationEntry.COLUMN_NAME_BEAMWIDTH, gs.beam_width);
 				values.put(StationEntry.COLUMN_NAME_ENABLED, gs.enabled);
 
 				

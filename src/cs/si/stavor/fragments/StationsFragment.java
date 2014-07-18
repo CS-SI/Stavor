@@ -167,7 +167,6 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 				StationEntry.COLUMN_NAME_LATITUDE,
 				StationEntry.COLUMN_NAME_LONGITUDE,
 				StationEntry.COLUMN_NAME_ELEVATION,
-				StationEntry.COLUMN_NAME_BEAMWIDTH,
 				StationEntry.COLUMN_NAME_ENABLED
 			    };
 
@@ -188,7 +187,6 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 			int latIndex = c.getColumnIndex(StationEntry.COLUMN_NAME_LATITUDE);
 			int lonIndex = c.getColumnIndex(StationEntry.COLUMN_NAME_LONGITUDE);
 			int elevIndex = c.getColumnIndex(StationEntry.COLUMN_NAME_ELEVATION);
-			int bwIndex = c.getColumnIndex(StationEntry.COLUMN_NAME_BEAMWIDTH);
 			int enabledIndex = c.getColumnIndex(StationEntry.COLUMN_NAME_ENABLED);
 			
 			//this.itemId = cursor.getLong(idIndex);
@@ -197,7 +195,6 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 			double station_lat = c.getDouble(latIndex);
 			double station_lon = c.getDouble(lonIndex);
 			double station_elev = c.getDouble(elevIndex);
-			double station_bw = c.getDouble(bwIndex);
 			boolean station_enabled = Boolean.parseBoolean(c.getString(enabledIndex));
 			
 			GroundStation gs = new GroundStation(
@@ -205,8 +202,7 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 					station_name,
 					station_lat,
 					station_lon,
-					station_elev,
-					station_bw);
+					station_elev);
 			
 			return new StationAndId(gs, station_id);
 		}else{

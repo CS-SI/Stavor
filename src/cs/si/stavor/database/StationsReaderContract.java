@@ -18,7 +18,6 @@ public final class StationsReaderContract {
         public static final String COLUMN_NAME_LATITUDE = "latitude";
         public static final String COLUMN_NAME_LONGITUDE = "longitude";
         public static final String COLUMN_NAME_ELEVATION = "elevation";
-        public static final String COLUMN_NAME_BEAMWIDTH = "beamwidth";
     }
 
     private static final String DOUBLE_TYPE = " DOUBLE";
@@ -34,8 +33,7 @@ public final class StationsReaderContract {
         		StationEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
         		StationEntry.COLUMN_NAME_LATITUDE + DOUBLE_TYPE + COMMA_SEP +
         		StationEntry.COLUMN_NAME_LONGITUDE + DOUBLE_TYPE + COMMA_SEP +
-        		StationEntry.COLUMN_NAME_ELEVATION + DOUBLE_TYPE + COMMA_SEP +
-        		StationEntry.COLUMN_NAME_BEAMWIDTH + DOUBLE_TYPE + 
+        		StationEntry.COLUMN_NAME_ELEVATION + DOUBLE_TYPE + 
         " )";
 
     static final String SQL_DELETE_ENTRIES =

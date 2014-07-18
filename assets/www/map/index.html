@@ -94,68 +94,23 @@
  
     
 */
+
+//******************************************************
+//         PATH
+//******************************************************
+	var style_path = { 
+		strokeColor: '#ff0000', 
+	  	strokeOpacity: 0.5,
+	  	strokeWidth: 3
+	};
+
 	var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
 	map.addLayer(lineLayer);                    
 	map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path)); 
 
-	var sc_layer = new OpenLayers.Layer.Vector("SC Layer");
-	map.addLayer(sc_layer);
-
-/*
-	var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
-	renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;*/
-
-	var polygonStyle = 
-		OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
-	polygonStyle.strokeColor = "#098700";
-	polygonStyle.strokeOpacity = "0.8";
-	polygonStyle.strokeWidth = "0.1";
-	polygonStyle.fillColor = "#00FF00";
-	polygonStyle.fillOpacity = 0.4;
-	polygonStyle.strokeWidth = 1;
-	polygonStyle.label = "${label}";
-	polygonStyle.labelOutlineColor = "white";
-	polygonStyle.labelOutlineWidth = 0.3;
-	polygonStyle.fontSize="10px";
-	polygonStyle.fontWeight="bold";
-	polygonStyle.fontColor="#000000";
-	polygonStyle.pointRadius="1";
-	polygonStyle.labelYOffset="10";	
-
-	
-	var smap = new OpenLayers.StyleMap({"default": polygonStyle});
-
-	var stations_layer = new OpenLayers.Layer.Vector("Stations Layer");
-	map.addLayer(stations_layer);
-
-	var stations_name_layer = new OpenLayers.Layer.Vector("StationsName Layer", {"styleMap": smap});
-	map.addLayer(stations_name_layer);
-
-	getInitialization();
-	//var polyOptions = {sides: 40};                              
-	//map.addControl(new OpenLayers.Control.DrawFeature(sc_layer, OpenLayers.Handler.RegularPolygon,{handlerOptions: polyOptions}));     
-	/*var points = new Array(
-	   new OpenLayers.Geometry.Point(1.0, 1.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-	   new OpenLayers.Geometry.Point(20.0, 20.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-	   new OpenLayers.Geometry.Point(20.0, 30.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-	   new OpenLayers.Geometry.Point(20.0, 40.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-	   new OpenLayers.Geometry.Point(40.0, 40.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject())
-	);*/
-
-
-	var line = new OpenLayers.Geometry.LineString(points);
-
-	var style = { 
-	  strokeColor: '#ff0000', 
-	  strokeOpacity: 0.5,
-	  strokeWidth: 3
-	};
-
-	var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
-	lineLayer.addFeatures([lineFeature]);
-
-	//Circle --------------------------------------------------
-
+//******************************************************
+//         SPACECRAFT
+//******************************************************
 	var sc_style = {
 	      strokeColor: "#FF0000",
 	      strokeOpacity: 0.5,
@@ -163,25 +118,78 @@
 	      fillOpacity: 0.3,
 		fillColor: "#FF2200"
 	};
-	//End circle ----------------------------------------------
 
-	//Stations --------------------------------------------------
+	var sc_layer = new OpenLayers.Layer.Vector("SC Layer");
+	map.addLayer(sc_layer);
 
-	/*var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
-	    new OpenLayers.Geometry.Point(0, 0),
-	    1500*1000,
-	    20 // According to the API you only need 20 sides to approximate a circle.
-	);*/
-	var station_style = {
+//******************************************************
+//         STATION BW
+//******************************************************
+
+	/*var station_style = {
 	      strokeColor: "#00FF00",
 	      strokeOpacity: 0.4,
 	      strokeWidth: 1,
 	      fillOpacity: 0.2,
 		fillColor: "#22FF00"
 	};
-	//var sc_feature = new OpenLayers.Feature.Vector(circle, null, sc_style);
-	//sc_layer.addFeatures([sc_feature]);
-	//End stations ----------------------------------------------
+
+	var stations_layer = new OpenLayers.Layer.Vector("Stations Layer");
+	map.addLayer(stations_layer);*/
+
+//******************************************************
+//         STATION AREA
+//******************************************************
+
+	var station_area_style = {
+	      strokeColor: "#00FF00",
+	      strokeOpacity: 0.3,
+	      strokeWidth: 1,
+	      fillOpacity: 0.1,
+		fillColor: "#00FF33"
+	};
+
+	var Rt = 6371000;
+
+	var stations_area_layer = new OpenLayers.Layer.Vector("Stations Area Layer");
+	map.addLayer(stations_area_layer);
+
+//******************************************************
+//         STATION NAME
+//******************************************************
+	var stationNameStyle = 
+		OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+	stationNameStyle.strokeColor = "#098700";
+	stationNameStyle.strokeOpacity = "0.8";
+	stationNameStyle.strokeWidth = "0.1";
+	stationNameStyle.fillColor = "#00FF00";
+	stationNameStyle.fillOpacity = 0.4;
+	stationNameStyle.strokeWidth = 1;
+	stationNameStyle.label = "${label}";
+	stationNameStyle.labelOutlineColor = "white";
+	stationNameStyle.labelOutlineWidth = 0.3;
+	stationNameStyle.fontSize="10px";
+	stationNameStyle.fontWeight="bold";
+	stationNameStyle.fontColor="#000000";
+	stationNameStyle.pointRadius="1";
+	stationNameStyle.labelYOffset="10";	
+	
+	var smap = new OpenLayers.StyleMap({"default": stationNameStyle});
+
+	var stations_name_layer = new OpenLayers.Layer.Vector("StationsName Layer", {"styleMap": smap});
+	map.addLayer(stations_name_layer);
+
+//******************************************************
+//---------------------- INIT --------------------------
+//******************************************************
+
+	getInitialization();
+
+	//PRE-STORED PATH
+	var line = new OpenLayers.Geometry.LineString(points);
+
+	var lineFeature = new OpenLayers.Feature.Vector(line, null, style_path);
+	lineLayer.addFeatures([lineFeature]);
 
 	//STATIONS NAME
 	for (var arrayIndex in stations){
@@ -201,7 +209,7 @@
 		//Path
 		line = new OpenLayers.Geometry.LineString(points);
 		lineLayer.removeAllFeatures();
-		var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
+		var lineFeature = new OpenLayers.Feature.Vector(line, null, style_path);
 		lineLayer.addFeatures([lineFeature]);
 
 		//Spacecraft
@@ -210,7 +218,7 @@
 		var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
 		    sc_position,
 		    radius,
-		    20 // According to the API you only need 20 sides to approximate a circle.
+		    30 // According to the API you only need 20 sides to approximate a circle.
 		);
 		sc_layer.removeAllFeatures();
 		var sc_feature = new OpenLayers.Feature.Vector(circle, null, sc_style);
@@ -226,19 +234,30 @@
 		}
 
 		//Stations		
-		stations_layer.removeAllFeatures();
+		//stations_layer.removeAllFeatures();
+		stations_area_layer.removeAllFeatures();
 		for (var arrayIndex in stations){
-			var radius = (sc_altitude-stations[arrayIndex].ellipsoid_elevation)*Math.tan((stations[arrayIndex].beam_width*Math.PI/180)/2);
+			//Stations BW
+			/*var radius = (sc_altitude-stations[arrayIndex].ellipsoid_elevation)*Math.tan((stations[arrayIndex].beam_width*Math.PI/180)/2);
 			var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
 			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 			    radius,
-			    20 // According to the API you only need 20 sides to approximate a circle.
+			    20 
 			);
 			var station_feature = new OpenLayers.Feature.Vector(circle, null, station_style);
-			/*station_feature.attributes = {
-				label:stations[arrayIndex].name
-			}*/
-			stations_layer.addFeatures([station_feature]);
+			stations_layer.addFeatures([station_feature]);*/
+
+			//Stations Area
+			var radius = Math.acos(Rt/(Rt+sc_altitude-stations[arrayIndex].ellipsoid_elevation))*180/Math.PI;
+			//var radius = (sc_altitude-stations[arrayIndex].ellipsoid_elevation)*Math.tan((stations[arrayIndex].beam_width*Math.PI/180)/2);
+			radius = radius * OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'];
+			var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
+			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
+			    radius,
+			    30 
+			);
+			var station_feature = new OpenLayers.Feature.Vector(circle, null, station_area_style);
+			stations_area_layer.addFeatures([station_feature]);
 		}
 	}
 	function clearPath(){
@@ -248,10 +267,6 @@
 		stations_layer.removeAllFeatures();
 		//reDraw();
 	}
-	/*function addPoint(lat, lon){
-		points.push(new OpenLayers.Geometry.Point(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-		reDraw();
-	}*/
 	function addPoints(points_ext){
 		var points_ext_ol = new Array();
 		for (var arrayIndex in points_ext) {		

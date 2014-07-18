@@ -42,8 +42,7 @@ public class ModelConfigurationMap {
 					StationEntry.COLUMN_NAME_NAME,
 				    StationEntry.COLUMN_NAME_LATITUDE,
 				    StationEntry.COLUMN_NAME_LONGITUDE,
-				    StationEntry.COLUMN_NAME_ELEVATION,
-				    StationEntry.COLUMN_NAME_BEAMWIDTH
+				    StationEntry.COLUMN_NAME_ELEVATION
 				    };
 	
 			Cursor c = db
@@ -64,8 +63,7 @@ public class ModelConfigurationMap {
 					double station_lat = c.getDouble(c.getColumnIndex(StationEntry.COLUMN_NAME_LATITUDE));
 					double station_lon = c.getDouble(c.getColumnIndex(StationEntry.COLUMN_NAME_LONGITUDE));
 					double station_elev = c.getDouble(c.getColumnIndex(StationEntry.COLUMN_NAME_ELEVATION));
-					double station_bw = c.getDouble(c.getColumnIndex(StationEntry.COLUMN_NAME_BEAMWIDTH));
-					GroundStation gs = new GroundStation(true, station_name, station_lat, station_lon, station_elev, station_bw);
+					GroundStation gs = new GroundStation(true, station_name, station_lat, station_lon, station_elev);
 					stationsList.add(gs);
 				}
 			}
