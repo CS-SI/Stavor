@@ -85,6 +85,8 @@
 	var sc_latitude = 0;
 	var sc_longitude = 0;
 	var sc_altitude = 0;
+	var night_line_init = false;
+	var sun_lon_tmp = 0;
 
 	init();
 
@@ -107,7 +109,20 @@
     
 */
 
+//******************************************************
+//         SUN MARKER
+//******************************************************
 
+	var sun_layer = new OpenLayers.Layer.Vector( "Sun Marker" );
+	map.addLayer(sun_layer);
+
+//******************************************************
+//         NIGHT LINE
+//******************************************************
+
+	var night_layer = new OpenLayers.Layer.Vector("Night Layer");
+	map.addLayer(night_layer);
+    	orthodromeFlag=true;
 
 //******************************************************
 //         STATION BW
@@ -149,12 +164,6 @@
 
 	map.addLayer(stations_area_layer);
 
-
-	var night_layer = new OpenLayers.Layer.Vector("Night Layer");
-	map.addLayer(night_layer);
-    	orthodromeFlag=true;
-	show_nightline(new OpenLayers.Geometry.Point(0.0, 0.0),
-			new OpenLayers.Geometry.Point(45.0,-89.0));
 
 //******************************************************
 //         STATION NAME
@@ -235,6 +244,32 @@
 //------------------------------------------------------------------------------
 
 	function reDraw(){
+		//Sun
+		sun_layer.removeAllFeatures();    
+		var marker_sun = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(sun_lon, sun_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()), null, {
+			externalGraphic: "sun.png",
+			graphicWidth: 32,
+			graphicHeight: 32,
+			fillOpacity: 1
+		});
+		sun_layer.addFeatures([marker_sun]);
+
+		//Night line
+		if(!night_line_init){
+			if(sun_lon!=0.0){
+				show_nightline(new OpenLayers.Geometry.Point(sun_lon, 85.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
+						new OpenLayers.Geometry.Point(sun_lon+10,0.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+				night_line_init = true;
+			}
+		}else{
+			night_layer.features[0].geometry.move((sun_lon-sun_lon_tmp)*OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'],0);
+			night_layer.features[0].layer.drawFeature(night_layer.features[0]);
+
+			night_layer.features[1].geometry.move((sun_lon-sun_lon_tmp)*OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'],0);
+			night_layer.features[1].layer.drawFeature(night_layer.features[1]);
+		}
+		sun_lon_tmp = sun_lon;
+
 		//Path
 		line = new OpenLayers.Geometry.LineString(points);
 		lineLayer.removeAllFeatures();
@@ -294,18 +329,18 @@
 
 
 
-			/*var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
+			var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
 			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 			    radius,
 			    30 
-			);*/
-			var circle = createGeodesicPolygon(
+			);
+			/*var circle = createGeodesicPolygon(
 			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 			    radius,
 			    30,
 				0,
  				new OpenLayers.Projection("EPSG:4326")
-			);
+			);*/
 
 
 			//circle.transform(new OpenLayers.Projection("EPSG:4258"), map.getProjectionObject());

@@ -42,9 +42,6 @@ function GreatCircleLine(pOrigin, pDest)
 
 function show_nightline(pt1, pt2)
 {
-    
-    pt1 = pt1.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-    pt2 = pt2.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 
     var pOrigin = new geo.Point(pt1.x, pt1.y);
     var pDest = new geo.Point(pt2.x, pt2.y);

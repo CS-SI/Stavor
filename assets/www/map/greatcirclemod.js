@@ -171,7 +171,7 @@ geo.GreatCircle.prototype.toLineString = function (startLon, endLon) {
    var waypoints = [];
    var k = 0;                            // waypoints index
 	var j = Math.abs(endLon-startLon);    // number of increments on g.c. route
-	var arc = Math.PI / 180.0;            // Size of increments in radians
+	var arc = Math.PI / 10.0;            // Size of increments in radians
 
 	lon = Math.min (lon1, lon2);
 	if (Math.abs(lon1-lon2) <= geo.TOL) {
