@@ -106,7 +106,8 @@ public class ModelSimulation {
     	if(browser!=null && isBrowserLoaded){
     		if(selectedBrowser.equals(Browsers.Map)){
     			if(mapPathBuffer.size()!=0){
-    				browser.loadUrl("javascript:updateModelState('"+gson.toJson(getMapPathBufferLast())+"')");
+    				ModelStateMap state = new ModelStateMap(getMapPathBufferLast(), sun_lat, sun_lon);
+    				browser.loadUrl("javascript:updateModelState('"+gson.toJson(state)+"')");
     			}
     		}
     	}
@@ -125,18 +126,30 @@ public class ModelSimulation {
     public void updateSimulation(SpacecraftState scs, int sim_progress){
     	if(selectedBrowser.equals(Browsers.Map)){
     		 try {
+    			 //Sat_Pos
     		 	GeodeticPoint gp = earth.transform(scs.getPVCoordinates().getPosition(), scs.getFrame(), scs.getDate());
     		 	double lat = gp.getLatitude()*180/Math.PI;
     		 	double lon = gp.getLongitude()*180/Math.PI;
     		 	double alt = gp.getAltitude();
     		 	if(!Double.isNaN(lat)&&!Double.isNaN(lon))
     		 		addToMapPathBuffer(lat, lon, alt);
+    		 	
+    		 	//Sun_Pos
+    		 	GeodeticPoint gp2 = earth.transform(CelestialBodyFactory.getSun().getPVCoordinates(scs.getDate(), scs.getFrame()).getPosition(), scs.getFrame(), scs.getDate());
+    		 	double lat2 = gp2.getLatitude()*180/Math.PI;
+    		 	double lon2 = gp2.getLongitude()*180/Math.PI;
+    		 	if(!Double.isNaN(lat)&&!Double.isNaN(lon)){
+    		 		sun_lat = lat2;
+    		 		sun_lon = lon2;
+    		 	}
+    		 	
     		} catch (OrekitException e) {
     			e.printStackTrace();
     		}
     	}
     }
 
+    double sun_lat, sun_lon;
 
 	private ArrayList<MapPoint> mapPathBuffer = new ArrayList<MapPoint>();
 	public synchronized void resetMapPathBuffer() {
