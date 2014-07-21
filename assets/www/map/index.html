@@ -10,6 +10,16 @@
   	<!--<script src="http://www.openlayers.org/api/OpenLayers.js"></script>-->
 	<script src="OpenLayers.mobile.js"></script>
         <script src="mobile.js"></script>
+
+	<script type="text/javascript" src="proj4js/proj4.js"></script>
+	<script type="text/javascript" src="greatCircle.js"></script>
+	<script type="text/javascript" src="greatcirclemod.js"></script>
+	<SCRIPT type="text/javascript" src="proj4js/data/tmerc.js"></SCRIPT>
+	<SCRIPT type="text/javascript" src="proj4js/data/merc.js"></SCRIPT>
+	<SCRIPT type="text/javascript" src="proj4js/data/EPSG31466.js"></SCRIPT>
+	<SCRIPT type="text/javascript" src="proj4js/data/EPSG31467.js"></SCRIPT>
+	<SCRIPT type="text/javascript" src="proj4js/data/EPSG900913.js"></SCRIPT>
+	<!--<script type="text/javascript" src="javascript/counter_orthodrome.js"></script>-->
 	<style>
             html, body {
                 margin  : 0;
@@ -127,7 +137,22 @@
 	var Rt = 6371000;
 
 	var stations_area_layer = new OpenLayers.Layer.Vector("Stations Area Layer");
+
+	/*var stations_area_layer = new OpenLayers.Layer.Vector("Stations Area Layer", {
+		   projection: map.displayProjection,
+		   preFeatureInsert: function(feature) {
+		   	feature.geometry.transform(new OpenLayers.Projection("EPSG:4258"), new OpenLayers.Projection("EPSG:4326"));
+		   }
+		}); */
+
 	map.addLayer(stations_area_layer);
+
+
+	var night_layer = new OpenLayers.Layer.Vector("Night Layer");
+	map.addLayer(night_layer);
+    	orthodromeFlag=true;
+	show_nightline(new OpenLayers.Geometry.Point(0.0, 0.0),
+			new OpenLayers.Geometry.Point(45.0,-89.0));
 
 //******************************************************
 //         STATION NAME
@@ -261,14 +286,27 @@
 			stations_layer.addFeatures([station_feature]);*/
 
 			//Stations Area
-			var radius = Math.acos(Rt/(Rt+sc_altitude-stations[arrayIndex].ellipsoid_elevation))*180/Math.PI;
+			var radius = Rt*Math.sin(Math.acos(Rt/(Rt+sc_altitude-stations[arrayIndex].ellipsoid_elevation)));
 			//var radius = (sc_altitude-stations[arrayIndex].ellipsoid_elevation)*Math.tan((stations[arrayIndex].beam_width*Math.PI/180)/2);
-			radius = radius * OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'];
-			var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
+			//radius = radius * OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'];
+
+
+
+			/*var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
 			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 			    radius,
 			    30 
+			);*/
+			var circle = createGeodesicPolygon(
+			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
+			    radius,
+			    30,
+				0,
+ 				new OpenLayers.Projection("EPSG:4326")
 			);
+
+
+			//circle.transform(new OpenLayers.Projection("EPSG:4258"), map.getProjectionObject());
 			var station_feature = new OpenLayers.Feature.Vector(circle, null, station_area_style);
 			stations_area_layer.addFeatures([station_feature]);
 		}
@@ -311,6 +349,38 @@ function changeView(view_mode){
 	}
 }
 
+/*
+ * APIMethod: createGeodesicPolygon
+ * Create a regular polygon around a radius. Useful for creating circles
+ * and the like.
+ *
+ * Parameters:
+ * origin - {<OpenLayers.Geometry.Point>} center of polygon.
+ * radius - {Float} distance to vertex, in map units.
+ * sides - {Integer} Number of sides. 20 approximates a circle.
+ * rotation - {Float} original angle of rotation, in degrees.
+ * projection - {<OpenLayers.Projection>} the map's projection
+ */
+function createGeodesicPolygon(origin, radius, sides, rotation, projection){
 
+    if (projection.getCode() !== "EPSG:4326") {
+        origin.transform(projection, new OpenLayers.Projection("EPSG:4326"));
+    }
+    var latlon = new OpenLayers.LonLat(origin.x, origin.y);
+    
+    var angle;
+    var new_lonlat, geom_point;
+    var points = [];
+    
+    for (var i = 0; i < sides; i++) {
+        angle = (i * 360 / sides) + rotation;
+        new_lonlat = OpenLayers.Util.destinationVincenty(latlon, angle, radius);
+        new_lonlat.transform(new OpenLayers.Projection("EPSG:4326"), projection);
+        geom_point = new OpenLayers.Geometry.Point(new_lonlat.lon, new_lonlat.lat);
+        points.push(geom_point);
+    }
+    var ring = new OpenLayers.Geometry.LinearRing(points);
+    return new OpenLayers.Geometry.Polygon([ring]);
+};
   </script>
 </body></html>

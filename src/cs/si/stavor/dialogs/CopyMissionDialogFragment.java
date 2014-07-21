@@ -2,9 +2,9 @@ package cs.si.stavor.dialogs;
 
 import java.io.IOException;
 
-import cs.si.stavor.R;
-import cs.si.stavor.MainActivity;
-import cs.si.stavor.StavorApplication;
+import cs.si.satcor.R;
+import cs.si.satcor.MainActivity;
+import cs.si.satcor.StavorApplication;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
 import cs.si.stavor.mission.Mission;
