@@ -80,9 +80,11 @@
 	var stations = new Array(station_a,station_b);
 
 	//HARD-CODED PARAMS
+	var sc_altitude_step = 50;
 
 	//VOLATILE PARAMS
 	var sc_latitude = 0;
+	var sc_altitude_tmp = 0;
 	var sc_longitude = 0;
 	var sc_altitude = 0;
 	var night_line_init = false;
@@ -257,16 +259,15 @@
 		//Night line
 		if(!night_line_init){
 			if(sun_lon!=0.0){
-				show_nightline(new OpenLayers.Geometry.Point(sun_lon, 85.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-						new OpenLayers.Geometry.Point(sun_lon+10,0.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+				show_nightline(new OpenLayers.Geometry.Point(sun_lon, 90.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
+						new OpenLayers.Geometry.Point(sun_lon+90,0.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
 				night_line_init = true;
 			}
 		}else{
-			night_layer.features[0].geometry.move((sun_lon-sun_lon_tmp)*OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'],0);
-			night_layer.features[0].layer.drawFeature(night_layer.features[0]);
-
-			night_layer.features[1].geometry.move((sun_lon-sun_lon_tmp)*OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'],0);
-			night_layer.features[1].layer.drawFeature(night_layer.features[1]);
+			for( var j=0; j < night_layer.features.length; j++){
+				night_layer.features[j].geometry.move((sun_lon-sun_lon_tmp)*OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'],0);
+				night_layer.features[j].layer.drawFeature(night_layer.features[j]);
+			}
 		}
 		sun_lon_tmp = sun_lon;
 
@@ -310,42 +311,46 @@
 
 		//Stations		
 		//stations_layer.removeAllFeatures();
-		stations_area_layer.removeAllFeatures();
-		for (var arrayIndex in stations){
-			//Stations BW
-			/*var radius = (sc_altitude-stations[arrayIndex].ellipsoid_elevation)*Math.tan((stations[arrayIndex].beam_width*Math.PI/180)/2);
-			var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
-			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-			    radius,
-			    20 
-			);
-			var station_feature = new OpenLayers.Feature.Vector(circle, null, station_style);
-			stations_layer.addFeatures([station_feature]);*/
+		if(Math.abs(sc_altitude-sc_altitude_tmp)>sc_altitude_step){
+			stations_area_layer.removeAllFeatures();
+			for (var arrayIndex in stations){
+				//Stations BW
+				/*var radius = (sc_altitude-stations[arrayIndex].ellipsoid_elevation)*Math.tan((stations[arrayIndex].beam_width*Math.PI/180)/2);
+				var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
+				    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
+				    radius,
+				    20 
+				);
+				var station_feature = new OpenLayers.Feature.Vector(circle, null, station_style);
+				stations_layer.addFeatures([station_feature]);*/
 
-			//Stations Area
-			var radius = Rt*Math.sin(Math.acos(Rt/(Rt+sc_altitude-stations[arrayIndex].ellipsoid_elevation)));
-			//var radius = (sc_altitude-stations[arrayIndex].ellipsoid_elevation)*Math.tan((stations[arrayIndex].beam_width*Math.PI/180)/2);
-			//radius = radius * OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'];
-
-
-
-			var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
-			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-			    radius,
-			    30 
-			);
-			/*var circle = createGeodesicPolygon(
-			    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-			    radius,
-			    30,
-				0,
- 				new OpenLayers.Projection("EPSG:4326")
-			);*/
+				//Stations Area
+				var radius = Rt*Math.sin(Math.acos(Rt/(Rt+sc_altitude-stations[arrayIndex].ellipsoid_elevation)));
+				//var radius = (sc_altitude-stations[arrayIndex].ellipsoid_elevation)*Math.tan((stations[arrayIndex].beam_width*Math.PI/180)/2);
+				//radius = radius * OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'];
 
 
-			//circle.transform(new OpenLayers.Projection("EPSG:4258"), map.getProjectionObject());
-			var station_feature = new OpenLayers.Feature.Vector(circle, null, station_area_style);
-			stations_area_layer.addFeatures([station_feature]);
+
+				var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
+				    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
+				    radius,
+				    30 
+				);
+				/*var circle = createGeodesicPolygon(
+				    new OpenLayers.Geometry.Point(stations[arrayIndex].longitude, stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
+				    radius,
+				    30,
+					0,
+	 				new OpenLayers.Projection("EPSG:4326")
+				);*/
+
+
+				//circle.transform(new OpenLayers.Projection("EPSG:4258"), map.getProjectionObject());
+				var station_feature = new OpenLayers.Feature.Vector(circle, null, station_area_style);
+				stations_area_layer.addFeatures([station_feature]);
+			}
+		
+			sc_altitude_tmp = sc_altitude;
 		}
 	}
 	function clearPath(){

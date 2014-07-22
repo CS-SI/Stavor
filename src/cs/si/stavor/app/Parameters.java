@@ -73,6 +73,6 @@ public class Parameters {
 		public static final String LOCALHOST = "http://localhost:8080/";
 	}
 	public static class Map {
-		public static final double marker_pos_threshold = 0.1;//In deg
+		public static final double marker_pos_threshold = 0.2;//In deg
 	}
 }
