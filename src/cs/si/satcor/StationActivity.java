@@ -22,7 +22,7 @@ import android.widget.Toast;
 public class StationActivity extends Activity{
 
 	boolean isEdit = false;
-	EditText tx_name, tx_lat, tx_lon, tx_elev;
+	EditText tx_name, tx_lat, tx_lon, tx_alt, tx_elev;
 	Button button;
 	StationAndId station;
 	
@@ -55,7 +55,8 @@ public class StationActivity extends Activity{
 						
 						station.station.latitude = Double.parseDouble(tx_lat.getText().toString());
 						station.station.longitude = Double.parseDouble(tx_lon.getText().toString());
-						station.station.ellipsoid_elevation = Double.parseDouble(tx_elev.getText().toString());
+						station.station.altitude = Double.parseDouble(tx_alt.getText().toString());
+						station.station.elevation = Double.parseDouble(tx_elev.getText().toString());
 						
 						if(isEdit){
 							//Update register with new name and serialized
@@ -90,13 +91,15 @@ public class StationActivity extends Activity{
 		
 		tx_lat = (EditText) findViewById(R.id.editTextStationLat);
 		tx_lon = (EditText) findViewById(R.id.editTextStationLon);
+		tx_alt = (EditText) findViewById(R.id.editTextStationAlt);
 		tx_elev = (EditText) findViewById(R.id.editTextStationElev);
 		
 
 		//Fill Views
 		tx_lat.setText(Double.toString(station.station.latitude));
 		tx_lon.setText(Double.toString(station.station.longitude));
-		tx_elev.setText(Double.toString(station.station.ellipsoid_elevation));
+		tx_alt.setText(Double.toString(station.station.altitude));
+		tx_elev.setText(Double.toString(station.station.elevation));
 
 		if(isEdit){
 			button.setText(getString(R.string.station_edit));
@@ -114,7 +117,8 @@ public class StationActivity extends Activity{
 		values.put(StationEntry.COLUMN_NAME_NAME, station.station.name);
 		values.put(StationEntry.COLUMN_NAME_LATITUDE, station.station.latitude);
 		values.put(StationEntry.COLUMN_NAME_LONGITUDE, station.station.longitude);
-		values.put(StationEntry.COLUMN_NAME_ELEVATION, station.station.ellipsoid_elevation);
+		values.put(StationEntry.COLUMN_NAME_ALTITUDE, station.station.altitude);
+		values.put(StationEntry.COLUMN_NAME_ELEVATION, station.station.elevation);
 		values.put(StationEntry.COLUMN_NAME_ENABLED, station.station.enabled);
 		
 		// Edit the row
@@ -131,7 +135,8 @@ public class StationActivity extends Activity{
 		values.put(StationEntry.COLUMN_NAME_NAME, station.station.name);
 		values.put(StationEntry.COLUMN_NAME_LATITUDE, station.station.latitude);
 		values.put(StationEntry.COLUMN_NAME_LONGITUDE, station.station.longitude);
-		values.put(StationEntry.COLUMN_NAME_ELEVATION, station.station.ellipsoid_elevation);
+		values.put(StationEntry.COLUMN_NAME_ALTITUDE, station.station.altitude);
+		values.put(StationEntry.COLUMN_NAME_ELEVATION, station.station.elevation);
 		values.put(StationEntry.COLUMN_NAME_ENABLED, station.station.enabled);
 		
 		// Insert the new row

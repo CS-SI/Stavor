@@ -18,7 +18,8 @@
     <string name="station_name">Nom:</string>
     <string name="station_lat">Latitude (deg):</string>
     <string name="station_lon">Longitude (deg):</string>
-    <string name="station_elev">Élévation (m):</string>
+    <string name="station_alt">Altitude (m):</string>
+    <string name="station_elev">Élévation min (deg):</string>
     <string name="station_bw">Il est considéré que l\'antenne a une mobilité en élévation de [90°,-90°], sans obstacles.</string>
     <string name="station_edit">Modifier</string>
     <string name="station_create">Créer</string>

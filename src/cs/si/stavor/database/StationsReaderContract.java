@@ -17,6 +17,7 @@ public final class StationsReaderContract {
         public static final String COLUMN_NAME_NAME = "name";
         public static final String COLUMN_NAME_LATITUDE = "latitude";
         public static final String COLUMN_NAME_LONGITUDE = "longitude";
+        public static final String COLUMN_NAME_ALTITUDE = "altitude";
         public static final String COLUMN_NAME_ELEVATION = "elevation";
     }
 
@@ -33,6 +34,7 @@ public final class StationsReaderContract {
         		StationEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
         		StationEntry.COLUMN_NAME_LATITUDE + DOUBLE_TYPE + COMMA_SEP +
         		StationEntry.COLUMN_NAME_LONGITUDE + DOUBLE_TYPE + COMMA_SEP +
+        		StationEntry.COLUMN_NAME_ALTITUDE + DOUBLE_TYPE + COMMA_SEP +
         		StationEntry.COLUMN_NAME_ELEVATION + DOUBLE_TYPE + 
         " )";
 

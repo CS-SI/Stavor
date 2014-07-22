@@ -1,6 +1,7 @@
 package cs.si.stavor.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.bodies.GeodeticPoint;
@@ -18,6 +19,9 @@ import com.google.gson.Gson;
 import cs.si.satcor.MainActivity;
 import cs.si.satcor.StavorApplication;
 import cs.si.stavor.app.Parameters;
+import cs.si.stavor.station.LatLon;
+import cs.si.stavor.station.StationArea;
+import cs.si.stavor.station.VisibilityCircle;
 
 /**
  * Contains and handles both the model information and configuration
@@ -27,6 +31,7 @@ import cs.si.stavor.app.Parameters;
 public class ModelSimulation {
 	private Gson gson = new Gson();
     private ModelConfigurationMap config;
+    private ModelStateMap state;
     private MainActivity activity;
     private WebView browser;
     private boolean isBrowserLoaded;
@@ -106,7 +111,6 @@ public class ModelSimulation {
     	if(browser!=null && isBrowserLoaded){
     		if(selectedBrowser.equals(Browsers.Map)){
     			if(mapPathBuffer.size()!=0){
-    				ModelStateMap state = new ModelStateMap(getMapPathBufferLast(), sun_lat, sun_lon);
     				browser.loadUrl("javascript:updateModelState('"+gson.toJson(state)+"')");
     			}
     		}
@@ -142,6 +146,26 @@ public class ModelSimulation {
     		 		sun_lat = lat2;
     		 		sun_lon = lon2;
     		 	}
+    		 	
+    		 	ArrayList<StationArea> stations = new ArrayList<StationArea>();
+    		 	for(int i = 0; i < config.stations.length; i++){
+    		 		if(config.stations[i].enabled){
+    		 			List<LatLon> circle = VisibilityCircle.computeCircle(
+	    		 				config.stations[i].latitude, 
+	    		 				config.stations[i].longitude, 
+	    		 				config.stations[i].altitude, 
+	    		 				config.stations[i].name, 
+	    		 				config.stations[i].elevation, 
+	    		 				scs.getPVCoordinates().getPosition().getNorm(), 
+	    		 				Parameters.Map.station_visibility_points);
+	    		 		stations.add(new StationArea(
+	    		 				config.stations[i].name,
+	    		 				circle.toArray(new LatLon[circle.size()])
+	    		 				));
+    		 		}
+    		 	}
+    		 	
+    		 	state = new ModelStateMap(getMapPathBufferLast(), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon);
     		 	
     		} catch (OrekitException e) {
     			e.printStackTrace();

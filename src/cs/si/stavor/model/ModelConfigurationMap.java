@@ -42,6 +42,7 @@ public class ModelConfigurationMap {
 					StationEntry.COLUMN_NAME_NAME,
 				    StationEntry.COLUMN_NAME_LATITUDE,
 				    StationEntry.COLUMN_NAME_LONGITUDE,
+				    StationEntry.COLUMN_NAME_ALTITUDE,
 				    StationEntry.COLUMN_NAME_ELEVATION
 				    };
 	
@@ -62,8 +63,9 @@ public class ModelConfigurationMap {
 					String station_name = c.getString(c.getColumnIndex(StationEntry.COLUMN_NAME_NAME));
 					double station_lat = c.getDouble(c.getColumnIndex(StationEntry.COLUMN_NAME_LATITUDE));
 					double station_lon = c.getDouble(c.getColumnIndex(StationEntry.COLUMN_NAME_LONGITUDE));
+					double station_alt = c.getDouble(c.getColumnIndex(StationEntry.COLUMN_NAME_ALTITUDE));
 					double station_elev = c.getDouble(c.getColumnIndex(StationEntry.COLUMN_NAME_ELEVATION));
-					GroundStation gs = new GroundStation(true, station_name, station_lat, station_lon, station_elev);
+					GroundStation gs = new GroundStation(true, station_name, station_lat, station_lon, station_alt, station_elev);
 					stationsList.add(gs);
 				}
 			}

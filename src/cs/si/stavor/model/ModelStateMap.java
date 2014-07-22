@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 
 import cs.si.stavor.model.ModelSimulation.MapPoint;
+import cs.si.stavor.station.StationArea;
 
 /**
  * Parameters for the periodic model representation.
@@ -15,11 +16,14 @@ public class ModelStateMap implements Serializable{
 	public MapPoint[] points;
 	public double sun_lat=0, sun_lon=0;
 	
-	public ModelStateMap(MapPoint[] mapPathBufferLast, double sun_lat,
+	public StationArea[] stations;
+	
+	public ModelStateMap(MapPoint[] mapPathBufferLast, StationArea[] stations, double sun_lat,
 			double sun_lon) {
 		this.points = mapPathBufferLast;
 		this.sun_lat = sun_lat;
 		this.sun_lon = sun_lon;
+		this.stations = stations;
 	}
 
 	/**
