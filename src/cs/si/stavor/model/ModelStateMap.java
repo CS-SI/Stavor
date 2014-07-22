@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 
 import cs.si.stavor.model.ModelSimulation.MapPoint;
+import cs.si.stavor.station.LatLon;
 import cs.si.stavor.station.StationArea;
 
 /**
@@ -14,16 +15,18 @@ import cs.si.stavor.station.StationArea;
  */
 public class ModelStateMap implements Serializable{
 	public MapPoint[] points;
+	public LatLon[] fov;
 	public double sun_lat=0, sun_lon=0;
 	
 	public StationArea[] stations;
 	
-	public ModelStateMap(MapPoint[] mapPathBufferLast, StationArea[] stations, double sun_lat,
+	public ModelStateMap(MapPoint[] mapPathBufferLast, LatLon[] fov, StationArea[] stations, double sun_lat,
 			double sun_lon) {
 		this.points = mapPathBufferLast;
 		this.sun_lat = sun_lat;
 		this.sun_lon = sun_lon;
 		this.stations = stations;
+		this.fov = fov;
 	}
 
 	/**

@@ -29,7 +29,7 @@ var init = function () {
         ],
         layers: [
             new OpenLayers.Layer.OSM("OpenStreetMap", null, {
-                transitionEffect: 'resize'
+                transitionEffect: 'null'
             })
         ],
         center: new OpenLayers.LonLat(0, 0),

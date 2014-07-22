@@ -11,6 +11,7 @@ function updateModelState(new_state){
 	sun_lat = state.sun_lat;//In degrees
 	sun_lon = state.sun_lon;//In degrees
 	station_areas = state.stations;
+	fov = state.fov;
 }
 function showAndroidToast(toast) {
 	if (typeof Android != "undefined"){ // check the bridge 

@@ -3,6 +3,10 @@ package cs.si.stavor.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Line;
+import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.orekit.attitudes.Attitude;
 import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.bodies.GeodeticPoint;
 import org.orekit.bodies.OneAxisEllipsoid;
@@ -147,6 +151,7 @@ public class ModelSimulation {
     		 		sun_lon = lon2;
     		 	}
     		 	
+    		 	//Station Areas
     		 	ArrayList<StationArea> stations = new ArrayList<StationArea>();
     		 	for(int i = 0; i < config.stations.length; i++){
     		 		if(config.stations[i].enabled){
@@ -165,7 +170,30 @@ public class ModelSimulation {
     		 		}
     		 	}
     		 	
-    		 	state = new ModelStateMap(getMapPathBufferLast(), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon);
+    		 	//Satellite FOV
+    		 	Rotation attitude = scs.getAttitude().getRotation();
+    		 	Vector3D close = scs.getPVCoordinates().getPosition();
+    		 	double sensor_aperture = config.payload_beamwidth;
+    		 	Vector3D sensor_sc_direction = new Vector3D(-1,0,0);
+    		 	Vector3D axis = attitude.applyTo(sensor_sc_direction);
+    		 	Vector3D ortho = axis.orthogonal();
+    		 	Rotation rot_aperture = new Rotation(ortho, sensor_aperture*Math.PI/180);
+    		 	Vector3D start = rot_aperture.applyTo(axis);
+    		 	
+    		 	
+    		 	
+    		 	double angle_step = 2.0*Math.PI/Parameters.Map.satellite_fov_points;
+    		 	double angle = 0;
+    		 	ArrayList<LatLon> fov = new ArrayList<LatLon>();
+    		 	for(int j = 0; j < Parameters.Map.satellite_fov_points; j++){
+    		 		Rotation r_circle = new Rotation(axis, angle);
+    		 		GeodeticPoint intersec = earth.getIntersectionPoint(new Line(r_circle.applyTo(start), close, 0.0), close, scs.getFrame(), scs.getDate());
+    		 		fov.add(new LatLon(intersec.getLatitude()*180/Math.PI,intersec.getLongitude()*180/Math.PI));
+    		 		angle += angle_step;
+    		 	}
+    		 	
+    		 	
+    		 	state = new ModelStateMap(getMapPathBufferLast(), fov.toArray(new LatLon[fov.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon);
     		 	
     		} catch (OrekitException e) {
     			e.printStackTrace();
