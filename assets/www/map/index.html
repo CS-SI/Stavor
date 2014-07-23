@@ -155,6 +155,14 @@
 		fillColor: "#00FF00"
 	};
 
+	var station_area_style2 = {
+	      strokeColor: "#00009c",
+	      strokeOpacity: 0.5,
+	      strokeWidth: 1,
+	      fillOpacity: 0.1,
+		fillColor: "#0000FF"
+	};
+
 	var Rt = 6371000;
 
 	var stations_area_layer = new OpenLayers.Layer.Vector("Stations Area Layer");
@@ -258,8 +266,8 @@
 		});
 		sun_layer.addFeatures([marker_sun]);
 
-		//Night line
-		if(!night_line_init){
+	//Night line
+		/*if(!night_line_init){
 			if(sun_lon!=0.0){
 				show_nightline(new OpenLayers.Geometry.Point(sun_lon, 90.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
 						new OpenLayers.Geometry.Point(sun_lon+90,0.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
@@ -271,9 +279,9 @@
 				night_layer.features[j].layer.drawFeature(night_layer.features[j]);
 			}
 		}
-		sun_lon_tmp = sun_lon;
+		sun_lon_tmp = sun_lon;*/
 
-		//Path
+	//Path
 		line = new OpenLayers.Geometry.LineString(points);
 		lineLayer.removeAllFeatures();
 		var lineFeature = new OpenLayers.Feature.Vector(line, null, style_path);
@@ -333,20 +341,52 @@
 				var station_feature = new OpenLayers.Feature.Vector(circle, null, station_area_style);
 				stations_area_layer.addFeatures([station_feature]);
 				*/
-				var areaPoints = [];
+
+				var areaPositive = [];
+				var areaNegative = [];
+				var area_tmp_long = 0, area_tmp_lat = 0;
+				var positive_tmp = true;
+						console.log("Discontinuity");
 				for (var i in station_areas[arrayIndex].points) {
 					var coord = station_areas[arrayIndex].points[i];
 					var point = new OpenLayers.Geometry.Point(coord.longitude, coord.latitude);
 					// transform from WGS 1984 to Spherical Mercator
 					point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-					areaPoints.push(point);
-				}				
-				areaPoints.push(areaPoints[0]);
+					var positive = (coord.longitude>=0);
+					if((i!=0) && positive!=positive_tmp){
+						console.log("Discontinuity");
+						var avg_lat = (coord.latitude+area_tmp_lat)/2;
+						if(Math.abs(coord.longitude)>90)
+							var new_lon = 179.999999;
+						else
+							var new_lon = 0;
+						areaPositive.push(new OpenLayers.Geometry.Point(new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+						areaNegative.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+					}
+					area_tmp_lat = coord.latitude;
+					area_tmp_long = coord.longitude;
+					positive_tmp = (coord.longitude>=0);
 
-				var linearRing = new OpenLayers.Geometry.LinearRing(areaPoints);
-				var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
-				var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, station_area_style);
-				stations_area_layer.addFeatures([polygonFeature]);
+					if(positive){
+						areaPositive.push(point);
+					}else{
+						areaNegative.push(point);
+					}					
+				}				
+				if(areaPositive.length>0){
+					areaPositive.push(areaPositive[0]);
+					var linearRing = new OpenLayers.Geometry.LinearRing(areaPositive);
+					var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
+					var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, station_area_style);
+					stations_area_layer.addFeatures([polygonFeature]);
+				}
+				if(areaNegative.length>0){
+					areaNegative.push(areaNegative[0]);
+					var linearRing = new OpenLayers.Geometry.LinearRing(areaNegative);
+					var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
+					var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, station_area_style2);
+					stations_area_layer.addFeatures([polygonFeature]);
+				}
 			}
 		
 			sc_altitude_tmp = sc_altitude;

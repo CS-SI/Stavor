@@ -52,7 +52,10 @@ public class VisibilityCircle {
         // compute the visibility circle
         List<LatLon> circle = new ArrayList<LatLon>();
         for (int i = 0; i < points; ++i) {
-            double azimuth = i * (2.0 * FastMath.PI / points);
+        	double twoPi = 2.0 * FastMath.PI;
+            double azimuth = i * (twoPi / points) + (FastMath.PI/2);
+            if(azimuth > twoPi)
+            	azimuth = azimuth - twoPi;
             GeodeticPoint gp = station.computeLimitVisibilityPoint(radius, azimuth, minElevation*Math.PI/180);
             circle.add(new LatLon(gp.getLatitude()*180/Math.PI,gp.getLongitude()*180/Math.PI));
         }

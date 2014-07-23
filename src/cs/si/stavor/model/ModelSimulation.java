@@ -173,8 +173,8 @@ public class ModelSimulation {
     		 	//Satellite FOV
     		 	Rotation attitude = scs.getAttitude().getRotation();
     		 	Vector3D close = scs.getPVCoordinates().getPosition();
-    		 	double sensor_aperture = config.payload_beamwidth;
-    		 	Vector3D sensor_sc_direction = new Vector3D(-1,0,0);
+    		 	double sensor_aperture = 30;
+    		 	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
     		 	Vector3D axis = attitude.applyTo(sensor_sc_direction);
     		 	Vector3D ortho = axis.orthogonal();
     		 	Rotation rot_aperture = new Rotation(ortho, sensor_aperture*Math.PI/180);
@@ -188,7 +188,9 @@ public class ModelSimulation {
     		 	for(int j = 0; j < Parameters.Map.satellite_fov_points; j++){
     		 		Rotation r_circle = new Rotation(axis, angle);
     		 		GeodeticPoint intersec = earth.getIntersectionPoint(new Line(r_circle.applyTo(start), close, 0.0), close, scs.getFrame(), scs.getDate());
-    		 		fov.add(new LatLon(intersec.getLatitude()*180/Math.PI,intersec.getLongitude()*180/Math.PI));
+    		 		if(intersec!=null){
+	    		 		fov.add(new LatLon(intersec.getLatitude()*180/Math.PI,intersec.getLongitude()*180/Math.PI));
+    		 		}
     		 		angle += angle_step;
     		 	}
     		 	
@@ -201,7 +203,7 @@ public class ModelSimulation {
     	}
     }
 
-    double sun_lat, sun_lon;
+	double sun_lat, sun_lon;
 
 	private ArrayList<MapPoint> mapPathBuffer = new ArrayList<MapPoint>();
 	public synchronized void resetMapPathBuffer() {
