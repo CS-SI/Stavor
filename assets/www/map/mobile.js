@@ -30,7 +30,7 @@ var init = function () {
         layers: [
             new OpenLayers.Layer.OSM("OpenStreetMap", null, {
                 transitionEffect: 'null',
-		wrapDateLine: true
+		wrapDateLine: false
             })
         ],
         center: new OpenLayers.LonLat(0, 0),

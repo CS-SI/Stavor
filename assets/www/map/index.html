@@ -20,6 +20,7 @@
 	<SCRIPT type="text/javascript" src="proj4js/data/EPSG31467.js"></SCRIPT>
 	<SCRIPT type="text/javascript" src="proj4js/data/EPSG900913.js"></SCRIPT>
 	<!--<script type="text/javascript" src="javascript/counter_orthodrome.js"></script>-->
+	<script type="text/javascript" src="arc.js"></script>
 	<style>
             html, body {
                 margin  : 0;
@@ -280,6 +281,26 @@
 			}
 		}
 		sun_lon_tmp = sun_lon;*/
+//***********************************************
+		
+		/*if(!night_line_init){
+			if(sun_lon!=0.0){
+
+				var start = { x: sun_lon, y: 85.0 };
+				var end = { x: sun_lon+90.0, y: 0.0 };
+				var generator = new arc.GreatCircle(start, end, {'name': 'NightLine'});
+				var line = generator.Arc(100,{offset:10});
+				
+				night_layer.addFeatures([new OpenLayers.Geometry.LineString()]);
+				night_line_init = true;
+			}
+		}else{
+			for( var j=0; j < night_layer.features.length; j++){
+				night_layer.features[j].geometry.move((sun_lon-sun_lon_tmp)*OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'],0);
+				night_layer.features[j].layer.drawFeature(night_layer.features[j]);
+			}
+		}
+		sun_lon_tmp = sun_lon;*/
 
 	//Path
 		line = new OpenLayers.Geometry.LineString(points);
@@ -346,7 +367,8 @@
 				var areaNegative = [];
 				var area_tmp_long = 0, area_tmp_lat = 0;
 				var positive_tmp = true;
-				/*for (var i in station_areas[arrayIndex].points) {
+				//***************************** Splitted positive negative
+				for (var i in station_areas[arrayIndex].points) {
 					var coord = station_areas[arrayIndex].points[i];
 					var point = new OpenLayers.Geometry.Point(coord.longitude, coord.latitude);
 					// transform from WGS 1984 to Spherical Mercator
@@ -384,15 +406,15 @@
 					var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
 					var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, station_area_style2);
 					stations_area_layer.addFeatures([polygonFeature]);
-				}*/
+				}
 
 
 
 
 
+				//***************************** Single polygon
 
-
-				for (var i in station_areas[arrayIndex].points) {
+				/*for (var i in station_areas[arrayIndex].points) {
 					var coord = station_areas[arrayIndex].points[i];
 					var positive = (coord.longitude>=0);
 					if((i!=0) && positive!=positive_tmp){						
@@ -417,12 +439,27 @@
 					var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
 					var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, station_area_style);
 					stations_area_layer.addFeatures([polygonFeature]);
-				}
+				}*/
 
 
 
 
+				//***************************** LineStrings
 
+				/*for (var i in station_areas[arrayIndex].points) {
+					var coord = station_areas[arrayIndex].points[i];
+					
+					var point = new OpenLayers.Geometry.Point(coord.longitude, coord.latitude);
+					// transform from WGS 1984 to Spherical Mercator
+					point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+					areaPositive.push(point);
+				}				
+				if(areaPositive.length>0){
+					areaPositive.push(areaPositive[0]);
+					var linearRing = new OpenLayers.Geometry.LineString(areaPositive);
+					var polygonFeature = new OpenLayers.Feature.Vector(linearRing, null, station_area_style);
+					stations_area_layer.addFeatures([polygonFeature]);
+				}*/
 
 
 
