@@ -346,15 +346,13 @@
 				var areaNegative = [];
 				var area_tmp_long = 0, area_tmp_lat = 0;
 				var positive_tmp = true;
-						console.log("Discontinuity");
-				for (var i in station_areas[arrayIndex].points) {
+				/*for (var i in station_areas[arrayIndex].points) {
 					var coord = station_areas[arrayIndex].points[i];
 					var point = new OpenLayers.Geometry.Point(coord.longitude, coord.latitude);
 					// transform from WGS 1984 to Spherical Mercator
 					point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					var positive = (coord.longitude>=0);
 					if((i!=0) && positive!=positive_tmp){
-						console.log("Discontinuity");
 						var avg_lat = (coord.latitude+area_tmp_lat)/2;
 						if(Math.abs(coord.longitude)>90)
 							var new_lon = 179.999999;
@@ -386,7 +384,52 @@
 					var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
 					var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, station_area_style2);
 					stations_area_layer.addFeatures([polygonFeature]);
+				}*/
+
+
+
+
+
+
+
+				for (var i in station_areas[arrayIndex].points) {
+					var coord = station_areas[arrayIndex].points[i];
+					var positive = (coord.longitude>=0);
+					if((i!=0) && positive!=positive_tmp){						
+						if(Math.abs(coord.longitude)>90)
+							var point = new OpenLayers.Geometry.Point(-180-coord.longitude, coord.latitude);
+						else
+							var point = new OpenLayers.Geometry.Point(coord.longitude, coord.latitude);
+						// transform from WGS 1984 to Spherical Mercator
+						point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+						areaPositive.push(point);
+					}else{
+						var point = new OpenLayers.Geometry.Point(coord.longitude, coord.latitude);
+						// transform from WGS 1984 to Spherical Mercator
+						point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+						areaPositive.push(point);
+					}
+					positive_tmp = (coord.longitude>=0);				
+				}				
+				if(areaPositive.length>0){
+					areaPositive.push(areaPositive[0]);
+					var linearRing = new OpenLayers.Geometry.LinearRing(areaPositive);
+					var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
+					var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, station_area_style);
+					stations_area_layer.addFeatures([polygonFeature]);
 				}
+
+
+
+
+
+
+
+
+
+
+
+
 			}
 		
 			sc_altitude_tmp = sc_altitude;

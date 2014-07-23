@@ -165,6 +165,7 @@ public class ModelSimulation {
 	    		 				Parameters.Map.station_visibility_points);
 	    		 		stations.add(new StationArea(
 	    		 				config.stations[i].name,
+	    		 				config.stations[i].longitude,
 	    		 				circle.toArray(new LatLon[circle.size()])
 	    		 				));
     		 		}
@@ -226,8 +227,11 @@ public class ModelSimulation {
 		return r;
 	}
 	public synchronized MapPoint[] getMapPathBufferLast(){
-		MapPoint[] r = {mapPathBuffer.get(mapPathBuffer.size()-1)};
-		return r;
+		if(mapPathBuffer.size()>0){
+			MapPoint[] r = {mapPathBuffer.get(mapPathBuffer.size()-1)};
+			return r;
+		}else
+			return null;
 	}
 	
 	class MapPoint{

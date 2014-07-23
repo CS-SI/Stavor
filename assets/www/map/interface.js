@@ -7,7 +7,9 @@ function setLoadingProgress(progress) {// from 0 to 100
 }
 function updateModelState(new_state){
 	var state = JSON.parse(new_state);
-	addPoints(state.points);
+	if (typeof state.points != "undefined"){
+		addPoints(state.points);
+	}
 	sun_lat = state.sun_lat;//In degrees
 	sun_lon = state.sun_lon;//In degrees
 	station_areas = state.stations;
