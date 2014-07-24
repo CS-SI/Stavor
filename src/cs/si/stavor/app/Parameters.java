@@ -74,7 +74,7 @@ public class Parameters {
 	}
 	public static class Map {
 		public static final double marker_pos_threshold = 0.2;//In deg
-		public static final int station_visibility_points = 50;//Points in the polygon
+		public static final int station_visibility_points = 30;//Points in the polygon
 		public static final int satellite_fov_points = 5;
 	}
 }

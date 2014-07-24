@@ -376,7 +376,7 @@
 					var positive = (coord.longitude>=0);
 					if((i!=0) && positive!=positive_tmp){
 						var avg_lat = (coord.latitude+area_tmp_lat)/2;
-						if(Math.abs(coord.longitude)>90)
+						if(Math.abs(coord.longitude-area_tmp_long)>90)
 							var new_lon = 179.999999;
 						else
 							var new_lon = 0;
