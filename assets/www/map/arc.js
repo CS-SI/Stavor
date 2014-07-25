@@ -55,6 +55,30 @@ Arc.prototype.json = function() {
     }
 };
 
+Arc.prototype.openlayers = function() {
+	
+	var lineStrings = new Array();	
+
+    if (this.geometries.length <= 0) {
+        lineStrings.push(new OpenLayers.Geometry.LineString());
+    } else if (this.geometries.length == 1) {
+	var points = new Array();
+	for(var j in this.geometries[0].coords){
+		points.push(new OpenLayers.Geometry.Point(this.geometries[0].coords[j][0], this.geometries[0].coords[j][1]).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+	}
+        lineStrings.push(new OpenLayers.Geometry.LineString(points));
+    } else {
+        for (var i = 0; i < this.geometries.length; i++) {
+		var points = new Array();
+		for(var j in this.geometries[i].coords){
+			points.push(new OpenLayers.Geometry.Point(this.geometries[i].coords[j][0], this.geometries[i].coords[j][1]).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+		}
+        	lineStrings.push(new OpenLayers.Geometry.LineString(points));
+        }
+    }
+	return new OpenLayers.Geometry.Collection(lineStrings);
+};
+
 // TODO - output proper multilinestring
 Arc.prototype.wkt = function() {
     var wkt_string = '';
