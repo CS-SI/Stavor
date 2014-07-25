@@ -15,6 +15,7 @@ import org.orekit.frames.Frame;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.utils.Constants;
 
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -226,10 +227,9 @@ public class ModelSimulation {
 		//resetMapPathBuffer();
 		return r;
 	}
-	public synchronized MapPoint[] getMapPathBufferLast(){
+	public synchronized MapPoint getMapPathBufferLast(){
 		if(mapPathBuffer.size()>0){
-			MapPoint[] r = {mapPathBuffer.get(mapPathBuffer.size()-1)};
-			return r;
+			return mapPathBuffer.get(mapPathBuffer.size()-1);
 		}else
 			return null;
 	}

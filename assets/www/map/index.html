@@ -6,6 +6,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
     	<link rel="stylesheet" href="theme/default/style.css" type="text/css">
         <link rel="stylesheet" href="theme/default/style.mobile.css" type="text/css">
+  	<script type='text/javascript' src="MultiPath.js"></script>
   	<script type='text/javascript' src="interface.js"></script>
   	<!--<script src="http://www.openlayers.org/api/OpenLayers.js"></script>-->
 	<script src="OpenLayers.mobile.js"></script>
@@ -57,10 +58,10 @@
   <div id="map"></div>
   <script>
 	setLoadingProgress(10);
-	
+
 	//DYNAMIC PARAMS
 	var follow_sc = false;
-	var path_points = new Array();
+	//var points = new Array();
 	var fov = new Array();
 	var sun_lat = 0;
 	var sun_lon = 0;
@@ -94,7 +95,6 @@
 	var sun_lon_tmp = 0;
 
 	init();
-
     	var lonLat = new OpenLayers.LonLat( 0.0 ,0.0 )
 	  .transform(
 	    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
@@ -105,6 +105,7 @@
 
 	map.setCenter (lonLat, zoom);
 	setLoadingProgress(60);
+
  /*
     var markers = new OpenLayers.Layer.Markers( "Markers" );
     map.addLayer(markers);
@@ -237,10 +238,13 @@
 	getInitialization();
 
 	//PRE-STORED PATH
-	var line = new OpenLayers.Geometry.LineString(path_points);
+/*	var line = new OpenLayers.Geometry.LineString(points);
 
 	var lineFeature = new OpenLayers.Feature.Vector(line, null, style_path);
+
 	lineLayer.addFeatures([lineFeature]);
+*/
+	lineLayer.addFeatures([myMultyPath.getFeature()]);
 
 	//STATIONS NAME
 	for (var arrayIndex in stations){
@@ -303,10 +307,11 @@
 		sun_lon_tmp = sun_lon;*/
 
 	//Path
-		line = new OpenLayers.Geometry.LineString(path_points);
+		//line = new OpenLayers.Geometry.LineString(points);
 		lineLayer.removeAllFeatures();
-		var lineFeature = new OpenLayers.Feature.Vector(line, null, style_path);
-		lineLayer.addFeatures([lineFeature]);
+		/*var lineFeature = new OpenLayers.Feature.Vector(line, null, style_path);
+		lineLayer.addFeatures([lineFeature]);*/
+		lineLayer.addFeatures([myMultyPath.getFeature()]);
 
 	//Spacecraft
 		/*var radius = sc_altitude*Math.tan((payload_beamwidth*Math.PI/180)/2);
@@ -348,43 +353,9 @@
 	//Stations	
 		drawStationsAreas();	
 	}
-	function clearPath(){
-		points = new Array();
-		lineLayer.removeAllFeatures();
-		sc_layer.removeAllFeatures();
-		//stations_layer.removeAllFeatures();
-		stations_area_layer.removeAllFeatures();
-		//reDraw();
-	}
-	function addPoints(points_ext){
-		var points_ext_ol = new Array();
-		for (var arrayIndex in points_ext) {		
-			points_ext_ol.push(new OpenLayers.Geometry.Point(points_ext[arrayIndex].longitude, points_ext[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-		}
-		points = points.concat(points_ext_ol);
-		//Limit path length
-		if(points.length>param_path_max_length){
-			points = points.slice(points.length-param_path_max_length);
-		}
-		sc_latitude = points_ext[points_ext.length-1].latitude;
-		sc_longitude = points_ext[points_ext.length-1].longitude;
-		sc_altitude = points_ext[points_ext.length-1].altitude;
-		reDraw();
-	}
 
-function changeView(view_mode){
-	switch(view_mode){
-		case "Free"://free
-			follow_sc = false;
-			break;
-		case "Locked"://locked
-			follow_sc = true;
-			break;
-		default://xyz
-			follow_sc = false;
-			break;
-	}
-}
+
+
 function drawStationsAreas(){
 	if(Math.abs(sc_altitude-sc_altitude_tmp)>sc_altitude_step){
 		stations_area_layer.removeAllFeatures();
