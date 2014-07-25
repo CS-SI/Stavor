@@ -53,7 +53,6 @@
 
 	//DYNAMIC PARAMS
 	var follow_sc = false;
-	//var points = new Array();
 	var fov = new Array();
 	var sun_lat = 0;
 	var sun_lon = 0;
@@ -83,7 +82,6 @@
 	var sc_altitude_tmp = 0;
 	var sc_longitude = 0;
 	var sc_altitude = 0;
-	var night_line_init = false;
 	var sun_lon_tmp = 0;
 
 	init();
@@ -246,7 +244,7 @@
 //------------------------------------------------------------------------------
 
 	function reDraw(){
-		//Sun
+	//Sun
 		sun_layer.removeAllFeatures();    
 		var marker_sun = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(sun_lon, sun_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()), null, {
 			externalGraphic: "sun.png",
@@ -255,47 +253,25 @@
 			fillOpacity: 1
 		});
 		sun_layer.addFeatures([marker_sun]);
-
-	//Night line
-		/*if(!night_line_init){
-			if(sun_lon!=0.0){
-				show_nightline(new OpenLayers.Geometry.Point(sun_lon, 90.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-						new OpenLayers.Geometry.Point(sun_lon+90,0.0).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-				night_line_init = true;
-			}
-		}else{
-			for( var j=0; j < night_layer.features.length; j++){
-				night_layer.features[j].geometry.move((sun_lon-sun_lon_tmp)*OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'],0);
-				night_layer.features[j].layer.drawFeature(night_layer.features[j]);
-			}
-		}
-		sun_lon_tmp = sun_lon;*/
-//***********************************************
-		
-		if(!night_line_init){
-			if(sun_lon!=0.0){
-				night_layer.removeAllFeatures();
-				var start = { x: sun_lon, y: 85.0 };
-				var end = { x: sun_lon+90.0, y: 0.0 };
-				var generator = new arc.GreatCircle(start, end, {'name': 'NightLine'});
-				var line = generator.Arc(100,{offset:10});
-				/*var night_points = new Array();
-				for(var i in line.coords){
-					console.log(line.coords[i][0]);
-					night_points.push(new OpenLayers.Geometry.Point(line.coords[i][0], line.coords[i][1]).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-				}*/
-				night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
-
-				//night_line_init = true;
-			}
-		}else{
-			for( var j in night_layer.features){
-				night_layer.features[j].geometry.move((sun_lon-sun_lon_tmp)*OpenLayers.INCHES_PER_UNIT['degrees'] / OpenLayers.INCHES_PER_UNIT['m'],0);
-				night_layer.features[j].layer.drawFeature(night_layer.features[j]);
-			}
-		}
 		sun_lon_tmp = sun_lon;
 
+	//Night line
+		if(sun_lon!=0.0){
+			night_layer.removeAllFeatures();
+			var start = { x: sun_lon, y: 85.0 };
+			var end = { x: sun_lon+90.0, y: 0.0 };
+			var generator = new arc.GreatCircle(start, end, {'name': 'NightLine'});
+			var line = generator.Arc(100,{offset:10});
+			/*var night_points = new Array();
+			for(var i in line.coords){
+				console.log(line.coords[i][0]);
+				night_points.push(new OpenLayers.Geometry.Point(line.coords[i][0], line.coords[i][1]).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+			}*/
+			night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
+
+			//night_line_init = true;
+		}
+		
 	//Path
 		lineLayer.removeAllFeatures();
 		lineLayer.addFeatures([myMultyPath.getFeature()]);
