@@ -373,19 +373,19 @@ function drawStationsAreas(){
 									coord.latitude
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 
-				if((i!=0) && (Math.abs(coord.longitude)>90.0) && (area_tmp_long+coord.longitude<90.0)){
+				if((i!=0) && ((coord.longitude*area_tmp_long)<0) && (Math.abs(coord.longitude)>90.0) && (area_tmp_long+coord.longitude<90.0)){
 					var avg_lat = (coord.latitude+area_tmp_lat)/2;
 					if(coord.longitude > 0)
 						var new_lon = -179.999999;
 					else
 						var new_lon = 179.999999;
 					if(first){
-						//areaFirst.push(new OpenLayers.Geometry.Point(new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-						//areaSecond.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+						areaFirst.push(new OpenLayers.Geometry.Point(new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+						areaSecond.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
 						first=false;
 					}else{
-						//areaFirst.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-						//areaSecond.push(new OpenLayers.Geometry.Point(+new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+						areaFirst.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+						areaSecond.push(new OpenLayers.Geometry.Point(+new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
 						first=true;
 					}
 				}
