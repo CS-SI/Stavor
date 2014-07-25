@@ -33,9 +33,22 @@ Paths.prototype = {
 			var act_positive = true;
 		else
 			var act_positive = false;
-		if(!this.firstPoint && (tmp_positive!=act_positive)){
-			//TODO Add missing points to close path in both subpathes 179.99, it would be easier if we consider just jumps in the dateline. 	
+		if(!this.firstPoint && (tmp_positive!=act_positive) && (Math.abs(point.longitude)>90.0) && (this.tmp_lon+point.longitude<90.0)){
+			//end of previous path
+			var tip = new Object();
+			tip.altitude = this.tmp_alt;
+			tip.latitude = (this.tmp_lat + point.latitude) / 2;
+			if(this.tmp_lon>=0){
+				tip.longitude = 179.99999;
+			}else{
+				tip.longitude = -179.99999;
+			}
+			this.paths[this.paths.length-1].addPoint(tip);
+			//create new subPath
 			this.paths.push(new SubPath());
+			//start of new subPath
+			tip.longitude = -tip.longitude;			
+			this.paths[this.paths.length-1].addPoint(tip);
 		}
 
 		//Add point
