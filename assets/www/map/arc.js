@@ -63,7 +63,24 @@ Arc.prototype.openlayers = function() {
         lineStrings.push(new OpenLayers.Geometry.LineString());
     } else if (this.geometries.length == 1) {
 	var points = new Array();
+	var tmp_lat = 0, tmp_lon = 0;
 	for(var j in this.geometries[0].coords){
+		//**************jump DateLine
+		if((j!=0) && ((this.geometries[0].coords[j][0]*tmp_lon)<0) && (Math.abs(this.geometries[0].coords[j][0])>90.0) && (tmp_lon+this.geometries[0].coords[j][0]<90.0)){
+			var avg_lat = (this.geometries[0].coords[j][1]+tmp_lat)/2;
+			if(this.geometries[0].coords[j][0] > 0)
+				var new_lon = -179.999999;
+			else
+				var new_lon = 179.999999;
+			
+			points.push(new OpenLayers.Geometry.Point(new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+			lineStrings.push(new OpenLayers.Geometry.LineString(points));
+			points = new Array();
+			points.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+		}		
+		tmp_lat = this.geometries[0].coords[j][1];
+		tmp_lon = this.geometries[0].coords[j][0];
+		//***************
 		points.push(new OpenLayers.Geometry.Point(this.geometries[0].coords[j][0], this.geometries[0].coords[j][1]).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
 	}
         lineStrings.push(new OpenLayers.Geometry.LineString(points));
