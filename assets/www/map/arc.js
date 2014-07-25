@@ -68,6 +68,7 @@ Arc.prototype.openlayers = function() {
 	}
         lineStrings.push(new OpenLayers.Geometry.LineString(points));
     } else {
+	console.log(this.geometries.length);
         for (var i = 0; i < this.geometries.length; i++) {
 		var points = new Array();
 		for(var j in this.geometries[i].coords){

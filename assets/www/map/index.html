@@ -13,15 +13,6 @@
 	<script src="OpenLayers.mobile.js"></script>
         <script src="mobile.js"></script>
 
-	<script type="text/javascript" src="proj4js/proj4.js"></script>
-	<script type="text/javascript" src="greatCircle.js"></script>
-	<script type="text/javascript" src="greatcirclemod.js"></script>
-	<SCRIPT type="text/javascript" src="proj4js/data/tmerc.js"></SCRIPT>
-	<SCRIPT type="text/javascript" src="proj4js/data/merc.js"></SCRIPT>
-	<SCRIPT type="text/javascript" src="proj4js/data/EPSG31466.js"></SCRIPT>
-	<SCRIPT type="text/javascript" src="proj4js/data/EPSG31467.js"></SCRIPT>
-	<SCRIPT type="text/javascript" src="proj4js/data/EPSG900913.js"></SCRIPT>
-	<!--<script type="text/javascript" src="javascript/counter_orthodrome.js"></script>-->
 	<script type="text/javascript" src="arc.js"></script>
 	<style>
             html, body {
@@ -132,9 +123,9 @@
     	orthodromeFlag=true;
 
 	var nightStyle = { 
-		strokeColor: '#FFFF00', 
+		strokeColor: '#FFcc00', 
 	  	strokeOpacity: 0.5,
-	  	strokeWidth: 3
+	  	strokeWidth: 2
 	};
 
 //******************************************************
@@ -283,6 +274,7 @@
 		
 		if(!night_line_init){
 			if(sun_lon!=0.0){
+				night_layer.removeAllFeatures();
 				var start = { x: sun_lon, y: 85.0 };
 				var end = { x: sun_lon+90.0, y: 0.0 };
 				var generator = new arc.GreatCircle(start, end, {'name': 'NightLine'});
@@ -294,7 +286,7 @@
 				}*/
 				night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
 
-				night_line_init = true;
+				//night_line_init = true;
 			}
 		}else{
 			for( var j in night_layer.features){
