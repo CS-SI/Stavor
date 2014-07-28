@@ -256,14 +256,33 @@
 		sun_lon_tmp = sun_lon;
 
 	//Night line
-		if(sun_lon!=0.0){
-			night_layer.removeAllFeatures();
-			var start = { x: sun_lon, y: 85.0 };
-			var end = { x: sun_lon+90.0, y: 0.0 };
-			var generator = new arc.GreatCircle(start, end, {'name': 'NightLine'});
-			var line = generator.Arc(100,{offset:10});
-			night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
-		}
+		//if(sun_lon!=0.0){
+		night_layer.removeAllFeatures();
+
+		var start = { x: sun_lon, y: addLats(sun_lat,90.0) };
+		var end = { x: sun_lon+90.0, y: sun_lat };
+		var generator = new arc.GreatCircle(start, end, {'name': 'NightLine'});
+		var line = generator.Arc(25,{offset:10});
+		night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
+
+		var start = { x: sun_lon-90.0, y: sun_lat };
+		var end = { x: sun_lon, y: addLats(sun_lat,90.0) };
+		var generator = new arc.GreatCircle(start, end, {'name': 'NightLine2'});
+		var line = generator.Arc(25,{offset:10});
+		night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
+
+		var start = { x: sun_lon-180.0, y: addLats(sun_lat,-90.0) };
+		var end = { x: sun_lon-90.0, y: sun_lat };
+		var generator = new arc.GreatCircle(start, end, {'name': 'NightLine3'});
+		var line = generator.Arc(25,{offset:10});
+		night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
+
+		var start = { x: sun_lon+90.0, y: sun_lat };
+		var end = { x: sun_lon+180.0, y: addLats(sun_lat,-90.0) };
+		var generator = new arc.GreatCircle(start, end, {'name': 'NightLine4'});
+		var line = generator.Arc(25,{offset:10});
+		night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
+		//}
 		
 	//Path
 		lineLayer.removeAllFeatures();
@@ -271,7 +290,7 @@
 
 	//Spacecraft
 		/*var radius = sc_altitude*Math.tan((payload_beamwidth*Math.PI/180)/2);
-		var sc_position = points[points.length-1];
+		var sc_position = new OpenLayers.Geometry.Point(sc_longitude, sc_latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 		var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
 		    sc_position,
 		    radius,
@@ -309,6 +328,15 @@
 	//Stations	
 		drawStationsAreas();	
 	}
+function addLats(lat1,lat2){
+	var limit = 89.9;
+	var lat = lat1+lat2;
+	if(lat>limit)
+		lat=limit;
+	if(lat<-limit)
+		lat=-limit;
+	return lat;
+}
 
   </script>
 </body></html>

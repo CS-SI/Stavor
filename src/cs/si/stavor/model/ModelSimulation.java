@@ -177,7 +177,8 @@ public class ModelSimulation {
     		 	Vector3D close = scs.getPVCoordinates().getPosition();
     		 	double sensor_aperture = 30;
     		 	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
-    		 	Vector3D axis = attitude.applyTo(sensor_sc_direction);
+    		 	//Vector3D axis = attitude.applyTo(sensor_sc_direction);
+    		 	Vector3D axis = new Vector3D(1,0,0);
     		 	Vector3D ortho = axis.orthogonal();
     		 	Rotation rot_aperture = new Rotation(ortho, sensor_aperture*Math.PI/180);
     		 	Vector3D start = rot_aperture.applyTo(axis);
