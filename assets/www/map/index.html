@@ -262,14 +262,7 @@
 			var end = { x: sun_lon+90.0, y: 0.0 };
 			var generator = new arc.GreatCircle(start, end, {'name': 'NightLine'});
 			var line = generator.Arc(100,{offset:10});
-			/*var night_points = new Array();
-			for(var i in line.coords){
-				console.log(line.coords[i][0]);
-				night_points.push(new OpenLayers.Geometry.Point(line.coords[i][0], line.coords[i][1]).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-			}*/
 			night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
-
-			//night_line_init = true;
 		}
 		
 	//Path
