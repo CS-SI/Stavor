@@ -104,7 +104,7 @@ public class MissionActivity extends Activity{
 						
 						mission.mission.initial_date = new AbsoluteDate(
 								datePicker.getYear(),
-								datePicker.getMonth(),
+								datePicker.getMonth()+1,
 								datePicker.getDayOfMonth(),
 								timePicker.getCurrentHour(),
 								timePicker.getCurrentMinute(),0.0,utc);
@@ -252,7 +252,7 @@ public class MissionActivity extends Activity{
 			
 			DateTimeComponents dateComps = mission.mission.initial_date.getComponents(utc);
 			
-			datePicker.updateDate(dateComps.getDate().getYear(), dateComps.getDate().getMonth(), dateComps.getDate().getDay());
+			datePicker.updateDate(dateComps.getDate().getYear(), dateComps.getDate().getMonth()-1, dateComps.getDate().getDay());
 			timePicker.setCurrentHour(dateComps.getTime().getHour());
 			timePicker.setCurrentMinute(dateComps.getTime().getMinute());
 			
