@@ -15,18 +15,19 @@ import cs.si.stavor.station.StationArea;
  */
 public class ModelStateMap implements Serializable{
 	public MapPoint point;
-	public LatLon[] fov;
+	public LatLon[] fov, terminator;
 	public double sun_lat=0, sun_lon=0;
 	
 	public StationArea[] stations;
 	
-	public ModelStateMap(MapPoint mapPathBufferLast, LatLon[] fov, StationArea[] stations, double sun_lat,
+	public ModelStateMap(MapPoint mapPathBufferLast, LatLon[] terminator, LatLon[] fov, StationArea[] stations, double sun_lat,
 			double sun_lon) {
 		this.point = mapPathBufferLast;
 		this.sun_lat = sun_lat;
 		this.sun_lon = sun_lon;
 		this.stations = stations;
 		this.fov = fov;
+		this.terminator = terminator;
 	}
 
 	/**

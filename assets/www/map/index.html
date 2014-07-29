@@ -9,6 +9,7 @@
   	<script type='text/javascript' src="MultiPath.js"></script>
   	<script type='text/javascript' src="Stations.js"></script>
   	<script type='text/javascript' src="Fov.js"></script>
+  	<script type='text/javascript' src="Sun.js"></script>
   	<script type='text/javascript' src="interface.js"></script>
   	<!--<script src="http://www.openlayers.org/api/OpenLayers.js"></script>-->
 	<script src="OpenLayers.mobile.js"></script>
@@ -119,28 +120,6 @@
 
 	var night_layer = new OpenLayers.Layer.Vector("Night Layer");
 	map.addLayer(night_layer);
-    	orthodromeFlag=true;
-
-	var nightStyle = { 
-		strokeColor: '#FFcc00', 
-	  	strokeOpacity: 0.5,
-	  	strokeWidth: 2
-	};
-
-//******************************************************
-//         STATION BW
-//******************************************************
-
-	/*var station_style = {
-	      strokeColor: "#00FF00",
-	      strokeOpacity: 0.4,
-	      strokeWidth: 1,
-	      fillOpacity: 0.2,
-		fillColor: "#22FF00"
-	};
-
-	var stations_layer = new OpenLayers.Layer.Vector("Stations Layer");
-	map.addLayer(stations_layer);*/
 
 //******************************************************
 //         STATION AREA
@@ -246,44 +225,10 @@
 
 	function reDraw(){
 	//Sun
-		sun_layer.removeAllFeatures();    
-		var marker_sun = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(sun_lon, sun_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()), null, {
-			externalGraphic: "sun.png",
-			graphicWidth: 32,
-			graphicHeight: 32,
-			fillOpacity: 1
-		});
-		sun_layer.addFeatures([marker_sun]);
-		sun_lon_tmp = sun_lon;
+		drawSun();
 
 	//Night line
-		//if(sun_lon!=0.0){
-		night_layer.removeAllFeatures();
-
-		var start = { x: sun_lon, y: addLats(sun_lat,90.0) };
-		var end = { x: sun_lon+90.0, y: sun_lat };
-		var generator = new arc.GreatCircle(start, end, {'name': 'NightLine'});
-		var line = generator.Arc(25,{offset:10});
-		night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
-
-		var start = { x: sun_lon-90.0, y: sun_lat };
-		var end = { x: sun_lon, y: addLats(sun_lat,90.0) };
-		var generator = new arc.GreatCircle(start, end, {'name': 'NightLine2'});
-		var line = generator.Arc(25,{offset:10});
-		night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
-
-		var start = { x: sun_lon-180.0, y: addLats(sun_lat,-90.0) };
-		var end = { x: sun_lon-90.0, y: sun_lat };
-		var generator = new arc.GreatCircle(start, end, {'name': 'NightLine3'});
-		var line = generator.Arc(25,{offset:10});
-		night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
-
-		var start = { x: sun_lon+90.0, y: sun_lat };
-		var end = { x: sun_lon+180.0, y: addLats(sun_lat,-90.0) };
-		var generator = new arc.GreatCircle(start, end, {'name': 'NightLine4'});
-		var line = generator.Arc(25,{offset:10});
-		night_layer.addFeatures(new OpenLayers.Feature.Vector(line.openlayers(),null,nightStyle));
-		//}
+		drawSolarTerminator();
 		
 	//Path
 		lineLayer.removeAllFeatures();

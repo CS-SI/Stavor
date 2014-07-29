@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.math3.geometry.euclidean.threed.Line;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.apache.commons.math3.util.FastMath;
 import org.orekit.attitudes.Attitude;
 import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.bodies.GeodeticPoint;
@@ -153,6 +154,30 @@ public class ModelSimulation {
     		 		sun_lon = lon2;
     		 	}
     		 	
+    		 	//Solar terminator
+    		 	ArrayList<LatLon> solarTerminator = new ArrayList<LatLon>(); 
+    		 	Vector3D s = CelestialBodyFactory.getSun().getPVCoordinates(
+    		 				scs.getDate(), 
+    		 				earthFixedFrame
+    		 			).getPosition();
+    		 	Vector3D t = s.orthogonal();
+    		 	Vector3D u = Vector3D.crossProduct(s, t);
+    		 	
+    		 	double alpha_o = Math.atan((-t.getY())/(u.getY()));
+    		 	Vector3D test_point = (t.scalarMultiply(Math.cos(alpha_o))).add(u.scalarMultiply(Math.sin(alpha_o)));
+    		 	if(test_point.getX()>0)
+    		 		alpha_o = alpha_o + FastMath.PI;
+    		 	
+    		 	double alpha = 0;
+    		 	double d_alpha = 2*FastMath.PI/Parameters.Map.solar_terminator_points;
+    		 	for(int i = 0; i<Parameters.Map.solar_terminator_points; i++){
+    		 		Vector3D point = (t.scalarMultiply(Math.cos(alpha+alpha_o))).add(u.scalarMultiply(Math.sin(alpha+alpha_o)));
+    		 		GeodeticPoint gpoint = earth.transform(point, earthFixedFrame, scs.getDate());
+    		 		solarTerminator.add(new LatLon(gpoint.getLatitude()*180/Math.PI,gpoint.getLongitude()*180/Math.PI));
+    		 		alpha = alpha + d_alpha;
+    		 	}
+    		 	
+    		 	
     		 	//Station Areas
     		 	ArrayList<StationArea> stations = new ArrayList<StationArea>();
     		 	for(int i = 0; i < config.stations.length; i++){
@@ -204,7 +229,7 @@ public class ModelSimulation {
     		 	}
     		 	
     		 	
-    		 	state = new ModelStateMap(getMapPathBufferLast(), fov.toArray(new LatLon[fov.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon);
+    		 	state = new ModelStateMap(getMapPathBufferLast(), solarTerminator.toArray(new LatLon[solarTerminator.size()]), fov.toArray(new LatLon[fov.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon);
     		 	
     		} catch (OrekitException e) {
     			e.printStackTrace();
