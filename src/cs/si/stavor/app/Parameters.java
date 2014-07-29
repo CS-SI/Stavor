@@ -76,6 +76,7 @@ public class Parameters {
 		public static final double marker_pos_threshold = 0.2;//In deg
 		public static final int station_visibility_points = 30;//Points in the polygon
 		public static final int satellite_fov_points = 20;
-		public static final double solar_terminator_points = 50;
+		public static final double solar_terminator_points = 100;
+		public static final double solar_terminator_threshold = 60*15;//In seconds
 	}
 }

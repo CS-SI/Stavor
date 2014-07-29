@@ -14,6 +14,7 @@ import org.orekit.bodies.OneAxisEllipsoid;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
 import org.orekit.propagation.SpacecraftState;
+import org.orekit.time.AbsoluteDate;
 import org.orekit.utils.Constants;
 
 import android.util.Log;
@@ -134,9 +135,11 @@ public class ModelSimulation {
     
     private OneAxisEllipsoid earth;
     private Frame earthFixedFrame;
+    private AbsoluteDate date_tmp = new AbsoluteDate();
     public void updateSimulation(SpacecraftState scs, int sim_progress){
     	if(selectedBrowser.equals(Browsers.Map)){
     		 try {
+    			 
     			 //Sat_Pos
     		 	GeodeticPoint gp = earth.transform(scs.getPVCoordinates().getPosition(), scs.getFrame(), scs.getDate());
     		 	double lat = gp.getLatitude()*180/Math.PI;
@@ -155,26 +158,32 @@ public class ModelSimulation {
     		 	}
     		 	
     		 	//Solar terminator
-    		 	ArrayList<LatLon> solarTerminator = new ArrayList<LatLon>(); 
-    		 	Vector3D s = CelestialBodyFactory.getSun().getPVCoordinates(
-    		 				scs.getDate(), 
-    		 				earthFixedFrame
-    		 			).getPosition();
-    		 	Vector3D t = s.orthogonal();
-    		 	Vector3D u = Vector3D.crossProduct(s, t);
-    		 	
-    		 	double alpha_o = Math.atan((-t.getY())/(u.getY()));
-    		 	Vector3D test_point = (t.scalarMultiply(Math.cos(alpha_o))).add(u.scalarMultiply(Math.sin(alpha_o)));
-    		 	if(test_point.getX()>0)
-    		 		alpha_o = alpha_o + FastMath.PI;
-    		 	
-    		 	double alpha = 0;
-    		 	double d_alpha = 2*FastMath.PI/Parameters.Map.solar_terminator_points;
-    		 	for(int i = 0; i<Parameters.Map.solar_terminator_points; i++){
-    		 		Vector3D point = (t.scalarMultiply(Math.cos(alpha+alpha_o))).add(u.scalarMultiply(Math.sin(alpha+alpha_o)));
-    		 		GeodeticPoint gpoint = earth.transform(point, earthFixedFrame, scs.getDate());
-    		 		solarTerminator.add(new LatLon(gpoint.getLatitude()*180/Math.PI,gpoint.getLongitude()*180/Math.PI));
-    		 		alpha = alpha + d_alpha;
+    		 	ArrayList<LatLon> solarTerminator = new ArrayList<LatLon>();
+    		 	if(Math.abs(scs.getDate().durationFrom(date_tmp))>Parameters.Map.solar_terminator_threshold){
+    		 		date_tmp = scs.getDate();
+    		 		
+	    		 	Vector3D s = CelestialBodyFactory.getSun().getPVCoordinates(
+	    		 				scs.getDate(), 
+	    		 				earthFixedFrame
+	    		 			).getPosition().normalize();
+	    		 	Vector3D t = s.orthogonal();
+	    		 	Vector3D u = Vector3D.crossProduct(t, s);
+	    		 	
+	    		 	double alpha_o = Math.atan((-t.getY())/(u.getY()));
+	    		 	Vector3D test_point = (t.scalarMultiply(Math.cos(alpha_o))).add(u.scalarMultiply(Math.sin(alpha_o)));
+	    		 	if(test_point.getX()>0)
+	    		 		alpha_o = alpha_o + FastMath.PI;
+	    		 	
+	    		 	double alpha = 0.01;
+	    		 	double d_alpha = 2*FastMath.PI/Parameters.Map.solar_terminator_points;
+	    		 	for(int i = 0; i<Parameters.Map.solar_terminator_points+1; i++){
+	    		 		Vector3D point = (t.scalarMultiply(Math.cos(alpha+alpha_o))).add(u.scalarMultiply(Math.sin(alpha+alpha_o))).scalarMultiply(Constants.WGS84_EARTH_EQUATORIAL_RADIUS);
+	    		 		GeodeticPoint gpoint = earth.transform(point, earthFixedFrame, scs.getDate());
+	    		 		solarTerminator.add(new LatLon(gpoint.getLatitude()*180/Math.PI,gpoint.getLongitude()*180/Math.PI));
+	    		 		alpha = alpha + d_alpha;
+	    		 		if(alpha>=2*FastMath.PI)
+	    		 			alpha=2*FastMath.PI-0.01;
+	    		 	}
     		 	}
     		 	
     		 	
@@ -201,8 +210,8 @@ public class ModelSimulation {
     		 	
     		 	//Satellite FOV
     		 	//data
-    		 	Rotation attitude = scs.getAttitude().getRotation();
-    		 	Vector3D close = scs.getPVCoordinates().getPosition();
+    		 	Rotation attitude = scs.getAttitude().withReferenceFrame(earthFixedFrame).getRotation();
+    		 	Vector3D close = scs.getPVCoordinates(earthFixedFrame).getPosition();
     		 	double sensor_aperture = 3;
     		 	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
     		 	//step

@@ -513,7 +513,7 @@ public class MainActivity extends ActionBarActivity implements
         // store the data in the fragment
         if(isFinishing()){
         	simulator.disconnect();
-            ((StavorApplication)getApplication()).db_help.close();
+            //((StavorApplication)getApplication()).db_help.close();
         }else{
         	dataFragment.setData(
         			this.simulator,
