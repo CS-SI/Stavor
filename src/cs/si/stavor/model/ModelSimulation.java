@@ -175,16 +175,18 @@ public class ModelSimulation {
     		 	}
     		 	
     		 	//Satellite FOV
+    		 	//data
     		 	Rotation attitude = scs.getAttitude().getRotation();
     		 	Vector3D close = scs.getPVCoordinates().getPosition();
-    		 	double sensor_aperture = 30;
+    		 	double sensor_aperture = 3;
     		 	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
-    		 	//Vector3D axis = attitude.applyTo(sensor_sc_direction);
-    		 	Vector3D axis = new Vector3D(1,0,0);
+    		 	//step
+    		 	sensor_sc_direction = sensor_sc_direction.normalize();
+    		 	Vector3D axis = attitude.applyTo(sensor_sc_direction).negate();
     		 	Vector3D ortho = axis.orthogonal();
     		 	Rotation rot_aperture = new Rotation(ortho, sensor_aperture*Math.PI/180);
     		 	Vector3D start = rot_aperture.applyTo(axis);
-    		 	
+    		 	//points
     		 	
     		 	
     		 	double angle_step = 2.0*Math.PI/Parameters.Map.satellite_fov_points;
@@ -192,7 +194,9 @@ public class ModelSimulation {
     		 	ArrayList<LatLon> fov = new ArrayList<LatLon>();
     		 	for(int j = 0; j < Parameters.Map.satellite_fov_points; j++){
     		 		Rotation r_circle = new Rotation(axis, angle);
-    		 		GeodeticPoint intersec = earth.getIntersectionPoint(new Line(r_circle.applyTo(start), close, 0.0), close, scs.getFrame(), scs.getDate());
+    		 		Vector3D dir = r_circle.applyTo(start);
+    		 		dir = dir.add(close);
+    		 		GeodeticPoint intersec = earth.getIntersectionPoint(new Line(dir, close, 0.0), close, scs.getFrame(), scs.getDate());
     		 		if(intersec!=null){
 	    		 		fov.add(new LatLon(intersec.getLatitude()*180/Math.PI,intersec.getLongitude()*180/Math.PI));
     		 		}
