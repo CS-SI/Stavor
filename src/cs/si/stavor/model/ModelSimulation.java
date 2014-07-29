@@ -65,6 +65,7 @@ public class ModelSimulation {
 	    				Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
 	    		 		Constants.WGS84_EARTH_FLATTENING,
 	    		 		earthFixedFrame);
+				
 			}
     	} catch (OrekitException e) {
 			// TODO Auto-generated catch block
@@ -157,6 +158,7 @@ public class ModelSimulation {
     		 	for(int i = 0; i < config.stations.length; i++){
     		 		if(config.stations[i].enabled){
     		 			List<LatLon> circle = VisibilityCircle.computeCircle(
+    		 					earth,
 	    		 				config.stations[i].latitude, 
 	    		 				config.stations[i].longitude, 
 	    		 				config.stations[i].altitude, 

@@ -36,15 +36,16 @@ import org.orekit.utils.IERSConventions;
  */
 public class VisibilityCircle {
 
-    public static List<LatLon> computeCircle(double latitude, double longitude, double altitude,
+    public static List<LatLon> computeCircle(BodyShape earth, double latitude, double longitude, double altitude,
                                                      String name, double minElevation, double radius, int points)
         throws OrekitException {
 
         // define Earth shape, using WGS84 model
-        BodyShape earth = new OneAxisEllipsoid(Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
+        /*BodyShape earth = new OneAxisEllipsoid(Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
                                                Constants.WGS84_EARTH_FLATTENING,
                                                FramesFactory.getITRF(IERSConventions.IERS_2010, false));
-
+*/
+    	
         // define an array of ground stations
         TopocentricFrame station =
                 new TopocentricFrame(earth, new GeodeticPoint(latitude*Math.PI/180, longitude*Math.PI/180, altitude), name);
