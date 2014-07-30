@@ -174,15 +174,16 @@ public class ModelSimulation {
 	    		 	if(test_point.getX()>0)
 	    		 		alpha_o = alpha_o + FastMath.PI;
 	    		 	
-	    		 	double alpha = 0.01;
+	    		 	double alpha_margin = 0.02;
+	    		 	double alpha = alpha_margin;
 	    		 	double d_alpha = 2*FastMath.PI/Parameters.Map.solar_terminator_points;
-	    		 	for(int i = 0; i<Parameters.Map.solar_terminator_points+1; i++){
+	    		 	for(int i = 0; i<Parameters.Map.solar_terminator_points; i++){
 	    		 		Vector3D point = (t.scalarMultiply(Math.cos(alpha+alpha_o))).add(u.scalarMultiply(Math.sin(alpha+alpha_o))).scalarMultiply(Constants.WGS84_EARTH_EQUATORIAL_RADIUS);
 	    		 		GeodeticPoint gpoint = earth.transform(point, earthFixedFrame, scs.getDate());
 	    		 		solarTerminator.add(new LatLon(gpoint.getLatitude()*180/Math.PI,gpoint.getLongitude()*180/Math.PI));
 	    		 		alpha = alpha + d_alpha;
-	    		 		if(alpha>=2*FastMath.PI)
-	    		 			alpha=2*FastMath.PI-0.01;
+	    		 		if(alpha>(2*FastMath.PI)-alpha_margin)
+	    		 			alpha=2*FastMath.PI-alpha_margin;
 	    		 	}
     		 	}
     		 	

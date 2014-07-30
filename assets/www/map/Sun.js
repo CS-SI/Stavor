@@ -23,19 +23,22 @@ function drawSolarTerminator(){
 		night_layer.removeAllFeatures();
 
 		var solarPoints = [];
-		//open polygon
-		var point = new OpenLayers.Geometry.Point(
-			-179.999, 
-			89.99
-		).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-		solarPoints.push(point);
-
+		var sign = 1;
 		//draw polygon 
 		for (var i in solarTerminator) {
 			if(i==0){
-				//open polygon
+				//Sign
+				if(solarTerminator[i].longitude>0)
+					sign = -1;
+				//open polygon 1
 				var point = new OpenLayers.Geometry.Point(
-					-179.999, 
+					-179.999*sign, 
+					89.99
+				).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+				solarPoints.push(point);
+				//open polygon 2
+				var point = new OpenLayers.Geometry.Point(
+					-179.999*sign, 
 					solarTerminator[i].latitude
 				).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 				solarPoints.push(point);
@@ -45,33 +48,27 @@ function drawSolarTerminator(){
 				solarTerminator[i].longitude, 
 				solarTerminator[i].latitude
 			).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-		
 			solarPoints.push(point);
 
 			if(i==solarTerminator.length-1){
+				//close polygon 1
+				var point = new OpenLayers.Geometry.Point(
+					179.999*sign, 
+					solarTerminator[i].latitude
+				).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+				solarPoints.push(point);
 				//close polygon
 				var point = new OpenLayers.Geometry.Point(
-					179.999, 
-					solarTerminator[i].latitude
+					179.999*sign, 
+					89.99
 				).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 				solarPoints.push(point);
 			}
 		
-		}
-
-		//close polygon
-		var point = new OpenLayers.Geometry.Point(
-			179.999, 
-			89.99
-		).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-		solarPoints.push(point);				
+		}		
 
 		if(solarPoints.length>0){
 			solarPoints.push(solarPoints[0]);
-
-			/*var lineString = new OpenLayers.Geometry.LineString(solarPoints);
-			var polygonFeature = new OpenLayers.Feature.Vector(lineString, null, nightStyle);
-			night_layer.addFeatures([polygonFeature]);*/
 
 			var linearRing = new OpenLayers.Geometry.LinearRing(solarPoints);
 			var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
