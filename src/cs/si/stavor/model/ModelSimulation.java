@@ -141,7 +141,7 @@ public class ModelSimulation {
     		 try {
     			 
     			 //Sat_Pos
-    		 	GeodeticPoint gp = earth.transform(scs.getPVCoordinates().getPosition(), scs.getFrame(), scs.getDate());
+    		 	GeodeticPoint gp = earth.transform(scs.getPVCoordinates(earthFixedFrame).getPosition(), earthFixedFrame, scs.getDate());
     		 	double lat = gp.getLatitude()*180/Math.PI;
     		 	double lon = gp.getLongitude()*180/Math.PI;
     		 	double alt = gp.getAltitude();
@@ -149,7 +149,7 @@ public class ModelSimulation {
     		 		addToMapPathBuffer(lat, lon, alt);
     		 	
     		 	//Sun_Pos
-    		 	GeodeticPoint gp2 = earth.transform(CelestialBodyFactory.getSun().getPVCoordinates(scs.getDate(), scs.getFrame()).getPosition(), scs.getFrame(), scs.getDate());
+    		 	GeodeticPoint gp2 = earth.transform(CelestialBodyFactory.getSun().getPVCoordinates(scs.getDate(), earthFixedFrame).getPosition(), earthFixedFrame, scs.getDate());
     		 	double lat2 = gp2.getLatitude()*180/Math.PI;
     		 	double lon2 = gp2.getLongitude()*180/Math.PI;
     		 	if(!Double.isNaN(lat)&&!Double.isNaN(lon)){
@@ -216,12 +216,11 @@ public class ModelSimulation {
     		 	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
     		 	//step
     		 	sensor_sc_direction = sensor_sc_direction.normalize();
-    		 	Vector3D axis = attitude.applyTo(sensor_sc_direction).negate();
+    		 	Vector3D axis = attitude.applyInverseTo(sensor_sc_direction);
     		 	Vector3D ortho = axis.orthogonal();
     		 	Rotation rot_aperture = new Rotation(ortho, sensor_aperture*Math.PI/180);
     		 	Vector3D start = rot_aperture.applyTo(axis);
     		 	//points
-    		 	
     		 	
     		 	double angle_step = 2.0*Math.PI/Parameters.Map.satellite_fov_points;
     		 	double angle = 0;
@@ -230,7 +229,7 @@ public class ModelSimulation {
     		 		Rotation r_circle = new Rotation(axis, angle);
     		 		Vector3D dir = r_circle.applyTo(start);
     		 		dir = dir.add(close);
-    		 		GeodeticPoint intersec = earth.getIntersectionPoint(new Line(dir, close, 0.0), close, scs.getFrame(), scs.getDate());
+    		 		GeodeticPoint intersec = earth.getIntersectionPoint(new Line(dir, close, 0.0), close, earthFixedFrame, scs.getDate());
     		 		if(intersec!=null){
 	    		 		fov.add(new LatLon(intersec.getLatitude()*180/Math.PI,intersec.getLongitude()*180/Math.PI));
     		 		}

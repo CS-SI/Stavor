@@ -7,14 +7,14 @@ function setLoadingProgress(progress) {// from 0 to 100
 }
 function updateModelState(new_state){
 	var state = JSON.parse(new_state);
-	if (typeof state.point != "undefined"){
-		addPathPoint(state.point);
-	}
 	sun_lat = state.sun_lat;//In degrees
 	sun_lon = state.sun_lon;//In degrees
 	station_areas = state.stations;
 	fov = state.fov;
 	solarTerminator = state.terminator;
+	if (typeof state.point != "undefined"){
+		addPathPoint(state.point);
+	}
 }
 function showAndroidToast(toast) {
 	if (typeof Android != "undefined"){ // check the bridge 
