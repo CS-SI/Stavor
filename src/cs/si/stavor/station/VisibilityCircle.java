@@ -20,6 +20,7 @@ package cs.si.stavor.station;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.util.FastMath;
 import org.orekit.bodies.BodyShape;
 import org.orekit.bodies.GeodeticPoint;
@@ -50,7 +51,7 @@ public class VisibilityCircle {
         List<LatLon> circle = new ArrayList<LatLon>();
         for (int i = 0; i < points; ++i) {
         	double twoPi = 2.0 * FastMath.PI;
-            double azimuth = i * (twoPi / points) + (FastMath.PI/2);
+            double azimuth = i * (twoPi / points) + (twoPi / (2*points));
             if(azimuth > twoPi)
             	azimuth = azimuth - twoPi;
             GeodeticPoint gp = station.computeLimitVisibilityPoint(radius, azimuth, minElevation*Math.PI/180);
@@ -61,5 +62,52 @@ public class VisibilityCircle {
         return circle;
 
     }
+    
+    public static int computeType(BodyShape earth, double latitude, double longitude, double altitude, double minElevation, double radius)
+		throws OrekitException {
+		
+		// define Earth shape, using WGS84 model
+		/*BodyShape earth = new OneAxisEllipsoid(Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
+		      Constants.WGS84_EARTH_FLATTENING,
+		      FramesFactory.getITRF(IERSConventions.IERS_2010, false));
+		*/
+    	int type = 0;
+    	
+    	GeodeticPoint station_point = new GeodeticPoint(latitude*Math.PI/180, longitude*Math.PI/180, altitude);
+		
+		// define an array of ground stations
+		TopocentricFrame station =
+		new TopocentricFrame(earth, station_point, "Station");
+		
+		Vector3D orig = earth.transform(station_point);
+		
+		GeodeticPoint poleN = new GeodeticPoint(FastMath.toRadians(90.0), 0, 0);
+		GeodeticPoint poleS = new GeodeticPoint(FastMath.toRadians(-90.0), 0, 0);
+		
+		Vector3D poleN3 = earth.transform(poleN);
+		Vector3D poleS3 = earth.transform(poleS);
+		
+		GeodeticPoint limitN = station.computeLimitVisibilityPoint(radius, 0, minElevation*Math.PI/180);
+		GeodeticPoint limitS = station.computeLimitVisibilityPoint(radius, FastMath.PI, minElevation*Math.PI/180);
+		
+		Vector3D limitN3 = earth.transform(limitN);
+		Vector3D limitS3 = earth.transform(limitS);
+		
+		double alphaNpole = Vector3D.angle(poleN3, orig);
+		double alphaNlimit = Vector3D.angle(limitN3, orig);
+
+		double alphaSpole = Vector3D.angle(poleS3, orig);
+		double alphaSlimit = Vector3D.angle(limitS3, orig);
+		
+		if(alphaNpole <= alphaNlimit)
+			type = 1;
+		else if(alphaSpole <= alphaSlimit)
+			type = 2;
+		else
+			type = 0;
+			
+		return type;
+		
+	}
 
 }

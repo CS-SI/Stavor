@@ -189,7 +189,6 @@ public class ModelSimulation {
     		 	
     		 	//Station Areas
     		 	ArrayList<StationArea> stations = new ArrayList<StationArea>();
-    		 	Log.d("STATIONS", "------------STATIONS------------");
     		 	for(int i = 0; i < config.stations.length; i++){
     		 		if(config.stations[i].enabled){
     		 			List<LatLon> circle = VisibilityCircle.computeCircle(
@@ -201,15 +200,25 @@ public class ModelSimulation {
 	    		 				config.stations[i].elevation, 
 	    		 				scs.getPVCoordinates().getPosition().getNorm(), 
 	    		 				Parameters.Map.station_visibility_points);
+    		 			
+    		 			//Find polygon type
+    		 			int type = VisibilityCircle.computeType(
+    		 					earth,
+	    		 				config.stations[i].latitude, 
+	    		 				config.stations[i].longitude, 
+	    		 				config.stations[i].altitude, 
+	    		 				config.stations[i].elevation, 
+	    		 				scs.getPVCoordinates().getPosition().getNorm()
+	    		 				);
+    		 			
+    		 			//------------------------
+    		 			
 	    		 		stations.add(new StationArea(
 	    		 				config.stations[i].name,
 	    		 				config.stations[i].longitude,
-	    		 				circle.toArray(new LatLon[circle.size()])
+	    		 				circle.toArray(new LatLon[circle.size()]),
+	    		 				type
 	    		 				));
-    		 		}
-    		 		Log.d("STATIONS", "STATION-"+i);
-    		 		for (LatLon coord : stations.get(i).points){
-    		 			Log.d("STATIONS", "( "+coord.longitude+" , "+coord.latitude+" )");
     		 		}
     		 	}
     		 	
