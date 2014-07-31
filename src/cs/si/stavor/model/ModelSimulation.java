@@ -7,7 +7,6 @@ import org.apache.commons.math3.geometry.euclidean.threed.Line;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.util.FastMath;
-import org.orekit.attitudes.Attitude;
 import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.bodies.GeodeticPoint;
 import org.orekit.bodies.OneAxisEllipsoid;
@@ -190,6 +189,7 @@ public class ModelSimulation {
     		 	
     		 	//Station Areas
     		 	ArrayList<StationArea> stations = new ArrayList<StationArea>();
+    		 	Log.d("STATIONS", "------------STATIONS------------");
     		 	for(int i = 0; i < config.stations.length; i++){
     		 		if(config.stations[i].enabled){
     		 			List<LatLon> circle = VisibilityCircle.computeCircle(
@@ -206,6 +206,10 @@ public class ModelSimulation {
 	    		 				config.stations[i].longitude,
 	    		 				circle.toArray(new LatLon[circle.size()])
 	    		 				));
+    		 		}
+    		 		Log.d("STATIONS", "STATION-"+i);
+    		 		for (LatLon coord : stations.get(i).points){
+    		 			Log.d("STATIONS", "( "+coord.longitude+" , "+coord.latitude+" )");
     		 		}
     		 	}
     		 	
