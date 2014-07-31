@@ -48,7 +48,7 @@ public class Parameters {
 		public static final long min_hud_panel_refreshing_interval_ns = 500000000;//[ns] 2Hz max
 		public static final long min_hud_model_refreshing_interval_ns = 40000000;//[ns] 25Hz max
 		public static final long model_refreshing_interval_safe_guard_ns = 5000000;//[ns] 5ms
-		
+		public static final int amount_mission_examples = 6;
 		public static class Remote{
 			public static final int remote_connection_timeout_ms = 5000;//[ms]
 			public static final String default_host = "192.168.1.2";

@@ -144,7 +144,7 @@ public class Installer {
 	 * @return
 	 */
 	public static ReaderDbHelper installApkDatabase(MainActivity activity){
-		ReaderDbHelper mDbHelper = new ReaderDbHelper(activity.getApplicationContext());
+		ReaderDbHelper mDbHelper = new ReaderDbHelper(activity.getApplicationContext(), activity);
 		SQLiteDatabase db = mDbHelper.getWritableDatabase();
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
@@ -171,7 +171,7 @@ public class Installer {
 		
 		Mission mission = new Mission();
 		mission.name="Example GTO";
-		mission.description="GTO mission example.";
+		mission.description="Geostationary Transfer Orbit mission example.";
 		mission.initial_orbit.a=2.4396159E7;
 		mission.initial_orbit.e=0.72831215;
 		
@@ -196,11 +196,11 @@ public class Installer {
 		
 		//Second Example
 		mission = new Mission();
-		mission.name="Example GEO";
-		mission.description="GEO mission example";
+		mission.name="Example GSO";
+		mission.description="Geosynchronous mission example.";
 		mission.initial_orbit.a=4.2164E7;
 		mission.initial_orbit.e=0.0;
-		mission.initial_orbit.i=0.4;
+		mission.initial_orbit.i=0.5;
 		mission.initial_orbit.raan=Math.PI/2;
 		try {
 			mission.initial_date = new AbsoluteDate(2008,7,4,0,0,0.0,TimeScalesFactory.getUTC());
@@ -229,8 +229,41 @@ public class Installer {
 		
 		//Third Example
 		mission = new Mission();
+		mission.name="Example GEO";
+		mission.description="Geostationary mission example.";
+		mission.initial_orbit.a=4.2164E7;
+		mission.initial_orbit.e=0.0;
+		mission.initial_orbit.i=0.0;
+		mission.initial_orbit.raan=0;
+		try {
+			mission.initial_date = new AbsoluteDate(2008,7,4,0,0,0.0,TimeScalesFactory.getUTC());
+		} catch (IllegalArgumentException e1) {
+			e1.printStackTrace();
+		} catch (OrekitException e1) {
+			e1.printStackTrace();
+		}
+		
+		values = new ContentValues();
+		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, mission.description);
+		try {
+			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				MissionEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId==-1)
+			result=false;
+		
+		//Fourth Example
+		mission = new Mission();
 		mission.name="Example LEO-Polar";
-		mission.description="Polar LEO mission example";
+		mission.description="Polar Low Earth Orbit mission example";
 		mission.initial_orbit.a=7.0E6;
 		mission.initial_orbit.e=0.0;
 		mission.initial_orbit.i=1.57;
@@ -262,6 +295,74 @@ public class Installer {
 		if(newRowId==-1)
 			result=false;
 		
+		//Fifth Example
+		mission = new Mission();
+		mission.name="Example MEO";
+		mission.description="Medium Earth Orbit mission example";
+		mission.initial_orbit.a=2.9E7;
+		mission.initial_orbit.e=0.0;
+		mission.initial_orbit.i=0.90;
+		mission.initial_orbit.raan=0.0;
+		mission.sim_duration=100000.0;
+		mission.sim_step=10.0;
+		try {
+			mission.initial_date = new AbsoluteDate(2008,1,3,0,0,0.0,TimeScalesFactory.getUTC());
+		} catch (IllegalArgumentException e1) {
+			e1.printStackTrace();
+		} catch (OrekitException e1) {
+			e1.printStackTrace();
+		}
+		
+		values = new ContentValues();
+		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, mission.description);
+		try {
+			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				MissionEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId==-1)
+			result=false;
+		
+		//Sixth Example
+		mission = new Mission();
+		mission.name="Example HEO";
+		mission.description="High Earth Orbit mission example.";
+		mission.initial_orbit.a=5.2164E7;
+		mission.initial_orbit.e=0.0;
+		mission.initial_orbit.i=0.0;
+		mission.initial_orbit.raan=0;
+		try {
+			mission.initial_date = new AbsoluteDate(2008,7,4,0,0,0.0,TimeScalesFactory.getUTC());
+		} catch (IllegalArgumentException e1) {
+			e1.printStackTrace();
+		} catch (OrekitException e1) {
+			e1.printStackTrace();
+		}
+		
+		values = new ContentValues();
+		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, mission.description);
+		try {
+			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				MissionEntry.TABLE_NAME,
+				null,
+		         values);
+		if(newRowId==-1)
+			result=false;
+			
 		//******** GROUND STATIONS ************
 		//First Example VIL-2
 		GroundStation gs = new GroundStation();
