@@ -2,7 +2,7 @@ package cs.si.stavor.fragments;
 
 import org.xwalk.core.XWalkView;
 
-import cs.si.stavor.database.MissionReaderDbHelper;
+import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.simulator.Simulator;
 import android.app.Fragment;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,7 +22,7 @@ public class RetainedFragment extends Fragment {
 	//Flag used to not reload the browser if only device orientation changed 
     private boolean loadBrowserOrbit;
     private Simulator sim;
-    private MissionReaderDbHelper db_help;
+    private ReaderDbHelper db_help;
     private SQLiteDatabase db;
     private boolean hud_panel_open;
 
@@ -34,7 +34,7 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setData(XWalkView xwalkView, boolean load, XWalkView xwalkViewOrbit, boolean loadOrbit, Simulator data, MissionReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
+    public void setData(XWalkView xwalkView, boolean load, XWalkView xwalkViewOrbit, boolean loadOrbit, Simulator data, ReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
         this.mXwalkView = xwalkView;
         this.loadBrowser = load;
         this.mXwalkViewOrbit = xwalkViewOrbit;
@@ -65,7 +65,7 @@ public class RetainedFragment extends Fragment {
         return sim;
     }
 
-	public MissionReaderDbHelper getDbHelp() {
+	public ReaderDbHelper getDbHelp() {
 		return db_help;
 	}
 

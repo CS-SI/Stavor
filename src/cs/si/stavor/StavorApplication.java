@@ -2,7 +2,7 @@ package cs.si.stavor;
 
 import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
 
-import cs.si.stavor.database.MissionReaderDbHelper;
+import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.web.WebAppInterface;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,7 +16,7 @@ public class StavorApplication extends Application {
 	private String searchTerm = "";
 	
 	//Global database objects (for multi-activity access)
-	public MissionReaderDbHelper db_help;
+	public ReaderDbHelper db_help;
     public SQLiteCursorLoader loader = null;
     public SQLiteDatabase db;
     

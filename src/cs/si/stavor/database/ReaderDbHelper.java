@@ -2,7 +2,6 @@ package cs.si.stavor.database;
 
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.R;
-import cs.si.stavor.app.Installer;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,13 +13,13 @@ import android.preference.PreferenceManager;
  * @author Xavier Gibert
  *
  */
-public class MissionReaderDbHelper extends SQLiteOpenHelper {
+public class ReaderDbHelper extends SQLiteOpenHelper {
 	// If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "Missions.db";
     private MainActivity activity;
     
-    public MissionReaderDbHelper(Context context, MainActivity activity) {
+    public ReaderDbHelper(Context context, MainActivity activity) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.activity = activity;
     }

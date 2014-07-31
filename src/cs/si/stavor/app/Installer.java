@@ -12,7 +12,7 @@ import org.orekit.time.TimeScalesFactory;
 
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
-import cs.si.stavor.database.MissionReaderDbHelper;
+import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
 import cs.si.stavor.mission.Mission;
@@ -141,8 +141,8 @@ public class Installer {
 	 * @param activity
 	 * @return
 	 */
-	public static MissionReaderDbHelper installApkDatabase(MainActivity activity){
-		MissionReaderDbHelper mDbHelper = new MissionReaderDbHelper(activity.getApplicationContext(), activity);
+	public static ReaderDbHelper installApkDatabase(MainActivity activity){
+		ReaderDbHelper mDbHelper = new ReaderDbHelper(activity.getApplicationContext(), activity);
 		SQLiteDatabase db = mDbHelper.getWritableDatabase();
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
