@@ -1,7 +1,7 @@
 package cs.si.stavor.database;
 
-import cs.si.stavor.MainActivity;
-import cs.si.stavor.R;
+import cs.si.satcor.MainActivity;
+import cs.si.satcor.R;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;

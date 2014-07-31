@@ -303,8 +303,6 @@ public class Installer {
 		mission.initial_orbit.e=0.0;
 		mission.initial_orbit.i=0.90;
 		mission.initial_orbit.raan=0.0;
-		mission.sim_duration=100000.0;
-		mission.sim_step=10.0;
 		try {
 			mission.initial_date = new AbsoluteDate(2008,1,3,0,0,0.0,TimeScalesFactory.getUTC());
 		} catch (IllegalArgumentException e1) {

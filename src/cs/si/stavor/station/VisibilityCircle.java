@@ -23,12 +23,8 @@ import java.util.List;
 import org.apache.commons.math3.util.FastMath;
 import org.orekit.bodies.BodyShape;
 import org.orekit.bodies.GeodeticPoint;
-import org.orekit.bodies.OneAxisEllipsoid;
 import org.orekit.errors.OrekitException;
-import org.orekit.frames.FramesFactory;
 import org.orekit.frames.TopocentricFrame;
-import org.orekit.utils.Constants;
-import org.orekit.utils.IERSConventions;
 
 
 /** Orekit tutorial for computing visibility circles.

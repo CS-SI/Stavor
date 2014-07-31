@@ -2,8 +2,6 @@ package cs.si.stavor.model;
 
 import java.io.Serializable;
 
-import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
-
 import cs.si.stavor.model.ModelSimulation.MapPoint;
 import cs.si.stavor.station.LatLon;
 import cs.si.stavor.station.StationArea;
