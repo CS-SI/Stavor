@@ -24,41 +24,43 @@ var Paths = function() {
 Paths.prototype = {
 
 	addPointToPath: function(point) {
-		//Check if discontinuity
-		if(this.tmp_lon>=0)
-			var tmp_positive = true;
-		else
-			var tmp_positive = false;
-		if(point.longitude>=0)
-			var act_positive = true;
-		else
-			var act_positive = false;
-		if(!this.firstPoint && (tmp_positive!=act_positive) && (Math.abs(point.longitude)>90.0) && (this.tmp_lon+point.longitude<90.0)){
-			//end of previous path
-			var tip = new Object();
-			tip.altitude = this.tmp_alt;
-			tip.latitude = (this.tmp_lat + point.latitude) / 2;
-			if(this.tmp_lon>=0){
-				tip.longitude = 179.99999;
-			}else{
-				tip.longitude = -179.99999;
+		if(show_track){
+			//Check if discontinuity
+			if(this.tmp_lon>=0)
+				var tmp_positive = true;
+			else
+				var tmp_positive = false;
+			if(point.longitude>=0)
+				var act_positive = true;
+			else
+				var act_positive = false;
+			if(!this.firstPoint && (tmp_positive!=act_positive) && (Math.abs(point.longitude)>90.0) && (this.tmp_lon+point.longitude<90.0)){
+				//end of previous path
+				var tip = new Object();
+				tip.altitude = this.tmp_alt;
+				tip.latitude = (this.tmp_lat + point.latitude) / 2;
+				if(this.tmp_lon>=0){
+					tip.longitude = 179.99999;
+				}else{
+					tip.longitude = -179.99999;
+				}
+				this.paths[this.paths.length-1].addPoint(tip);
+				//create new subPath
+				this.paths.push(new SubPath());
+				//start of new subPath
+				tip.longitude = -tip.longitude;			
+				this.paths[this.paths.length-1].addPoint(tip);
 			}
-			this.paths[this.paths.length-1].addPoint(tip);
-			//create new subPath
-			this.paths.push(new SubPath());
-			//start of new subPath
-			tip.longitude = -tip.longitude;			
-			this.paths[this.paths.length-1].addPoint(tip);
+
+			//Add point
+			this.paths[this.paths.length-1].addPoint(point);
+
+			//Store temporals
+			this.tmp_lat = point.latitude;
+			this.tmp_lon = point.longitude;
+			this.tmp_alt = point.altitude;
+			this.firstPoint=false;
 		}
-
-		//Add point
-		this.paths[this.paths.length-1].addPoint(point);
-
-		//Store temporals
-		this.tmp_lat = point.latitude;
-		this.tmp_lon = point.longitude;
-		this.tmp_alt = point.altitude;
-		this.firstPoint=false;
 	},
 
 	getFeature: function() {

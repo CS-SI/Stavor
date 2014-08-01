@@ -20,13 +20,18 @@ import android.preference.PreferenceManager;
 public class ModelConfigurationMap {
 	
 	public ModelConfigurationMap(Context ctx, SQLiteDatabase db, MapPoint[] path, int follow_sc_view){
-		/*SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
-		try{
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
+		/*try{
 			payload_beamwidth = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_payload_beamwidth), Double.toString(payload_beamwidth)));
 			
 		}catch(NumberFormatException e){
 			System.err.println("Error loading configuration parameter: "+e.getMessage());
 		}*/
+		show_fov = sharedPref.getBoolean(ctx.getString(R.string.pref_key_map_show_fov), show_fov);
+		show_track = sharedPref.getBoolean(ctx.getString(R.string.pref_key_map_show_track), show_track);
+		show_sun_icon = sharedPref.getBoolean(ctx.getString(R.string.pref_key_map_show_sun_icon), show_sun_icon);
+		show_sun_terminator = sharedPref.getBoolean(ctx.getString(R.string.pref_key_map_show_sun_terminator), show_sun_terminator);
+		
 		points = path;
 		if(follow_sc_view == R.id.menu_mapviews_free)
 			follow_sc = false;
@@ -78,5 +83,9 @@ public class ModelConfigurationMap {
 	public boolean follow_sc = false;
 	//public double payload_beamwidth = 5.0;
 	//public int track_max_length = 5000;
+	public boolean show_fov = true;
+	public boolean show_track = true;
+	public boolean show_sun_icon = true;
+	public boolean show_sun_terminator = true;
 
 }

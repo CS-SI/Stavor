@@ -225,6 +225,16 @@
     <string name="sim_stop_simulator_first">Stop the simulator first</string>
     
     <string name="pref_payload">Payload</string>
+    <string name="pref_map_spacecraft">Spacecraft</string>
+    <string name="pref_map_sun">Sun</string>
+    <string name="pref_title_map_show_fov">Show FOV</string>
+    <string name="pref_summary_map_show_fov">Show the field of view of the spacecraft payload sensor</string>
+    <string name="pref_title_map_show_track">Show Track</string>
+    <string name="pref_summary_map_show_track">Show the ground track of the spacecraft</string>
+    <string name="pref_title_map_show_sun_icon">Show Icon</string>
+    <string name="pref_summary_map_show_sun_icon">Show the Sun position icon</string>
+    <string name="pref_title_map_show_sun_terminator">Show Terminator</string>
+    <string name="pref_summary_map_show_sun_terminator">Show the Day/Night separation line</string>
     <string name="pref_title_payload_beamwidth">Beam width angle</string>
     <string name="pref_summary_payload_beamwidth">Beam width angle of the camera or antenna in degrees</string>
     <string name="pref_title_payload_x">Sensor direction X</string>

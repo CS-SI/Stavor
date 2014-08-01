@@ -28,7 +28,11 @@ function getInitialization(){
 	  if (Android.getInitializationMapJSON!= "undefined") { // check the method
 		var config = JSON.parse(Android.getInitializationMapJSON());
 			
-		stations = config.stations;
+		stations = config.stations;		
+		show_fov = config.show_fov;
+		show_track = config.show_track;
+		show_sun_icon = config.show_sun_icon;
+		show_sun_terminator = config.show_sun_terminator;
 		//param_path_max_length = config.track_max_length;
 		//payload_beamwidth = config.payload_beamwidth;
 		follow_sc = config.follow_sc;

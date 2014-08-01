@@ -61,8 +61,12 @@
 	var station_areas = new Array();
 
 	//CONFIG PARAMS
-	var payload_beamwidth = 5;//Degrees
-	var param_path_max_length = 5000;
+	//var payload_beamwidth = 5;//Degrees
+	//var param_path_max_length = 5000;
+	var show_fov = true;
+	var show_track = true;
+	var show_sun_icon = true;
+	var show_sun_terminator = true;
 
 	var station_a = new Object();
 	station_a.name = "AAA";
@@ -214,7 +218,9 @@
 	getInitialization();
 
 	//PRE-STORED PATH
-	lineLayer.addFeatures([myMultyPath.getFeature()]);
+	if(show_track){
+		lineLayer.addFeatures([myMultyPath.getFeature()]);
+	}
 
 	//STATIONS NAME
 	addSelectedStationsNames();
@@ -229,8 +235,10 @@
 		drawSolarTerminator();
 		
 	//Path
-		lineLayer.removeAllFeatures();
-		lineLayer.addFeatures([myMultyPath.getFeature()]);
+		if(show_track){
+			lineLayer.removeAllFeatures();
+			lineLayer.addFeatures([myMultyPath.getFeature()]);
+		}
 
 	//Spacecraft
 		drawFov();

@@ -225,6 +225,16 @@
     <string name="sim_stop_simulator_first">Arrêtez le simulateur avant</string>
     
     <string name="pref_payload">Charge utile</string>
+    <string name="pref_map_spacecraft">Satellite</string>
+    <string name="pref_map_sun">Soleil</string>
+    <string name="pref_title_map_show_fov">Afficher FOV</string>
+    <string name="pref_summary_map_show_fov">Afficher le champ de vue du capteur de la charge utile du satellite</string>
+    <string name="pref_title_map_show_track">Afficher Trace</string>
+    <string name="pref_summary_map_show_track">Afficher la trace au sol du satellite</string>
+    <string name="pref_title_map_show_sun_icon">Afficher Icône</string>
+    <string name="pref_summary_map_show_sun_icon">Afficher l\'icône de position du Soleil</string>
+    <string name="pref_title_map_show_sun_terminator">Afficher Terminateur</string>
+    <string name="pref_summary_map_show_sun_terminator">Afficher la ligne de séparation Jour/Nuit</string>
     <string name="pref_title_payload_beamwidth">Angle d\'ouverture</string>
     <string name="pref_summary_payload_beamwidth">Angle d\'ouverture de la caméra ou de l\'antenne en degrés</string>
     <string name="pref_title_payload_x">Direction capteur X</string>

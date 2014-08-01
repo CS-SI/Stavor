@@ -12,8 +12,14 @@
     <string name="pref_screen_coverage">pref_screen_coverage</string>
     <string name="pref_screen_orbit">pref_screen_orbit</string>
     <string name="pref_key_category_earth">pref_key_category_earth</string>
+    <string name="pref_key_category_map_sun">pref_key_category_earth</string>
+    <string name="pref_key_category_map_spacecraft">pref_key_category_earth</string>
     <string name="pref_key_payload">pref_key_payload</string>
     <string name="pref_key_payload_beamwidth">pref_key_payload_beamwidth</string>
+    <string name="pref_key_map_show_fov">pref_key_map_show_fov</string>
+    <string name="pref_key_map_show_track">pref_key_map_show_track</string>
+    <string name="pref_key_map_show_sun_icon">pref_key_map_show_sun_icon</string>
+    <string name="pref_key_map_show_sun_terminator">pref_key_map_show_sun_terminator</string>
     <string name="pref_key_payload_x">pref_key_payload_x</string>
     <string name="pref_key_payload_y">pref_key_payload_y</string>
     <string name="pref_key_payload_z">pref_key_payload_z</string>

@@ -2,15 +2,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="@string/pref_screen_preferences">
     <PreferenceCategory 
-        android:title="@string/pref_performance"
-        android:key="@string/pref_key_performance">
-        <EditTextPreference
+        android:title="@string/pref_map_spacecraft"
+        android:key="@string/pref_key_category_map_spacecraft">
+        <!-- <EditTextPreference
             android:key="@string/pref_key_path_length"
             android:summary="@string/pref_summary_path_length"
             android:title="@string/pref_title_path_length"
             android:defaultValue="5000"
         	android:inputType="number" 
         	android:maxLength="5"
-            android:numeric="integer" />
+            android:numeric="integer" /> -->
+        <CheckBoxPreference
+            android:key="@string/pref_key_map_show_fov"
+            android:summary="@string/pref_summary_map_show_fov"
+            android:title="@string/pref_title_map_show_fov"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_map_show_track"
+            android:summary="@string/pref_summary_map_show_track"
+            android:title="@string/pref_title_map_show_track"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_map_sun"
+        android:key="@string/pref_key_category_map_sun">
+        <CheckBoxPreference
+            android:key="@string/pref_key_map_show_sun_icon"
+            android:summary="@string/pref_summary_map_show_sun_icon"
+            android:title="@string/pref_title_map_show_sun_icon"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_map_show_sun_terminator"
+            android:summary="@string/pref_summary_map_show_sun_terminator"
+            android:title="@string/pref_title_map_show_sun_terminator"
+            android:defaultValue="true" />
     </PreferenceCategory>
 </PreferenceScreen>

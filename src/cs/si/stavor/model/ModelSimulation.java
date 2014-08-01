@@ -106,7 +106,7 @@ public class ModelSimulation {
      * @return
      */
 	public synchronized String getInitializationMapJSON() {
-		//Init local config values for FOV
+		//Init local config values for FOV and solar terminator
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
 		try{
 			double x = Double.parseDouble(sharedPref.getString(activity.getString(R.string.pref_key_payload_x), Double.toString(sensor_sc_direction.getX())));
@@ -118,6 +118,8 @@ public class ModelSimulation {
 		}catch(NumberFormatException e){
 			System.err.println("Error loading configuration parameter: "+e.getMessage());
 		}
+		
+		date_tmp = null;
 		
 		//Return config JSON
     	config = new ModelConfigurationMap(activity.getApplicationContext(),
