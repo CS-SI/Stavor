@@ -23,6 +23,8 @@
             android:id="@+id/textViewMission"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
             android:text="TextView"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white" />
@@ -46,6 +48,8 @@
             android:id="@+id/textViewMissionDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
             android:text="Small Text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/white" />
