@@ -36,7 +36,7 @@ function paintOpenArea(arrayIndex,type){
 							coord.latitude
 			).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 
-		if((i!=0) && ((coord.longitude*area_tmp_long)<0) && (Math.abs(coord.longitude)>90.0) && (area_tmp_long+coord.longitude<90.0)){
+		if((i!=0) && ((coord.longitude*area_tmp_long)<0) && (Math.abs(coord.longitude)+Math.abs(area_tmp_long)>180.0)){
 			var avg_lat = (coord.latitude+area_tmp_lat)/2;
 			if(coord.longitude > 0)
 				var new_lon = -179.999999;
@@ -79,7 +79,7 @@ function paintClosedArea(arrayIndex){
 							coord.latitude
 			).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 
-		if((i!=0) && ((coord.longitude*area_tmp_long)<0) && (Math.abs(coord.longitude)>90.0) && (area_tmp_long+coord.longitude<90.0)){
+		if((i!=0) && ((coord.longitude*area_tmp_long)<0) && (Math.abs(coord.longitude)+Math.abs(area_tmp_long)>180.0)){
 			var avg_lat = (coord.latitude+area_tmp_lat)/2;
 			if(coord.longitude > 0)
 				var new_lon = -179.999999;
@@ -117,6 +117,19 @@ function paintClosedArea(arrayIndex){
 		var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
 		var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, station_area_style);
 		stations_area_layer.addFeatures([polygonFeature]);
+	}
+	console.log("Station");
+	console.log("First");
+	for(var i in areaFirst){
+		var pt = areaFirst[i];
+		pt=pt.transform(map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326"));
+		console.log("( ".concat(String(pt.x).concat(" , ".concat(String(pt.y).concat(" )")))));
+	}
+	console.log("Second");
+	for(var i in areaSecond){
+		var pt = areaSecond[i];
+		pt=pt.transform(map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326"));
+		console.log("( ".concat(String(pt.x).concat(" , ".concat(String(pt.y).concat(" )")))));
 	}
 }
 

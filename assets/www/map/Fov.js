@@ -23,7 +23,7 @@ function drawFov(){
 		point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 
 
-		if((i!=0) && ((fov[i].longitude*fov_tmp_long)<0) && (Math.abs(fov[i].longitude)>90.0) && (fov_tmp_long+fov[i].longitude<90.0)){
+		if((i!=0) && ((fov[i].longitude*fov_tmp_long)<0) && (Math.abs(fov[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
 			var avg_lat = (fov[i].latitude+fov_tmp_lat)/2;
 			if(fov[i].longitude > 0)
 				var new_lon = -179.999999;
