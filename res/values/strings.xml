@@ -227,6 +227,12 @@
     <string name="pref_payload">Payload</string>
     <string name="pref_title_payload_beamwidth">Beam width angle</string>
     <string name="pref_summary_payload_beamwidth">Beam width angle of the camera or antenna in degrees</string>
+    <string name="pref_title_payload_x">Sensor direction X</string>
+    <string name="pref_summary_payload_x">The X component of the sensor direction vector</string>
+    <string name="pref_title_payload_y">Sensor direction Y</string>
+    <string name="pref_summary_payload_y">The Y component of the sensor direction vector</string>
+    <string name="pref_title_payload_z">Sensor direction Z</string>
+    <string name="pref_summary_payload_z">The Z component of the sensor direction vector</string>
     <string name="pref_apk_install">Application install</string>
     <string name="pref_performance">Performance</string>
     <string name="pref_general">General</string>

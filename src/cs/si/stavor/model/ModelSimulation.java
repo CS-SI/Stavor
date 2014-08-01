@@ -16,12 +16,15 @@ import org.orekit.propagation.SpacecraftState;
 import org.orekit.time.AbsoluteDate;
 import org.orekit.utils.Constants;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.webkit.WebView;
 
 import com.google.gson.Gson;
 
 import cs.si.satcor.MainActivity;
+import cs.si.satcor.R;
 import cs.si.satcor.StavorApplication;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.station.LatLon;
@@ -103,6 +106,20 @@ public class ModelSimulation {
      * @return
      */
 	public synchronized String getInitializationMapJSON() {
+		//Init local config values for FOV
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+		try{
+			double x = Double.parseDouble(sharedPref.getString(activity.getString(R.string.pref_key_payload_x), Double.toString(sensor_sc_direction.getX())));
+			double y = Double.parseDouble(sharedPref.getString(activity.getString(R.string.pref_key_payload_y), Double.toString(sensor_sc_direction.getY())));
+			double z = Double.parseDouble(sharedPref.getString(activity.getString(R.string.pref_key_payload_z), Double.toString(sensor_sc_direction.getZ())));
+		 	sensor_sc_direction = new Vector3D(x,y,z);
+		 	sensor_aperture = Double.parseDouble(sharedPref.getString(activity.getString(R.string.pref_key_payload_beamwidth), Double.toString(sensor_aperture)));
+			
+		}catch(NumberFormatException e){
+			System.err.println("Error loading configuration parameter: "+e.getMessage());
+		}
+		
+		//Return config JSON
     	config = new ModelConfigurationMap(activity.getApplicationContext(),
     			((StavorApplication)activity.getApplication()).db,
     			getMapPathBuffer(),
@@ -134,6 +151,8 @@ public class ModelSimulation {
     private OneAxisEllipsoid earth;
     private Frame earthFixedFrame;
     private AbsoluteDate date_tmp = null;
+ 	double sensor_aperture = 3;
+ 	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
     public void updateSimulation(SpacecraftState scs, int sim_progress){
     	if(selectedBrowser.equals(Browsers.Map)){
     		 try {
@@ -225,8 +244,6 @@ public class ModelSimulation {
     		 	//data
     		 	Rotation attitude = scs.getAttitude().withReferenceFrame(earthFixedFrame).getRotation();
     		 	Vector3D close = scs.getPVCoordinates(earthFixedFrame).getPosition();
-    		 	double sensor_aperture = 3;
-    		 	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
     		 	//step
     		 	sensor_sc_direction = sensor_sc_direction.normalize();
     		 	Vector3D axis = attitude.applyInverseTo(sensor_sc_direction);

@@ -227,6 +227,12 @@
     <string name="pref_payload">Carga útil</string>
     <string name="pref_title_payload_beamwidth">Ángulo de apertura</string>
     <string name="pref_summary_payload_beamwidth">Ángulo de apertura de la cámara o antena en grados</string>
+    <string name="pref_title_payload_x">Dirección sensor X</string>
+    <string name="pref_summary_payload_x">La componente X del vector de dirección del sensor</string>
+    <string name="pref_title_payload_y">Dirección sensor Y</string>
+    <string name="pref_summary_payload_y">La componente Y del vector de dirección del sensor</string>
+    <string name="pref_title_payload_z">Dirección sensor Z</string>
+    <string name="pref_summary_payload_z">La componente Z del vector de dirección del sensor</string>
     <string name="pref_apk_install">Application install</string>
     <string name="pref_performance">Rendimiento</string>
     <string name="pref_general">General</string>

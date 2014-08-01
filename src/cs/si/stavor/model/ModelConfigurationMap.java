@@ -20,20 +20,20 @@ import android.preference.PreferenceManager;
 public class ModelConfigurationMap {
 	
 	public ModelConfigurationMap(Context ctx, SQLiteDatabase db, MapPoint[] path, int follow_sc_view){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
+		/*SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
 		try{
 			payload_beamwidth = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_payload_beamwidth), Double.toString(payload_beamwidth)));
 			
 		}catch(NumberFormatException e){
 			System.err.println("Error loading configuration parameter: "+e.getMessage());
-		}
+		}*/
 		points = path;
 		if(follow_sc_view == R.id.menu_mapviews_free)
 			follow_sc = false;
 		else if(follow_sc_view == R.id.menu_mapviews_locked){
 			follow_sc = true;
 		}
-		track_max_length = Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_path_length), Integer.toString(track_max_length)));
+		//track_max_length = Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_path_length), Integer.toString(track_max_length)));
 		
 		//Load enabled stations:
 		if(db!=null){
@@ -76,7 +76,7 @@ public class ModelConfigurationMap {
 	public GroundStation[] stations = null;
 	public MapPoint[] points = null;
 	public boolean follow_sc = false;
-	public double payload_beamwidth = 5.0;
-	public int track_max_length = 5000;
+	//public double payload_beamwidth = 5.0;
+	//public int track_max_length = 5000;
 
 }
