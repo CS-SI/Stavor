@@ -416,7 +416,7 @@ public class Installer {
 		
 		//Third Example Cebreros
 		gs = new GroundStation();
-		gs.enabled = true;
+		gs.enabled = false;
 		gs.name="Cebreros";
 		gs.latitude=40.452689;
 		gs.longitude=-4.36755;
@@ -443,7 +443,7 @@ public class Installer {
 
 		//Fourth Example Kiruna
 		gs = new GroundStation();
-		gs.enabled = true;
+		gs.enabled = false;
 		gs.name="Kiruna";
 		gs.latitude=67.857128;
 		gs.longitude=20.964325;
@@ -469,7 +469,7 @@ public class Installer {
 	
 		//Fifth Example Maspalomas
 			gs = new GroundStation();
-			gs.enabled = true;
+			gs.enabled = false;
 			gs.name="Maspalomas";
 			gs.latitude=27.762889;
 			gs.longitude=-15.6338;
@@ -495,10 +495,10 @@ public class Installer {
 			
 			//sixth Example Poker flat
 			gs = new GroundStation();
-			gs.enabled = true;
+			gs.enabled = false;
 			gs.name="Poker Flat";
 			gs.latitude=65.116667;
-			gs.longitude=212.538333;
+			gs.longitude=-147.461667;
 			gs.altitude=430.34;
 			gs.elevation=1;
 			
@@ -521,10 +521,10 @@ public class Installer {
 			
 			//seventh Example Santiago, Chile
 			gs = new GroundStation();
-			gs.enabled = true;
+			gs.enabled = false;
 			gs.name="Santiago";
 			gs.latitude=-33.151794;
-			gs.longitude=289.332688;
+			gs.longitude=-70.667312;
 			gs.altitude=730.0;
 			gs.elevation=1;
 			
@@ -547,7 +547,7 @@ public class Installer {
 			
 			//eigth Example Canberra
 			gs = new GroundStation();
-			gs.enabled = true;
+			gs.enabled = false;
 			gs.name="Canberra";
 			gs.latitude=-39.018556;
 			gs.longitude=148.983058;
@@ -573,10 +573,10 @@ public class Installer {
 			
 			//nineth Example Goldstone
 			gs = new GroundStation();
-			gs.enabled = true;
+			gs.enabled = false;
 			gs.name="Goldstone";
 			gs.latitude=35.339907;
-			gs.longitude=243.125198;
+			gs.longitude=-116.883019;
 			gs.altitude=956.059;
 			gs.elevation=1;
 			

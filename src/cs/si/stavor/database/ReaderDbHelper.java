@@ -25,6 +25,7 @@ public class ReaderDbHelper extends SQLiteOpenHelper {
     }
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(MissionReaderContract.SQL_CREATE_ENTRIES);
+        db.execSQL(StationsReaderContract.SQL_CREATE_ENTRIES);
         
         //Reset install database flag
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
@@ -34,6 +35,7 @@ public class ReaderDbHelper extends SQLiteOpenHelper {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         db.execSQL(MissionReaderContract.SQL_DELETE_ENTRIES);
+        db.execSQL(StationsReaderContract.SQL_DELETE_ENTRIES);
         onCreate(db);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
