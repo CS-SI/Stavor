@@ -55,7 +55,9 @@
         android:layout_alignParentTop="true"
         android:layout_margin="5dp"
         android:layout_toRightOf="@+id/linearLayout1"
-        android:background="@color/grey3" >
+        android:background="@color/grey3"
+        android:choiceMode="singleChoice"
+        android:clickable="true" >
 
     </ListView>
 

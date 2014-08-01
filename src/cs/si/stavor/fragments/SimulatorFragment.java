@@ -106,10 +106,9 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				restoreMissionsBackground();
 				if(arg1!=null){
 					last_mission_selection = arg2;
-					arg1.setBackgroundResource(R.drawable.mission_item_sel);
+					markActiveMission();
 					activeMissionId = Integer.parseInt((String) ((TextView)arg1.findViewById(R.id.textViewMissionId)).getText());
 					activeMissionName=(String) ((TextView)arg1.findViewById(R.id.textViewMission)).getText();
 					/*Toast.makeText(getActivity().getApplicationContext(), "Active mission: "+activeMissionId,
@@ -304,11 +303,11 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	/**
 	 * Change the text color of the missions in list that is selected
 	 */
-	private void restoreMissionsBackground() {
+	private void markActiveMission() {
 		if(missionsList!=null){
 			for(int i = 0; i < missionsList.getChildCount(); i++){
 				LinearLayout lay = (LinearLayout)missionsList.getChildAt(i);
-				lay.setBackgroundResource(R.drawable.mission_item);
+				//lay.setBackgroundResource(R.drawable.mission_item);
 				TextView text_id = (TextView)lay.findViewById(R.id.textViewMissionId);
 				TextView text_name = (TextView)lay.findViewById(R.id.textViewMission);
 				if(simulator.getSelectedMissionid()==Integer.parseInt(text_id.getText().toString())){
