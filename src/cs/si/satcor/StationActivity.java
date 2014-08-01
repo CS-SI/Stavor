@@ -58,21 +58,25 @@ public class StationActivity extends Activity{
 						station.station.altitude = Double.parseDouble(tx_alt.getText().toString());
 						station.station.elevation = Double.parseDouble(tx_elev.getText().toString());
 						
-						if(isEdit){
-							//Update register with new name and serialized
-							if(editStation()){
-								//((StavorApplication)getApplication()).loader.reset();
-								finish();
-							}else{
-								Toast.makeText(getApplicationContext(), getString(R.string.station_error_edit), Toast.LENGTH_LONG).show();
-							}
+						if(station.station.elevation < -5.0 || station.station.elevation > 90.0){//Check elevation is between limits -5º and 90º
+							Toast.makeText(getApplicationContext(), getString(R.string.station_elevation_out_of_range), Toast.LENGTH_LONG).show();
 						}else{
-							//Create new register in db
-							if(addStation()){
-								//((StavorApplication)getApplication()).loader.reset();
-								finish();
+							if(isEdit){
+								//Update register with new name and serialized
+								if(editStation()){
+									//((StavorApplication)getApplication()).loader.reset();
+									finish();
+								}else{
+									Toast.makeText(getApplicationContext(), getString(R.string.station_error_edit), Toast.LENGTH_LONG).show();
+								}
 							}else{
-								Toast.makeText(getApplicationContext(), getString(R.string.station_error_create), Toast.LENGTH_LONG).show();
+								//Create new register in db
+								if(addStation()){
+									//((StavorApplication)getApplication()).loader.reset();
+									finish();
+								}else{
+									Toast.makeText(getApplicationContext(), getString(R.string.station_error_create), Toast.LENGTH_LONG).show();
+								}
 							}
 						}
 						

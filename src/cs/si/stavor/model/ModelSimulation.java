@@ -16,7 +16,6 @@ import org.orekit.propagation.SpacecraftState;
 import org.orekit.time.AbsoluteDate;
 import org.orekit.utils.Constants;
 
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 

@@ -27,6 +27,7 @@
     <string name="station_error_create">Erreur de création de station dans la base de données</string>
     <string name="station_error_edit">Erreur d\'édittion de station en base de données</string>
     <string name="station_name_is_mandatory">Le nom de la station est obligatoire</string>
+    <string name="station_elevation_out_of_range">L\'élévation est hors limites [-5º,90º]</string>
     
     <string name="mission_parsing_angle_error">Erreur transformant angles</string>
     <string name="mission_editor">Éditeur de mission</string>

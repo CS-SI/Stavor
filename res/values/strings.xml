@@ -27,6 +27,7 @@
     <string name="station_error_create">Error creating station in database</string>
     <string name="station_error_edit">Error editing station in database</string>
     <string name="station_name_is_mandatory">The station name is mandatory</string>
+    <string name="station_elevation_out_of_range">The elevation is out of range [-5º,90º]</string>
     
     <string name="mission_parsing_angle_error">Error parsing angles</string>
     <string name="mission_editor">Mission editor</string>

@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textView44"
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/station_alt"
@@ -124,7 +124,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal"
+                    android:hint="@string/station_elevation_limits"
+                    android:inputType="numberSigned|numberDecimal"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
             </LinearLayout>            
