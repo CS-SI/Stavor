@@ -134,7 +134,7 @@ public class ModelSimulation {
     
     private OneAxisEllipsoid earth;
     private Frame earthFixedFrame;
-    private AbsoluteDate date_tmp = new AbsoluteDate();
+    private AbsoluteDate date_tmp = null;
     public void updateSimulation(SpacecraftState scs, int sim_progress){
     	if(selectedBrowser.equals(Browsers.Map)){
     		 try {
@@ -158,7 +158,7 @@ public class ModelSimulation {
     		 	
     		 	//Solar terminator
     		 	ArrayList<LatLon> solarTerminator = new ArrayList<LatLon>();
-    		 	if(Math.abs(scs.getDate().durationFrom(date_tmp))>Parameters.Map.solar_terminator_threshold){
+    		 	if(date_tmp == null || Math.abs(scs.getDate().durationFrom(date_tmp))>Parameters.Map.solar_terminator_threshold){
     		 		date_tmp = scs.getDate();
     		 		
 	    		 	Vector3D s = CelestialBodyFactory.getSun().getPVCoordinates(
