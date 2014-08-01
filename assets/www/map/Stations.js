@@ -118,18 +118,5 @@ function paintClosedArea(arrayIndex){
 		var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, station_area_style);
 		stations_area_layer.addFeatures([polygonFeature]);
 	}
-	console.log("Station");
-	console.log("First");
-	for(var i in areaFirst){
-		var pt = areaFirst[i];
-		pt=pt.transform(map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326"));
-		console.log("( ".concat(String(pt.x).concat(" , ".concat(String(pt.y).concat(" )")))));
-	}
-	console.log("Second");
-	for(var i in areaSecond){
-		var pt = areaSecond[i];
-		pt=pt.transform(map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326"));
-		console.log("( ".concat(String(pt.x).concat(" , ".concat(String(pt.y).concat(" )")))));
-	}
 }
 
