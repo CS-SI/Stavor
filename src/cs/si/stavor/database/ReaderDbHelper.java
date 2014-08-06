@@ -43,7 +43,7 @@ public class ReaderDbHelper extends SQLiteOpenHelper {
 		
 		activity.userMissions.clear();
 		if(result.getCount()>3){
-			for(int i = 4; i < result.getCount(); i++){
+			for(int i = 4; i <= result.getCount(); i++){
 				result.moveToPosition(i);
 				String name = result.getString(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
 				String description = result.getString(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_DESCRIPTION));
