@@ -1,10 +1,13 @@
 package cs.si.satcor;
 
+import java.util.ArrayList;
+
 import cs.si.satcor.R;
 import cs.si.stavor.app.Installer;
 import cs.si.stavor.app.OrekitInit;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.ReaderDbHelper;
+import cs.si.stavor.database.UserMission;
 import cs.si.stavor.dialogs.ErrorDialogFragment;
 import cs.si.stavor.dialogs.ResetAppDialogFragment;
 import cs.si.stavor.dialogs.ResetDbDialogFragment;
@@ -114,6 +117,7 @@ public class MainActivity extends ActionBarActivity implements
 	    	}
     	}
     }
+    public ArrayList<UserMission> userMissions;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +125,7 @@ public class MainActivity extends ActionBarActivity implements
 		long start_time = System.nanoTime();
 		
 		//Install Orekit default files if not installed yet
+		userMissions = new ArrayList<UserMission>();
 		Installer.installApkData(this);
 		
 		//Initialize Orekit with the data files
