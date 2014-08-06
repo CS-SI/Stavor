@@ -21,6 +21,7 @@ import cs.si.satcor.R;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import android.os.Handler;
+import android.util.Log;
 
 public class ThreadLocal extends Thread{
 	private final Handler mHandler;
@@ -114,13 +115,20 @@ public class ThreadLocal extends Thread{
     }
 
 	private long time_tmp_data = 0;
+    private long time_tmp_gui = 0;
 	private void publishProgress(){
         mHandler.post(new Runnable() {
             @Override
             public void run() {
         		//Update model by push
             	simulator.getSimulationResults().pushSimulationModel();
-            	
+
+            	//Update GUI HUD
+            	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
+            		
+            		time_tmp_gui = System.nanoTime();
+            		simulator.getSimulationResults().updateHUD();
+            	}
             }
         });
 	}

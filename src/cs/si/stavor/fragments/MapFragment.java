@@ -27,12 +27,17 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.SlidingDrawer;
+import android.widget.SlidingDrawer.OnDrawerCloseListener;
+import android.widget.SlidingDrawer.OnDrawerOpenListener;
 
 /**
  * Fragment with the visualization browser for the map
  * @author Xavier Gibert
  *
  */
+
+@SuppressWarnings("deprecation")
 public final class MapFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
@@ -56,8 +61,9 @@ public final class MapFragment extends Fragment {
 	}
 	
 	private Simulator simulator;
-	LinearLayout browserLayout;
+	LinearLayout browserLayout, slider_content;
 	Button views_menu;
+	SlidingDrawer drawer;
 	
 	/**
 	 * WebView from XWalk project to increase compatibility of WebGL
@@ -77,6 +83,35 @@ public final class MapFragment extends Fragment {
 		/*if(mXwalkView==null){
 			mXwalkView = ((MainActivity)getActivity()).getBrowserMap();
 		}*/
+
+		//Hud Panel
+		drawer = (SlidingDrawer) rootView.findViewById(R.id.slidingDrawer1);
+        drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
+            public void onDrawerOpened() {
+            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
+            	if(getResources().getConfiguration().orientation==android.content.res.Configuration.ORIENTATION_PORTRAIT){
+                	layoutParams.height = browser.getHeight()-slider_content.getHeight();
+                	layoutParams.width = LayoutParams.MATCH_PARENT;
+            	}else{
+            		layoutParams.width = browser.getWidth()-slider_content.getWidth();
+                	layoutParams.height = LayoutParams.MATCH_PARENT;
+            	}
+            	browser.setLayoutParams(layoutParams);
+            	((MainActivity)getActivity()).setHudPanelOpen(true);
+            }
+        });
+       
+        drawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
+            public void onDrawerClosed() {
+            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(browser.getLayoutParams());
+            	layoutParams.height = LayoutParams.MATCH_PARENT;
+            	layoutParams.width = LayoutParams.MATCH_PARENT;
+            	browser.setLayoutParams(layoutParams);
+            	((MainActivity)getActivity()).setHudPanelOpen(false);
+            }
+        });
+        
+		slider_content = (LinearLayout) rootView.findViewById(R.id.content);
 		
 		browser = new WebView(getActivity().getApplicationContext());
 		//mXwalkView.setBackgroundResource(R.color.black);
@@ -99,7 +134,7 @@ public final class MapFragment extends Fragment {
     	browser.addJavascriptInterface(new WebAppInterface(getActivity(), simulator.getSimulationResults()), "Android");
     	
 		
-    	simulator.setHudView(Browsers.Map, browser);
+    	simulator.setHudView(Browsers.Map, rootView, browser);
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);

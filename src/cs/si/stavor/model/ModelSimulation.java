@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Line;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
+import org.apache.commons.math3.geometry.euclidean.threed.RotationOrder;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.util.FastMath;
+import org.orekit.attitudes.Attitude;
 import org.orekit.bodies.CelestialBodyFactory;
 import org.orekit.bodies.GeodeticPoint;
 import org.orekit.bodies.OneAxisEllipsoid;
@@ -14,6 +16,8 @@ import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.time.AbsoluteDate;
+import org.orekit.time.TimeScale;
+import org.orekit.time.TimeScalesFactory;
 import org.orekit.utils.Constants;
 
 import android.content.SharedPreferences;
@@ -21,6 +25,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -41,7 +47,9 @@ public class ModelSimulation {
 	private Gson gson = new Gson();
     private ModelConfigurationMap config;
     private ModelStateMap state;
+    private ModelInfo info;
     private MainActivity activity;
+    private View view;
     private WebView browser;
     private boolean isBrowserLoaded;
     private Browsers selectedBrowser = Browsers.None;
@@ -71,6 +79,9 @@ public class ModelSimulation {
 	    		 		earthFixedFrame);
 				
 			}
+			if(utc==null){
+				utc = TimeScalesFactory.getUTC();
+			}
     	} catch (OrekitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,15 +93,21 @@ public class ModelSimulation {
      * @param hud
      * @param mBrowser
      */
-    public void setHud(Browsers type, View mBrowser){
+    public void setHud(Browsers type, View hud, View mBrowser){
     	selectedBrowser = type;
+		view = hud;
     	if(selectedBrowser.equals(Browsers.Map)){
-        	browser = (WebView)mBrowser;
+        	initViews();
+    	}else{
+    		uninitViews();
     	}
+    	browser = (WebView) mBrowser;
     }
     
     public void clearHud(){
       	selectedBrowser = Browsers.None;
+      	view = null;
+      	uninitViews();
     	browser = null;
     }
     
@@ -142,6 +159,12 @@ public class ModelSimulation {
     		}
     	}
 	}
+	private synchronized void updateInfo(ModelInfo inf){
+    	info = inf; 
+    }
+    private synchronized void updateState(ModelStateMap st){
+    	state = st;
+    }
     
     private void clearSimulationModel(){
     	if(browser!=null && isBrowserLoaded){
@@ -154,8 +177,11 @@ public class ModelSimulation {
     private OneAxisEllipsoid earth;
     private Frame earthFixedFrame;
     private AbsoluteDate date_tmp = null;
- 	double sensor_aperture = 3;
+ 	private double sensor_aperture = 3;
  	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
+ 	private AbsoluteDate tmp_time;
+    private Vector3D tmp_vel;
+    private TimeScale utc;
     public void updateSimulation(SpacecraftState scs, int sim_progress){
     	if(selectedBrowser.equals(Browsers.Map)){
     		 try {
@@ -305,13 +331,106 @@ public class ModelSimulation {
     		 		
     		 	}
     		 	
-    		 	state = new ModelStateMap(getMapPathBufferLast(), solarTerminator.toArray(new LatLon[solarTerminator.size()]), fov.toArray(new LatLon[fov.size()]), fovTerminator.toArray(new LatLon[fovTerminator.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon);
+    		 	updateState(new ModelStateMap(getMapPathBufferLast(), solarTerminator.toArray(new LatLon[solarTerminator.size()]), fov.toArray(new LatLon[fov.size()]), fovTerminator.toArray(new LatLon[fovTerminator.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon));
+
+
+    	    	ModelInfo new_info = new ModelInfo();
+    	    	
+    	    	//Basic indicators and Attitude
+    	    	Attitude sc_att = scs.getAttitude();
+    	    	
+    	    	Vector3D velocity = scs.getPVCoordinates().getVelocity();
+    	    	new_info.velocity = scs.getPVCoordinates().getVelocity().getNorm()/1000;
+    	    	
+    	    	Vector3D earth = scs.getPVCoordinates().getPosition().negate();
+    	    	new_info.orbit_radium = earth.getNorm()/1000;
+    	    	
+    	    	
+    	    	new_info.progress = sim_progress;
+    	    	if(new_info.progress>100)
+    	    		new_info.progress=100;
+    	    	if(new_info.progress<0)
+    	    		new_info.progress=0;
+    	    	
+    			AbsoluteDate date = sc_att.getDate();
+    			new_info.time = date.getComponents(utc).toString();
+    	
+    			//Compute acceleration
+    			if(tmp_time != null){
+    				double delay = date.offsetFrom(tmp_time,utc);
+    				Vector3D acceleration = new Vector3D(
+    						(velocity.getX()-tmp_vel.getX())/delay,
+    						(velocity.getY()-tmp_vel.getY())/delay,
+    						(velocity.getZ()-tmp_vel.getZ())/delay);
+    				new_info.acceleration = acceleration.getNorm();
+    			}
+    			
+    			//Update temporal variables for acceleration computation
+    	    	tmp_vel = velocity;
+    	    	tmp_time = date;
+    	
+    	    	double[] angles = sc_att.getOrientation().getRotation().getAngles(RotationOrder.XYZ);
+    	    	new_info.roll = angles[0];
+    	    	new_info.pitch = angles[1];
+    	    	new_info.yaw = angles[2];
+    	
+    	    	new_info.mass = scs.getMass();
+    		 	
+    	    	updateInfo(new_info);
     		 	
     		} catch (OrekitException e) {
     			e.printStackTrace();
     		}
     	}
     }
+
+	/**
+     * Update the Hud panel with the new simulation step values
+     */
+    public synchronized void updateHUD(){
+    	if(selectedBrowser.equals(Browsers.Map)){
+    		if(panel_time != null)
+    			panel_time.setText(info.time.replace("T", "  "));
+    		if(panel_progress != null)
+    			panel_progress.setProgress(info.progress);
+    		if(panel_vel != null){
+    			panel_vel.setText(activity.getString(R.string.panel_vel)+" "+String.format("%.2f", info.velocity)+" Km/s");
+    			/*if(info.velocity>config.limit_velocity)
+    				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
+    			else
+    				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_value));
+    				*/
+    		}
+    		if(panel_accel != null){
+    			panel_accel.setText(activity.getString(R.string.panel_accel)+" "+String.format("%.2f", info.acceleration)+" Km/s2");
+    			/*if(info.acceleration>config.limit_acceleration)
+    				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
+    			else
+    				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_value));
+    				*/
+    		}
+    		if(panel_radium != null)
+    			panel_radium.setText(activity.getString(R.string.panel_radium)+" "+String.format("%.1f", info.orbit_radium)+" Km");
+    		if(panel_mass != null)
+    			panel_mass.setText(activity.getString(R.string.panel_mass)+" "+String.format("%.1f", info.mass)+" Kg");
+    		if(panel_roll != null)
+    			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"º");
+    		if(panel_pitch != null)
+    			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"º");
+    		if(panel_yaw != null)
+    			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"º");
+    	}
+    }
+
+	TextView panel_time;
+	ProgressBar panel_progress;
+	TextView panel_vel;
+	TextView panel_accel;
+	TextView panel_radium;
+	TextView panel_mass;
+	TextView panel_roll;
+	TextView panel_pitch;
+	TextView panel_yaw;
 
 	double sun_lat, sun_lon;
 
@@ -352,6 +471,29 @@ public class ModelSimulation {
 		double longitude = 0;
 		double altitude = 0;
 	}
-
+	private void initViews() {
+		if(view != null){
+	    	panel_time = (TextView)view.findViewById(R.id.textViewPanelTime);
+			panel_progress = (ProgressBar)view.findViewById(R.id.progressBarPanelProgress);
+			panel_vel = (TextView)view.findViewById(R.id.textViewPanelVel);
+			panel_accel = (TextView)view.findViewById(R.id.textViewPanelAccel);
+			panel_radium = (TextView)view.findViewById(R.id.textViewPanelRadium);
+			panel_mass = (TextView)view.findViewById(R.id.textViewPanelMass);
+			panel_roll = (TextView)view.findViewById(R.id.textViewPanelRoll);
+			panel_pitch = (TextView)view.findViewById(R.id.textViewPanelPitch);
+			panel_yaw = (TextView)view.findViewById(R.id.textViewPanelYaw);
+		}
+	}
+	private void uninitViews() {
+    	panel_time = null;
+		panel_progress = null;
+		panel_vel = null;
+		panel_accel = null;
+		panel_radium = null;
+		panel_mass = null;
+		panel_roll = null;
+		panel_pitch = null;
+		panel_yaw = null;
+	}
 	
 }

@@ -95,10 +95,15 @@ public class ThreadRemote extends Thread{
     }
 	
 	private long time_tmp_data = 0;
+    private long time_tmp_gui = 0;
 	private void publishProgress(){
         mHandler.post(new Runnable() {
             @Override
             public void run() {
+            	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
+            		time_tmp_gui = System.nanoTime();
+            		simulator.getSimulationResults().updateHUD();
+            	}
             	if(time_tmp_data==0 || (System.nanoTime()-time_tmp_data)>Parameters.Simulator.min_hud_model_refreshing_interval_ns){
             		time_tmp_data = System.nanoTime();
                 	simulator.getSimulationResults().pushSimulationModel();

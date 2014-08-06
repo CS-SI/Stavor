@@ -127,8 +127,8 @@ public class Simulator {
 	 * @param v
 	 * @param x
 	 */
-	public void setHudView(Browsers type, View x){
-		simulation.setHud(type, x);
+	public void setHudView(Browsers type, View v, View x){
+		simulation.setHud(type, v, x);
 	}
 	
 	public void clearHud(){
