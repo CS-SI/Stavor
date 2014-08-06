@@ -65,9 +65,8 @@ function drawFov(){
 					//Sign
 					if(fov_terminator[i].longitude>0)
 						sign = -1;
-					if(fov_terminator[i].latitude>0)
+					if(sc_latitude>=0)
 						sign_lat = 1;
-					//open polygon 1
 					var point = new OpenLayers.Geometry.Point(
 						-179.999*sign, 
 						89.99*sign_lat
@@ -94,7 +93,7 @@ function drawFov(){
 						fov_terminator[i].latitude
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					fovPoints.push(point);
-					//close polygon
+					//close polygon				
 					var point = new OpenLayers.Geometry.Point(
 						179.999*sign, 
 						89.99*sign_lat
@@ -105,8 +104,13 @@ function drawFov(){
 			}		
 
 			if(fovPoints.length>0){
-				fovPoints.push(fovPoints[0]);
-
+				//fovPoints.push(fovPoints[0]);
+				/*console.log("sc_latitude: ".concat(String(sc_latitude)));
+				for(var i in fovPoints){
+				var pt = fovPoints[i].clone();
+				pt=pt.transform(map.getProjectionObject(),new OpenLayers.Projection("EPSG:4326"));
+				//console.log("( ".concat(String(pt.y).concat(" , ".concat(String(pt.x).concat(" )")))));
+				}*/
 				var linearRing = new OpenLayers.Geometry.LinearRing(fovPoints);
 				var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
 				var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, sc_style);

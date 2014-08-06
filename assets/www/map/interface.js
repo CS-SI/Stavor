@@ -13,6 +13,7 @@ function updateModelState(new_state){
 	fov = state.fov;
 	fov_terminator = state.fov_terminator;
 	solarTerminator = state.terminator;
+	//console.log("interface: ".concat(String(state.point.latitude)));
 	if (typeof state.point != "undefined"){
 		addPathPoint(state.point);
 	}

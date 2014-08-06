@@ -18,6 +18,7 @@ import org.orekit.utils.Constants;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -272,7 +273,7 @@ public class ModelSimulation {
     		 	//FOV terminator
     		 	ArrayList<LatLon> fovTerminator = new ArrayList<LatLon>();
     		 	//Check if FOV contains the whole earth
- /*   		 	if(fov.size()==0){//No intersection with Earth
+    		 	if(fov.size()==0){//No intersection with Earth
     		 		//Check if the center of the sensor intersects the Earth
     		 		GeodeticPoint intersec = earth.getIntersectionPoint(new Line(axis, close, 0.0), close, earthFixedFrame, scs.getDate());
     		 		if(intersec!=null){//Case whole earth inside FOV
@@ -303,7 +304,6 @@ public class ModelSimulation {
     		 		}
     		 		
     		 	}
-    		 	*/
     		 	
     		 	state = new ModelStateMap(getMapPathBufferLast(), solarTerminator.toArray(new LatLon[solarTerminator.size()]), fov.toArray(new LatLon[fov.size()]), fovTerminator.toArray(new LatLon[fovTerminator.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon);
     		 	
@@ -321,13 +321,13 @@ public class ModelSimulation {
 		clearSimulationModel();
 	}
 	
-	private double tmp_lat=0, tmp_lon=0;
+	//private double tmp_lat=0, tmp_lon=0;
 	public synchronized void addToMapPathBuffer(double lat, double lon, double alt) {
-		if(Math.abs(tmp_lat-lat)>Parameters.Map.marker_pos_threshold || Math.abs(tmp_lon-lon)>Parameters.Map.marker_pos_threshold){
-			tmp_lat = lat;
-			tmp_lon = lon;
+		//if(Math.abs(tmp_lat-lat)>Parameters.Map.marker_pos_threshold || Math.abs(tmp_lon-lon)>Parameters.Map.marker_pos_threshold){
+			//tmp_lat = lat;
+			//tmp_lon = lon;
 			mapPathBuffer.add(new MapPoint(lat,lon,alt));
-		}
+		//}
 	}
 	public synchronized MapPoint[] getMapPathBuffer(){
 		MapPoint[] r =
