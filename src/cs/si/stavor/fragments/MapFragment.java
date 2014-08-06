@@ -181,6 +181,8 @@ public final class MapFragment extends Fragment {
     	    @Override
     	    public void run()
     	    {
+    	    	if(((MainActivity)getActivity()).getHudPanelOpen())
+    	    		drawer.open();
     	    	/*
     	    	if(((MainActivity)getActivity()).getLoadBrowserFlagMap()){
     	    		//mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
