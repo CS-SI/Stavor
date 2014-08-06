@@ -21,7 +21,6 @@ import cs.si.satcor.R;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import android.os.Handler;
-import android.util.Log;
 
 public class ThreadLocal extends Thread{
 	private final Handler mHandler;
