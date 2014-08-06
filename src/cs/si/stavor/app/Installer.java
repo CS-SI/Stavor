@@ -15,6 +15,7 @@ import cs.si.stavor.MainActivity;
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
+import cs.si.stavor.database.UserMission;
 import cs.si.stavor.mission.Mission;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -149,7 +150,7 @@ public class Installer {
 		if(!prefs.getBoolean(activity.getString(R.string.pref_key_database_installed), false)){
 			//Log.d("INSTALLER", "Installing Missions database...");
 			
-			if(addMissionEntry(db)){
+			if(addMissionEntry(db, activity)){
 				prefs.edit().putBoolean(activity.getString(R.string.pref_key_database_installed), true).commit();
 				//Log.d("INSTALLER", "Installing Missions database... OK");
 			}else{
@@ -163,7 +164,7 @@ public class Installer {
 		return mDbHelper;
 	}
 	
-	private static boolean addMissionEntry(SQLiteDatabase db){
+	private static boolean addMissionEntry(SQLiteDatabase db, MainActivity activity){
 		// Create a new map of values, where column names are the keys
 		boolean result = true;
 		
@@ -360,6 +361,23 @@ public class Installer {
 		         values);
 		if(newRowId==-1)
 			result=false;
+		
+		//ADD USER MISSIONS
+		for(UserMission mis : activity.userMissions){
+			values = new ContentValues();
+			values.put(MissionEntry.COLUMN_NAME_NAME, mis.name);
+			values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, mis.description);
+			values.put(MissionEntry.COLUMN_NAME_CLASS, mis.serialclass);
+			
+			// Insert the new row, returning the primary key value of the new row
+			newRowId = db.insert(
+					MissionEntry.TABLE_NAME,
+					null,
+			         values);
+			if(newRowId==-1)
+				result=false;
+		}
+		activity.userMissions.clear();
 		
 		
 		return result;
