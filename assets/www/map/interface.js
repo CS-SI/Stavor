@@ -11,6 +11,7 @@ function updateModelState(new_state){
 	sun_lon = state.sun_lon;//In degrees
 	station_areas = state.stations;
 	fov = state.fov;
+	fov_terminator = state.fov_terminator;
 	solarTerminator = state.terminator;
 	if (typeof state.point != "undefined"){
 		addPathPoint(state.point);

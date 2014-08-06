@@ -250,7 +250,7 @@ public class ModelSimulation {
     		 	sensor_sc_direction = sensor_sc_direction.normalize();
     		 	Vector3D axis = attitude.applyInverseTo(sensor_sc_direction);
     		 	Vector3D ortho = axis.orthogonal();
-    		 	Rotation rot_aperture = new Rotation(ortho, sensor_aperture*Math.PI/180);
+    		 	Rotation rot_aperture = new Rotation(ortho, sensor_aperture*Math.PI/360);
     		 	Vector3D start = rot_aperture.applyTo(axis);
     		 	//points
     		 	
@@ -268,8 +268,44 @@ public class ModelSimulation {
     		 		angle += angle_step;
     		 	}
     		 	
+
+    		 	//FOV terminator
+    		 	ArrayList<LatLon> fovTerminator = new ArrayList<LatLon>();
+    		 	//Check if FOV contains the whole earth
+ /*   		 	if(fov.size()==0){//No intersection with Earth
+    		 		//Check if the center of the sensor intersects the Earth
+    		 		GeodeticPoint intersec = earth.getIntersectionPoint(new Line(axis, close, 0.0), close, earthFixedFrame, scs.getDate());
+    		 		if(intersec!=null){//Case whole earth inside FOV
+    	    		 	Vector3D s = scs.getPVCoordinates( 
+	    		 				earthFixedFrame
+	    		 			).getPosition().normalize();
+		    		 	Vector3D t = s.orthogonal();
+		    		 	Vector3D u = Vector3D.crossProduct(t, s);
+		    		 	
+		    		 	double alpha_o = Math.atan((-t.getY())/(u.getY()));
+		    		 	Vector3D test_point = (t.scalarMultiply(Math.cos(alpha_o))).add(u.scalarMultiply(Math.sin(alpha_o)));
+		    		 	if(test_point.getX()>0)
+		    		 		alpha_o = alpha_o + FastMath.PI;
+		    		 	
+		    		 	double alpha_margin = 0.02;
+		    		 	double alpha = alpha_margin;
+		    		 	double d_alpha = 2*FastMath.PI/(Parameters.Map.satellite_fov_points*3);
+		    		 	for(int i = 0; i<(Parameters.Map.satellite_fov_points*3); i++){
+		    		 		Vector3D point = (t.scalarMultiply(Math.cos(alpha+alpha_o))).add(u.scalarMultiply(Math.sin(alpha+alpha_o))).scalarMultiply(Constants.WGS84_EARTH_EQUATORIAL_RADIUS);
+		    		 		GeodeticPoint gpoint = earth.transform(point, earthFixedFrame, scs.getDate());
+		    		 		fovTerminator.add(new LatLon(gpoint.getLatitude()*180/Math.PI,gpoint.getLongitude()*180/Math.PI));
+		    		 		alpha = alpha + d_alpha;
+		    		 		if(alpha>(2*FastMath.PI)-alpha_margin)
+		    		 			alpha=2*FastMath.PI-alpha_margin;
+		    		 	}
+    		 		}else{//CASE NOT POINTING EARTH BUT FOV TAKES EARTH INSIDE (DEPOINTING A LARGLY APERTURE SENSOR)
+    		 			//XGGDEBUG: Handle case
+    		 		}
+    		 		
+    		 	}
+    		 	*/
     		 	
-    		 	state = new ModelStateMap(getMapPathBufferLast(), solarTerminator.toArray(new LatLon[solarTerminator.size()]), fov.toArray(new LatLon[fov.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon);
+    		 	state = new ModelStateMap(getMapPathBufferLast(), solarTerminator.toArray(new LatLon[solarTerminator.size()]), fov.toArray(new LatLon[fov.size()]), fovTerminator.toArray(new LatLon[fovTerminator.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon);
     		 	
     		} catch (OrekitException e) {
     			e.printStackTrace();

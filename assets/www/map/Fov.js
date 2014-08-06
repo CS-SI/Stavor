@@ -1,6 +1,8 @@
 function drawFov(){
 	if(show_fov){
 		sc_layer.removeAllFeatures();
+
+		//NORMAL CASE
 		var fovPointsA = [];
 		var fovPointsB = [];
 		var fov_tmp_long = 0, fov_tmp_lat = 0;
@@ -51,6 +53,67 @@ function drawFov(){
 			var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, sc_style);
 			sc_layer.addFeatures([polygonFeature]);
 		}
+
+		//WHOLE EARTH CASE
+		if(typeof fov_terminator != "undefined" && fov_terminator.length > 0){
+			var fovPoints = [];
+			var sign = 1;
+			var sign_lat = -1;
+			//draw polygon 
+			for (var i in fov_terminator) {
+				if(i==0){
+					//Sign
+					if(fov_terminator[i].longitude>0)
+						sign = -1;
+					if(fov_terminator[i].latitude>0)
+						sign_lat = 1;
+					//open polygon 1
+					var point = new OpenLayers.Geometry.Point(
+						-179.999*sign, 
+						89.99*sign_lat
+					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+					fovPoints.push(point);
+					//open polygon 2
+					var point = new OpenLayers.Geometry.Point(
+						-179.999*sign, 
+						fov_terminator[i].latitude
+					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+					fovPoints.push(point);
+				}
+
+				var point = new OpenLayers.Geometry.Point(
+					fov_terminator[i].longitude, 
+					fov_terminator[i].latitude
+				).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+				fovPoints.push(point);
+
+				if(i==fov_terminator.length-1){
+					//close polygon 1
+					var point = new OpenLayers.Geometry.Point(
+						179.999*sign, 
+						fov_terminator[i].latitude
+					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+					fovPoints.push(point);
+					//close polygon
+					var point = new OpenLayers.Geometry.Point(
+						179.999*sign, 
+						89.99*sign_lat
+					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+					fovPoints.push(point);
+				}
+		
+			}		
+
+			if(fovPoints.length>0){
+				fovPoints.push(fovPoints[0]);
+
+				var linearRing = new OpenLayers.Geometry.LinearRing(fovPoints);
+				var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
+				var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, sc_style);
+				sc_layer.addFeatures([polygonFeature]);
+			}
+		}
+
 	}
 }
 
