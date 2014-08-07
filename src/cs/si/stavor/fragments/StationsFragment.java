@@ -277,13 +277,11 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 	}
 	
 	private void selectFirstStationInList(){
-		Object obj = stationsList.getItemAtPosition(0);
-		if(obj!=null){
-			Cursor curs = (Cursor)obj;
+		Cursor curs = (Cursor)stationsList.getItemAtPosition(0);
+		if(curs!=null){
 			activeStationId = curs.getInt(curs.getColumnIndex(StationsReaderContract.StationEntry._ID));
 			activeStationName = curs.getString(curs.getColumnIndex(StationsReaderContract.StationEntry.COLUMN_NAME_NAME));
 			selectStationByCursorPos(0,getStationView(activeStationId));
-			curs.close();
 		}
 	}
 	
