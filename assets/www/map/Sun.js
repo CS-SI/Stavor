@@ -27,7 +27,7 @@ function drawSolarTerminator(){
 
 			var solarPoints = [];
 			var sign = 1;
-			var sign_lat = -1;
+			var sign_lat = 1;
 			//draw polygon 
 			for (var i in solarTerminator) {
 				if(i==0){
@@ -35,7 +35,7 @@ function drawSolarTerminator(){
 					if(solarTerminator[i].longitude>0)
 						sign = -1;
 					if(sun_lat>=0)
-						sign_lat = 1;
+						sign_lat = -1;
 					//open polygon 1
 					var point = new OpenLayers.Geometry.Point(
 						-179.999*sign, 
