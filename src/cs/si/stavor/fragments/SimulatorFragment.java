@@ -367,9 +367,11 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			missionsList.setItemChecked(0, true);
 			missionsList.setSelection(0);
 			Cursor curs = (Cursor)missionsList.getItemAtPosition(0);
-			activeMissionId = curs.getInt(curs.getColumnIndex(MissionReaderContract.MissionEntry._ID));
-			activeMissionName = curs.getString(curs.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
-			markActiveMission();
+			if(curs!=null){
+				activeMissionId = curs.getInt(curs.getColumnIndex(MissionReaderContract.MissionEntry._ID));
+				activeMissionName = curs.getString(curs.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
+				markActiveMission();
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
