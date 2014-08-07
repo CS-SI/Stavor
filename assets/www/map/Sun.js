@@ -27,16 +27,19 @@ function drawSolarTerminator(){
 
 			var solarPoints = [];
 			var sign = 1;
+			var sign_lat = -1;
 			//draw polygon 
 			for (var i in solarTerminator) {
 				if(i==0){
 					//Sign
 					if(solarTerminator[i].longitude>0)
 						sign = -1;
+					if(sun_lat>=0)
+						sign_lat = 1;
 					//open polygon 1
 					var point = new OpenLayers.Geometry.Point(
 						-179.999*sign, 
-						89.99
+						89.99*sign_lat
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					solarPoints.push(point);
 					//open polygon 2
@@ -63,7 +66,7 @@ function drawSolarTerminator(){
 					//close polygon
 					var point = new OpenLayers.Geometry.Point(
 						179.999*sign, 
-						89.99
+						89.99*sign_lat
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					solarPoints.push(point);
 				}
