@@ -4,6 +4,7 @@ import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.StavorApplication;
 import cs.si.stavor.app.Parameters;
+import cs.si.stavor.database.MissionReaderContract;
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
@@ -420,8 +421,12 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	    ContextMenuInfo menuInfo) {
 	  if (v.getId()==R.id.listView1) {
 	    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-	    String header = ((TextView)((ListView)v).getChildAt(info.position).findViewById(R.id.textViewMission)).getText().toString();
-	    menu.setHeaderTitle(header);
+	    if(adapter!=null && adapter.getCursor()!=null){
+		    adapter.getCursor().moveToPosition(info.position);
+		    String header = adapter.getCursor().getString(
+		    		adapter.getCursor().getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
+		    menu.setHeaderTitle(header);
+	    }
 	    String[] menuItems = getResources().getStringArray(R.array.missions_menu);
 	    for (int i = 0; i<menuItems.length; i++) {
 	      menu.add(Menu.NONE, i, i, menuItems[i]);
@@ -438,32 +443,37 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	  
 	  int listItemKey = -1;
 	  try{
-		  listItemKey = Integer.parseInt(((TextView)(missionsList.getChildAt(info.position).findViewById(R.id.textViewMissionId))).getText().toString());
-		  String listItemName = ((TextView)missionsList.getChildAt(info.position).findViewById(R.id.textViewMission)).getText().toString();
-		  if(menuItemIndex==0){
-				if(listItemKey==-1){
-					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
-				}else if (listItemKey==0 ||listItemKey==1 ||listItemKey==2 || listItemKey==3 ){
-					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_removable), Toast.LENGTH_LONG).show();
-				}else{
-					  showDeleteMissionDialog(listItemKey, listItemName);
-				}
-		  }else if(menuItemIndex==1){
-			  showCopyMissionDialog(listItemKey, listItemName, getMission(listItemKey).mission);
-		  }else if(menuItemIndex==2){
-				if(listItemKey==-1){
-					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
-				}else if (listItemKey==0 ||listItemKey==1 ||listItemKey==2  ||listItemKey==3){
-					Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_editable), Toast.LENGTH_LONG).show();
-				}else{
-					MissionAndId mis = getMission(listItemKey);
-	    			if(mis!=null){
-	    				((MainActivity)getActivity()).showMissionEditor(mis);
-	    			}else{
-	    				Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
-	    			}
-				}
-		  }
+		if(adapter!=null && adapter.getCursor()!=null){
+		    adapter.getCursor().moveToPosition(info.position);
+		    listItemKey = adapter.getCursor().getInt(
+		    		adapter.getCursor().getColumnIndex(MissionReaderContract.MissionEntry._ID));
+		    String listItemName = adapter.getCursor().getString(
+		    		adapter.getCursor().getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
+			  if(menuItemIndex==0){
+					if(listItemKey==-1){
+						Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
+					}else if (listItemKey==0 ||listItemKey==1 ||listItemKey==2 || listItemKey==3 ){
+						Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_removable), Toast.LENGTH_LONG).show();
+					}else{
+						  showDeleteMissionDialog(listItemKey, listItemName);
+					}
+			  }else if(menuItemIndex==1){
+				  showCopyMissionDialog(listItemKey, listItemName, getMission(listItemKey).mission);
+			  }else if(menuItemIndex==2){
+					if(listItemKey==-1){
+						Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_select_first_a_mission), Toast.LENGTH_LONG).show();
+					}else if (listItemKey==0 ||listItemKey==1 ||listItemKey==2  ||listItemKey==3){
+						Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_mission_not_editable), Toast.LENGTH_LONG).show();
+					}else{
+						MissionAndId mis = getMission(listItemKey);
+						if(mis!=null){
+							((MainActivity)getActivity()).showMissionEditor(mis);
+						}else{
+							Toast.makeText(getActivity().getApplicationContext(), getString(R.string.sim_local_cannot_deserialize_selected_mission), Toast.LENGTH_LONG).show();
+						}
+					}
+			  }
+		}
 	  }catch(Exception e){
 		  
 	  }
