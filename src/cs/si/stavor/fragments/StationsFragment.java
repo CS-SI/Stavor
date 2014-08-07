@@ -3,8 +3,10 @@ package cs.si.stavor.fragments;
 import cs.si.satcor.MainActivity;
 import cs.si.satcor.R;
 import cs.si.satcor.StavorApplication;
+import cs.si.stavor.database.MissionReaderContract;
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.StationsCursorAdapter;
+import cs.si.stavor.database.StationsReaderContract;
 import cs.si.stavor.database.StationsReaderContract.StationEntry;
 import cs.si.stavor.dialogs.DeleteStationDialogFragment;
 import cs.si.stavor.station.GroundStation;
@@ -78,11 +80,10 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				if(arg1!=null){
-					//last_station_selection = arg2;
-					stationsList.setSelection(arg2);
-					selectStationByChildPos(arg2);
-					/*Toast.makeText(getActivity().getApplicationContext(), "Active mission: "+activeMissionId,
-			                Toast.LENGTH_LONG).show();*/
+					LinearLayout lay = (LinearLayout) arg1;
+					activeStationId = Integer.parseInt((String) ((TextView)lay.findViewById(R.id.textViewStationId)).getText());
+					activeStationName=((TextView)lay.findViewById(R.id.textViewStationName)).getText().toString();
+					selectStationByCursorPos(arg2, (LinearLayout)arg1);
 				}else{
 					activeStationId=-1;
 					activeStationName="";
@@ -92,12 +93,12 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 		
 		stationsList.setOnScrollListener(new OnScrollListener(){
 		    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-		        // TODO Auto-generated method stub
+		    	updateListSelection();
 		    }
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				if(scrollState == 0){
+				//if(scrollState == 0){
 					updateListSelection();
-				}
+				//}
 		    }
 		});
 		
@@ -249,19 +250,51 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 		}
 	}
 	
-	private void selectFirstStationInList(){
-		selectStationByChildPos(0);
+	private LinearLayout getStationView(int key){
+		if(stationsList!=null){
+			for(int i = 0; i < stationsList.getChildCount(); i++){
+				LinearLayout lay = (LinearLayout)stationsList.getChildAt(i);
+				TextView text_id = (TextView)lay.findViewById(R.id.textViewStationId);
+				if(key==Integer.parseInt(text_id.getText().toString())){
+					return lay;
+				}
+			}
+		}
+		return null;
 	}
 	
-	private void selectStationByChildPos(int child_pos){
+	private int getCursorPosFromStationKey(int key){
+		for(int j = 0; j<adapter.getCount(); j++){
+			adapter.getCursor().moveToPosition(j);
+			int mis_key = adapter.getCursor().getInt(
+					adapter.getCursor().getColumnIndex(
+							MissionReaderContract.MissionEntry._ID));
+			if(mis_key == key){
+				return j;
+			}
+		}
+		return -1;
+	}
+	
+	private void selectFirstStationInList(){
+		Object obj = stationsList.getItemAtPosition(0);
+		if(obj!=null){
+			Cursor curs = (Cursor)obj;
+			activeStationId = curs.getInt(curs.getColumnIndex(StationsReaderContract.StationEntry._ID));
+			activeStationName = curs.getString(curs.getColumnIndex(StationsReaderContract.StationEntry.COLUMN_NAME_NAME));
+			selectStationByCursorPos(0,getStationView(activeStationId));
+			curs.close();
+		}
+	}
+	
+	private void selectStationByCursorPos(int curs_pos, LinearLayout lay){
 		restoreStationsBackground();
-		try{
-			LinearLayout lay = (LinearLayout)stationsList.getChildAt(child_pos);
-	    	lay.setBackgroundResource(R.drawable.mission_item_sel);
-			activeStationId = Integer.parseInt((String) ((TextView)lay.findViewById(R.id.textViewStationId)).getText());
-			activeStationName=((TextView)lay.findViewById(R.id.textViewStationName)).getText().toString();
-		}catch(Exception e){
-			e.printStackTrace();
+		if(lay!=null&&curs_pos!=-1){
+			try{
+		    	lay.setBackgroundResource(R.drawable.mission_item_sel);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -271,12 +304,11 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 	 */
 	private void selectStationByKey(int key){
 		if(key!=-1){
-			for(int i = 0; i < stationsList.getChildCount(); i++){
-				LinearLayout lay = (LinearLayout)stationsList.getChildAt(i);
-				if(((TextView)lay.findViewById(R.id.textViewStationId)).getText().toString().equals(
-						Integer.toString(key))){
-					selectStationByChildPos(i);
-				}
+			int pos = getCursorPosFromStationKey(key);
+			if(pos!=-1){//Found!
+				selectStationByCursorPos(pos,getStationView(key));
+			}else{//Not found, probably due to deletion
+				selectFirstStationInList();
 			}
 		}else{
 			selectFirstStationInList();
