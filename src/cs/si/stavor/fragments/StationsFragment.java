@@ -20,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -75,12 +77,10 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				restoreStationsBackground();
 				if(arg1!=null){
-					last_station_selection = arg2;
-					arg1.setBackgroundResource(R.drawable.mission_item_sel);
-					activeStationId = Integer.parseInt((String) ((TextView)arg1.findViewById(R.id.textViewStationId)).getText());
-					activeStationName=(String) ((TextView)arg1.findViewById(R.id.textViewStationName)).getText();
+					//last_station_selection = arg2;
+					stationsList.setSelection(arg2);
+					selectStationByChildPos(arg2);
 					/*Toast.makeText(getActivity().getApplicationContext(), "Active mission: "+activeMissionId,
 			                Toast.LENGTH_LONG).show();*/
 				}else{
@@ -88,6 +88,17 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 					activeStationName="";
 				}
 			}
+		});
+		
+		stationsList.setOnScrollListener(new OnScrollListener(){
+		    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+		        // TODO Auto-generated method stub
+		    }
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				if(scrollState == 0){
+					updateListSelection();
+				}
+		    }
 		});
 		
 		adapter = new StationsCursorAdapter(
@@ -239,13 +250,40 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 	}
 	
 	private void selectFirstStationInList(){
-		selectStationInList(0);
+		selectStationByChildPos(0);
 	}
 	
-	private void selectStationInList(int position){
-		int mActivePosition = position;
-    	stationsList.setSelection(mActivePosition);
-		stationsList.performItemClick(stationsList.getChildAt(mActivePosition), mActivePosition, stationsList.getAdapter().getItemId(mActivePosition));
+	private void selectStationByChildPos(int child_pos){
+		restoreStationsBackground();
+		try{
+			LinearLayout lay = (LinearLayout)stationsList.getChildAt(child_pos);
+	    	lay.setBackgroundResource(R.drawable.mission_item_sel);
+			activeStationId = Integer.parseInt((String) ((TextView)lay.findViewById(R.id.textViewStationId)).getText());
+			activeStationName=((TextView)lay.findViewById(R.id.textViewStationName)).getText().toString();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Select station in list with the database position
+	 * @param position
+	 */
+	private void selectStationByKey(int key){
+		if(key!=-1){
+			for(int i = 0; i < stationsList.getChildCount(); i++){
+				LinearLayout lay = (LinearLayout)stationsList.getChildAt(i);
+				if(((TextView)lay.findViewById(R.id.textViewStationId)).getText().toString().equals(
+						Integer.toString(key))){
+					selectStationByChildPos(i);
+				}
+			}
+		}else{
+			selectFirstStationInList();
+		}
+	}
+	private void updateListSelection(){
+		selectStationByKey(activeStationId);
 	}
 
 	@Override
@@ -283,11 +321,7 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 			stationsList.post(new Runnable() {
 		        @Override
 		        public void run() {
-	        		if(last_station_selection!=-1){
-	        			selectStationInList(last_station_selection);
-	        		}else{
-	        			selectFirstStationInList();
-	        		}
+        			selectStationByKey(activeStationId);
 		        }    
 		    });
 		}
