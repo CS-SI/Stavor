@@ -115,8 +115,8 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 					/*Toast.makeText(getActivity().getApplicationContext(), "Active mission: "+activeMissionId,
 			                Toast.LENGTH_LONG).show();*/
 				}else{
-					activeMissionId=-1;
-					activeMissionName="";
+					//activeMissionId=-1;
+					//activeMissionName="";
 				}
 			}
 		});
