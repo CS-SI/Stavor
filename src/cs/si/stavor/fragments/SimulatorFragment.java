@@ -33,6 +33,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -43,6 +44,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
@@ -86,7 +88,6 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	AutoCompleteTextView host_view;
 	EditText port_view;
 	ListView missionsList;
-	int last_mission_selection = -1;
 
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -108,18 +109,27 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				if(arg1!=null){
-					last_mission_selection = arg2;
+					activeMissionId = Integer.parseInt(((TextView)arg1.findViewById(R.id.textViewMissionId)).getText().toString());
+					activeMissionName=((TextView)arg1.findViewById(R.id.textViewMission)).getText().toString();
 					markActiveMission();
-					activeMissionId = Integer.parseInt((String) ((TextView)arg1.findViewById(R.id.textViewMissionId)).getText());
-					activeMissionName=(String) ((TextView)arg1.findViewById(R.id.textViewMission)).getText();
-					/*Toast.makeText(getActivity().getApplicationContext(), "Active mission: "+activeMissionId,
-			                Toast.LENGTH_LONG).show();*/
 				}else{
-					//activeMissionId=-1;
-					//activeMissionName="";
+					activeMissionId=-1;
+					activeMissionName="";
 				}
 			}
 		});
+		
+		missionsList.setOnScrollListener(new OnScrollListener(){
+		    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				updateListSelection();
+		    }
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				//if(scrollState == 0){//Stop scroll
+					updateListSelection();
+				//}
+		    }
+		});
+		
 		adapter = new SimpleCursorAdapter(
 	    		this.getActivity().getApplicationContext(),
 	            R.layout.mission_list_item, null,
@@ -154,9 +164,10 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	button_connect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
-            		int tmp_sel = last_mission_selection;
+            		//int tmp_sel = last_mission_selection;
             		simulator.disconnect();
-            		selectMissionInList(tmp_sel);
+            		//selectMissionInList(tmp_sel);
+            		updateListSelection();
             	}else{
             		boolean remote = sharedPref.getBoolean(v.getContext().getString(R.string.pref_key_sim_global_remote), false);
             		if(remote){
@@ -301,28 +312,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	newFragment.show(getFragmentManager(), "copy");
     }
 
-	/**
-	 * Change the text color of the missions in list that is selected
-	 */
-	private void markActiveMission() {
-		if(missionsList!=null){
-			for(int i = 0; i < missionsList.getChildCount(); i++){
-				LinearLayout lay = (LinearLayout)missionsList.getChildAt(i);
-				//lay.setBackgroundResource(R.drawable.mission_item);
-				TextView text_id = (TextView)lay.findViewById(R.id.textViewMissionId);
-				TextView text_name = (TextView)lay.findViewById(R.id.textViewMission);
-				if(simulator.getSelectedMissionid()==Integer.parseInt(text_id.getText().toString())){
-					text_name.setTextColor(getResources().getColor(R.color.selected_mission));
-					//String htmlString="<u>This text will be underlined</u>";
-					//text_name.setText(Html.fromHtml("<u>"++"</u>"));
-					text_name.setPaintFlags(text_name.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-				}else{
-					text_name.setTextColor(getResources().getColor(R.color.white));
-					text_name.setPaintFlags(text_name.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-				}
-			}
-		}
-	}
+
 
 	/**
 	 * load local or remote simulator view
@@ -352,14 +342,66 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	}
 	}
 	
-	private void selectFirstMissionInList(){
-		selectMissionInList(0);
+	/**
+	 * Change the text color of the missions in list that is selected
+	 */
+	private void markActiveMission() {
+		if(missionsList!=null){
+			for(int i = 0; i < missionsList.getChildCount(); i++){
+				LinearLayout lay = (LinearLayout)missionsList.getChildAt(i);
+				TextView text_id = (TextView)lay.findViewById(R.id.textViewMissionId);
+				TextView text_name = (TextView)lay.findViewById(R.id.textViewMission);
+				if(simulator.getSelectedMissionid()==Integer.parseInt(text_id.getText().toString())){
+					text_name.setTextColor(getResources().getColor(R.color.selected_mission));
+					text_name.setPaintFlags(text_name.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+				}else{
+					text_name.setTextColor(getResources().getColor(R.color.white));
+					text_name.setPaintFlags(text_name.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+				}
+			}
+		}
 	}
 	
-	private void selectMissionInList(int position){
-		int mActivePosition = position;
-    	missionsList.setSelection(mActivePosition);
-		missionsList.performItemClick(missionsList.getChildAt(mActivePosition), mActivePosition, missionsList.getAdapter().getItemId(mActivePosition));
+	private void selectFirstMissionInList(){
+		try{
+			missionsList.setItemChecked(0, true);
+			missionsList.setSelection(0);
+			Cursor curs = (Cursor)missionsList.getItemAtPosition(0);
+			activeMissionId = curs.getInt(curs.getColumnIndex(MissionReaderContract.MissionEntry._ID));
+			activeMissionName = curs.getString(curs.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
+			markActiveMission();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	private void selectMissionByKey(int key){
+		if(key!=-1){
+			boolean found = false;
+			for(int j = 0; j<adapter.getCount(); j++){
+				adapter.getCursor().moveToPosition(j);
+				int mis_key = adapter.getCursor().getInt(
+						adapter.getCursor().getColumnIndex(
+								MissionReaderContract.MissionEntry._ID));
+				if(mis_key == key){
+					found=true;
+					missionsList.setItemChecked(j, true);
+					missionsList.setSelection(j);
+					Cursor curs = (Cursor)missionsList.getItemAtPosition(j);
+					activeMissionId = curs.getInt(curs.getColumnIndex(MissionReaderContract.MissionEntry._ID));
+					activeMissionName = curs.getString(curs.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
+					markActiveMission();
+				}
+			}
+			if(!found){
+				selectFirstMissionInList();
+			}
+		}else{
+			selectFirstMissionInList();
+		}
+	}
+	private void updateListSelection(){
+		markActiveMission();
 	}
 
 	@Override
@@ -399,11 +441,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		        public void run() {
 		        	boolean remote = sharedPref.getBoolean(getString(R.string.pref_key_sim_global_remote), false);
 		        	if(!remote){
-		        		if(last_mission_selection!=-1){
-		        			selectMissionInList(last_mission_selection);
-		        		}else{
-		        			selectFirstMissionInList();
-		        		}
+		        		selectMissionByKey(activeMissionId);
 		        	}
 		        }    
 		    });
@@ -421,6 +459,14 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	    ContextMenuInfo menuInfo) {
 	  if (v.getId()==R.id.listView1) {
 	    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+	    
+	    missionsList.setItemChecked(info.position, true);
+	    missionsList.setSelection(info.position);
+		Cursor curs = (Cursor)missionsList.getItemAtPosition(info.position);
+		activeMissionId = curs.getInt(curs.getColumnIndex(MissionReaderContract.MissionEntry._ID));
+		activeMissionName = curs.getString(curs.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
+		markActiveMission();
+		
 	    if(adapter!=null && adapter.getCursor()!=null){
 		    adapter.getCursor().moveToPosition(info.position);
 		    String header = adapter.getCursor().getString(
