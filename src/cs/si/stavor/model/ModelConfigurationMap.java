@@ -19,7 +19,7 @@ import android.preference.PreferenceManager;
  */
 public class ModelConfigurationMap {
 	
-	public ModelConfigurationMap(Context ctx, SQLiteDatabase db, MapPoint[] path, int follow_sc_view, int map_zoom){
+	public ModelConfigurationMap(Context ctx, SQLiteDatabase db, MapPoint[] path, int follow_sc_view, int map_zoom, float map_lon, float map_lat){
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
 		/*try{
 			payload_beamwidth = Double.parseDouble(sharedPref.getString(ctx.getString(R.string.pref_key_payload_beamwidth), Double.toString(payload_beamwidth)));
@@ -40,6 +40,8 @@ public class ModelConfigurationMap {
 		}
 		
 		zoom = map_zoom;
+		lon = map_lon;
+		lat = map_lat;
 		//track_max_length = Integer.parseInt(sharedPref.getString(ctx.getString(R.string.pref_key_path_length), Integer.toString(track_max_length)));
 		
 		//Load enabled stations:
@@ -84,6 +86,8 @@ public class ModelConfigurationMap {
 	public MapPoint[] points = null;
 	public boolean follow_sc = false;
 	public int zoom = 1;
+	public float lon = (float) 0.0;
+	public float lat = (float) 0.0;
 	//public double payload_beamwidth = 5.0;
 	//public int track_max_length = 5000;
 	public boolean show_fov = true;

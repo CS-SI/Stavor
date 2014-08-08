@@ -144,6 +144,8 @@ public class MainActivity extends ActionBarActivity implements
         if (dataFragment == null) {
         	((StavorApplication)getApplication()).follow_sc = R.id.menu_mapviews_free;
         	((StavorApplication)getApplication()).zoom = 1;
+        	((StavorApplication)getApplication()).lon = (float)0.0;
+        	((StavorApplication)getApplication()).lat = (float)0.0;
             // add the fragment
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();

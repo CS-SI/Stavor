@@ -25,6 +25,13 @@ function storeNewZoom(zoom) {
 		  }
    	}
 }
+function updateMapCenter() {
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.updateMapCenter!= "undefined") { // check the method
+			 Android.updateMapCenter(map.getCenter().lon,map.getCenter().lat);
+		  }
+   	}
+}
 function showAndroidToast(toast) {
 	if (typeof Android != "undefined"){ // check the bridge 
 		  if (Android.showToast!= "undefined") { // check the method
@@ -38,6 +45,8 @@ function getInitialization(){
 		var config = JSON.parse(Android.getInitializationMapJSON());
 		
 		zoom = config.zoom;
+		lonLat = new OpenLayers.LonLat( config.lon, config.lat );
+
 		map.setCenter (lonLat, zoom);
 	
 		stations = config.stations;		

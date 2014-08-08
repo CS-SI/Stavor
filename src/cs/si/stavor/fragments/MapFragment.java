@@ -273,6 +273,7 @@ public final class MapFragment extends Fragment {
         	simulator.temporaryPause();
         }
         if (browser != null) {
+            browser.loadUrl("javascript:updateMapCenter()");
         	browser.pauseTimers();
         	browser.onPause();
             //mXwalkView.pauseTimers();

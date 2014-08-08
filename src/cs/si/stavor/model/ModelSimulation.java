@@ -64,7 +64,9 @@ public class ModelSimulation {
     			((StavorApplication)activity.getApplication()).db,
     			getMapPathBuffer(),
     			((StavorApplication)activity.getApplication()).follow_sc,
-    			((StavorApplication)activity.getApplication()).zoom);
+    			((StavorApplication)activity.getApplication()).zoom,
+    			((StavorApplication)activity.getApplication()).lon,
+    			((StavorApplication)activity.getApplication()).lat);
     }
     
     /**
@@ -148,7 +150,9 @@ public class ModelSimulation {
     			((StavorApplication)activity.getApplication()).db,
     			getMapPathBuffer(),
     			((StavorApplication)activity.getApplication()).follow_sc,
-    			((StavorApplication)activity.getApplication()).zoom);
+    			((StavorApplication)activity.getApplication()).zoom,
+    			((StavorApplication)activity.getApplication()).lon,
+    			((StavorApplication)activity.getApplication()).lat);
         return gson.toJson(config);
     }
     

@@ -35,6 +35,12 @@ public final class WebAppInterface {
         ((StavorApplication)activity.getApplication()).zoom = zoom;
     }
     
+    @JavascriptInterface
+    public void updateMapCenter(float lon, float lat) {
+        ((StavorApplication)activity.getApplication()).lon = lon;
+        ((StavorApplication)activity.getApplication()).lat = lat;
+    }
+    
     /** Set loading progress (0-100) from the web page */
     @JavascriptInterface
     public void setProgressMap(final int progress) {
