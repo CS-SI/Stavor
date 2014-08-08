@@ -1,6 +1,7 @@
 package cs.si.stavor.web;
 
 import cs.si.satcor.MainActivity;
+import cs.si.satcor.StavorApplication;
 import cs.si.stavor.model.ModelSimulation;
 import android.app.Activity;
 import android.webkit.JavascriptInterface;
@@ -26,6 +27,12 @@ public final class WebAppInterface {
     @JavascriptInterface
     public void showToast(String toast) {
         Toast.makeText(activity.getApplicationContext(), toast, Toast.LENGTH_LONG).show();
+    }
+    
+    /** store new map zoom */
+    @JavascriptInterface
+    public void storeNewZoom(int zoom) {
+        ((StavorApplication)activity.getApplication()).zoom = zoom;
     }
     
     /** Set loading progress (0-100) from the web page */

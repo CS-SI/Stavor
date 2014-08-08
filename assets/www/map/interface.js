@@ -18,6 +18,13 @@ function updateModelState(new_state){
 		addPathPoint(state.point);
 	}
 }
+function storeNewZoom(zoom) {
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.storeNewZoom!= "undefined") { // check the method
+			 Android.storeNewZoom(zoom);
+		  }
+   	}
+}
 function showAndroidToast(toast) {
 	if (typeof Android != "undefined"){ // check the bridge 
 		  if (Android.showToast!= "undefined") { // check the method
@@ -29,7 +36,10 @@ function getInitialization(){
 	if (typeof Android != "undefined"){ // check the bridge 
 	  if (Android.getInitializationMapJSON!= "undefined") { // check the method
 		var config = JSON.parse(Android.getInitializationMapJSON());
-			
+		
+		zoom = config.zoom;
+		map.setCenter (lonLat, zoom);
+	
 		stations = config.stations;		
 		show_fov = config.show_fov;
 		show_track = config.show_track;

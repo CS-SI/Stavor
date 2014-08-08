@@ -36,4 +36,14 @@ var init = function () {
         center: new OpenLayers.LonLat(0, 0),
         zoom: 0
     });
+
+	/*map.events.register("moveend", map, function(){
+	     var lyr = map.getLayersByName('vectorLayer')[0];
+	     map.removeLayer(lyr);
+	});*/
+
+	map.events.register("zoomend", map, function(){
+	     storeNewZoom(map.getZoom());
+	});
+
 };

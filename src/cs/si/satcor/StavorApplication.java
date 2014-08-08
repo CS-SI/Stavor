@@ -20,6 +20,7 @@ public class StavorApplication extends Application {
     public SQLiteDatabase db;
     
     public int follow_sc = R.id.menu_mapviews_free;
+    public int zoom = 1;
 	
 	public void setSearchTerm(String searchTerm) {
 		this.searchTerm = searchTerm;
