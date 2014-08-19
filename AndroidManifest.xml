@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cs.si.stavor"
-    android:versionCode="1190"
-    android:versionName="1.1.9"
+    android:versionCode="1200"
+    android:versionName="1.2.0"
     android:installLocation="auto" >
     <!-- VersionCode: [3]version+[1]architecture e.g 1.0.2arm is 1020, 1.1.3x86 is 1131  -->
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

@@ -12,8 +12,6 @@ import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.UserMission;
 import cs.si.stavor.dialogs.ErrorDialogFragment;
-import cs.si.stavor.dialogs.ResetAppDialogFragment;
-import cs.si.stavor.dialogs.ResetDbDialogFragment;
 import cs.si.stavor.dialogs.TutorialDialogFragment;
 import cs.si.stavor.dialogs.WelcomeDialogFragment;
 import cs.si.stavor.fragments.HudFragment;
@@ -633,20 +631,20 @@ public class MainActivity extends ActionBarActivity implements
     /**
      * Displays a confirmation dialog for reseting application configuration
      */
-    private void resetUserConfigShowDialog() {
+    /*private void resetUserConfigShowDialog() {
     	DialogFragment newFragment = ResetAppDialogFragment.newInstance();
     	newFragment.setCancelable(true);
     	newFragment.show(getFragmentManager(), "reset");
-	}
+	}*/
     
     /**
      * Displays a confirmation dialog for reseting Missions database
      */
-    private void resetMissionsDbShowDialog() {
+    /*private void resetMissionsDbShowDialog() {
     	DialogFragment newFragment = ResetDbDialogFragment.newInstance();
     	newFragment.setCancelable(true);
     	newFragment.show(getFragmentManager(), "reset_db");
-	}
+	}*/
     
     @Override
     protected void onPause() {//Pause simulator and browser
