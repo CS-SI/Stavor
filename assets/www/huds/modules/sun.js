@@ -66,7 +66,7 @@ function initSun(){
 			var customMaterialSun = new THREE.ShaderMaterial( 
 			{
 				uniforms: customUniforms,
-				vertexShader:   THREE.ShaderSun.vertexShader,
+				vertexShader:   THREE.ShaderEngine.vertexShader,
 				fragmentShader: THREE.ShaderSun.fragmentShader
 			}   );
 		}else{//Not using texture, solid color instead
