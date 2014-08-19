@@ -88,6 +88,18 @@ function addPathPoint(point){
 	sc_latitude = point.latitude;
 	sc_longitude = point.longitude;
 	sc_altitude = point.altitude;
+
+	if(show_satellite){
+		sc_marker_layer.removeAllFeatures();    
+		var marker_sat = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(sc_longitude, sc_latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()), null, {
+			externalGraphic: "sat.png",
+			graphicWidth: 30,
+			graphicHeight: 10,
+			fillOpacity: 1
+		});
+		sc_marker_layer.addFeatures([marker_sat]);
+	}
+
 	reDraw();
 }
 function changeView(view_mode){

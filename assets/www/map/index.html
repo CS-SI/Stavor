@@ -60,6 +60,7 @@
 	var station_areas = new Array();
 
 	//CONFIG PARAMS
+	var show_satellite = true;
 	//var payload_beamwidth = 5;//Degrees
 	//var param_path_max_length = 5000;
 	var show_fov = true;
@@ -208,6 +209,10 @@
 
 	var sc_layer = new OpenLayers.Layer.Vector("SC Layer");
 	map.addLayer(sc_layer);
+
+
+	var sc_marker_layer = new OpenLayers.Layer.Vector( "SC Marker" );
+	map.addLayer(sc_marker_layer);
 
 //******************************************************
 //---------------------- INIT --------------------------
