@@ -10,6 +10,8 @@ import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.geometry.euclidean.twod.PolygonsSet;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.geometry.partitioning.Region.Location;
+import org.apache.commons.math3.geometry.spherical.twod.S2Point;
+import org.apache.commons.math3.geometry.spherical.twod.SphericalPolygonsSet;
 import org.apache.commons.math3.util.FastMath;
 import org.orekit.attitudes.Attitude;
 import org.orekit.bodies.CelestialBodyFactory;
@@ -293,7 +295,7 @@ public class ModelSimulation {
     		 	double angle_step = 2.0*Math.PI/Parameters.Map.satellite_fov_points;
     		 	double angle = 0;
     		 	ArrayList<LatLon> fov = new ArrayList<LatLon>();
-    		 	ArrayList<Vector2D> fov2d = new ArrayList<Vector2D>();
+    		 	ArrayList<S2Point> fov2d = new ArrayList<S2Point>();
     		 	int type = 0;//0 no poles, 1 north pole, 2 south pole
     		 	for(int j = 0; j < Parameters.Map.satellite_fov_points; j++){
     		 		Rotation r_circle = new Rotation(axis, angle);
@@ -302,22 +304,33 @@ public class ModelSimulation {
     		 		GeodeticPoint intersec = earth.getIntersectionPoint(new Line(dir, close, 0.0), close, earthFixedFrame, scs.getDate());
     		 		if(intersec!=null){
 	    		 		fov.add(new LatLon(intersec.getLatitude()*180/Math.PI,intersec.getLongitude()*180/Math.PI));
-	    		 		Vector3D p3d = earth.transform(intersec);
-	    		 		fov2d.add(new Vector2D(p3d.getX(),p3d.getY()));
+	    		 		//Vector3D p3d = earth.transform(intersec);
+	    		 		try{
+	    		 			double azim = intersec.getLongitude();
+	    		 			if(azim < 0)
+	    		 				azim = (2*FastMath.PI) - azim;
+	    		 			fov2d.add(new S2Point(azim,(FastMath.PI/2)-intersec.getLatitude()));
+	    		 		}catch(Exception e ){
+	    		 			e.printStackTrace();
+	    		 		}
     		 		}
     		 		angle += angle_step;
     		 	}
     		 	
     		 	//Check if one of the poles is inside the FOV
-    		 	/*if(fov2d.size()>1){
+    		 	if(fov2d.size()>1){
     		 		try{
-    		 		PolygonsSet zone = new PolygonsSet(100,fov2d.toArray(new Vector2D[fov2d.size()]));
-    		 		Location loc = zone.checkPoint(new Vector2D(0,0));
-    		 		Log.d("INSIDE",loc.toString());
+    		 			S2Point[] vec = fov2d.toArray(new S2Point[fov2d.size()]);
+	    		 		SphericalPolygonsSet zone = new SphericalPolygonsSet(0.01,vec);
+	    		 		Location loc = zone.checkPoint(new S2Point(0,0));
+	    		 		if (loc.equals(Location.INSIDE)){
+	    		 			type = 1;
+	    		 		}
+	    		 		Log.d("INSIDE",loc.toString()+"-------------------------");
     		 		}catch(Exception e){
     		 			Log.d("INSIDE","EXCEPTION");
     		 		}
-    		 	}*/
+    		 	}
     		 	
 
     		 	//FOV terminator
