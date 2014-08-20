@@ -52,6 +52,7 @@ public class Parameters {
 			public static final int remote_connection_timeout_ms = 5000;//[ms]
 			public static final String default_host = "192.168.1.2";
 			public static final String default_port = "1520";
+			public static boolean default_ssl = false;
 		}
 	}
 	/**

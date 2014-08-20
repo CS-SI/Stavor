@@ -175,6 +175,7 @@
     <string name="panel_radium">Orbit radius:</string>
     <string name="panel_mass">Mass:</string>
     
+    <string name="sim_use_ssl">Use secure connection (SSL)</string>
     <string name="sim_start">Start</string>
     <string name="sim_stop">Stop</string>
     <string name="sim_connect">Connect</string>

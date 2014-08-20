@@ -176,6 +176,7 @@
     <string name="panel_radium">Rayon orbital:</string>
     <string name="panel_mass">Masse:</string>
     
+    <string name="sim_use_ssl">Utiliser une connexion sécurisée (SSL)</string>
     <string name="sim_start">Lancer</string>
     <string name="sim_stop">Arrêter</string>
     <string name="sim_connect">Connecter</string>

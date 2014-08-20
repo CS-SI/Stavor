@@ -1,12 +1,14 @@
 package cs.si.stavor.simulator;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 
 import org.orekit.propagation.SpacecraftState;
 
@@ -19,25 +21,37 @@ public class ThreadRemote extends Thread{
 	
 	private String dstAddress;
 	private int dstPort;
+	private boolean use_ssl = false;
 	private Socket socket = null;
+	private SSLSocket ssl_socket = null;
 	private Simulator simulator;
 	private ObjectInputStream inputOStream;
-    private InputStream inputStream;
 	
-	ThreadRemote(Handler handler, Simulator simu, String addr, int port) {
+	ThreadRemote(Handler handler, Simulator simu, String addr, int port, boolean ssl) {
         mHandler = handler;
 
 		simulator = simu;
 		dstAddress = addr;
 		dstPort = port;
+		use_ssl = ssl;
     }
 	
 	public void closeSocket(){
-		if(socket != null){
-			try {
-				socket.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+		if(!use_ssl){
+			if(socket != null){
+				try {
+					socket.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}else{
+			if(ssl_socket != null){
+				try {
+					ssl_socket.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -48,10 +62,15 @@ public class ThreadRemote extends Thread{
     		//Connect remote simulator
     		try {
     			simulator.setProgress(60 * 100);
-        		socket = new Socket();
-        		socket.connect(new InetSocketAddress(dstAddress, dstPort), Parameters.Simulator.Remote.remote_connection_timeout_ms);
-        	    inputStream = socket.getInputStream();
-				inputOStream = new ObjectInputStream( inputStream );
+    			if(!use_ssl){
+	        		socket = new Socket();
+	        		socket.connect(new InetSocketAddress(dstAddress, dstPort), Parameters.Simulator.Remote.remote_connection_timeout_ms);
+					inputOStream = new ObjectInputStream( socket.getInputStream() );
+    			}else{
+    	            SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+    	            ssl_socket = (SSLSocket) sslsocketfactory.createSocket(dstAddress, dstPort);
+    	            inputOStream = new ObjectInputStream( ssl_socket.getInputStream() );
+    			}
     			simulator.setProgress(80 * 100);
 				setConnected();
 				simulator.goToHud();
