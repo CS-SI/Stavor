@@ -162,6 +162,9 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		host_view.setText(host);
 		port_view.setText(port);
 		checkSSL.setChecked(ssl);
+		checkSSL.setEnabled(Parameters.App.pro_version);
+		if(!Parameters.App.pro_version)
+			checkSSL.setText(checkSSL.getText()+" "+getString(R.string.pro_only));
 		
     	button_connect = (Button) rootView.findViewById(R.id.buttonConnect);
     	simulator.setButtonConnect(button_connect);

@@ -84,6 +84,7 @@
                 android:layout_alignRight="@+id/editTextPort"
                 android:layout_below="@+id/editTextPort"
                 android:layout_marginLeft="28dp"
+                android:enabled="false"
                 android:text="@string/sim_use_ssl" />
 
         </RelativeLayout>

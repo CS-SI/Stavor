@@ -18,7 +18,7 @@
     <string name="action_reset_conf">Réinitialiser Config.</string>
     <string name="action_reset_db">Réinitialiser Missions</string>
     <string name="action_about">À propos</string>
-    
+    <string name="pro_only">(version PRO)</string>
     
     <string name="mission_parsing_angle_error">Erreur transformant angles</string>
     <string name="mission_editor">Éditeur de mission</string>
