@@ -349,7 +349,7 @@ public class Simulator {
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
-			thread_remote.closeSocket();
+			thread_remote.setDisconnected();
 			
 		}else{
 			// Local

@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.URL;
+import java.net.URI;
 import java.net.UnknownHostException;
 import java.security.KeyStore;
 import java.util.Random;
@@ -18,11 +18,14 @@ import ch.boye.httpclientandroidlib.HttpEntity;
 import ch.boye.httpclientandroidlib.HttpStatus;
 import ch.boye.httpclientandroidlib.StatusLine;
 import ch.boye.httpclientandroidlib.client.ClientProtocolException;
+import ch.boye.httpclientandroidlib.client.config.RequestConfig;
 import ch.boye.httpclientandroidlib.client.methods.CloseableHttpResponse;
 import ch.boye.httpclientandroidlib.client.methods.HttpGet;
+import ch.boye.httpclientandroidlib.client.utils.URIBuilder;
 import ch.boye.httpclientandroidlib.conn.ssl.SSLConnectionSocketFactory;
 import ch.boye.httpclientandroidlib.impl.client.CloseableHttpClient;
 import ch.boye.httpclientandroidlib.impl.client.HttpClients;
+
 import org.orekit.propagation.SpacecraftState;
 
 import cs.si.stavor.R;
@@ -61,11 +64,11 @@ public class ThreadRemote extends Thread{
 			}
 		}else{
 			if(client != null){
-				try {
+				/*try {
 					client.close();
 				} catch (IOException e) {
 					e.printStackTrace();
-				}
+				}*/
 			}
 		}
 	}
@@ -80,6 +83,11 @@ public class ThreadRemote extends Thread{
 	        		socket = new Socket();
 	        		socket.connect(new InetSocketAddress(dstAddress, dstPort), Parameters.Simulator.Remote.remote_connection_timeout_ms);
 					inputOStream = new ObjectInputStream( socket.getInputStream() );
+					
+	    			simulator.setProgress(80 * 100);
+					setConnected();
+					simulator.goToHud();
+	        	    simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_simulator_connected));
     			}else{
     	            /*SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
     	            ssl_socket = (SSLSocket) sslsocketfactory.createSocket(dstAddress, dstPort);
@@ -112,29 +120,53 @@ public class ThreadRemote extends Thread{
     	            inputOStream = new ObjectInputStream( urlConnection.getInputStream() );
     	            */
     	            //----------------------------------
+
+	    			simulator.setProgress(80 * 100);
+	    			
     	         // HTTP client
     	    		client = HttpClients.custom()
     	    				.setHostnameVerifier(SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
     	    				.setSslcontext(context)
     	    				.build();
     	    		
-    	    		/*RequestConfig requestConfig = RequestConfig.custom()
+    	    		RequestConfig requestConfig = RequestConfig.custom()
     	    		        .setSocketTimeout(Parameters.Simulator.Remote.remote_connection_timeout_ms)
     	    		        .setConnectTimeout(Parameters.Simulator.Remote.remote_connection_timeout_ms)
-    	    		        .build();*/
+    	    		        .build();
     	    		
     	    		// GET request to execute
-    	    		/*HttpGet get = new HttpGet(
-    	    				"https://127.0.0.1:8443/OrekitWebServer/StavorServlet");*/
+    	    		/*get = new HttpGet(
+    	    				"https://192.168.43.10:8443/OrekitWebServer/StavorServlet");*/
+    	    		
+    	    		String[] path = dstAddress.split("/",2);
+    	    		String host = path[0];
+    	    		String files = "";
+    	    		if(path.length==2)
+    	    			files = path[1];
 
-    	    		URL uri = new URL("https", dstAddress, dstPort, "OrekitWebServer/StavorServlet");
-    	    		get = new HttpGet(uri.toURI()+"?client_id="+client_id);
+    	    		//URL uri = new URL("https", host, dstPort, files);
+    	    		
+    	    		URI uri = new URIBuilder()
+    	    	    .setScheme("https")
+    	    	    .setHost(host)
+    	    	    .setPort(dstPort)
+    	    	    .setPath("/"+files)
+    	    	    .addParameter("clientId", String.valueOf(client_id))
+    	    	    .build();
+    	    		
+    	    		
+    	    		get = new HttpGet(uri);//+"?clientId="+client_id
+    	    		get.setConfig(requestConfig);
+    	    		
+					if(getSimObject()!=null){
+						setConnected();
+						simulator.goToHud();
+		        	    simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_simulator_connected));
+					}else{
+						setDisconnected();
+					}
     	    		
     			}
-    			simulator.setProgress(80 * 100);
-				setConnected();
-				simulator.goToHud();
-        	    simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_simulator_connected));
         	} catch (UnknownHostException e) {
         		e.printStackTrace();
         		simulator.showMessage(simulator.getContext().getString(R.string.sim_unknown_host));
@@ -179,9 +211,13 @@ public class ThreadRemote extends Thread{
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				simulator.showMessage(simulator.getContext().getString(R.string.sim_error)+": "+e.getMessage());
-			}
+			} catch (Exception e) {
+        		e.printStackTrace();
+				simulator.showMessage(simulator.getContext().getString(R.string.sim_error)+": "+e.getMessage());
+  	        }
     	}
-    	setDisconnected();
+    	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected))
+    		setDisconnected();
     }
 	
 	private long time_tmp_data = 0;
@@ -209,9 +245,11 @@ public class ThreadRemote extends Thread{
     
     public void setDisconnected(){
 		//Log.d("Sim",System.currentTimeMillis()+": "+"Simulator disconnected");
-    	closeSocket();
-    	simulator.setSimulatorStatus(SimulatorStatus.Disconnected);
-    	simulator.resetSelectedMissionId();
+    	//if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
+    		closeSocket();
+	    	simulator.setSimulatorStatus(SimulatorStatus.Disconnected);
+	    	simulator.resetSelectedMissionId();
+    	//}
     }
     
 	// Create an HostnameVerifier that hardwires the expected hostname.
@@ -244,14 +282,14 @@ public class ThreadRemote extends Thread{
 				sstate = (SpacecraftState) is.readObject();
 	
 				// Display the object retrieved
-				System.out.println("Retrieved sim object");
+				//System.out.println("Retrieved sim object");
 
 				// Close the connection
 				response.close();
 			} else {
 				// Unexpected response
 				System.out.println("ERROR : " + status.getReasonPhrase());
-		        	//XGGDEBUG: insert error message
+				simulator.showMessage(simulator.getContext().getString(R.string.sim_error)+": "+status.getReasonPhrase());
 				setDisconnected();
 			}
     	} catch (ClassNotFoundException e) {
