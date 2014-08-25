@@ -328,7 +328,8 @@ public class Simulator {
 				setProgress(40 * 100);
 				simulation.preInitialize();
 				setProgress(50 * 100);
-				thread_remote = new ThreadRemote(handler_remote,this,host,port);
+				Boolean ssl = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_remote_ssl), Parameters.Simulator.Remote.default_ssl);
+				thread_remote = new ThreadRemote(handler_remote,this,host,port,ssl);
 				thread_remote.start();
 			}catch(NumberFormatException nfe){
 				setSimulatorStatus(SimulatorStatus.Disconnected);
@@ -352,7 +353,7 @@ public class Simulator {
 		boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
 		if(remote){
 			// Remote
-			thread_remote.closeSocket();
+			thread_remote.setDisconnected();
 			
 		}else{
 			// Local

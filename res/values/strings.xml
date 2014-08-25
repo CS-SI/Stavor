@@ -28,6 +28,7 @@
     <string name="station_error_edit">Error editing station in database</string>
     <string name="station_name_is_mandatory">The station name is mandatory</string>
     <string name="station_elevation_out_of_range">The elevation is out of range [-5º,90º]</string>
+    <string name="pro_only">(PRO version)</string>
     
     <string name="mission_parsing_angle_error">Error parsing angles</string>
     <string name="mission_editor">Mission editor</string>
@@ -195,6 +196,7 @@
     <string name="panel_radium">Orbit radius:</string>
     <string name="panel_mass">Mass:</string>
     
+    <string name="sim_use_ssl">Use secure connection (SSL)</string>
     <string name="sim_start">Start</string>
     <string name="sim_stop">Stop</string>
     <string name="sim_connect">Connect</string>

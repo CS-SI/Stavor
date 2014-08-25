@@ -37,6 +37,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -88,6 +89,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	AutoCompleteTextView host_view;
 	EditText port_view;
 	ListView missionsList;
+	CheckBox checkSSL;
 
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled", "NewApi" })
 	@Override
@@ -153,10 +155,18 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	
     	host_view = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompleteTextViewHost);
     	port_view = (EditText) rootView.findViewById(R.id.editTextPort);
+    	checkSSL = (CheckBox) rootView.findViewById(R.id.checkBoxSSL);
     	String host = sharedPref.getString(getString(R.string.pref_key_sim_remote_host), Parameters.Simulator.Remote.default_host);
 		String port = sharedPref.getString(getString(R.string.pref_key_sim_remote_port), Parameters.Simulator.Remote.default_port);
+		Boolean ssl = sharedPref.getBoolean(getString(R.string.pref_key_sim_remote_ssl), Parameters.Simulator.Remote.default_ssl);
 		host_view.setText(host);
 		port_view.setText(port);
+		checkSSL.setChecked(ssl);
+		checkSSL.setEnabled(Parameters.App.pro_version);
+		if(!Parameters.App.pro_version){
+			checkSSL.setText(checkSSL.getText()+" "+getString(R.string.pro_only));
+			checkSSL.setChecked(false);
+		}
 		
     	button_connect = (Button) rootView.findViewById(R.id.buttonConnect);
     	simulator.setButtonConnect(button_connect);
@@ -178,6 +188,10 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	            		sharedPref.edit().putString(v.getContext().getString(
 	            				R.string.pref_key_sim_remote_port), 
 	            				port_view.getText().toString()
+	            				).commit();
+	            		sharedPref.edit().putBoolean(v.getContext().getString(
+	            				R.string.pref_key_sim_remote_ssl), 
+	            				checkSSL.isChecked()
 	            				).commit();
 	            		simulator.connect();
             		}else{

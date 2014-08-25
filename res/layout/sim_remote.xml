@@ -79,6 +79,18 @@
                 android:inputType="number"
                 android:text="@string/sim_remote_port_eg"
                 android:textSize="25sp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxSSL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignRight="@+id/autoCompleteTextViewHost"
+                android:layout_below="@+id/editTextPort"
+                android:layout_marginTop="18dp"
+                android:enabled="false"
+                android:text="@string/sim_use_ssl" />
+
         </RelativeLayout>
 
     </RelativeLayout>

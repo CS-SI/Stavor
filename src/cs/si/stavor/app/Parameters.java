@@ -15,6 +15,7 @@ public class Parameters {
 		public static final long splash_min_time_ns = 1000000000;//[ns] 1.0s min
 		public static final boolean show_tutorial = true;
 		public static final boolean show_tests_section = false;
+		public static final boolean pro_version = true;
 	}
 	/**
 	 * About screen information
@@ -53,6 +54,7 @@ public class Parameters {
 			public static final int remote_connection_timeout_ms = 5000;//[ms]
 			public static final String default_host = "192.168.1.2";
 			public static final String default_port = "1520";
+			public static boolean default_ssl = false;
 		}
 	}
 	/**
