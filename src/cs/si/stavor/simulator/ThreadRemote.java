@@ -26,6 +26,9 @@ import ch.boye.httpclientandroidlib.conn.ssl.SSLConnectionSocketFactory;
 import ch.boye.httpclientandroidlib.impl.client.CloseableHttpClient;
 import ch.boye.httpclientandroidlib.impl.client.HttpClients;
 
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.orekit.propagation.SpacecraftState;
 
 import cs.si.stavor.R;
@@ -130,9 +133,14 @@ public class ThreadRemote extends Thread{
     	    				.build();
     	    		
     	    		RequestConfig requestConfig = RequestConfig.custom()
+    	    				.setConnectionRequestTimeout(Parameters.Simulator.Remote.remote_connection_timeout_ms)
     	    		        .setSocketTimeout(Parameters.Simulator.Remote.remote_connection_timeout_ms)
     	    		        .setConnectTimeout(Parameters.Simulator.Remote.remote_connection_timeout_ms)
     	    		        .build();
+    	    		
+    	    		final HttpParams httpParams = new BasicHttpParams();
+    	    		HttpConnectionParams.setSoTimeout(httpParams, Parameters.Simulator.Remote.remote_connection_timeout_ms);
+    	    		HttpConnectionParams.setConnectionTimeout(httpParams, Parameters.Simulator.Remote.remote_connection_timeout_ms);
     	    		
     	    		// GET request to execute
     	    		/*get = new HttpGet(
