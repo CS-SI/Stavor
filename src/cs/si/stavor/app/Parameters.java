@@ -55,6 +55,7 @@ public class Parameters {
 			public static final String default_host = "192.168.1.2";
 			public static final String default_port = "1520";
 			public static boolean default_ssl = false;
+			public static int objects_per_ssl_request = 50;
 		}
 	}
 	/**
