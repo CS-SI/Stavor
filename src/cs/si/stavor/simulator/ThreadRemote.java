@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.UnknownHostException;
 import java.security.KeyStore;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.net.ssl.SSLContext;
@@ -76,8 +77,8 @@ public class ThreadRemote extends Thread{
 		}
 	}
 	
-
 	@Override public void run() {
+		ArrayList<SpacecraftState> init_states = new ArrayList<SpacecraftState>();
 		if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
     		//Connect remote simulator
     		try {
@@ -160,13 +161,15 @@ public class ThreadRemote extends Thread{
     	    	    .setPort(dstPort)
     	    	    .setPath("/"+files)
     	    	    .addParameter("clientId", String.valueOf(client_id))
+    	    	    .addParameter("xObjects", Integer.toString(Parameters.Simulator.Remote.objects_per_ssl_request))
     	    	    .build();
     	    		
     	    		
     	    		get = new HttpGet(uri);//+"?clientId="+client_id
     	    		get.setConfig(requestConfig);
     	    		
-					if(getSimObject()!=null){
+    	    		init_states = getSimObject();
+					if(init_states.size()!=0){
 						setConnected();
 						simulator.goToHud();
 		        	    simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_simulator_connected));
@@ -194,16 +197,28 @@ public class ThreadRemote extends Thread{
 				while (true){//Infinite simulation loop
 					if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected))
 						break;
-					SpacecraftState sstate = null;
 					if(!use_ssl){
-						sstate = (SpacecraftState) inputOStream.readObject();
+						SpacecraftState sstate = (SpacecraftState) inputOStream.readObject();
+						if(sstate!=null){
+							simulator.getSimulationResults().updateSimulation(sstate, 0);
+				            publishProgress();
+						}
 					}else{
-						sstate = getSimObject();
-					}
-					if(sstate!=null){
-						simulator.getSimulationResults().updateSimulation(sstate, 0);
-						
-			            publishProgress();
+						if(init_states.size()!=0){
+							for(int j = 0; j < init_states.size(); j++){
+								simulator.getSimulationResults().updateSimulation(init_states.get(j), 0);
+					            publishProgress();
+					            timer();
+							}
+							init_states.clear();
+						}else{
+							ArrayList<SpacecraftState> loop_states = getSimObject();
+							for(int j = 0; j < loop_states.size(); j++){
+								simulator.getSimulationResults().updateSimulation(loop_states.get(j), 0);
+					            publishProgress();
+					            timer();
+							}
+						}
 					}
 		            /*if(simulator.cancel){
 		            	simulator.cancel=false;
@@ -273,8 +288,27 @@ public class ThreadRemote extends Thread{
 	    }
 	};*/
     
-    private SpacecraftState getSimObject(){
-    	SpacecraftState sstate = null;
+    private long old_time = 0;
+    private void timer(){
+    	if(old_time!=0){
+    		long new_time = System.nanoTime();
+	    	long dur = new_time-old_time;
+	    	if(dur<Parameters.Simulator.min_hud_model_refreshing_interval_ns){
+	    		try {
+					Thread.sleep((Parameters.Simulator.min_hud_model_refreshing_interval_ns-dur)/1000000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    	}
+    		old_time = new_time;
+    	}else{
+    		old_time = System.nanoTime();
+    	}
+    }
+    
+    private ArrayList<SpacecraftState> getSimObject(){
+    	ArrayList<SpacecraftState> states = new ArrayList<SpacecraftState>();
     	try{
 			// Execute the HTTP request
 			CloseableHttpResponse response = client.execute(get);
@@ -287,7 +321,10 @@ public class ThreadRemote extends Thread{
 				// Extract the object from the response
 				ObjectInputStream is = new ObjectInputStream(
 						entity.getContent());
-				sstate = (SpacecraftState) is.readObject();
+				
+				for(int k = 0; k < Parameters.Simulator.Remote.objects_per_ssl_request; k++){
+					states.add((SpacecraftState) is.readObject());
+				}
 	
 				// Display the object retrieved
 				//System.out.println("Retrieved sim object");
@@ -314,7 +351,7 @@ public class ThreadRemote extends Thread{
 			simulator.showMessage(simulator.getContext().getString(R.string.sim_error)+": "+e.getMessage());
 			setDisconnected();
 		}
-        return sstate;
+        return states;
     }
 	
 }
