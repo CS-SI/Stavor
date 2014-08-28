@@ -26,7 +26,7 @@
 
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px; background-color:black"></div>
 <script>
-	var orbit;
+	var orbit, orbit_galileo;
 	var spacecraft;
 	var projection, starSphere, containerEarth;
 	// MAIN
@@ -84,7 +84,8 @@
 	var spacecraft_color = 0xfff200;
 	var show_projection = true;
 	
-	var orbit_color = 0x00ff00;
+	var orbit_color = 0xff0000;
+	var orbit_galileo_color = 0x00ff00;
 	
 	var performance_level = 3;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
 	
@@ -129,6 +130,7 @@
 	includeProjection();
 	setLoadingProgress(18);
 	includeOrbit();
+	includeGalileoOrbit()
 
 
 	//setLoadingProgress(100);
@@ -203,7 +205,30 @@ function includeOrbit(){
 		});
 	//}
 }
-
+function includeGalileoOrbit(){
+	//////////////////////////////////////////////////////////////////////////////////
+	//		Orbit						//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	var a=3;
+	var e=0.7;
+	var i = Math.PI/6;
+	var w = Math.PI/9;
+	var raan = Math.PI/2;
+	*/
+	
+	
+	//if(!orbit_init){
+		
+		createGalileoOrbit();
+		//orbit_galileo_init = true;
+		onRenderFcts.push(function(delta, now){
+			scene.remove(orbit_galileo);
+			createGalileoOrbit();
+		});
+	//}
+}
 function createOrbit(){
 	var a = value_orbit_a*dist_scale;
 	var f=a*value_orbit_e;
@@ -226,6 +251,37 @@ function createOrbit(){
 	orbit.quaternion.multiplyQuaternions(quat, orbit.quaternion);
 	
 	scene.add( orbit );
+}
+
+function createGalileoOrbit(){
+
+	var value_orbit_galileo_a = 29900000;
+	var value_orbit_galileo_e = 0;
+	var value_orbit_galileo_i = 55*Math.PI/180;
+	var value_orbit_galileo_w = Math.PI;
+	var value_orbit_galileo_raan = 0;
+
+	var a = value_orbit_galileo_a*dist_scale;
+	var f=a*value_orbit_galileo_e;
+	var b = Math.sqrt(a*a-f*f);	
+
+	// Ellipse
+	var material = new THREE.LineBasicMaterial({color:orbit_galileo_color, opacity:1});
+	var ellipse = new THREE.EllipseCurve(0, f, b, a, 0, 2.0 * Math.PI, false);
+	var ellipsePath = new THREE.CurvePath();
+	ellipsePath.add(ellipse);
+	var ellipseGeometry = ellipsePath.createPointsGeometry(100);
+	ellipseGeometry.computeTangents();
+	orbit_galileo = new THREE.Line(ellipseGeometry, material);
+	// Argument of the perigee
+	orbit_galileo.rotation.z = value_orbit_galileo_w+Math.PI/2+value_orbit_galileo_raan;
+	//Inclination
+	var nodeA = new THREE.Vector3(Math.cos(value_orbit_galileo_raan),Math.sin(value_orbit_galileo_raan),0);
+	var quat = new THREE.Quaternion();
+	quat.setFromAxisAngle(nodeA,value_orbit_galileo_i);
+	orbit_galileo.quaternion.multiplyQuaternions(quat, orbit_galileo.quaternion);
+	
+	scene.add( orbit_galileo );
 }
 
 function includeSpacecraft(){
