@@ -99,7 +99,7 @@
     <string name="tutorial_continue">Continuer</string>
     <string name="tutorial_dont_show_again">Ne pas afficher de nouveau</string>
     <string name="tutorial_title_simulator">Tutoriel Simulateur</string>
-    <string name="tutorial_message_simulator">Vous êtes sur ​​l\'écran du simulateur, ici vous pouvez choisir entre un simulateur local ou éloigné. Dans le premier, vous trouverez une liste de missions; vous pouvez créer, modifier et sélectionnez la mission pour le simulateur. Le client éloigné se connecte à un simulateur externe par la réseau. Une fois connecté au simulateur, l\'application va vous rediriger vers l\'écran d\'Attitude.</string>
+    <string name="tutorial_message_simulator">Vous êtes sur ​​l\'écran du simulateur, ici vous pouvez choisir entre un simulateur local ou distant. Dans le premier, vous trouverez une liste de missions; vous pouvez créer, modifier et sélectionnez la mission pour le simulateur. Le client distant se connecte à un simulateur externe par la réseau. Une fois connecté au simulateur, l\'application va vous rediriger vers l\'écran d\'Attitude.</string>
     <string name="tutorial_title_display">Tutoriel Attitude</string>
     <string name="tutorial_message_display">Vous êtes actuellement sur l\'écran d\'Attitude, ici vous pouvez voir l\'attitude simulée. Vous trouverez les commandes de simulation, un bouton pour sélectionner la vue et un panneau rétractable avec des informations détaillées.</string>
     <string name="tutorial_title_orbit">Tutoriel Orbite</string>
@@ -145,7 +145,7 @@
     
     <string name="title_simulator">Simulateur</string>
     <string name="title_sim_local">Local</string>
-    <string name="title_sim_remote">Éloigné</string><!-- Check -->
+    <string name="title_sim_remote">Distant</string>
     <string name="button_sim_play">Jouer</string>
     <string name="button_sim_pause">Pause</string>
     <string name="button_sim_stop">Arrêter</string>
@@ -194,8 +194,8 @@
     <string name="sim_local_cannot_find_selected_mission_in_db">Erreur , n\'a pas pu trouver la Mission sélectionné dans la base de données</string>
     <string name="sim_orekit_init_error">Erreur d\'initialisation du simulateur</string>
     <string name="sim_orekit_prop_error">Erreur de propagation du simulateur</string>
-    <string name="sim_remote_simulator_connected">Simulateur éloigné connecté!</string><!-- Check -->
-    <string name="sim_remote_disconnected">Simulateur éloigné déconnecté</string><!-- Check -->
+    <string name="sim_remote_simulator_connected">Simulateur distant connecté!</string><!-- Check -->
+    <string name="sim_remote_disconnected">Simulateur distant déconnecté</string><!-- Check -->
     <string name="sim_unknown_host">Hôte inconnu</string>
     <string name="sim_io_error">Erreur IO du simulateur</string>
     <string name="sim_error">Erreur du simulateur</string>
@@ -210,7 +210,7 @@
     <string name="pref_general">Général</string>
     <string name="pref_general2">Général</string>
     <string name="pref_sim_global">Global</string>
-    <string name="pref_sim_remote">Éloigné</string><!-- Check -->
+    <string name="pref_sim_remote">Distant</string>
     <string name="pref_sim_local">Locale</string>
     <string name="pref_axis">Axes</string>
     <string name="pref_spacecraft">Vaisseau</string>
@@ -232,8 +232,8 @@
     <string name="pref_summary_database_installed">Flag to know if the Missions database has been already installed</string>
     <string name="pref_title_data_installed">Les données d\'Orekit sont déjà installés</string>
     <string name="pref_summary_data_installed">Flag to know if the Orekit data has been already installed</string>
-    <string name="pref_title_sim_global_remote">Simulateur éloigné</string><!-- Check -->
-    <string name="pref_summary_sim_global_remote">Utilisez un simulateur éloigné connecté avec sockets</string><!-- Check -->
+    <string name="pref_title_sim_global_remote">Simulateur distant</string>
+    <string name="pref_summary_sim_global_remote">Utilisez un simulateur distant connecté avec sockets</string><!-- Check -->
     <string name="pref_title_sim_remote_host">Hôte</string>
     <string name="pref_summary_sim_remote_host">Hôte du serveur socket</string>
     <string name="pref_title_sim_remote_port">Port</string>
