@@ -38,6 +38,7 @@ public class AboutActivity extends Activity {
 		TextView tx_version_gson = (TextView) findViewById(R.id.TextViewVersionGson);
 		TextView tx_version_color = (TextView) findViewById(R.id.TextViewVersionColor);
 		TextView tx_version_loader = (TextView) findViewById(R.id.TextViewVersionLoader);
+		TextView tx_version_http = (TextView) findViewById(R.id.TextViewVersionHttp);
 		TextView tx_xwalk_package = (TextView) findViewById(R.id.TextView08);
 		
 		//Fill Views
@@ -74,6 +75,7 @@ public class AboutActivity extends Activity {
 			tx_version_gson.setText(Parameters.About.version_gson);
 			tx_version_color.setText(Parameters.About.version_androidcolorpicker);
 			tx_version_loader.setText(Parameters.About.version_loader);
+			tx_version_http.setText(Parameters.About.version_http);
 			
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();

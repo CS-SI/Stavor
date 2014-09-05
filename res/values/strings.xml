@@ -79,6 +79,7 @@
     <string name="about_table_crosswalk">Crosswalk-Webview-</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
+    <string name="about_table_http">HttpClientAndroidLib</string>
     <string name="about_table_threejs">ThreeJS</string>
     <string name="about_table_gson">GSON</string>
     <string name="about_table_version">Version</string>
