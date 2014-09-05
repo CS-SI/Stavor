@@ -26,9 +26,7 @@ function drawStationsAreas(){
 
 function paintOpenArea(arrayIndex,type){
 	var areaFirst = [];
-	var areaSecond = [];
 	var area_tmp_long = 0, area_tmp_lat = 0;
-	var first = true;
 	for (var i in station_areas[arrayIndex].points) {
 		var coord = station_areas[arrayIndex].points[i];
 		var point = new OpenLayers.Geometry.Point(

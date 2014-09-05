@@ -11,6 +11,7 @@ function updateModelState(new_state){
 	sun_lon = state.sun_lon;//In degrees
 	station_areas = state.stations;
 	fov = state.fov;
+	fov_type = state.fov_type;
 	fov_terminator = state.fov_terminator;
 	solarTerminator = state.terminator;
 	//console.log("interface: ".concat(String(state.point.latitude)));

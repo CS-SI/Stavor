@@ -2,58 +2,6 @@ function drawFov(){
 	if(show_fov){
 		sc_layer.removeAllFeatures();
 
-		//NORMAL CASE
-		var fovPointsA = [];
-		var fovPointsB = [];
-		var fov_tmp_long = 0, fov_tmp_lat = 0;
-		var first = true;
-		for (var i in fov) {
-			var point = new OpenLayers.Geometry.Point(fov[i].longitude, fov[i].latitude);
-			// transform from WGS 1984 to Spherical Mercator
-			point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-
-
-			if((i!=0) && ((fov[i].longitude*fov_tmp_long)<0) && (Math.abs(fov[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
-				var avg_lat = (fov[i].latitude+fov_tmp_lat)/2;
-				if(fov[i].longitude > 0)
-					var new_lon = -179.999999;
-				else
-					var new_lon = 179.999999;
-				if(first){
-					fovPointsA.push(new OpenLayers.Geometry.Point(new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-					fovPointsB.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-					first=false;
-				}else{
-					fovPointsA.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-					fovPointsB.push(new OpenLayers.Geometry.Point(+new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
-					first=true;
-				}
-			}
-			fov_tmp_lat = fov[i].latitude;
-			fov_tmp_long = fov[i].longitude;
-
-			if(first){
-				fovPointsA.push(point);
-			}else{
-				fovPointsB.push(point);
-			}
-		}				
-
-		if(fovPointsA.length>0){
-			fovPointsA.push(fovPointsA[0]);
-			var linearRing = new OpenLayers.Geometry.LinearRing(fovPointsA);
-			var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
-			var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, sc_style);
-			sc_layer.addFeatures([polygonFeature]);
-		}
-		if(fovPointsB.length>0){
-			fovPointsB.push(fovPointsB[0]);
-			var linearRing = new OpenLayers.Geometry.LinearRing(fovPointsB);
-			var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
-			var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, sc_style);
-			sc_layer.addFeatures([polygonFeature]);
-		}
-
 		//WHOLE EARTH CASE
 		if(typeof fov_terminator != "undefined" && fov_terminator.length > 0){
 			var fovPoints = [];
@@ -116,8 +64,109 @@ function drawFov(){
 				var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, sc_style);
 				sc_layer.addFeatures([polygonFeature]);
 			}
+		}else{
+			//Normal FOVs
+			if(fov_type==0)
+				paintFovClosedArea();
+			else
+				paintFovOpenArea();
 		}
 
+	}
+}
+function paintFovClosedArea(){
+	//NORMAL CASE
+	var fovPointsA = [];
+	var fovPointsB = [];
+	var fov_tmp_long = 0, fov_tmp_lat = 0;
+	var first = true;
+	for (var i in fov) {
+		var point = new OpenLayers.Geometry.Point(fov[i].longitude, fov[i].latitude);
+		// transform from WGS 1984 to Spherical Mercator
+		point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+
+
+		if((i!=0) && ((fov[i].longitude*fov_tmp_long)<0) && (Math.abs(fov[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
+			var avg_lat = (fov[i].latitude+fov_tmp_lat)/2;
+			if(fov[i].longitude > 0)
+				var new_lon = -179.999999;
+			else
+				var new_lon = 179.999999;
+			if(first){
+				fovPointsA.push(new OpenLayers.Geometry.Point(new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+				fovPointsB.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+				first=false;
+			}else{
+				fovPointsA.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+				fovPointsB.push(new OpenLayers.Geometry.Point(+new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+				first=true;
+			}
+		}
+		fov_tmp_lat = fov[i].latitude;
+		fov_tmp_long = fov[i].longitude;
+
+		if(first){
+			fovPointsA.push(point);
+		}else{
+			fovPointsB.push(point);
+		}
+	}				
+
+	if(fovPointsA.length>0){
+		fovPointsA.push(fovPointsA[0]);
+		var linearRing = new OpenLayers.Geometry.LinearRing(fovPointsA);
+		var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
+		var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, sc_style);
+		sc_layer.addFeatures([polygonFeature]);
+	}
+	if(fovPointsB.length>0){
+		fovPointsB.push(fovPointsB[0]);
+		var linearRing = new OpenLayers.Geometry.LinearRing(fovPointsB);
+		var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
+		var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, sc_style);
+		sc_layer.addFeatures([polygonFeature]);
+	}
+}
+function paintFovOpenArea(){
+	//Poles CASE
+	var fovPointsA = [];
+	var fov_tmp_long = 0, fov_tmp_lat = 0;
+	var first = true;
+	for (var i in fov) {
+		var point = new OpenLayers.Geometry.Point(fov[i].longitude, fov[i].latitude);
+		// transform from WGS 1984 to Spherical Mercator
+		point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+
+
+		if((i!=0) && ((fov[i].longitude*fov_tmp_long)<0) && (Math.abs(fov[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
+			var avg_lat = (fov[i].latitude+fov_tmp_lat)/2;
+			if(fov[i].longitude > 0)
+				var new_lon = -179.999999;
+			else
+				var new_lon = 179.999999;
+			if(fov_type == 1)
+				var new_lat = 90.0;
+			else
+				var new_lat = -90.0;
+
+			fovPointsA.push(new OpenLayers.Geometry.Point(new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+			fovPointsA.push(new OpenLayers.Geometry.Point(new_lon, new_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+			fovPointsA.push(new OpenLayers.Geometry.Point(-new_lon, new_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+			fovPointsA.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
+
+		}
+		fov_tmp_lat = fov[i].latitude;
+		fov_tmp_long = fov[i].longitude;
+
+		fovPointsA.push(point);
+	}				
+
+	if(fovPointsA.length>0){
+		fovPointsA.push(fovPointsA[0]);
+		var linearRing = new OpenLayers.Geometry.LinearRing(fovPointsA);
+		var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
+		var polygonFeature = new OpenLayers.Feature.Vector(geometry, null, sc_style);
+		sc_layer.addFeatures([polygonFeature]);
 	}
 }
 

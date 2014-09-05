@@ -7,8 +7,6 @@ import org.apache.commons.math3.geometry.euclidean.threed.Line;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.RotationOrder;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
-import org.apache.commons.math3.geometry.euclidean.twod.PolygonsSet;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.geometry.partitioning.Region.Location;
 import org.apache.commons.math3.geometry.spherical.twod.S2Point;
 import org.apache.commons.math3.geometry.spherical.twod.SphericalPolygonsSet;
@@ -27,7 +25,6 @@ import org.orekit.utils.Constants;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
@@ -296,7 +293,7 @@ public class ModelSimulation {
     		 	double angle = 0;
     		 	ArrayList<LatLon> fov = new ArrayList<LatLon>();
     		 	ArrayList<S2Point> fov2d = new ArrayList<S2Point>();
-    		 	int type = 0;//0 no poles, 1 north pole, 2 south pole
+    		 	int fov_type = 0;//0 no poles, 1 north pole, 2 south pole
     		 	for(int j = 0; j < Parameters.Map.satellite_fov_points; j++){
     		 		Rotation r_circle = new Rotation(axis, angle);
     		 		Vector3D dir = r_circle.applyTo(start);
@@ -307,9 +304,10 @@ public class ModelSimulation {
 	    		 		//Vector3D p3d = earth.transform(intersec);
 	    		 		try{
 	    		 			double azim = intersec.getLongitude();
-	    		 			if(azim < 0)
-	    		 				azim = (2*FastMath.PI) - azim;
+	    		 			/*if(azim < 0)
+	    		 				azim = (2*FastMath.PI) - azim;*/
 	    		 			fov2d.add(new S2Point(azim,(FastMath.PI/2)-intersec.getLatitude()));
+	    		 			//Log.d("INSIDE","azim: "+azim+" , lat: "+((FastMath.PI/2)-intersec.getLatitude()));
 	    		 		}catch(Exception e ){
 	    		 			e.printStackTrace();
 	    		 		}
@@ -321,14 +319,18 @@ public class ModelSimulation {
     		 	if(fov2d.size()>1){
     		 		try{
     		 			S2Point[] vec = fov2d.toArray(new S2Point[fov2d.size()]);
-	    		 		SphericalPolygonsSet zone = new SphericalPolygonsSet(0.01,vec);
+	    		 		SphericalPolygonsSet zone = new SphericalPolygonsSet(0.0001,vec);
 	    		 		Location loc = zone.checkPoint(new S2Point(0,0));
-	    		 		if (loc.equals(Location.INSIDE)){
-	    		 			type = 1;
+	    		 		if (loc.equals(Location.OUTSIDE)){//Outside because the order of the points is the oposite
+	    		 			fov_type = 1;
 	    		 		}
-	    		 		Log.d("INSIDE",loc.toString()+"-------------------------");
+	    		 		loc = zone.checkPoint(new S2Point(0,FastMath.PI));
+	    		 		if (loc.equals(Location.OUTSIDE)){//Outside because the order of the points is the oposite
+	    		 			fov_type = 2;
+	    		 		}
+	    		 		//Log.d("INSIDE",loc.toString()+"-------------------------");
     		 		}catch(Exception e){
-    		 			Log.d("INSIDE","EXCEPTION");
+    		 			//Log.d("INSIDE","EXCEPTION");
     		 		}
     		 	}
     		 	
@@ -368,7 +370,7 @@ public class ModelSimulation {
     		 		
     		 	}
     		 	
-    		 	updateState(new ModelStateMap(getMapPathBufferLast(), solarTerminator.toArray(new LatLon[solarTerminator.size()]), fov.toArray(new LatLon[fov.size()]), fovTerminator.toArray(new LatLon[fovTerminator.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon));
+    		 	updateState(new ModelStateMap(getMapPathBufferLast(), solarTerminator.toArray(new LatLon[solarTerminator.size()]), fov.toArray(new LatLon[fov.size()]), fov_type, fovTerminator.toArray(new LatLon[fovTerminator.size()]), stations.toArray(new StationArea[stations.size()]), sun_lat, sun_lon));
 
 
     	    	ModelInfo new_info = new ModelInfo();
