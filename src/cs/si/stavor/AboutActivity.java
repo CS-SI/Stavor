@@ -25,6 +25,7 @@ public class AboutActivity extends Activity {
 		
 		//Load Views
 		TextView tx_package = (TextView) findViewById(R.id.TextViewVersionPackage);
+		TextView tx_flavor = (TextView) findViewById(R.id.TextViewVersionFlavor);
 		TextView tx_platform = (TextView) findViewById(R.id.TextViewAboutPlatform);
 		TextView tx_license = (TextView) findViewById(R.id.TextViewProjectLicense);
 		TextView tx_start_date = (TextView) findViewById(R.id.TextViewProjectStart);
@@ -42,6 +43,10 @@ public class AboutActivity extends Activity {
 		//Fill Views
 		try {
 			tx_package.setText(getPackageManager().getPackageInfo(getPackageName(), 0).packageName);
+			if(Parameters.App.pro_version)
+				tx_flavor.setText(getString(R.string.about_flavor_pro));
+			else
+				tx_flavor.setText(getString(R.string.about_flavor_public));
 			tx_version_num.setText(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
 			int versionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
 			String code = Integer.toString(versionCode);

@@ -95,6 +95,9 @@
     <string name="about_platform">Arquitectura:</string>
     <string name="about_app">App:</string>
     <string name="about_appname">Spacecraft Three-dimensional Attitude Visualization using ORekit library</string>
+    <string name="about_flavor">Sabor</string>
+    <string name="about_flavor_public">Publico</string>
+    <string name="about_flavor_pro">Profesional</string>
     
     <string name="tutorial_continue">Continuar</string>
     <string name="tutorial_dont_show_again">No volver a mostrar</string>
