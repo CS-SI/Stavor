@@ -30,7 +30,8 @@ public class Parameters {
 		public static final String version_gson = "2.2.4";
 		public static final String version_androidcolorpicker = "1.0";
 		public static final String version_loader = "0.7.3";
-		public static CharSequence version_openlayers = "2.13.1";
+		public static final String version_openlayers = "2.13.1";
+		public static final String version_http = "1.2.1";
 	}
 	/**
 	 * Visualization configuration

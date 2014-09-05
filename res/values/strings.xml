@@ -89,6 +89,8 @@
     <string name="about_table_openlayers">OpenLayers</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
+    <string name="about_table_http">HttpClientAndroidLib</string>
+    <string name="about_table_threejs">ThreeJS</string>
     <string name="about_table_gson">GSON</string>
     <string name="about_table_version">Version</string>
     <string name="about_table_license">License</string>
@@ -104,6 +106,9 @@
     <string name="about_platform">Architecture:</string>
     <string name="about_app">App:</string>
     <string name="about_appname">SAtellite Tracking and Coverage using ORekit library</string>
+	<string name="about_flavor">Flavor</string>
+    <string name="about_flavor_public">Public</string>
+    <string name="about_flavor_pro">Professional</string>
     
     <string name="tutorial_continue">Continue</string>
     <string name="tutorial_dont_show_again">Don\'t show again</string>

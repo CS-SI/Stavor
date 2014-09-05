@@ -79,6 +79,27 @@
                 android:text="@string/dummy"
                 android:textColor="@color/white" />
         </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextViewAbout107"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_flavor"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/TextViewVersionFlavor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="@string/dummy"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -483,6 +504,45 @@
 
                     <TextView
                         android:id="@+id/TextViewVersionLoader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:text="@string/dummy"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/grey1" />
+                </TableRow>
+                
+                <TableRow
+                    android:id="@+id/tableRow96"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/TextView222"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:paddingRight="3dp"
+                        android:text="@string/about_table_http"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/grey1" />
+
+                    <View style="@style/VDividerAbout" />
+
+                    <TextView
+                        android:id="@+id/TextView9188"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:paddingRight="3dp"
+                        android:text="@string/about_table_apache2_license"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/grey1" />
+
+                    <View style="@style/VDividerAbout" />
+
+                    <TextView
+                        android:id="@+id/TextViewVersionHttp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="1dp"

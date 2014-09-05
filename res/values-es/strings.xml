@@ -89,6 +89,8 @@
     <string name="about_table_openlayers">OpenLayers</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
+    <string name="about_table_http">HttpClientAndroidLib</string>
+    <string name="about_table_threejs">ThreeJS</string>
     <string name="about_table_gson">GSON</string>
     <string name="about_table_version">Versión</string>
     <string name="about_table_license">Licencia</string>
@@ -104,6 +106,9 @@
     <string name="about_platform">Arquitectura:</string>
     <string name="about_app">App:</string>
     <string name="about_appname">Spacecraft Three-dimensional Attitude Visualization using ORekit library</string>
+    <string name="about_flavor">Sabor</string>
+    <string name="about_flavor_public">Publico</string>
+    <string name="about_flavor_pro">Profesional</string>
     
     <string name="tutorial_continue">Continuar</string>
     <string name="tutorial_dont_show_again">No volver a mostrar</string>
