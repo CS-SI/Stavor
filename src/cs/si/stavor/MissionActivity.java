@@ -205,42 +205,64 @@ public class MissionActivity extends Activity{
     	switch_angles.setOnCheckedChangeListener(new OnCheckedChangeListener() {
     	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
     	    	sharedPref.edit().putBoolean(buttonView.getContext().getString(R.string.pref_key_mission_degrees), isChecked).commit();
+    	    	double i_tmp, omega_tmp, raan_tmp, lm_tmp;
     	    	try{
-    	    		double i_tmp = Double.parseDouble(tx_orbit_i.getText().toString());
-    	    		double omega_tmp = Double.parseDouble(tx_orbit_omega.getText().toString());
-    	    		double raan_tmp = Double.parseDouble(tx_orbit_raan.getText().toString());
-    	    		double lm_tmp = Double.parseDouble(tx_orbit_lm.getText().toString());
-	    	    	if(isChecked){
-	    	    		//Convert form radians to degrees
-	    	    		i_tmp=i_tmp*180/Math.PI;
-	    	    		omega_tmp=omega_tmp*180/Math.PI;
-	    	    		raan_tmp=raan_tmp*180/Math.PI;
-	    	    		lm_tmp=lm_tmp*180/Math.PI;
-	    	    		
-	    	    		text_i.setText(getResources().getString(R.string.mission_i_deg));
-	    	    		text_omega.setText(getResources().getString(R.string.mission_omega_deg));
-	    	    		text_raan.setText(getResources().getString(R.string.mission_raan_deg));
-	    	    		text_lm.setText(getResources().getString(R.string.mission_lm_deg));
-	    	    	}else{
-	    	    		//Convert from degrees to radians
-	    	    		i_tmp=i_tmp*Math.PI/180;
-	    	    		omega_tmp=omega_tmp*Math.PI/180;
-	    	    		raan_tmp=raan_tmp*Math.PI/180;
-	    	    		lm_tmp=lm_tmp*Math.PI/180;
-	    	    		
-	    	    		text_i.setText(getResources().getString(R.string.mission_i));
-	    	    		text_omega.setText(getResources().getString(R.string.mission_omega));
-	    	    		text_raan.setText(getResources().getString(R.string.mission_raan));
-	    	    		text_lm.setText(getResources().getString(R.string.mission_lm));
-	    	    	}
-	    	    	tx_orbit_i.setText(Double.toString(i_tmp));
-	    	    	tx_orbit_omega.setText(Double.toString(omega_tmp));
-	    	    	tx_orbit_raan.setText(Double.toString(raan_tmp));
-	    	    	tx_orbit_lm.setText(Double.toString(lm_tmp));
+    	    		i_tmp = Double.parseDouble(tx_orbit_i.getText().toString());
     	    	}catch(Exception e){
     	    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.mission_parsing_angle_error),
     		                Toast.LENGTH_LONG).show();
+    	    		i_tmp = 0;
     	    	}
+    	    	try{
+    	    		omega_tmp = Double.parseDouble(tx_orbit_omega.getText().toString());
+    	    	}catch(Exception e){
+    	    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.mission_parsing_angle_error),
+    		                Toast.LENGTH_LONG).show();
+    	    		omega_tmp = 0;
+    	    	}
+    	    	try{
+    	    		raan_tmp = Double.parseDouble(tx_orbit_raan.getText().toString());
+    	    	}catch(Exception e){
+    	    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.mission_parsing_angle_error),
+    		                Toast.LENGTH_LONG).show();
+    	    		raan_tmp = 0;
+    	    	}
+    	    	try{
+    	    		lm_tmp = Double.parseDouble(tx_orbit_lm.getText().toString());
+    	    	}catch(Exception e){
+    	    		Toast.makeText(getApplicationContext(), getResources().getString(R.string.mission_parsing_angle_error),
+    		                Toast.LENGTH_LONG).show();
+    	    		lm_tmp = 0;
+    	    	}
+	    		
+    	    	if(isChecked){
+    	    		//Convert form radians to degrees
+    	    		i_tmp=i_tmp*180/Math.PI;
+    	    		omega_tmp=omega_tmp*180/Math.PI;
+    	    		raan_tmp=raan_tmp*180/Math.PI;
+    	    		lm_tmp=lm_tmp*180/Math.PI;
+    	    		
+    	    		text_i.setText(getResources().getString(R.string.mission_i_deg));
+    	    		text_omega.setText(getResources().getString(R.string.mission_omega_deg));
+    	    		text_raan.setText(getResources().getString(R.string.mission_raan_deg));
+    	    		text_lm.setText(getResources().getString(R.string.mission_lm_deg));
+    	    	}else{
+    	    		//Convert from degrees to radians
+    	    		i_tmp=i_tmp*Math.PI/180;
+    	    		omega_tmp=omega_tmp*Math.PI/180;
+    	    		raan_tmp=raan_tmp*Math.PI/180;
+    	    		lm_tmp=lm_tmp*Math.PI/180;
+    	    		
+    	    		text_i.setText(getResources().getString(R.string.mission_i));
+    	    		text_omega.setText(getResources().getString(R.string.mission_omega));
+    	    		text_raan.setText(getResources().getString(R.string.mission_raan));
+    	    		text_lm.setText(getResources().getString(R.string.mission_lm));
+    	    	}
+    	    	tx_orbit_i.setText(Double.toString(i_tmp));
+    	    	tx_orbit_omega.setText(Double.toString(omega_tmp));
+    	    	tx_orbit_raan.setText(Double.toString(raan_tmp));
+    	    	tx_orbit_lm.setText(Double.toString(lm_tmp));
+    	    	
     	    }
     	});
 
