@@ -57,7 +57,7 @@
 	var planes_radius = axis_radius;
 	var planes_width = axis_radius*4;
 	
-	var spacecraft_radius = 0.03;
+	var spacecraft_radius = 0.05;
 	
 	
 	
@@ -210,7 +210,7 @@ function createOrbit(){
 	var b = Math.sqrt(a*a-f*f);	
 
 	// Ellipse
-	var material = new THREE.LineBasicMaterial({color:orbit_color, opacity:1});
+	var material = new THREE.LineBasicMaterial({color:orbit_color, opacity:1, linewidth: 3});
 	var ellipse = new THREE.EllipseCurve(0, f, b, a, 0, 2.0 * Math.PI, false);
 	var ellipsePath = new THREE.CurvePath();
 	ellipsePath.add(ellipse);
@@ -257,7 +257,7 @@ function includeProjection(){
 		var vertArray = lineGeometry.vertices;
 		vertArray.push( new THREE.Vector3(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z), new THREE.Vector3(0, 0, 0) );
 		lineGeometry.computeLineDistances();
-		var lineMaterial = new THREE.LineDashedMaterial( { color: spacecraft_color, dashSize: 0.02, gapSize: 0.04 } );
+		var lineMaterial = new THREE.LineDashedMaterial( { color: spacecraft_color, dashSize: 0.02, gapSize: 0.04, linewidth: 3 } );
 		projection = new THREE.Line( lineGeometry, lineMaterial );
 		projection.name = "PROJECTION";
 		scene.add(projection);
