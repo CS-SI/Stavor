@@ -48,6 +48,7 @@ function initScene(){
 	controls.panSpeed = 0.8;
 	controls.noZoom = false;
 	controls.maxDistance = 2000;
+	controls.minDistance = 25;
 	controls.noPan = true;
 	controls.staticMoving = true;
 	controls.dynamicDampingFactor = 0.3;
