@@ -2,7 +2,7 @@ package cs.si.stavor;
 
 import java.util.ArrayList;
 
-import org.xwalk.core.XWalkSettings;
+//import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
@@ -237,7 +237,7 @@ public class MainActivity extends ActionBarActivity implements
 	        xwalkView.setUIClient(new MyUIClient(xwalkView));
 	        xwalkView.clearCache(true);
 	        
-	        XWalkSettings browserSettings = xwalkView.getSettings();
+	        /*XWalkSettings browserSettings = xwalkView.getSettings();
 	    	
 	    	browserSettings.setJavaScriptEnabled(true);
 	    	browserSettings.setUseWideViewPort(false);
@@ -246,7 +246,7 @@ public class MainActivity extends ActionBarActivity implements
 	    	browserSettings.setAllowUniversalAccessFromFileURLs(true);
 	    	//browserSettings.setBuiltInZoomControls(true);
 	    	//browserSettings.setDisplayZoomControls(true);
-	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener
+	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener*/
 	    	
 	    	//Orbit browser
 	    	XWalkView xwalkViewOrbit = new XWalkView(this.getApplicationContext(), this);
@@ -256,7 +256,7 @@ public class MainActivity extends ActionBarActivity implements
 	        xwalkViewOrbit.setUIClient(new MyUIClient(xwalkViewOrbit));
 	        xwalkViewOrbit.clearCache(true);
 	        
-	        XWalkSettings browserSettingsOrbit = xwalkViewOrbit.getSettings();
+	        /*XWalkSettings browserSettingsOrbit = xwalkViewOrbit.getSettings();
 	    	
 	    	browserSettingsOrbit.setJavaScriptEnabled(true);
 	    	browserSettingsOrbit.setUseWideViewPort(false);
@@ -265,7 +265,7 @@ public class MainActivity extends ActionBarActivity implements
 	    	browserSettingsOrbit.setAllowUniversalAccessFromFileURLs(true);
 	    	//browserSettings.setBuiltInZoomControls(true);
 	    	//browserSettings.setDisplayZoomControls(true);
-	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener
+	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener*/
 	    	
 	    	((StavorApplication)getApplication()).jsInterface = new WebAppInterface(this, simu.getSimulationResults());
 	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");

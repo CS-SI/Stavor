@@ -1,7 +1,7 @@
 package cs.si.stavor.fragments;
 
 
-import org.xwalk.core.XWalkSettings;
+//import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.R;
@@ -96,7 +96,7 @@ public final class TestFragment extends Fragment {
 		
 		//mXwalkView = new XWalkView(this.getActivity().getApplicationContext(), this.getActivity());
 		
-    	XWalkSettings browserSettings = mXwalkView.getSettings();
+    	/*XWalkSettings browserSettings = mXwalkView.getSettings();
     	
     	browserSettings.setJavaScriptEnabled(true);
     	browserSettings.setUseWideViewPort(false);
@@ -105,7 +105,7 @@ public final class TestFragment extends Fragment {
     	browserSettings.setAllowUniversalAccessFromFileURLs(true);
     	//browserSettings.setBuiltInZoomControls(true);
     	//browserSettings.setDisplayZoomControls(true);
-    	//browserSettings.setSupportZoom(true);
+    	//browserSettings.setSupportZoom(true);*/
     	
     	mXwalkView.clearCache(true);
     	
