@@ -35,11 +35,13 @@ public class AboutActivity extends Activity {
 		TextView tx_version_orekit = (TextView) findViewById(R.id.TextViewVersionOrekit);
 		TextView tx_version_xwalk = (TextView) findViewById(R.id.TextViewVersionXwalk);
 		TextView tx_version_three = (TextView) findViewById(R.id.TextViewVersionThree);
+		TextView tx_version_openlayers = (TextView) findViewById(R.id.TextViewVersionXwalk);
 		TextView tx_version_gson = (TextView) findViewById(R.id.TextViewVersionGson);
 		TextView tx_version_color = (TextView) findViewById(R.id.TextViewVersionColor);
 		TextView tx_version_loader = (TextView) findViewById(R.id.TextViewVersionLoader);
 		TextView tx_version_http = (TextView) findViewById(R.id.TextViewVersionHttp);
 		TextView tx_xwalk_package = (TextView) findViewById(R.id.TextView08);
+		TextView tx_openlayers_package = (TextView) findViewById(R.id.TextView08);//XGGDEBUG:MERGE duplicated textview8
 		
 		//Fill Views
 		try {
@@ -58,6 +60,7 @@ public class AboutActivity extends Activity {
 				tx_platform.setText("x86");
 				tx_xwalk_package.setText(getString(R.string.about_table_crosswalk)+"x86");
 			}
+			tx_openlayers_package.setText(getString(R.string.about_table_openlayers));
 			tx_start_date.setText(Parameters.About.project_start_date);
 			tx_license.setText(getString(R.string.about_project_license_value));
 			
@@ -72,6 +75,7 @@ public class AboutActivity extends Activity {
 			tx_version_orekit.setText(Parameters.About.version_orekit);
 			tx_version_xwalk.setText(Parameters.About.version_xwalk);
 			tx_version_three.setText(Parameters.About.version_threejs);
+			tx_version_openlayers.setText(Parameters.About.version_openlayers);
 			tx_version_gson.setText(Parameters.About.version_gson);
 			tx_version_color.setText(Parameters.About.version_androidcolorpicker);
 			tx_version_loader.setText(Parameters.About.version_loader);

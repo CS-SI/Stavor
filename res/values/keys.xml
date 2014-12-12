@@ -4,9 +4,25 @@
     <string name="pref_key_tutorial_display">pref_key_tutorial_display</string>
     <string name="pref_key_tutorial_config">pref_key_tutorial_config</string>
     <string name="pref_key_tutorial_orbit">pref_key_tutorial_orbit</string>
+    <string name="pref_key_tutorial_map">pref_key_tutorial_map</string>
+    <string name="pref_key_tutorial_stations">pref_key_tutorial_stations</string>
+    <string name="pref_key_tutorial_coverage">pref_key_tutorial_coverage</string>
+    <string name="pref_key_tutorial_config_map">pref_key_tutorial_config_map</string>
  
+    <string name="pref_screen_coverage">pref_screen_coverage</string>
     <string name="pref_screen_orbit">pref_screen_orbit</string>
     <string name="pref_key_category_earth">pref_key_category_earth</string>
+    <string name="pref_key_category_map_sun">pref_key_category_earth</string>
+    <string name="pref_key_category_map_spacecraft">pref_key_category_earth</string>
+    <string name="pref_key_payload">pref_key_payload</string>
+    <string name="pref_key_payload_beamwidth">pref_key_payload_beamwidth</string>
+    <string name="pref_key_map_show_fov">pref_key_map_show_fov</string>
+    <string name="pref_key_map_show_track">pref_key_map_show_track</string>
+    <string name="pref_key_map_show_sun_icon">pref_key_map_show_sun_icon</string>
+    <string name="pref_key_map_show_sun_terminator">pref_key_map_show_sun_terminator</string>
+    <string name="pref_key_payload_x">pref_key_payload_x</string>
+    <string name="pref_key_payload_y">pref_key_payload_y</string>
+    <string name="pref_key_payload_z">pref_key_payload_z</string>
     <string name="pref_key_category_ref">pref_key_category_ref</string>
     <string name="pref_key_category_spacecraft">pref_key_category_spacecraft</string>
     <string name="pref_key_category_orbit">pref_key_category_orbit</string>
@@ -118,6 +134,8 @@
     
     <string name="pref_key_mission_degrees">pref_key_show_projection_line</string>
     
+    <string name="pref_key_path_length">pref_key_path_length</string>
+    
     <string name="key_views_ref_frame_xyz">XYZ</string>
     <string name="key_views_ref_frame_x">X</string>
     <string name="key_views_ref_frame_xx">-X</string>
@@ -137,6 +155,8 @@
     
     <string name="key_orbviews_free">Free</string>
     <string name="key_orbviews_locked">Locked</string>
+	<string name="key_mapviews_free">Free</string>
+    <string name="key_mapviews_locked">Locked</string>
     
     
 </resources>

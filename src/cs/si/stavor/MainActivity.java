@@ -15,19 +15,24 @@ import cs.si.stavor.dialogs.ErrorDialogFragment;
 import cs.si.stavor.dialogs.TutorialDialogFragment;
 import cs.si.stavor.dialogs.WelcomeDialogFragment;
 import cs.si.stavor.fragments.HudFragment;
+import cs.si.stavor.fragments.MapFragment;
 import cs.si.stavor.fragments.NavigationDrawerFragment;
 import cs.si.stavor.fragments.OrbitFragment;
 import cs.si.stavor.fragments.RetainedFragment;
 import cs.si.stavor.fragments.SimulatorFragment;
+import cs.si.stavor.fragments.StationsFragment;
 import cs.si.stavor.fragments.TestFragment;
 import cs.si.stavor.mission.MissionAndId;
 import cs.si.stavor.settings.SettingsBasicFragment;
+import cs.si.stavor.settings.SettingsCoverageFragment;
 import cs.si.stavor.settings.SettingsExtraFragment;
 import cs.si.stavor.settings.SettingsGeneralFragment;
+import cs.si.stavor.settings.SettingsGeneralMapFragment;
 import cs.si.stavor.settings.SettingsMeasuresFragment;
 import cs.si.stavor.settings.SettingsModelsFragment;
 import cs.si.stavor.settings.SettingsOrbitFragment;
 import cs.si.stavor.simulator.Simulator;
+import cs.si.stavor.station.StationAndId;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
 import cs.si.stavor.web.WebAppInterface;
@@ -196,6 +201,38 @@ public class MainActivity extends ActionBarActivity implements
 	    	}
     	}
     }
+
+    private ProgressBar browserProgressBarMap = null;
+    private FrameLayout browserProgressLayoutMap = null;
+    public void setBrowserProgressBarMap(ProgressBar bar, FrameLayout fr){
+    	browserProgressLayoutMap = fr;
+    	browserProgressBarMap = bar;
+    }
+    public void resetBrowserProgressBarMap(){
+    	browserProgressLayoutMap = null;
+    	browserProgressBarMap = null;
+    }
+    public void setBrowserProgressValueMap(int progr){
+    	if(browserProgressLayoutMap!=null && browserProgressBarMap!=null){
+	    	browserProgressBarMap.setProgress(progr);
+	    	if(progr<10000){
+	    		browserProgressLayoutMap.setVisibility(View.VISIBLE);
+	    	}else{
+	    		Animation fadeOut = new AlphaAnimation(1.00f, 0.00f);
+                fadeOut.setDuration(1500);
+                fadeOut.setAnimationListener(new AnimationListener() {
+                    public void onAnimationStart(Animation animation) {}
+                    public void onAnimationRepeat(Animation animation) {}
+                    public void onAnimationEnd(Animation animation) {
+                    	browserProgressLayoutMap.setVisibility(View.GONE);
+                    }
+                });
+
+                browserProgressLayoutMap.startAnimation(fadeOut);
+	    		
+	    	}
+    	}
+    }
     public ArrayList<UserMission> userMissions;
     
 	@Override
@@ -224,6 +261,10 @@ public class MainActivity extends ActionBarActivity implements
         	flagActivityFirstExec=true;
         	((StavorApplication)getApplication()).modelViewId = R.id.menu_views_ref_frame_xyz;
         	((StavorApplication)getApplication()).modelOrbitViewId = R.id.menu_orbviews_free;
+			((StavorApplication)getApplication()).follow_sc = R.id.menu_mapviews_free;
+        	((StavorApplication)getApplication()).zoom = 1;
+        	((StavorApplication)getApplication()).lon = (float)0.0;
+        	((StavorApplication)getApplication()).lat = (float)0.0;
             // add the fragment
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();
@@ -395,6 +436,29 @@ public class MainActivity extends ActionBarActivity implements
 	        .replace(R.id.container, 
 	        		SettingsGeneralFragment.newInstance(position +1)).commit();
 		}else if(position==9){
+			fragmentManager
+			.beginTransaction()
+			.replace(R.id.container,
+					MapFragment.newInstance(position + 1)).commit();
+		}else if(position==10){
+			// Display the fragment as the main content.
+	        fragmentManager
+	        .beginTransaction()
+	        .replace(R.id.container, 
+	        		SettingsCoverageFragment.newInstance(position +1)).commit();
+		}else if(position==11){
+			// Display the fragment as the main content.
+	        fragmentManager
+	        .beginTransaction()
+	        .replace(R.id.container, 
+	        		StationsFragment.newInstance(position +1)).commit();
+		}else if(position==12){
+			// Display the fragment as the main content.
+	        fragmentManager    
+	        .beginTransaction()
+	        .replace(R.id.container, 
+	        		SettingsGeneralMapFragment.newInstance(position +1)).commit();
+		}else if(position==13){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
@@ -506,6 +570,25 @@ public class MainActivity extends ActionBarActivity implements
 		Intent myIntent = new Intent(MainActivity.this, MissionActivity.class);
 		Bundle b = new Bundle();
 		b.putSerializable("MISSION",mission);
+		myIntent.putExtras(b);
+		MainActivity.this.startActivity(myIntent);
+	}
+	
+	/**
+	 * Starts the Station editor activity in create mode
+	 */
+	public void showStationCreator() {
+		Intent myIntent = new Intent(MainActivity.this, StationActivity.class);
+		MainActivity.this.startActivity(myIntent);
+	}
+	
+	/**
+	 * Starts the Station editor activity in edit mode
+	 */
+	public void showStationEditor(StationAndId station){
+		Intent myIntent = new Intent(MainActivity.this, StationActivity.class);
+		Bundle b = new Bundle();
+		b.putSerializable("STATION",station);
 		myIntent.putExtras(b);
 		MainActivity.this.startActivity(myIntent);
 	}
@@ -622,6 +705,42 @@ public class MainActivity extends ActionBarActivity implements
 	    	showTutorialDialog(key, title, message);
     	}
     }
+	public void showTutorialMap(){
+    	String key = getString(R.string.pref_key_tutorial_map);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
+	    	String title = getString(R.string.tutorial_title_map);
+	    	String message = getString(R.string.tutorial_message_map);
+	    	showTutorialDialog(key, title, message);
+    	}
+    }
+    public void showTutorialStations(){
+    	String key = getString(R.string.pref_key_tutorial_stations);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
+	    	String title = getString(R.string.tutorial_title_stations);
+	    	String message = getString(R.string.tutorial_message_stations);
+	    	showTutorialDialog(key, title, message);
+    	}
+    }
+    public void showTutorialCoverage(){
+    	String key = getString(R.string.pref_key_tutorial_coverage);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
+	    	String title = getString(R.string.tutorial_title_coverage);
+	    	String message = getString(R.string.tutorial_message_coverage);
+	    	showTutorialDialog(key, title, message);
+    	}
+    }
+    public void showTutorialConfigMap(){
+    	String key = getString(R.string.pref_key_tutorial_config_map);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
+	    	String title = getString(R.string.tutorial_title_config_map);
+	    	String message = getString(R.string.tutorial_message_config_map);
+	    	showTutorialDialog(key, title, message);
+    	}
+    }
     private void showTutorialDialog(String key, String title, String message) {
     	DialogFragment newFragment = TutorialDialogFragment.newInstance(key, title, message);
     	newFragment.setCancelable(true);
@@ -679,6 +798,7 @@ public class MainActivity extends ActionBarActivity implements
         if (mXwalkViewOrbit != null) {
             mXwalkViewOrbit.onNewIntent(intent);
         }
+    	super.onNewIntent(intent);
     }
 	
 	@Override

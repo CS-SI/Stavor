@@ -18,6 +18,8 @@
     <string name="sim_remote_host_eg">192.168.43.10</string>
     <string name="sim_remote_port_eg">1520</string>
     
+    <string name="station_elevation_limits">-5º to 90º</string>
+    
     <bool name="true_value">true</bool>
 
 </resources>

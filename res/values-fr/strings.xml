@@ -18,6 +18,21 @@
     <string name="action_reset_conf">Réinitialiser Config.</string>
     <string name="action_reset_db">Réinitialiser Missions</string>
     <string name="action_about">À propos</string>
+    
+    <string name="station_editor">Éditeur de station</string>
+    <string name="station_name">Nom:</string>
+    <string name="station_lat">Latitude (deg):</string>
+    <string name="station_lon">Longitude (deg):</string>
+    <string name="station_alt">Altitude (m):</string>
+    <string name="station_elev">Élévation min (deg):</string>
+    <string name="station_bw">Il est considéré que l\'antenne a une mobilité en élévation de [90°,-90°], sans obstacles.</string>
+    <string name="station_edit">Modifier</string>
+    <string name="station_create">Créer</string>
+    <string name="station_format_error">Erreur de format: vérifier les champs</string>
+    <string name="station_error_create">Erreur de création de station dans la base de données</string>
+    <string name="station_error_edit">Erreur d\'édittion de station en base de données</string>
+    <string name="station_name_is_mandatory">Le nom de la station est obligatoire</string>
+    <string name="station_elevation_out_of_range">L\'élévation est hors limites [-5º,90º]</string>
     <string name="pro_only">(version PRO)</string>
     
     <string name="mission_parsing_angle_error">Erreur transformant angles</string>
@@ -69,6 +84,9 @@
     
     <string name="menu_orbviews_free">Libre</string>
     <string name="menu_orbviews_locked">Saisi</string>
+
+    <string name="menu_mapviews_free">Libre</string>
+    <string name="menu_mapviews_locked">Saisi</string>
     
     <string name="about">À propos</string>
     <string name="cs_site">http://c-s.fr/</string>
@@ -77,6 +95,7 @@
     <string name="about_project_license_value">Gratuit</string>
     <string name="about_table_orekit">Orekit</string>
     <string name="about_table_crosswalk">Crosswalk-Webview-</string>
+    <string name="about_table_openlayers">OpenLayers</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
     <string name="about_table_http">HttpClientAndroidLib</string>
@@ -111,6 +130,15 @@
     <string name="tutorial_title_config">Tutoriel Configurations</string>
     <string name="tutorial_message_config">Vous êtes dans l\'un des écrans de configuration, ils contiennent toutes les options de l\'utilisateur. Les sections d\'Indicateurs basiques et extra servent à personnaliser l\'affichage de ces indicateurs (Vitesse, Accélération, Moment...). La section Mesures est utilisée pour sélectionner l\'affichage de mesures telles que les angles. La section Modèles contient des d\'options pour les objets comme la Terre et le Soleil. La section Préférences contient toutes les autres options générales.</string>
     
+    <string name="tutorial_title_config_map">Tutoriel Préférences</string>
+    <string name="tutorial_message_config_map">Vous avez saisi dans l\'écran des Préférences, il contient toutes les options générales.</string>
+    <string name="tutorial_title_map">Tutoriel Carte</string>
+    <string name="tutorial_message_map">Vous êtes actuellement sur l\'écran de la Carte, il contient l\'affichage de la carte montrant la trace au sol du satellite et des stations terrestres. Vous trouverez tous les contrôles sur la simulation et la visualisation ici.</string>
+    <string name="tutorial_title_stations">Tutoriel Stations</string>
+    <string name="tutorial_message_stations">Vous êtes actuellement sur l\'écran des stations, ici vous pouvez choisir et définir les stations sol.</string>
+    <string name="tutorial_title_coverage">Tutoriel Couverture</string>
+    <string name="tutorial_message_coverage">Vous êtes sur l\'écran de couverture, ici vous pouvez définir la largeur du faisceau (beamwidth) de l\'antenne/caméra pour calculer le champ de vision sur la Terre.</string>
+    
     <string name="dialog_welcome">Bienvenue</string>
     <string name="dialog_error">Erreur</string>
     <string name="dialog_exit">Quitter</string>
@@ -118,6 +146,8 @@
     <string name="dialog_continue">Continuer</string>
     <string name="dialog_install_message">Les modèles et données par défaut pour le simulateur ont été installés dans la racine de données d\'Orekit:</string>
     
+    <string name="dialog_delete_title_station">Supprimer Station Sol</string>
+    <string name="dialog_delete_message_station">Vous êtes en train de supprimer la station sol: </string>
     <string name="dialog_delete_title">Supprimer Mission</string>
     <string name="dialog_delete_message">Vous êtes en train de supprimer la mission: </string>
     <string name="dialog_delete_confirm">Supprimer</string>
@@ -193,9 +223,11 @@
     <string name="sim_local_mission_not_removable">Cette mission ne peut pas être supprimé</string>
     <string name="sim_local_mission_not_editable">Cette mission ne peut pas être modifié</string>
     <string name="sim_local_select_first_a_mission">Sélectionnez premier la mission</string>
+    <string name="select_first_a_station">Sélectionnez premier la station</string>
     <string name="sim_local_simulator_connected">Simulateur lancé!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Erreur , ne pouvait pas désérialiser la mission sélectionnée</string>
     <string name="sim_local_cannot_find_selected_mission_in_db">Erreur , n\'a pas pu trouver la Mission sélectionné dans la base de données</string>
+    <string name="cannot_find_selected_mission_in_db">Erreur , n\'a pas pu trouver la Station sélectionné dans la base de données</string>
     <string name="sim_orekit_init_error">Erreur d\'initialisation du simulateur</string>
     <string name="sim_orekit_prop_error">Erreur de propagation du simulateur</string>
     <string name="sim_remote_simulator_connected">Simulateur distant connecté!</string><!-- Check -->
@@ -208,7 +240,25 @@
     <string name="sim_mis_description">Description:</string>
     <string name="sim_stop_simulator_first">Arrêtez le simulateur avant</string>
     
-    
+    <string name="pref_payload">Charge utile</string>
+    <string name="pref_map_spacecraft">Satellite</string>
+    <string name="pref_map_sun">Soleil</string>
+    <string name="pref_title_map_show_fov">Afficher FOV</string>
+    <string name="pref_summary_map_show_fov">Afficher le champ de vue du capteur de la charge utile du satellite</string>
+    <string name="pref_title_map_show_track">Afficher Trace</string>
+    <string name="pref_summary_map_show_track">Afficher la trace au sol du satellite</string>
+    <string name="pref_title_map_show_sun_icon">Afficher Icône</string>
+    <string name="pref_summary_map_show_sun_icon">Afficher l\'icône de position du Soleil</string>
+    <string name="pref_title_map_show_sun_terminator">Afficher Terminateur</string>
+    <string name="pref_summary_map_show_sun_terminator">Afficher la ligne de séparation Jour/Nuit</string>
+    <string name="pref_title_payload_beamwidth">Angle d\'ouverture</string>
+    <string name="pref_summary_payload_beamwidth">Angle d\'ouverture de la caméra ou de l\'antenne en degrés</string>
+    <string name="pref_title_payload_x">Direction capteur X</string>
+    <string name="pref_summary_payload_x">Le composant X du vecteur de direction du capteur</string>
+    <string name="pref_title_payload_y">Direction capteur Y</string>
+    <string name="pref_summary_payload_y">Le composant Y du vecteur de direction du capteur</string>
+    <string name="pref_title_payload_z">Direction capteur Z</string>
+    <string name="pref_summary_payload_z">Le composant Z du vecteur de direction du capteur</string>
     <string name="pref_apk_install">Application install</string>
     <string name="pref_performance">Performance</string>
     <string name="pref_general">Général</string>
@@ -231,6 +281,9 @@
     <string name="pref_inclination">Inclinaison</string>
     <string name="pref_spherical_coords">Coordonnées sphériques</string>
     <string name="pref_angle">Angles</string>
+    
+    <string name="pref_title_path_length">Longueur du trajectoire</string>
+    <string name="pref_summary_path_length">Nombre maximal de points dans la trajectoire terrestre du satellite</string>
     
     <string name="pref_title_database_installed">La base de données des missions est déjà installé</string>
     <string name="pref_summary_database_installed">Flag to know if the Missions database has been already installed</string>
