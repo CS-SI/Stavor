@@ -1,6 +1,7 @@
 package cs.si.stavor.web;
 
 import cs.si.stavor.R;
+import cs.si.stavor.StavorApplication;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.fragments.HudFragment;
 import cs.si.stavor.fragments.OrbitFragment;
@@ -30,6 +31,19 @@ public final class WebAppInterface {
     public WebAppInterface(Activity a, ModelSimulation s) {
         activity = a;
         sim = s;
+    }
+
+
+    /** store new map zoom */
+    @JavascriptInterface
+    public void storeNewZoom(int zoom) {
+        ((StavorApplication)activity.getApplication()).zoom = zoom;
+    }
+    
+    @JavascriptInterface
+    public void updateMapCenter(float lon, float lat) {
+        ((StavorApplication)activity.getApplication()).lon = lon;
+        ((StavorApplication)activity.getApplication()).lat = lat;
     }
 
     /** Show a toast from the web page */
@@ -63,6 +77,19 @@ public final class WebAppInterface {
 	        }
 	    });
     }
+
+    /** Set loading progress (0-100) from the web page */
+    @JavascriptInterface
+    public void setProgressMap(final int progress) {
+    	if(progress==100)
+    		((MainActivity)activity).getSimulator().setBrowserLoaded(true);
+    	activity.runOnUiThread( new Runnable() {
+	        public void run() {
+	        	((MainActivity)activity).setBrowserProgressValueMap(progress * 100);
+            	//activity.setProgress(progress * 100);
+	        }
+	    });
+    }
     
     /** Update the stats of the web page */
     @JavascriptInterface
@@ -87,6 +114,12 @@ public final class WebAppInterface {
     @JavascriptInterface
     public String getInitializationOrbitJSON() {
         return sim.getInitializationOrbitJSON();
+    }
+
+    /** get orbit model initialization */
+    @JavascriptInterface
+    public String getInitializationMapJSON() {
+        return sim.getInitializationMapJSON();
     }
     
     /** get model initialization */

@@ -24,6 +24,11 @@ public class StavorApplication extends Application {
     public int modelOrbitViewId = R.id.menu_orbviews_free;
     
     WebAppInterface jsInterface;
+
+    public int follow_sc = R.id.menu_mapviews_free;
+    public int zoom = 1;
+    public float lon = (float) 0.0;
+    public float lat = (float) 0.0;
 	
 	public void setSearchTerm(String searchTerm) {
 		this.searchTerm = searchTerm;

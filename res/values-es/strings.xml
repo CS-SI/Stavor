@@ -11,13 +11,32 @@
     <string name="title_section7">Órbita</string>
     <string name="title_section8">Modelos</string>
     <string name="title_section9">Preferencias</string>
-    <string name="title_section10">Test WebGL</string>
+    <string name="title_section10">Mapa</string>
+    <string name="title_section11">Covertura</string>
+    <string name="title_section12">Estaciones</string>
+    <string name="title_section13">Preferencias</string>
+    <string name="title_section14">WebGL test</string>
     <string name="navigation_drawer_open">Abre el menú de navegación</string>
     <string name="navigation_drawer_close">Cierra el menú de navegación</string>
     <string name="action_screenshot">Acerca de</string>
     <string name="action_reset_conf">Resetear Config.</string>
     <string name="action_reset_db">Resetear Misiones</string>
     <string name="action_about">Acerca de</string>
+    
+    <string name="station_editor">Editor d\'estación</string>
+    <string name="station_name">Nombre:</string>
+    <string name="station_lat">Latitud (deg):</string>
+    <string name="station_lon">Longitud (deg):</string>
+    <string name="station_alt">Altitud (m):</string>
+    <string name="station_elev">Elevación min (deg):</string>
+    <string name="station_bw">Se considera que la antena tiene una movilidad en elevación de [90º,-90º], sin obstáculos.</string>
+    <string name="station_edit">Editar</string>
+    <string name="station_create">Crear</string>
+    <string name="station_format_error">Error de formato: revise los campos</string>
+    <string name="station_error_create">Error creando estación en base de datos</string>
+    <string name="station_error_edit">Error editando estación en base de datos</string>
+    <string name="station_name_is_mandatory">El nombre de la estación es obligatorio</string>
+    <string name="station_elevation_out_of_range">La elevación está fuera de limites [-5º,90º]</string>
     <string name="pro_only">(versión PRO)</string>
     
     <string name="mission_parsing_angle_error">Error transformando ángulos</string>
@@ -69,6 +88,9 @@
     
     <string name="menu_orbviews_free">Libre</string>
     <string name="menu_orbviews_locked">Agarrado</string>
+
+    <string name="menu_mapviews_free">Libre</string>
+    <string name="menu_mapviews_locked">Agarrado</string>
     
     <string name="about">Acerca de</string>
     <string name="cs_site">http://c-s.fr/</string>
@@ -77,6 +99,7 @@
     <string name="about_project_license_value">Gratis</string>
     <string name="about_table_orekit">Orekit</string>
     <string name="about_table_crosswalk">Crosswalk-Webview-</string>
+    <string name="about_table_openlayers">OpenLayers</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
     <string name="about_table_http">HttpClientAndroidLib</string>
@@ -111,6 +134,15 @@
     <string name="tutorial_title_config">Tutorial Configuraciones</string>
     <string name="tutorial_message_config">Usted ha entrado en una de las pantallas de configuración, éstas continenen todas las opciones de usuario. Las secciones de Indicadores básicos y extra sirven para personalizar la visualización de esos indicadores (Velocidad, Aceleración, Momento...). La sección de Medidas se utiliza para seleccionar la visualización de medidas como ángulos. La sección Modelos contiene opciones de los objetos como la Tierra y el Sol. La sección de preferencias, todos las otras opciones más generales.</string>
     
+    <string name="tutorial_title_config_map">Tutorial Preferencias</string>
+    <string name="tutorial_message_config_map">Usted ha entrado en la pantalla de Preferencias, ésta contiene todas las opciones generales.</string>
+    <string name="tutorial_title_map">Tutorial Mapa</string>
+    <string name="tutorial_message_map">Usted ha entrado en la pantalla del Mapa, ésta contiene la visualización del mapa que muestra la trayectoria terrestre del satelite y las estaciones de tierra. Usted encontrará todos los controles de la simulación y visualización aquí.</string>
+    <string name="tutorial_title_stations">Tutorial Estaciones</string>
+    <string name="tutorial_message_stations">Usted ha entrado en la pantalla de Estaciones, aquí puede escoger y definir las estaciones de tierra.</string>
+    <string name="tutorial_title_coverage">Tutorial Cobertura</string>
+    <string name="tutorial_message_coverage">Usted ha entrado en la pantalla de Cobertura, aquí usted puede definir el ancho de haz (beamwidth) de la antena/cámara para computar el campo de visión sobre la Tierra.</string>
+    
     <string name="dialog_welcome">Bienvenido</string>
     <string name="dialog_error">Error</string>
     <string name="dialog_exit">Salir</string>
@@ -118,6 +150,8 @@
     <string name="dialog_continue">Continuar</string>
     <string name="dialog_install_message">Los modelos y datos por defecto para el simulador han sido instalados en la raiz de datos de Orekit:</string>
     
+    <string name="dialog_delete_title_station">Eliminar Estación Tierra</string>
+    <string name="dialog_delete_message_station">Se dispone a eliminar la estación tierra: </string>
     <string name="dialog_delete_title">Eliminar Misión</string>
     <string name="dialog_delete_message">Se dispone a eliminar la misión: </string>
     <string name="dialog_delete_confirm">Eliminar</string>
@@ -193,9 +227,11 @@
     <string name="sim_local_mission_not_removable">Esta misión no puede ser eliminada</string>
     <string name="sim_local_mission_not_editable">Esta misión no puede ser editada</string>
     <string name="sim_local_select_first_a_mission">Seleccione una misión primero</string>
+    <string name="select_first_a_station">Seleccione una estación primero</string>
     <string name="sim_local_simulator_connected">Simulador listo!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Error, no se pudo deserializar la misión seleccionada</string>
     <string name="sim_local_cannot_find_selected_mission_in_db">Error, no se pudo encontrar la misión seleccionada en la base de datos</string>
+    <string name="cannot_find_selected_mission_in_db">Error, no se pudo encontrar la estación seleccionada en la base de datos</string>
     <string name="sim_orekit_init_error">Error de inicialización del simulador</string>
     <string name="sim_orekit_prop_error">Error de propagación del simulador</string>
     <string name="sim_remote_simulator_connected">Simulador remoto conectado!</string>
@@ -208,7 +244,25 @@
     <string name="sim_mis_description">Descripción:</string>
     <string name="sim_stop_simulator_first">Pare el simulador primero</string>
     
-    
+    <string name="pref_payload">Carga útil</string>
+    <string name="pref_map_spacecraft">Satélite</string>
+    <string name="pref_map_sun">Sol</string>
+    <string name="pref_title_map_show_fov">Mostrar FOV</string>
+    <string name="pref_summary_map_show_fov">Mostrar el campo visual del sensor de carga útil del satélite</string>
+    <string name="pref_title_map_show_track">Mostrar Trayectoria</string>
+    <string name="pref_summary_map_show_track">Mostrar la trayectoria terrestre del satélite</string>
+    <string name="pref_title_map_show_sun_icon">Mostrar Icono</string>
+    <string name="pref_summary_map_show_sun_icon">Mostrar el icono de posición del Sol</string>
+    <string name="pref_title_map_show_sun_terminator">Mostrar Terminador</string>
+    <string name="pref_summary_map_show_sun_terminator">Mostrar la línea de separación Día/Noche</string>
+    <string name="pref_title_payload_beamwidth">Ángulo de apertura</string>
+    <string name="pref_summary_payload_beamwidth">Ángulo de apertura de la cámara o antena en grados</string>
+    <string name="pref_title_payload_x">Dirección sensor X</string>
+    <string name="pref_summary_payload_x">La componente X del vector de dirección del sensor</string>
+    <string name="pref_title_payload_y">Dirección sensor Y</string>
+    <string name="pref_summary_payload_y">La componente Y del vector de dirección del sensor</string>
+    <string name="pref_title_payload_z">Dirección sensor Z</string>
+    <string name="pref_summary_payload_z">La componente Z del vector de dirección del sensor</string>
     <string name="pref_apk_install">Application install</string>
     <string name="pref_performance">Rendimiento</string>
     <string name="pref_general">General</string>
@@ -231,6 +285,9 @@
     <string name="pref_inclination">Inclinación</string>
     <string name="pref_spherical_coords">Coordenadas esféricas</string>
     <string name="pref_angle">Ángulos</string>
+    
+    <string name="pref_title_path_length">Longitud de trayectoria</string>
+    <string name="pref_summary_path_length">Máximo número de puntos en la trayectoria terrestre del satelite</string>
     
     <string name="pref_title_database_installed">La base de datos de misiones ya está instalada</string>
     <string name="pref_summary_database_installed">Flag to know if the Misions database has been already installed</string>

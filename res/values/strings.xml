@@ -11,13 +11,32 @@
     <string name="title_section7">Orbit</string>
     <string name="title_section8">Models</string>
     <string name="title_section9">Preferences</string>
-    <string name="title_section10">WebGL test</string>
+    <string name="title_section10">Map</string>
+    <string name="title_section11">Coverage</string>
+    <string name="title_section12">Stations</string>
+    <string name="title_section13">Preferences</string>
+    <string name="title_section14">WebGL test</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_screenshot">About</string>
     <string name="action_reset_conf">Reset Conf.</string>
     <string name="action_reset_db">Reset Missions</string>
     <string name="action_about">About</string>
+    
+    <string name="station_editor">Station editor</string>
+    <string name="station_name">Name:</string>
+    <string name="station_lat">Latitude (deg):</string>
+    <string name="station_lon">Longitude (deg):</string>
+    <string name="station_alt">Altitude (m):</string>
+    <string name="station_elev">Elevation min (deg):</string>
+    <string name="station_bw">The antenna is considered to have a [90º,-90º] elevation mobility, without obstacles.</string>
+    <string name="station_edit">Edit</string>
+    <string name="station_create">Create</string>
+    <string name="station_format_error">Format error: review the fields</string>
+    <string name="station_error_create">Error creating station in database</string>
+    <string name="station_error_edit">Error editing station in database</string>
+    <string name="station_name_is_mandatory">The station name is mandatory</string>
+    <string name="station_elevation_out_of_range">The elevation is out of range [-5º,90º]</string>
     <string name="pro_only">(PRO version)</string>
     
     <string name="mission_parsing_angle_error">Error parsing angles</string>
@@ -69,6 +88,9 @@
     
     <string name="menu_orbviews_free">Free</string>
     <string name="menu_orbviews_locked">Locked</string>
+	
+    <string name="menu_mapviews_free">Free</string>
+    <string name="menu_mapviews_locked">Locked</string>
     
     <string name="about">About</string>
     <string name="cs_site">http://c-s.fr/</string>
@@ -77,6 +99,7 @@
     <string name="about_project_license_value">Free</string>
     <string name="about_table_orekit">Orekit</string>
     <string name="about_table_crosswalk">Crosswalk-Webview-</string>
+    <string name="about_table_openlayers">OpenLayers</string>
     <string name="about_table_colorpicker">AndroidColorPicker</string>
     <string name="about_table_loader">CWAC-LoaderEx</string>
     <string name="about_table_http">HttpClientAndroidLib</string>
@@ -111,6 +134,15 @@
     <string name="tutorial_title_config">Tutorial Configurations</string>
     <string name="tutorial_message_config">You entered one of the Configuration screens, they contain all the user options. The Basic and Extra Indicators sections are to personalize the visualization of those indicators (Velocity, Acceleration, Momentum...). The Measures section is used to select the visualization of measures like angles. The section Models contains options of the objects like the Earth and the Sun. The section of Preferences contains all the other, more general, options.</string>
     
+    <string name="tutorial_title_config_map">Tutorial Preferences</string>
+    <string name="tutorial_message_config_map">You entered the Preferences screen, it contains all the general options.</string>
+    <string name="tutorial_title_map">Tutorial Map</string>
+    <string name="tutorial_message_map">You entered the Map screen, it contains the map visualization that shows the satellite ground track and the ground stations. You will find all the controls of the simulation and visualization here.</string>
+    <string name="tutorial_title_stations">Tutorial Stations</string>
+    <string name="tutorial_message_stations">You entered the Stations screen, here you can choose and define the ground stations.</string>
+    <string name="tutorial_title_coverage">Tutorial Coverage</string>
+    <string name="tutorial_message_coverage">You entered the Coverage screen, here you can define the antenna/camera beamwidth to compute the field of view on the Earth.</string>
+    
     <string name="dialog_welcome">Welcome</string>
     <string name="dialog_error">Error</string>
     <string name="dialog_exit">Exit</string>
@@ -118,6 +150,8 @@
     <string name="dialog_continue">Continue</string>
     <string name="dialog_install_message">The default models and data for the simulator have been installed in the Orekit data root:</string>
     
+    <string name="dialog_delete_title_station">Delete Ground Station</string>
+    <string name="dialog_delete_message_station">You are going to delete the ground station: </string>
     <string name="dialog_delete_title">Delete Mission</string>
     <string name="dialog_delete_message">You are going to delete the mission: </string>
     <string name="dialog_delete_confirm">Delete</string>
@@ -193,9 +227,11 @@
     <string name="sim_local_mission_not_removable">This mission cannot be deleted</string>
     <string name="sim_local_mission_not_editable">This mission cannot be edited</string>
     <string name="sim_local_select_first_a_mission">Select a mission first</string>
+    <string name="select_first_a_station">Select a station first</string>
     <string name="sim_local_simulator_connected">Simulator started!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Error, cannot deserialize selected mission</string>
     <string name="sim_local_cannot_find_selected_mission_in_db">Error, cannot find selected mission in database</string>
+    <string name="cannot_find_selected_station_in_db">Error, cannot find selected station in database</string>
     <string name="sim_orekit_init_error">Simulator initialization error</string>
     <string name="sim_orekit_prop_error">Simulator propagation error</string>
     <string name="sim_remote_simulator_connected">Remote simulator connected!</string>
@@ -208,7 +244,25 @@
     <string name="sim_mis_description">Description:</string>
     <string name="sim_stop_simulator_first">Stop the simulator first</string>
     
-    
+    <string name="pref_payload">Payload</string>
+    <string name="pref_map_spacecraft">Spacecraft</string>
+    <string name="pref_map_sun">Sun</string>
+    <string name="pref_title_map_show_fov">Show FOV</string>
+    <string name="pref_summary_map_show_fov">Show the field of view of the spacecraft payload sensor</string>
+    <string name="pref_title_map_show_track">Show Track</string>
+    <string name="pref_summary_map_show_track">Show the ground track of the spacecraft</string>
+    <string name="pref_title_map_show_sun_icon">Show Icon</string>
+    <string name="pref_summary_map_show_sun_icon">Show the Sun position icon</string>
+    <string name="pref_title_map_show_sun_terminator">Show Terminator</string>
+    <string name="pref_summary_map_show_sun_terminator">Show the Day/Night separation line</string>
+    <string name="pref_title_payload_beamwidth">Beam width angle</string>
+    <string name="pref_summary_payload_beamwidth">Beam width angle of the camera or antenna in degrees</string>
+    <string name="pref_title_payload_x">Sensor direction X</string>
+    <string name="pref_summary_payload_x">The X component of the sensor direction vector</string>
+    <string name="pref_title_payload_y">Sensor direction Y</string>
+    <string name="pref_summary_payload_y">The Y component of the sensor direction vector</string>
+    <string name="pref_title_payload_z">Sensor direction Z</string>
+    <string name="pref_summary_payload_z">The Z component of the sensor direction vector</string>
     <string name="pref_apk_install">Application install</string>
     <string name="pref_performance">Performance</string>
     <string name="pref_general">General</string>
@@ -231,6 +285,9 @@
     <string name="pref_inclination">Inclination</string>
     <string name="pref_spherical_coords">Spherical coordinates</string>
     <string name="pref_angle">Angle</string>
+    
+    <string name="pref_title_path_length">Ground track length</string>
+    <string name="pref_summary_path_length">Maximum number of points in the satellite ground track</string>
     
     <string name="pref_title_database_installed">Missions database is already installed</string>
     <string name="pref_summary_database_installed">Flag to know if the Missions database has been already installed</string>

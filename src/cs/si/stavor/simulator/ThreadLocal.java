@@ -59,6 +59,7 @@ public class ThreadLocal extends Thread{
 						simulator.reset=false;
 						setSimulationParameters();
 						simulator.pause();
+						clearBrowserPath();//XGGDEBUG:MERGE just for map?
 					}
 					simulator.playCondition.block();
 					if(simulator.cancel){
@@ -127,6 +128,17 @@ public class ThreadLocal extends Thread{
             		time_tmp_gui = System.nanoTime();
             		simulator.getSimulationResults().updateHUD();
             	}
+            }
+        });
+	}
+
+	private void clearBrowserPath(){
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+        		//Clear model by push
+            	simulator.getSimulationResults().resetMapPathBuffer();
+            	
             }
         });
 	}

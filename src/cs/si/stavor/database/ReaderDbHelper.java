@@ -26,6 +26,7 @@ public class ReaderDbHelper extends SQLiteOpenHelper {
     }
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(MissionReaderContract.SQL_CREATE_ENTRIES);
+        db.execSQL(StationsReaderContract.SQL_CREATE_ENTRIES);
         
         //Reset install database flag
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
@@ -53,6 +54,7 @@ public class ReaderDbHelper extends SQLiteOpenHelper {
 		}
     	
         db.execSQL(MissionReaderContract.SQL_DELETE_ENTRIES);
+        db.execSQL(StationsReaderContract.SQL_DELETE_ENTRIES);
         onCreate(db);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
