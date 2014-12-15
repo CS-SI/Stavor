@@ -503,6 +503,18 @@ public class MainActivity extends ActionBarActivity implements
 		case 10:
 			mTitle = getString(R.string.title_section10);
 			break;
+		case 11:
+			mTitle = getString(R.string.title_section11);
+			break;
+		case 12:
+			mTitle = getString(R.string.title_section12);
+			break;
+		case 13:
+			mTitle = getString(R.string.title_section13);
+			break;
+		case 14:
+			mTitle = getString(R.string.title_section14);
+			break;
 		}
 	}
     

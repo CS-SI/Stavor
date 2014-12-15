@@ -11,7 +11,11 @@
     <string name="title_section7">Órbita</string>
     <string name="title_section8">Modelos</string>
     <string name="title_section9">Preferencias</string>
-    <string name="title_section10">Test WebGL</string>
+    <string name="title_section10">Mapa</string>
+    <string name="title_section11">Covertura</string>
+    <string name="title_section12">Estaciones</string>
+    <string name="title_section13">Preferencias</string>
+    <string name="title_section14">WebGL test</string>
     <string name="navigation_drawer_open">Abre el menú de navegación</string>
     <string name="navigation_drawer_close">Cierra el menú de navegación</string>
     <string name="action_screenshot">Acerca de</string>
