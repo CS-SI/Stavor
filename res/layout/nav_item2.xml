@@ -18,6 +18,8 @@
             android1:layout_height="20dp"
             android1:layout_alignParentLeft="true"
             android1:layout_alignParentTop="true"
+            android1:layout_centerInParent="true"
+            android1:layout_centerVertical="true"
             android1:contentDescription="@string/dummy"
             android1:scaleType="fitCenter"
             android1:src="@drawable/simulator" />
@@ -29,9 +31,13 @@
             android1:layout_alignBottom="@+id/nav_item_icon"
             android1:layout_alignParentRight="true"
             android1:layout_alignParentTop="true"
+            android1:layout_centerInParent="true"
+            android1:layout_centerVertical="true"
             android1:layout_toRightOf="@+id/nav_item_icon"
             android1:paddingLeft="5dp"
-            android1:textAppearance="?android:attr/textAppearanceMedium" />
+            android1:text="Test"
+            android1:textAppearance="?android:attr/textAppearanceSmall" />
+
     </RelativeLayout>
 
 </RelativeLayout>
