@@ -430,34 +430,34 @@ public class MainActivity extends ActionBarActivity implements
 	        .replace(R.id.container, 
 	        		SettingsOrbitFragment.newInstance(position +1)).commit();
 		}else if(position==8){
-			// Display the fragment as the main content.
-	        fragmentManager    
-	        .beginTransaction()
-	        .replace(R.id.container, 
-	        		SettingsGeneralFragment.newInstance(position +1)).commit();
-		}else if(position==9){
 			fragmentManager
 			.beginTransaction()
 			.replace(R.id.container,
 					MapFragment.newInstance(position + 1)).commit();
-		}else if(position==10){
+		}else if(position==9){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
 	        		SettingsCoverageFragment.newInstance(position +1)).commit();
-		}else if(position==11){
+		}else if(position==10){
 			// Display the fragment as the main content.
 	        fragmentManager
 	        .beginTransaction()
 	        .replace(R.id.container, 
 	        		StationsFragment.newInstance(position +1)).commit();
-		}else if(position==12){
+		}else if(position==11){
 			// Display the fragment as the main content.
 	        fragmentManager    
 	        .beginTransaction()
 	        .replace(R.id.container, 
 	        		SettingsGeneralMapFragment.newInstance(position +1)).commit();
+		}else if(position==12){
+			// Display the fragment as the main content.
+	        fragmentManager    
+	        .beginTransaction()
+	        .replace(R.id.container, 
+	        		SettingsGeneralFragment.newInstance(position +1)).commit();
 		}else if(position==13){
 			// Display the fragment as the main content.
 	        fragmentManager
@@ -638,7 +638,9 @@ public class MainActivity extends ActionBarActivity implements
 	    		showSection(6);
 	    	}else if (sel>1 && sel<6){//If it is in Hud, goto simulator screen
 	    		showSection(1);
-	    	}else if (sel==1 || sel==6 || sel==8){//If it is in Hud, goto simulator screen
+	    	}else if (sel>8 && sel<12){//If it is in Hud, goto simulator screen
+	    		showSection(8);
+	    	}else if (sel==1 || sel==6 || sel==8 || sel==12){//If it is in Hud, goto simulator screen
 	    		showSection(0);
 	    	}else if (sel==0){//If it is in Simulator, warn user before exit
 		    	if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {//Wait some time for confirmation

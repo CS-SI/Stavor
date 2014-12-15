@@ -159,7 +159,6 @@ public class NavigationDrawerFragment extends Fragment {
         				position==1 ||
         				position==6 ||
         				position==8 ||
-        				position==9 ||
         				position==12 ||
         				position==13);
         		if(first_level){
@@ -201,16 +200,16 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.model_s);
 		        	    	break;
 		        	    case 8:
-		        	    	iconView.setImageResource(R.drawable.preferences_s);
-		        	    	break;
-		        	    case 9:
 		        	    	iconView.setImageResource(R.drawable.map_s);
 		        	    	break;
-		        	    case 10:
+		        	    case 9:
 		        	    	iconView.setImageResource(R.drawable.fov_s);
 		        	    	break;
-		        	    case 11:
+		        	    case 10:
 		        	    	iconView.setImageResource(R.drawable.station_s);
+		        	    	break;
+		        	    case 11:
+		        	    	iconView.setImageResource(R.drawable.preferences_s);
 		        	    	break;
 		        	    case 12:
 		        	    	iconView.setImageResource(R.drawable.preferences_s);
@@ -251,16 +250,16 @@ public class NavigationDrawerFragment extends Fragment {
 		        	    	iconView.setImageResource(R.drawable.model);
 		        	    	break;
 		        	    case 8:
-		        	    	iconView.setImageResource(R.drawable.preferences);
-		        	    	break;
-		        	    case 9:
 		        	    	iconView.setImageResource(R.drawable.map);
 		        	    	break;
-		        	    case 10:
+		        	    case 9:
 		        	    	iconView.setImageResource(R.drawable.fov);
 		        	    	break;
-		        	    case 11:
+		        	    case 10:
 		        	    	iconView.setImageResource(R.drawable.station);
+		        	    	break;
+		        	    case 11:
+		        	    	iconView.setImageResource(R.drawable.preferences);
 		        	    	break;
 		        	    case 12:
 		        	    	iconView.setImageResource(R.drawable.preferences);

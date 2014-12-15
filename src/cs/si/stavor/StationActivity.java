@@ -58,7 +58,7 @@ public class StationActivity extends Activity{
 						station.station.altitude = Double.parseDouble(tx_alt.getText().toString());
 						station.station.elevation = Double.parseDouble(tx_elev.getText().toString());
 						
-						if(station.station.elevation < -5.0 || station.station.elevation > 90.0){//Check elevation is between limits -5ยบ and 90ยบ
+						if(station.station.elevation < -5.0 || station.station.elevation > 90.0){//Check elevation is between limits -5บ and 90บ
 							Toast.makeText(getApplicationContext(), getString(R.string.station_elevation_out_of_range), Toast.LENGTH_LONG).show();
 						}else{
 							if(isEdit){

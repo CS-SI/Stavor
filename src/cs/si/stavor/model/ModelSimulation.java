@@ -600,11 +600,11 @@ public class ModelSimulation {
     		if(panel_mass != null)
     			panel_mass.setText(activity.getString(R.string.panel_mass)+" "+String.format("%.1f", info.mass)+" Kg");
     		if(panel_roll != null)
-    			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"ยบ");
+    			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"บ");
     		if(panel_pitch != null)
-    			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"ยบ");
+    			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"บ");
     		if(panel_yaw != null)
-    			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"ยบ");
+    			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"บ");
     	}else if(selectedBrowser.equals(Browsers.Map)){
     		if(panel_time != null)
     			panel_time.setText(info.time.replace("T", "  "));
@@ -631,11 +631,11 @@ public class ModelSimulation {
     		if(panel_mass != null)
     			panel_mass.setText(activity.getString(R.string.panel_mass)+" "+String.format("%.1f", info.mass)+" Kg");
     		if(panel_roll != null)
-    			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"ยบ");
+    			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"บ");
     		if(panel_pitch != null)
-    			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"ยบ");
+    			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"บ");
     		if(panel_yaw != null)
-    			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"ยบ");
+    			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"บ");
     	}
     }
     

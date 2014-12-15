@@ -102,7 +102,7 @@ function initAngles(){
 			scene.add( incl_arc );
 
 			//Sprite
-			spriteInclination = makeTextSprite( 4, " i=0ยบ ", 
+			spriteInclination = makeTextSprite( 4, " i=0บ ", 
 				{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
 			spriteInclination.position = clip_mid.clone();
 			scene.add(spriteInclination);
@@ -164,7 +164,7 @@ function initAngles(){
 		scene.add( long_arc );
 
 		//Set longitude arc sprite
-		long_sprite = makeTextSprite( 5, " "+parseFloat(Math.round(lng * 180) / Math.PI).toFixed(1)+"ยบ ", 
+		long_sprite = makeTextSprite( 5, " "+parseFloat(Math.round(lng * 180) / Math.PI).toFixed(1)+"บ ", 
 				{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
 		long_sprite.position.set( sphcoord_long_mid.x, sphcoord_long_mid.y, sphcoord_long_mid.z);
 		scene.add(long_sprite);
@@ -189,7 +189,7 @@ function initAngles(){
 		scene.add( lat_arc );
 
 		//Set latittude arc sprite
-		lat_sprite = makeTextSprite( 6, " "+parseFloat(Math.round(lat * 180) / Math.PI).toFixed(1)+"ยบ ", 
+		lat_sprite = makeTextSprite( 6, " "+parseFloat(Math.round(lat * 180) / Math.PI).toFixed(1)+"บ ", 
 				{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
 		lat_sprite.position = sphcoord_lat_mid.clone();
 		scene.add(lat_sprite);
@@ -239,7 +239,7 @@ function initAngles(){
 		scene.add( vectors_arc );
 
 		//Set angles arc sprite
-		vectors_sprite = makeTextSprite( 7, " "+parseFloat(Math.round(dist_angle * 180) / Math.PI).toFixed(1)+"ยบ ", 
+		vectors_sprite = makeTextSprite( 7, " "+parseFloat(Math.round(dist_angle * 180) / Math.PI).toFixed(1)+"บ ", 
 				{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
 		vectors_sprite.position = angle_vector_mid.clone().multiplyScalar(0.7);
 		scene.add(vectors_sprite);

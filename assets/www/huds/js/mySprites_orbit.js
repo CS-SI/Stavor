@@ -94,7 +94,7 @@ function roundRect(ctx, x, y, w, h, r)
 }
 function updateInclinationSprite(inclination){
 	//Update Sprite
-	var messageInclination = " i="+parseFloat((inclination * 180) / Math.PI).toFixed(1)+"º ";
+	var messageInclination = " i="+parseFloat((inclination * 180) / Math.PI).toFixed(1)+"� ";
 	contextInclination.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
 	contextInclination.fill(); // FILL THE CONTEXT
 	// get size data (height depends only on font size)
@@ -117,7 +117,7 @@ function updateInclinationSprite(inclination){
 }
 function updateLatitudeSprite(lat){
 	//Update Sprite
-	var messageLatitude = " φ="+parseFloat((lat * 180) / Math.PI).toFixed(1)+"º ";
+	var messageLatitude = " φ="+parseFloat((lat * 180) / Math.PI).toFixed(1)+"� ";
 	contextLatitude.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
 	contextLatitude.fill(); // FILL THE CONTEXT
 	// get size data (height depends only on font size)
@@ -140,7 +140,7 @@ function updateLatitudeSprite(lat){
 }
 function updateLongitudeSprite(lng){
 	//Update Sprite
-	var messageLongitude = " λ="+parseFloat((lng * 180) / Math.PI).toFixed(1)+"º ";
+	var messageLongitude = " λ="+parseFloat((lng * 180) / Math.PI).toFixed(1)+"� ";
 	contextLongitude.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
 	contextLongitude.fill(); // FILL THE CONTEXT
 	// get size data (height depends only on font size)
@@ -163,7 +163,7 @@ function updateLongitudeSprite(lng){
 }
 function updateAnglesSprite(angle){
 	//Update Sprite
-	var messageAngles = " α="+parseFloat((angle * 180) / Math.PI).toFixed(1)+"º ";
+	var messageAngles = " α="+parseFloat((angle * 180) / Math.PI).toFixed(1)+"� ";
 	contextAngles.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
 	contextAngles.fill(); // FILL THE CONTEXT
 	// get size data (height depends only on font size)
