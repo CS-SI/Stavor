@@ -1,0 +1,265 @@
+<html>
+    <head>
+        <title>OpenLayers Mobile</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+    	<link rel="stylesheet" href="theme/default/style.css" type="text/css">
+        <link rel="stylesheet" href="theme/default/style.mobile.css" type="text/css">
+  	<script type='text/javascript' src="MultiPath.js"></script>
+  	<script type='text/javascript' src="Stations.js"></script>
+  	<script type='text/javascript' src="Fov.js"></script>
+  	<script type='text/javascript' src="Sun.js"></script>
+  	<script type='text/javascript' src="interface.js"></script>
+  	<!--<script src="http://www.openlayers.org/api/OpenLayers.js"></script>-->
+	<script src="OpenLayers.mobile.js"></script>
+        <script src="mobile.js"></script>
+	<style>
+            html, body {
+                margin  : 0;
+                padding : 0;
+                height  : 100%;
+                width   : 100%;
+            }
+            @media only screen and (max-width: 600px) {
+                html, body {
+                    height  : 117%;
+                }
+            }
+            #map {
+                width    : 100%;
+                position : absolute;
+                height   : 100%;
+            }
+            .olControlAttribution {
+                position      : absolute;
+                font-size     : 10px;
+                bottom        : 0 !important;
+                right         : 0 !important;
+                background    : rgba(0,0,0,0.1);
+                font-family   : Arial;
+                padding       : 2px 4px;
+                border-radius : 5px 0 0 0;
+            }
+            #title, #tags, #shortdesc {
+                display: none;
+            }
+        </style>
+    </head>
+<body>
+  <div id="map"></div>
+  <script>
+	setLoadingProgress(10);
+
+	//DYNAMIC PARAMS
+	var follow_sc = false;
+	var fov = new Array();
+	var fov_type = 0;
+	var fov_terminator = new Array();
+	var sun_lat = 0;
+	var sun_lon = 0;
+	var station_areas = new Array();
+
+	//CONFIG PARAMS
+	var show_satellite = true;
+	//var payload_beamwidth = 5;//Degrees
+	//var param_path_max_length = 5000;
+	var show_fov = true;
+	var show_track = true;
+	var show_sun_icon = true;
+	var show_sun_terminator = true;
+
+	var station_a = new Object();
+	station_a.name = "AAA";
+	station_a.latitude = 20;
+	station_a.longitude = 20;
+	station_a.beamwidth = 5;
+	var station_b = new Object();
+	station_b.name = "BBB";
+	station_b.latitude = -20;
+	station_b.longitude = -20;
+	station_b.beamwidth = 7;
+	var stations = new Array(station_a,station_b);
+
+	//HARD-CODED PARAMS
+	var sc_altitude_step = 10;
+
+	//VOLATILE PARAMS
+	var sc_latitude = 0;
+	var sc_altitude_tmp = 0;
+	var sc_longitude = 0;
+	var sc_altitude = 0;
+	var sun_lon_tmp = 0;
+
+	init();
+    	var lonLat = new OpenLayers.LonLat( 0.0 ,0.0 )
+	  .transform(
+	    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+	    map.getProjectionObject() // to Spherical Mercator Projection
+	  );
+ 
+   	var zoom=1;
+
+	setLoadingProgress(60);
+
+ /*
+    var markers = new OpenLayers.Layer.Markers( "Markers" );
+    map.addLayer(markers);
+ 
+    markers.addMarker(new OpenLayers.Marker(lonLat));
+ 
+    
+*/
+
+//******************************************************
+//         SUN MARKER
+//******************************************************
+
+	var sun_layer = new OpenLayers.Layer.Vector( "Sun Marker" );
+	map.addLayer(sun_layer);
+
+//******************************************************
+//         NIGHT LINE
+//******************************************************
+
+	var night_layer = new OpenLayers.Layer.Vector("Night Layer");
+	map.addLayer(night_layer);
+
+//******************************************************
+//         STATION AREA
+//******************************************************
+
+	var station_area_style = {
+	      strokeColor: "#009c00",
+	      strokeOpacity: 0.5,
+	      strokeWidth: 1,
+	      fillOpacity: 0.1,
+		fillColor: "#00FF00"
+	};
+
+	var station_area_style2 = {
+	      strokeColor: "#00009c",
+	      strokeOpacity: 0.5,
+	      strokeWidth: 1,
+	      fillOpacity: 0.1,
+		fillColor: "#0000FF"
+	};
+
+	var Rt = 6371000;
+
+	var stations_area_layer = new OpenLayers.Layer.Vector("Stations Area Layer");
+
+	/*var stations_area_layer = new OpenLayers.Layer.Vector("Stations Area Layer", {
+		   projection: map.displayProjection,
+		   preFeatureInsert: function(feature) {
+		   	feature.geometry.transform(new OpenLayers.Projection("EPSG:4258"), new OpenLayers.Projection("EPSG:4326"));
+		   }
+		}); */
+
+	map.addLayer(stations_area_layer);
+
+
+//******************************************************
+//         STATION NAME
+//******************************************************
+	var stationNameStyle = 
+		OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+	stationNameStyle.strokeColor = "#098700";
+	stationNameStyle.strokeOpacity = "0.8";
+	stationNameStyle.strokeWidth = "0.1";
+	stationNameStyle.fillColor = "#00FF00";
+	stationNameStyle.fillOpacity = 0.4;
+	stationNameStyle.strokeWidth = 1;
+	stationNameStyle.label = "${label}";
+	stationNameStyle.labelOutlineColor = "white";
+	stationNameStyle.labelOutlineWidth = 0.3;
+	stationNameStyle.fontSize="10px";
+	stationNameStyle.fontWeight="bold";
+	stationNameStyle.fontColor="#000000";
+	stationNameStyle.pointRadius="1";
+	stationNameStyle.labelYOffset="10";	
+	
+	var smap = new OpenLayers.StyleMap({"default": stationNameStyle});
+
+	var stations_name_layer = new OpenLayers.Layer.Vector("StationsName Layer", {"styleMap": smap});
+	map.addLayer(stations_name_layer);
+
+//******************************************************
+//         PATH
+//******************************************************
+	var style_path = { 
+		strokeColor: '#ff0000', 
+	  	strokeOpacity: 0.5,
+	  	strokeWidth: 3
+	};
+
+	var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
+	map.addLayer(lineLayer);                    
+	map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path)); 
+
+//******************************************************
+//         SPACECRAFT
+//******************************************************
+	var sc_style = {
+	      strokeColor: "#FF0000",
+	      strokeOpacity: 0.5,
+	      strokeWidth: 1,
+	      fillOpacity: 0.3,
+		fillColor: "#FF2200"
+	};
+
+	var sc_layer = new OpenLayers.Layer.Vector("SC Layer");
+	map.addLayer(sc_layer);
+
+
+	var sc_marker_layer = new OpenLayers.Layer.Vector( "SC Marker" );
+	map.addLayer(sc_marker_layer);
+
+//******************************************************
+//---------------------- INIT --------------------------
+//******************************************************
+
+	getInitialization();
+
+	//PRE-STORED PATH
+	if(show_track){
+		lineLayer.addFeatures([myMultyPath.getFeature()]);
+	}
+
+	//STATIONS NAME
+	addSelectedStationsNames();
+
+	setLoadingProgress(100);
+
+//------------------------------------------------------------------------------
+
+	function reDraw(){
+
+	//Night line and Sun
+		drawSolarTerminator();
+		
+	//Path
+		if(show_track){
+			lineLayer.removeAllFeatures();
+			lineLayer.addFeatures([myMultyPath.getFeature()]);
+		}
+
+	//Spacecraft
+		drawFov();
+
+	//Follow Spacecraft
+		if(follow_sc){
+		    	var lonLat = new OpenLayers.LonLat( sc_longitude ,sc_latitude )
+			  .transform(
+			    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+			    map.getProjectionObject() // to Spherical Mercator Projection
+			  );
+			map.setCenter(lonLat, map.getZoom());
+		}
+
+	//Stations	
+		drawStationsAreas();	
+	}
+
+  </script>
+</body></html>
