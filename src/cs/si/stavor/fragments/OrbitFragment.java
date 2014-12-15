@@ -24,7 +24,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
+import android.widget.SlidingDrawer.OnDrawerCloseListener;
+import android.widget.SlidingDrawer.OnDrawerOpenListener;
 
 /**
  * Fragment with the visualization browser for the orbit
@@ -54,8 +57,9 @@ public final class OrbitFragment extends Fragment {
 	}
 	
 	private Simulator simulator;
-	LinearLayout browserLayout;
+	LinearLayout browserLayout, slider_content;
 	Button views_menu;
+	SlidingDrawer drawer;
 	
 	/**
 	 * WebView from XWalk project to increase compatibility of WebGL
@@ -75,11 +79,40 @@ public final class OrbitFragment extends Fragment {
 		if(mXwalkView==null){
 			mXwalkView = ((MainActivity)getActivity()).getBrowserOrbit();
 		}
+		//Hud Panel
+		drawer = (SlidingDrawer) rootView.findViewById(R.id.slidingDrawer1);
+        drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
+            public void onDrawerOpened() {
+            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mXwalkView.getLayoutParams());
+            	if(getResources().getConfiguration().orientation==android.content.res.Configuration.ORIENTATION_PORTRAIT){
+                	layoutParams.height = mXwalkView.getHeight()-slider_content.getHeight();
+                	layoutParams.width = LayoutParams.MATCH_PARENT;
+            	}else{
+            		layoutParams.width = mXwalkView.getWidth()-slider_content.getWidth();
+                	layoutParams.height = LayoutParams.MATCH_PARENT;
+            	}
+            	mXwalkView.setLayoutParams(layoutParams);
+            	((MainActivity)getActivity()).setHudPanelOpen(true);
+            }
+        });
+       
+        drawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
+            public void onDrawerClosed() {
+            	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mXwalkView.getLayoutParams());
+            	layoutParams.height = LayoutParams.MATCH_PARENT;
+            	layoutParams.width = LayoutParams.MATCH_PARENT;
+            	mXwalkView.setLayoutParams(layoutParams);
+            	((MainActivity)getActivity()).setHudPanelOpen(false);
+            }
+        });
+        
+		slider_content = (LinearLayout) rootView.findViewById(R.id.content);
+		
 		TextView fps = ((TextView) rootView.findViewById(R.id.textViewFPS));
 		fps.setAlpha((float)0.0);
 		
     	simulator = ((MainActivity)getActivity()).getSimulator();
-    	simulator.setHudView(Browsers.Orbit,rootView, mXwalkView);//XGGDEBUG: set to null? new method???
+    	simulator.setHudView(Browsers.Orbit,rootView, mXwalkView);
     	
     	browserLayout=(LinearLayout)rootView.findViewById(R.id.simLayout);
     	LayoutParams browser_params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -115,6 +148,8 @@ public final class OrbitFragment extends Fragment {
     	    @Override
     	    public void run()
     	    {
+    	    	if(((MainActivity)getActivity()).getHudPanelOpen())
+    	    		drawer.open();
     	    	if(((MainActivity)getActivity()).getLoadBrowserFlagOrbit()){
     	    		//mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
     	    		//mXwalkView.load("javascript:showLoadingScreen()",null);

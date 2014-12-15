@@ -116,7 +116,7 @@ public class ModelSimulation {
     public void setHud(Browsers type, View hud, XWalkView mBrowser){
     	selectedBrowser = type;
 		view = hud;
-    	if(selectedBrowser.equals(Browsers.Attitude) || selectedBrowser.equals(Browsers.Map)){
+    	if(selectedBrowser.equals(Browsers.Attitude) || selectedBrowser.equals(Browsers.Orbit) || selectedBrowser.equals(Browsers.Map)){
         	initViews();
     	}else{
     		uninitViews();
@@ -316,6 +316,7 @@ public class ModelSimulation {
 	    	updateInfo(new_info);
     	}else if(selectedBrowser.equals(Browsers.Orbit)){
     		ModelStateOrbit new_state = new ModelStateOrbit();
+	    	ModelInfo new_info = new ModelInfo();
     		
 
 			AbsoluteDate date = scs.getAttitude().getDate();
@@ -340,6 +341,45 @@ public class ModelSimulation {
 	    	new_state.value_orbit_raan = keplerOrb.getRightAscensionOfAscendingNode();
     		
     		updateState(new_state);
+    		
+    		//INFO RETRACTABLE PANEL
+    		//Basic indicators and Attitude
+	    	Attitude sc_att = scs.getAttitude();
+	    	
+	    	Vector3D velocity = scs.getPVCoordinates().getVelocity();
+	    	new_info.velocity = scs.getPVCoordinates().getVelocity().getNorm()/1000;
+	    	
+	    	Vector3D earth = scs.getPVCoordinates().getPosition().negate();
+	    	new_info.orbit_radium = earth.getNorm()/1000;
+	    	
+	    	new_info.progress = sim_progress;
+	    	if(new_info.progress>100)
+	    		new_info.progress=100;
+	    	if(new_info.progress<0)
+	    		new_info.progress=0;
+	    	
+			new_info.time = date.getComponents(utc).toString();
+	
+			//Compute acceleration
+			if(tmp_time != null){
+				double delay = date.offsetFrom(tmp_time,utc);
+				Vector3D acceleration = new Vector3D(
+						(velocity.getX()-tmp_vel.getX())/delay,
+						(velocity.getY()-tmp_vel.getY())/delay,
+						(velocity.getZ()-tmp_vel.getZ())/delay);
+				new_info.acceleration = acceleration.getNorm();
+			}
+			//Update temporal variables for acceleration computation
+	    	tmp_vel = velocity;
+	    	tmp_time = date;
+	
+	    	double[] angles = sc_att.getOrientation().getRotation().getAngles(RotationOrder.XYZ);
+	    	new_info.roll = angles[0];
+	    	new_info.pitch = angles[1];
+	    	new_info.yaw = angles[2];
+	
+	    	new_info.mass = scs.getMass();
+	    	updateInfo(new_info);
     	}else if(selectedBrowser.equals(Browsers.Map)){
     		 try {
     			 
@@ -576,7 +616,7 @@ public class ModelSimulation {
      * Update the Hud panel with the new simulation step values
      */
     public synchronized void updateHUD(){
-    	if(selectedBrowser.equals(Browsers.Attitude)){
+    	if(selectedBrowser.equals(Browsers.Attitude) || selectedBrowser.equals(Browsers.Orbit) || selectedBrowser.equals(Browsers.Map)){
     		if(panel_time != null)
     			panel_time.setText(info.time.replace("T", "  "));
     		if(panel_progress != null)
@@ -594,37 +634,6 @@ public class ModelSimulation {
     				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
     			else
     				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_value));
-    		}
-    		if(panel_radium != null)
-    			panel_radium.setText(activity.getString(R.string.panel_radium)+" "+String.format("%.1f", info.orbit_radium)+" Km");
-    		if(panel_mass != null)
-    			panel_mass.setText(activity.getString(R.string.panel_mass)+" "+String.format("%.1f", info.mass)+" Kg");
-    		if(panel_roll != null)
-    			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"º");
-    		if(panel_pitch != null)
-    			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"º");
-    		if(panel_yaw != null)
-    			panel_yaw.setText("Yaw: "+String.format("%.1f", (180*info.yaw/Math.PI))+"º");
-    	}else if(selectedBrowser.equals(Browsers.Map)){
-    		if(panel_time != null)
-    			panel_time.setText(info.time.replace("T", "  "));
-    		if(panel_progress != null)
-    			panel_progress.setProgress(info.progress);
-    		if(panel_vel != null){
-    			panel_vel.setText(activity.getString(R.string.panel_vel)+" "+String.format("%.2f", info.velocity)+" Km/s");
-    			/*if(info.velocity>config.limit_velocity)
-    				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
-    			else
-    				panel_vel.setTextColor(activity.getResources().getColor(R.color.panel_value));
-    				*/
-    		}
-    		if(panel_accel != null){
-    			panel_accel.setText(activity.getString(R.string.panel_accel)+" "+String.format("%.2f", info.acceleration)+" Km/s2");
-    			/*if(info.acceleration>config.limit_acceleration)
-    				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_limit));
-    			else
-    				panel_accel.setTextColor(activity.getResources().getColor(R.color.panel_value));
-    				*/
     		}
     		if(panel_radium != null)
     			panel_radium.setText(activity.getString(R.string.panel_radium)+" "+String.format("%.1f", info.orbit_radium)+" Km");
