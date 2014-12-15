@@ -39,22 +39,25 @@ public class ReaderDbHelper extends SQLiteOpenHelper {
     	//Check if the user has introduced new entries
     		//Get all entries
     	
-		Cursor result =
-			    db.rawQuery("select * from "+MissionReaderContract.MissionEntry.TABLE_NAME+" order by "+MissionReaderContract.MissionEntry._ID+" asc",null);
-		
-		activity.userMissions.clear();
-		if(result.getCount()>3){
-			for(int i = 3; i < result.getCount(); i++){
-				result.moveToPosition(i);
-				String name = result.getString(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
-				String description = result.getString(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_DESCRIPTION));
-				byte[] serialclass = result.getBlob(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_CLASS));
-				activity.userMissions.add(new UserMission(name, description, serialclass));
+    	if(oldVersion==1){
+	    	
+			Cursor result =
+				    db.rawQuery("select * from "+MissionReaderContract.MissionEntry.TABLE_NAME+" order by "+MissionReaderContract.MissionEntry._ID+" asc",null);
+			
+			activity.userMissions.clear();
+			if(result.getCount()>3){
+				for(int i = 3; i < result.getCount(); i++){
+					result.moveToPosition(i);
+					String name = result.getString(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
+					String description = result.getString(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_DESCRIPTION));
+					byte[] serialclass = result.getBlob(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_CLASS));
+					activity.userMissions.add(new UserMission(name, description, serialclass));
+				}
 			}
-		}
+	    	
+	        db.execSQL(MissionReaderContract.SQL_DELETE_ENTRIES);
+    	}
     	
-        db.execSQL(MissionReaderContract.SQL_DELETE_ENTRIES);
-        db.execSQL(StationsReaderContract.SQL_DELETE_ENTRIES);
         onCreate(db);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
