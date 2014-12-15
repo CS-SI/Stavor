@@ -56,6 +56,23 @@ public class ReaderDbHelper extends SQLiteOpenHelper {
 			}
 	    	
 	        db.execSQL(MissionReaderContract.SQL_DELETE_ENTRIES);
+    	}else if(oldVersion==2){
+	    	
+			Cursor result =
+				    db.rawQuery("select * from "+MissionReaderContract.MissionEntry.TABLE_NAME+" order by "+MissionReaderContract.MissionEntry._ID+" asc",null);
+			
+			activity.userMissions.clear();
+			if(result.getCount()>6){
+				for(int i = 6; i < result.getCount(); i++){
+					result.moveToPosition(i);
+					String name = result.getString(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_NAME));
+					String description = result.getString(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_DESCRIPTION));
+					byte[] serialclass = result.getBlob(result.getColumnIndex(MissionReaderContract.MissionEntry.COLUMN_NAME_CLASS));
+					activity.userMissions.add(new UserMission(name, description, serialclass));
+				}
+			}
+	    	
+	        db.execSQL(MissionReaderContract.SQL_DELETE_ENTRIES);
     	}
     	
         onCreate(db);

@@ -233,6 +233,8 @@ public class MainActivity extends ActionBarActivity implements
 	    	}
     	}
     }
+    
+    //Temporal storing of the user missions for the upgrading of the database
     public ArrayList<UserMission> userMissions;
     
 	@Override
