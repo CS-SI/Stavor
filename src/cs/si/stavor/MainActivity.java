@@ -817,11 +817,14 @@ public class MainActivity extends ActionBarActivity implements
             //((StavorApplication)getApplication()).db_help.close();
         	
         	//Prevent onDestroy to avoid exception of illegalArgument: receiver not registered
-        	try{
+        	//try{
 	            mXwalkView.onDestroy();
+        	/*}catch(Exception e){
+        	}*/
+        	//try{
 	            mXwalkViewOrbit.onDestroy();
-        	}catch(Exception e){
-        	}
+        	/*}catch(Exception e){
+        	}*/
         }else{
         	dataFragment.setData(
         			this.mXwalkView,

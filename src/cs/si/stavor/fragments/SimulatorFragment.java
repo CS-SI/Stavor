@@ -40,6 +40,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -113,6 +114,12 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 				if(arg1!=null){
 					activeMissionId = Integer.parseInt(((TextView)arg1.findViewById(R.id.textViewMissionId)).getText().toString());
 					activeMissionName=((TextView)arg1.findViewById(R.id.textViewMission)).getText().toString();
+					TextView text_description = ((TextView)arg1.findViewById(R.id.textViewMissionDescription));
+					if(text_description.getVisibility() == View.GONE){
+						Toast.makeText(getActivity().getApplicationContext(),
+								text_description.getText().toString(), 
+								Toast.LENGTH_LONG).show();
+					}
 					markActiveMission();
 				}else{
 					activeMissionId=-1;
@@ -365,12 +372,18 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 				LinearLayout lay = (LinearLayout)missionsList.getChildAt(i);
 				TextView text_id = (TextView)lay.findViewById(R.id.textViewMissionId);
 				TextView text_name = (TextView)lay.findViewById(R.id.textViewMission);
+				//TextView text_description = (TextView)lay.findViewById(R.id.textViewMissionDescription);
+				ImageView image_selected = (ImageView)lay.findViewById(R.id.imageViewSelection);
 				if(simulator.getSelectedMissionid()==Integer.parseInt(text_id.getText().toString())){
-					text_name.setTextColor(getResources().getColor(R.color.selected_mission));
-					text_name.setPaintFlags(text_name.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+					//text_name.setTextColor(getResources().getColor(R.color.selected_mission));
+					//text_name.setPaintFlags(text_name.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+					image_selected.setVisibility(View.VISIBLE);
+					//text_description.setVisibility(View.VISIBLE);
 				}else{
-					text_name.setTextColor(getResources().getColor(R.color.white));
-					text_name.setPaintFlags(text_name.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+					//text_name.setTextColor(getResources().getColor(R.color.white));
+					//text_name.setPaintFlags(text_name.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+					image_selected.setVisibility(View.GONE);
+					//text_description.setVisibility(View.GONE);
 				}
 			}
 		}
