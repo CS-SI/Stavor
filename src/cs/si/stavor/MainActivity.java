@@ -815,8 +815,13 @@ public class MainActivity extends ActionBarActivity implements
         if(isFinishing()){
         	simulator.disconnect();
             //((StavorApplication)getApplication()).db_help.close();
-            mXwalkView.onDestroy();
-            mXwalkViewOrbit.onDestroy();
+        	
+        	//Prevent onDestroy to avoid exception of illegalArgument: receiver not registered
+        	try{
+	            mXwalkView.onDestroy();
+	            mXwalkViewOrbit.onDestroy();
+        	}catch(Exception e){
+        	}
         }else{
         	dataFragment.setData(
         			this.mXwalkView,
@@ -828,15 +833,15 @@ public class MainActivity extends ActionBarActivity implements
         			((StavorApplication)getApplication()).db,
         			hud_panel_open
         			);
-        	//Recycle background
-            BitmapDrawable bd = (BitmapDrawable)getWindow().getDecorView().getBackground();
+        	//Recycle background [NOT USED SINCE NEW ACTIVITY SPLASH SCREEN BUT SAVE FOR FUTURE IMPLEMENTATIONS]
+            /*BitmapDrawable bd = (BitmapDrawable)getWindow().getDecorView().getBackground();
             Bitmap mBitmap = bd.getBitmap();
             if (mBitmap != null && !mBitmap.isRecycled()) {
             	getWindow().getDecorView().setBackgroundResource(0);
                 bd.setCallback(null);
                 mBitmap.recycle();
                 mBitmap = null; 
-            }
+            }*/
         }
     }
 
