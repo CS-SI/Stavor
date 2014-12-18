@@ -12,7 +12,7 @@ public class Parameters {
 	 *
 	 */
 	public static class App {
-		public static final long splash_min_time_ns = 1000000000;//[ns] 1.0s min
+		public static final int splash_min_time_ms = 3000;//[ms] 3.0s min
 		public static final boolean show_tutorial = true;
 		public static final boolean show_tests_section = false;
 		public static final boolean pro_version = false;

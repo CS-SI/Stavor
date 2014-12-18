@@ -5,16 +5,13 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context="cs.si.stavor.MainActivity" >
-
-	<!-- SplashScreen -->
-	<include layout="@layout/splash_screen"/>
+   
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-
+    
     <fragment
         android:id="@+id/navigation_drawer"
         android:name="cs.si.stavor.fragments.NavigationDrawerFragment"

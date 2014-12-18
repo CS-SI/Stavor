@@ -2,6 +2,7 @@ package cs.si.stavor;
 
 import java.util.ArrayList;
 
+
 //import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
@@ -56,6 +57,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 /**
@@ -240,7 +242,7 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		long start_time = System.nanoTime();
+		//start_time = System.nanoTime();
 		
 		//Install Orekit default files if not installed yet
 		userMissions = new ArrayList<UserMission>();
@@ -364,17 +366,6 @@ public class MainActivity extends ActionBarActivity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
-		
-		
-		//Wait a minimum amount of time to display the splash screen
-		long diff_time = System.nanoTime()-start_time;
-		if(diff_time<Parameters.App.splash_min_time_ns){
-			try {
-				Thread.sleep((Parameters.App.splash_min_time_ns-diff_time)/1000000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 		
 	}
 
