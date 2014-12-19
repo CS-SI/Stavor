@@ -15,6 +15,13 @@ import android.database.sqlite.SQLiteDatabase;
 public class StavorApplication extends Application {
 	private String searchTerm = "";
 	
+	/**
+	 * Used to store the last screen title. For use in
+	 * {@link #restoreActionBar()}.
+	 */
+	public CharSequence mTitle;
+	public int currentSection;
+	
 	//Global database objects (for multi-activity access)
 	public ReaderDbHelper db_help;
     public SQLiteCursorLoader loader = null;

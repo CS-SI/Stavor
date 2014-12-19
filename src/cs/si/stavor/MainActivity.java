@@ -73,13 +73,6 @@ public class MainActivity extends ActionBarActivity implements
 	 * navigation drawer.
 	 */
 	private NavigationDrawerFragment mNavigationDrawerFragment;
-
-	/**
-	 * Used to store the last screen title. For use in
-	 * {@link #restoreActionBar()}.
-	 */
-	private CharSequence mTitle;
-	private int currentSection;
 	
 	/**
 	 * Used to store information during application restart due to configuration
@@ -362,12 +355,13 @@ public class MainActivity extends ActionBarActivity implements
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		
-		mTitle = getTitle();
+		//((StavorApplication)getApplication()).mTitle = getTitle();
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		
+		restoreActionBar();
 	}
 
 	@Override
@@ -466,49 +460,49 @@ public class MainActivity extends ActionBarActivity implements
 	 * Updates the title of the section
 	 */
 	public void onSectionAttached(int number) {
-		currentSection = number;
+		((StavorApplication)getApplication()).currentSection = number;
 		switch (number) {
 		case 1:
-			mTitle = getString(R.string.title_section1);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section1);
 			break;
 		case 2:
-			mTitle = getString(R.string.title_section2);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section2);
 			break;
 		case 3:
-			mTitle = getString(R.string.title_section3);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section3);
 			break;
 		case 4:
-			mTitle = getString(R.string.title_section4);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section4);
 			break;
 		case 5:
-			mTitle = getString(R.string.title_section5);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section5);
 			break;
 		case 6:
-			mTitle = getString(R.string.title_section6);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section6);
 			break;
 		case 7:
-			mTitle = getString(R.string.title_section7);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section7);
 			break;
 		case 8:
-			mTitle = getString(R.string.title_section8);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section8);
 			break;
 		case 9:
-			mTitle = getString(R.string.title_section9);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section9);
 			break;
 		case 10:
-			mTitle = getString(R.string.title_section10);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section10);
 			break;
 		case 11:
-			mTitle = getString(R.string.title_section11);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section11);
 			break;
 		case 12:
-			mTitle = getString(R.string.title_section12);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section12);
 			break;
 		case 13:
-			mTitle = getString(R.string.title_section13);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section13);
 			break;
 		case 14:
-			mTitle = getString(R.string.title_section14);
+			((StavorApplication)getApplication()).mTitle = getString(R.string.title_section14);
 			break;
 		}
 	}
@@ -517,9 +511,9 @@ public class MainActivity extends ActionBarActivity implements
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setTitle(mTitle);
-		actionBar.setIcon(R.drawable.simulator_s);
-		getSupportActionBar().setDisplayShowHomeEnabled(true);
+		actionBar.setTitle(((StavorApplication)getApplication()).mTitle);
+		//actionBar.setIcon(R.drawable.simulator_s);
+		//getSupportActionBar().setDisplayShowHomeEnabled(true);
 	}
 	
 	@Override
@@ -543,19 +537,19 @@ public class MainActivity extends ActionBarActivity implements
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
-			if(currentSection==1){
+			if(((StavorApplication)getApplication()).currentSection==1){
 				MenuItem item = menu.findItem(R.id.action_simulator);
 				//item.setVisible(false);
 				item.setIcon(R.drawable.ab_simulator);
-			}else if(currentSection==2){
+			}else if(((StavorApplication)getApplication()).currentSection==2){
 				MenuItem item = menu.findItem(R.id.action_attitude);
 				//item.setVisible(false);
 				item.setIcon(R.drawable.ab_attitude);
-			}else if(currentSection==7){
+			}else if(((StavorApplication)getApplication()).currentSection==7){
 				MenuItem item = menu.findItem(R.id.action_orbit);
 				//item.setVisible(false);
 				item.setIcon(R.drawable.ab_orbit);
-			}else if(currentSection==9){
+			}else if(((StavorApplication)getApplication()).currentSection==9){
 				MenuItem item = menu.findItem(R.id.action_map);
 				//item.setVisible(false);
 				item.setIcon(R.drawable.ab_map);
@@ -579,16 +573,16 @@ public class MainActivity extends ActionBarActivity implements
 		if (id == R.id.action_about) {
 			showAbout();
 			return true;
-		}else if (id == R.id.action_simulator && currentSection!=1) {
+		}else if (id == R.id.action_simulator && ((StavorApplication)getApplication()).currentSection!=1) {
 			showSection(0);
 			return true;
-		}else if (id == R.id.action_attitude && currentSection!=2) {
+		}else if (id == R.id.action_attitude && ((StavorApplication)getApplication()).currentSection!=2) {
 			showSection(1);
 			return true;
-		}else if (id == R.id.action_orbit && currentSection!=7) {
+		}else if (id == R.id.action_orbit && ((StavorApplication)getApplication()).currentSection!=7) {
 			showSection(6);
 			return true;
-		}else if (id == R.id.action_map && currentSection!=9) {
+		}else if (id == R.id.action_map && ((StavorApplication)getApplication()).currentSection!=9) {
 			showSection(8);
 			return true;
 		}
