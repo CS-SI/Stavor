@@ -518,6 +518,7 @@ public class MainActivity extends ActionBarActivity implements
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setTitle(mTitle);
+		//actionBar.setIcon(R.drawable.simulator_s);
 	}
 	
 	@Override
@@ -554,10 +555,14 @@ public class MainActivity extends ActionBarActivity implements
 				MenuItem item = menu.findItem(R.id.action_map);
 				item.setVisible(false);
 			}
-			invalidateOptionsMenu();
+			supportInvalidateOptionsMenu();
 			return true;
 		}
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	public void refreshActionBarIcons(){
+		supportInvalidateOptionsMenu();
 	}
 
 	@Override
@@ -697,8 +702,10 @@ public class MainActivity extends ActionBarActivity implements
      * Displays the Welcome dialog
      */
     public void showWelcomeMessage() {
-        DialogFragment newFragment = new WelcomeDialogFragment();
-        newFragment.show(getFragmentManager(), "welcome");
+		if(Parameters.App.show_orekit_data_installation_message){
+	        DialogFragment newFragment = new WelcomeDialogFragment();
+	        newFragment.show(getFragmentManager(), "welcome");
+		}
     }
     
     /**
@@ -723,7 +730,7 @@ public class MainActivity extends ActionBarActivity implements
     	}
     	if(flag_show_welcome){
     		flag_show_welcome=false;
-    		showWelcomeMessage();
+			showWelcomeMessage();
     	}
     }
     public void showTutorialDisplay(){

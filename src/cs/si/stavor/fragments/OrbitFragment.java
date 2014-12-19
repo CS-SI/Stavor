@@ -73,6 +73,8 @@ public final class OrbitFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.orb_display, container,
 				false);
 		
+		((MainActivity)getActivity()).refreshActionBarIcons();
+		
 		((MainActivity)getActivity()).showTutorialOrbit();
 		
 		//Browser

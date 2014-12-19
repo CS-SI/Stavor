@@ -13,9 +13,14 @@ public class Parameters {
 	 */
 	public static class App {
 		public static final int splash_min_time_ms = 3000;//[ms] 3.0s min
-		public static final boolean show_tutorial = true;
 		public static final boolean show_tests_section = false;
 		public static final boolean pro_version = false;
+		
+		//FIRST RUN PARAMETERS
+		public static final boolean show_tutorial = false;
+		public static final boolean show_orekit_data_installation_message = false;
+		//If we want to show the sections menu open during the first run of the application and always until user makes use of it then set to false.
+		public static final boolean first_start_app_closed_section_menu = true; 
 	}
 	/**
 	 * About screen information

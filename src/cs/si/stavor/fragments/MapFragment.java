@@ -77,6 +77,8 @@ public final class MapFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.map_display, container,
 				false);
+		
+		((MainActivity)getActivity()).refreshActionBarIcons();
 
 		((MainActivity)getActivity()).showTutorialMap();
 		

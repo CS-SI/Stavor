@@ -74,6 +74,8 @@ public final class HudFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.hud_display, container,
 				false);
 		
+		((MainActivity)getActivity()).refreshActionBarIcons();
+		
 		((MainActivity)getActivity()).showTutorialDisplay();
 		
 		//Browser

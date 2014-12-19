@@ -99,6 +99,8 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		View rootView = inflater.inflate(R.layout.sim, container,
 				false);
 		
+		((MainActivity)getActivity()).refreshActionBarIcons();
+		
 		((MainActivity)getActivity()).showTutorialSimulator();
 		
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
