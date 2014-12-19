@@ -32,7 +32,8 @@
                 <TextView
                     android:id="@+id/textViewPanelTime"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:background="@drawable/clock_background"
                     android:gravity="center"
                     android:text="@string/eg_sim_time"
@@ -54,7 +55,9 @@
                 <LinearLayout
                     android:id="@+id/anglesLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical" >
 
                     <TextView
                         android:id="@+id/textViewPanelRoll"
@@ -88,10 +91,13 @@
 				<View
 				    style="@style/HDivider"
 				    android:layout_width="250dp" />
+
                 <LinearLayout
                     android:id="@+id/velLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical" >
 
                     <TextView
                         android:id="@+id/textViewPanelVel"
@@ -120,7 +126,9 @@
                 <TextView
                     android:id="@+id/textViewPanelRadium"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:text="@string/eg_radium"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/white" />
@@ -128,13 +136,17 @@
                 <View
 				    style="@style/HDivider"
 				    android:layout_width="250dp" />
+
                 <TextView
                     android:id="@+id/textViewPanelMass"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:text="@string/eg_mass"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/white" />
+
             </LinearLayout>
         </cs.si.stavor.layout.WrappingSlidingDrawer>
     </FrameLayout>

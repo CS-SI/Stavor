@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true" >
+    android:layout_alignParentRight="true" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <cs.si.stavor.layout.WrappingSlidingDrawer
         android:id="@+id/slidingDrawer1"
@@ -54,7 +53,9 @@
             <LinearLayout
                 android:id="@+id/anglesLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:id="@+id/textViewPanelRoll"
@@ -88,10 +89,13 @@
 <View
     style="@style/HDivider"
     android:layout_width="250dp" />
+
             <LinearLayout
                 android:id="@+id/velLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:id="@+id/textViewPanelVel"
@@ -120,7 +124,9 @@
             <TextView
                 android:id="@+id/textViewPanelRadium"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="@string/eg_radium"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/white" />
@@ -128,13 +134,17 @@
             <View
     style="@style/HDivider"
     android:layout_width="250dp" />
+
             <TextView
                 android:id="@+id/textViewPanelMass"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="@string/eg_mass"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/white" />
+
         </LinearLayout>
     </cs.si.stavor.layout.WrappingSlidingDrawer>
 </FrameLayout>
