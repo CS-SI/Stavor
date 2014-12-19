@@ -21,6 +21,7 @@ function initScene(){
 		alert('WebGL not supported in this device');
 		canvasMode(1);
 	}
+	//renderer.setClearColor(0xff0000, 1);
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	container = document.getElementById( 'ThreeJS' );
 	container.appendChild( renderer.domElement );

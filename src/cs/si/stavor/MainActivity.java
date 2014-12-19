@@ -518,7 +518,8 @@ public class MainActivity extends ActionBarActivity implements
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setTitle(mTitle);
-		//actionBar.setIcon(R.drawable.simulator_s);
+		actionBar.setIcon(R.drawable.simulator_s);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
 	}
 	
 	@Override
@@ -544,16 +545,20 @@ public class MainActivity extends ActionBarActivity implements
 			// decide what to show in the action bar.
 			if(currentSection==1){
 				MenuItem item = menu.findItem(R.id.action_simulator);
-				item.setVisible(false);
+				//item.setVisible(false);
+				item.setIcon(R.drawable.ab_simulator);
 			}else if(currentSection==2){
 				MenuItem item = menu.findItem(R.id.action_attitude);
-				item.setVisible(false);
+				//item.setVisible(false);
+				item.setIcon(R.drawable.ab_attitude);
 			}else if(currentSection==7){
 				MenuItem item = menu.findItem(R.id.action_orbit);
-				item.setVisible(false);
+				//item.setVisible(false);
+				item.setIcon(R.drawable.ab_orbit);
 			}else if(currentSection==9){
 				MenuItem item = menu.findItem(R.id.action_map);
-				item.setVisible(false);
+				//item.setVisible(false);
+				item.setIcon(R.drawable.ab_map);
 			}
 			supportInvalidateOptionsMenu();
 			return true;
@@ -574,16 +579,16 @@ public class MainActivity extends ActionBarActivity implements
 		if (id == R.id.action_about) {
 			showAbout();
 			return true;
-		}else if (id == R.id.action_simulator) {
+		}else if (id == R.id.action_simulator && currentSection!=1) {
 			showSection(0);
 			return true;
-		}else if (id == R.id.action_attitude) {
+		}else if (id == R.id.action_attitude && currentSection!=2) {
 			showSection(1);
 			return true;
-		}else if (id == R.id.action_orbit) {
+		}else if (id == R.id.action_orbit && currentSection!=7) {
 			showSection(6);
 			return true;
-		}else if (id == R.id.action_map) {
+		}else if (id == R.id.action_map && currentSection!=9) {
 			showSection(8);
 			return true;
 		}

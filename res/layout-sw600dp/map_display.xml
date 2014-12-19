@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="cs.si.stavor.fragments.HudFragment"
     android:id="@+id/mainLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/black"
     android:gravity="top"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context="cs.si.stavor.fragments.MapFragment" >
 
     <LinearLayout
         android:id="@+id/simLayout"

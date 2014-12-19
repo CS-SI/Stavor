@@ -16,7 +16,7 @@
             android:key="@string/pref_key_show_fps"
             android:summary="@string/pref_summary_show_fps"
             android:title="@string/pref_title_show_fps"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
         <EditTextPreference
             android:key="@string/pref_key_fps_update_skips"
             android:summary="@string/pref_summary_fps_update_skips"

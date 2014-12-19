@@ -8,19 +8,19 @@
         android:title="@string/action_screenshot"
         app:showAsAction="withText|ifRoom"/> -->
     <item android:id="@+id/action_simulator"
-          android:icon="@drawable/simulator_s"
+          android:icon="@drawable/ab_simulator_s"
           android:title="@string/title_section1"
           app:showAsAction="ifRoom" />
     <item android:id="@+id/action_attitude"
-          android:icon="@drawable/attitude_s"
+          android:icon="@drawable/ab_attitude_s"
           android:title="@string/title_section2"
           app:showAsAction="ifRoom" />
     <item android:id="@+id/action_orbit"
-          android:icon="@drawable/orbit_s"
+          android:icon="@drawable/ab_orbit_s"
           android:title="@string/title_section7"
           app:showAsAction="ifRoom" />
     <item android:id="@+id/action_map"
-          android:icon="@drawable/map_s"
+          android:icon="@drawable/ab_map_s"
           android:title="@string/title_section9"
           app:showAsAction="ifRoom" />
     <item
