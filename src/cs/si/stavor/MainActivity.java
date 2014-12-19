@@ -79,6 +79,7 @@ public class MainActivity extends ActionBarActivity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
+	private int currentSection;
 	
 	/**
 	 * Used to store information during application restart due to configuration
@@ -242,7 +243,7 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//start_time = System.nanoTime();
+		//start_time = System.nanoTime(); 
 		
 		//Install Orekit default files if not installed yet
 		userMissions = new ArrayList<UserMission>();
@@ -465,6 +466,7 @@ public class MainActivity extends ActionBarActivity implements
 	 * Updates the title of the section
 	 */
 	public void onSectionAttached(int number) {
+		currentSection = number;
 		switch (number) {
 		case 1:
 			mTitle = getString(R.string.title_section1);
@@ -517,15 +519,42 @@ public class MainActivity extends ActionBarActivity implements
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setTitle(mTitle);
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		//actionBarMenu = menu;
+		//currentSection = currentSection;
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
 			getMenuInflater().inflate(R.menu.main, menu);
 			restoreActionBar();
+			return true;
+		}
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if (!mNavigationDrawerFragment.isDrawerOpen()) {
+			// Only show items in the action bar relevant to this screen
+			// if the drawer is not showing. Otherwise, let the drawer
+			// decide what to show in the action bar.
+			if(currentSection==1){
+				MenuItem item = menu.findItem(R.id.action_simulator);
+				item.setVisible(false);
+			}else if(currentSection==2){
+				MenuItem item = menu.findItem(R.id.action_attitude);
+				item.setVisible(false);
+			}else if(currentSection==7){
+				MenuItem item = menu.findItem(R.id.action_orbit);
+				item.setVisible(false);
+			}else if(currentSection==9){
+				MenuItem item = menu.findItem(R.id.action_map);
+				item.setVisible(false);
+			}
+			invalidateOptionsMenu();
 			return true;
 		}
 		return super.onCreateOptionsMenu(menu);
@@ -539,6 +568,18 @@ public class MainActivity extends ActionBarActivity implements
 		int id = item.getItemId();
 		if (id == R.id.action_about) {
 			showAbout();
+			return true;
+		}else if (id == R.id.action_simulator) {
+			showSection(0);
+			return true;
+		}else if (id == R.id.action_attitude) {
+			showSection(1);
+			return true;
+		}else if (id == R.id.action_orbit) {
+			showSection(6);
+			return true;
+		}else if (id == R.id.action_map) {
+			showSection(8);
 			return true;
 		}
 		/*if (id == R.id.action_reset_conf) {

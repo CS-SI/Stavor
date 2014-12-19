@@ -426,9 +426,9 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (item.getItemId() == R.id.action_screenshot) {
+        /*if (item.getItemId() == R.id.action_screenshot) {
         	((MainActivity)getActivity()).showAbout();
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
