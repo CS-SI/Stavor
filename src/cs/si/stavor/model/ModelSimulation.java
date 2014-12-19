@@ -640,7 +640,7 @@ public class ModelSimulation {
     		if(panel_mass != null)
     			panel_mass.setText(activity.getString(R.string.panel_mass)+" "+String.format("%.1f", info.mass)+" Kg");
     		if(panel_roll != null)
-    			panel_roll.setText("Rol: "+String.format("%.1f", (180*info.roll/Math.PI))+"º");
+    			panel_roll.setText("Roll: "+String.format("%.1f", (180*info.roll/Math.PI))+"º");
     		if(panel_pitch != null)
     			panel_pitch.setText("Pitch: "+String.format("%.1f", (180*info.pitch/Math.PI))+"º");
     		if(panel_yaw != null)
