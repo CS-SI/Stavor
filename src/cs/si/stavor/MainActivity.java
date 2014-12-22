@@ -268,69 +268,21 @@ public class MainActivity extends ActionBarActivity implements
             fm.beginTransaction().add(dataFragment, "data").commit();
             
             Simulator simu = new Simulator(this);
-            
-            XWalkView xwalkView = new XWalkView(this.getApplicationContext(), this);
-			//mXwalkView.setBackgroundResource(R.color.black);
-			xwalkView.setBackgroundColor(0x00000000);
-			xwalkView.setResourceClient(new MyResourceClient(xwalkView));
-	        xwalkView.setUIClient(new MyUIClient(xwalkView));
-	        xwalkView.clearCache(true);
-	        
-	        /*XWalkSettings browserSettings = xwalkView.getSettings();
-	    	
-	    	browserSettings.setJavaScriptEnabled(true);
-	    	browserSettings.setUseWideViewPort(false);
-	    	//browserSettings.setLoadWithOverviewMode(true);
-	    	browserSettings.setAllowFileAccessFromFileURLs(true); //Maybe you don't need this rule
-	    	browserSettings.setAllowUniversalAccessFromFileURLs(true);
-	    	//browserSettings.setBuiltInZoomControls(true);
-	    	//browserSettings.setDisplayZoomControls(true);
-	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener*/
-	    	
-	    	//Orbit browser
-	    	XWalkView xwalkViewOrbit = new XWalkView(this.getApplicationContext(), this);
-			//mXwalkView.setBackgroundResource(R.color.black);
-			xwalkViewOrbit.setBackgroundColor(0x00000000);
-			xwalkViewOrbit.setResourceClient(new MyResourceClient(xwalkViewOrbit));
-	        xwalkViewOrbit.setUIClient(new MyUIClient(xwalkViewOrbit));
-	        xwalkViewOrbit.clearCache(true);
-	        
-	        /*XWalkSettings browserSettingsOrbit = xwalkViewOrbit.getSettings();
-	    	
-	    	browserSettingsOrbit.setJavaScriptEnabled(true);
-	    	browserSettingsOrbit.setUseWideViewPort(false);
-	    	//browserSettings.setLoadWithOverviewMode(true);
-	    	browserSettingsOrbit.setAllowFileAccessFromFileURLs(true); //Maybe you don't need this rule
-	    	browserSettingsOrbit.setAllowUniversalAccessFromFileURLs(true);
-	    	//browserSettings.setBuiltInZoomControls(true);
-	    	//browserSettings.setDisplayZoomControls(true);
-	    	//browserSettings.setSupportZoom(true);, OnMenuItemClickListener*/
-	    	
-	    	((StavorApplication)getApplication()).jsInterface = new WebAppInterface(this, simu.getSimulationResults());
-	    	xwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
-	    	xwalkViewOrbit.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
 	    	
             ReaderDbHelper db_help_tmp;
             SQLiteDatabase db_tmp;
             db_help_tmp = Installer.installApkDatabase(this);
             db_tmp = db_help_tmp.getWritableDatabase();
             
+            ((StavorApplication)getApplication()).jsInterface = new WebAppInterface(this, simu.getSimulationResults());
+            
             dataFragment.setData(
-            		xwalkView,
-            		true,
-            		xwalkViewOrbit,
-            		true,
             		simu,
             		db_help_tmp,
             		db_tmp,
             		Parameters.Hud.start_panel_open
             		);
         }
-        
-        this.mXwalkView = dataFragment.getBrowser();
-        this.mXwalkViewOrbit = dataFragment.getBrowserOrbit();
-        this.loadBrowser = dataFragment.getLoadBrowser();
-        this.loadBrowserOrbit = dataFragment.getLoadBrowserOrbit();
         
         // the data is available in dataFragment.getData()
         this.simulator = dataFragment.getSim();
@@ -339,17 +291,36 @@ public class MainActivity extends ActionBarActivity implements
         //Update javascriptInterface
         ((StavorApplication)getApplication()).jsInterface.reconstruct(this, simulator.getSimulationResults());
         
+        mXwalkView = new XWalkView(this.getApplicationContext(), this);
+		//mXwalkView.setBackgroundResource(R.color.black);
+        mXwalkView.setBackgroundColor(0x00000000);
+        mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
+        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
+        mXwalkView.clearCache(true);
+    	
+    	//Orbit browser
+        mXwalkViewOrbit = new XWalkView(this.getApplicationContext(), this);
+		//mXwalkView.setBackgroundResource(R.color.black);
+        mXwalkViewOrbit.setBackgroundColor(0x00000000);
+        mXwalkViewOrbit.setResourceClient(new MyResourceClient(mXwalkViewOrbit));
+        mXwalkViewOrbit.setUIClient(new MyUIClient(mXwalkViewOrbit));
+        mXwalkViewOrbit.clearCache(true);
+    	
+    	((StavorApplication)getApplication()).jsInterface = new WebAppInterface(this, simulator.getSimulationResults());
+    	mXwalkView.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
+    	mXwalkViewOrbit.addJavascriptInterface(((StavorApplication)getApplication()).jsInterface, "Android");
+    	
+    	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+    	mXwalkViewOrbit.load(Parameters.Web.STARTING_PAGE_ORBIT,null);
+    	
+    	resetLoadBrowserFlag();
+    	resetLoadBrowserFlagOrbit();
+        
 		//Install the Missions database if not installed yet and store database objects
 		((StavorApplication)getApplication()).db_help = dataFragment.getDbHelp();
 		((StavorApplication)getApplication()).db = dataFragment.getDb();
 
 		hud_panel_open = dataFragment.getHudPanelOpen();
-		
-		if(flagActivityFirstExec){
-        	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
-        	mXwalkViewOrbit.load(Parameters.Web.STARTING_PAGE_ORBIT,null);
-        	flagActivityFirstExec=false;
-        }
         
         // NAVIGATION
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
@@ -862,22 +833,8 @@ public class MainActivity extends ActionBarActivity implements
         if(isFinishing()){
         	simulator.disconnect();
             //((StavorApplication)getApplication()).db_help.close();
-        	
-        	//Prevent onDestroy to avoid exception of illegalArgument: receiver not registered
-        	try{
-	            mXwalkView.onDestroy();
-        	}catch(Exception e){
-        	}
-        	try{
-	            mXwalkViewOrbit.onDestroy();
-        	}catch(Exception e){
-        	}
         }else{
         	dataFragment.setData(
-        			this.mXwalkView,
-        			this.loadBrowser,
-        			this.mXwalkViewOrbit,
-        			this.loadBrowserOrbit,
         			this.simulator,
         			((StavorApplication)getApplication()).db_help,
         			((StavorApplication)getApplication()).db,
@@ -893,6 +850,15 @@ public class MainActivity extends ActionBarActivity implements
                 mBitmap = null; 
             }*/
         }
+      //Prevent onDestroy to avoid exception of illegalArgument: receiver not registered
+    	try{
+            mXwalkView.onDestroy();
+    	}catch(Exception e){
+    	}
+    	try{
+            mXwalkViewOrbit.onDestroy();
+    	}catch(Exception e){
+    	}
     }
 
 	private boolean hud_panel_open;
