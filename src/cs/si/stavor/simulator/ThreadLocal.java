@@ -44,6 +44,7 @@ public class ThreadLocal extends Thread{
     			setSimulationParameters();
     			simulator.setProgress(80 * 100);
 				setConnected();
+				clearBrowserPath();
 				simulator.goToHud();
         	    simulator.showMessage(simulator.getContext().getString(R.string.sim_local_simulator_connected));
         	} catch (OrekitException e) {
@@ -59,7 +60,7 @@ public class ThreadLocal extends Thread{
 						simulator.reset=false;
 						setSimulationParameters();
 						simulator.pause();
-						clearBrowserPath();//XGGDEBUG:MERGE just for map?
+						clearBrowserPath();
 					}
 					simulator.playCondition.block();
 					if(simulator.cancel){
