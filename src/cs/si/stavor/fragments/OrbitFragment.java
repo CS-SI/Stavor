@@ -75,7 +75,7 @@ public final class OrbitFragment extends Fragment {
 		
 		((MainActivity)getActivity()).refreshActionBarIcons();
 		
-		((MainActivity)getActivity()).showTutorialOrbit();
+		//((MainActivity)getActivity()).showTutorialOrbit();
 		
 		//Browser
 		if(mXwalkView==null){

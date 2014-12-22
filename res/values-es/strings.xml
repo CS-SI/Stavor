@@ -125,7 +125,7 @@
     
     <string name="tutorial_continue">Continuar</string>
     <string name="tutorial_dont_show_again">No volver a mostrar</string>
-    <string name="tutorial_title_simulator">Tutorial Simulador</string>
+    <!-- <string name="tutorial_title_simulator">Tutorial Simulador</string>
     <string name="tutorial_message_simulator">Usted se encuentra en la pantalla del Simulador, aquí puede escoger entre el simulador local o el cliente remoto. En el primero, usted encontrará una lista de misiones; puede crear, editar y seleccionar la mision para el simulador. El cliente remoto conecta con un simulador externo a través de la red. Una vez conectado el simulador, la aplicación le redigirá a la pantalla de Actitud.</string>
     <string name="tutorial_title_display">Tutorial Actitud</string>
     <string name="tutorial_message_display">Usted se encuentra ahora en la pantalla de Actitud, aquí puede ver la actitud simulada. Encontrará los controles de la simulación, un botón para seleccionar la vista y un panel retractable con información detallada.</string>
@@ -142,7 +142,8 @@
     <string name="tutorial_message_stations">Usted ha entrado en la pantalla de Estaciones, aquí puede escoger y definir las estaciones de tierra.</string>
     <string name="tutorial_title_coverage">Tutorial Cobertura</string>
     <string name="tutorial_message_coverage">Usted ha entrado en la pantalla de Cobertura, aquí usted puede definir el ancho de haz (beamwidth) de la antena/cámara para computar el campo de visión sobre la Tierra.</string>
-    
+     -->
+     
     <string name="dialog_welcome">Bienvenido</string>
     <string name="dialog_error">Error</string>
     <string name="dialog_exit">Salir</string>

@@ -125,7 +125,14 @@
     
     <string name="tutorial_continue">Continue</string>
     <string name="tutorial_dont_show_again">Don\'t show again</string>
-    <string name="tutorial_title_simulator">Tutorial Simulator</string>
+    
+    <string name="tutorial_sim_1">Select the simulator mode</string>
+    <string name="tutorial_sim_2a">Choose a Mission</string>
+    <string name="tutorial_sim_2b">Introduce remote simulator network parameters</string>
+    <string name="tutorial_sim_2a_title">Local:</string>
+    <string name="tutorial_sim_2b_title">Remote:</string>
+    <string name="tutorial_sim_3">Start the simulator</string>
+    <!-- <string name="tutorial_title_simulator">Tutorial Simulator</string>
     <string name="tutorial_message_simulator">You are in the Simulator screen, in here you can chose between the local simulator or the remote client. In the first one you will find a list of missions; you can create, edit and select the mission for the simulator. The remote client connects with an external simulator over a network. Once you connect the simulator, the application will redirect you to the Attitude screen.</string>
     <string name="tutorial_title_display">Tutorial Attitude</string>
     <string name="tutorial_message_display">You are now in the Attitude screen, in here you can visualize the simulated attitude. You will find the controls of the simulation, a button to select the view and a retractable panel with detailed information.</string>
@@ -142,7 +149,8 @@
     <string name="tutorial_message_stations">You entered the Stations screen, here you can choose and define the ground stations.</string>
     <string name="tutorial_title_coverage">Tutorial Coverage</string>
     <string name="tutorial_message_coverage">You entered the Coverage screen, here you can define the antenna/camera beamwidth to compute the field of view on the Earth.</string>
-    
+     -->
+     
     <string name="dialog_welcome">Welcome</string>
     <string name="dialog_error">Error</string>
     <string name="dialog_exit">Exit</string>

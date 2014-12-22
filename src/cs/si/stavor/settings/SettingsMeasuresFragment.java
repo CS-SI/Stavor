@@ -47,7 +47,7 @@ public class SettingsMeasuresFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.measures);
         
-        ((MainActivity)getActivity()).showTutorialConfig();
+        //((MainActivity)getActivity()).showTutorialConfig();
     }
     
     @Override

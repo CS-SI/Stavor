@@ -76,7 +76,7 @@ public final class HudFragment extends Fragment {
 		
 		((MainActivity)getActivity()).refreshActionBarIcons();
 		
-		((MainActivity)getActivity()).showTutorialDisplay();
+		//((MainActivity)getActivity()).showTutorialDisplay();
 		
 		//Browser
 		if(mXwalkView==null){

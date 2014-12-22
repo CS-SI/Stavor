@@ -70,7 +70,7 @@ public final class StationsFragment extends Fragment implements LoaderCallbacks<
 		View rootView = inflater.inflate(R.layout.stations, container,
 				false);
 		
-		((MainActivity)getActivity()).showTutorialStations();
+		//((MainActivity)getActivity()).showTutorialStations();
 		
 		//Load missions in list
 		stationsList = (ListView) rootView.findViewById(R.id.listView1);

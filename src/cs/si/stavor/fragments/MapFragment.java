@@ -80,7 +80,7 @@ public final class MapFragment extends Fragment {
 		
 		((MainActivity)getActivity()).refreshActionBarIcons();
 
-		((MainActivity)getActivity()).showTutorialMap();
+		//((MainActivity)getActivity()).showTutorialMap();
 		
 		//Browser
 		/*if(mXwalkView==null){

@@ -690,7 +690,7 @@ public class MainActivity extends ActionBarActivity implements
     }
     
     
-    public void showTutorialSimulator(){
+    /*public void showTutorialSimulator(){
     	String key = getString(R.string.pref_key_tutorial_simulator);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     	if(sharedPref.getBoolean(key, Parameters.App.show_tutorial)){
@@ -702,7 +702,8 @@ public class MainActivity extends ActionBarActivity implements
     		flag_show_welcome=false;
 			showWelcomeMessage();
     	}
-    }
+    }*/
+    /*
     public void showTutorialDisplay(){
     	String key = getString(R.string.pref_key_tutorial_display);
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -770,7 +771,7 @@ public class MainActivity extends ActionBarActivity implements
     	DialogFragment newFragment = TutorialDialogFragment.newInstance(key, title, message);
     	newFragment.setCancelable(true);
     	newFragment.show(getFragmentManager(), "tutorial-"+title);
-    }
+    }*/
     
     /**
      * Displays a confirmation dialog for reseting application configuration

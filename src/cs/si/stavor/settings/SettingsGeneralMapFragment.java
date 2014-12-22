@@ -46,7 +46,7 @@ public class SettingsGeneralMapFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences_map);
         
-        ((MainActivity)getActivity()).showTutorialConfigMap();
+        //((MainActivity)getActivity()).showTutorialConfigMap();
     }
     
     @Override

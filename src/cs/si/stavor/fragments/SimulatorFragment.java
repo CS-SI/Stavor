@@ -32,6 +32,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -40,6 +43,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -100,8 +104,6 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 				false);
 		
 		((MainActivity)getActivity()).refreshActionBarIcons();
-		
-		((MainActivity)getActivity()).showTutorialSimulator();
 		
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 		
@@ -275,6 +277,8 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			}
     		
     	});
+    	
+    	showGuideSimulator(rootView);
     	
 		return rootView;
 	}
@@ -557,5 +561,49 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	  
 	  return true;
 	}
+	
+
+	FrameLayout guideFrame;
+    public void showGuideSimulator(View rootView){
+    	
+    	guideFrame = (FrameLayout) rootView.findViewById(R.id.guideLayout);
+    	
+    	String key = getString(R.string.pref_key_guide_simulator);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+    	if(sharedPref.getBoolean(key, Parameters.App.show_guide)){
+    		guideFrame.setVisibility(View.VISIBLE);
+    		guideFrame.setOnClickListener(new OnClickListener(){
+				@Override
+				public void onClick(View arg0) {
+					//Check selection of don't show again
+					CheckBox cb = (CheckBox)arg0.findViewById(R.id.checkBoxGuide);
+					if(cb.isChecked()){
+						String key = getString(R.string.pref_key_guide_simulator);
+				    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+				    	sharedPref.edit().putBoolean(key, false).commit();
+					}
+
+					//arg0.setVisibility(View.GONE);
+					
+					Animation fadeOut = new AlphaAnimation(1.00f, 0.00f);
+	                fadeOut.setDuration(1000);
+	                fadeOut.setAnimationListener(new AnimationListener() {
+	                    public void onAnimationStart(Animation animation) {}
+	                    public void onAnimationRepeat(Animation animation) {}
+	                    public void onAnimationEnd(Animation animation) {
+	                    	guideFrame.setVisibility(View.GONE);
+	                    }
+	                });
+
+	                arg0.startAnimation(fadeOut);
+				}
+    		});
+	    	/*String title = getString(R.string.tutorial_title_simulator);
+	    	String message = getString(R.string.tutorial_message_simulator);
+	    	showTutorialDialog(key, title, message);*/
+    	}else{
+    		guideFrame.setVisibility(View.GONE);
+    	}
+    }
 	
 }

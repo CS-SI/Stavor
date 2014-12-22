@@ -47,7 +47,7 @@ public class SettingsOrbitFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.orbit);
         
-        ((MainActivity)getActivity()).showTutorialConfig();
+        //((MainActivity)getActivity()).showTutorialConfig();
     }
     
     @Override

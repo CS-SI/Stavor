@@ -125,7 +125,7 @@
     
     <string name="tutorial_continue">Continuer</string>
     <string name="tutorial_dont_show_again">Ne pas afficher de nouveau</string>
-    <string name="tutorial_title_simulator">Tutoriel Simulateur</string>
+    <!-- <string name="tutorial_title_simulator">Tutoriel Simulateur</string>
     <string name="tutorial_message_simulator">Vous êtes sur ​​l\'écran du simulateur, ici vous pouvez choisir entre un simulateur local ou distant. Dans le premier, vous trouverez une liste de missions; vous pouvez créer, modifier et sélectionnez la mission pour le simulateur. Le client distant se connecte à un simulateur externe par la réseau. Une fois connecté au simulateur, l\'application va vous rediriger vers l\'écran d\'Attitude.</string>
     <string name="tutorial_title_display">Tutoriel Attitude</string>
     <string name="tutorial_message_display">Vous êtes actuellement sur l\'écran d\'Attitude, ici vous pouvez voir l\'attitude simulée. Vous trouverez les commandes de simulation, un bouton pour sélectionner la vue et un panneau rétractable avec des informations détaillées.</string>
@@ -142,7 +142,8 @@
     <string name="tutorial_message_stations">Vous êtes actuellement sur l\'écran des stations, ici vous pouvez choisir et définir les stations sol.</string>
     <string name="tutorial_title_coverage">Tutoriel Couverture</string>
     <string name="tutorial_message_coverage">Vous êtes sur l\'écran de couverture, ici vous pouvez définir la largeur du faisceau (beamwidth) de l\'antenne/caméra pour calculer le champ de vision sur la Terre.</string>
-    
+     -->
+     
     <string name="dialog_welcome">Bienvenue</string>
     <string name="dialog_error">Erreur</string>
     <string name="dialog_exit">Quitter</string>

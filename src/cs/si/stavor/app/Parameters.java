@@ -17,6 +17,8 @@ public class Parameters {
 		public static final boolean pro_version = false;
 		
 		//FIRST RUN PARAMETERS
+		public static final boolean show_guide = true;
+		//Deprecated: it was the old crappy tutorial based on dialog boxes
 		public static final boolean show_tutorial = false;
 		public static final boolean show_orekit_data_installation_message = false;
 		//If we want to show the sections menu open during the first run of the application and always until user makes use of it then set to false.
@@ -30,7 +32,7 @@ public class Parameters {
 	public static class About {
 		public static final String project_start_date = "2014/04/01";
 		public static final String version_orekit = "6.1";
-		public static final String version_xwalk = "7.36.154.14s";
+		public static final String version_xwalk = "10.39.235.12b";
 		public static final String version_threejs = "r67";
 		public static final String version_gson = "2.2.4";
 		public static final String version_androidcolorpicker = "1.0";
