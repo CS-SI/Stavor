@@ -26,7 +26,9 @@
         android:theme="@style/nonSplashScreenTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" 
+            android:configChanges="orientation|keyboardHidden" >
             <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,12 +44,16 @@
             android:name=".MissionActivity"
             android:label="@string/mission_editor"
             android:theme="@style/nonSplashScreenTheme"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="landscape" 
+            android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:screenOrientation="landscape" 
+            android:configChanges="orientation|keyboardHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
  
