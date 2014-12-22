@@ -24,7 +24,6 @@ import android.app.Fragment;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Paint;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -377,7 +376,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 			for(int i = 0; i < missionsList.getChildCount(); i++){
 				LinearLayout lay = (LinearLayout)missionsList.getChildAt(i);
 				TextView text_id = (TextView)lay.findViewById(R.id.textViewMissionId);
-				TextView text_name = (TextView)lay.findViewById(R.id.textViewMission);
+				//TextView text_name = (TextView)lay.findViewById(R.id.textViewMission);
 				//TextView text_description = (TextView)lay.findViewById(R.id.textViewMissionDescription);
 				ImageView image_selected = (ImageView)lay.findViewById(R.id.imageViewSelection);
 				if(simulator.getSelectedMissionid()==Integer.parseInt(text_id.getText().toString())){

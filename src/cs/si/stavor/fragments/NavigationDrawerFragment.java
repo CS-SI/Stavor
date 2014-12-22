@@ -1,7 +1,6 @@
 package cs.si.stavor.fragments;
 
 import cs.si.stavor.R;
-import cs.si.stavor.MainActivity;
 import cs.si.stavor.app.Parameters;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;

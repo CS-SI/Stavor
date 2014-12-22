@@ -1,7 +1,5 @@
 package cs.si.stavor.fragments;
 
-import org.xwalk.core.XWalkView;
-
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.simulator.Simulator;
 import android.app.Fragment;

@@ -13,7 +13,6 @@ import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.UserMission;
 import cs.si.stavor.dialogs.ErrorDialogFragment;
-import cs.si.stavor.dialogs.TutorialDialogFragment;
 import cs.si.stavor.dialogs.WelcomeDialogFragment;
 import cs.si.stavor.fragments.HudFragment;
 import cs.si.stavor.fragments.MapFragment;
@@ -42,13 +41,9 @@ import android.support.v7.app.ActionBar;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,7 +52,6 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 /**
@@ -128,8 +122,6 @@ public class MainActivity extends ActionBarActivity implements
 	public void raiseLoadBrowserFlagOrbit(){
 		loadBrowserOrbit = true;
 	}
-	// to know when the oncreate and onresume are triggered for the first time
-	private boolean flagActivityFirstExec = false;
 	
     public boolean flag_show_welcome = false;
     
@@ -256,7 +248,6 @@ public class MainActivity extends ActionBarActivity implements
 
         // create the fragment and data the first time
         if (dataFragment == null) {
-        	flagActivityFirstExec=true;
         	((StavorApplication)getApplication()).modelViewId = R.id.menu_views_ref_frame_xyz;
         	((StavorApplication)getApplication()).modelOrbitViewId = R.id.menu_orbviews_free;
 			((StavorApplication)getApplication()).follow_sc = R.id.menu_mapviews_free;
