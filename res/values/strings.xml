@@ -132,6 +132,10 @@
     <string name="tutorial_sim_2a_title">Local:</string>
     <string name="tutorial_sim_2b_title">Remote:</string>
     <string name="tutorial_sim_3">Start the simulator</string>
+    <string name="tutorial_hud_1">Change view</string>
+    <string name="tutorial_hud_2">Control simulation</string>
+    <string name="tutorial_hud_3">Visualization</string>
+    <string name="tutorial_hud_4">Retractable panel</string>
     <!-- <string name="tutorial_title_simulator">Tutorial Simulator</string>
     <string name="tutorial_message_simulator">You are in the Simulator screen, in here you can chose between the local simulator or the remote client. In the first one you will find a list of missions; you can create, edit and select the mission for the simulator. The remote client connects with an external simulator over a network. Once you connect the simulator, the application will redirect you to the Attitude screen.</string>
     <string name="tutorial_title_display">Tutorial Attitude</string>

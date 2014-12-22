@@ -40,8 +40,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@drawable/guide_text"
+                    android:gravity="center_vertical"
                     android:text="@string/tutorial_sim_1"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -59,6 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@drawable/guide_text"
+                    android:gravity="center_vertical"
                     android:text="@string/tutorial_sim_3"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -128,9 +131,11 @@
                         android:id="@+id/TextView02"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
                         android:layout_weight="1"
                         android:text="@string/tutorial_sim_2b"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
+
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

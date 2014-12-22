@@ -125,6 +125,17 @@
     
     <string name="tutorial_continue">Continuar</string>
     <string name="tutorial_dont_show_again">No volver a mostrar</string>
+    
+    <string name="tutorial_sim_1">Seleccione el modo de simulator</string>
+    <string name="tutorial_sim_2a">Escoja una Misión</string>
+    <string name="tutorial_sim_2b">Introduzca los parametros de red del simulador remoto</string>
+    <string name="tutorial_sim_2a_title">Local:</string>
+    <string name="tutorial_sim_2b_title">Remoto:</string>
+    <string name="tutorial_sim_3">Lance el simulador</string>
+    <string name="tutorial_hud_1">Cambiar vista</string>
+    <string name="tutorial_hud_2">Control simulación</string>
+    <string name="tutorial_hud_3">Visualización</string>
+    <string name="tutorial_hud_4">Panel retractable</string>
     <!-- <string name="tutorial_title_simulator">Tutorial Simulador</string>
     <string name="tutorial_message_simulator">Usted se encuentra en la pantalla del Simulador, aquí puede escoger entre el simulador local o el cliente remoto. En el primero, usted encontrará una lista de misiones; puede crear, editar y seleccionar la mision para el simulador. El cliente remoto conecta con un simulador externo a través de la red. Una vez conectado el simulador, la aplicación le redigirá a la pantalla de Actitud.</string>
     <string name="tutorial_title_display">Tutorial Actitud</string>

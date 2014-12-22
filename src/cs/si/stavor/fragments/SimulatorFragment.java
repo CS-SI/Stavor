@@ -596,6 +596,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	                });
 
 	                arg0.startAnimation(fadeOut);
+	                arg0.setOnClickListener(null);
 				}
     		});
 	    	/*String title = getString(R.string.tutorial_title_simulator);

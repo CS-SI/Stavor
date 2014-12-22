@@ -6,19 +6,26 @@ import org.xwalk.core.XWalkView;
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.StavorApplication;
+import cs.si.stavor.app.Parameters;
 import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -164,6 +171,8 @@ public final class HudFragment extends Fragment {
     	    	}
     	    }
     	});
+    	
+    	showGuideVisualization(rootView);
     	
 		return rootView;
 	}
@@ -361,5 +370,49 @@ public final class HudFragment extends Fragment {
         ((ViewGroup) view).removeAllViews();
         }
     }*/
+	
+	FrameLayout guideFrame;
+    public void showGuideVisualization(View rootView){
+    	
+    	guideFrame = (FrameLayout) rootView.findViewById(R.id.guideLayout);
+    	
+    	String key = getString(R.string.pref_key_guide_visualization);
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+    	if(sharedPref.getBoolean(key, Parameters.App.show_guide)){
+    		guideFrame.setVisibility(View.VISIBLE);
+    		guideFrame.setOnClickListener(new OnClickListener(){
+				@Override
+				public void onClick(View arg0) {
+					//Check selection of don't show again
+					CheckBox cb = (CheckBox)arg0.findViewById(R.id.checkBoxGuide);
+					if(cb.isChecked()){
+						String key = getString(R.string.pref_key_guide_visualization);
+				    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+				    	sharedPref.edit().putBoolean(key, false).commit();
+					}
+
+					//arg0.setVisibility(View.GONE);
+					
+					Animation fadeOut = new AlphaAnimation(1.00f, 0.00f);
+	                fadeOut.setDuration(1000);
+	                fadeOut.setAnimationListener(new AnimationListener() {
+	                    public void onAnimationStart(Animation animation) {}
+	                    public void onAnimationRepeat(Animation animation) {}
+	                    public void onAnimationEnd(Animation animation) {
+	                    	guideFrame.setVisibility(View.GONE);
+	                    }
+	                });
+
+	                arg0.startAnimation(fadeOut);
+	                arg0.setOnClickListener(null);
+				}
+    		});
+	    	/*String title = getString(R.string.tutorial_title_simulator);
+	    	String message = getString(R.string.tutorial_message_simulator);
+	    	showTutorialDialog(key, title, message);*/
+    	}else{
+    		guideFrame.setVisibility(View.GONE);
+    	}
+    }
 	
 }
