@@ -126,14 +126,14 @@
     <string name="tutorial_continue">Continuer</string>
     <string name="tutorial_dont_show_again">Ne pas afficher de nouveau</string>
     
-    <string name="tutorial_sim_1">Séleccionnez le mode du simulateur</string>
-    <string name="tutorial_sim_2a">Choisissez une Mission</string>
-    <string name="tutorial_sim_2b">Introduisez les paramètres réseau du simulateur distant</string>
+    <string name="tutorial_sim_1">Sélectionner le mode du simulateur</string>
+    <string name="tutorial_sim_2a">Choisir une Mission</string>
+    <string name="tutorial_sim_2b">Introduire les paramètres réseau du simulateur distant</string>
     <string name="tutorial_sim_2a_title">Local:</string>
     <string name="tutorial_sim_2b_title">Distant:</string>
     <string name="tutorial_sim_3">Lancer le simulateur</string>
     <string name="tutorial_hud_1">Changer vue</string>
-    <string name="tutorial_hud_2">Contrôle simulation</string>
+    <string name="tutorial_hud_2">Contrôler simulation</string>
     <string name="tutorial_hud_3">Visualisation</string>
     <string name="tutorial_hud_4">Panneau rétractable</string>
     <!-- <string name="tutorial_title_simulator">Tutoriel Simulateur</string>
@@ -239,6 +239,7 @@
     <string name="sim_local_mission_not_removable">Cette mission ne peut pas être supprimé</string>
     <string name="sim_local_mission_not_editable">Cette mission ne peut pas être modifié</string>
     <string name="sim_local_select_first_a_mission">Sélectionnez premier la mission</string>
+    <string name="sim_local_start_simulator_first">Lancer le simulateur en premier!</string>
     <string name="select_first_a_station">Sélectionnez premier la station</string>
     <string name="sim_local_simulator_connected">Simulateur lancé!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Erreur , ne pouvait pas désérialiser la mission sélectionnée</string>

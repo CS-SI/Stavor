@@ -65,7 +65,7 @@
                 <TextView
                     android:id="@+id/TextView02"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/guide_text"
@@ -76,7 +76,7 @@
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/guide_text"
@@ -100,7 +100,7 @@
             <TextView
                 android:id="@+id/TextView01"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/guide_text"
                 android:gravity="center_vertical"

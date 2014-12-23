@@ -39,7 +39,7 @@
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/guide_text"
                     android:gravity="center_vertical"
                     android:text="@string/tutorial_sim_1"
@@ -60,7 +60,7 @@
                 <TextView
                     android:id="@+id/TextView01"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/guide_text"
                     android:gravity="center_vertical"
                     android:text="@string/tutorial_sim_3"

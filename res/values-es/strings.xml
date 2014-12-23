@@ -239,6 +239,7 @@
     <string name="sim_local_mission_not_removable">Esta misión no puede ser eliminada</string>
     <string name="sim_local_mission_not_editable">Esta misión no puede ser editada</string>
     <string name="sim_local_select_first_a_mission">Seleccione una misión primero</string>
+    <string name="sim_local_start_simulator_first">Lance primero el simulador!</string>
     <string name="select_first_a_station">Seleccione una estación primero</string>
     <string name="sim_local_simulator_connected">Simulador listo!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Error, no se pudo deserializar la misión seleccionada</string>
