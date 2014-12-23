@@ -493,17 +493,51 @@ public class Simulator {
 						but_play.setVisibility(View.VISIBLE);
 						but_stop.setVisibility(View.VISIBLE);
 						if(getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
-							but_play.setEnabled(false);
-							but_stop.setEnabled(false);
+							//but_play.setEnabled(false);
+							//but_stop.setEnabled(false);
+							but_play.setAlpha(0.4f);
+							but_stop.setAlpha(0.4f);
+							//Listeners
+							but_play.setOnClickListener(new View.OnClickListener() {
+					            public void onClick(View v) {
+					                // Perform action on click
+					            	Toast.makeText(activity.getApplicationContext(), activity.getString(R.string.sim_local_start_simulator_first), Toast.LENGTH_LONG).show();
+					            }
+					        });
+							but_stop.setOnClickListener(new View.OnClickListener() {
+					            public void onClick(View v) {
+					                // Perform action on click
+					            	Toast.makeText(activity.getApplicationContext(), activity.getString(R.string.sim_local_start_simulator_first), Toast.LENGTH_LONG).show();
+					            }
+					        });
 						}else{
-							but_play.setEnabled(true);
-							but_stop.setEnabled(true);
+							//but_play.setEnabled(true);
+							//but_stop.setEnabled(true);
+							but_play.setAlpha(1.0f);
+							but_stop.setAlpha(1.0f);
 							if(getSimulationStatus().equals(SimulationStatus.Play)){
 								//set pause drawable
 								but_play.setImageDrawable(context.getResources().getDrawable(R.drawable.pause));
 							}else{
 								but_play.setImageDrawable(context.getResources().getDrawable(R.drawable.play));
 							}
+							//Listeners
+							but_play.setOnClickListener(new View.OnClickListener() {
+					            public void onClick(View v) {
+					                // Perform action on click
+					            	if(simulationStatus.equals(SimulationStatus.Play)){
+					            		pause();
+					            	}else{
+					            		play();
+					            	}
+					            }
+					        });
+							but_stop.setOnClickListener(new View.OnClickListener() {
+					            public void onClick(View v) {
+					                // Perform action on click
+					            	stop();
+					            }
+					        });
 						}
 					}
 		        }
