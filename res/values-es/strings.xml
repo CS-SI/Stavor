@@ -243,7 +243,7 @@
     <string name="sim_local_simulator_connected">Simulador listo!</string>
     <string name="sim_local_cannot_deserialize_selected_mission">Error, no se pudo deserializar la misión seleccionada</string>
     <string name="sim_local_cannot_find_selected_mission_in_db">Error, no se pudo encontrar la misión seleccionada en la base de datos</string>
-    <string name="cannot_find_selected_mission_in_db">Error, no se pudo encontrar la estación seleccionada en la base de datos</string>
+    <string name="cannot_find_selected_station_in_db">Error, no se pudo encontrar la estación seleccionada en la base de datos</string>
     <string name="sim_orekit_init_error">Error de inicialización del simulador</string>
     <string name="sim_orekit_prop_error">Error de propagación del simulador</string>
     <string name="sim_remote_simulator_connected">Simulador remoto conectado!</string>
