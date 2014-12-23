@@ -3,9 +3,11 @@ package cs.si.stavor;
 import java.util.ArrayList;
 
 
+
 //import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
+import unused.WelcomeDialogFragment;
 import cs.si.stavor.R;
 import cs.si.stavor.app.Installer;
 import cs.si.stavor.app.OrekitInit;
@@ -13,7 +15,6 @@ import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.UserMission;
 import cs.si.stavor.dialogs.ErrorDialogFragment;
-import cs.si.stavor.dialogs.WelcomeDialogFragment;
 import cs.si.stavor.fragments.HudFragment;
 import cs.si.stavor.fragments.MapFragment;
 import cs.si.stavor.fragments.NavigationDrawerFragment;

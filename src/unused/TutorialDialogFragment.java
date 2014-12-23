@@ -1,4 +1,4 @@
-package cs.si.stavor.dialogs;
+package unused;
 
 import cs.si.stavor.R;
 import android.app.AlertDialog;
