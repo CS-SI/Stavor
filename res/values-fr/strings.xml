@@ -134,7 +134,7 @@
     <string name="tutorial_sim_3">Lancer le simulateur</string>
     <string name="tutorial_hud_1">Changer vue</string>
     <string name="tutorial_hud_2">Contrôle simulation</string>
-    <string name="tutorial_hud_3">Visualization</string>
+    <string name="tutorial_hud_3">Visualisation</string>
     <string name="tutorial_hud_4">Panneau rétractable</string>
     <!-- <string name="tutorial_title_simulator">Tutoriel Simulateur</string>
     <string name="tutorial_message_simulator">Vous êtes sur ​​l\'écran du simulateur, ici vous pouvez choisir entre un simulateur local ou distant. Dans le premier, vous trouverez une liste de missions; vous pouvez créer, modifier et sélectionnez la mission pour le simulateur. Le client distant se connecte à un simulateur externe par la réseau. Une fois connecté au simulateur, l\'application va vous rediriger vers l\'écran d\'Attitude.</string>
