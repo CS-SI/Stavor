@@ -5,14 +5,13 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat">
-        <!-- API 14 theme customizations can go here. -->
+    <!-- <style name="AppBaseTheme" parent="Theme.AppCompat">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
     </style>
 	
 	<style name="MyActionBar" parent="Widget.AppCompat.Base.ActionBar">
 	  <item name="android:background">@color/grey5</item>
-	</style>
+	</style> -->
 	
 	<style name="HDivider">
 	    <item name="android:layout_width">match_parent</item>

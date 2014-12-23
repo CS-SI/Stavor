@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 	
+	<string name="stavor_link"><a href="https://play.google.com/store/apps/details?id=cs.si.stavor">DOWNLOAD</a></string>
+    <string name="app_deprecated_message">This application is deprecated! The functionalities of SATCOR have been merged into the application STAVOR. Please replace this application by STAVOR</string>
+    
     <string name="app_exit_prevent_message">Press back again to close this app</string>
     <string name="title_section1">Simulator</string>
     <string name="title_section2">Map</string>

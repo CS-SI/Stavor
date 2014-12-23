@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-	
+    <string name="app_deprecated_message">Cette application est obsolète! Les fonctionnalités de SATCOR ont été combinées avec l\'application STAVOR. Merci de remplacer cette application par STAVOR</string>
     <string name="app_exit_prevent_message">Appuyez de nouveau pour fermer l\'application</string>
     <string name="title_section1">Simulateur</string>
     <string name="title_section2">Carte</string>

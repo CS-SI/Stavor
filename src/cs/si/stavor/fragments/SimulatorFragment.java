@@ -25,6 +25,7 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Paint;
+import android.text.method.LinkMovementMethod;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -263,6 +265,19 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 		    			}
 					}
 				//}
+			}
+    		
+    	});
+    	
+    	FrameLayout deprecatedLayout = (FrameLayout) rootView.findViewById(R.id.deprecatedLayout);
+    	deprecatedLayout.setVisibility(View.VISIBLE);
+    	TextView t2 = (TextView) rootView.findViewById(R.id.textViewLink);
+        t2.setMovementMethod(LinkMovementMethod.getInstance());
+    	
+    	deprecatedLayout.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				arg0.setVisibility(View.GONE);
 			}
     		
     	});

@@ -1,84 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RelativeLayout1"
+    android:id="@+id/globalSimLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
-    android:background="@color/black"
-    android:contentDescription="@string/powered_by" >
+    android:layout_gravity="center_horizontal" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_toLeftOf="@+id/nav_item_icon"
-        android:paddingBottom="32dp"
-        android:text="@string/powered_by"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-    <ImageView
-        android:id="@+id/nav_item_icon"
-        android:layout_width="90dp"
-        android:layout_height="60dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textView1"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/powered_by"
-        android:scaleType="fitCenter"
-        android:src="@drawable/orekit" />
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/nav_item_icon"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:textOff="@string/title_sim_local"
-        android:textOn="@string/title_sim_remote" />
-
-    <ViewSwitcher
-        android:id="@+id/sim_content"
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonConnect"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/nav_item_icon"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/grey5"
-        android:inAnimation="@android:anim/fade_in"
-        android:outAnimation="@android:anim/fade_out" >
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:contentDescription="@string/powered_by" >
 
-        <include
+        <TextView
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            layout="@layout/sim_local" />
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toLeftOf="@+id/nav_item_icon"
+            android:paddingBottom="32dp"
+            android:text="@string/powered_by"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-        <include
+        <ImageView
+            android:id="@+id/nav_item_icon"
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView1"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/powered_by"
+            android:scaleType="fitCenter"
+            android:src="@drawable/orekit" />
+
+        <Switch
+            android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            layout="@layout/sim_remote" />
+            android:layout_alignBottom="@+id/nav_item_icon"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:textOff="@string/title_sim_local"
+            android:textOn="@string/title_sim_remote" />
 
-    </ViewSwitcher>
+        <ViewSwitcher
+            android:id="@+id/sim_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonConnect"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/nav_item_icon"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/grey5"
+            android:inAnimation="@android:anim/fade_in"
+            android:outAnimation="@android:anim/fade_out" >
 
-    <Button
-        android:id="@+id/buttonConnect"
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/sim_local" />
+
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                layout="@layout/sim_remote" />
+        </ViewSwitcher>
+
+        <Button
+            android:id="@+id/buttonConnect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/sim_connect"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/deprecatedLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/sim_connect"
-        android:textColor="@color/white" />
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/alert" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView1"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:linksClickable="true"
+                android:text="@string/app_deprecated_message"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/textViewLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:linksClickable="true"
+                android:text="@string/stavor_link"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </RelativeLayout>
+    </FrameLayout>
 
 </RelativeLayout>
