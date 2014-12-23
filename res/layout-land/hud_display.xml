@@ -85,10 +85,10 @@
                     android:src="@drawable/stop" />
             </LinearLayout>
         </FrameLayout>
-
-        <include layout="@layout/loading_screen" />
     </RelativeLayout>
 
     <include layout="@layout/hud_guide"/>
+
+    <include layout="@layout/loading_screen" />
     
 </RelativeLayout>
