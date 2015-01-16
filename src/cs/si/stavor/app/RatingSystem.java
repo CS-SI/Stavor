@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 public class RatingSystem {
 
-	private static int runs_of_application_before_rate_suggestion = 1;
+	private static int runs_of_application_before_rate_suggestion = 5;
 	private static int runs_of_application_after_rate_suggestion = 2;//Remind me later
 	private static int rate_suggestion_show_delay = 5000;//ms
 	
