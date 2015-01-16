@@ -71,7 +71,7 @@ public class VTS2Orekit {
 			}
 			PVCoordinates pv = new PVCoordinates(position, velocity);
 			Orbit orbit = new KeplerianOrbit(pv, old_state.getFrame(), date, old_state.getMu());
-			Attitude attitude = new Attitude(date, old_state.getFrame(), quaternion, null);
+			Attitude attitude = new Attitude(date, old_state.getFrame(), quaternion, null, null);
 			
 			SpacecraftState state = new SpacecraftState(orbit, attitude, mass);
 			old_state = state;
