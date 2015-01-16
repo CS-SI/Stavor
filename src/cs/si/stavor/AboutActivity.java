@@ -6,8 +6,12 @@ import java.text.SimpleDateFormat;
 import cs.si.stavor.R;
 import cs.si.stavor.app.Parameters;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -78,6 +82,17 @@ public class AboutActivity extends Activity {
 			tx_version_color.setText(Parameters.About.version_androidcolorpicker);
 			tx_version_loader.setText(Parameters.About.version_loader);
 			tx_version_http.setText(Parameters.About.version_http);
+			
+			ImageView img_jocs = (ImageView) findViewById(R.id.imageView2);
+	    	img_jocs.setOnClickListener(new View.OnClickListener(){
+	    	    public void onClick(View v){
+	    	        Intent intent = new Intent();
+	    	        intent.setAction(Intent.ACTION_VIEW);
+	    	        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+	    	        intent.setData(Uri.parse(Parameters.About.jocs_site));
+	    	        startActivity(intent);
+	    	    }
+	    	});
 			
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();

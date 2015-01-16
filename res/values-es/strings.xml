@@ -22,6 +22,13 @@
     <string name="action_reset_conf">Resetear Config.</string>
     <string name="action_reset_db">Resetear Misiones</string>
     <string name="action_about">Acerca de</string>
+    <string name="action_share">Compartir App</string>
+    <string name="action_rate">Valorar App</string>
+    
+    <string name="rate_dialog_rate_app">Valorar Stavor</string>
+    <string name="rate_dialog_rate_message">Si disfruta de Stavor, por favor tome un tiempo para valorar la aplicación. Gracias por su soporte!</string>
+    <string name="rate_dialog_remind_me_later">Recordar luego</string>
+    <string name="rate_dialog_no_thanks">No, gracias</string>
     
     <string name="station_editor">Editor d\'estación</string>
     <string name="station_name">Nombre:</string>
@@ -126,9 +133,9 @@
     <string name="tutorial_continue">Continuar</string>
     <string name="tutorial_dont_show_again">No volver a mostrar</string>
     
-    <string name="tutorial_sim_1">Seleccione el modo de simulator</string>
+    <string name="tutorial_sim_1">Seleccione el modo de simulador</string>
     <string name="tutorial_sim_2a">Escoja una Misión</string>
-    <string name="tutorial_sim_2b">Introduzca los parametros de red del simulador remoto</string>
+    <string name="tutorial_sim_2b">Introduzca los parámetros de red del simulador remoto</string>
     <string name="tutorial_sim_2a_title">Local:</string>
     <string name="tutorial_sim_2b_title">Remoto:</string>
     <string name="tutorial_sim_3">Lance el simulador</string>

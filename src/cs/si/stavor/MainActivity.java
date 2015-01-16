@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 
 
+
+
+
+
+
+
+
+
 //import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
@@ -12,6 +20,7 @@ import cs.si.stavor.R;
 import cs.si.stavor.app.Installer;
 import cs.si.stavor.app.OrekitInit;
 import cs.si.stavor.app.Parameters;
+import cs.si.stavor.app.RatingSystem;
 import cs.si.stavor.database.ReaderDbHelper;
 import cs.si.stavor.database.UserMission;
 import cs.si.stavor.dialogs.ErrorDialogFragment;
@@ -39,11 +48,16 @@ import cs.si.stavor.web.MyUIClient;
 import cs.si.stavor.web.WebAppInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.ShareActionProvider;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -274,6 +288,8 @@ public class MainActivity extends ActionBarActivity implements
             		db_tmp,
             		Parameters.Hud.start_panel_open
             		);
+            
+            RatingSystem.verify(this);
         }
         
         // the data is available in dataFragment.getData()
@@ -282,6 +298,7 @@ public class MainActivity extends ActionBarActivity implements
         
         //Update javascriptInterface
         ((StavorApplication)getApplication()).jsInterface.reconstruct(this, simulator.getSimulationResults());
+        //XGGDEBUG: NullPointer dans cette ligne au dessus quand on ferme l'application
         
         mXwalkView = new XWalkView(this.getApplicationContext(), this);
 		//mXwalkView.setBackgroundResource(R.color.black);
@@ -479,6 +496,19 @@ public class MainActivity extends ActionBarActivity implements
 		//getSupportActionBar().setDisplayShowHomeEnabled(true);
 	}
 	
+	private ShareActionProvider mShareActionProvider;
+	
+	private void launchMarket() {
+	    Uri uri = Uri.parse("market://details?id=" + getPackageName());
+	    Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+	    try {
+	        startActivity(myAppLinkToMarket);
+	    } catch (ActivityNotFoundException e) {
+	        Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show();
+	    }
+	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		//actionBarMenu = menu;
@@ -488,9 +518,23 @@ public class MainActivity extends ActionBarActivity implements
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
 			getMenuInflater().inflate(R.menu.main, menu);
+			
+			// Locate MenuItem with ShareActionProvider
+		    MenuItem item = menu.findItem(R.id.menu_item_share);
+		    //mShareActionProvider = (ShareActionProvider) item.getActionProvider(); 
+		    mShareActionProvider = (ShareActionProvider)
+		            MenuItemCompat.getActionProvider(item);
+		    
+		    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id=cs.si.stavor");
+            shareIntent.setType("text/plain");
+            mShareActionProvider.setShareIntent(shareIntent); 
+		    
 			restoreActionBar();
 			return true;
 		}
+		
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -548,6 +592,8 @@ public class MainActivity extends ActionBarActivity implements
 		}else if (id == R.id.action_map && ((StavorApplication)getApplication()).currentSection!=9) {
 			showSection(8);
 			return true;
+		}else if (id == R.id.menu_item_rate) {
+			launchMarket();
 		}
 		/*if (id == R.id.action_reset_conf) {
 			resetUserConfigShowDialog();
@@ -783,9 +829,17 @@ public class MainActivity extends ActionBarActivity implements
     	newFragment.show(getFragmentManager(), "reset_db");
 	}*/
     
+    Dialog rate_dialog;
+    public void setRateDialog(Dialog dialog){
+    	rate_dialog = dialog;
+    }
+    
     @Override
     protected void onPause() {//Pause simulator and browser
         super.onPause();
+        if(rate_dialog!=null){
+        	rate_dialog.dismiss();
+        }
         /*if(simulator!=null){
         	simulator.pause();
         }*/

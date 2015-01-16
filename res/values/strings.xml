@@ -22,6 +22,13 @@
     <string name="action_reset_conf">Reset Conf.</string>
     <string name="action_reset_db">Reset Missions</string>
     <string name="action_about">About</string>
+    <string name="action_share">Share App</string>
+    <string name="action_rate">Rate App</string>
+    
+    <string name="rate_dialog_rate_app">Rate Stavor</string>
+    <string name="rate_dialog_rate_message">If you enjoy using Stavor, please take a moment to rate it. Thanks for your support!</string>
+    <string name="rate_dialog_remind_me_later">Remind me later</string>
+    <string name="rate_dialog_no_thanks">No, thanks</string>
     
     <string name="station_editor">Station editor</string>
     <string name="station_name">Name:</string>

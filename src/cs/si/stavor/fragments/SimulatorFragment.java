@@ -18,9 +18,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -275,6 +277,17 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 				//}
 			}
     		
+    	});
+    	
+    	ImageView img_orekit = (ImageView)rootView.findViewById(R.id.nav_item_icon);
+    	img_orekit.setOnClickListener(new View.OnClickListener(){
+    	    public void onClick(View v){
+    	        Intent intent = new Intent();
+    	        intent.setAction(Intent.ACTION_VIEW);
+    	        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+    	        intent.setData(Uri.parse(Parameters.About.orekit_site));
+    	        startActivity(intent);
+    	    }
     	});
     	
     	showGuideSimulator(rootView);

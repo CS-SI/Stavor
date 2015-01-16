@@ -88,7 +88,7 @@
 	
 	var performance_level = 3;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
 	
-	//getInitialization();//If used in Android, update the init params with the Android configuration
+	getInitialization();//If used in Android, update the init params with the Android configuration
 	
 	// Segments
 	if(performance_level<1)
@@ -320,11 +320,7 @@ function includeEarth(){
 	containerEarth.position.z	= 0;
 	containerEarth.name = "EARTH";
 	scene.add(containerEarth);
-	if(show_earth){
-		containerEarth.visible = true;
-	}else{
-		containerEarth.visible = false;
-	}
+	
 	/*
 	var geometry	= new THREE.SphereGeometry(1737000*dist_scale, 32, 32);
 	var material	= new THREE.MeshPhongMaterial({
@@ -417,6 +413,12 @@ function includeEarth(){
 		earthCloud.visible = true;
 	}else{
 		earthCloud.visible = false;
+	}
+	
+	if(show_earth){
+		containerEarth.visible = true;
+	}else{
+		containerEarth.visible = false;
 	}
 }
 
