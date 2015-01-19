@@ -12,6 +12,8 @@ public class Parameters {
 	 *
 	 */
 	public static class App {
+		//public static final String google_analytics_property_id = "UA-58638794-1";
+		
 		public static final int splash_min_time_ms = 3000;//[ms] 3.0s min
 		public static final boolean show_tests_section = false;
 		public static final boolean pro_version = false;

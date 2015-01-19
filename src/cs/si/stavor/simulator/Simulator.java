@@ -2,8 +2,13 @@ package cs.si.stavor.simulator;
 
 import org.xwalk.core.XWalkView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
+import cs.si.stavor.StavorApplication;
+import cs.si.stavor.StavorApplication.TrackerName;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import cs.si.stavor.model.Browsers;
@@ -231,6 +236,22 @@ public class Simulator {
 			simulationStatus = SimulationStatus.Pause;
 			playCondition = new ConditionVariable(false);
 			connectThread();
+			
+			//********** Google Analytics ***********
+			boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
+			String remote_str = "Local";
+			if(remote) remote_str = "Remote";
+            // Get tracker.
+            Tracker t = ((StavorApplication) activity.getApplication()).getTracker(
+                TrackerName.APP_TRACKER);
+            t.setScreenName("Simulator");
+            t.send(new HitBuilders.EventBuilder()
+            	.setCategory("Simulator")
+            	.setAction("Connect")
+            	.setLabel(remote_str)
+            	.setValue(1)
+            	.build());
+            //***************************************
 		}
 		return simulatorStatus;
 	}
@@ -244,6 +265,22 @@ public class Simulator {
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
 			resetSelectedMissionId();
 			disconnectThread();
+			
+			//********** Google Analytics ***********
+			boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
+			String remote_str = "Local";
+			if(remote) remote_str = "Remote";
+            // Get tracker.
+            Tracker t = ((StavorApplication) activity.getApplication()).getTracker(
+                TrackerName.APP_TRACKER);
+            t.setScreenName("Simulator");
+            t.send(new HitBuilders.EventBuilder()
+            	.setCategory("Simulator")
+            	.setAction("Disconnect")
+            	.setLabel(remote_str)
+            	.setValue(1)
+            	.build());
+            //***************************************
 		}
 		return simulatorStatus;
 	}
@@ -257,6 +294,22 @@ public class Simulator {
 			if(simulationStatus.equals(SimulationStatus.Pause)){
 				resumeThread();
 				simulationStatus = SimulationStatus.Play;
+				
+				//********** Google Analytics ***********
+				boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
+				String remote_str = "Local";
+				if(remote) remote_str = "Remote";
+	            // Get tracker.
+	            Tracker t = ((StavorApplication) activity.getApplication()).getTracker(
+	                TrackerName.APP_TRACKER);
+	            t.setScreenName("Simulator");
+	            t.send(new HitBuilders.EventBuilder()
+	            	.setCategory("Simulator")
+	            	.setAction("Play")
+	            	.setLabel(remote_str)
+	            	.setValue(1)
+	            	.build());
+	            //***************************************
 			}
 		}
     	setCorrectSimulatorControls();
@@ -272,6 +325,22 @@ public class Simulator {
 			if(simulationStatus.equals(SimulationStatus.Play)){
 				pauseThread();
 				simulationStatus = SimulationStatus.Pause;
+				
+				//********** Google Analytics ***********
+				boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
+				String remote_str = "Local";
+				if(remote) remote_str = "Remote";
+	            // Get tracker.
+	            Tracker t = ((StavorApplication) activity.getApplication()).getTracker(
+	                TrackerName.APP_TRACKER);
+	            t.setScreenName("Simulator");
+	            t.send(new HitBuilders.EventBuilder()
+	            	.setCategory("Simulator")
+	            	.setAction("Pause")
+	            	.setLabel(remote_str)
+	            	.setValue(1)
+	            	.build());
+	            //***************************************
 			}
 		}
     	setCorrectSimulatorControls();
@@ -286,6 +355,22 @@ public class Simulator {
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
 			play();
 			reset=true;
+			
+			//********** Google Analytics ***********
+			boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
+			String remote_str = "Local";
+			if(remote) remote_str = "Remote";
+            // Get tracker.
+            Tracker t = ((StavorApplication) activity.getApplication()).getTracker(
+                TrackerName.APP_TRACKER);
+            t.setScreenName("Simulator");
+            t.send(new HitBuilders.EventBuilder()
+            	.setCategory("Simulator")
+            	.setAction("Stop")
+            	.setLabel(remote_str)
+            	.setValue(1)
+            	.build());
+            //***************************************
 		}
 		return simulationStatus;
 	}

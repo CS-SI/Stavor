@@ -1,7 +1,12 @@
 package cs.si.stavor.settings;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
+import cs.si.stavor.StavorApplication;
+import cs.si.stavor.StavorApplication.TrackerName;
 import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
@@ -21,6 +26,8 @@ public class SettingsMeasuresFragment extends PreferenceFragment {
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
 
+	private static String screenName = "Settings - Measures";
+	
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
@@ -44,6 +51,14 @@ public class SettingsMeasuresFragment extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+      //********** Google Analytics ***********
+	      // Get tracker.
+	      Tracker t = ((StavorApplication) getActivity().getApplication()).getTracker(
+	          TrackerName.APP_TRACKER);
+	      t.setScreenName(screenName);
+	      t.send(new HitBuilders.AppViewBuilder().build());
+	      //***************************************
+	      
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.measures);
         

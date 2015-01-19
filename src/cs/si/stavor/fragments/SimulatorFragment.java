@@ -3,6 +3,7 @@ package cs.si.stavor.fragments;
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.StavorApplication;
+import cs.si.stavor.StavorApplication.TrackerName;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.MissionReaderContract;
 import cs.si.stavor.database.ReaderDbHelper;
@@ -57,6 +58,8 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.commonsware.cwac.loaderex.SQLiteCursorLoader;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 /**
  * Fragment to show all the simulator configurations
@@ -70,6 +73,8 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
 
+	private static String screenName = "Simulator";
+	
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 * @param simulation 
@@ -101,6 +106,15 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		//********** Google Analytics ***********
+        // Get tracker.
+        Tracker t = ((StavorApplication) getActivity().getApplication()).getTracker(
+            TrackerName.APP_TRACKER);
+        t.setScreenName(screenName);
+        t.send(new HitBuilders.AppViewBuilder().build());
+        //***************************************
+		
 		View rootView = inflater.inflate(R.layout.sim, container,
 				false);
 		

@@ -1,7 +1,12 @@
 package cs.si.stavor.app;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.R;
+import cs.si.stavor.StavorApplication;
+import cs.si.stavor.StavorApplication.TrackerName;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ActionBar.LayoutParams;
@@ -23,6 +28,8 @@ public class RatingSystem {
 	private static int runs_of_application_after_rate_suggestion = 2;//Remind me later
 	private static int rate_suggestion_show_delay = 5000;//ms
 	
+	private static String screenName = "RatingDialog";
+	
 	public static void verify(Activity activity){
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
 		boolean show_again = sharedPref.getBoolean(activity.getString(R.string.pref_key_rate_app_show_again), true);
@@ -39,6 +46,14 @@ public class RatingSystem {
 	}
 	
 	private static void showSuggestion(final Activity activity, final SharedPreferences.Editor editor){
+		//********** Google Analytics ***********
+        // Get tracker.
+        Tracker t = ((StavorApplication) activity.getApplication()).getTracker(
+            TrackerName.APP_TRACKER);
+        t.setScreenName(screenName);
+        t.send(new HitBuilders.AppViewBuilder().build());
+        //***************************************
+        
 		final Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 		  @Override
@@ -72,6 +87,19 @@ public class RatingSystem {
 		                }
 		                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + activity.getPackageName())));
 		                dialog.dismiss();
+		                
+		                //********** Google Analytics ***********
+		                // Get tracker.
+		                Tracker t = ((StavorApplication) activity.getApplication()).getTracker(
+		                    TrackerName.APP_TRACKER);
+		                //t.setScreenName(screenName);
+		                t.send(new HitBuilders.EventBuilder()
+		                	.setCategory(screenName)
+		                	.setAction("Rate")
+		                	.setLabel("Rate")
+		                	.setValue(1)
+		                	.build());
+		                //***************************************
 		            }
 		        });        
 		        ll.addView(b1);
@@ -85,6 +113,19 @@ public class RatingSystem {
 		                    editor.commit();
 		                }
 		                dialog.dismiss();
+
+		              //********** Google Analytics ***********
+		                // Get tracker.
+		                Tracker t = ((StavorApplication) activity.getApplication()).getTracker(
+		                    TrackerName.APP_TRACKER);
+		                //t.setScreenName(screenName);
+		                t.send(new HitBuilders.EventBuilder()
+		                	.setCategory(screenName)
+		                	.setAction("Remind")
+		                	.setLabel("Remind")
+		                	.setValue(1)
+		                	.build());
+		                //***************************************
 		            }
 		        });
 		        ll.addView(b2);
@@ -98,6 +139,19 @@ public class RatingSystem {
 		                    editor.commit();
 		                }
 		                dialog.dismiss();
+
+		              //********** Google Analytics ***********
+		                // Get tracker.
+		                Tracker t = ((StavorApplication) activity.getApplication()).getTracker(
+		                    TrackerName.APP_TRACKER);
+		                //t.setScreenName(screenName);
+		                t.send(new HitBuilders.EventBuilder()
+		                	.setCategory(screenName)
+		                	.setAction("No")
+		                	.setLabel("No")
+		                	.setValue(1)
+		                	.build());
+		                //***************************************
 		            }
 		        });
 		        ll.addView(b3);

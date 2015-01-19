@@ -8,7 +8,11 @@ import org.orekit.time.DateTimeComponents;
 import org.orekit.time.TimeScale;
 import org.orekit.time.TimeScalesFactory;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import cs.si.stavor.R;
+import cs.si.stavor.StavorApplication.TrackerName;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.SerializationUtil;
 import cs.si.stavor.database.MissionReaderContract.MissionEntry;
@@ -126,6 +130,19 @@ public class MissionActivity extends Activity{
 						if(isEdit){
 							//Update register with new name and serialized
 							if(editMission()){
+								//********** Google Analytics ***********
+						        // Get tracker.
+						        Tracker t = ((StavorApplication) getApplication()).getTracker(
+						            TrackerName.APP_TRACKER);
+						        t.setScreenName("MissionEditor");
+						        t.send(new HitBuilders.EventBuilder()
+						        	.setCategory("MissionEditor")
+						        	.setAction("Edit")
+						        	.setLabel(mission.mission.name)
+						        	.setValue(1)
+						        	.build());
+						        //***************************************
+						        
 								//((StavorApplication)getApplication()).loader.reset();
 								finish();
 							}else{
@@ -134,6 +151,19 @@ public class MissionActivity extends Activity{
 						}else{
 							//Create new register in db
 							if(addMission()){
+								//********** Google Analytics ***********
+						        // Get tracker.
+						        Tracker t = ((StavorApplication) getApplication()).getTracker(
+						            TrackerName.APP_TRACKER);
+						        t.setScreenName("MissionEditor");
+						        t.send(new HitBuilders.EventBuilder()
+						        	.setCategory("MissionEditor")
+						        	.setAction("Create")
+						        	.setLabel(mission.mission.name)
+						        	.setValue(1)
+						        	.build());
+						        //***************************************
+						        
 								//((StavorApplication)getApplication()).loader.reset();
 								finish();
 							}else{

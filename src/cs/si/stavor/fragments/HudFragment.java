@@ -3,9 +3,13 @@ package cs.si.stavor.fragments;
 
 import org.xwalk.core.XWalkView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.StavorApplication;
+import cs.si.stavor.StavorApplication.TrackerName;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
@@ -48,6 +52,8 @@ public final class HudFragment extends Fragment {
 	 * fragment.
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
+	
+	private static String screenName = "Attitude";
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
@@ -78,6 +84,15 @@ public final class HudFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+
+        //********** Google Analytics ***********
+        // Get tracker.
+        Tracker t = ((StavorApplication) getActivity().getApplication()).getTracker(
+            TrackerName.APP_TRACKER);
+        t.setScreenName(screenName);
+        t.send(new HitBuilders.AppViewBuilder().build());
+        //***************************************
+        
 		View rootView = inflater.inflate(R.layout.hud_display, container,
 				false);
 		
@@ -294,6 +309,20 @@ public final class HudFragment extends Fragment {
                 }
                 views_menu.setText(com_view);
                 mXwalkView.load("javascript:changeView('"+command+"')", null);
+                
+              //********** Google Analytics ***********
+                // Get tracker.
+                Tracker t = ((StavorApplication) getActivity().getApplication()).getTracker(
+                    TrackerName.APP_TRACKER);
+                t.setScreenName(screenName);
+                t.send(new HitBuilders.EventBuilder()
+                	.setCategory(screenName)
+                	.setAction("ChangeView")
+                	.setLabel(command)
+                	.setValue(1)
+                	.build());
+                //***************************************
+                
                 return true;
             }
         });
