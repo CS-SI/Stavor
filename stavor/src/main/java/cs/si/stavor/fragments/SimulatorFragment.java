@@ -296,6 +296,19 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
     	ImageView img_orekit = (ImageView)rootView.findViewById(R.id.nav_item_icon);
     	img_orekit.setOnClickListener(new View.OnClickListener(){
     	    public void onClick(View v){
+                //********** Google Analytics ***********
+                // Get tracker.
+                Tracker t = ((StavorApplication) getActivity().getApplication()).getTracker(
+                        StavorApplication.TrackerName.APP_TRACKER);
+                t.setScreenName("Simulator");
+                t.send(new HitBuilders.EventBuilder()
+                        .setCategory("Link")
+                        .setAction("Orekit")
+                        .setLabel("Orekit")
+                        .setValue(1)
+                        .build());
+                //***************************************
+
     	        Intent intent = new Intent();
     	        intent.setAction(Intent.ACTION_VIEW);
     	        intent.addCategory(Intent.CATEGORY_BROWSABLE);

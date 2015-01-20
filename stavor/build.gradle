@@ -35,31 +35,17 @@ android {
     productFlavors {
         armv7 {
             versionCode Integer.parseInt(defaultConfig.versionCode.toString()+"0")
+            //printf("versionCode: "+ versionCode.toString())
             ndk {
                 abiFilters "armeabi-v7a", ""
             }
-            /*def manifestFile = file("src/main/AndroidManifest.xml")
-            def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
-            def manifestText = manifestFile.getText()
-            def matcher = pattern.matcher(manifestText)
-            matcher.find()
-            def version = Integer.parseInt(matcher.group(1))
-            defaultConfig. versionCode "$version"+2*/
-            //versionCode ""+"2"
         }
         x86 {
             versionCode Integer.parseInt(defaultConfig.versionCode.toString()+"1")
+            //printf("versionCode: "+ versionCode.toString())
             ndk {
                 abiFilters "x86", ""
             }
-            /*def manifestFile = file("AndroidManifest.xml")
-            def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
-            def manifestText = manifestFile.getText()
-            def matcher = pattern.matcher(manifestText)
-            matcher.find()
-            def version = Integer.parseInt(matcher.group(1))
-            versionCode "$version"+4*/
-            //versionCode ""+"4"
         }
     }
 }
