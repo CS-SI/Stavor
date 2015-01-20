@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-import java.util.regex.Pattern
+//import java.util.regex.Pattern
 
 android {
     compileSdkVersion 21
@@ -8,6 +8,8 @@ android {
 
     defaultConfig {
         applicationId "cs.si.stavor"
+        versionCode 210
+        versionName "2.1.0"
         minSdkVersion 14
         targetSdkVersion 21
         // Enabling multidex support.
@@ -30,12 +32,9 @@ android {
         }
     }
 
-    defaultConfig {
-        versionCode getVersionCode()
-    }
-
     productFlavors {
         armv7 {
+            versionCode Integer.parseInt(defaultConfig.versionCode.toString()+"0")
             ndk {
                 abiFilters "armeabi-v7a", ""
             }
@@ -46,9 +45,10 @@ android {
             matcher.find()
             def version = Integer.parseInt(matcher.group(1))
             defaultConfig. versionCode "$version"+2*/
-            //versionCode getVersionCode()+"2"
+            //versionCode ""+"2"
         }
         x86 {
+            versionCode Integer.parseInt(defaultConfig.versionCode.toString()+"1")
             ndk {
                 abiFilters "x86", ""
             }
@@ -59,29 +59,9 @@ android {
             matcher.find()
             def version = Integer.parseInt(matcher.group(1))
             versionCode "$version"+4*/
-            //versionCode getVersionCode()+"4"
+            //versionCode ""+"4"
         }
     }
-
-    /*android.variantFilter { variant ->
-        def flavorString = ""
-        def flavors = variant.getFlavors()
-        for (int i = 0; i < flavors.size(); i++) {
-            flavorString += flavors[i].name;
-        }
-        if(flavorString.equalsIgnoreCase("freeDataset1")) {
-            variant.getDefaultConfig().applicationId "com.beansys.freeappdataset1"
-        }
-        if(flavorString.equalsIgnoreCase("freeDataset2")) {
-            variant.getDefaultConfig().applicationId "com.beansys.freedataset2"
-        }
-        if(flavorString.equalsIgnoreCase("paidDataset1")) {
-            variant.getDefaultConfig().applicationId "com.beansys.dataset1paid"
-        }
-        if(flavorString.equalsIgnoreCase("paidDataset2")) {
-            variant.getDefaultConfig().applicationId "com.beansys.mypaiddataset2"
-        }
-    }*/
 }
 
 repositories {

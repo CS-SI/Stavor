@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cs.si.stavor"
     android:installLocation="auto"
-    android:versionCode="2100"
+    android:versionCode="210"
     android:versionName="2.1.0" >
 
     <!-- VersionCode: [3]version+[1]architecture e.g 1.0.2arm is 1020, 1.1.3x86 is 1131 -->
