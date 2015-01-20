@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+import java.util.regex.Pattern
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -27,10 +29,70 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    defaultConfig {
+        versionCode getVersionCode()
+    }
+
+    productFlavors {
+        armv7 {
+            ndk {
+                abiFilters "armeabi-v7a", ""
+            }
+            /*def manifestFile = file("src/main/AndroidManifest.xml")
+            def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
+            def manifestText = manifestFile.getText()
+            def matcher = pattern.matcher(manifestText)
+            matcher.find()
+            def version = Integer.parseInt(matcher.group(1))
+            defaultConfig. versionCode "$version"+2*/
+            //versionCode getVersionCode()+"2"
+        }
+        x86 {
+            ndk {
+                abiFilters "x86", ""
+            }
+            /*def manifestFile = file("AndroidManifest.xml")
+            def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
+            def manifestText = manifestFile.getText()
+            def matcher = pattern.matcher(manifestText)
+            matcher.find()
+            def version = Integer.parseInt(matcher.group(1))
+            versionCode "$version"+4*/
+            //versionCode getVersionCode()+"4"
+        }
+    }
+
+    /*android.variantFilter { variant ->
+        def flavorString = ""
+        def flavors = variant.getFlavors()
+        for (int i = 0; i < flavors.size(); i++) {
+            flavorString += flavors[i].name;
+        }
+        if(flavorString.equalsIgnoreCase("freeDataset1")) {
+            variant.getDefaultConfig().applicationId "com.beansys.freeappdataset1"
+        }
+        if(flavorString.equalsIgnoreCase("freeDataset2")) {
+            variant.getDefaultConfig().applicationId "com.beansys.freedataset2"
+        }
+        if(flavorString.equalsIgnoreCase("paidDataset1")) {
+            variant.getDefaultConfig().applicationId "com.beansys.dataset1paid"
+        }
+        if(flavorString.equalsIgnoreCase("paidDataset2")) {
+            variant.getDefaultConfig().applicationId "com.beansys.mypaiddataset2"
+        }
+    }*/
+}
+
+repositories {
+    maven {
+        url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
+    }
 }
 
 dependencies {
-    compile project(':crosswalkwebview103923515arm')
+    //compile project(':crosswalkwebview103923515arm')
+    compile 'org.xwalk:xwalk_core_library:10.39.235.15'
     compile 'com.google.android.gms:play-services:+'
     compile 'com.android.support:multidex:1.0.+'
     compile 'com.android.support:appcompat-v7:21.0.3'
@@ -40,3 +102,5 @@ dependencies {
     compile files('libs/httpclientandroidlib-1.2.1.jar')
     compile files('libs/orekit.jar')
 }
+
+
