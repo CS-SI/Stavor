@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="basicindsstr">
+        <item>Tierra</item>
+        <item>Sol</item>
+        <item>Velocidad</item>
+        <item>Aceleración</item>
+        <item>Momento</item>
+    </string-array>
+    <string-array name="basicindsvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array> 
+    <string-array name="missions_menu">
+        <item>Eliminar</item>
+        <item>Copiar</item>
+        <item>Editar</item>
+    </string-array> 
+</resources>

@@ -1,0 +1,75 @@
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_screen_measures">
+    <PreferenceCategory 
+        android:title="@string/pref_inclination"
+        android:key="@string/pref_key_inclination">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_orbital_plane"
+            android:summary="@string/pref_summary_show_orbital_plane"
+            android:title="@string/pref_title_show_orbital_plane"
+            android:defaultValue="false" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="@string/pref_key_plane_xy_color"
+            android:persistent="true"
+            android:summary="@string/pref_summary_plane_xy_color"
+            android:title="@string/pref_title_plane_xy_color"
+            android:defaultValue="@color/pref_def_plane_xy"
+            android:dependency="@string/pref_key_show_orbital_plane" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="@string/pref_key_plane_orb_color"
+            android:persistent="true"
+            android:summary="@string/pref_summary_plane_orb_color"
+            android:title="@string/pref_title_plane_orb_color"
+            android:defaultValue="@color/pref_def_plane_orb"
+            android:dependency="@string/pref_key_show_orbital_plane" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_inclination"
+            android:summary="@string/pref_summary_show_inclination"
+            android:title="@string/pref_title_show_inclination"
+            android:defaultValue="false"
+            android:dependency="@string/pref_key_show_orbital_plane" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_spherical_coords"
+        android:key="@string/pref_key_spherical_coords">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_spheric_coords"
+            android:summary="@string/pref_summary_show_spheric_coords"
+            android:title="@string/pref_title_show_spheric_coords"
+            android:defaultValue="false" />
+        <ListPreference
+            android:key="@string/pref_key_spheric_coords_selection"
+            android:title="@string/pref_title_spheric_coords_selection"
+            android:summary="@string/pref_summary_spheric_coords_selection"
+            android:entries="@array/basicindsstr"
+            android:entryValues="@array/basicindsvalues"
+            android:defaultValue="0"
+            android:dependency="@string/pref_key_show_spheric_coords" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_angle"
+        android:key="@string/pref_key_angle">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_vectors_angle"
+            android:summary="@string/pref_summary_show_vectors_angle"
+            android:title="@string/pref_title_show_vectors_angle"
+            android:defaultValue="false" />
+        <ListPreference
+            android:key="@string/pref_key_vectors_angle_sel1"
+            android:title="@string/pref_title_vectors_angle_sel1"
+            android:summary="@string/pref_summary_vectors_angle_sel1"
+            android:entries="@array/basicindsstr"
+            android:entryValues="@array/basicindsvalues"
+            android:defaultValue="0"
+            android:dependency="@string/pref_key_show_vectors_angle" />
+        <ListPreference
+            android:key="@string/pref_key_vectors_angle_sel2"
+            android:title="@string/pref_title_vectors_angle_sel2"
+            android:summary="@string/pref_summary_vectors_angle_sel2"
+            android:entries="@array/basicindsstr"
+            android:entryValues="@array/basicindsvalues"
+            android:defaultValue="2"
+            android:dependency="@string/pref_key_show_vectors_angle" />
+    </PreferenceCategory>
+</PreferenceScreen>

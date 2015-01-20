@@ -1,0 +1,73 @@
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_screen_orbit">
+    <PreferenceCategory 
+        android:title="@string/pref_category_earth"
+        android:key="@string/pref_key_category_earth">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_earth_axis"
+            android:summary="@string/pref_summary_show_earth_axis"
+            android:title="@string/pref_title_show_earth_axis"
+            android:defaultValue="true" />        
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_earth_orbit"
+            android:summary="@string/pref_summary_show_earth_orbit"
+            android:title="@string/pref_title_show_earth_orbit"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_earth_atmosphere"
+            android:summary="@string/pref_summary_show_earth_atmosphere"
+            android:title="@string/pref_title_show_earth_atmosphere"
+            android:dependency="@string/pref_key_show_earth_orbit"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_earth_clouds"
+            android:summary="@string/pref_summary_show_earth_clouds"
+            android:title="@string/pref_title_show_earth_clouds"
+            android:dependency="@string/pref_key_show_earth_orbit"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_category_ref"
+        android:key="@string/pref_key_category_ref">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_xy_plane"
+            android:summary="@string/pref_summary_show_xy_plane"
+            android:title="@string/pref_title_show_xy_plane"
+            android:defaultValue="false" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="@string/pref_key_color_xy_plane"
+            android:summary="@string/pref_summary_color_xy_plane"
+            android:title="@string/pref_title_color_xy_plane"
+            android:dependency="@string/pref_key_show_xy_plane"
+            android:defaultValue="@color/pref_def_color_xy_plane" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_category_spacecraft"
+        android:key="@string/pref_key_category_spacecraft">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_spacecraft"
+            android:summary="@string/pref_summary_show_spacecraft"
+            android:title="@string/pref_title_show_spacecraft"
+            android:defaultValue="true" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="@string/pref_key_spacecraft_color"
+            android:summary="@string/pref_summary_spacecraft_color"
+            android:title="@string/pref_title_spacecraft_color"
+            android:defaultValue="@color/pref_def_spacecraft_color" />
+    </PreferenceCategory>
+        <PreferenceCategory 
+        android:title="@string/pref_category_orbit"
+        android:key="@string/pref_key_category_orbit">
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="@string/pref_key_orbit_color"
+            android:summary="@string/pref_summary_orbit_color"
+            android:title="@string/pref_title_orbit_color"
+            android:defaultValue="@color/pref_def_orbit_color" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_projection_line"
+            android:summary="@string/pref_summary_show_projection_line"
+            android:title="@string/pref_title_show_projection_line"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

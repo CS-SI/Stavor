@@ -1,0 +1,54 @@
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_screen_preferences">
+    <PreferenceCategory 
+        android:title="@string/pref_performance"
+        android:key="@string/pref_key_performance">
+        <EditTextPreference
+            android:key="@string/pref_key_detail_level"
+            android:summary="@string/pref_summary_detail_level"
+            android:title="@string/pref_title_detail_level"
+            android:defaultValue="3"
+        	android:inputType="number" 
+        	android:maxLength="1"
+            android:numeric="integer" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_fps"
+            android:summary="@string/pref_summary_show_fps"
+            android:title="@string/pref_title_show_fps"
+            android:defaultValue="false" />
+        <EditTextPreference
+            android:key="@string/pref_key_fps_update_skips"
+            android:summary="@string/pref_summary_fps_update_skips"
+            android:title="@string/pref_title_fps_update_skips"
+            android:dependency="@string/pref_key_show_fps"
+            android:defaultValue="60"
+        	android:inputType="number" 
+        	android:maxLength="3"
+            android:numeric="integer" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_general"
+        android:key="@string/pref_key_general">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_sky"
+            android:summary="@string/pref_summary_show_sky"
+            android:title="@string/pref_title_show_sky"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_axis"
+        android:key="@string/pref_key_axis">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_axis"
+            android:summary="@string/pref_summary_show_axis"
+            android:title="@string/pref_title_show_axis"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_axis_labels"
+            android:summary="@string/pref_summary_show_axis_labels"
+            android:title="@string/pref_title_show_axis_labels"
+            android:dependency="@string/pref_key_show_axis"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

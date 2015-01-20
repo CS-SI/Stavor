@@ -1,0 +1,58 @@
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_screen_basic_indicators">
+    <PreferenceCategory 
+        android:title="@string/pref_velocity"
+        android:key="@string/pref_key_velocity">
+        <CheckBoxPreference
+            android:key="@string/pref_key_velocity_show"
+            android:summary="@string/pref_summary_velocity_show"
+            android:title="@string/pref_title_velocity_show"
+            android:defaultValue="true" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="@string/pref_key_velocity_color"
+            android:summary="@string/pref_summary_velocity_color"
+            android:title="@string/pref_title_velocity_color"
+            android:defaultValue="@color/pref_def_velocity" />
+        <EditTextPreference
+            android:key="@string/pref_key_velocity_limit"
+            android:summary="@string/pref_summary_velocity_limit"
+            android:title="@string/pref_title_velocity_limit"
+            android:defaultValue="10"
+            android:numeric="decimal" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_acceleration"
+        android:key="@string/pref_key_acceleration">
+        <CheckBoxPreference
+            android:key="@string/pref_key_acceleration_show"
+            android:summary="@string/pref_summary_acceleration_show"
+            android:title="@string/pref_title_acceleration_show"
+            android:defaultValue="true" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="@string/pref_key_acceleration_color"
+            android:summary="@string/pref_summary_acceleration_color"
+            android:title="@string/pref_title_acceleration_color"
+            android:defaultValue="@color/pref_def_acceleration" />
+        <EditTextPreference
+            android:key="@string/pref_key_acceleration_limit"
+            android:summary="@string/pref_summary_acceleration_limit"
+            android:title="@string/pref_title_acceleration_limit"
+            android:defaultValue="5"
+            android:numeric="decimal" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_momentum"
+        android:key="@string/pref_key_momentum">
+        <CheckBoxPreference
+            android:key="@string/pref_key_momentum_show"
+            android:summary="@string/pref_summary_momentum_show"
+            android:title="@string/pref_title_momentum_show"
+            android:defaultValue="true" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="@string/pref_key_momentum_color"
+            android:summary="@string/pref_summary_momentum_color"
+            android:title="@string/pref_title_momentum_color"
+            android:defaultValue="@color/pref_def_momentum" />
+    </PreferenceCategory>
+</PreferenceScreen>

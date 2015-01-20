@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cs.si.stavor.fragments.OrbitFragment"
+    android:id="@+id/mainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/black"
+    android:gravity="top"
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/simLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/SimControlFrame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" >
+
+        <LinearLayout
+            android:id="@+id/controlsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/imageButtonPlay"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/dummy"
+                android:scaleType="fitCenter"
+                android:src="@drawable/play" />
+
+            <ImageButton
+                android:id="@+id/imageButtonStop"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/dummy"
+                android:scaleType="fitCenter"
+                android:src="@drawable/stop" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/spinnerlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/buttonMissionNew"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/view_selector"
+            android:minHeight="30dp"
+            android:text="@string/menu_views_ref_frame_xyz"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/spinnerlayout"
+        android:layout_marginTop="3dp" >
+
+        <TextView
+            android:id="@+id/textViewFPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fps_zero"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <include layout="@layout/info_panel"/>
+
+    <include layout="@layout/loading_screen"/>
+
+</RelativeLayout>

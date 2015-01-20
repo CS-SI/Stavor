@@ -1,0 +1,138 @@
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_screen_models">
+    <PreferenceCategory 
+    android:title="@string/pref_general2"
+    android:key="@string/pref_key_general2">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_sphere"
+            android:summary="@string/pref_summary_show_sphere"
+            android:title="@string/pref_title_show_sphere"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_mini_spheres"
+            android:summary="@string/pref_summary_show_mini_spheres"
+            android:title="@string/pref_title_show_mini_spheres"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_circles"
+            android:summary="@string/pref_summary_show_circles"
+            android:title="@string/pref_title_show_circles"
+            android:defaultValue="true" />
+        <!-- <CheckBoxPreference
+            android:key="@string/pref_key_show_planes"
+            android:summary="@string/pref_summary_show_planes"
+            android:title="@string/pref_title_show_planes"
+            android:defaultValue="true" /> -->
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_spacecraft"
+        android:key="@string/pref_key_spacecraft">
+        <!-- <CheckBoxPreference
+            android:key="@string/pref_key_show_spacecraft"
+            android:summary="@string/pref_summary_show_spacecraft"
+            android:title="@string/pref_title_show_spacecraft"
+            android:defaultValue="true" /> -->
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_sc_axis"
+            android:summary="@string/pref_summary_show_sc_axis"
+            android:title="@string/pref_title_show_sc_axis"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_engine_texture"
+            android:summary="@string/pref_summary_show_engine_texture"
+            android:title="@string/pref_title_show_engine_texture"
+            android:defaultValue="true" />
+        <!-- android:dependency="@string/pref_key_show_spacecraft"  -->
+    </PreferenceCategory> 
+    <PreferenceCategory 
+        android:title="@string/pref_sun"
+        android:key="@string/pref_key_sun">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_sun"
+            android:summary="@string/pref_summary_show_sun"
+            android:title="@string/pref_title_show_sun"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_sun_texture"
+            android:summary="@string/pref_summary_show_sun_texture"
+            android:title="@string/pref_title_show_sun_texture"
+            android:dependency="@string/pref_key_show_sun"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_sun_rotates"
+            android:summary="@string/pref_summary_sun_rotates"
+            android:title="@string/pref_title_sun_rotates"
+            android:dependency="@string/pref_key_show_sun"
+            android:defaultValue="true" />
+        <EditTextPreference
+            android:key="@string/pref_key_sun_rotation_speed"
+            android:summary="@string/pref_summary_sun_rotation_speed"
+            android:title="@string/pref_title_sun_rotation_speed"
+            android:dependency="@string/pref_key_sun_rotates"
+            android:defaultValue="5"
+        	android:inputType="number" 
+        	android:maxLength="1"
+            android:numeric="integer" />
+        <!-- <CheckBoxPreference
+            android:key="@string/pref_key_sun_simple_glow"
+            android:summary="@string/pref_summary_sun_simple_glow"
+            android:title="@string/pref_title_sun_simple_glow"
+            android:dependency="@string/pref_key_show_sun"
+            android:defaultValue="true" /> -->
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_sun_line"
+            android:summary="@string/pref_summary_show_sun_line"
+            android:title="@string/pref_title_show_sun_line"
+            android:dependency="@string/pref_key_show_sun"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_sun_distance"
+            android:summary="@string/pref_summary_show_sun_distance"
+            android:title="@string/pref_title_show_sun_distance"
+            android:dependency="@string/pref_key_show_sun"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="@string/pref_earth"
+        android:key="@string/pref_key_earth">
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_earth"
+            android:summary="@string/pref_summary_show_earth"
+            android:title="@string/pref_title_show_earth"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_earth_texture"
+            android:summary="@string/pref_summary_show_earth_texture"
+            android:title="@string/pref_title_show_earth_texture"
+            android:dependency="@string/pref_key_show_earth"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_earth_rotates"
+            android:summary="@string/pref_summary_earth_rotates"
+            android:title="@string/pref_title_earth_rotates"
+            android:dependency="@string/pref_key_show_earth"
+            android:defaultValue="true" />
+        <EditTextPreference
+            android:key="@string/pref_key_earth_rotation_speed"
+            android:summary="@string/pref_summary_earth_rotation_speed"
+            android:title="@string/pref_title_earth_rotation_speed"
+            android:dependency="@string/pref_key_earth_rotates"
+            android:defaultValue="2"
+        	android:inputType="number" 
+        	android:maxLength="1"
+            android:numeric="integer" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_earth_line"
+            android:summary="@string/pref_summary_show_earth_line"
+            android:title="@string/pref_title_show_earth_line"
+            android:dependency="@string/pref_key_show_earth"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_earth_distance"
+            android:summary="@string/pref_summary_show_earth_distance"
+            android:title="@string/pref_title_show_earth_distance"
+            android:dependency="@string/pref_key_show_earth"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+</PreferenceScreen>
