@@ -3,9 +3,22 @@ apply plugin: 'com.android.application'
 //import java.util.regex.Pattern
 
 android {
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        //abortOnError false
+    }
+    signingConfigs {
+        config {
+            keyAlias 'Stavor'
+            keyPassword '2TqXSDgA'
+            storeFile file('D:/Users/xgibert/CS/Projets/Stavor_files/Release/Keys_CS_Mobile/releaseKey')
+            storePassword '2TqXSDgA'
+        }
+    }
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
-
     defaultConfig {
         applicationId "cs.si.stavor"
         versionCode 210
@@ -14,8 +27,8 @@ android {
         targetSdkVersion 21
         // Enabling multidex support.
         multiDexEnabled true
+        signingConfig signingConfigs.config
     }
-
     dexOptions {
         javaMaxHeapSize "4g"
 
@@ -24,24 +37,23 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.config
         }
     }
-
     productFlavors {
         armv7 {
-            versionCode Integer.parseInt(defaultConfig.versionCode.toString()+"0")
+            versionCode Integer.parseInt(defaultConfig.versionCode.toString() + "0")
             //printf("versionCode: "+ versionCode.toString())
             ndk {
                 abiFilters "armeabi-v7a", ""
             }
         }
         x86 {
-            versionCode Integer.parseInt(defaultConfig.versionCode.toString()+"1")
+            versionCode Integer.parseInt(defaultConfig.versionCode.toString() + "1")
             //printf("versionCode: "+ versionCode.toString())
             ndk {
                 abiFilters "x86", ""
