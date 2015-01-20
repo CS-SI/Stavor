@@ -77,8 +77,7 @@ public final class SimulatorFragment extends Fragment implements LoaderCallbacks
 	
 	/**
 	 * Returns a new instance of this fragment for the given section number.
-	 * @param simulation 
-	 * @param sim_config 
+	 * @param sectionNumber
 	 */
 	public static SimulatorFragment newInstance(int sectionNumber) {	
 		SimulatorFragment fragment = new SimulatorFragment();

@@ -22,8 +22,7 @@ public class StavorApplication extends MultiDexApplication {
 	private String searchTerm = "";
 	
 	/**
-	 * Used to store the last screen title. For use in
-	 * {@link #restoreActionBar()}.
+	 * Used to store the last screen title. For use in restoreActionBar()
 	 */
 	public CharSequence mTitle;
 	public int currentSection;
@@ -68,6 +67,7 @@ public class StavorApplication extends MultiDexApplication {
 	HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
 	
 	public synchronized Tracker getTracker(TrackerName trackerId) {
+        GoogleAnalytics.getInstance(this).setAppOptOut(BuildConfig.DEBUG);
 		if (!mTrackers.containsKey(trackerId)) {
 	
 			GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
