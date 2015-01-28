@@ -278,19 +278,80 @@
 			var div_map = document.getElementById("DivMap");
 			
 			if(lenum_visualization == enum_visualizations.ATTITUDE){
-				div_attitude.style.display = "block";
-				div_orbit.style.display = "none";
-				div_map.style.display = "none";
+				//Visibility
+				//div_attitude.style.display = "block";
+				//div_orbit.style.display = "none";
+				//div_map.style.display = "none";
+				//Position
+				div_attitude.style.width = "100%";
+				div_attitude.style.height = "100%";
+				div_attitude.style.right = "0";
+				div_attitude.style.bottom = "0";
+				div_attitude.style.zIndex = "1";
+				
+				div_orbit.style.width = "10%";
+				div_orbit.style.height = "10%";
+				div_orbit.style.right = "1%";
+				div_orbit.style.bottom = "1%";
+				div_orbit.style.zIndex = "2";
+				
+				div_map.style.width = "10%";
+				div_map.style.height = "10%";
+				div_map.style.right = "12%";
+				div_map.style.bottom = "1%";
+				div_map.style.zIndex = "2";
+				
 				global_current_visualization = lenum_visualization;
 			}else if(lenum_visualization == enum_visualizations.ORBIT){
-				div_attitude.style.display = "none";
-				div_orbit.style.display = "block";
-				div_map.style.display = "none";
+				//Visibility
+				//div_attitude.style.display = "none";
+				//div_orbit.style.display = "block";
+				//div_map.style.display = "none";
+				//Position
+				div_orbit.style.width = "100%";
+				div_orbit.style.height = "100%";
+				div_orbit.style.right = "0";
+				div_orbit.style.bottom = "0";
+				div_orbit.style.zIndex = "1";
+				
+				div_map.style.width = "10%";
+				div_map.style.height = "10%";
+				div_map.style.right = "1%";
+				div_map.style.bottom = "1%";
+				div_map.style.zIndex = "2";
+				
+				div_attitude.style.width = "10%";
+				div_attitude.style.height = "10%";
+				div_attitude.style.right = "12%";
+				div_attitude.style.bottom = "1%";
+				div_attitude.style.zIndex = "2";
+				
+				
 				global_current_visualization = lenum_visualization;
 			}else if(lenum_visualization == enum_visualizations.MAP){
-				div_attitude.style.display = "none";
-				div_orbit.style.display = "none";
-				div_map.style.display = "block";
+				//Visibility
+				//div_attitude.style.display = "none";
+				//div_orbit.style.display = "none";
+				//div_map.style.display = "block";
+				//Position
+				div_map.style.width = "100%";
+				div_map.style.height = "100%";
+				div_map.style.right = "0";
+				div_map.style.bottom = "0";
+				div_map.style.zIndex = "1";
+				
+				div_attitude.style.width = "10%";
+				div_attitude.style.height = "10%";
+				div_attitude.style.right = "1%";
+				div_attitude.style.bottom = "1%";
+				div_attitude.style.zIndex = "2";
+				
+				div_orbit.style.width = "10%";
+				div_orbit.style.height = "10%";
+				div_orbit.style.right = "12%";
+				div_orbit.style.bottom = "1%";
+				div_orbit.style.zIndex = "2";
+				
 				global_current_visualization = lenum_visualization;
 			}else{
 				error("ERROR: changeVisualization(): the provided visualization enum is not recognized.");
@@ -301,9 +362,10 @@
 <body>
 
 <div id="Loading" style="position: absolute; left:0px; top:0px; background-color:red; width:100%; height: 100%; overflow: hidden; opacity: 0.5; z-index: 1000; text-align: center; display: none;">Loading...</div>
-<div id="DivAttitude" style="position: absolute; left:0px; top:0px; background-color:black; width:100%; height: 100%; overflow: hidden;"></div>
-<div id="DivOrbit" style="position: absolute; left:0px; top:0px; background-color:black; width:100%; height: 100%; overflow: hidden;"></div>
-<div id="DivMap" style="position: absolute; left:0px; top:0px; background-color:white; width:100%; height: 100%; overflow: hidden;"></div>
+
+<div id="DivAttitude" onclick="changeVisualization(enum_visualizations.ATTITUDE)" ></div>
+<div id="DivOrbit" onclick="changeVisualization(enum_visualizations.ORBIT)" ></div>
+<div id="DivMap" onclick="changeVisualization(enum_visualizations.MAP)" ></div>
 
 </body>
 </html>

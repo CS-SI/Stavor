@@ -1,0 +1,40 @@
+Body{
+	background-color: #ffffff;
+	margin: auto;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+#DivAttitude{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+	
+	position: absolute;
+	background-color:black;  
+	overflow: hidden;
+}
+#DivOrbit{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+	
+	position: absolute;
+	background-color:green;  
+	overflow: hidden;
+}
+#DivMap{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+	
+	position: absolute;
+	background-color:blue;  
+	overflow: hidden;
+}
