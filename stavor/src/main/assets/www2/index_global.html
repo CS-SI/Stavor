@@ -176,13 +176,13 @@
 					earth_direction: new THREE.Vector3( 0, 0, 0 ) //Km
 				},
 				earth:{
-					earth_rotation: new THREE.Quaternion( 0, 0, 0, 0 ),	
-					spacecraft_position: new THREE.Vector3( 0, 0, 0 ), //Km
+					earth_rotation: new THREE.Quaternion( 0, 0, 0, 1 ),	
+					spacecraft_position: new THREE.Vector3( 42164000.0,7.337791634217176E-12,-2.010800849831316E-12 ), //Km
 					osculating_orbit:{
-						a: 0,
-						e: 0,
-						i: 0,
-						w: 0,
+						a: 24396159,
+						e: 0.73,
+						i: Math.PI/9,
+						w: Math.PI,
 						raan: 0
 					}
 				},
@@ -237,13 +237,18 @@
 		}
 	</script>
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
+		var global_orbit;
 		window.onload = function () { 
 			//var global_attitude = new Attitude();
-			var global_orbit = new Orbit();
+			global_orbit = new Orbit();
 			changeVisualization(enum_visualizations.ATTITUDE);
+			global_orbit.resizeCanvas();
 		}
 		function error(text){
 			alert(text);
+		}
+		function pushSimulationState(state){
+			global_simulation.results = state;
 		}
 		function changeVisualization(lenum_visualization) {
 			var div_attitude = document.getElementById("DivAttitude");
@@ -305,8 +310,8 @@
 				div_attitude.style.bottom = "1%";
 				div_attitude.style.zIndex = "2";
 				
-				
 				global_current_visualization = lenum_visualization;
+				global_orbit.resizeCanvas();
 			}else if(lenum_visualization == enum_visualizations.MAP){
 				//Visibility
 				//div_attitude.style.display = "none";
@@ -353,7 +358,7 @@
 
 <!-- Modules -->
 	<!-- Attitude -->
-	<script type='text/javascript' src="modules/attitude/interface.js"></script>
+	<!--<script type='text/javascript' src="modules/attitude/interface.js"></script>
 	<script type='text/javascript' src="modules/attitude/components/scene.js"></script>
 	<script type='text/javascript' src="modules/attitude/components/reference.js"></script>
 	<script type='text/javascript' src="modules/attitude/components/spacecraft.js"></script>
@@ -366,17 +371,16 @@
 	<script type='text/javascript' src="modules/attitude/functions.js"></script>
 	<script type='text/javascript' src="modules/attitude/init.js"></script>
 	<script type='text/javascript' src="modules/attitude/update.js"></script>
-	<script type='text/javascript' src="modules/attitude/index.js"></script>
+	<script type='text/javascript' src="modules/attitude/attitude.js"></script>-->
 	<!-- Orbit -->
-	<script type='text/javascript' src="modules/orbit/interface.js"></script>
 	<script type='text/javascript' src="modules/orbit/components/mySprites.js"></script>
-	<script type='text/javascript' src="modules/orbit/index.js"></script>
+	<script type='text/javascript' src="modules/orbit/orbit.js"></script>
 	<!-- Map -->
 	<script type='text/javascript' src="modules/map/components/MultiPath.js"></script>
 	<script type='text/javascript' src="modules/map/components/Stations.js"></script>
 	<script type='text/javascript' src="modules/map/components/Fov.js"></script>
 	<script type='text/javascript' src="modules/map/components/Sun.js"></script>
 	<script type='text/javascript' src="modules/map/interface.js"></script>
-	<script type='text/javascript' src="modules/map/index.js"></script>
+	<script type='text/javascript' src="modules/map/map.js"></script>
 </body>
 </html>

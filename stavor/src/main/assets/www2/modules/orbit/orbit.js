@@ -1,5 +1,11 @@
 var Orbit = function()
 {	
+	// Global pointers
+	var global = global_simulation.config.global;
+	var config = global_simulation.config.orbit;
+	var results = global_simulation.results.earth;
+	var segments = global_3d_segments.orbit;
+	
 	var orbit;
 	var spacecraft;
 	var projection, starSphere, containerEarth;
@@ -10,7 +16,7 @@ var Orbit = function()
 	setLoadingProgress(5);
 	var container, scene, camera, renderer, controls, stats, light, delta;
 	var clock = new THREE.Clock();
-	var onRenderFcts= [];
+	var onRenderFcts = [];
 	var fps_update_counter = 0;
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			SCENE PARAMS (Hard-coded parameters)
@@ -33,79 +39,28 @@ var Orbit = function()
 	
 	var spacecraft_radius = 0.03;
 	
-	
-	
-//-----------------------------------------------------------------------------------------------------------------------
-//			PERFORMANCE VALUES (Set at initialization)
-//-----------------------------------------------------------------------------------------------------------------------
-	
-	/*var show_fps = true;//Show FPS stats in Android
-	var fps_update_skips = 60;
-
-	var show_sky = true;
-
-	var show_axis = true;
-	var show_axis_labels = true;
-
-	var show_earth = true;
-	var show_earth_axis = true;
-	var show_earth_atmosphere = true;
-	var show_earth_clouds = true;
-	var show_xy_plane = true;
-	var color_xy_plane = 0xff0094;
-	
-	var show_spacecraft = true;
-	var spacecraft_color = 0xfff200;
-	var show_projection = true;
-	
-	var orbit_color = 0x00ff00;
-	
-	var performance_level = 3;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
-	
-	getInitialization();//If used in Android, update the init params with the Android configuration
-	
-	// Segments
-	if(performance_level<1)
-		performance_level=1;
-	var segments_scale = performance_level;//Multiply segments of all geometries: 
-	
-	var earth_seg = 32 * segments_scale;
-	var plane_resolution = 20*segments_scale;
-	var spacecraft_seg = 16*segments_scale;*/
-//-----------------------------------------------------------------------------------------------------------------------
-//			DYNAMIC VALUES (Updated at each cycle)
-//-----------------------------------------------------------------------------------------------------------------------
-	
-	/*var value_spacecraft  = new THREE.Vector3(42164000.0,7.337791634217176E-12,-2.010800849831316E-12); //Km
-	var value_earth_rotation = new THREE.Quaternion(0,0,0,1);
-	var value_orbit_a = 24396159;
-	var value_orbit_e = 0.73;
-	var value_orbit_i = Math.PI/9;
-	var value_orbit_w = Math.PI;
-	var value_orbit_raan = 0;*/
 
 	var locked_view = false;
 	
 //-----------------------------------------------------------------------------------------------------------------------
 
-	setLoadingProgress(1);
+	//setLoadingProgress(1);
 	initScene();
-	setLoadingProgress(3);
+	//setLoadingProgress(3);
 	setSky();
 	setAxis();
-	setLoadingProgress(6);
+	//setLoadingProgress(6);
 	includeEarth();
-	setLoadingProgress(8);
+	//setLoadingProgress(8);
 	setXYplane();
-	setLoadingProgress(10);
+	//setLoadingProgress(10);
 	includeSpacecraft();
-	setLoadingProgress(14);
+	//setLoadingProgress(14);
 	includeProjection();
-	setLoadingProgress(18);
+	//setLoadingProgress(18);
 	includeOrbit();
 	
-	
-	setLoadingProgress(100);
+	//setLoadingProgress(100);
 
 	
 	//////////////////////////////////////////////////////////////////////////////////
@@ -128,7 +83,7 @@ var Orbit = function()
 	//////////////////////////////////////////////////////////////////////////////////
 	//		loop runner							//
 	//////////////////////////////////////////////////////////////////////////////////
-	var lastTimeMsec= null
+	var lastTimeMsec = null;
 	requestAnimationFrame(function animate(nowMsec){
 		// keep looping
 		requestAnimationFrame( animate );
@@ -149,42 +104,25 @@ var Orbit = function()
 	})
 
 
-	function render() 
-	{
+	function render() {
 		renderer.render( scene, camera );
 	}
-	function includeOrbit(){
-		//////////////////////////////////////////////////////////////////////////////////
-		//		Orbit						//
-		//////////////////////////////////////////////////////////////////////////////////
-		
-		/*
-		var a=3;
-		var e=0.7;
-		var i = Math.PI/6;
-		var w = Math.PI/9;
-		var raan = Math.PI/2;
-		*/
-		
-		
-		//if(!orbit_init){
-			
+	function includeOrbit() {
+		createOrbit();
+		orbit_init = true;
+		onRenderFcts.push(function(delta, now){
+			scene.remove(orbit);
 			createOrbit();
-			orbit_init = true;
-			onRenderFcts.push(function(delta, now){
-				scene.remove(orbit);
-				createOrbit();
-			});
-		//}
+		});
 	}
 
-	function createOrbit(){
-		var a = value_orbit_a*dist_scale;
-		var f=a*value_orbit_e;
+	function createOrbit() {
+		var a = results.osculating_orbit.a*dist_scale;
+		var f=a*results.osculating_orbit.e;
 		var b = Math.sqrt(a*a-f*f);	
 
 		// Ellipse
-		var material = new THREE.LineBasicMaterial({color:orbit_color, opacity:1});
+		var material = new THREE.LineBasicMaterial({color:config.orbit_color, opacity:1});
 		var ellipse = new THREE.EllipseCurve(0, f, b, a, 0, 2.0 * Math.PI, false);
 		var ellipsePath = new THREE.CurvePath();
 		ellipsePath.add(ellipse);
@@ -192,11 +130,11 @@ var Orbit = function()
 		ellipseGeometry.computeTangents();
 		orbit = new THREE.Line(ellipseGeometry, material);
 		// Argument of the perigee
-		orbit.rotation.z = value_orbit_w+Math.PI/2+value_orbit_raan;
+		orbit.rotation.z = results.osculating_orbit.w+Math.PI/2+results.osculating_orbit.raan;
 		//Inclination
-		var nodeA = new THREE.Vector3(Math.cos(value_orbit_raan),Math.sin(value_orbit_raan),0);
+		var nodeA = new THREE.Vector3(Math.cos(results.osculating_orbit.raan),Math.sin(results.osculating_orbit.raan),0);
 		var quat = new THREE.Quaternion();
-		quat.setFromAxisAngle(nodeA,value_orbit_i);
+		quat.setFromAxisAngle(nodeA,results.osculating_orbit.i);
 		orbit.quaternion.multiplyQuaternions(quat, orbit.quaternion);
 		
 		scene.add( orbit );
@@ -206,20 +144,20 @@ var Orbit = function()
 		//////////////////////////////////////////////////////////////////////////////////
 		//		Spacecraft						//
 		//////////////////////////////////////////////////////////////////////////////////
-		var material = new THREE.MeshBasicMaterial({color:spacecraft_color, opacity:1});
-		var geometry	= new THREE.SphereGeometry(spacecraft_radius, spacecraft_seg, spacecraft_seg);
+		var material = new THREE.MeshBasicMaterial({color:config.spacecraft_color, opacity:1});
+		var geometry	= new THREE.SphereGeometry(spacecraft_radius, segments.spacecraft_seg, segments.spacecraft_seg);
 		spacecraft	= new THREE.Mesh(geometry, material );
 		spacecraft.name = "SPACECRAFT";
 		scene.add(spacecraft);
 		spacecraft_init=true;
 		onRenderFcts.push(function(delta, now){
 			spacecraft.position = new THREE.Vector3(
-				value_spacecraft.x*dist_scale,
-				value_spacecraft.y*dist_scale,
-				value_spacecraft.z*dist_scale
+				results.spacecraft_position.x*dist_scale,
+				results.spacecraft_position.y*dist_scale,
+				results.spacecraft_position.z*dist_scale
 			);					
 		});
-		spacecraft.visible = show_spacecraft;
+		spacecraft.visible = config.show_spacecraft;
 	}
 
 
@@ -231,7 +169,7 @@ var Orbit = function()
 			var vertArray = lineGeometry.vertices;
 			vertArray.push( new THREE.Vector3(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z), new THREE.Vector3(0, 0, 0) );
 			lineGeometry.computeLineDistances();
-			var lineMaterial = new THREE.LineDashedMaterial( { color: spacecraft_color, dashSize: 0.02, gapSize: 0.04 } );
+			var lineMaterial = new THREE.LineDashedMaterial( { color: config.spacecraft_color, dashSize: 0.02, gapSize: 0.04 } );
 			projection = new THREE.Line( lineGeometry, lineMaterial );
 			projection.name = "PROJECTION";
 			scene.add(projection);
@@ -241,11 +179,12 @@ var Orbit = function()
 				projection.geometry.computeLineDistances();
 				projection.geometry.verticesNeedUpdate = true;
 			});
-			projection.visible = show_projection;
+			projection.visible = config.show_projection;
 	}
 
-	function setXYplane(){
-		if(show_xy_plane){
+	function setXYplane()
+	{
+		if(config.show_xy_plane){
 			// points that define shape
 			var pts = [], hls = [];
 			var radius = planes_radius;
@@ -283,7 +222,8 @@ var Orbit = function()
 		}
 	}
 
-	function includeEarth(){
+	function includeEarth()
+	{
 		
 		containerEarth	= new THREE.Object3D();
 		//containerEarth.rotateX(Math.PI/2);
@@ -307,7 +247,7 @@ var Orbit = function()
 		containerEarth.add(moonMesh);
 		*/
 
-		var geometry	= new THREE.SphereGeometry(earth_radius, earth_seg, earth_seg);
+		var geometry	= new THREE.SphereGeometry(earth_radius, segments.earth_seg, segments.earth_seg);
 		var material	= new THREE.MeshPhongMaterial({
 			map		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www2/modules/orbit/textures/earthmap1k.jpg'),
 			bumpMap		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www2/modules/orbit/textures/earthbump1k.jpg'),
@@ -324,7 +264,7 @@ var Orbit = function()
 		onRenderFcts.push(function(delta, now){
 			//earthMesh.rotation.y += 1/32 * delta * accel_time;
 			var offset_quat = new THREE.Quaternion().setFromUnitVectors( new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,1) );
-			earthMesh.quaternion.multiplyQuaternions(value_earth_rotation,offset_quat);
+			earthMesh.quaternion.multiplyQuaternions(results.earth_rotation,offset_quat);
 		})
 
 		//Earth axis
@@ -333,14 +273,14 @@ var Orbit = function()
 		axis_earth.position.set( 0, 0, 0 );
 		axis_earth.name = "EARTH-AXIS"
 		earthMesh.add(axis_earth);
-		if(show_earth_axis){
+		if(config.show_earth_axis){
 			axis_earth.visible = true;
 		}else{
 			axis_earth.visible = false;
 		}
 
 		//Earth atmosphere
-		var geometry	= new THREE.SphereGeometry(earth_radius, earth_seg, earth_seg);
+		var geometry	= new THREE.SphereGeometry(earth_radius, segments.earth_seg, segments.earth_seg);
 		var material	= THREEx.createAtmosphereMaterial();
 		material.uniforms.glowColor.value.set(0x00b3ff);
 		material.uniforms.coeficient.value	= 0.8;
@@ -351,7 +291,7 @@ var Orbit = function()
 		containerEarth.add( mesh );
 		// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
 		
-		var geometry	= new THREE.SphereGeometry(earth_radius, earth_seg, earth_seg);
+		var geometry	= new THREE.SphereGeometry(earth_radius, segments.earth_seg, segments.earth_seg);
 		var material	= THREEx.createAtmosphereMaterial();
 		material.side	= THREE.BackSide;
 		material.uniforms.glowColor.value.set(0x00b3ff);
@@ -362,7 +302,7 @@ var Orbit = function()
 		mesh2.name = "EARTH-ATM-2";
 		containerEarth.add( mesh2 );
 		// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
-		if(show_earth_atmosphere){
+		if(config.show_earth_atmosphere){
 			mesh.visible=true;
 			mesh2.visible=true;
 		}else{
@@ -380,13 +320,13 @@ var Orbit = function()
 			earthCloud.rotation.z += 1/32 * delta * accel_time;		
 		});
 
-		if(show_earth_clouds){
+		if(config.show_earth_clouds){
 			earthCloud.visible = true;
 		}else{
 			earthCloud.visible = false;
 		}
 		
-		if(show_earth){
+		if(config.show_earth){
 			containerEarth.visible = true;
 		}else{
 			containerEarth.visible = false;
@@ -397,12 +337,12 @@ var Orbit = function()
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			REFERENCE AXIS
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(show_axis){
+		if(config.show_axis){
 			var axis = new THREE.AxisHelper( axis_radius );
 			axis.position.set( 0, 0, 0 );
 			scene.add( axis );
 		}
-		if(show_axis_labels){
+		if(config.show_axis_labels){
 			var sprite_X = makeTextSprite( 0, " X ", 
 			{ fontsize: 128, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:174, b:0, a:1.0} } );
 			sprite_X.position.set( axis_radius, 0, 0 );
@@ -425,7 +365,7 @@ var Orbit = function()
 		starSphere = THREEx.Planets.createStarfield();
 		starSphere.name = "STARS";
 		scene.add(starSphere);
-		if(!show_sky){
+		if(!config.show_sky){
 			starSphere.visible = false;
 		}else{
 			starSphere.visible = true;
@@ -448,8 +388,8 @@ var Orbit = function()
 			//renderer.autoClear = true;
 			//renderer.autoClearColor = true;
 			//renderer.setClearColor(0xff0000, 1);
-			if(performance_level<=2)
-				canvasMode(performance_level);
+			if(global.performance_level<=2)
+				canvasMode(global.performance_level);
 		}else{
 			renderer = new THREE.CanvasRenderer();
 			alert('WebGL not supported in this device');
@@ -472,11 +412,13 @@ var Orbit = function()
 		// EVENTS
 		//THREEx.WindowResize(renderer, camera);
 		//THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
-		window.addEventListener( 'resize', onWindowResize, false );
+		
+		//window.addEventListener( 'resize', onWindowResize, false );
+		container.addEventListener("transitionend", onWindowResize, false);
 
 		// CONTROLS
 		//controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls = new THREE.TrackballControls( camera );
+		controls = new THREE.TrackballControls( camera, renderer.domElement);
 		controls.rotateSpeed = 1.0;
 		controls.zoomSpeed = 1.2;
 		controls.panSpeed = 0.8;
@@ -502,14 +444,14 @@ var Orbit = function()
 		//scene.add(light);
 
 		// ambient
-		var ambient = new THREE.AmbientLight( 0xFFFFFF );
+		ambient = new THREE.AmbientLight( 0xFFFFFF );
 		scene.add( ambient );
 		
 		onRenderFcts.push(function(delta, now){
-			if(show_fps){
+			if(global.show_fps){
 				stats.update();
 				fps_update_counter=fps_update_counter+1;
-				if(fps_update_counter>fps_update_skips){
+				if(fps_update_counter>global.fps_update_skips){
 					fps_update_counter=0;	
 					updateFPS();
 				}
@@ -517,9 +459,9 @@ var Orbit = function()
 		})
 	}
 
-	function onWindowResize() {
+	function onWindowResize(){
 
-		camera.aspect = window.innerWidth / window.innerHeight;
+		/*camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -527,6 +469,18 @@ var Orbit = function()
 		controls.handleResize();
 
 		render();
+		*/
+		camera.aspect = container.clientWidth / container.clientHeight;
+		camera.updateProjectionMatrix();
 
+		renderer.setSize( container.clientWidth, container.clientHeight );
+
+		controls.handleResize();
+
+		render();
+	}
+	
+	Orbit.prototype.resizeCanvas = function(){
+		onWindowResize();
 	}
 }
