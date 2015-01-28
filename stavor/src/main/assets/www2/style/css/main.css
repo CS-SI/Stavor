@@ -6,35 +6,44 @@ Body{
 	width: 100%;
 }
 #DivAttitude{
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-	
 	position: absolute;
 	background-color:black;  
 	overflow: hidden;
 }
+.AttitudeToMiniature{
+    -webkit-transition: width 0.5s ease, height 0.2s ease;
+    -moz-transition: width 0.5s ease, height 0.2s ease;
+    -ms-transition: width 0.5s ease, height 0.2s ease;
+    -o-transition: width 0.5s ease, height 0.2s ease;
+    transition: width 0.5s ease, height 0.2s ease;
+}
+.AttitudeToCurrent{
+}
 #DivOrbit{
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-	
 	position: absolute;
 	background-color:green;  
 	overflow: hidden;
 }
+.OrbitToMiniature{
+    -webkit-transition: width 0.5s ease, height 0.2s ease;
+    -moz-transition: width 0.5s ease, height 0.2s ease;
+    -ms-transition: width 0.5s ease, height 0.2s ease;
+    -o-transition: width 0.5s ease, height 0.2s ease;
+    transition: width 0.5s ease, height 0.2s ease;
+}
+.OrbitToCurrent{
+}
 #DivMap{
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-	
 	position: absolute;
 	background-color:blue;  
 	overflow: hidden;
+}
+.MapToMiniature{
+    -webkit-transition: width 0.5s ease, height 0.2s ease;
+    -moz-transition: width 0.5s ease, height 0.2s ease;
+    -ms-transition: width 0.5s ease, height 0.2s ease;
+    -o-transition: width 0.5s ease, height 0.2s ease;
+    transition: width 0.5s ease, height 0.2s ease;
+}
+.MapToCurrent{
 }
