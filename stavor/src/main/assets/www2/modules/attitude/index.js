@@ -1,4 +1,6 @@
-// MAIN
+/*var Attitude = function () 
+{*/
+	// MAIN
 	//***********************************************************************************************************************
 	//		GLOBAL VARIABLES
 	//***********************************************************************************************************************
@@ -218,16 +220,17 @@
 // FUNCTIONS 		
 
 
-function animate() 
-{
-    	requestAnimationFrame( animate );
-	render();		
-	update();
-}
+	function animate() 
+	{
+			requestAnimationFrame( animate );
+		render();		
+		update();
+	}
 
 
 
-function render() 
-{
-	renderer.render( scene, camera );
-}
+	function render() 
+	{
+		renderer.render( scene, camera );
+	}
+//}

@@ -16,7 +16,7 @@ Body{
 	height: 2%;
 	background-color:rgba(255, 255, 255, 0.32);;
 	z-index: 1000;
-	box-shadow: 1px 1px 12px ;
+	box-shadow: 1px 1px 12px #999999;
 	
     -webkit-transition: height 0.5s ease, width 0.2s ease;
     -moz-transition: height 0.5s ease, width 0.2s ease;
@@ -32,7 +32,7 @@ Body{
 	position: absolute;
 	background-color:red;  
 	overflow: hidden;
-	box-shadow: 1px 1px 6px ;
+	box-shadow: 1px 1px 6px #999999;
 }
 .AttitudeToMiniature{
     -webkit-transition: height 0.5s ease, width 0.2s ease;
@@ -47,7 +47,7 @@ Body{
 	position: absolute;
 	background-color:green;  
 	overflow: hidden;
-	box-shadow: 1px 1px 6px ;
+	box-shadow: 1px 1px 6px #999999;
 }
 .OrbitToMiniature{
     -webkit-transition: height 0.5s ease, width 0.2s ease;
@@ -62,7 +62,7 @@ Body{
 	position: absolute;
 	background-color:blue;  
 	overflow: hidden;
-	box-shadow: 1px 1px 6px ;
+	box-shadow: 1px 1px 6px #999999;
 }
 .MapToMiniature{
     -webkit-transition: height 0.5s ease, width 0.2s ease;
