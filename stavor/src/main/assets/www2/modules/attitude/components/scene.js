@@ -23,7 +23,7 @@ function initScene(){
 	}
 	//renderer.setClearColor(0xff0000, 1);
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-	container = document.getElementById( 'ThreeJS' );
+	container = document.getElementById( 'DivAttitude' );
 	container.appendChild( renderer.domElement );
 	renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
 	    event.preventDefault();

@@ -7,7 +7,7 @@ function initEarth(){
 		if(show_earth_texture){	 
 			if(typeof textureEarth === 'undefined'){
 			   // your code here.
-				textureEarth= new THREE.ImageUtils.loadTexture( 'textures/earth/Land_ocean_ice_cloud_2048.jpg' );
+				textureEarth= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/earth/Land_ocean_ice_cloud_2048.jpg' );
 			};
 			var earth_material = new THREE.MeshBasicMaterial( { map: textureEarth, overdraw: true } )
 		}else{

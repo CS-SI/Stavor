@@ -47,9 +47,9 @@ function initSpacecraft(){
 		//scene.add( eng2 );
 		
 		if (sc_show_eng_texture){
-			var noiseTexture = new THREE.ImageUtils.loadTexture( 'textures/lava/cloud.png' );
+			var noiseTexture = new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/cloud.png' );
 			noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping;	
-			var waterTexture = new THREE.ImageUtils.loadTexture( 'textures/water/engine.jpg' );
+			var waterTexture = new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/water/engine.jpg' );
 			waterTexture.wrapS = waterTexture.wrapT = THREE.RepeatWrapping; 
 			// use "this." to create global object
 			this.customUniforms2 = {

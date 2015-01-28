@@ -5,17 +5,41 @@ Body{
 	height: 100%;
 	width: 100%;
 }
+#DivMenu{
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: 20%;
+	height: 2%;
+	background-color:rgba(255, 255, 255, 0.32);;
+	z-index: 1000;
+	box-shadow: 1px 1px 12px ;
+	
+    -webkit-transition: height 0.5s ease, width 0.2s ease;
+    -moz-transition: height 0.5s ease, width 0.2s ease;
+    -ms-transition: height 0.5s ease, width 0.2s ease;
+    -o-transition: height 0.5s ease, width 0.2s ease;
+    transition: height 0.5s ease, width 0.2s ease;
+}
+#DivMenu:hover{
+	height: 15%;
+	width: 100%;
+}
 #DivAttitude{
 	position: absolute;
-	background-color:black;  
+	background-color:red;  
 	overflow: hidden;
+	box-shadow: 1px 1px 6px ;
 }
 .AttitudeToMiniature{
-    -webkit-transition: width 0.5s ease, height 0.2s ease;
-    -moz-transition: width 0.5s ease, height 0.2s ease;
-    -ms-transition: width 0.5s ease, height 0.2s ease;
-    -o-transition: width 0.5s ease, height 0.2s ease;
-    transition: width 0.5s ease, height 0.2s ease;
+    -webkit-transition: height 0.5s ease, width 0.2s ease;
+    -moz-transition: height 0.5s ease, width 0.2s ease;
+    -ms-transition: height 0.5s ease, width 0.2s ease;
+    -o-transition: height 0.5s ease, width 0.2s ease;
+    transition: height 0.5s ease, width 0.2s ease;
 }
 .AttitudeToCurrent{
 }
@@ -23,13 +47,14 @@ Body{
 	position: absolute;
 	background-color:green;  
 	overflow: hidden;
+	box-shadow: 1px 1px 6px ;
 }
 .OrbitToMiniature{
-    -webkit-transition: width 0.5s ease, height 0.2s ease;
-    -moz-transition: width 0.5s ease, height 0.2s ease;
-    -ms-transition: width 0.5s ease, height 0.2s ease;
-    -o-transition: width 0.5s ease, height 0.2s ease;
-    transition: width 0.5s ease, height 0.2s ease;
+    -webkit-transition: height 0.5s ease, width 0.2s ease;
+    -moz-transition: height 0.5s ease, width 0.2s ease;
+    -ms-transition: height 0.5s ease, width 0.2s ease;
+    -o-transition: height 0.5s ease, width 0.2s ease;
+    transition: height 0.5s ease, width 0.2s ease;
 }
 .OrbitToCurrent{
 }
@@ -37,13 +62,14 @@ Body{
 	position: absolute;
 	background-color:blue;  
 	overflow: hidden;
+	box-shadow: 1px 1px 6px ;
 }
 .MapToMiniature{
-    -webkit-transition: width 0.5s ease, height 0.2s ease;
-    -moz-transition: width 0.5s ease, height 0.2s ease;
-    -ms-transition: width 0.5s ease, height 0.2s ease;
-    -o-transition: width 0.5s ease, height 0.2s ease;
-    transition: width 0.5s ease, height 0.2s ease;
+    -webkit-transition: height 0.5s ease, width 0.2s ease;
+    -moz-transition: height 0.5s ease, width 0.2s ease;
+    -ms-transition: height 0.5s ease, width 0.2s ease;
+    -o-transition: height 0.5s ease, width 0.2s ease;
+    transition: height 0.5s ease, width 0.2s ease;
 }
 .MapToCurrent{
 }

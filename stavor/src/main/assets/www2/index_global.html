@@ -28,35 +28,6 @@
 	<script type='text/javascript' src="js/OpenLayers/OpenLayers.mobile.js"></script>
 	<script type='text/javascript' src="js/OpenLayers/mobile.js"></script>
 	
-	<!-- Modules -->
-		<!-- Attitude -->
-		<script type='text/javascript' src="modules/attitude/index.js"></script>
-		<script type='text/javascript' src="modules/attitude/interface.js"></script>
-		<script type='text/javascript' src="modules/attitude/components/scene.js"></script>
-		<script type='text/javascript' src="modules/attitude/components/reference.js"></script>
-		<script type='text/javascript' src="modules/attitude/components/spacecraft.js"></script>
-		<script type='text/javascript' src="modules/attitude/components/angles.js"></script>
-		<script type='text/javascript' src="modules/attitude/components/sun.js"></script>
-		<script type='text/javascript' src="modules/attitude/components/earth.js"></script>
-		<script type='text/javascript' src="modules/attitude/components/indicators.js"></script>
-		<script type='text/javascript' src="modules/attitude/components/view.js"></script>
-		<script type='text/javascript' src="modules/attitude/components/mySprites.js"></script>
-		<script type='text/javascript' src="modules/attitude/functions.js"></script>
-		<script type='text/javascript' src="modules/attitude/init.js"></script>
-		<script type='text/javascript' src="modules/attitude/update.js"></script>
-		<!-- Orbit -->
-		<script type='text/javascript' src="modules/orbit/index.js"></script>
-		<script type='text/javascript' src="modules/orbit/interface.js"></script>
-		<script type='text/javascript' src="modules/orbit/components/mySprites.js"></script>
-		<!-- Map -->
-		<script type='text/javascript' src="modules/map/index.js"></script>
-		<script type='text/javascript' src="modules/map/components/MultiPath.js"></script>
-		<script type='text/javascript' src="modules/map/components/Stations.js"></script>
-		<script type='text/javascript' src="modules/map/components/Fov.js"></script>
-		<script type='text/javascript' src="modules/map/components/Sun.js"></script>
-		<script type='text/javascript' src="modules/map/interface.js"></script>
-		
-	
 	<script type="text/javascript"><!-- CONSTANTS AND ENUMS -->
 		var enum_basic_indicators = {
 			VELOCITY: 0,
@@ -376,5 +347,34 @@
 <div id="DivOrbit" onclick="changeVisualization(enum_visualizations.ORBIT)" ></div>
 <div id="DivMap" onclick="changeVisualization(enum_visualizations.MAP)" ></div>
 
+<div id="DivMenu" ></div>
+
+<!-- Modules -->
+	<!-- Attitude -->
+	<script type='text/javascript' src="modules/attitude/interface.js"></script>
+	<script type='text/javascript' src="modules/attitude/components/scene.js"></script>
+	<script type='text/javascript' src="modules/attitude/components/reference.js"></script>
+	<script type='text/javascript' src="modules/attitude/components/spacecraft.js"></script>
+	<script type='text/javascript' src="modules/attitude/components/angles.js"></script>
+	<script type='text/javascript' src="modules/attitude/components/sun.js"></script>
+	<script type='text/javascript' src="modules/attitude/components/earth.js"></script>
+	<script type='text/javascript' src="modules/attitude/components/indicators.js"></script>
+	<script type='text/javascript' src="modules/attitude/components/view.js"></script>
+	<script type='text/javascript' src="modules/attitude/components/mySprites.js"></script>
+	<script type='text/javascript' src="modules/attitude/functions.js"></script>
+	<script type='text/javascript' src="modules/attitude/init.js"></script>
+	<script type='text/javascript' src="modules/attitude/update.js"></script>
+	<script type='text/javascript' src="modules/attitude/index.js"></script>
+	<!-- Orbit -->
+	<script type='text/javascript' src="modules/orbit/interface.js"></script>
+	<script type='text/javascript' src="modules/orbit/components/mySprites.js"></script>
+	<script type='text/javascript' src="modules/orbit/index.js"></script>
+	<!-- Map -->
+	<script type='text/javascript' src="modules/map/components/MultiPath.js"></script>
+	<script type='text/javascript' src="modules/map/components/Stations.js"></script>
+	<script type='text/javascript' src="modules/map/components/Fov.js"></script>
+	<script type='text/javascript' src="modules/map/components/Sun.js"></script>
+	<script type='text/javascript' src="modules/map/interface.js"></script>
+	<script type='text/javascript' src="modules/map/index.js"></script>
 </body>
 </html>

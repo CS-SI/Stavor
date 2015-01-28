@@ -6,15 +6,15 @@ function initSun(){
 		if(show_sun_texture){
 			if(typeof textureSun === 'undefined'){
 			   // your code here.
-				textureSun= new THREE.ImageUtils.loadTexture( 'textures/lava/lava.jpg' );
+				textureSun= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/lava.jpg' );
 			};
 			if(typeof textureSun2 === 'undefined'){
 			   // your code here.
-				textureSun2= new THREE.ImageUtils.loadTexture( 'textures/lava/cloud.png' );
+				textureSun2= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/cloud.png' );
 			};
 			if(typeof textureSun3 === 'undefined'){
 			   // your code here.
-				textureSun3= new THREE.ImageUtils.loadTexture( 'textures/lava/lava.jpg' );
+				textureSun3= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/lava.jpg' );
 			};
 			// base image texture for mesh
 			var lavaTexture = textureSun;
@@ -109,7 +109,7 @@ function initSun(){
 			// use sprite because it appears the same from all angles
 			if(typeof textureSun4 === 'undefined'){
 			   // your code here.
-				textureSun4= new THREE.ImageUtils.loadTexture( 'textures/lava/glow.png' );
+				textureSun4= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/glow.png' );
 			};
 			var spriteMaterial = new THREE.SpriteMaterial( 
 			{ 
