@@ -26,7 +26,6 @@
 	
 	<!-- OpenLayers -->
 	<script type='text/javascript' src="js/OpenLayers/OpenLayers.mobile.js"></script>
-	<script type='text/javascript' src="js/OpenLayers/mobile.js"></script>
 	
 	<script type="text/javascript"><!-- CONSTANTS AND ENUMS -->
 		var enum_basic_indicators = {
@@ -74,7 +73,7 @@
 		}
 	</script>
 	<script type="text/javascript"><!-- GLOBAL VARIABLES -->
-		var global_current_visualization = enum_visualizations.ATTITUDE;
+		var global_current_visualization = enum_visualizations.ORBITE;
 		var global_simulation = {
 			config:{
 				global:{
@@ -158,7 +157,8 @@
 				map:{
 					zoom: 0,
 					lonLat: new OpenLayers.LonLat( 0, 0 ),
-					stations: undefined,		
+					stations: undefined,
+					show_satellite: true,					
 					show_fov: true,
 					show_track: true,
 					show_sun_icon: true,
@@ -169,11 +169,11 @@
 			results:{
 				spacecraft:{
 					attitude: new THREE.Quaternion(0,0,0,1),			
-					velocity: new THREE.Vector3( 0, 0, 0 ), //Km/s
-					acceleration: new THREE.Vector3( 0, 0, 0 ), //Km/s2
-					momentum: new THREE.Vector3( 0, 0, 0 ),
-					sun_direction: new THREE.Vector3( 0, 0, 0 ), //Km
-					earth_direction: new THREE.Vector3( 0, 0, 0 ) //Km
+					velocity: new THREE.Vector3( 2.83195518282009,-5.49945264687097E-16,-1.1973314470667253 ), //Km/s
+					acceleration: new THREE.Vector3( -4.517719883627554E-4,0.22420886513859567,1.9100613309698625E-4 ), //Km/s2
+					momentum: new THREE.Vector3( 5.048428313412141E10,-3.091270787372526E-6,1.1940655832842628E11 ),
+					sun_direction: new THREE.Vector3( -1.1414775124432093E7,-1.464188429948789E8,7716114.240559303 ), //Km
+					earth_direction: new THREE.Vector3( 7.337791634217176E-12,42164.0,-2.010800849831316E-12 ) //Km
 				},
 				earth:{
 					earth_rotation: new THREE.Quaternion( 0, 0, 0, 1 ),	
@@ -237,12 +237,16 @@
 		}
 	</script>
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
-		var global_orbit;
+		var global_orbit, global_attitude, global_map;
 		window.onload = function () { 
 			//var global_attitude = new Attitude();
+			global_attitude = new Attitude();
 			global_orbit = new Orbit();
+			global_map = new Map();
 			changeVisualization(enum_visualizations.ATTITUDE);
+			global_attitude.resizeCanvas();
 			global_orbit.resizeCanvas();
+			//global_map.resizeCanvas();
 		}
 		function error(text){
 			alert(text);
@@ -253,9 +257,9 @@
 		function changeVisualization(lenum_visualization) {
 			var div_attitude = document.getElementById("DivAttitude");
 			var div_orbit = document.getElementById("DivOrbit");
-			var div_map = document.getElementById("DivMap");
+			var div_map = document.getElementById("map");
 			
-			if(lenum_visualization == enum_visualizations.ATTITUDE){
+			if(lenum_visualization == enum_visualizations.ATTITUDE && global_current_visualization != enum_visualizations.ATTITUDE){
 				//Visibility
 				//div_attitude.style.display = "block";
 				//div_orbit.style.display = "none";
@@ -282,8 +286,9 @@
 				div_map.style.bottom = "1%";
 				div_map.style.zIndex = "2";
 				
+				global_attitude.resizeCanvas();
 				global_current_visualization = lenum_visualization;
-			}else if(lenum_visualization == enum_visualizations.ORBIT){
+			}else if(lenum_visualization == enum_visualizations.ORBIT && global_current_visualization != enum_visualizations.ORBIT){
 				//Visibility
 				//div_attitude.style.display = "none";
 				//div_orbit.style.display = "block";
@@ -312,7 +317,7 @@
 				
 				global_current_visualization = lenum_visualization;
 				global_orbit.resizeCanvas();
-			}else if(lenum_visualization == enum_visualizations.MAP){
+			}else if(lenum_visualization == enum_visualizations.MAP && global_current_visualization != enum_visualizations.MAP){
 				//Visibility
 				//div_attitude.style.display = "none";
 				//div_orbit.style.display = "none";
@@ -340,8 +345,11 @@
 				div_orbit.style.zIndex = "2";
 				
 				global_current_visualization = lenum_visualization;
+				//global_map.resizeCanvas();
 			}else{
-				error("ERROR: changeVisualization(): the provided visualization enum is not recognized.");
+				if(global_current_visualization != lenum_visualization){
+					error("ERROR: changeVisualization(): the provided visualization enum is not recognized.");
+				}
 			}
 		}
 	</script>
@@ -352,35 +360,16 @@
 
 <div id="DivAttitude" onclick="changeVisualization(enum_visualizations.ATTITUDE)" ></div>
 <div id="DivOrbit" onclick="changeVisualization(enum_visualizations.ORBIT)" ></div>
-<div id="DivMap" onclick="changeVisualization(enum_visualizations.MAP)" ></div>
+<div id="map" onclick="changeVisualization(enum_visualizations.MAP)" ></div>
 
 <div id="DivMenu" ></div>
 
 <!-- Modules -->
 	<!-- Attitude -->
-	<!--<script type='text/javascript' src="modules/attitude/interface.js"></script>
-	<script type='text/javascript' src="modules/attitude/components/scene.js"></script>
-	<script type='text/javascript' src="modules/attitude/components/reference.js"></script>
-	<script type='text/javascript' src="modules/attitude/components/spacecraft.js"></script>
-	<script type='text/javascript' src="modules/attitude/components/angles.js"></script>
-	<script type='text/javascript' src="modules/attitude/components/sun.js"></script>
-	<script type='text/javascript' src="modules/attitude/components/earth.js"></script>
-	<script type='text/javascript' src="modules/attitude/components/indicators.js"></script>
-	<script type='text/javascript' src="modules/attitude/components/view.js"></script>
-	<script type='text/javascript' src="modules/attitude/components/mySprites.js"></script>
-	<script type='text/javascript' src="modules/attitude/functions.js"></script>
-	<script type='text/javascript' src="modules/attitude/init.js"></script>
-	<script type='text/javascript' src="modules/attitude/update.js"></script>
-	<script type='text/javascript' src="modules/attitude/attitude.js"></script>-->
+	<script type='text/javascript' src="modules/attitude/attitude.js"></script>
 	<!-- Orbit -->
-	<script type='text/javascript' src="modules/orbit/components/mySprites.js"></script>
 	<script type='text/javascript' src="modules/orbit/orbit.js"></script>
 	<!-- Map -->
-	<script type='text/javascript' src="modules/map/components/MultiPath.js"></script>
-	<script type='text/javascript' src="modules/map/components/Stations.js"></script>
-	<script type='text/javascript' src="modules/map/components/Fov.js"></script>
-	<script type='text/javascript' src="modules/map/components/Sun.js"></script>
-	<script type='text/javascript' src="modules/map/interface.js"></script>
 	<script type='text/javascript' src="modules/map/map.js"></script>
 </body>
 </html>

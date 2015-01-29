@@ -46,10 +46,10 @@ THREE.MomentumHelper = function ( dir, origin, length, hex, headLength, headWidt
 	coneGeometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, - 0.5, 0 ) );
 	//coneGeometry.dynamic = true;
 	
-	if(!canvas_mode)
+	//if(!canvas_mode)
 		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: hex, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } ) );
-	else
-		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: hex } ) );
+	//else
+		//this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: hex } ) );
 	//this.cone = THREE.SceneUtils.createMultiMaterialObject( coneGeometry, materials );
 	this.cone.matrixAutoUpdate = false;
 	this.add( this.cone );
@@ -191,10 +191,10 @@ THREE.TargetHelper = function ( dir, origin, length, hex, headLength, headWidth,
 
 	//coneGeometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, - 0.5, 0 ) );
 
-	if(!canvas_mode)
+	//if(!canvas_mode)
 		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: hex, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } ) );
-	else
-		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: hex } ) );
+	//else
+		//this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: hex } ) );
 	this.cone.matrixAutoUpdate = false;
 	this.add( this.cone );
 
@@ -298,10 +298,10 @@ THREE.VectorHelper = function ( dir, origin, length, color, headLength, headWidt
 	coneGeometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, - 0.5, 0 ) );
 
 	//this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: color } ) );
-	if(!canvas_mode)
+	//if(!canvas_mode)
 		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshLambertMaterial( { color: color, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } ) );
-	else
-		this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: color } ) );
+	//else
+		//this.cone = new THREE.Mesh( coneGeometry, new THREE.MeshBasicMaterial( { color: color } ) );
 
 
 	this.cone.matrixAutoUpdate = false;
