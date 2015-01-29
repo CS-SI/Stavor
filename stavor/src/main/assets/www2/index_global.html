@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, height=device-height, target-densitydpi=device-dpi, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<link rel=stylesheet href="style/css/main.css"/>
+    <link rel="stylesheet" href="style/css/OpenLayers/style.css" type="text/css">
+    <link rel="stylesheet" href="style/css/OpenLayers/style.mobile.css" type="text/css">
 	
 	<!-- ThreeJS -->
 	<script type='text/javascript' src="js/ThreeJS/three.js"></script>
@@ -25,6 +27,7 @@
 	<script type='text/javascript' src="js/ThreeJS/shaders/ShaderSun.js"></script><!-- Sun surface -->
 	
 	<!-- OpenLayers -->
+	<!--<script type='text/javascript' src="js/OpenLayers/OpenLayers.js"></script>-->
 	<script type='text/javascript' src="js/OpenLayers/OpenLayers.mobile.js"></script>
 	
 	<script type="text/javascript"><!-- CONSTANTS AND ENUMS -->
@@ -157,7 +160,7 @@
 				map:{
 					zoom: 0,
 					lonLat: new OpenLayers.LonLat( 0, 0 ),
-					stations: undefined,
+					stations: [],
 					show_satellite: true,					
 					show_fov: true,
 					show_track: true,
@@ -246,7 +249,7 @@
 			changeVisualization(enum_visualizations.ATTITUDE);
 			global_attitude.resizeCanvas();
 			global_orbit.resizeCanvas();
-			//global_map.resizeCanvas();
+			global_map.resizeCanvas();
 		}
 		function error(text){
 			alert(text);
@@ -345,7 +348,7 @@
 				div_orbit.style.zIndex = "2";
 				
 				global_current_visualization = lenum_visualization;
-				//global_map.resizeCanvas();
+				global_map.resizeCanvas();
 			}else{
 				if(global_current_visualization != lenum_visualization){
 					error("ERROR: changeVisualization(): the provided visualization enum is not recognized.");
