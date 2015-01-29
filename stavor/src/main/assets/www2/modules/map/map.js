@@ -610,13 +610,13 @@ function changeView(view_mode){
                 new OpenLayers.Control.PanZoom()*/
 			],
 			layers: [
-				new OpenLayers.Layer.OSM("OpenStreetMap", null, {
+				new OpenLayers.Layer.OSM("OpenStreetMap", ["http://a.basemaps.cartocdn.com/dark_all/${z}/${x}/${y}.png"]/*null*/, {
 					transitionEffect: 'null',
 			wrapDateLine: false
 				})
 			],
 			center: new OpenLayers.LonLat(0, 0),
-			zoom: 0
+			zoom: 1
 		});
 
 		/*map.events.register("moveend", map, function(){
