@@ -289,7 +289,7 @@
 				div_map.style.bottom = "1%";
 				div_map.style.zIndex = "2";
 				
-				global_attitude.resizeCanvas();
+				//global_attitude.resizeCanvas();
 				global_current_visualization = lenum_visualization;
 			}else if(lenum_visualization == enum_visualizations.ORBIT && global_current_visualization != enum_visualizations.ORBIT){
 				//Visibility
@@ -319,7 +319,7 @@
 				div_attitude.style.zIndex = "2";
 				
 				global_current_visualization = lenum_visualization;
-				global_orbit.resizeCanvas();
+				//global_orbit.resizeCanvas();
 			}else if(lenum_visualization == enum_visualizations.MAP && global_current_visualization != enum_visualizations.MAP){
 				//Visibility
 				//div_attitude.style.display = "none";
@@ -348,7 +348,7 @@
 				div_orbit.style.zIndex = "2";
 				
 				global_current_visualization = lenum_visualization;
-				global_map.resizeCanvas();
+				//global_map.resizeCanvas();
 			}else{
 				if(global_current_visualization != lenum_visualization){
 					error("ERROR: changeVisualization(): the provided visualization enum is not recognized.");
@@ -359,13 +359,23 @@
 </head>
 <body>
 
-<div id="Loading" style="position: absolute; left:0px; top:0px; background-color:red; width:100%; height: 100%; overflow: hidden; opacity: 0.5; z-index: 1000; text-align: center; display: none;">Loading...</div>
+<div id="Loading"></div>
 
 <div id="DivAttitude" onclick="changeVisualization(enum_visualizations.ATTITUDE)" ></div>
 <div id="DivOrbit" onclick="changeVisualization(enum_visualizations.ORBIT)" ></div>
 <div id="map" onclick="changeVisualization(enum_visualizations.MAP)" ></div>
 
 <div id="DivMenu" ></div>
+<div id="DivToolbar" >
+	<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator"/>
+	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator"/>
+	<input id="TimeBar" type="range" min="0" max="100" value="0" disabled="true" title="Simulation time"/>
+	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation"/>
+	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation"/>&nbsp;
+	<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation"/>
+	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation"/>&nbsp;&nbsp;
+</div>
+<div id="DivClock" >2014-01-01 20:00:33.1 UTC</div>
 
 <!-- Modules -->
 	<!-- Attitude -->
