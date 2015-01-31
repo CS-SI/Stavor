@@ -242,7 +242,6 @@
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
 		var global_orbit, global_attitude, global_map;
 		window.onload = function () { 
-			//var global_attitude = new Attitude();
 			global_attitude = new Attitude();
 			global_orbit = new Orbit();
 			global_map = new Map();
@@ -250,6 +249,8 @@
 			global_attitude.resizeCanvas();
 			global_orbit.resizeCanvas();
 			global_map.resizeCanvas();
+			
+			hideSplash();
 		}
 		function error(text){
 			alert(text);
@@ -257,6 +258,31 @@
 		function pushSimulationState(state){
 			global_simulation.results = state;
 		}
+		
+		//SplashScreen
+		function hideSplash(){
+			setTimeout(function() { 					
+				var div_splash = document.getElementById("Splash");
+				div_splash.style.visibility = "hidden";
+				div_splash.style.opacity = "0";
+			}, 3000);
+		}
+		//Loading screen
+		/*var isLoading = false;
+		function setLoading(){
+			var div_loading = document.getElementById("Loading");
+			div_loading.style.visibility = "visible";
+			div_loading.style.opacity = "1";
+		}
+		function setLoaded(delay){
+			if(typeof(delay) == undefined) delay = 0; 
+			setTimeout(function() { 					
+				var div_loading = document.getElementById("Loading");
+				div_loading.style.visibility = "hidden";
+				div_loading.style.opacity = "0";
+			}, delay);
+		}*/
+		
 		function changeVisualization(lenum_visualization) {
 			var div_attitude = document.getElementById("DivAttitude");
 			var div_orbit = document.getElementById("DivOrbit");
@@ -359,7 +385,7 @@
 </head>
 <body>
 
-<div id="Loading"></div>
+<div id="Splash"></div>
 
 <div id="DivAttitude" onclick="changeVisualization(enum_visualizations.ATTITUDE)" ></div>
 <div id="DivOrbit" onclick="changeVisualization(enum_visualizations.ORBIT)" ></div>
