@@ -4,10 +4,14 @@
 	<title>STAVOR</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, height=device-height, target-densitydpi=device-dpi, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel=stylesheet href="style/css/main.css"/>
+	<link rel="icon" href="style/icons/capsule.png" />
+	<link rel="stylesheet" href="style/css/main.css"/>
+	<link rel="stylesheet" href="style/css/views.css"/>
     <link rel="stylesheet" href="style/css/OpenLayers/style.css" type="text/css">
     <link rel="stylesheet" href="style/css/OpenLayers/style.mobile.css" type="text/css">
 	
+	<!-- jQuery -->
+	<script type='text/javascript' src="js/jQuery/jquery-2.1.3.min.js"></script>
 	<!-- ThreeJS -->
 	<script type='text/javascript' src="js/ThreeJS/three.js"></script>
 	<script type='text/javascript' src="js/ThreeJS/three.ext.js"></script>	
@@ -30,225 +34,23 @@
 	<!--<script type='text/javascript' src="js/OpenLayers/OpenLayers.js"></script>-->
 	<script type='text/javascript' src="js/OpenLayers/OpenLayers.mobile.js"></script>
 	
-	<script type="text/javascript"><!-- CONSTANTS AND ENUMS -->
-		var enum_basic_indicators = {
-			VELOCITY: 0,
-			ACCELERATION: 1,
-			MOMENTUM: 2,
-			EARTH: 3,
-			SUN: 4
-		};
-		var enum_extra_indicators = {
-			TARGET: 0,
-			VECTOR: 1,
-			DIRECTION: 2
-		};
-		var enum_visualizations = {
-			ATTITUDE: 0,
-			ORBIT: 1,
-			MAP: 2
-		};
-		var enum_rotation_speed = {
-			STOPPED: 0,
-			EXTREMELY_SLOW: 1,
-			VERY_SLOW: 2,
-			SLOW: 3,
-			SLIGHTLY_SLOW: 4,
-			NORMAL: 5,
-			SLIGHTLY_FAST: 6,
-			FAST: 7,
-			VERY_FAST: 8,
-			EXTREMELY_FAST: 9
-		}
-		var enum_performance_level = {
-			VERY_LOW: 1,
-			LOW: 2,
-			NORMAL: 3,
-			HIGH: 4,
-			VERY_HIGH: 5,
-			ULTRA_HIGH: 6,
-			EXTREMELY_HIGH: 7
-		}
-		var enum_fov_type = {
-			NO_POLES: 0,
-			NORTH_POLE: 1,
-			SOUTH_POLE: 2
-		}
-	</script>
-	<script type="text/javascript"><!-- GLOBAL VARIABLES -->
-		var global_current_visualization = enum_visualizations.ORBITE;
-		var global_simulation = {
-			config:{
-				global:{
-					performance_level: enum_performance_level.NORMAL,
-					show_fps: false,
-					fps_update_skips: 60
-				},
-				attitude:{
-					show_sky: true,
-					show_sphere: true,
-					show_mini_spheres: true,
-					show_circles: true,
-					show_axis: true,
-					show_axis_labels: true,
-					//Measures: Inclination, angles and planes
-					show_planes: false,
-					show_orbital_plane: false,
-					plane_xy_color: 0xff0094,
-					plane_orb_color: 0x65ff00,
-					show_inclination: false,
-					//Measures: spheric coordinates
-					show_spheric_coords: false,
-					spheric_coords_selection: enum_basic_indicators.VELOCITY,
-					//Mesures: vector's angle
-					show_vectors_angle: false,
-					vectors_angle_sel1: enum_basic_indicators.VELOCITY,
-					vectors_angle_sel2: enum_basic_indicators.ACCELERATION,
-					//Spacecraft
-					show_sc_axis: true,
-					sc_show_eng_texture: true,
-					//Sun
-					show_sun: true,
-					sun_rotates: true,
-					sun_rotation_speed: enum_rotation_speed.NORMAL,
-					show_sun_texture: true,
-					sun_simple_glow: true,//Recomended to not use the shader glow, problems in android
-					sun_show_line: true,
-					sun_show_dist: true,
-					//Earth
-					show_earth: true,
-					earth_rotates: true,
-					earth_rotation_speed: enum_rotation_speed.VERY_SLOW,
-					show_earth_texture: true,
-					earth_show_line: true,
-					earth_show_dist: true,
-					//Indicators
-					show_velocity: true,
-					color_velocity: 0x001dff,
-					limit_velocity: 10, //Km/s value corresponding to the full length arrow (touching the sphere)
-					show_acceleration: true,
-					color_acceleration: 0xfc00b0,
-					limit_acceleration: 5, //Km/s2 value corresponding to the full length arrow (touching the sphere)
-					show_momentum: true,
-					color_momentum: 0x00fc19,
-					show_target_a: false,
-					color_target_a: 0xff0000,
-					value_target_a: new THREE.Vector3( -5, -5, -5 ),
-					show_vector_a: false,
-					color_vector_a: 0x00fffa,
-					limit_vector_a: 25,// In the same units of the provided value
-					value_vector_a: new THREE.Vector3( -5, -5, -5 ),
-					show_direction_a: false,
-					color_direction_a: 0xffff00,
-					value_direction_a: new THREE.Vector3( -5, -5, -5 )
-				},
-				orbit:{
-					show_sky: true,
-					show_axis: true,
-					show_axis_labels: true,
-					show_earth: true,
-					show_earth_axis: true,
-					show_earth_atmosphere: true,
-					show_earth_clouds: true,
-					show_xy_plane: false,
-					color_xy_plane: 0xff0094,
-					show_spacecraft: true,
-					spacecraft_color: 0xfff200,
-					show_projection: true,
-					orbit_color: 0x00ff00
-				},
-				map:{
-					zoom: 0,
-					lonLat: new OpenLayers.LonLat( 0, 0 ),
-					stations: [],
-					show_satellite: true,					
-					show_fov: true,
-					show_track: true,
-					show_sun_icon: true,
-					show_sun_terminator: true,
-					follow_sc: false
-				}
-			},
-			results:{
-				spacecraft:{
-					attitude: new THREE.Quaternion(0,0,0,1),			
-					velocity: new THREE.Vector3( 2.83195518282009,-5.49945264687097E-16,-1.1973314470667253 ), //Km/s
-					acceleration: new THREE.Vector3( -4.517719883627554E-4,0.22420886513859567,1.9100613309698625E-4 ), //Km/s2
-					momentum: new THREE.Vector3( 5.048428313412141E10,-3.091270787372526E-6,1.1940655832842628E11 ),
-					sun_direction: new THREE.Vector3( -1.1414775124432093E7,-1.464188429948789E8,7716114.240559303 ), //Km
-					earth_direction: new THREE.Vector3( 7.337791634217176E-12,42164.0,-2.010800849831316E-12 ) //Km
-				},
-				earth:{
-					earth_rotation: new THREE.Quaternion( 0, 0, 0, 1 ),	
-					spacecraft_position: new THREE.Vector3( 42164000.0,7.337791634217176E-12,-2.010800849831316E-12 ), //Km
-					osculating_orbit:{
-						a: 24396159,
-						e: 0.73,
-						i: Math.PI/9,
-						w: Math.PI,
-						raan: 0
-					}
-				},
-				map:{
-					sun_position:{
-						lat: 0,//In degrees
-						lon: 0//In degrees
-					},
-					station_areas: [],
-					fov:{
-						fov_type: enum_fov_type.NO_POLES,
-						closed: [],
-						terminator: []
-					},
-					solarTerminator: []
-				}
-			}
-		}
-    
-	</script>
-	<script type="text/javascript"><!-- DERIVATED VARIABLES -->
-		// Segments
-		if(global_simulation.config.global.performance_level<1)
-			global_simulation.config.global.performance_level=1;
-		var segments_scale = global_simulation.config.global.performance_level;//Multiply segments of all geometries:
-
-		var global_3d_segments = {
-			attitude:{
-				sc_body_segments: 8 * segments_scale,
-				sc_window_segments: 10 * segments_scale,
-				sc_engine_segments: 10 * segments_scale,
-				sc_eng_disk_segments: this.sc_engine_segments,
-				sun_seg: 10 * segments_scale,
-				earth_seg: 12 * segments_scale,
-				sphere_segments: 20 * segments_scale,
-				miniSphere_seg: 7 * segments_scale,
-				torus_seg_r: 4 * segments_scale,
-				torus_seg_t: 32 * segments_scale,
-				arc_seg_r: 4 * segments_scale,
-				arc_seg_t: 32 * segments_scale,
-				arrow_segments: 4 * segments_scale,
-				momentum_segments: 4 * segments_scale,
-				target_segments: 8 * segments_scale,
-				arc_resolution: 30 * segments_scale,
-				plane_resolution: 20 * segments_scale
-			},
-			orbit:{
-				earth_seg: 32 * segments_scale,
-				plane_resolution: 20*segments_scale,
-				spacecraft_seg: 16*segments_scale
-			}
-		}
-	</script>
+	<!-- Stavor -->
+	<script type='text/javascript' src="js/Stavor/parameters.js"></script>
+	<script type='text/javascript' src="js/Stavor/constants.js"></script>
+	<script type='text/javascript' src="js/Stavor/enums.js"></script>
+	<script type='text/javascript' src="js/Stavor/variables.js"></script>
+	
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
 		var global_orbit, global_attitude, global_map;
 		window.onload = function () { 
 			global_attitude = new Attitude();
 			global_orbit = new Orbit();
 			global_map = new Map();
-			changeVisualization(enum_visualizations.ATTITUDE);
+			initVisualizations();
+			/*changeVisualization(enum_visualizations.ATTITUDE);
 			global_attitude.resizeCanvas();
 			global_orbit.resizeCanvas();
-			global_map.resizeCanvas();
+			global_map.resizeCanvas();*/
 			
 			hideSplash();
 		}
@@ -282,8 +84,98 @@
 				div_loading.style.opacity = "0";
 			}, delay);
 		}*/
-		
-		function changeVisualization(lenum_visualization) {
+		function prevVisualization(){
+			var div_attitude = document.getElementById("DivAttitude");
+			var div_orbit = document.getElementById("DivOrbit");
+			var div_map = document.getElementById("map");
+			
+			var new_vis = enum_visualizations.ATTITUDE;
+			if(global_current_visualization == enum_visualizations.ATTITUDE){
+				//Slide out Attitude
+				$('#DivAttitude').animate({
+					right: '-100%'
+				},"slow");
+				//Slide in Map
+				div_map.style.right = "100%"; 
+				$('#map').animate({
+					right: '0'
+				},"slow");
+				new_vis = enum_visualizations.MAP;
+			}else if(global_current_visualization == enum_visualizations.ORBIT){
+				//Slide out Orbit
+				$('#DivOrbit').animate({
+					right: '-100%'
+				},"slow");
+				//Slide in Attitude
+				div_attitude.style.right = "100%"; 
+				$('#DivAttitude').animate({
+					right: '0'
+				},"slow");
+				new_vis = enum_visualizations.ATTITUDE;
+			}else if(global_current_visualization == enum_visualizations.MAP){
+				//Slide out Map
+				$('#map').animate({
+					right: '-100%'
+				},"slow");
+				//Slide in Orbit
+				div_orbit.style.right = "100%"; 
+				$('#DivOrbit').animate({
+					right: '0'
+				},"slow");
+				new_vis = enum_visualizations.ORBIT;
+			}else{
+				error("ERROR: prevVisualization(): the current visualization enum is not recognized.");
+			}
+			global_current_visualization = new_vis;
+		}
+		function initVisualizations(){
+			global_current_visualization = enum_visualizations.ATTITUDE;
+		}
+		function nextVisualization(){
+			var div_attitude = document.getElementById("DivAttitude");
+			var div_orbit = document.getElementById("DivOrbit");
+			var div_map = document.getElementById("map");
+			
+			var new_vis = enum_visualizations.ATTITUDE;
+			if(global_current_visualization == enum_visualizations.ATTITUDE){
+				//Slide out Attitude
+				$('#DivAttitude').animate({
+					right: '100%'
+				},"slow");
+				//Slide in Orbit
+				div_orbit.style.right = "-100%"; 
+				$('#DivOrbit').animate({
+					right: '0'
+				},"slow");
+				new_vis = enum_visualizations.ORBIT;
+			}else if(global_current_visualization == enum_visualizations.ORBIT){
+				//Slide out Orbit
+				$('#DivOrbit').animate({
+					right: '100%'
+				},"slow");
+				//Slide in Map
+				div_map.style.right = "-100%"; 
+				$('#map').animate({
+					right: '0'
+				},"slow");
+				new_vis = enum_visualizations.MAP;
+			}else if(global_current_visualization == enum_visualizations.MAP){
+				//Slide out Map
+				$('#map').animate({
+					right: '100%'
+				},"slow");
+				//Slide in Attitude
+				div_attitude.style.right = "-100%"; 
+				$('#DivAttitude').animate({
+					right: '0'
+				},"slow");
+				new_vis = enum_visualizations.ATTITUDE;
+			}else{
+				error("ERROR: nextVisualization(): the current visualization enum is not recognized.");
+			}
+			global_current_visualization = new_vis;
+		}
+		/*function changeVisualization(lenum_visualization) {
 			var div_attitude = document.getElementById("DivAttitude");
 			var div_orbit = document.getElementById("DivOrbit");
 			var div_map = document.getElementById("map");
@@ -380,18 +272,23 @@
 					error("ERROR: changeVisualization(): the provided visualization enum is not recognized.");
 				}
 			}
-		}
+		}*/
 	</script>
 </head>
 <body>
 
 <div id="Splash"></div>
 
-<div id="DivAttitude" onclick="changeVisualization(enum_visualizations.ATTITUDE)" ></div>
-<div id="DivOrbit" onclick="changeVisualization(enum_visualizations.ORBIT)" ></div>
-<div id="map" onclick="changeVisualization(enum_visualizations.MAP)" ></div>
+
+<div id="map" ></div>
+<div id="DivOrbit" ></div>
+<div id="DivAttitude" ></div>
 
 <div id="DivMenu" ></div>
+
+<div id="SlidePrev" onclick="prevVisualization()" ></div>
+<div id="SlideNext" onclick="nextVisualization()" ></div>
+
 <div id="DivToolbar" >
 	<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator"/>
 	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator"/>

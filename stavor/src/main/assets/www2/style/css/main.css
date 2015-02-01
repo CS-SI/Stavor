@@ -32,10 +32,63 @@ html,body{
     -o-transition: visibility 0s linear 0.8s, opacity 0.8s linear;
     transition: visibility 0s linear 0.8s, opacity 0.8s linear;
 }
+#SlidePrev{
+	position: absolute;
+	z-index: 1000; 
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/prev.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+}
+#SlidePrev:active{
+	background-image:  url(../icons/prev_h.png);
+}
+#SlideNext{
+	position: absolute;
+	z-index: 1000; 
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/next.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+}
+#SlideNext:active{
+	background-image:  url(../icons/next_h.png);
+}
 /* #### Portrait #### */
 @media screen and (orientation: portrait){
 	#Splash{
 		background-image:  url(../icons/stavor_port.jpg);
+	}
+	#SlidePrev{
+		left:0px; 
+		top:0px;
+		width:calc(0.75*8vh); 
+		height: 8%; 
+	}
+	#SlideNext{
+		right:0px; 
+		top:0px;
+		width:calc(0.75*8vh); 
+		height: 8%; 
+	}
+}
+/* #### Landscape #### */
+@media screen and (orientation: landscape){
+	#SlidePrev{
+		left:0px; 
+		top:40%;
+		width: calc(0.75*10vh); 
+		height: 10%; 
+	}
+	#SlideNext{
+		right:0px; 
+		top:40%;
+		width: calc(0.75*10vh); 
+		height: 10%; 
 	}
 }
 /* #### Landscape Tablet #### */
@@ -63,7 +116,7 @@ html,body{
 	width: 75%;
 	min-width: 20%;
 	max-width: 75%;
-	z-index: 1000;
+	z-index: 1500;
 	background-color:rgba(255, 255, 255, 0.32);
 }
 .SimControl{
@@ -141,77 +194,7 @@ html,body{
 	height: 15%;
 	width: 100%;
 }
-#DivAttitude{
-	position: absolute;
-	background-color:black;  
-	overflow: hidden;
-	box-shadow: 1px 1px 4px #999999;
-}
-.AttitudeToMiniature{
-    -webkit-transition: height 0.01s ease, width 0.01s ease;
-    -moz-transition: height 0.01s ease, width 0.01s ease;
-    -ms-transition: height 0.01s ease, width 0.01s ease;
-    -o-transition: height 0.01s ease, width 0.01s ease;
-    transition: height 0.01s ease, width 0.01s ease;
-}
-.AttitudeToCurrent{
-    -webkit-transition: height 0.5s ease, width 0.2s ease;
-    -moz-transition: height 0.5s ease, width 0.2s ease;
-    -ms-transition: height 0.5s ease, width 0.2s ease;
-    -o-transition: height 0.5s ease, width 0.2s ease;
-    transition: height 0.5s ease, width 0.2s ease;
-}
-#DivOrbit{
-	width    : 100%;
-	height   : 100%;
-	position: absolute;
-	background-color:black;  
-	overflow: hidden;
-	box-shadow: 1px 1px 4px #999999;
-}
-.OrbitToMiniature{
-    -webkit-transition: height 0.01s ease, width 0.01s ease;
-    -moz-transition: height 0.01s ease, width 0.01s ease;
-    -ms-transition: height 0.01s ease, width 0.01s ease;
-    -o-transition: height 0.01s ease, width 0.01s ease;
-    transition: height 0.01s ease, width 0.01s ease;
-}
-.OrbitToCurrent{
-    -webkit-transition: height 0.5s ease, width 0.2s ease;
-    -moz-transition: height 0.5s ease, width 0.2s ease;
-    -ms-transition: height 0.5s ease, width 0.2s ease;
-    -o-transition: height 0.5s ease, width 0.2s ease;
-    transition: height 0.5s ease, width 0.2s ease;
-}
-/*#DivMap{
-	position: absolute;
-	background-color:blue;  
-	overflow: hidden;
-	box-shadow: 1px 1px 6px #999999;
-}*/
-#map {
-	width    : 100%;
-	height   : 100%;
-	position : absolute;
-	position: absolute;
-	background-color:black;  
-	overflow: hidden;
-	box-shadow: 1px 1px 4px #999999;
-}
-.MapToMiniature{
-    -webkit-transition: height 0.01s ease, width 0.01s ease;
-    -moz-transition: height 0.01s ease, width 0.01s ease;
-    -ms-transition: height 0.01s ease, width 0.01s ease;
-    -o-transition: height 0.01s ease, width 0.01s ease;
-    transition: height 0.01s ease, width 0.01s ease;
-}
-.MapToCurrent{
-    -webkit-transition: height 0.5s ease, width 0.2s ease;
-    -moz-transition: height 0.5s ease, width 0.2s ease;
-    -ms-transition: height 0.5s ease, width 0.2s ease;
-    -o-transition: height 0.5s ease, width 0.2s ease;
-    transition: height 0.5s ease, width 0.2s ease;
-}
+
 
 
 
@@ -227,4 +210,35 @@ html,body{
 }
 #title, #tags, #shortdesc {
 	display: none;
+}
+
+
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #000099;
+    margin-top: -6px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
 }
