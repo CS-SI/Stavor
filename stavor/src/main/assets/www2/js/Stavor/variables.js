@@ -72,7 +72,7 @@ var global_simulation = {
 			show_earth_axis: true,
 			show_earth_atmosphere: true,
 			show_earth_clouds: true,
-			show_xy_plane: false,
+			show_xy_plane: true,
 			color_xy_plane: 0xff0094,
 			show_spacecraft: true,
 			spacecraft_color: 0xfff200,

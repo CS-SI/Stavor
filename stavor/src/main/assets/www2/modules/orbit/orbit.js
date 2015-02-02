@@ -190,8 +190,8 @@ var Orbit = function()
 			var radius = planes_radius;
 			var radius_ext = planes_width;
 
-			for ( i = 0; i < config.plane_resolution; i ++ ) {
-				var a = 2*Math.PI * i / plane_resolution;
+			for ( i = 0; i < segments.plane_resolution; i ++ ) {
+				var a = 2*Math.PI * i / segments.plane_resolution;
 				pts.push( new THREE.Vector2 ( Math.cos( a ) * radius_ext, Math.sin( a ) * radius_ext ) );
 				hls.push( new THREE.Vector2 ( Math.cos( a ) * radius, Math.sin( a ) * radius ) );
 			}
@@ -216,7 +216,7 @@ var Orbit = function()
 			// mesh
 			var plane_xy = new THREE.Mesh( 
 				geometry, 
-				new THREE.MeshBasicMaterial( { color: color_xy_plane, transparent: true, opacity: 0.2 } )
+				new THREE.MeshBasicMaterial( { color: config.color_xy_plane, transparent: true, opacity: 0.2 } )
 			);
 			scene.add( plane_xy );
 		}
