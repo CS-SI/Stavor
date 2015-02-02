@@ -7,6 +7,7 @@
 	<link rel="icon" href="style/icons/capsule.png" />
 	<link rel="stylesheet" href="style/css/main.css"/>
 	<link rel="stylesheet" href="style/css/views.css"/>
+	<link rel="stylesheet" href="style/css/leds.css"/>
     <link rel="stylesheet" href="style/css/OpenLayers/style.css" type="text/css">
     <link rel="stylesheet" href="style/css/OpenLayers/style.mobile.css" type="text/css">
 	
@@ -84,6 +85,31 @@
 				div_loading.style.opacity = "0";
 			}, delay);
 		}*/
+		function initVisualizations(){
+			global_current_visualization = enum_visualizations.ATTITUDE;
+			updateLeds();
+		}
+		function updateLeds(){
+			var led_attitude = document.getElementById("LedAttitude");
+			var led_orbit = document.getElementById("LedOrbit");
+			var led_map = document.getElementById("LedMap");
+			
+			if(global_current_visualization == enum_visualizations.ATTITUDE){
+				led_attitude.className = "Led LedSelected";
+				led_orbit.className = "Led LedUnselected";
+				led_map.className = "Led LedUnselected";
+			}else if(global_current_visualization == enum_visualizations.ORBIT){
+				led_attitude.className = "Led LedUnselected";
+				led_orbit.className = "Led LedSelected";
+				led_map.className = "Led LedUnselected";
+			}else if(global_current_visualization == enum_visualizations.MAP){
+				led_attitude.className = "Led LedUnselected";
+				led_orbit.className = "Led LedUnselected";
+				led_map.className = "Led LedSelected";
+			}else{
+				error("ERROR: updateLeds(): the current visualization enum is not recognized.");
+			}
+		}
 		function prevVisualization(){
 			var div_attitude = document.getElementById("DivAttitude");
 			var div_orbit = document.getElementById("DivOrbit");
@@ -127,9 +153,7 @@
 				error("ERROR: prevVisualization(): the current visualization enum is not recognized.");
 			}
 			global_current_visualization = new_vis;
-		}
-		function initVisualizations(){
-			global_current_visualization = enum_visualizations.ATTITUDE;
+			updateLeds();
 		}
 		function nextVisualization(){
 			var div_attitude = document.getElementById("DivAttitude");
@@ -174,6 +198,7 @@
 				error("ERROR: nextVisualization(): the current visualization enum is not recognized.");
 			}
 			global_current_visualization = new_vis;
+			updateLeds();
 		}
 		/*function changeVisualization(lenum_visualization) {
 			var div_attitude = document.getElementById("DivAttitude");
@@ -299,6 +324,9 @@
 	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation"/>&nbsp;&nbsp;
 </div>
 <div id="DivClock" >2014-01-01 20:00:33.1 UTC</div>
+<div id="LedMap" class="Led LedUnselected"/>
+<div id="LedOrbit" class="Led LedUnselected"/>
+<div id="LedAttitude" class="Led LedUnselected"/>
 
 <!-- Modules -->
 	<!-- Attitude -->

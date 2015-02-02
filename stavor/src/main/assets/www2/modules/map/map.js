@@ -543,7 +543,7 @@ function changeView(view_mode){
 //---------------------- END --------------------------
 //******************************************************	
 
-	OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
+	/*OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
 		defaultHandlerOptions: {
 			'single': true,
 			'double': false,
@@ -570,7 +570,7 @@ function changeView(view_mode){
 			changeVisualization(enum_visualizations.MAP);
 		}
 
-	});
+	});*/
 
 	// Get rid of address bar on iphone/ipod
 	var fixSize = function() {
@@ -628,9 +628,9 @@ function changeView(view_mode){
 			 //storeNewZoom(map.getZoom());
 		});
 		
-		var click = new OpenLayers.Control.Click();
+		/*var click = new OpenLayers.Control.Click();
 		map.addControl(click);
-		click.activate();
+		click.activate();*/
 
 	};
 

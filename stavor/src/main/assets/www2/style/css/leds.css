@@ -1,0 +1,33 @@
+#LedMap{
+	right:0px;
+}
+#LedOrbit{
+	right:30px; 
+}
+#LedAttitude{
+	right:60px; 
+}
+.Led{ 
+	position: fixed; 
+	bottom:0px; 
+	height: 10px;
+	width: 10px;	
+	margin: 8px;
+    border-radius: 10px;
+	border: 3px solid;
+	z-index: 1000;
+	
+	-webkit-transition: background-color 0.5s linear;
+    -moz-transition: background-color 0.5s linear;
+    -ms-transition: background-color 0.5s linear;
+    -o-transition: background-color 0.5s linear;
+    transition: background-color 0.5s linear;
+}
+.LedSelected{
+	border-color: #888;
+	background-color:#ddd;
+}
+.LedUnselected{
+	border-color: #888;
+	background-color:#333;
+}
