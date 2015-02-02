@@ -17,6 +17,8 @@
 	
 	<!-- jQuery -->
 	<script type='text/javascript' src="js/jQuery/jquery-2.1.3.min.js"></script>
+	<!-- PouchDB -->
+	<script type='text/javascript' src="js/PouchDB/pouchdb-3.2.1.min.js"></script>
 	<!-- ThreeJS -->
 	<script type='text/javascript' src="js/ThreeJS/three.js"></script>
 	<script type='text/javascript' src="js/ThreeJS/three.ext.js"></script>	
@@ -44,6 +46,10 @@
 	<script type='text/javascript' src="js/Stavor/constants.js"></script>
 	<script type='text/javascript' src="js/Stavor/enums.js"></script>
 	<script type='text/javascript' src="js/Stavor/variables.js"></script>
+	
+	<script type='text/javascript' src="modules/simulator/components/Mission.js"></script>
+	<script type='text/javascript' src="modules/simulator/components/Orbit.js"></script>
+	<script type='text/javascript' src="db/missions.js"></script>
 	
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
 		var global_orbit, global_attitude, global_map;
@@ -327,10 +333,12 @@
 	<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation"/>
 	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation"/>&nbsp;&nbsp;
 </div>
-<div id="DivClock" >2014-01-01 20:00:33.1 UTC</div>
+<div id="DivClock" ><input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list"/>&nbsp;2014-01-01 20:00:33.1 UTC&nbsp;</div>
 <div id="LedMap" class="Led LedUnselected"/>
 <div id="LedOrbit" class="Led LedUnselected"/>
 <div id="LedAttitude" class="Led LedUnselected"/>
+
+<div id="DivMissions"/>
 
 <!-- Modules -->
 	<!-- Attitude -->

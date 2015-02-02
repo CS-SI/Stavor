@@ -157,10 +157,17 @@ html,body{
 #DivClock{
 	position: absolute;
 	margin: 0;
-	padding: 0.1%;
+	/*padding: 0.1%;*/
 	left: 0;
 	bottom: 30px;
-	height: auto;
+	
+	
+    display: block;
+    vertical-align: middle;
+	position: absolute;
+	height: 30px;
+	line-height: 30px;
+	
     border-radius: 0px 10px 0px 0px;
 	border: 5px solid rgba(255, 255, 255, 0.32);
 	width: auto;
@@ -168,6 +175,33 @@ html,body{
 	background-color:rgba(0, 0, 0, 1.00);
 	color: white;
 	font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+}
+#MissionsListButton{
+	position: relative;
+	height: 70%;
+	width: auto;
+	background-color: black;
+	vertical-align:middle;
+}
+
+#DivMissions{
+	position: fixed;
+	left: 0;
+	bottom: 80px;
+	background-color: red;
+	width: 30px;
+	height: 30px;
+	
+	-webkit-transition: height 0.1s ease, width 0.5s ease;
+    -moz-transition: height 0.1s ease, width 0.5s ease;
+    -ms-transition: height 0.1s ease, width 0.5s ease;
+    -o-transition: height 0.1s ease, width 0.5s ease;
+    transition: height 0.1s ease, width 0.5s ease;
+}
+#DivMissions:hover{
+	width: 300px;
+	max-width: 90%;
+	height: calc(100% - 60px);
 }
 #DivMenu{
 	position: absolute;
