@@ -190,7 +190,7 @@ var Orbit = function()
 			var radius = planes_radius;
 			var radius_ext = planes_width;
 
-			for ( i = 0; i < plane_resolution; i ++ ) {
+			for ( i = 0; i < config.plane_resolution; i ++ ) {
 				var a = 2*Math.PI * i / plane_resolution;
 				pts.push( new THREE.Vector2 ( Math.cos( a ) * radius_ext, Math.sin( a ) * radius_ext ) );
 				hls.push( new THREE.Vector2 ( Math.cos( a ) * radius, Math.sin( a ) * radius ) );

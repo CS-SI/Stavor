@@ -56,6 +56,9 @@
 	height   : 100%;
 	position : absolute;
 	background-color:black;  
+	background-image:  url(../../modules/map/textures/stars.jpg);
+    background-repeat: repeat;
+    background-position: center center; 
 	overflow: hidden;
 	/*box-shadow: 1px 1px 4px #999999;*/
 }
