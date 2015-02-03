@@ -1,4 +1,6 @@
 var global_current_visualization = enum_visualizations.ORBITE;
+var global_missions_list_is_open = false;
+
 var global_simulation = {
 	config:{
 		global:{

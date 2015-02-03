@@ -213,6 +213,18 @@
 			global_current_visualization = new_vis;
 			updateLeds();
 		}
+		function switchMissionsListStatus(){
+			if(global_missions_list_is_open){
+				$('#DivMissions').animate({
+					left: '-300px'
+				},"slow");
+			}else{
+				$('#DivMissions').animate({
+					left: '0px'
+				},"slow");
+			}
+			global_missions_list_is_open = !global_missions_list_is_open;
+		}
 		/*function changeVisualization(lenum_visualization) {
 			var div_attitude = document.getElementById("DivAttitude");
 			var div_orbit = document.getElementById("DivOrbit");
@@ -336,12 +348,77 @@
 	<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation"/>
 	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation"/>&nbsp;&nbsp;
 </div>
-<div id="DivClock" ><input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list"/>&nbsp;2014-01-01 20:00:33.1 UTC&nbsp;</div>
+<div id="DivClock" >
+	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/>&nbsp;2014-01-01 20:00:33.1 UTC&nbsp;
+</div>
 <div id="LedMap" class="Led LedUnselected"/>
 <div id="LedOrbit" class="Led LedUnselected"/>
 <div id="LedAttitude" class="Led LedUnselected"/>
 
-<div id="DivMissions"/>
+<div id="DivMissions">
+	<input id="MissionsListClose" class="" type="image" src="style/icons/close.png" title="Close mission list" onclick="switchMissionsListStatus()"/>
+	<h3 id="TitleMissions">Missions</h3>	
+	<div id="ListMissions">
+		<ol id="olListMissions">
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		</ol>
+	</div>
+</div>
 
 <!-- Modules -->
 	<!-- Attitude -->
