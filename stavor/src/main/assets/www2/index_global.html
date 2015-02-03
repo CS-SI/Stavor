@@ -41,6 +41,8 @@
 	<!--<script type='text/javascript' src="js/OpenLayers/OpenLayers.js"></script>-->
 	<script type='text/javascript' src="js/OpenLayers/OpenLayers.mobile.js"></script>
 	
+	<!-- Orekit -->
+	<script type='text/javascript' src="modules/simulator/orekit/orekit-data.js"></script>
 	<!-- Stavor -->
 	<script type='text/javascript' src="js/Stavor/parameters.js"></script>
 	<script type='text/javascript' src="js/Stavor/constants.js"></script>
@@ -62,9 +64,10 @@
 			global_attitude.resizeCanvas();
 			global_orbit.resizeCanvas();
 			global_map.resizeCanvas();*/
-			
+			loadOrekitFilesText();
 			hideSplash();
 		}
+		
 		function error(text){
 			alert(text);
 		}
