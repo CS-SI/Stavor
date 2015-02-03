@@ -262,7 +262,7 @@ src: url("../fonts/Xolonium/Xolonium-Bold.otf") format("opentype");
 	padding-top: 10px;
 	padding-bottom: 10px;
 	width: calc(100%);
-	height: calc(100% - 154px);
+	height: calc(100% - 134px);
 	background-color: rgba(220, 220, 220, 0.7);
 }
 
@@ -291,6 +291,30 @@ ol li{
 	-o-text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 90%;
+}
+
+#MissionsMenu{
+	display: inline-block;
+	position: relative;
+	width: calc(100% - 20px);
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	height: 30px;
+	background-color: rgba(220, 220, 220, 0.7);
+	border-radius: 2px 2px 4px 2px;
+}
+.MissionsMenuItem{
+	display: inline-block;
+	width: calc(25% - 3px);
+	height: 100%;
+	text-align: center;
+}
+
+.MissionsMenuButton{
+	height: 20px;
+	padding: 5px;
+	width: auto;
 }
 
 #DivMenu{

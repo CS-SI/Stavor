@@ -413,8 +413,8 @@ var Orbit = function()
 		//THREEx.WindowResize(renderer, camera);
 		//THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 		
-		//window.addEventListener( 'resize', onWindowResize, false );
-		container.addEventListener("transitionend", onWindowResize, false);
+		window.addEventListener( 'resize', onWindowResize, false );
+		//container.addEventListener("transitionend", onWindowResize, false);
 
 		// CONTROLS
 		//controls = new THREE.OrbitControls( camera, renderer.domElement );
