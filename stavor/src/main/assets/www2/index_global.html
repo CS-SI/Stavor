@@ -130,6 +130,9 @@
 			
 			var new_vis = enum_visualizations.ATTITUDE;
 			if(global_current_visualization == enum_visualizations.ATTITUDE){
+				div_attitude.style.display = "block";
+				div_orbit.style.display = "none";
+				div_map.style.display = "block";
 				//Slide out Attitude
 				$('#DivAttitude').animate({
 					right: '-100%'
@@ -141,6 +144,9 @@
 				},"slow");
 				new_vis = enum_visualizations.MAP;
 			}else if(global_current_visualization == enum_visualizations.ORBIT){
+				div_attitude.style.display = "block";
+				div_orbit.style.display = "block";
+				div_map.style.display = "none";
 				//Slide out Orbit
 				$('#DivOrbit').animate({
 					right: '-100%'
@@ -152,6 +158,9 @@
 				},"slow");
 				new_vis = enum_visualizations.ATTITUDE;
 			}else if(global_current_visualization == enum_visualizations.MAP){
+				div_attitude.style.display = "none";
+				div_orbit.style.display = "block";
+				div_map.style.display = "block";
 				//Slide out Map
 				$('#map').animate({
 					right: '-100%'
@@ -175,6 +184,9 @@
 			
 			var new_vis = enum_visualizations.ATTITUDE;
 			if(global_current_visualization == enum_visualizations.ATTITUDE){
+				div_attitude.style.display = "block";
+				div_orbit.style.display = "block";
+				div_map.style.display = "none";
 				//Slide out Attitude
 				$('#DivAttitude').animate({
 					right: '100%'
@@ -186,6 +198,9 @@
 				},"slow");
 				new_vis = enum_visualizations.ORBIT;
 			}else if(global_current_visualization == enum_visualizations.ORBIT){
+				div_attitude.style.display = "none";
+				div_orbit.style.display = "block";
+				div_map.style.display = "block";
 				//Slide out Orbit
 				$('#DivOrbit').animate({
 					right: '100%'
@@ -197,6 +212,9 @@
 				},"slow");
 				new_vis = enum_visualizations.MAP;
 			}else if(global_current_visualization == enum_visualizations.MAP){
+				div_attitude.style.display = "block";
+				div_orbit.style.display = "none";
+				div_map.style.display = "block";
 				//Slide out Map
 				$('#map').animate({
 					right: '100%'
