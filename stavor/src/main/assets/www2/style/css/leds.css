@@ -16,6 +16,7 @@
     border-radius: 10px;
 	border: 3px solid;
 	z-index: 1000;
+	box-shadow: 2px -2px 6px #333;
 	
 	-webkit-transition: background-color 0.5s linear;
     -moz-transition: background-color 0.5s linear;
