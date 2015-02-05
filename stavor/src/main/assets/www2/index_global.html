@@ -6,7 +6,11 @@
 	<meta name="viewport" content="width=device-width, height=device-height, target-densitydpi=device-dpi, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<link rel="icon" href="style/icons/capsule.png" />
 	<link rel="stylesheet" href="style/css/main.css"/>
+	<link rel="stylesheet" href="style/css/toolbar.css"/>
+	<link rel="stylesheet" href="style/css/tabs.css"/>
+	<link rel="stylesheet" href="style/css/missions.css"/>
 	<link rel="stylesheet" href="style/css/views.css"/>
+	<link rel="stylesheet" href="style/css/map.css"/>
 	<link rel="stylesheet" href="style/css/leds.css"/>
     <link rel="stylesheet" href="style/css/OpenLayers/style.css" type="text/css">
     <link rel="stylesheet" href="style/css/OpenLayers/style.mobile.css" type="text/css">
@@ -64,8 +68,51 @@
 			global_attitude.resizeCanvas();
 			global_orbit.resizeCanvas();
 			global_map.resizeCanvas();*/
+			
+			// get tab container
+			var tabcontainer = document.getElementById("tabContainer");
+				var tabcon = document.getElementById("tabscontent");
+				//alert(tabcon.childNodes.item(1));
+			// set current tab
+			var navitem = document.getElementById("tabHeader_1");
+				
+			//store which tab we are on
+			var ident = navitem.id.split("_")[1];
+				//alert(ident);
+			navitem.parentNode.setAttribute("data-current",ident);
+			//set current tab with class of activetabheader
+			navitem.setAttribute("class","tabActiveHeader");
+
+			//hide two tab contents we don't need
+			 var pages = tabcon.getElementsByTagName("div");
+				for (var i = 1; i < pages.length; i++) {
+				 pages.item(i).style.display="none";
+				};
+
+			//this adds click event to tabs
+			var tabs = tabcontainer.getElementsByTagName("li");
+			for (var i = 0; i < tabs.length; i++) {
+			  tabs[i].onclick=displayPage;
+			}
+			
+			
+			
 			loadOrekitFilesText();
 			hideSplash();
+		}
+
+		// on click of one of tabs
+		function displayPage() {
+		  var current = this.parentNode.getAttribute("data-current");
+		  //remove class of activetabheader and hide old contents
+		  document.getElementById("tabHeader_" + current).removeAttribute("class");
+		  document.getElementById("tabpage_" + current).style.display="none";
+
+		  var ident = this.id.split("_")[1];
+		  //add class of activetabheader to new active tab and show contents
+		  this.setAttribute("class","tabActiveHeader");
+		  document.getElementById("tabpage_" + ident).style.display="block";
+		  this.parentNode.setAttribute("data-current",ident);
 		}
 		
 		function error(text){
@@ -443,6 +490,46 @@
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission" onclick=""/></div>
 	</div>
 </div>
+
+<div id="tabContainer">
+	<div id="tabs">
+	  <ul>
+		<li id="tabHeader_1">Page 1</li>
+		<li id="tabHeader_2">Page 2</li>
+		<li id="tabHeader_3">Page 3</li>
+	  </ul>
+	</div>
+	<div id="tabscontent">
+	  <div class="tabpage" id="tabpage_1">
+		<h2>Page 1</h2>
+		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
+		  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum 
+		  erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.
+		  Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat 
+		  volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
+	  </div>
+	  <div class="tabpage" id="tabpage_2">
+		<h2>Page 2</h2>
+		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
+		  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. </p>
+		<p>Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus 
+		lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. </p>
+		<p> Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, 
+		accumsan porttitor, facilisis luctus, metus. </p>
+	  </div>
+	  <div class="tabpage" id="tabpage_3">
+		<h2>Page 3</h2>
+		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+		<p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris 
+		placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, 
+		elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.</p>
+		<p>Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam 
+		erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
+	  </div>
+	</div>
+</div>
+
+
 
 <!-- Modules -->
 	<!-- Attitude -->

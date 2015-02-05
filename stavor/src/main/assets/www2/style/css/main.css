@@ -51,6 +51,27 @@ font-weight: bold;
 src: url("../fonts/Xolonium/Xolonium-Bold.otf") format("opentype");
 }
 
+ol{
+    list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+ol li{
+    padding-left: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: rgba(240, 240, 240, 0.98);
+	border: 1px solid black;
+	border-radius: 4px;
+	font-family: Stavor, Helvetica, Verdana, Sans-Serif;
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 90%;
+}
+
 #Splash{
 	position: absolute; 
 	left:0px; 
@@ -144,182 +165,7 @@ src: url("../fonts/Xolonium/Xolonium-Bold.otf") format("opentype");
 		background-image:  url(../icons/stavor_sland.jpg);
 	}
 }
-#DivToolbar{
-    display: block;
-    vertical-align: middle;
-	position: absolute;
-	margin: 0;
-	left: 0;
-	bottom: 0;
-	height: 30px;
-	line-height: 30px;
-    border-radius: 0px 10px 0px 0px;
-	width: 75%;
-	min-width: 20%;
-	max-width: 75%;
-	z-index: 1500;
-	background-color:rgba(255, 255, 255, 0.32);
-	box-shadow: 2px -2px 6px #333;
-}
-.SimControl{
-	position: relative;
-	width: 20px;
-	height: 20px;
-	/*margin: 0 0 5px 5px;*/
-	margin-left: 5px;
-	padding: 2px;
-	vertical-align:middle;
-	background-color: black;
-    border-radius: 5px;
-}
-.SimControlLeft{
-	position: relative;
-	width: 15px;
-	height: 15px;
-	margin: 5px 0 5px 0;
-	padding: 2px;
-	vertical-align:middle;
-	background-color: white;
-    border-radius: 5px 0 0 5px;
-}
-.SimControlRight{
-	position: relative;
-	width: 15px;
-	height: 15px;
-	margin: 5px 0 5px 0;
-	padding: 2px;
-	vertical-align:middle;
-	background-color: white;
-    border-radius: 0 5px 5px 0;
-}
-#TimeBar{
-	position: relative;
-	width: calc(100% - 195px);
-	min-width: 50px;
-	vertical-align:middle;
-}
-#DivClock{
-	position: absolute;
-	margin: 0;
-	/*padding: 0.1%;*/
-	left: 0;
-	bottom: 30px;
-	
-	
-    display: block;
-    vertical-align: middle;
-	position: absolute;
-	height: 30px;
-	line-height: 30px;
-	
-    border-radius: 0px 10px 0px 0px;
-	border: 5px solid rgba(255, 255, 255, 0.32);
-	width: auto;
-	z-index: 1000;
-	background-color:rgba(0, 0, 0, 1.00);
-	box-shadow: 2px -2px 6px #333;
-	color: white;
-	font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
-}
-#MissionsListButton{
-	position: relative;
-	height: 20px;
-	padding-top: 3px;
-	padding-bottom: 5px;
-	width: auto;
-	background-color: black;
-	vertical-align:middle;
-}
-#MissionsListClose{
-	display:inline-block;
-	height: 47px;
-	margin-top: 6px;
-	margin-bottom: 6px;
-	width: auto;
-	float: right;
-	vertical-align:middle;
-	line-height: 69px;
-}
 
-#DivMissions{
-	position: fixed;
-	left: -300px;
-	bottom: 70px;
-	background-color: rgba(200, 200, 200, 0.7);
-	width: 300px;
-	max-width: 90%;
-	height: calc(100% - 70px);
-    border-radius: 0px 5px 5px 0px;
-	/*box-shadow: 1px 1px 8px #999999;*/
-}
-
-#TitleMissions{
-	text-align: center;
-}
-
-#ListMissions{
-	position: relative;
-	/*margin-left: 20px;
-	margin-right: 20px;*/
-	padding-top: 10px;
-	padding-bottom: 10px;
-	width: calc(100%);
-	height: calc(100% - 134px);
-	background-color: rgba(220, 220, 220, 0.7);
-}
-
-#olListMissions{
-	height: 100%;
-	max-height: 100%;
-	overflow: auto;
-}
-
-ol {
-    list-style-type: none;
-	padding: 0;
-	margin: 0;
-}
-ol li{
-    padding-left: 10px;
-	margin-left: 10px;
-	margin-right: 10px;
-	background-color: rgba(240, 240, 240, 0.98);
-	border: 1px solid black;
-	border-radius: 4px;
-	font-family: Stavor, Helvetica, Verdana, Sans-Serif;
-	
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 90%;
-}
-
-#MissionsMenu{
-	display: inline-block;
-	position: relative;
-	width: calc(100% - 20px);
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	height: 30px;
-	background-color: rgba(220, 220, 220, 0.7);
-	border-radius: 2px 2px 4px 2px;
-	box-shadow: 1px -1px 4px #000;
-	/*box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.3) inset;*/
-}
-.MissionsMenuItem{
-	display: inline-block;
-	width: calc(25% - 3px);
-	height: 100%;
-	text-align: center;
-}
-
-.MissionsMenuButton{
-	height: 20px;
-	padding: 5px;
-	width: auto;
-}
 
 #DivMenu{
 	position: absolute;
@@ -345,50 +191,3 @@ ol li{
 	width: 100%;
 }
 
-
-
-
-.olControlAttribution {
-	position      : absolute;
-	font-size     : 10px;
-	bottom        : 0 !important;
-	right         : 0 !important;
-	background    : rgba(0,0,0,0.1);
-	font-family   : Arial;
-	padding       : 2px 4px;
-	border-radius : 5px 0 0 0;
-}
-#title, #tags, #shortdesc {
-	display: none;
-}
-
-
-input[type=range]{
-    -webkit-appearance: none;
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-    width: 300px;
-    height: 5px;
-    background: #ddd;
-    border: none;
-    border-radius: 3px;
-}
-
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #000099;
-    margin-top: -6px;
-}
-
-input[type=range]:focus {
-    outline: none;
-}
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #ccc;
-}
