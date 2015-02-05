@@ -396,7 +396,7 @@ var Orbit = function()
 			canvasMode(1);
 		}
 		renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-		container = document.getElementById( 'DivOrbit' );
+		container = document.getElementById( 'orbit' );
 		container.appendChild( renderer.domElement );
 		renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
 			event.preventDefault();

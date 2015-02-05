@@ -1,10 +1,13 @@
-#tabContainer {
-	position: fixed;
+
+.tabContainer {
+	display: none;
+	position: absolute;
+	z-index: 1000;
 	right: 0;
 	top: 0;
 	width:400px;
-	max-width: 100%;
-	height: calc(100% - 60px);
+	max-width: 90%;
+	height: calc(100% - 90px);
 	padding: 0 10px 10px 10px;
 	/*background-color:#2e2e2e;*/
 	background-color: rgba(50, 50, 50, 0.5);
@@ -12,17 +15,17 @@
 	border-radius: 4px; 
 }
 
-#tabs{
+.tabs{
 	height:auto;
 	overflow:hidden;
 }
 
-#tabs > ul{
+.tabs > ul{
 	font: 1em;
 	list-style:none;
 }
 
-#tabs > ul > li{
+.tabs > ul > li{
 	margin:0 2px 0 0;
 	padding:7px 10px;
 	display:block;
@@ -44,7 +47,7 @@
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0C91EC), color-stop(100%,#257AB6)); /* webkit */
 }
 
-#tabs > ul > li:hover{
+.tabs > ul > li:hover{
 	background: #FFFFFF; /* old browsers */
 	background: -moz-linear-gradient(top, #FFFFFF 0%, #F3F3F3 10%, #F3F3F3 50%, #FFFFFF 100%); /* firefox */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(10%,#F3F3F3), color-stop(50%,#F3F3F3), color-stop(100%,#FFFFFF)); /* webkit */
@@ -52,7 +55,7 @@
 	color: #333;
 }
 
-#tabs > ul > li.tabActiveHeader{
+.tabs > ul > li.tabActiveHeader{
 	background: #FFFFFF; /* old browsers */
 	background: -moz-linear-gradient(top, #FFFFFF 0%, #F3F3F3 10%, #F3F3F3 50%, #FFFFFF 100%); /* firefox */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(10%,#F3F3F3), color-stop(50%,#F3F3F3), color-stop(100%,#FFFFFF)); /* webkit */
@@ -60,7 +63,7 @@
 	color: #333;
 }
 
-#tabscontent {
+.tabscontent {
 	-moz-border-radius-topleft: 0px;
 	-moz-border-radius-topright: 4px;
 	-moz-border-radius-bottomright: 4px;

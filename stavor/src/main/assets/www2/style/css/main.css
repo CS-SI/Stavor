@@ -126,16 +126,17 @@ ol li{
 		background-image:  url(../icons/stavor_port.jpg);
 	}
 	#SlidePrev{
-		left:0px; 
-		top:0px;
-		width:calc(0.75*8vh); 
-		height: 8%; 
+		right:23px; 
+		bottom:35px;
+		width:23px; 
+		height: 30px;
+		margin-right: 20px;
 	}
 	#SlideNext{
 		right:0px; 
-		top:0px;
-		width:calc(0.75*8vh); 
-		height: 8%; 
+		bottom:35px;
+		width:23px; 
+		height: 30px; 
 	}
 }
 /* #### Landscape #### */
@@ -152,6 +153,9 @@ ol li{
 		width: calc(0.75*10vh); 
 		height: 10%; 
 	}
+	.tabContainer{
+		margin-right: 50px;
+	}
 }
 /* #### Landscape Tablet #### */
 @media screen and (orientation: landscape) and (max-device-width: 1024px){
@@ -166,6 +170,24 @@ ol li{
 	}
 }
 
+.MenuButton{
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	top: 0;
+	right: 0;
+	z-index: 1001; 
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/menu.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+}
+
+.MenuButton:active{
+	background-image:  url(../icons/menu_h.png);
+}
 
 #DivMenu{
 	position: absolute;

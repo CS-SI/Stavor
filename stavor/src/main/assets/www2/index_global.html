@@ -52,6 +52,7 @@
 	<script type='text/javascript' src="js/Stavor/constants.js"></script>
 	<script type='text/javascript' src="js/Stavor/enums.js"></script>
 	<script type='text/javascript' src="js/Stavor/variables.js"></script>
+	<script type='text/javascript' src="js/Stavor/menus.js"></script>
 	
 	<script type='text/javascript' src="modules/simulator/components/Mission.js"></script>
 	<script type='text/javascript' src="modules/simulator/components/Orbit.js"></script>
@@ -69,50 +70,12 @@
 			global_orbit.resizeCanvas();
 			global_map.resizeCanvas();*/
 			
-			// get tab container
-			var tabcontainer = document.getElementById("tabContainer");
-				var tabcon = document.getElementById("tabscontent");
-				//alert(tabcon.childNodes.item(1));
-			// set current tab
-			var navitem = document.getElementById("tabHeader_1");
-				
-			//store which tab we are on
-			var ident = navitem.id.split("_")[1];
-				//alert(ident);
-			navitem.parentNode.setAttribute("data-current",ident);
-			//set current tab with class of activetabheader
-			navitem.setAttribute("class","tabActiveHeader");
-
-			//hide two tab contents we don't need
-			 var pages = tabcon.getElementsByTagName("div");
-				for (var i = 1; i < pages.length; i++) {
-				 pages.item(i).style.display="none";
-				};
-
-			//this adds click event to tabs
-			var tabs = tabcontainer.getElementsByTagName("li");
-			for (var i = 0; i < tabs.length; i++) {
-			  tabs[i].onclick=displayPage;
-			}
-			
-			
+			initializeAttitudeMenu();
+			initializeOrbitMenu();
+			initializeMapMenu();
 			
 			loadOrekitFilesText();
 			hideSplash();
-		}
-
-		// on click of one of tabs
-		function displayPage() {
-		  var current = this.parentNode.getAttribute("data-current");
-		  //remove class of activetabheader and hide old contents
-		  document.getElementById("tabHeader_" + current).removeAttribute("class");
-		  document.getElementById("tabpage_" + current).style.display="none";
-
-		  var ident = this.id.split("_")[1];
-		  //add class of activetabheader to new active tab and show contents
-		  this.setAttribute("class","tabActiveHeader");
-		  document.getElementById("tabpage_" + ident).style.display="block";
-		  this.parentNode.setAttribute("data-current",ident);
 		}
 		
 		function error(text){
@@ -130,21 +93,7 @@
 				div_splash.style.opacity = "0";
 			}, 3000);
 		}
-		//Loading screen
-		/*var isLoading = false;
-		function setLoading(){
-			var div_loading = document.getElementById("Loading");
-			div_loading.style.visibility = "visible";
-			div_loading.style.opacity = "1";
-		}
-		function setLoaded(delay){
-			if(typeof(delay) == undefined) delay = 0; 
-			setTimeout(function() { 					
-				var div_loading = document.getElementById("Loading");
-				div_loading.style.visibility = "hidden";
-				div_loading.style.opacity = "0";
-			}, delay);
-		}*/
+		
 		function initVisualizations(){
 			global_current_visualization = enum_visualizations.ATTITUDE;
 			updateLeds();
@@ -173,7 +122,7 @@
 		function prevVisualization(){
 			var div_attitude = document.getElementById("DivAttitude");
 			var div_orbit = document.getElementById("DivOrbit");
-			var div_map = document.getElementById("map");
+			var div_map = document.getElementById("DivMap");
 			
 			var new_vis = enum_visualizations.ATTITUDE;
 			if(global_current_visualization == enum_visualizations.ATTITUDE){
@@ -186,7 +135,7 @@
 				},"slow");
 				//Slide in Map
 				div_map.style.right = "100%"; 
-				$('#map').animate({
+				$('#DivMap').animate({
 					right: '0'
 				},"slow");
 				new_vis = enum_visualizations.MAP;
@@ -209,7 +158,7 @@
 				div_orbit.style.display = "block";
 				div_map.style.display = "block";
 				//Slide out Map
-				$('#map').animate({
+				$('#DivMap').animate({
 					right: '-100%'
 				},"slow");
 				//Slide in Orbit
@@ -227,7 +176,7 @@
 		function nextVisualization(){
 			var div_attitude = document.getElementById("DivAttitude");
 			var div_orbit = document.getElementById("DivOrbit");
-			var div_map = document.getElementById("map");
+			var div_map = document.getElementById("DivMap");
 			
 			var new_vis = enum_visualizations.ATTITUDE;
 			if(global_current_visualization == enum_visualizations.ATTITUDE){
@@ -254,7 +203,7 @@
 				},"slow");
 				//Slide in Map
 				div_map.style.right = "-100%"; 
-				$('#map').animate({
+				$('#DivMap').animate({
 					right: '0'
 				},"slow");
 				new_vis = enum_visualizations.MAP;
@@ -263,7 +212,7 @@
 				div_orbit.style.display = "none";
 				div_map.style.display = "block";
 				//Slide out Map
-				$('#map').animate({
+				$('#DivMap').animate({
 					right: '100%'
 				},"slow");
 				//Slide in Attitude
@@ -290,104 +239,7 @@
 			}
 			global_missions_list_is_open = !global_missions_list_is_open;
 		}
-		/*function changeVisualization(lenum_visualization) {
-			var div_attitude = document.getElementById("DivAttitude");
-			var div_orbit = document.getElementById("DivOrbit");
-			var div_map = document.getElementById("map");
-			
-			if(lenum_visualization == enum_visualizations.ATTITUDE && global_current_visualization != enum_visualizations.ATTITUDE){
-				//Visibility
-				//div_attitude.style.display = "block";
-				//div_orbit.style.display = "none";
-				//div_map.style.display = "none";
-				//Position
-				div_attitude.className = "AttitudeToCurrent"
-				div_attitude.style.width = "100%";
-				div_attitude.style.height = "100%";
-				div_attitude.style.right = "0";
-				div_attitude.style.bottom = "0";
-				div_attitude.style.zIndex = "1";
-				
-				div_orbit.className = "OrbitToMiniature"
-				div_orbit.style.width = "10%";
-				div_orbit.style.height = "10%";
-				div_orbit.style.right = "1%";
-				div_orbit.style.bottom = "1%";
-				div_orbit.style.zIndex = "2";
-				
-				div_map.className = "MapToMiniature"
-				div_map.style.width = "10%";
-				div_map.style.height = "10%";
-				div_map.style.right = "12%";
-				div_map.style.bottom = "1%";
-				div_map.style.zIndex = "2";
-				
-				//global_attitude.resizeCanvas();
-				global_current_visualization = lenum_visualization;
-			}else if(lenum_visualization == enum_visualizations.ORBIT && global_current_visualization != enum_visualizations.ORBIT){
-				//Visibility
-				//div_attitude.style.display = "none";
-				//div_orbit.style.display = "block";
-				//div_map.style.display = "none";
-				//Position
-				div_orbit.className = "OrbitToCurrent"
-				div_orbit.style.width = "100%";
-				div_orbit.style.height = "100%";
-				div_orbit.style.right = "0";
-				div_orbit.style.bottom = "0";
-				div_orbit.style.zIndex = "1";
-				
-				div_map.className = "MapToMiniature"
-				div_map.style.width = "10%";
-				div_map.style.height = "10%";
-				div_map.style.right = "1%";
-				div_map.style.bottom = "1%";
-				div_map.style.zIndex = "2";
-				
-				div_attitude.className = "AttitudeToMiniature"
-				div_attitude.style.width = "10%";
-				div_attitude.style.height = "10%";
-				div_attitude.style.right = "12%";
-				div_attitude.style.bottom = "1%";
-				div_attitude.style.zIndex = "2";
-				
-				global_current_visualization = lenum_visualization;
-				//global_orbit.resizeCanvas();
-			}else if(lenum_visualization == enum_visualizations.MAP && global_current_visualization != enum_visualizations.MAP){
-				//Visibility
-				//div_attitude.style.display = "none";
-				//div_orbit.style.display = "none";
-				//div_map.style.display = "block";
-				//Position
-				div_map.className = "MapToCurrent"
-				div_map.style.width = "100%";
-				div_map.style.height = "100%";
-				div_map.style.right = "0";
-				div_map.style.bottom = "0";
-				div_map.style.zIndex = "1";
-				
-				div_attitude.className = "AttitudeToMiniature"
-				div_attitude.style.width = "10%";
-				div_attitude.style.height = "10%";
-				div_attitude.style.right = "1%";
-				div_attitude.style.bottom = "1%";
-				div_attitude.style.zIndex = "2";
-				
-				div_orbit.className = "OrbitToMiniature"
-				div_orbit.style.width = "10%";
-				div_orbit.style.height = "10%";
-				div_orbit.style.right = "12%";
-				div_orbit.style.bottom = "1%";
-				div_orbit.style.zIndex = "2";
-				
-				global_current_visualization = lenum_visualization;
-				//global_map.resizeCanvas();
-			}else{
-				if(global_current_visualization != lenum_visualization){
-					error("ERROR: changeVisualization(): the provided visualization enum is not recognized.");
-				}
-			}
-		}*/
+		
 	</script>
 </head>
 <body>
@@ -395,9 +247,103 @@
 <div id="Splash"></div>
 
 
-<div id="map" ></div>
-<div id="DivOrbit" ></div>
-<div id="DivAttitude" ></div>
+<div id="DivMap" >
+	<div id="map" ></div>
+	<div id="MaptabContainer" class="tabContainer">
+		<div id="Maptabs" class="tabs">
+		  <ul>
+			<li id="MaptabHeader_1">Page 1</li>
+			<li id="MaptabHeader_2">Page 2</li>
+			<li id="MaptabHeader_3">Page 3</li>
+		  </ul>
+		</div>
+		<div id="Maptabscontent" class="tabscontent">
+		  <div class="tabpage" id="Maptabpage_1">
+			<h2>Page 1</h2>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
+			  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum 
+			  erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.
+			  Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat 
+			  volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
+		  </div>
+		  <div class="tabpage" id="Maptabpage_2">
+			<h2>Page 2</h2>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
+			  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. </p>
+			<p>Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus 
+			lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. </p>
+			<p> Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, 
+			accumsan porttitor, facilisis luctus, metus. </p>
+		  </div>
+		  <div class="tabpage" id="Maptabpage_3">
+			<h2>Page 3</h2>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+			<p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris 
+			placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, 
+			elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.</p>
+			<p>Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam 
+			erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
+		  </div>
+		</div>
+	</div>
+	<div id="MenuButtonMap" class="MenuButton" onclick="switchMapMenu()" ></div>
+</div>
+<div id="DivOrbit" >
+	<div id="orbit" ></div>
+	<div id="OrbittabContainer" class="tabContainer">
+		<div id="Orbittabs" class="tabs">
+		  <ul>
+			<li id="OrbittabHeader_1">Page 1</li>
+			<li id="OrbittabHeader_2">Page 2</li>
+			<li id="OrbittabHeader_3">Page 3</li>
+		  </ul>
+		</div>
+		<div id="Orbittabscontent" class="tabscontent">
+		  <div class="tabpage" id="Orbittabpage_1">
+			<h2>Page 1</h2>
+			<p>Pellentesque  </p>
+		  </div>
+		  <div class="tabpage" id="Orbittabpage_2">
+			<h2>Page 2</h2>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
+			  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. </p>
+		  </div>
+		  <div class="tabpage" id="Orbittabpage_3">
+			<h2>Page 3</h2>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+		  </div>
+		</div>
+	</div>
+	<div id="MenuButtonOrbit" class="MenuButton" onclick="switchOrbitMenu()" ></div>
+</div>
+<div id="DivAttitude" >
+	<div id="attitude" ></div>
+	<div id="AttitudetabContainer" class="tabContainer">
+		<div id="Attitudetabs" class="tabs">
+		  <ul>
+			<li id="AttitudetabHeader_1">Page 1</li>
+			<li id="AttitudetabHeader_2">Page 2</li>
+			<li id="AttitudetabHeader_3">Page 3</li>
+		  </ul>
+		</div>
+		<div id="Attitudetabscontent" class="tabscontent">
+		  <div class="tabpage" id="Attitudetabpage_1">
+			<h2>Page 1</h2>
+			<p>Pellentesque  </p>
+		  </div>
+		  <div class="tabpage" id="Attitudetabpage_2">
+			<h2>Page 2</h2>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
+			  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. </p>
+		  </div>
+		  <div class="tabpage" id="Attitudetabpage_3">
+			<h2>Page 3</h2>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+		  </div>
+		</div>
+	</div>
+	<div id="MenuButtonAttitude" class="MenuButton" onclick="switchAttitudeMenu()" ></div>
+</div>
 
 <div id="DivMenu" ></div>
 
@@ -490,46 +436,6 @@
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission" onclick=""/></div>
 	</div>
 </div>
-
-<div id="tabContainer">
-	<div id="tabs">
-	  <ul>
-		<li id="tabHeader_1">Page 1</li>
-		<li id="tabHeader_2">Page 2</li>
-		<li id="tabHeader_3">Page 3</li>
-	  </ul>
-	</div>
-	<div id="tabscontent">
-	  <div class="tabpage" id="tabpage_1">
-		<h2>Page 1</h2>
-		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
-		  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum 
-		  erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.
-		  Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat 
-		  volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
-	  </div>
-	  <div class="tabpage" id="tabpage_2">
-		<h2>Page 2</h2>
-		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
-		  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. </p>
-		<p>Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus 
-		lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. </p>
-		<p> Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, 
-		accumsan porttitor, facilisis luctus, metus. </p>
-	  </div>
-	  <div class="tabpage" id="tabpage_3">
-		<h2>Page 3</h2>
-		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
-		<p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris 
-		placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, 
-		elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.</p>
-		<p>Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam 
-		erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
-	  </div>
-	</div>
-</div>
-
-
 
 <!-- Modules -->
 	<!-- Attitude -->
