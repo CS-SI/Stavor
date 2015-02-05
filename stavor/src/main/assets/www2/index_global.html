@@ -252,37 +252,24 @@
 	<div id="MaptabContainer" class="tabContainer">
 		<div id="Maptabs" class="tabs">
 		  <ul>
-			<li id="MaptabHeader_1">Page 1</li>
-			<li id="MaptabHeader_2">Page 2</li>
-			<li id="MaptabHeader_3">Page 3</li>
+			<li id="MaptabHeader_1">Coverage</li>
+			<li id="MaptabHeader_2">Stations</li>
+			<li id="MaptabHeader_3">Models</li>
 		  </ul>
 		</div>
 		<div id="Maptabscontent" class="tabscontent">
 		  <div class="tabpage" id="Maptabpage_1">
-			<h2>Page 1</h2>
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
-			  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum 
-			  erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.
-			  Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat 
-			  volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
+			<h4>Payload</h4>
+			
 		  </div>
 		  <div class="tabpage" id="Maptabpage_2">
-			<h2>Page 2</h2>
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
-			  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. </p>
-			<p>Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus 
-			lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. </p>
-			<p> Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, 
-			accumsan porttitor, facilisis luctus, metus. </p>
+			<h4>Ground stations</h4>
+			
 		  </div>
 		  <div class="tabpage" id="Maptabpage_3">
-			<h2>Page 3</h2>
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
-			<p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris 
-			placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, 
-			elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.</p>
-			<p>Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam 
-			erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
+			<h4>Satellite</h4>
+			<h4>Sun</h4>
+			
 		  </div>
 		</div>
 	</div>
@@ -293,24 +280,29 @@
 	<div id="OrbittabContainer" class="tabContainer">
 		<div id="Orbittabs" class="tabs">
 		  <ul>
-			<li id="OrbittabHeader_1">Page 1</li>
-			<li id="OrbittabHeader_2">Page 2</li>
-			<li id="OrbittabHeader_3">Page 3</li>
+			<li id="OrbittabHeader_1">Models</li>
 		  </ul>
 		</div>
 		<div id="Orbittabscontent" class="tabscontent">
 		  <div class="tabpage" id="Orbittabpage_1">
-			<h2>Page 1</h2>
-			<p>Pellentesque  </p>
-		  </div>
-		  <div class="tabpage" id="Orbittabpage_2">
-			<h2>Page 2</h2>
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
-			  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. </p>
-		  </div>
-		  <div class="tabpage" id="Orbittabpage_3">
-			<h2>Page 3</h2>
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+			<h4>General</h4>
+			<p>Show sky:<input id="opt-orb-ShowSky" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>Show axis:<input id="opt-orb-ShowAxis" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>Show axis labels:<input id="opt-orb-ShowAxisLabels" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<h4>Earth</h4>
+			<p>Show Earth model:<input id="opt-orb-ShowEarthModel" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>Show Earth axis:<input id="opt-orb-ShowEarthAxis" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>Show Earth atmosphere:<input id="opt-orb-ShowEarthAtmosphere" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>Show Earth clouds:<input id="opt-orb-ShowEarthClouds" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<h4>Reference</h4>
+			<p>Show XY plane:<input id="opt-orb-ShowXyPlane" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>Color:<input id="opt-orb-PlaneXyColor" type="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<h4>Spacecraft</h4>
+			<p>Show spacecraft:<input id="opt-orb-ShowSpacecraft" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>Color:<input id="opt-orb-SpacecraftColor" type="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<h4>Orbit</h4>
+			<p>Show projection:<input id="opt-orb-ShowProjection" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>Color:<input id="opt-orb-OrbitColor" type="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 		  </div>
 		</div>
 	</div>
@@ -321,24 +313,83 @@
 	<div id="AttitudetabContainer" class="tabContainer">
 		<div id="Attitudetabs" class="tabs">
 		  <ul>
-			<li id="AttitudetabHeader_1">Page 1</li>
-			<li id="AttitudetabHeader_2">Page 2</li>
-			<li id="AttitudetabHeader_3">Page 3</li>
+			<li id="AttitudetabHeader_1">Indicators</li>
+			<li id="AttitudetabHeader_2">Measures</li>
+			<li id="AttitudetabHeader_3">Models</li>
 		  </ul>
 		</div>
 		<div id="Attitudetabscontent" class="tabscontent">
 		  <div class="tabpage" id="Attitudetabpage_1">
-			<h2>Page 1</h2>
-			<p>Pellentesque  </p>
+			<h4>Basic</h4>
+			<h5>Velocity</h5>
+			<p>Show velocity:<input id="opt-att-ShowVelocity" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Limit (Km/s):<input id="opt-att-LimitVelocity" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-VelocityColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h5>Acceleration</h5>
+			<p>Show acceleration:<input id="opt-att-ShowAcceleration" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Limit (Km/s2):<input id="opt-att-LimitAcceleration" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-AccelerationColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h5>Momentum</h5>
+			<p>Show momentum:<input id="opt-att-ShowMomentum" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Color:<input id="opt-orb-MomentumColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h4>Extra</h4>
+			<h5>Target</h5>
+			<p>Show target:<input id="opt-att-ShowTarget" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>X:<input id="opt-att-TargetValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Y:<input id="opt-att-TargetValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Z:<input id="opt-att-TargetValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-TargetColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h5>Vector</h5>
+			<p>Show vector:<input id="opt-att-ShowVector" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Limit:<input id="opt-att-LimitVector" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>X:<input id="opt-att-VectorValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Y:<input id="opt-att-VectorValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Z:<input id="opt-att-VectorValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-VectorColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h5>Direction</h5>
+			<p>Show direction:<input id="opt-att-ShowDirection" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>X:<input id="opt-att-DirectionValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Y:<input id="opt-att-DirectionValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Z:<input id="opt-att-DirectionValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-DirectionColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 		  </div>
 		  <div class="tabpage" id="Attitudetabpage_2">
-			<h2>Page 2</h2>
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. 
-			  Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. </p>
+			<h4>Inclination</h4>
+			<p>Show Earth rotation plane:<input id="opt-att-ShowEarthPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Rotation plane color:<input id="opt-orb-RotationPlaneColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p><br>
+			<p>Show orbital plane:<input id="opt-att-ShowOrbitalPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Orbital plane color:<input id="opt-orb-OrbitalPlaneColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h4>Spheric coordinates</h4>
+			<p>Show spheric coordinates:<input id="opt-att-ShowSphericCoordinates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<select id="opt-att-SphericCoordsSelection" onchange="updateAttitudeOption(this.id,this.value)">
+				<option value="0">VELOCITY</option>
+				<option value="1">ACCELERATION</option>
+				<option value="2">MOMENTUM</option>
+				<option value="3">EARTH</option>
+				<option value="4">SUN</option>
+			</select>
+			<h4>Angles</h4>
+			<p>Show vectors angle:<input id="opt-att-ShowVectorsAngle" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<select id="opt-att-AnglesSelection1" onchange="updateAttitudeOption(this.id,this.value)">
+				<option value="0">VELOCITY</option>
+				<option value="1">ACCELERATION</option>
+				<option value="2">MOMENTUM</option>
+				<option value="3">EARTH</option>
+				<option value="4">SUN</option>
+			</select>
+			<select id="opt-att-AnglesSelection2" onchange="updateAttitudeOption(this.id,this.value)">
+				<option value="0">VELOCITY</option>
+				<option value="1">ACCELERATION</option>
+				<option value="2">MOMENTUM</option>
+				<option value="3">EARTH</option>
+				<option value="4">SUN</option>
+			</select>
 		  </div>
 		  <div class="tabpage" id="Attitudetabpage_3">
-			<h2>Page 3</h2>
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+			<h4>General</h4>
+			<h4>Spacecraft</h4>
+			<h4>Sun</h4>
+			<h4>Earth</h4>
 		  </div>
 		</div>
 	</div>

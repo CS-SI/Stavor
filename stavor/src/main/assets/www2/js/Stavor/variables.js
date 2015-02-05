@@ -75,11 +75,11 @@ var global_simulation = {
 			show_earth_atmosphere: true,
 			show_earth_clouds: true,
 			show_xy_plane: true,
-			color_xy_plane: 0xff0094,
+			color_xy_plane: "#ff0094",
 			show_spacecraft: true,
-			spacecraft_color: 0xfff200,
+			spacecraft_color: "#fff200",
 			show_projection: true,
-			orbit_color: 0x00ff00
+			orbit_color: "#00ff00"
 		},
 		map:{
 			zoom: 0,

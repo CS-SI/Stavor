@@ -26,6 +26,16 @@ h1, h2, h3, h4, h5 {
 	font-family: Stavor, Helvetica, Verdana, Sans-Serif;
 }
 
+h4,h5{
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+p {
+  margin-top: 0em;
+  margin-bottom: 0.5em;
+}
+
 input[type=image]{
 	outline : none;
 }
@@ -143,15 +153,15 @@ ol li{
 @media screen and (orientation: landscape){
 	#SlidePrev{
 		left:0px; 
-		top:40%;
-		width: calc(0.75*10vh); 
-		height: 10%; 
+		top:calc(50% - 25px);
+		width: 45px; 
+		height: 60px; 
 	}
 	#SlideNext{
 		right:0px; 
-		top:40%;
-		width: calc(0.75*10vh); 
-		height: 10%; 
+		top:calc(50% - 25px);
+		width: 45px; 
+		height: 60px; 
 	}
 	.tabContainer{
 		margin-right: 50px;

@@ -84,9 +84,10 @@ var Orbit = function()
 	//		loop runner							//
 	//////////////////////////////////////////////////////////////////////////////////
 	var lastTimeMsec = null;
+	var requestId;
 	requestAnimationFrame(function animate(nowMsec){
 		// keep looping
-		requestAnimationFrame( animate );
+		requestId = requestAnimationFrame( animate );
 		// measure time
 		/*lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
 		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
@@ -329,7 +330,7 @@ var Orbit = function()
 		if(config.show_earth){
 			containerEarth.visible = true;
 		}else{
-			containerEarth.visible = false;
+			containerEarth.traverse( function ( child ) { child.visible = false; } );
 		}
 	}
 
@@ -397,11 +398,12 @@ var Orbit = function()
 		}
 		renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		container = document.getElementById( 'orbit' );
+		container.innerHTML = "";
 		container.appendChild( renderer.domElement );
 		renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
 			event.preventDefault();
 			// animationID would have been set by your call to requestAnimationFrame
-			cancelAnimationFrame(); 
+			cancelAnimationFrame(requestId); 
 		}, false);
 
 		renderer.context.canvas.addEventListener("webglcontextrestored", function(event) {
@@ -482,6 +484,9 @@ var Orbit = function()
 	
 	Orbit.prototype.resizeCanvas = function(){
 		onWindowResize();
+	}
+	Orbit.prototype.stopAnimation = function(){
+		cancelAnimationFrame(requestId); 
 	}
 	
 //***********************************************************************************************************************

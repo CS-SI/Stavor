@@ -26,6 +26,7 @@
 }
 
 .tabs > ul > li{
+	font-family: Stavor, Helvetica, Verdana, Sans-Serif;
 	margin:0 2px 0 0;
 	padding:7px 10px;
 	display:block;

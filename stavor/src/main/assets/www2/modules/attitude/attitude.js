@@ -117,10 +117,11 @@ var Attitude = function ()
 
 // FUNCTIONS 		
 
-
+	
+	var requestId;
 	function animate() 
 	{
-		requestAnimationFrame( animate );
+		requestId = requestAnimationFrame( animate );
 		render();		
 		update();
 	}
@@ -1066,7 +1067,7 @@ var Attitude = function ()
 		renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
 			event.preventDefault();
 			// animationID would have been set by your call to requestAnimationFrame
-			cancelAnimationFrame(); 
+			cancelAnimationFrame(requestId); 
 		}, false);
 
 		renderer.context.canvas.addEventListener("webglcontextrestored", function(event) {
@@ -1604,6 +1605,10 @@ var Attitude = function ()
 	Attitude.prototype.resizeCanvas = function(){
 		onWindowResize();
 	}
+	Attitude.prototype.stopAnimation = function(){
+		cancelAnimationFrame(requestId); 
+	}
+	
 	function updateView() {
 		switch(selected_view){
 			case "Earth"://Earth
