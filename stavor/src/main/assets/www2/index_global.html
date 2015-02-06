@@ -295,6 +295,7 @@
 		</div>
 	</div>
 	<div id="MenuButtonMap" class="MenuButton" onclick="switchMapMenu()" ></div>
+	<div id="ViewButtonMap" class="ViewButton" onclick="" ></div>
 </div>
 <div id="DivOrbit" >
 	<div id="orbit" ></div>
@@ -328,6 +329,7 @@
 		</div>
 	</div>
 	<div id="MenuButtonOrbit" class="MenuButton" onclick="switchOrbitMenu()" ></div>
+	<div id="ViewButtonOrbit" class="ViewButton" onclick="" ></div>
 </div>
 <div id="DivAttitude" >
 	<div id="attitude" ></div>
@@ -437,28 +439,11 @@
 		</div>
 	</div>
 	<div id="MenuButtonAttitude" class="MenuButton" onclick="switchAttitudeMenu()" ></div>
+	<div id="ViewButtonAttitude" class="ViewButton" onclick="" ></div>
 </div>
 
-<div id="DivMenu" ></div>
-
-<div id="SlidePrev" onclick="prevVisualization()" ></div>
-<div id="SlideNext" onclick="nextVisualization()" ></div>
-
-<div id="DivToolbar" >
-	<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator"/>
-	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator"/>
-	<input id="TimeBar" type="range" min="0" max="100" value="0" disabled="true" title="Simulation time"/>
-	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation"/>
-	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation"/>&nbsp;
-	<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation"/>
-	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation"/>&nbsp;&nbsp;
-</div>
-<div id="DivClock" >
-	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/>&nbsp;2014-01-01 20:00:33.1 UTC&nbsp;
-</div>
-<div id="LedMap" class="Led LedUnselected"/>
-<div id="LedOrbit" class="Led LedUnselected"/>
-<div id="LedAttitude" class="Led LedUnselected"/>
+<div id="ConfigButton" class="ConfigButton" onclick="" ></div>
+<div id="DivInfoPanel" ></div>
 
 <div id="DivMissions">
 	<input id="MissionsListClose" class="" type="image" src="style/icons/close.png" title="Close mission list" onclick="switchMissionsListStatus()"/>
@@ -530,6 +515,27 @@
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission" onclick=""/></div>
 	</div>
 </div>
+
+<div id="SlidePrev" onclick="prevVisualization()" ></div>
+<div id="SlideNext" onclick="nextVisualization()" ></div>
+
+<div id="DivToolbar" >
+	<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator"/>
+	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator"/>
+	<input id="TimeBar" type="range" min="0" max="100" value="0" disabled="true" title="Simulation time"/>
+	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation"/>
+	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation"/>&nbsp;
+	<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation"/>
+	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation"/>&nbsp;&nbsp;
+</div>
+<div id="DivClock" >
+	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/>&nbsp;2014-01-01 20:00:33.1 UTC&nbsp;
+</div>
+<div id="LedMap" class="Led LedUnselected"/>
+<div id="LedOrbit" class="Led LedUnselected"/>
+<div id="LedAttitude" class="Led LedUnselected"/>
+
+
 
 <!-- Modules -->
 	<!-- Attitude -->

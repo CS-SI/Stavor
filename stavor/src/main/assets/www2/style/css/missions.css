@@ -19,7 +19,7 @@
 }
 
 #DivMissions{
-	position: fixed;
+	position: absolute;
 	left: -300px;
 	bottom: 70px;
 	background-color: rgba(200, 200, 200, 0.7);
@@ -27,6 +27,7 @@
 	max-width: 90%;
 	height: calc(100% - 70px);
     border-radius: 0px 5px 5px 0px;
+	z-index: 9999;
 	/*box-shadow: 1px 1px 8px #999999;*/
 }
 
