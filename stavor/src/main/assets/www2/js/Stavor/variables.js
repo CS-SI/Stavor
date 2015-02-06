@@ -16,6 +16,19 @@ var global_menus = {
 	},
 }
 
+//To save camera position and zoom when an option is changed and the visualization needs to recharge
+var global_cameras = {
+	attitude:{
+		position: new THREE.Vector3(300,300,300),
+		up: new THREE.Vector3(-0.577,-0.577,0.577)
+	},
+	orbit:{
+		position: new THREE.Vector3(0,0,13)
+	},
+	map:{
+	}
+}
+
 var global_simulation = {
 	config:{
 		global:{
@@ -33,8 +46,8 @@ var global_simulation = {
 			//Measures: Inclination, angles and planes
 			show_planes: false,
 			show_orbital_plane: false,
-			plane_xy_color: 0xff0094,
-			plane_orb_color: 0x65ff00,
+			plane_xy_color: "#ff0094",
+			plane_orb_color: "#65ff00",
 			show_inclination: false,
 			//Measures: spheric coordinates
 			show_spheric_coords: false,
@@ -63,22 +76,22 @@ var global_simulation = {
 			earth_show_dist: true,
 			//Indicators
 			show_velocity: true,
-			color_velocity: 0x001dff,
+			color_velocity: "#001dff",
 			limit_velocity: 10, //Km/s value corresponding to the full length arrow (touching the sphere)
 			show_acceleration: true,
-			color_acceleration: 0xfc00b0,
+			color_acceleration: "#fc00b0",
 			limit_acceleration: 5, //Km/s2 value corresponding to the full length arrow (touching the sphere)
 			show_momentum: true,
-			color_momentum: 0x00fc19,
+			color_momentum: "#00fc19",
 			show_target_a: false,
-			color_target_a: 0xff0000,
+			color_target_a: "#ff0000",
 			value_target_a: new THREE.Vector3( -5, -5, -5 ),
 			show_vector_a: false,
-			color_vector_a: 0x00fffa,
+			color_vector_a: "#00fffa",
 			limit_vector_a: 25,// In the same units of the provided value
 			value_vector_a: new THREE.Vector3( -5, -5, -5 ),
 			show_direction_a: false,
-			color_direction_a: 0xffff00,
+			color_direction_a: "#ffff00",
 			value_direction_a: new THREE.Vector3( -5, -5, -5 )
 		},
 		orbit:{

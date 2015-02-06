@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>STAVOR</title>
+	<title>STAVOR v3.0.0</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, height=device-height, target-densitydpi=device-dpi, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<link rel="icon" href="style/icons/capsule.png" />
@@ -19,6 +19,8 @@
 	<!--<script src='intelxdk.js'></script>-->
     <!--<script src='xhr.js'></script>--><!-- Same origin policy -->
 	
+	<!-- JSColor -->
+	<script type="text/javascript" src="js/jscolor/jscolor.js"></script>
 	<!-- jQuery -->
 	<script type='text/javascript' src="js/jQuery/jquery-2.1.3.min.js"></script>
 	<!-- PouchDB -->
@@ -291,18 +293,18 @@
 			<p>Show axis labels:<input id="opt-orb-ShowAxisLabels" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
 			<h4>Earth</h4>
 			<p>Show Earth model:<input id="opt-orb-ShowEarthModel" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>Show Earth axis:<input id="opt-orb-ShowEarthAxis" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>Show Earth atmosphere:<input id="opt-orb-ShowEarthAtmosphere" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>Show Earth clouds:<input id="opt-orb-ShowEarthClouds" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>&bull;Show Earth axis:<input id="opt-orb-ShowEarthAxis" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>&bull;Show Earth atmosphere:<input id="opt-orb-ShowEarthAtmosphere" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>&bull;Show Earth clouds:<input id="opt-orb-ShowEarthClouds" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
 			<h4>Reference</h4>
 			<p>Show XY plane:<input id="opt-orb-ShowXyPlane" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>Color:<input id="opt-orb-PlaneXyColor" type="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-PlaneXyColor" class="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 			<h4>Spacecraft</h4>
 			<p>Show spacecraft:<input id="opt-orb-ShowSpacecraft" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>Color:<input id="opt-orb-SpacecraftColor" type="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-SpacecraftColor" class="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 			<h4>Orbit</h4>
 			<p>Show projection:<input id="opt-orb-ShowProjection" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>Color:<input id="opt-orb-OrbitColor" type="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-OrbitColor" class="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 		  </div>
 		</div>
 	</div>
@@ -324,41 +326,42 @@
 			<h5>Velocity</h5>
 			<p>Show velocity:<input id="opt-att-ShowVelocity" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>Limit (Km/s):<input id="opt-att-LimitVelocity" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-orb-VelocityColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-att-VelocityColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5>Acceleration</h5>
 			<p>Show acceleration:<input id="opt-att-ShowAcceleration" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>Limit (Km/s2):<input id="opt-att-LimitAcceleration" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-orb-AccelerationColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-att-AccelerationColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5>Momentum</h5>
 			<p>Show momentum:<input id="opt-att-ShowMomentum" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>Color:<input id="opt-orb-MomentumColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-att-MomentumColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h4>Extra</h4>
 			<h5>Target</h5>
 			<p>Show target:<input id="opt-att-ShowTarget" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>X:<input id="opt-att-TargetValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<p>Y:<input id="opt-att-TargetValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<p>Z:<input id="opt-att-TargetValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-orb-TargetColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-att-TargetColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5>Vector</h5>
 			<p>Show vector:<input id="opt-att-ShowVector" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>Limit:<input id="opt-att-LimitVector" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<p>X:<input id="opt-att-VectorValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<p>Y:<input id="opt-att-VectorValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<p>Z:<input id="opt-att-VectorValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-orb-VectorColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-att-VectorColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5>Direction</h5>
 			<p>Show direction:<input id="opt-att-ShowDirection" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>X:<input id="opt-att-DirectionValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<p>Y:<input id="opt-att-DirectionValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<p>Z:<input id="opt-att-DirectionValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-orb-DirectionColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-att-DirectionColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 		  </div>
 		  <div class="tabpage" id="Attitudetabpage_2">
 			<h4>Inclination</h4>
-			<p>Show Earth rotation plane:<input id="opt-att-ShowEarthPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>Rotation plane color:<input id="opt-orb-RotationPlaneColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p><br>
-			<p>Show orbital plane:<input id="opt-att-ShowOrbitalPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>Orbital plane color:<input id="opt-orb-OrbitalPlaneColor" type="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Show planes:<input id="opt-att-ShowOrbitalPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;Show inclination:<input id="opt-att-ShowInclination" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<!--<p>Show Earth rotation plane:<input id="opt-att-ShowEarthPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>-->
+			<p>Rotation plane color:<input id="opt-att-RotationPlaneColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Orbital plane color:<input id="opt-att-OrbitalPlaneColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h4>Spheric coordinates</h4>
 			<p>Show spheric coordinates:<input id="opt-att-ShowSphericCoordinates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<select id="opt-att-SphericCoordsSelection" onchange="updateAttitudeOption(this.id,this.value)">
@@ -387,9 +390,30 @@
 		  </div>
 		  <div class="tabpage" id="Attitudetabpage_3">
 			<h4>General</h4>
+			<p>Show sky:<input id="opt-att-ShowSky" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Show axis:<input id="opt-att-ShowAxis" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Show axis labels:<input id="opt-att-ShowAxisLabels" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<h4>Reference</h4>
+			<p>Show ref. sphere:<input id="opt-att-ShowSphere" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Show mini spheres:<input id="opt-att-ShowMiniSpheres" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Show circles:<input id="opt-att-ShowCircles" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<h4>Spacecraft</h4>
+			<p>Show spacecraft axis:<input id="opt-att-ShowScAxis" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Show engine texture:<input id="opt-att-ShowEngineTexture" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<h4>Sun</h4>
+			<p>Show model:<input id="opt-att-ShowSunModel" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;Show surface:<input id="opt-att-ShowSunSurface" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;Sun rotates:<input id="opt-att-SunRotates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Rotation speed [0-9]:<input id="opt-att-SunRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>&bull;Show line:<input id="opt-att-ShowSunLine" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;Show distance:<input id="opt-att-ShowSunDistance" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<h4>Earth</h4>
+			<p>Show model:<input id="opt-att-ShowEarthModel" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;Show surface:<input id="opt-att-ShowEarthSurface" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;Earth rotates:<input id="opt-att-EarthRotates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>Rotation speed [0-9]:<input id="opt-att-EarthRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>&bull;Show line:<input id="opt-att-ShowEarthLine" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;Show distance:<input id="opt-att-ShowEarthDistance" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 		  </div>
 		</div>
 	</div>

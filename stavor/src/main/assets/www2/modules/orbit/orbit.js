@@ -22,7 +22,7 @@ var Orbit = function()
 	//			SCENE PARAMS (Hard-coded parameters)
 	//-----------------------------------------------------------------------------------------------------------------------
 	var canvas_mode = false;
-	var cam_init_pos  = new THREE.Vector3(0,0,13);
+	//var cam_init_pos  = new THREE.Vector3(0,0,13);
 	var cam_view_angle = 25;
 	var cam_rend_near = 0.1;
 	var cam_rend_far = 20000;
@@ -381,7 +381,7 @@ var Orbit = function()
 		var VIEW_ANGLE = cam_view_angle, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = cam_rend_near, FAR = cam_rend_far;
 		camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 		scene.add(camera);
-		camera.position = cam_init_pos;
+		camera.position = global_cameras.orbit.position;
 		camera.lookAt(scene.position);	
 		// RENDERER
 		if ( Detector.webgl ){
@@ -487,6 +487,8 @@ var Orbit = function()
 	}
 	Orbit.prototype.stopAnimation = function(){
 		cancelAnimationFrame(requestId); 
+		global_cameras.orbit.position = camera.position;
+		global_cameras.orbit.up = camera.up;
 	}
 	
 //***********************************************************************************************************************

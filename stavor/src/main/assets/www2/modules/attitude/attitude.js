@@ -6,6 +6,8 @@ var Attitude = function ()
 	var results = global_simulation.results.spacecraft;
 	var segments = global_3d_segments.attitude;
 	
+	
+	var selected_view = "FREE";
 	// MAIN
 	//***********************************************************************************************************************
 	//		GLOBAL VARIABLES
@@ -39,7 +41,7 @@ var Attitude = function ()
 	//-----------------------------------------------------------------------------------------------------------------------
 	//			SCENE PARAMS (Hard-coded parameters)
 	//-----------------------------------------------------------------------------------------------------------------------
-	var cam_init_pos  = new THREE.Vector3(300,300,300);
+	//var cam_init_pos  = new THREE.Vector3(300,300,300);
 	var cam_view_angle = 25;
 	var cam_rend_near = 0.1;
 	var cam_rend_far = 20000;
@@ -210,8 +212,8 @@ var Attitude = function ()
 			var radius = sphere_radius;
 			var radius_ext = planes_width;
 
-			for ( i = 0; i < plane_resolution; i ++ ) {
-				var a = 2*Math.PI * i / plane_resolution;
+			for ( i = 0; i < segments.plane_resolution; i ++ ) {
+				var a = 2*Math.PI * i / segments.plane_resolution;
 				pts.push( new THREE.Vector2 ( Math.cos( a ) * radius_ext, Math.sin( a ) * radius_ext ) );
 				hls.push( new THREE.Vector2 ( Math.cos( a ) * radius, Math.sin( a ) * radius ) );
 			}
@@ -236,14 +238,14 @@ var Attitude = function ()
 			// mesh
 			var plane_xy = new THREE.Mesh( 
 				geometry, 
-				new THREE.MeshBasicMaterial( { color: plane_xy_color, transparent: true, opacity: 0.2 } )
+				new THREE.MeshBasicMaterial( { color: config.plane_xy_color, transparent: true, opacity: 0.2 } )
 			);
 			scene.add( plane_xy );
 
 			// mesh
 			plane_orb = new THREE.Mesh( 
 				geometry, 
-				new THREE.MeshBasicMaterial( { color: plane_orb_color, transparent: true, opacity: 0.2 } )
+				new THREE.MeshBasicMaterial( { color: config.plane_orb_color, transparent: true, opacity: 0.2 } )
 			);
 			scene.add( plane_orb );
 
@@ -263,7 +265,7 @@ var Attitude = function ()
 			plane_orb.position.set( 0, 0, 0 );*/
 
 			//Compute inclination quaternion
-			var norm_orbital_plane = value_velocity.clone().normalize().cross(value_earth.clone().normalize());
+			var norm_orbital_plane = results.velocity.clone().normalize().cross(results.earth_direction.clone().normalize());
 			var norm_rotation_earth = new THREE.Vector3(0,0,1);
 			var incl_quat = new THREE.Quaternion().setFromUnitVectors( norm_rotation_earth, norm_orbital_plane );
 
@@ -272,14 +274,14 @@ var Attitude = function ()
 			plane_orb.matrixWorldNeedsUpdate = true;
 			plane_orb.updateMatrix();
 
-			if(show_inclination){
+			if(config.show_inclination){
 				//Compute instant inclination angle
-				var inclination = Math.asin(value_earth.z/value_earth.length());
+				var inclination = Math.asin(results.earth_direction.z/results.earth_direction.length());
 				//console.debug(inclination);
 
 				//Compute arc angle clip points
-				var clip1 = value_earth.clone().normalize().multiplyScalar(sphere_radius);
-				var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
+				var clip1 = results.earth_direction.clone().normalize().multiplyScalar(sphere_radius);
+				var clip2 = results.earth_direction.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
 				var clip_mid = clip1.clone().add(clip2.clone());
 
 				//Draw Arc
@@ -292,7 +294,7 @@ var Attitude = function ()
 				});
 
 				var geometry = new THREE.Geometry();
-				var splinePoints = spline.getPoints(arc_resolution);
+				var splinePoints = spline.getPoints(segments.arc_resolution);
 
 				for(var i = 0; i < splinePoints.length; i++){
 					geometry.vertices.push(splinePoints[i]);  
@@ -317,7 +319,7 @@ var Attitude = function ()
 		//Spheric coordinates
 		if(config.show_spheric_coords){
 
-			var sphcoord_target = value_earth.clone().normalize().multiplyScalar(arc_sphcoord_radius);
+			var sphcoord_target = results.earth_direction.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 			var sphcoord_cross = sphcoord_target.clone().setZ(0).normalize().multiplyScalar(arc_sphcoord_radius);
 			var sphcoord_ref = axis_x.clone().multiplyScalar(arc_sphcoord_radius);
 			var sphcoord_long_mid = sphcoord_ref.clone().add(sphcoord_cross.clone());
@@ -354,7 +356,7 @@ var Attitude = function ()
 			});
 
 			var geometry = new THREE.Geometry();
-			var splinePoints = spline.getPoints(arc_resolution);
+			var splinePoints = spline.getPoints(segments.arc_resolution);
 
 			for(var i = 0; i < splinePoints.length; i++){
 				geometry.vertices.push(splinePoints[i]);  
@@ -379,7 +381,7 @@ var Attitude = function ()
 			});
 
 			var geometry = new THREE.Geometry();
-			var splinePoints = spline.getPoints(arc_resolution);
+			var splinePoints = spline.getPoints(segments.arc_resolution);
 
 			for(var i = 0; i < splinePoints.length; i++){
 				geometry.vertices.push(splinePoints[i]);  
@@ -397,8 +399,8 @@ var Attitude = function ()
 		}
 		if(config.show_vectors_angle){
 			
-			var angle_vector_start = value_earth.clone().normalize().multiplyScalar(arc_vectors_radius);
-			var angle_vector_end = value_momentum.clone().normalize().multiplyScalar(arc_vectors_radius);
+			var angle_vector_start = results.earth_direction.clone().normalize().multiplyScalar(arc_vectors_radius);
+			var angle_vector_end = results.momentum.clone().normalize().multiplyScalar(arc_vectors_radius);
 			var angle_vector_mid = angle_vector_start.clone().add(angle_vector_end.clone());
 
 			var dist_angle = angle_vector_start.clone().angleTo(angle_vector_end);
@@ -429,7 +431,7 @@ var Attitude = function ()
 			});
 
 			var geometry = new THREE.Geometry();
-			var splinePoints = spline.getPoints(arc_resolution);
+			var splinePoints = spline.getPoints(segments.arc_resolution);
 
 			for(var i = 0; i < splinePoints.length; i++){
 				geometry.vertices.push(splinePoints[i]);  
@@ -453,7 +455,7 @@ var Attitude = function ()
 
 		if(config.show_orbital_plane){
 			//Compute inclination quaternion
-			var norm_orbital_plane = value_velocity.clone().normalize().cross(results.earth_direction.clone().normalize());
+			var norm_orbital_plane = results.velocity.clone().normalize().cross(results.earth_direction.clone().normalize());
 			var norm_rotation_earth = new THREE.Vector3(0,0,1);
 			var incl_quat = new THREE.Quaternion().setFromUnitVectors( norm_rotation_earth, norm_orbital_plane );
 
@@ -462,15 +464,15 @@ var Attitude = function ()
 
 			if(config.show_inclination){
 				//Compute instant inclination angle
-				var inclination = Math.asin(value_earth.z/value_earth.length());
+				var inclination = Math.asin(results.earth_direction.z/results.earth_direction.length());
 				
 				//ReDraw Arc
 				scene.remove(incl_arc);
 
 				
 				//Compute arc angle clip points
-				var clip1 = value_earth.clone().normalize().multiplyScalar(arc_inclination_radius);
-				var clip2 = value_earth.clone().setZ(0).normalize().multiplyScalar(arc_inclination_radius);
+				var clip1 = results.earth_direction.clone().normalize().multiplyScalar(arc_inclination_radius);
+				var clip2 = results.earth_direction.clone().setZ(0).normalize().multiplyScalar(arc_inclination_radius);
 				var clip_mid = clip1.clone().add(clip2.clone()).normalize().multiplyScalar(arc_inclination_radius);
 
 
@@ -499,7 +501,7 @@ var Attitude = function ()
 				});
 
 				var geometry = new THREE.Geometry();
-				var splinePoints = spline.getPoints(arc_resolution);
+				var splinePoints = spline.getPoints(segments.arc_resolution);
 
 				for(var i = 0; i < splinePoints.length; i++){
 					geometry.vertices.push(splinePoints[i]);  
@@ -515,24 +517,24 @@ var Attitude = function ()
 		if(config.show_spheric_coords){
 			
 			var sphcoord_target;
-			switch(spheric_coords_selection){
-				case "Earth":
-					sphcoord_target = value_earth.clone().normalize().multiplyScalar(arc_sphcoord_radius);
+			switch(config.spheric_coords_selection){
+				case enum_basic_indicators.EARTH:
+					sphcoord_target = results.earth_direction.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 					break;
-				case "Sun":
-					sphcoord_target = value_sun.clone().normalize().multiplyScalar(arc_sphcoord_radius);
+				case enum_basic_indicators.SUN:
+					sphcoord_target = results.sun_direction.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 					break;
-				case "Velocity":
-					sphcoord_target = value_velocity.clone().normalize().multiplyScalar(arc_sphcoord_radius);
+				case enum_basic_indicators.VELOCITY:
+					sphcoord_target = results.velocity.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 					break;
-				case "Acceleration":
-					sphcoord_target = value_acceleration.clone().normalize().multiplyScalar(arc_sphcoord_radius);
+				case enum_basic_indicators.ACCELERATION:
+					sphcoord_target = results.acceleration.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 					break;
-				case "Momentum":
-					sphcoord_target = value_momentum.clone().normalize().multiplyScalar(arc_sphcoord_radius);
+				case enum_basic_indicators.MOMENTUM:
+					sphcoord_target = results.momentum.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 					break;
 				default:
-					sphcoord_target = value_velocity.clone().normalize().multiplyScalar(arc_sphcoord_radius);
+					sphcoord_target = results.velocity.clone().normalize().multiplyScalar(arc_sphcoord_radius);
 					break;
 			}
 
@@ -587,7 +589,7 @@ var Attitude = function ()
 			});
 
 			var geometry = new THREE.Geometry();
-			var splinePoints = spline.getPoints(arc_resolution);
+			var splinePoints = spline.getPoints(segments.arc_resolution);
 
 			for(var i = 0; i < splinePoints.length; i++){
 				geometry.vertices.push(splinePoints[i]);  
@@ -618,7 +620,7 @@ var Attitude = function ()
 			});
 
 			var geometry = new THREE.Geometry();
-			var splinePoints = spline.getPoints(arc_resolution);
+			var splinePoints = spline.getPoints(segments.arc_resolution);
 
 			for(var i = 0; i < splinePoints.length; i++){
 				geometry.vertices.push(splinePoints[i]);  
@@ -632,45 +634,45 @@ var Attitude = function ()
 		}
 		if(config.show_vectors_angle){
 			var angle_vector_start;
-			switch(vectors_angle_sel1){
-				case "Earth":
-					angle_vector_start = value_earth.clone().normalize().multiplyScalar(arc_vectors_radius);
+			switch(config.vectors_angle_sel1){
+				case enum_basic_indicators.EARTH:
+					angle_vector_start = results.earth_direction.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
-				case "Sun":
-					angle_vector_start = value_sun.clone().normalize().multiplyScalar(arc_vectors_radius);
+				case enum_basic_indicators.SUN:
+					angle_vector_start = results.sun_direction.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
-				case "Velocity":
-					angle_vector_start = value_velocity.clone().normalize().multiplyScalar(arc_vectors_radius);
+				case enum_basic_indicators.VELOCITY:
+					angle_vector_start = results.velocity.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
-				case "Acceleration":
-					angle_vector_start = value_acceleration.clone().normalize().multiplyScalar(arc_vectors_radius);
+				case enum_basic_indicators.ACCELERATION:
+					angle_vector_start = results.acceleration.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
-				case "Momentum":
-					angle_vector_start = value_momentum.clone().normalize().multiplyScalar(arc_vectors_radius);
+				case enum_basic_indicators.MOMENTUM:
+					angle_vector_start = results.momentum.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
 				default:
-					angle_vector_start = value_earth.clone().normalize().multiplyScalar(arc_vectors_radius);
+					angle_vector_start = results.earth_direction.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
 			}
 			var angle_vector_end;
-			switch(vectors_angle_sel2){
-				case "Earth":
-					angle_vector_end = value_earth.clone().normalize().multiplyScalar(arc_vectors_radius);
+			switch(config.vectors_angle_sel2){
+				case enum_basic_indicators.EARTH:
+					angle_vector_end = results.earth_direction.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
-				case "Sun":
-					angle_vector_end = value_sun.clone().normalize().multiplyScalar(arc_vectors_radius);
+				case enum_basic_indicators.SUN:
+					angle_vector_end = results.sun_direction.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
-				case "Velocity":
-					angle_vector_end = value_velocity.clone().normalize().multiplyScalar(arc_vectors_radius);
+				case enum_basic_indicators.VELOCITY:
+					angle_vector_end = results.velocity.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
-				case "Acceleration":
-					angle_vector_end = value_acceleration.clone().normalize().multiplyScalar(arc_vectors_radius);
+				case enum_basic_indicators.ACCELERATION:
+					angle_vector_end = results.acceleration.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
-				case "Momentum":
-					angle_vector_end = value_momentum.clone().normalize().multiplyScalar(arc_vectors_radius);
+				case enum_basic_indicators.MOMENTUM:
+					angle_vector_end = results.momentum.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
 				default:
-					angle_vector_end = value_earth.clone().normalize().multiplyScalar(arc_vectors_radius);
+					angle_vector_end = results.earth_direction.clone().normalize().multiplyScalar(arc_vectors_radius);
 					break;
 			}
 			var angle_vector_mid = angle_vector_start.clone().add(angle_vector_end.clone()).normalize().multiplyScalar(arc_vectors_radius);
@@ -712,7 +714,7 @@ var Attitude = function ()
 			});
 
 			var geometry = new THREE.Geometry();
-			var splinePoints = spline.getPoints(arc_resolution);
+			var splinePoints = spline.getPoints(segments.arc_resolution);
 
 			for(var i = 0; i < splinePoints.length; i++){
 				geometry.vertices.push(splinePoints[i]);  
@@ -900,7 +902,7 @@ var Attitude = function ()
 		if(config.show_vector_a){
 			new_direction = new THREE.Vector3().subVectors(config.value_vector_a, origin).normalize();
 			vector_a.setDirection(new_direction);
-			vector_a.setLength(value_vector_a.length()*arrow_max_length/limit_vector_a, arrow_head_length, arrow_head_width);
+			vector_a.setLength(config.value_vector_a.length()*arrow_max_length/config.limit_vector_a, arrow_head_length, arrow_head_width);
 			//vector_a.setColor(color_vector_a);
 		}
 		
@@ -1045,7 +1047,7 @@ var Attitude = function ()
 		var VIEW_ANGLE = cam_view_angle, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = cam_rend_near, FAR = cam_rend_far;
 		camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 		scene.add(camera);
-		camera.position = cam_init_pos;
+		camera.position = global_cameras.attitude.position;
 		camera.lookAt(scene.position);	
 		// RENDERER
 		if ( Detector.webgl ){
@@ -1063,6 +1065,7 @@ var Attitude = function ()
 		//renderer.setClearColor(0xff0000, 1);
 		renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		container = document.getElementById( 'attitude' );
+		container.innerHTML = "";
 		container.appendChild( renderer.domElement );
 		renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
 			event.preventDefault();
@@ -1215,10 +1218,10 @@ var Attitude = function ()
 				
 				//customMaterial2.transparent = true;
 			}else{
-				if(!canvas_mode)
+				//if(!canvas_mode)
 					var customMaterial2 = new THREE.MeshPhongMaterial( { color: sc_eng_solid_color, metal: true } );
-				else
-					var customMaterial2 = new THREE.MeshBasicMaterial( { color: sc_eng_solid_color } );
+				/*else
+					var customMaterial2 = new THREE.MeshBasicMaterial( { color: sc_eng_solid_color } );*/
 			}
 			customMaterial2.side = THREE.BackSide;
 			// apply the material to a surface    innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength)
@@ -1331,10 +1334,10 @@ var Attitude = function ()
 					fragmentShader: THREE.ShaderSun.fragmentShader
 				}   );
 			}else{//Not using texture, solid color instead
-				if(!canvas_mode)
+				//if(!canvas_mode)
 					var customMaterialSun = new THREE.MeshPhongMaterial( { color: sun_solid_color, metal: true } );
-				else
-					var customMaterialSun = new THREE.MeshBasicMaterial( { color: sun_solid_color } );
+				/*else
+					var customMaterialSun = new THREE.MeshBasicMaterial( { color: sun_solid_color } );*/
 			}
 			
 			var sunGeometry = new THREE.SphereGeometry( sun_radius, segments.sun_seg, segments.sun_seg );
@@ -1489,11 +1492,14 @@ var Attitude = function ()
 			sunGlow.visible=true;
 		}
 	}
-	var selected_view = "XYZ";
 	function changeView(view_mode){
 		restoreMiniSpheres();
 		restorePlanets();
 		switch(view_mode){
+			case "FREE":
+				camera.position = global_cameras.attitude.position;
+				camera.up = global_cameras.attitude.up;
+				break;
 			case "XYZ"://xyz
 				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
 				camera.up = new THREE.Vector3(-0.577,-0.577,0.577);
@@ -1573,9 +1579,9 @@ var Attitude = function ()
 				camera.position = init_sc_dir_right.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
 				camera.up = init_sc_up_right.clone().applyQuaternion(spacecraft.quaternion.clone().normalize());
 				break;
-			default://xyz
-				camera.position = new THREE.Vector3(getCamEquilater(),getCamEquilater(),getCamEquilater());
-				camera.up = new THREE.Vector3(-0.577,-0.577,0.577);
+			default: //free
+				camera.position = global_cameras.attitude.position;
+				camera.up = global_cameras.attitude.up;
 				break;
 		}
 		selected_view = view_mode;
@@ -1607,6 +1613,8 @@ var Attitude = function ()
 	}
 	Attitude.prototype.stopAnimation = function(){
 		cancelAnimationFrame(requestId); 
+		global_cameras.attitude.position = camera.position;
+		global_cameras.attitude.up = camera.up;
 	}
 	
 	function updateView() {
