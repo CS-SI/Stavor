@@ -122,40 +122,49 @@ function displayAttitudeMenuPage() {
 }
 
 function switchMapMenu(){
-	var menu = document.getElementById("MaptabContainer"); 
-	var divi = document.getElementById("DivMap"); 
-	var w = Math.min(400,divi.clientWidth);
-	if(menu.style.display == "none" || menu.style.display == ""){
-		menu.style.right = "-"+w+"px"; 
-		menu.style.display = "block";
-		$('#MaptabContainer').animate({
-			right: '0'
-		},"slow");
-	}else{
-		$('#MaptabContainer').animate({
-			right: '-100%'
-		},"slow",mapEndClosing);
+	if(global_menus.map.inAnimation == false){
+		global_menus.map.inAnimation = true;
+		var menu = document.getElementById("MaptabContainer"); 
+		var divi = document.getElementById("DivMap"); 
+		var w = Math.min(400,divi.clientWidth);
+		if(!global_menus.map.isOpen){
+			menu.style.right = "-"+w+"px"; 
+			menu.style.display = "block";
+			$('#MaptabContainer').animate({
+				right: '0'
+			},"slow",endMapAnimation);
+		}else{
+			$('#MaptabContainer').animate({
+				right: '-100%'
+			},"slow",mapEndClosing);
+		}
+		global_menus.map.isOpen = !global_menus.map.isOpen;
 	}
 }
 function mapEndClosing(){
 	var menu = document.getElementById("MaptabContainer"); 
 	menu.style.display = "none";
+	endMapAnimation();
 }
 function switchOrbitMenu(){
-	var menu = document.getElementById("OrbittabContainer"); 
-	var divi = document.getElementById("DivOrbit"); 
-	var w = Math.min(400,divi.clientWidth);
-	if(menu.style.display == "none" || menu.style.display == ""){
-		updateOrbitOptions();
-		menu.style.right = "-"+w+"px"; 
-		menu.style.display = "block";
-		$('#OrbittabContainer').animate({
-			right: '0'
-		},"slow");
-	}else{
-		$('#OrbittabContainer').animate({
-			right: '-100%'
-		},"slow",orbitEndClosing);
+	if(global_menus.orbit.inAnimation == false){
+		global_menus.orbit.inAnimation = true;
+		var menu = document.getElementById("OrbittabContainer"); 
+		var divi = document.getElementById("DivOrbit"); 
+		var w = Math.min(400,divi.clientWidth);
+		if(!global_menus.orbit.isOpen){
+			updateOrbitOptions();
+			menu.style.right = "-"+w+"px"; 
+			menu.style.display = "block";
+			$('#OrbittabContainer').animate({
+				right: '0'
+			},"slow",endOrbitAnimation);
+		}else{
+			$('#OrbittabContainer').animate({
+				right: '-100%'
+			},"slow",orbitEndClosing);
+		}
+		global_menus.orbit.isOpen = !global_menus.orbit.isOpen;
 	}
 }
 function updateOrbitOption(id,val){
@@ -228,24 +237,39 @@ function updateOrbitOptions(){
 function orbitEndClosing(){
 	var menu = document.getElementById("OrbittabContainer"); 
 	menu.style.display = "none";
+	endOrbitAnimation();
 }
 function switchAttitudeMenu(){
-	var menu = document.getElementById("AttitudetabContainer"); 
-	var divi = document.getElementById("DivAttitude"); 
-	var w = Math.min(400,divi.clientWidth);
-	if(menu.style.display == "none" || menu.style.display == ""){
-		menu.style.right = "-"+w+"px"; 
-		menu.style.display = "block";
-		$('#AttitudetabContainer').animate({
-			right: '0'
-		},"slow");
-	}else{
-		$('#AttitudetabContainer').animate({
-			right: '-100%'
-		},"slow",attitudeEndClosing);
+	if(global_menus.attitude.inAnimation == false){
+		global_menus.attitude.inAnimation = true;
+		var menu = document.getElementById("AttitudetabContainer"); 
+		var divi = document.getElementById("DivAttitude"); 
+		var w = Math.min(400,divi.clientWidth);
+		if(!global_menus.attitude.isOpen){
+			menu.style.right = "-"+w+"px"; 
+			menu.style.display = "block";
+			$('#AttitudetabContainer').animate({
+				right: '0'
+			},"slow",endAttitudeAnimation);
+		}else{
+			$('#AttitudetabContainer').animate({
+				right: '-100%'
+			},"slow",attitudeEndClosing);
+		}
+		global_menus.attitude.isOpen = !global_menus.attitude.isOpen;
 	}
 }
 function attitudeEndClosing(){
 	var menu = document.getElementById("AttitudetabContainer"); 
 	menu.style.display = "none";
+	endAttitudeAnimation();
+}
+function endAttitudeAnimation(){
+	global_menus.attitude.inAnimation = false;
+}
+function endOrbitAnimation(){
+	global_menus.orbit.inAnimation = false;
+}
+function endMapAnimation(){
+	global_menus.map.inAnimation = false;
 }

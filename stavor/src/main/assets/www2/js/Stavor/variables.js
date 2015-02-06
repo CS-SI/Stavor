@@ -1,6 +1,21 @@
 var global_current_visualization = enum_visualizations.ORBITE;
 var global_missions_list_is_open = false;
 
+var global_menus = {
+	attitude:{
+		isOpen: false,
+		inAnimation: false
+	},
+	orbit:{
+		isOpen: false,
+		inAnimation: false
+	},
+	map:{
+		isOpen: false,
+		inAnimation: false
+	},
+}
+
 var global_simulation = {
 	config:{
 		global:{
