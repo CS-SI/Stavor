@@ -230,6 +230,7 @@ function updateOrbitOption(id,val){
 	}
 	global_orbit.stopAnimation();
 	global_orbit = new Orbit();
+	saveStoredVariables();
 }
 function updateOrbitOptions(){
 	document.getElementById("opt-orb-ShowSky").checked = global_simulation.config.orbit.show_sky;
@@ -505,6 +506,7 @@ function updateAttitudeOption(id,val){
 	}
 	global_attitude.stopAnimation();
 	global_attitude = new Attitude();
+	saveStoredVariables();
 }
 function updateAttitudeOptions(){
 	//Models

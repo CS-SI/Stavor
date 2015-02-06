@@ -62,7 +62,9 @@
 	
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
 		var global_orbit, global_attitude, global_map;
-		window.onload = function () { 
+		window.onload = function () {
+			loadStoredVariables();
+		
 			global_attitude = new Attitude();
 			global_orbit = new Orbit();
 			global_map = new Map();
@@ -78,6 +80,23 @@
 			
 			loadOrekitFilesText();
 			hideSplash();
+		}
+		
+		function loadStoredVariables(){
+			var serialized = localStorage.getItem('simulationConfig'); 
+			if(serialized){
+				var localData = JSON.parse(serialized);
+				global_simulation.config = localData;
+			}
+		}
+		function saveStoredVariables(){
+			var dataToStore = JSON.stringify(global_simulation.config);
+			localStorage.setItem('simulationConfig', dataToStore);
+		}
+		//XGGDEBUG: use this function somewhere (in same place as performance level?)
+		function resetStoredVariables(){
+			localStorage.removeItem('simulationConfig'); 
+			window.location.reload();
 		}
 		
 		function error(text){
