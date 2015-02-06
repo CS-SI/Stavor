@@ -150,6 +150,24 @@ ol li{
 		width:23px; 
 		height: 30px; 
 	}
+	#DivInfoPanel1{
+		position: relative;
+		width: 100%;
+		height: 50%;
+		background-color:red;
+		top:0;
+		left:0;
+		right:0;
+	}
+	#DivInfoPanel2{
+		position: relative;
+		width: 100%;
+		height: 50%;
+		background-color:blue;
+		top:0;
+		left:0;
+		right:0;
+	}
 }
 /* #### Landscape #### */
 @media screen and (orientation: landscape){
@@ -167,6 +185,22 @@ ol li{
 	}
 	.tabContainer{
 		margin-right: 50px;
+	}
+	#DivInfoPanel1{
+		position: relative;
+		width: 50%;
+		height: 100%;
+		background-color:red;
+		top:0;
+		left:0;
+	}
+	#DivInfoPanel2{
+		position: relative;
+		width: 50%;
+		height: 100%;
+		background-color:blue;
+		top:-100%;
+		left:50%;
 	}
 }
 /* #### Landscape Tablet #### */
@@ -253,7 +287,7 @@ ol li{
 	height: 2%;
 	background-color:rgba(255, 255, 255, 0.1);
 	z-index: 500;
-	box-shadow: 1px 1px 8px #999999;
+	/*box-shadow: 1px 1px 8px #999999;*/
 	
     -webkit-transition: height 0.5s ease, width 0.2s ease;
     -moz-transition: height 0.5s ease, width 0.2s ease;
@@ -265,4 +299,6 @@ ol li{
 	height: 15%;
 	width: 100%;
 }
+
+
 

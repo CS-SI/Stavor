@@ -14,6 +14,9 @@ var global_menus = {
 		isOpen: false,
 		inAnimation: false
 	},
+	info_panel:{//XGGDEBUG: use somewhere
+		isOpen: false
+	}
 }
 
 //To save camera position and zoom when an option is changed and the visualization needs to recharge
@@ -124,6 +127,17 @@ var global_simulation = {
 		}
 	},
 	results:{
+		info_panel:{
+			attitude:{
+				roll: 0,
+				pitch: 0,
+				yaw: 0
+			},
+			velocity: 0,
+			acceleration: 0,
+			orb_radius: 0,
+			mass: 0
+		},
 		spacecraft:{
 			attitude: new THREE.Quaternion(0,0,0,1),			
 			velocity: new THREE.Vector3( 2.83195518282009,-5.49945264687097E-16,-1.1973314470667253 ), //Km/s
