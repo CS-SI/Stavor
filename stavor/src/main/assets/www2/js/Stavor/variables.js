@@ -20,10 +20,12 @@ var global_menus = {
 var global_cameras = {
 	attitude:{
 		position: new THREE.Vector3(300,300,300),
-		up: new THREE.Vector3(-0.577,-0.577,0.577)
+		up: new THREE.Vector3(-0.577,-0.577,0.577),
+		view_mode: "FREE"
 	},
 	orbit:{
-		position: new THREE.Vector3(0,0,13)
+		position: new THREE.Vector3(0,0,13),
+		view_locked: false
 	},
 	map:{
 	}

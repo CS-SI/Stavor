@@ -6,6 +6,8 @@ var Orbit = function()
 	var results = global_simulation.results.earth;
 	var segments = global_3d_segments.orbit;
 	
+	var locked_view = global_cameras.orbit.view_locked;
+	
 	var orbit;
 	var spacecraft;
 	var projection, starSphere, containerEarth;
@@ -40,7 +42,6 @@ var Orbit = function()
 	var spacecraft_radius = 0.03;
 	
 
-	var locked_view = false;
 	
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -487,6 +488,7 @@ var Orbit = function()
 	}
 	Orbit.prototype.stopAnimation = function(){
 		cancelAnimationFrame(requestId); 
+		global_cameras.orbit.view_locked = locked_view;
 		global_cameras.orbit.position = camera.position;
 		global_cameras.orbit.up = camera.up;
 	}

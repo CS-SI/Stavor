@@ -7,7 +7,7 @@ var Attitude = function ()
 	var segments = global_3d_segments.attitude;
 	
 	
-	var selected_view = "FREE";
+	var selected_view = global_cameras.attitude.view_mode;
 	// MAIN
 	//***********************************************************************************************************************
 	//		GLOBAL VARIABLES
@@ -1585,6 +1585,7 @@ var Attitude = function ()
 				break;
 		}
 		selected_view = view_mode;
+		global_cameras.attitude.view_mode = view_mode;
 		camera.lookAt(scene.position);
 	}
 	function onWindowResize(){
