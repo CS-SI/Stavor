@@ -12,19 +12,19 @@ var Map = function ()
 //---------------------- FOV --------------------------
 //******************************************************
 function drawFov(){
-	if(show_fov){
+	if(config.show_fov){
 		sc_layer.removeAllFeatures();
 
 		//WHOLE EARTH CASE
-		if(typeof fov_terminator != "undefined" && fov_terminator.length > 0){
+		if(typeof results.fov.terminator != "undefined" && results.fov.terminator.length > 0){
 			var fovPoints = [];
 			var sign = 1;
 			var sign_lat = -1;
 			//draw polygon 
-			for (var i in fov_terminator) {
+			for (var i in results.fov.terminator) {
 				if(i==0){
 					//Sign
-					if(fov_terminator[i].longitude>0)
+					if(results.fov.terminator[i].longitude>0)
 						sign = -1;
 					if(sc_latitude>=0)
 						sign_lat = 1;
@@ -42,16 +42,16 @@ function drawFov(){
 				}
 
 				var point = new OpenLayers.Geometry.Point(
-					fov_terminator[i].longitude, 
-					fov_terminator[i].latitude
+					results.fov.terminator[i].longitude, 
+					results.fov.terminator[i].latitude
 				).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 				fovPoints.push(point);
 
-				if(i==fov_terminator.length-1){
+				if(i==results.fov.terminator.length-1){
 					//close polygon 1
 					var point = new OpenLayers.Geometry.Point(
 						179.999*sign, 
-						fov_terminator[i].latitude
+						results.fov.terminator[i].latitude
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					fovPoints.push(point);
 					//close polygon				
@@ -94,14 +94,14 @@ function paintFovClosedArea(){
 	var fov_tmp_long = 0, fov_tmp_lat = 0;
 	var first = true;
 	for (var i in fov) {
-		var point = new OpenLayers.Geometry.Point(fov[i].longitude, fov[i].latitude);
+		var point = new OpenLayers.Geometry.Point(results.fov.closed[i].longitude, results.fov.closed[i].latitude);
 		// transform from WGS 1984 to Spherical Mercator
 		point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 
 
-		if((i!=0) && ((fov[i].longitude*fov_tmp_long)<0) && (Math.abs(fov[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
-			var avg_lat = (fov[i].latitude+fov_tmp_lat)/2;
-			if(fov[i].longitude > 0)
+		if((i!=0) && ((results.fov.closed[i].longitude*fov_tmp_long)<0) && (Math.abs(results.fov.closed[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
+			var avg_lat = (results.fov.closed[i].latitude+fov_tmp_lat)/2;
+			if(results.fov.closed[i].longitude > 0)
 				var new_lon = -179.999999;
 			else
 				var new_lon = 179.999999;
@@ -115,8 +115,8 @@ function paintFovClosedArea(){
 				first=true;
 			}
 		}
-		fov_tmp_lat = fov[i].latitude;
-		fov_tmp_long = fov[i].longitude;
+		fov_tmp_lat = results.fov.closed[i].latitude;
+		fov_tmp_long = results.fov.closed[i].longitude;
 
 		if(first){
 			fovPointsA.push(point);
@@ -145,15 +145,15 @@ function paintFovOpenArea(){
 	var fovPointsA = [];
 	var fov_tmp_long = 0, fov_tmp_lat = 0;
 	var first = true;
-	for (var i in fov) {
-		var point = new OpenLayers.Geometry.Point(fov[i].longitude, fov[i].latitude);
+	for (var i in results.fov.closed) {
+		var point = new OpenLayers.Geometry.Point(results.fov.closed[i].longitude, results.fov.closed[i].latitude);
 		// transform from WGS 1984 to Spherical Mercator
 		point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 
 
-		if((i!=0) && ((fov[i].longitude*fov_tmp_long)<0) && (Math.abs(fov[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
-			var avg_lat = (fov[i].latitude+fov_tmp_lat)/2;
-			if(fov[i].longitude > 0)
+		if((i!=0) && ((results.fov.closed[i].longitude*fov_tmp_long)<0) && (Math.abs(results.fov.closed[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
+			var avg_lat = (results.fov.closed[i].latitude+fov_tmp_lat)/2;
+			if(results.fov.closed[i].longitude > 0)
 				var new_lon = -179.999999;
 			else
 				var new_lon = 179.999999;
@@ -168,8 +168,8 @@ function paintFovOpenArea(){
 			fovPointsA.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
 
 		}
-		fov_tmp_lat = fov[i].latitude;
-		fov_tmp_long = fov[i].longitude;
+		fov_tmp_lat = results.fov.closed[i].latitude;
+		fov_tmp_long = results.fov.closed[i].longitude;
 
 		fovPointsA.push(point);
 	}				
@@ -285,11 +285,11 @@ function addSelectedStationsNames(){
 function drawStationsAreas(){
 	if(Math.abs(sc_altitude-sc_altitude_tmp)>sc_altitude_step){
 		stations_area_layer.removeAllFeatures();
-		for (var arrayIndex in station_areas){
-			if(station_areas[arrayIndex].type==0)
+		for (var arrayIndex in results.station_areas){
+			if(results.station_areas[arrayIndex].type==0)
 				paintClosedArea(arrayIndex);
 			else
-				paintOpenArea(arrayIndex,station_areas[arrayIndex].type);
+				paintOpenArea(arrayIndex,results.station_areas[arrayIndex].type);
 
 		}
 	
@@ -300,8 +300,8 @@ function drawStationsAreas(){
 function paintOpenArea(arrayIndex,type){
 	var areaFirst = [];
 	var area_tmp_long = 0, area_tmp_lat = 0;
-	for (var i in station_areas[arrayIndex].points) {
-		var coord = station_areas[arrayIndex].points[i];
+	for (var i in results.station_areas[arrayIndex].points) {
+		var coord = results.station_areas[arrayIndex].points[i];
 		var point = new OpenLayers.Geometry.Point(
 							coord.longitude, 
 							coord.latitude
@@ -343,8 +343,8 @@ function paintClosedArea(arrayIndex){
 	var areaSecond = [];
 	var area_tmp_long = 0, area_tmp_lat = 0;
 	var first = true;
-	for (var i in station_areas[arrayIndex].points) {
-		var coord = station_areas[arrayIndex].points[i];
+	for (var i in results.station_areas[arrayIndex].points) {
+		var coord = results.station_areas[arrayIndex].points[i];
 		var point = new OpenLayers.Geometry.Point(
 							coord.longitude, 
 							coord.latitude
@@ -394,16 +394,16 @@ function paintClosedArea(arrayIndex){
 //---------------------- Sun --------------------------
 //******************************************************
 function drawSun(){
-	if(show_sun_icon){
+	if(config.show_sun_icon){
 		sun_layer.removeAllFeatures();    
-		var marker_sun = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(sun_lon, sun_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()), null, {
+		var marker_sun = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(results.sun_position.lon, results.sun_position.lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()), null, {
 			externalGraphic: "sun.png",
 			graphicWidth: 32,
 			graphicHeight: 32,
 			fillOpacity: 1
 		});
 		sun_layer.addFeatures([marker_sun]);
-		sun_lon_tmp = sun_lon;
+		sun_lon_tmp = results.sun_position.lon;
 	}
 }
 var nightStyle = {
@@ -417,7 +417,7 @@ var solarTerminator;
 function drawSolarTerminator(){
 	if(typeof solarTerminator != "undefined" && solarTerminator.length > 0){
 		drawSun();
-		if(show_sun_terminator){
+		if(config.show_sun_terminator){
 			night_layer.removeAllFeatures();
 
 			var solarPoints = [];
@@ -429,7 +429,7 @@ function drawSolarTerminator(){
 					//Sign
 					if(solarTerminator[i].longitude>0)
 						sign = -1;
-					if(sun_lat>=0)
+					if(results.sun_position.lat>=0)
 						sign_lat = -1;
 					//open polygon 1
 					var point = new OpenLayers.Geometry.Point(
