@@ -592,3 +592,23 @@ function endOrbitAnimation(){
 function endMapAnimation(){
 	global_menus.map.inAnimation = false;
 }
+function updateGlobalOption(id,val){
+	switch(id) {
+		case "opt-glo-ShowFps":
+			global_simulation.config.global.show_fps = val;		
+			break;
+		case "opt-glo-PerformanceLevel":
+			global_simulation.config.global.performance_level = val;
+			break;
+		default:
+	}	
+	global_orbit.stopAnimation();
+	global_orbit = new Orbit();
+	global_attitude.stopAnimation();
+	global_attitude = new Attitude();
+	saveStoredVariables();
+}
+function initializeGlobalMenu(){
+	document.getElementById("opt-glo-ShowFps").checked = global_simulation.config.global.show_fps;
+	document.getElementById("opt-glo-PerformanceLevel").value = global_simulation.config.global.performance_level;
+}

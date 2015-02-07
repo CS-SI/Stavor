@@ -16,6 +16,9 @@ var global_menus = {
 	},
 	info_panel:{
 		isOpen: false
+	},
+	global:{
+		isOpen: false
 	}
 }
 
@@ -38,8 +41,7 @@ var global_simulation = {
 	config:{
 		global:{
 			performance_level: enum_performance_level.NORMAL,
-			show_fps: false,
-			fps_update_skips: 60
+			show_fps: false
 		},
 		attitude:{
 			show_sky: true,

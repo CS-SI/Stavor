@@ -1055,8 +1055,8 @@ var Attitude = function ()
 			//renderer.autoClear = true;
 			//renderer.autoClearColor = true;
 			//renderer.setClearColor(0xff0000, 1);
-			if(config.performance_level<=2)
-				canvasMode(config.performance_level);
+			/*if(config.performance_level<=2)
+				canvasMode(config.performance_level);*/
 		}else{
 			renderer = new THREE.CanvasRenderer();
 			alert('WebGL not supported in this device');
@@ -1103,10 +1103,12 @@ var Attitude = function ()
 		// STATS
 		stats = new Stats();
 		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.top = '0px';
+		stats.domElement.style.top = '50px';
 		stats.domElement.style.zIndex = 100;
-		//stats.domElement.style.webkitTransform = 0;
-		//container.appendChild( stats.domElement );
+		if(global.show_fps){
+			stats.domElement.style.webkitTransform = 0;
+			container.appendChild( stats.domElement );
+		}
 		// LIGHT
 		light = new THREE.PointLight(0xE0E0E0);
 		//light.position.set(200,200,200);
@@ -1130,13 +1132,13 @@ var Attitude = function ()
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			ANDROID STATS UPDATE
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(config.show_fps){
+		if(global.show_fps){
 			stats.update();
-			fps_update_counter=fps_update_counter+1;
+			/*fps_update_counter=fps_update_counter+1;
 			if(fps_update_counter>config.fps_update_skips){
 				fps_update_counter=0;	
 				//updateFPS();
-			}
+			}*/
 		}
 	}
 //***********************************************************************************************************************

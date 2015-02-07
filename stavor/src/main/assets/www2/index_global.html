@@ -63,6 +63,7 @@
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
 		var global_orbit, global_attitude, global_map;
 		window.onload = function () {
+			var splash_start = new Date().getTime();
 			loadStoredVariables();
 		
 			global_attitude = new Attitude();
@@ -74,12 +75,13 @@
 			global_orbit.resizeCanvas();
 			global_map.resizeCanvas();*/
 			updateInfoPanel(true);
+			initializeGlobalMenu();
 			initializeAttitudeMenu();
 			initializeOrbitMenu();
 			initializeMapMenu();
 			
 			loadOrekitFilesText();
-			hideSplash();
+			hideSplash(splash_start);
 		}
 		
 		function loadStoredVariables(){
@@ -93,10 +95,17 @@
 			var dataToStore = JSON.stringify(global_simulation.config);
 			localStorage.setItem('simulationConfig', dataToStore);
 		}
-		//XGGDEBUG: use this function somewhere (in same place as performance level?)
+		
 		function resetStoredVariables(){
 			localStorage.removeItem('simulationConfig'); 
 			window.location.reload();
+		}
+		
+		function resetConfiguration(){
+			var r = confirm("Are you sure?");
+			if (r == true) {
+				resetStoredVariables();
+			}
 		}
 		
 		function error(text){
@@ -107,12 +116,18 @@
 		}
 		
 		//SplashScreen
-		function hideSplash(){
+		function hideSplash(start_time){
+			var current_time = new Date().getTime();
+			var elapsed = current_time - start_time;
+			var delay = parameters.splash_min_time - elapsed;
+			if( delay < 0 ){
+				delay = 0;
+			}			
 			setTimeout(function() { 					
 				var div_splash = document.getElementById("Splash");
 				div_splash.style.visibility = "hidden";
 				div_splash.style.opacity = "0";
-			}, 3000);
+			}, delay);
 		}
 		
 		function initVisualizations(){
@@ -275,6 +290,22 @@
 				div_info_panel2.className = "InfoPanelVisible";
 			}
 			global_menus.info_panel.isOpen = !global_menus.info_panel.isOpen;
+		}
+		
+		function switchGlogalMenu(){
+			//var div_global_menu = document.getElementById("DivConfig");
+			if(global_menus.global.isOpen){
+				$( "#DivConfig" ).fadeOut( "slow", function() {
+					// Animation complete.
+				  });
+				//div_global_menu.className = "DivConfigClosed";
+			}else{
+				$( "#DivConfig" ).fadeIn( "slow", function() {
+					// Animation complete.
+				  });
+				//div_global_menu.className = "DivConfigOpened";
+			}
+			global_menus.global.isOpen = !global_menus.global.isOpen;
 		}
 		
 		function updateInfoPanel(force){
@@ -479,7 +510,7 @@
 	<div id="ViewButtonAttitude" class="ViewButton" onclick="" ></div>
 </div>
 
-<div id="ConfigButton" class="ConfigButton" onclick="" ></div>
+<div id="ConfigButton" class="ConfigButton" onclick="switchGlogalMenu()" ></div>
 <div id="DivInfoPanel" class="InfoPanelClosed" onclick="switchInfoPanel()">
 	<div id="DivInfoPanel1" class="InfoPanelInvisible">
 		<div class="InfoPanelTop" >
@@ -626,6 +657,15 @@
 <div id="LedMap" class="Led LedUnselected" />
 <div id="LedOrbit" class="Led LedUnselected"/>
 <div id="LedAttitude" class="Led LedUnselected"/>
+
+
+<div id="DivConfig">
+	<div id="ConfigCloseButton" onclick="switchGlogalMenu()"></div>
+	<h3>Configuration</h3>
+	<p>3D Detail level [1-9]:<input id="opt-glo-PerformanceLevel" type="number" min="1" max="9" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"/></p>
+	<p>Show FPS:<input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
+	<p><input id="ResetConfigButton" value="Reset all configuration" type="button" onclick="resetConfiguration()"/></p>
+</div>
 
 
 

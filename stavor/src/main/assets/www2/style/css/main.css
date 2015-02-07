@@ -373,3 +373,40 @@ ol li{
 	padding:0;
 	margin:0;
 }
+
+#DivConfig{
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+	background-color:rgba(255, 255, 255, 0.85);
+	z-index: 20000;
+	padding:10px;
+	width: 250px;
+	max-width: 90%;
+	height: auto;
+	max-height: 90%;
+	border-radius: 20px;
+	overflow: auto;
+}
+#ConfigCloseButton{
+	position: relative;
+	height: 30px;
+	width: 30px;
+	top: 0;
+	right: 0;
+	float:right;
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/close_options.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+
+#ConfigCloseButton:active{
+	background-image:  url(../icons/close_options_h.png);
+}
