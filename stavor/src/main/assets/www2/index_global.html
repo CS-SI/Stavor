@@ -295,12 +295,12 @@
 		function switchGlogalMenu(){
 			//var div_global_menu = document.getElementById("DivConfig");
 			if(global_menus.global.isOpen){
-				$( "#DivConfig" ).fadeOut( "slow", function() {
+				$( "#DivConfigBackground" ).fadeOut( "slow", function() {
 					// Animation complete.
 				  });
 				//div_global_menu.className = "DivConfigClosed";
 			}else{
-				$( "#DivConfig" ).fadeIn( "slow", function() {
+				$( "#DivConfigBackground" ).fadeIn( "slow", function() {
 					// Animation complete.
 				  });
 				//div_global_menu.className = "DivConfigOpened";
@@ -642,6 +642,16 @@
 <div id="SlidePrev" onclick="prevVisualization()" ></div>
 <div id="SlideNext" onclick="nextVisualization()" ></div>
 
+<div id="DivConfigBackground">
+	<div id="DivConfig">
+		<div id="ConfigCloseButton" onclick="switchGlogalMenu()"></div>
+		<h3>Configuration</h3>
+		<p>3D Detail level [1-9]:<input id="opt-glo-PerformanceLevel" type="number" min="1" max="9" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"/></p>
+		<p>Show FPS:<input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
+		<p><input id="ResetConfigButton" value="Reset all configuration" type="button" onclick="resetConfiguration()"/></p>
+	</div>
+</div>
+	
 <div id="DivToolbar" >
 	<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator"/>
 	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator"/>
@@ -659,13 +669,7 @@
 <div id="LedAttitude" class="Led LedUnselected"/>
 
 
-<div id="DivConfig">
-	<div id="ConfigCloseButton" onclick="switchGlogalMenu()"></div>
-	<h3>Configuration</h3>
-	<p>3D Detail level [1-9]:<input id="opt-glo-PerformanceLevel" type="number" min="1" max="9" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"/></p>
-	<p>Show FPS:<input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
-	<p><input id="ResetConfigButton" value="Reset all configuration" type="button" onclick="resetConfiguration()"/></p>
-</div>
+
 
 
 

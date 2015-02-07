@@ -177,33 +177,38 @@ var global_simulation = {
 
 // DERIVATED VARIABLES 
 // Segments
-if(global_simulation.config.global.performance_level<1)
-	global_simulation.config.global.performance_level=1;
-var segments_scale = global_simulation.config.global.performance_level;//Multiply segments of all geometries:
+var global_3d_segments;
 
-var global_3d_segments = {
-	attitude:{
-		sc_body_segments: 8 * segments_scale,
-		sc_window_segments: 10 * segments_scale,
-		sc_engine_segments: 10 * segments_scale,
-		sc_eng_disk_segments: this.sc_engine_segments,
-		sun_seg: 10 * segments_scale,
-		earth_seg: 12 * segments_scale,
-		sphere_segments: 20 * segments_scale,
-		miniSphere_seg: 7 * segments_scale,
-		torus_seg_r: 4 * segments_scale,
-		torus_seg_t: 32 * segments_scale,
-		arc_seg_r: 4 * segments_scale,
-		arc_seg_t: 32 * segments_scale,
-		arrow_segments: 4 * segments_scale,
-		momentum_segments: 4 * segments_scale,
-		target_segments: 8 * segments_scale,
-		arc_resolution: 30 * segments_scale,
-		plane_resolution: 20 * segments_scale
-	},
-	orbit:{
-		earth_seg: 32 * segments_scale,
-		plane_resolution: 20*segments_scale,
-		spacecraft_seg: 16*segments_scale
+function setPerformanceLevel(){
+	if(global_simulation.config.global.performance_level<1)
+		global_simulation.config.global.performance_level=1;
+	var segments_scale = global_simulation.config.global.performance_level;//Multiply segments of all geometries:
+
+	global_3d_segments = {
+		attitude:{
+			sc_body_segments: 8 * segments_scale,
+			sc_window_segments: 10 * segments_scale,
+			sc_engine_segments: 10 * segments_scale,
+			sc_eng_disk_segments: this.sc_engine_segments,
+			sun_seg: 10 * segments_scale,
+			earth_seg: 12 * segments_scale,
+			sphere_segments: 20 * segments_scale,
+			miniSphere_seg: 7 * segments_scale,
+			torus_seg_r: 4 * segments_scale,
+			torus_seg_t: 32 * segments_scale,
+			arc_seg_r: 4 * segments_scale,
+			arc_seg_t: 32 * segments_scale,
+			arrow_segments: 4 * segments_scale,
+			momentum_segments: 4 * segments_scale,
+			target_segments: 8 * segments_scale,
+			arc_resolution: 30 * segments_scale,
+			plane_resolution: 20 * segments_scale
+		},
+		orbit:{
+			earth_seg: 32 * segments_scale,
+			plane_resolution: 20*segments_scale,
+			spacecraft_seg: 16*segments_scale
+		}
 	}
 }
+setPerformanceLevel();

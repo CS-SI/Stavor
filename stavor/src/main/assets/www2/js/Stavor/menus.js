@@ -599,6 +599,7 @@ function updateGlobalOption(id,val){
 			break;
 		case "opt-glo-PerformanceLevel":
 			global_simulation.config.global.performance_level = val;
+			setPerformanceLevel();
 			break;
 		default:
 	}	
