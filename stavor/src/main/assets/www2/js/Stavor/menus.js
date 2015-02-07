@@ -610,6 +610,7 @@ function updateGlobalOption(id,val){
 	saveStoredVariables();
 }
 function initializeGlobalMenu(){
+
 	document.getElementById("opt-glo-ShowFps").checked = global_simulation.config.global.show_fps;
 	document.getElementById("opt-glo-PerformanceLevel").value = global_simulation.config.global.performance_level;
 }

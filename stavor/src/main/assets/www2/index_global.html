@@ -19,6 +19,8 @@
 	<!--<script src='intelxdk.js'></script>-->
     <!--<script src='xhr.js'></script>--><!-- Same origin policy -->
 	
+	<!-- HammerJs -->
+	<script type="text/javascript" src="js/Gestures/hammer.min.js"></script>
 	<!-- JSColor -->
 	<script type="text/javascript" src="js/jscolor/jscolor.js"></script>
 	<!-- jQuery -->
@@ -55,6 +57,7 @@
 	<script type='text/javascript' src="js/Stavor/enums.js"></script>
 	<script type='text/javascript' src="js/Stavor/variables.js"></script>
 	<script type='text/javascript' src="js/Stavor/menus.js"></script>
+	<script type='text/javascript' src="js/Stavor/gestures.js"></script>
 	
 	<script type='text/javascript' src="modules/simulator/components/Mission.js"></script>
 	<script type='text/javascript' src="modules/simulator/components/Orbit.js"></script>
@@ -79,6 +82,8 @@
 			initializeAttitudeMenu();
 			initializeOrbitMenu();
 			initializeMapMenu();
+			
+			initializePanGestures();
 			
 			loadOrekitFilesText();
 			hideSplash(splash_start);
