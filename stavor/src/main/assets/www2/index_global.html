@@ -73,7 +73,7 @@
 			global_attitude.resizeCanvas();
 			global_orbit.resizeCanvas();
 			global_map.resizeCanvas();*/
-			
+			updateInfoPanel(true);
 			initializeAttitudeMenu();
 			initializeOrbitMenu();
 			initializeMapMenu();
@@ -261,6 +261,43 @@
 			global_missions_list_is_open = !global_missions_list_is_open;
 		}
 		
+		function switchInfoPanel(){
+			var div_info_panel = document.getElementById("DivInfoPanel");
+			var div_info_panel1 = document.getElementById("DivInfoPanel1");
+			var div_info_panel2 = document.getElementById("DivInfoPanel2");
+			if(global_menus.info_panel.isOpen){
+				div_info_panel.className = "InfoPanelClosed";
+				div_info_panel1.className = "InfoPanelInvisible";
+				div_info_panel2.className = "InfoPanelInvisible";
+			}else{
+				div_info_panel.className = "InfoPanelOpened";
+				div_info_panel1.className = "InfoPanelVisible";
+				div_info_panel2.className = "InfoPanelVisible";
+			}
+			global_menus.info_panel.isOpen = !global_menus.info_panel.isOpen;
+		}
+		
+		function updateInfoPanel(force){
+			if(global_menus.info_panel.isOpen || force){
+				var results = global_simulation.results.info_panel;
+				var ip_roll = document.getElementById("IpRoll");
+				var ip_pitch = document.getElementById("IpPitch");
+				var ip_yaw = document.getElementById("IpYaw");
+				var ip_vel = document.getElementById("IpVel");
+				var ip_accel = document.getElementById("IpAccel");
+				var ip_mass = document.getElementById("IpMass");
+				var ip_radius = document.getElementById("IpRadius");
+				
+				ip_roll.innerHTML = results.attitude.roll.toPrecision(3)+"°";
+				ip_pitch.innerHTML = results.attitude.pitch.toPrecision(3)+"°";
+				ip_yaw.innerHTML = results.attitude.yaw.toPrecision(3)+"°";
+				ip_vel.innerHTML = results.velocity.toPrecision(3)+" Km/s";
+				ip_accel.innerHTML = results.acceleration.toPrecision(3)+" Km/s2";
+				ip_mass.innerHTML = results.mass.toPrecision(4)+" Kg";
+				ip_radius.innerHTML = results.orb_radius.toPrecision(6)+" Km";
+			}
+		}
+		
 	</script>
 </head>
 <body>
@@ -443,9 +480,61 @@
 </div>
 
 <div id="ConfigButton" class="ConfigButton" onclick="" ></div>
-<div id="DivInfoPanel" >
-	<div id="DivInfoPanel1"></div>
-	<div id="DivInfoPanel2"></div>
+<div id="DivInfoPanel" class="InfoPanelClosed" onclick="switchInfoPanel()">
+	<div id="DivInfoPanel1" class="InfoPanelInvisible">
+		<div class="InfoPanelTop" >
+			<table class="EqColomTable"><tr><td>
+				<table class="InfoPanelField"><tr><td>
+				Roll: 
+				</td><td align="right" id="IpRoll">
+				0.00° 
+				</td></tr></table>
+			</td><td>
+				<table class="InfoPanelField"><tr><td>
+				Pitch: 
+				</td><td align="right" id="IpPitch">
+				0.00° 
+				</td></tr></table>
+			</td><td>
+				<table class="InfoPanelField"><tr><td>
+				Yaw: 
+				</td><td align="right" id="IpYaw">
+				0.00° 
+				</td></tr></table>
+			</td></tr></table>
+		</div>
+		<div class="InfoPanelBottom" >
+			<table class="InfoPanelField"><tr><td style="padding-left:5px">
+			Mass: 
+			</td><td align="right" style="padding-right:5px" id="IpMass">
+			0.00 Kg 
+			</td></tr></table>
+		</div>
+	</div>
+	<div id="DivInfoPanel2" class="InfoPanelInvisible">
+		<div class="InfoPanelTop" >
+			<table class="EqColomTable"><tr><td>
+				<table class="InfoPanelField"><tr><td>
+				Vel.: 
+				</td><td align="right" id="IpVel">
+				0.00 Km/s 
+				</td></tr></table>
+			</td><td>
+				<table class="InfoPanelField"><tr><td>
+				Accel.: 
+				</td><td align="right" id="IpAccel">
+				0.00 Km/m2 
+				</td></tr></table>
+			</td></tr></table>
+		</div>
+		<div class="InfoPanelBottom" >
+			<table class="InfoPanelField"><tr><td style="padding-left:5px">
+			Orb. radius: 
+			</td><td align="right" style="padding-right:5px" id="IpRadius">
+			0.00 Km
+			</td></tr></table>
+		</div>
+	</div>
 </div>
 
 <div id="DivMissions">
@@ -525,7 +614,7 @@
 <div id="DivToolbar" >
 	<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator"/>
 	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator"/>
-	<input id="TimeBar" type="range" min="0" max="100" value="0" disabled="true" title="Simulation time"/>
+	<input id="TimeBar" type="range" min="0" max="100" value="0"  title="Simulation time"/><!--disabled="true"-->
 	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation"/>
 	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation"/>&nbsp;
 	<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation"/>
@@ -534,7 +623,7 @@
 <div id="DivClock" >
 	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/>&nbsp;2014-01-01 20:00:33.1 UTC&nbsp;
 </div>
-<div id="LedMap" class="Led LedUnselected"/>
+<div id="LedMap" class="Led LedUnselected" />
 <div id="LedOrbit" class="Led LedUnselected"/>
 <div id="LedAttitude" class="Led LedUnselected"/>
 

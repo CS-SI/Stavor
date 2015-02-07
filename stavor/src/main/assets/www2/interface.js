@@ -38,6 +38,7 @@ Simulator.prototype.progressValueChanged = function(){
 //****************************************************************************
 Simulator.prototype.updateMissionState = function(state){
 	global_simulation.results = state;
+	updateInfoPanel(false);
 }
 
 Simulator.prototype.updateSimulatorState = function(state){

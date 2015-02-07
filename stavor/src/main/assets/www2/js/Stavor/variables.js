@@ -14,7 +14,7 @@ var global_menus = {
 		isOpen: false,
 		inAnimation: false
 	},
-	info_panel:{//XGGDEBUG: use somewhere
+	info_panel:{
 		isOpen: false
 	}
 }

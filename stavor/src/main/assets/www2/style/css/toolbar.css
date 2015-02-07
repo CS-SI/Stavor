@@ -48,7 +48,7 @@
 }
 #TimeBar{
 	position: relative;
-	width: calc(100% - 195px);
+	width: calc(100% - 175px);
 	min-width: 50px;
 	vertical-align:middle;
 }
