@@ -193,7 +193,15 @@ function initializeMissionsDb(){
 			for(var i = 0; i < default_missions.length; i++)
 				tx.executeSql('INSERT INTO missions (isDefault, name, json) VALUES (?, ?, ?)', [true, default_missions[i].name, JSON.stringify(default_missions[i])], successDatabaseHandler, errorDatabaseHandler);
 			});
-		});//This will stop here if Table already exists
+			
+			global_delayed_loading.database.missions = true;
+			setLoadingText("Missions loaded!");
+			hideSplash();
+		}, function(){
+			global_delayed_loading.database.missions = true;
+			setLoadingText("Missions loaded!");
+			hideSplash();
+		});
 }
 
 function addMissionToDb(mission){

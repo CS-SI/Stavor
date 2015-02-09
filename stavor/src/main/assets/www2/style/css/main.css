@@ -107,6 +107,21 @@ ol li{
     -o-transition: visibility 0s linear 0.8s, opacity 0.8s linear;
     transition: visibility 0s linear 0.8s, opacity 0.8s linear;
 }
+#SplashLoading{
+	color: white;
+	background-color:rgba(0, 0, 0, 0.8);
+	max-width: 100%;
+	width: 300px;
+	text-align: center;
+	height: auto;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, 0);
+	font-family: Stavor, Helvetica, Verdana, Sans-Serif;
+	font-size: 0.8em;
+}
 #SlidePrev{
 	position: absolute;
 	z-index: 1000; 

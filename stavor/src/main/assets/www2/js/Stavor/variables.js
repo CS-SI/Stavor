@@ -1,6 +1,18 @@
 var global_current_visualization = enum_visualizations.ORBITE;
 var global_missions_list_is_open = false;
 
+//Flags for asyncronous loading functions
+var global_delayed_loading = {
+	visualization:{
+		attitude: false,
+		orbit: false,
+		map: false
+	},
+	database:{
+		missions: false
+	}
+}
+
 var global_menus = {
 	attitude:{
 		isOpen: false,

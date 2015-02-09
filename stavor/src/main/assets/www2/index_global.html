@@ -64,31 +64,30 @@
 	
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
 		var global_orbit, global_attitude, global_map;
+		var start_time;
 		window.onload = function () {
-			var splash_start = new Date().getTime();
+			start_time = new Date().getTime();
+				setLoadingText("Loading Configuration...");
 			loadStoredVariables();
-		
-			global_attitude = new Attitude();
-			global_orbit = new Orbit();
-			global_map = new Map();
+			
+			global_attitude = new Attitude();//Splash
+			global_orbit = new Orbit();//Splash
+			global_map = new Map();//Splash
+				setLoadingText("Init Visualizations...");
 			initVisualizations();
-			/*changeVisualization(enum_visualizations.ATTITUDE);
-			global_attitude.resizeCanvas();
-			global_orbit.resizeCanvas();
-			global_map.resizeCanvas();*/
+				setLoadingText("Init Info Panel...");
 			updateInfoPanel(true);
+				setLoadingText("Init Option Menus...");
 			initializeGlobalMenu();
 			initializeAttitudeMenu();
 			initializeOrbitMenu();
 			initializeMapMenu();
-			
+				setLoadingText("Init Touch Controls...");
 			initializePanGestures();
-			
-			initializeMissionsDb();
+			initializeMissionsDb();//Splash
 			drawMissionsList();
 			
 			loadOrekitFilesText();
-			hideSplash(splash_start);
 		}
 		
 		function loadStoredVariables(){
@@ -123,18 +122,40 @@
 		}
 		
 		//SplashScreen
-		function hideSplash(start_time){
-			var current_time = new Date().getTime();
-			var elapsed = current_time - start_time;
-			var delay = parameters.splash_min_time - elapsed;
-			if( delay < 0 ){
-				delay = 0;
-			}			
-			setTimeout(function() { 					
-				var div_splash = document.getElementById("Splash");
-				div_splash.style.visibility = "hidden";
-				div_splash.style.opacity = "0";
-			}, delay);
+		function hideSplash(){
+			if(
+				global_delayed_loading.visualization.attitude &&
+				global_delayed_loading.visualization.orbit &&
+				global_delayed_loading.visualization.map &&
+				global_delayed_loading.database.missions
+				){
+				var current_time = new Date().getTime();
+				var elapsed = current_time - start_time;
+				var delay = parameters.splash_min_time - elapsed;
+				if( delay < 0 ){
+					delay = 0;
+				}			
+				setTimeout(function() { 					
+					var div_splash = document.getElementById("Splash");
+					div_splash.style.visibility = "hidden";
+					div_splash.style.opacity = "0";
+				}, delay);
+			}else{
+				//Wait for loading
+				if(!global_delayed_loading.visualization.attitude){
+					setLoadingText("Init Attitude module...");
+				}else if(!global_delayed_loading.visualization.orbit){
+					setLoadingText("Init Orbit module...");
+				}else if(!global_delayed_loading.visualization.map){
+					setLoadingText("Init Map module...");
+				}else if(!global_delayed_loading.database.missions){
+					setLoadingText("Loading Missions db...");
+				}
+			}
+		}
+		function setLoadingText(text){
+			var div = document.getElementById("SplashLoading");
+			div.innerHTML = text;
 		}
 		
 		function initVisualizations(){
@@ -340,7 +361,9 @@
 </head>
 <body>
 
-<div id="Splash"></div>
+<div id="Splash">
+	<div id="SplashLoading">Starting Stavor...</div>
+</div>
 
 
 <div id="DivMap" >

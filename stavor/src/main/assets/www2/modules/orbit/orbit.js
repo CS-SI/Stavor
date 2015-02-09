@@ -80,6 +80,9 @@ var Orbit = function()
 			camera.lookAt(scene.position);
 		}		
 	})	
+	
+	global_delayed_loading.visualization.orbit = true;
+	setLoadingText("Orbit module loaded!");
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		loop runner							//

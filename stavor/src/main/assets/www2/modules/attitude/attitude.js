@@ -198,6 +198,9 @@ var Attitude = function ()
 		changeView(selected_view);
 		//setLoadingProgress(100);
 		//setLoadingProgress(18);
+		
+		global_delayed_loading.visualization.attitude = true;
+		setLoadingText("Attitude module loaded!");
 	}
 	
 //***********************************************************************************************************************
