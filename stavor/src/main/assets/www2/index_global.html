@@ -60,7 +60,9 @@
 	<script type='text/javascript' src="modules/simulator/components/Mission.js"></script>
 	<script type='text/javascript' src="modules/simulator/components/Orbit.js"></script>
 	<script type='text/javascript' src="modules/simulator/components/SimDate.js"></script>
+	<script type='text/javascript' src="js/Stavor/database.js"></script>
 	<script type='text/javascript' src="js/Stavor/missions.js"></script>
+	<!--<script type='text/javascript' src="js/Stavor/stations.js"></script>-->
 	
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
 		var global_orbit, global_attitude, global_map;
@@ -129,6 +131,7 @@
 				global_delayed_loading.visualization.map &&
 				global_delayed_loading.database.missions
 				){
+				setLoadingText("Stavor loaded!");
 				var current_time = new Date().getTime();
 				var elapsed = current_time - start_time;
 				var delay = parameters.splash_min_time - elapsed;

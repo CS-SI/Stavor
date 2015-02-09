@@ -188,6 +188,9 @@ ol li{
 		height: auto;
 		width: 250px;
 	}
+	.tabs > ul > li{
+		font-size: 0.8em;
+	}
 }
 /* #### Landscape #### */
 @media screen and (orientation: landscape){

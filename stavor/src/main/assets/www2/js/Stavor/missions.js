@@ -86,9 +86,6 @@ function drawMissionsList(){
 	});
 }
 
-//Database
-var db = openDatabase('stavor', '1.0', 'Stavor database', 2 * 1024 * 1024);
-
 function resetMissionsDb(){
 	var r = confirm("Reset missions list to default value?");
 	if(r){
