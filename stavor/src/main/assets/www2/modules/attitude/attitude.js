@@ -133,17 +133,20 @@ var Attitude = function ()
 	}
 	function update()
 	{	
-		//Controls
-		controls.update();
-		//View
-		updateView();
-		
-		updateScene();
-		updateSpacecraft();
-		updateAngles();
-		updateSun();
-		updateEarth();
-		updateIndicators();
+		if(global_current_visualization == enum_visualizations.ATTITUDE){
+			//console.log("UPDATE ATTITUDE");
+			//Controls
+			controls.update();
+			//View
+			updateView();
+			
+			updateScene();
+			updateSpacecraft();
+			updateAngles();
+			updateSun();
+			updateEarth();
+			updateIndicators();
+		}
 	}
 	function init() 
 	{
@@ -1125,7 +1128,6 @@ var Attitude = function ()
 	}
 	function updateScene(){
 		delta = clock.getDelta();
-
 		//Ligts
 		light.position.set(camera.position.x,camera.position.y,camera.position.z);
 

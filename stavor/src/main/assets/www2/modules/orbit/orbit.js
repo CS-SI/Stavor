@@ -95,15 +95,18 @@ var Orbit = function()
 		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
 		lastTimeMsec	= nowMsec*/
 		
-		delta = clock.getDelta();
-		
-		controls.update();
+		if(global_current_visualization == enum_visualizations.ORBIT){
+			//console.log("UPDATE ORBIT");
+			delta = clock.getDelta();
+			
+			controls.update();
 
-		// call each update function
-		onRenderFcts.forEach(function(onRenderFct){
-			//onRenderFct(deltaMsec/1000, nowMsec/1000)
-			onRenderFct(delta, 0)
-		})
+			// call each update function
+			onRenderFcts.forEach(function(onRenderFct){
+				//onRenderFct(deltaMsec/1000, nowMsec/1000)
+				onRenderFct(delta, 0)
+			})
+		}
 	})
 
 
