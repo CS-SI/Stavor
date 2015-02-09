@@ -25,8 +25,6 @@
 	<script type="text/javascript" src="js/jscolor/jscolor.js"></script>
 	<!-- jQuery -->
 	<script type='text/javascript' src="js/jQuery/jquery-2.1.3.min.js"></script>
-	<!-- PouchDB -->
-	<script type='text/javascript' src="js/PouchDB/pouchdb-3.2.1.min.js"></script>
 	<!-- ThreeJS -->
 	<script type='text/javascript' src="js/ThreeJS/three.js"></script>
 	<script type='text/javascript' src="js/ThreeJS/three.ext.js"></script>	
@@ -61,7 +59,8 @@
 	
 	<script type='text/javascript' src="modules/simulator/components/Mission.js"></script>
 	<script type='text/javascript' src="modules/simulator/components/Orbit.js"></script>
-	<script type='text/javascript' src="db/missions.js"></script>
+	<script type='text/javascript' src="modules/simulator/components/SimDate.js"></script>
+	<script type='text/javascript' src="js/Stavor/missions.js"></script>
 	
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
 		var global_orbit, global_attitude, global_map;
@@ -84,6 +83,9 @@
 			initializeMapMenu();
 			
 			initializePanGestures();
+			
+			initializeMissionsDb();
+			drawMissionsList();
 			
 			loadOrekitFilesText();
 			hideSplash(splash_start);
@@ -598,10 +600,10 @@
 		</ol>
 	</div>
 	<div id="MissionsMenu">
-		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/select.png" title="Select Mission" onclick=""/></div>
+		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/select.png" title="Select Mission" onclick="onSelectMissionButtonClicked()"/></div>
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/new.png" title="Create Mission" onclick=""/></div>
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission" onclick=""/></div>
-		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission" onclick=""/></div>
+		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission" onclick="onDeleteMissionButtonClicked()"/></div>
 	</div>
 </div>
 
@@ -615,6 +617,7 @@
 		<p>3D Detail level [1-9]:<input id="opt-glo-PerformanceLevel" type="number" min="1" max="9" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"/></p>
 		<p>Show FPS:<input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
 		<p><input id="ResetConfigButton" value="Reset all configuration" type="button" onclick="resetConfiguration()" class="stavorDarkButton"/></p>
+		<p><input id="ResetMissionsButton" value="Reset missions database" type="button" onclick="resetMissionsDb()" class="stavorDarkButton"/></p>
 	</div>
 </div>
 	
