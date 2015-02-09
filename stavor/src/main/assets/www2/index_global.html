@@ -323,7 +323,7 @@
 			global_menus.info_panel.isOpen = !global_menus.info_panel.isOpen;
 		}
 		
-		function switchGlogalMenu(){
+		function switchGlobalMenu(){
 			//var div_global_menu = document.getElementById("DivConfig");
 			if(global_menus.global.isOpen){
 				$( "#DivConfigBackground" ).fadeOut( "slow", function() {
@@ -337,6 +337,43 @@
 				//div_global_menu.className = "DivConfigOpened";
 			}
 			global_menus.global.isOpen = !global_menus.global.isOpen;
+		}
+		
+		function closeMissionEditor(){
+			if(global_menus.mission.isOpen){
+				$( "#MissionEditorBackground" ).fadeOut( "slow", function() {
+					// Animation complete.
+				  });
+				global_menus.mission.isOpen = !global_menus.mission.isOpen;
+			}
+		}
+		function saveMissionEditor(id){
+			//Todo save
+			closeMissionEditor();
+		}
+		
+		function openMissionEditor(id){
+			if(!global_menus.mission.isOpen){
+				if(id == -1){//Create mode
+					//Update all inputs including th onclick of the button to add the id of the mission
+					//TODO
+					
+					$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
+						// Animation complete.
+					  });
+					global_menus.mission.isOpen = !global_menus.mission.isOpen;
+				}else if(id == global_selected_mission){
+					alert("Cannot edit the simulation selected mission, select another one!");
+				}else{//Edit Mode
+					//Update all inputs including th onclick of the button to add the id of the mission
+					//TODO
+					
+					$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
+						// Animation complete.
+					  });
+					global_menus.mission.isOpen = !global_menus.mission.isOpen;
+				}
+			}
 		}
 		
 		function updateInfoPanel(force){
@@ -543,7 +580,7 @@
 	<div id="ViewButtonAttitude" class="ViewButton" onclick="" ></div>
 </div>
 
-<div id="ConfigButton" class="ConfigButton" onclick="switchGlogalMenu()" ></div>
+<div id="ConfigButton" class="ConfigButton" onclick="switchGlobalMenu()" ></div>
 <div id="DivInfoPanel" class="InfoPanelClosed" onclick="switchInfoPanel()">
 	<div id="DivInfoPanel1" class="InfoPanelInvisible">
 		<div class="InfoPanelTop" >
@@ -627,9 +664,36 @@
 	</div>
 	<div id="MissionsMenu">
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/select.png" title="Select Mission" onclick="onSelectMissionButtonClicked()"/></div>
-		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/new.png" title="Create Mission" onclick=""/></div>
-		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission" onclick=""/></div>
+		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/new.png" title="Create Mission" onclick="openMissionEditor(-1)"/></div>
+		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission" onclick="openMissionEditor(global_active_mission)"/></div>
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission" onclick="onDeleteMissionButtonClicked()"/></div>
+	</div>
+</div>
+
+<div id="MissionEditorBackground">
+	<div id="MissionEditor">
+		<div id="MissionCloseButton" onclick="closeMissionEditor()"></div>
+		<div id="MissionConfirmButton" onclick=""></div>
+		<h3>Edit mission</h3>
+		<p>Name:<input id="mis-Name" type="text" style="float: right;"/></p>
+		<p>Desription:<input id="mis-Description" type="text" style="float: right;"/></p>
+		<h4>Simulation</h4>
+		<!-- Date picker -->
+		<p>Duration:<input id="mis-Duration" type="number" min="0" style="float: right;"/></p>
+		<p>Speed:<input id="mis-Speed" type="number" min="0" style="float: right;"/></p>
+		<h4>Attitude</h4>
+		<p>Attitude control:<select id="mis-AttitudeProvider" style="float: right;">
+			<option value="0">INERTIAL</option>
+			<option value="1">FACING_EARTH</option>
+			<option value="2">FACING_SUN</option>
+		</select></p>
+		<h4>Orbit</h4>
+		<p>Semi-major axis (m):<input id="mis-a" type="number" min="0" style="float: right;"/></p>
+		<p>Eccentricity:<input id="mis-e" type="number" min="0" style="float: right;"/></p>
+		<p>Inclination (rad):<input id="mis-i" type="number" style="float: right;"/></p>
+		<p>Arg. Perigee (rad):<input id="mis-omega" type="number" style="float: right;"/></p>
+		<p>RAAN (rad):<input id="mis-raan" type="number" style="float: right;"/></p>
+		<p>Mean anomaly (rad):<input id="mis-lm" type="number" style="float: right;"/></p>
 	</div>
 </div>
 
@@ -638,7 +702,7 @@
 
 <div id="DivConfigBackground">
 	<div id="DivConfig">
-		<div id="ConfigCloseButton" onclick="switchGlogalMenu()"></div>
+		<div id="ConfigCloseButton" onclick="switchGlobalMenu()"></div>
 		<h3>Configuration</h3>
 		<p>3D Detail level [1-9]:<input id="opt-glo-PerformanceLevel" type="number" min="1" max="9" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"/></p>
 		<p>Show FPS:<input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
@@ -662,10 +726,6 @@
 <div id="LedMap" class="Led LedUnselected" />
 <div id="LedOrbit" class="Led LedUnselected"/>
 <div id="LedAttitude" class="Led LedUnselected"/>
-
-
-
-
 
 
 <!-- Modules -->

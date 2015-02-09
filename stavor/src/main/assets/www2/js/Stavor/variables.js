@@ -31,6 +31,9 @@ var global_menus = {
 	},
 	global:{
 		isOpen: false
+	},
+	mission:{
+		isOpen: false
 	}
 }
 
