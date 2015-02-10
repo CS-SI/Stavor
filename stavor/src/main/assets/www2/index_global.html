@@ -362,7 +362,7 @@
 						// Animation complete.
 					  });
 					global_menus.mission.isOpen = !global_menus.mission.isOpen;
-				}else if(id == global_selected_mission){
+				}else if(id == global_missions.selected){
 					alert("Cannot edit the simulation selected mission, select another one!");
 				}else{//Edit Mode
 					//Update all inputs including th onclick of the button to add the id of the mission
@@ -665,7 +665,7 @@
 	<div id="MissionsMenu">
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/select.png" title="Select Mission" onclick="onSelectMissionButtonClicked()"/></div>
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/new.png" title="Create Mission" onclick="openMissionEditor(-1)"/></div>
-		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission" onclick="openMissionEditor(global_active_mission)"/></div>
+		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission" onclick="openMissionEditor(global_missions.active)"/></div>
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission" onclick="onDeleteMissionButtonClicked()"/></div>
 	</div>
 </div>

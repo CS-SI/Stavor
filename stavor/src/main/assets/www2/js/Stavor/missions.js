@@ -1,21 +1,34 @@
-var global_active_mission = -1;
-var global_selected_mission = -1;
+var global_missions = {
+	active: -1,
+	selected: -1
+}
 
+function loadMissionsStoredVariables(){
+	var serialized = localStorage.getItem('missionsConfig'); 
+	if(serialized){
+		var localData = JSON.parse(serialized);
+		global_missions = localData;
+	}
+}
+function saveMissionsStoredVariables(){
+	var dataToStore = JSON.stringify(global_missions);
+	localStorage.setItem('missionsConfig', dataToStore);
+}
 
 function onDeleteMissionButtonClicked(){
-	if(global_active_mission == -1){
+	if(global_missions.active == -1){
 		alert("Click on a mission first!");
 	}else{
-		if(global_active_mission == global_selected_mission){
+		if(global_missions.active == global_missions.selected){
 			alert("The mission selected for simulation cannot be deleted, please select another mission first!");
 		}else{
 			db.transaction(function (tx) {
-				tx.executeSql('SELECT name FROM missions WHERE id = '+global_active_mission+';', [], function (tx, results) {	
+				tx.executeSql('SELECT name FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
 					var r = confirm("Delete mission "+results.rows.item(0).name+"?");
 					if(r){
 						db.transaction(function (tx) {
-							tx.executeSql('DELETE FROM missions WHERE id = '+global_active_mission+';', [], function (tx, results) {	
-								global_active_mission = -1;
+							tx.executeSql('DELETE FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
+								global_missions.active = -1;
 								drawMissionsList();
 							}, errorDatabaseHandler);
 						});
@@ -26,16 +39,17 @@ function onDeleteMissionButtonClicked(){
 	}
 }
 function onSelectMissionButtonClicked(){
-	if(global_active_mission == -1){
+	if(global_missions.active == -1){
 		alert("Click on a mission first!");
 	}else{
-		if(global_active_mission != global_selected_mission){
+		if(global_missions.active != global_missions.selected){
 			db.transaction(function (tx) {
-				tx.executeSql('SELECT name FROM missions WHERE id = '+global_active_mission+';', [], function (tx, results) {	
+				tx.executeSql('SELECT name FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
 					var r = confirm("Select mission "+results.rows.item(0).name+" for simulation? (Simulator will be stopped)");
 					if(r){
-						global_selected_mission = global_active_mission;
+						global_missions.selected = global_missions.active;
 						styleMissionRows();
+						saveMissionsStoredVariables();
 						//TODO reinit simulator
 					}
 				}, errorDatabaseHandler);
@@ -47,25 +61,53 @@ function onSelectMissionButtonClicked(){
 
 function onMissionClicked(id){
 	var num_id = Number(id.substr(4,id.length));
-	global_active_mission = num_id;
+	global_missions.active = num_id;
 	styleMissionRows();
 }
 
 function styleMissionRows(){
 	var list = document.getElementById("olListMissions");
 	var listItems = list.getElementsByTagName("li");
+	var active_found = false;
+	var selected_found = false;
 	for (var i=0; i < listItems.length; i++) {
 		var num_id = Number(listItems[i].id.substr(4,listItems[i].id.length));
 	
-		if(num_id == global_active_mission && num_id == global_selected_mission){
+		if(num_id == global_missions.active && num_id == global_missions.selected){
 			listItems[i].className = "MissionActiveSelected";
-		}else if (num_id == global_active_mission){
+			selected_found = true;
+			active_found = true;
+		}else if (num_id == global_missions.active){
 			listItems[i].className = "MissionActive";
-		}else if(num_id == global_selected_mission){
+			active_found = true;
+		}else if(num_id == global_missions.selected){
 			listItems[i].className = "MissionSelected";
+			selected_found = true;
 		}else{
 			listItems[i].className = "MissionNormal";
 		}
+	}
+	
+	var recursive = false;
+	if(!active_found){
+		if(listItems.length > 0){
+			global_missions.active = Number(listItems[0].id.substr(4,listItems[0].id.length));
+			recursive = true;
+		}else{
+			global_missions.active = -1;
+		}
+	}
+	
+	if(!selected_found){
+		if(listItems.length > 0){
+			global_missions.selected = Number(listItems[0].id.substr(4,listItems[0].id.length));
+		}else{
+			global_missions.selected = -1;
+		}
+	}
+	
+	if(recursive){
+		styleMissionRows();
 	}
 }
 
@@ -191,10 +233,12 @@ function initializeMissionsDb(){
 				tx.executeSql('INSERT INTO missions (isDefault, name, json) VALUES (?, ?, ?)', [true, default_missions[i].name, JSON.stringify(default_missions[i])], successDatabaseHandler, errorDatabaseHandler);
 			});
 			
+			loadMissionsStoredVariables();
 			global_delayed_loading.database.missions = true;
 			setLoadingText("Missions loaded!");
 			hideSplash();
 		}, function(){
+			loadMissionsStoredVariables();
 			global_delayed_loading.database.missions = true;
 			setLoadingText("Missions loaded!");
 			hideSplash();
