@@ -347,18 +347,14 @@
 				global_menus.mission.isOpen = !global_menus.mission.isOpen;
 			}
 		}
-		function saveMissionEditor(id){
-			//Todo save
-			closeMissionEditor();
-		}
 		
 		function openMissionEditor(id){
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
 					if(!global_menus.mission.isOpen){
 						if(id == -1){//Create mode
-							var mission = JSON.parse(results.rows.item(0).json);
-							updateMissionEditor(mission);
+							var mission = new Mission();
+							updateMissionEditor(mission,id);
 							$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
 								// Animation complete.
 							  });
@@ -367,7 +363,7 @@
 							alert("Cannot edit the simulation selected mission, select another one!");
 						}else{//Edit Mode
 							var mission = JSON.parse(results.rows.item(0).json);
-							updateMissionEditor(mission);
+							updateMissionEditor(mission,id);
 							$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
 								// Animation complete.
 							  });
@@ -399,8 +395,18 @@
 			}
 		}
 		
-		function updateMissionEditor(mission){
-			var field = document.getElementById("mis-Name");
+		function updateMissionEditor(mission,mission_id){
+			var field;
+			field = document.getElementById("mis-Id");
+			field.value = mission_id;
+			
+			field = document.getElementById("mis-Title");
+			if(mission_id == -1){
+				field.innerHTML = "Create Mission";
+			}else{
+				field.innerHTML = "Edit Mission";
+			}
+			field = document.getElementById("mis-Name");
 			field.value = mission.name;
 			field = document.getElementById("mis-Description");
 			field.value = mission.description;
@@ -429,7 +435,7 @@
 			field = document.getElementById("mis-Duration");
 			field.value = mission.duration;
 			field = document.getElementById("mis-Speed");
-			field.value = mission.step;
+			field.value = mission.step*parameters.simulator_target_fps;
 			field = document.getElementById("mis-a");
 			field.value = mission.initial_orbit.a;
 			field = document.getElementById("mis-e");
@@ -442,6 +448,61 @@
 			field.value = mission.initial_orbit.raan;
 			field = document.getElementById("mis-lm");
 			field.value = mission.initial_orbit.lM;
+		}
+		
+		function saveMissionEditor(){
+			try{
+				var field;
+				
+				var mission = new Mission();
+				
+				field = document.getElementById("mis-Name");
+				mission.name = field.value;
+				field = document.getElementById("mis-Description");
+				mission.description = field.value;
+				field = document.getElementById("mis-Mass");
+				mission.initial_mass = field.value;
+				
+				field = document.getElementById("mis-Date");
+				var dates = field.value.split('/');
+				mission.initial_date.year = Number(dates[0]);
+				mission.initial_date.month = Number(dates[1]);
+				mission.initial_date.day = Number(dates[2]);
+				field = document.getElementById("mis-Time");
+				var times = field.value.split(':');
+				mission.initial_date.hour = Number(times[0]);
+				mission.initial_date.minute = Number(times[1]);
+				
+				field = document.getElementById("mis-Duration");
+				mission.duration = Number(field.value);
+				field = document.getElementById("mis-Speed");
+				mission.step = Number(field.value)/parameters.simulator_target_fps;
+				
+				
+				field = document.getElementById("mis-a");
+				mission.initial_orbit.a = Number(field.value);
+				field = document.getElementById("mis-e");
+				mission.initial_orbit.e = Number(field.value);
+				field = document.getElementById("mis-i");
+				mission.initial_orbit.i = Number(field.value);
+				field = document.getElementById("mis-omega");
+				mission.initial_orbit.omega = Number(field.value);
+				field = document.getElementById("mis-raan");
+				mission.initial_orbit.raan = Number(field.value);
+				field = document.getElementById("mis-lm");
+				mission.initial_orbit.lM = Number(field.value);
+				
+				field = document.getElementById("mis-Id");
+				var id = Number(field.value);
+				if(id == -1){//Create mode
+					addMissionToDb(mission);
+				}else{//Edit mode
+					editMissionToDb(id,mission);
+				}
+				
+			}catch(err){
+				alert("Format error");
+			}
 		}
 		
 	</script>
@@ -712,18 +773,19 @@
 <div id="MissionEditorBackground">
 	<div id="MissionEditor">
 		<div id="MissionCloseButton" onclick="closeMissionEditor()"></div>
-		<div id="MissionConfirmButton" onclick=""></div>
-			<h3>Edit mission</h3>
+		<div id="MissionConfirmButton" onclick="saveMissionEditor()"></div>
+			<h3 id="mis-Title">Edit mission</h3>
 		<div id="MissionEditorContent">
+			<input id="mis-Id" type="hidden"/>
 			<p>Name:<input id="mis-Name" type="text" style="float: right;"/></p>
 			<p>Desription:<input id="mis-Description" type="text" style="float: right;"/></p>
-			<p>Initial mass:<input id="mis-Mass" type="number" min="0" style="float: right;"/></p>
+			<p>Initial mass (Kg):<input id="mis-Mass" type="number" min="0" style="float: right;"/></p>
 			<h4>Simulation</h4>
 			<!-- Date picker -->
 			<p>Date:<input id="mis-Date" class="datepicker" style="float: right;"/></p>
 			<p>Time:<input id="mis-Time" class="timepicker" style="float: right;"/></p>
-			<p>Duration:<input id="mis-Duration" type="number" min="0" style="float: right;"/></p>
-			<p>Speed:<input id="mis-Speed" type="number" min="0" style="float: right;"/></p>
+			<p>Duration (s):<input id="mis-Duration" type="number" min="0" style="float: right;"/></p>
+			<p>Speed (s'/s):<input id="mis-Speed" type="number" min="0" style="float: right;"/></p>
 			<h4>Attitude</h4>
 			<p>Attitude control:<select id="mis-AttitudeProvider" style="float: right;">
 				<option value="0">INERTIAL</option>

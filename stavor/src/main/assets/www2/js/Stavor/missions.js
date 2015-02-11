@@ -113,7 +113,7 @@ function styleMissionRows(){
 
 function drawMissionsList(){
 	db.transaction(function (tx) {
-		tx.executeSql('SELECT * FROM missions;', [], function (tx, results) {
+		tx.executeSql('SELECT * FROM missions ORDER BY name COLLATE NOCASE;', [], function (tx, results) {
 			var mission_rows = results.rows;
 			var div_list = document.getElementById("olListMissions"); 
 			var content = "";
@@ -248,7 +248,18 @@ function initializeMissionsDb(){
 function addMissionToDb(mission){
 	var json = JSON.stringify(mission);
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO missions (isDefault, name, json) VALUES (?, ?, ?)', [false, mission.name, json]);
+		tx.executeSql('INSERT INTO missions (isDefault, name, json) VALUES (?, ?, ?)', [false, mission.name, json], onMissionEditorConfirm);
+	});
+}
+function onMissionEditorConfirm(){
+	closeMissionEditor();
+	drawMissionsList();
+}
+
+function editMissionToDb(id,mission){
+	var json = JSON.stringify(mission);
+	db.transaction(function (tx) {
+		tx.executeSql('UPDATE missions SET name=?, json=? WHERE id=?', [mission.name, json, id], onMissionEditorConfirm);
 	});
 }
 
