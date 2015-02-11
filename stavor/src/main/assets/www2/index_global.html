@@ -713,29 +713,31 @@
 	<div id="MissionEditor">
 		<div id="MissionCloseButton" onclick="closeMissionEditor()"></div>
 		<div id="MissionConfirmButton" onclick=""></div>
-		<h3>Edit mission</h3>
-		<p>Name:<input id="mis-Name" type="text" style="float: right;"/></p>
-		<p>Desription:<input id="mis-Description" type="text" style="float: right;"/></p>
-		<p>Initial mass:<input id="mis-Mass" type="number" min="0" style="float: right;"/></p>
-		<h4>Simulation</h4>
-		<!-- Date picker -->
-		<p>Date:<input id="mis-Date" class="datepicker" style="float: right;"/></p>
-		<p>Time:<input id="mis-Time" class="timepicker" style="float: right;"/></p>
-		<p>Duration:<input id="mis-Duration" type="number" min="0" style="float: right;"/></p>
-		<p>Speed:<input id="mis-Speed" type="number" min="0" style="float: right;"/></p>
-		<h4>Attitude</h4>
-		<p>Attitude control:<select id="mis-AttitudeProvider" style="float: right;">
-			<option value="0">INERTIAL</option>
-			<option value="1">FACING_EARTH</option>
-			<option value="2">FACING_SUN</option>
-		</select></p>
-		<h4>Orbit</h4>
-		<p>Semi-major axis (m):<input id="mis-a" type="number" min="0" step="any" style="float: right;"/></p>
-		<p>Eccentricity:<input id="mis-e" type="number" min="0" step="any" style="float: right;"/></p>
-		<p>Inclination (rad):<input id="mis-i" type="number" step="any" style="float: right;"/></p>
-		<p>Arg. Perigee (rad):<input id="mis-omega" type="number" step="any" style="float: right;"/></p>
-		<p>RAAN (rad):<input id="mis-raan" type="number" step="any" style="float: right;"/></p>
-		<p>Mean anomaly (rad):<input id="mis-lm" type="number" step="any" style="float: right;"/></p>
+			<h3>Edit mission</h3>
+		<div id="MissionEditorContent">
+			<p>Name:<input id="mis-Name" type="text" style="float: right;"/></p>
+			<p>Desription:<input id="mis-Description" type="text" style="float: right;"/></p>
+			<p>Initial mass:<input id="mis-Mass" type="number" min="0" style="float: right;"/></p>
+			<h4>Simulation</h4>
+			<!-- Date picker -->
+			<p>Date:<input id="mis-Date" class="datepicker" style="float: right;"/></p>
+			<p>Time:<input id="mis-Time" class="timepicker" style="float: right;"/></p>
+			<p>Duration:<input id="mis-Duration" type="number" min="0" style="float: right;"/></p>
+			<p>Speed:<input id="mis-Speed" type="number" min="0" style="float: right;"/></p>
+			<h4>Attitude</h4>
+			<p>Attitude control:<select id="mis-AttitudeProvider" style="float: right;">
+				<option value="0">INERTIAL</option>
+				<option value="1">FACING_EARTH</option>
+				<option value="2">FACING_SUN</option>
+			</select></p>
+			<h4>Orbit</h4>
+			<p>Semi-major axis (m):<input id="mis-a" type="number" min="0" step="any" style="float: right;"/></p>
+			<p>Eccentricity:<input id="mis-e" type="number" min="0" step="any" style="float: right;"/></p>
+			<p>Inclination (rad):<input id="mis-i" type="number" step="any" style="float: right;"/></p>
+			<p>Arg. Perigee (rad):<input id="mis-omega" type="number" step="any" style="float: right;"/></p>
+			<p>RAAN (rad):<input id="mis-raan" type="number" step="any" style="float: right;"/></p>
+			<p>Mean anomaly (rad):<input id="mis-lm" type="number" step="any" style="float: right;"/></p>
+		</div>
 	</div>
 </div>
 

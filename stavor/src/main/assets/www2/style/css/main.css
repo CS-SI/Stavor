@@ -121,6 +121,7 @@ ol li{
 	transform: translate(-50%, 0);
 	font-family: Stavor, Helvetica, Verdana, Sans-Serif;
 	font-size: 0.8em;
+	border-radius: 10px;
 }
 #SlidePrev{
 	position: absolute;
