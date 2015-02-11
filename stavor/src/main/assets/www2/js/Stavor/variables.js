@@ -9,7 +9,8 @@ var global_delayed_loading = {
 		map: false
 	},
 	database:{
-		missions: false
+		missions: false,
+		stations: false
 	}
 }
 
@@ -32,7 +33,10 @@ var global_menus = {
 	global:{
 		isOpen: false
 	},
-	mission:{
+	mission:{//editor
+		isOpen: false
+	},
+	station:{//editor
 		isOpen: false
 	}
 }

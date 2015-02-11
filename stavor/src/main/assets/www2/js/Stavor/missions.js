@@ -263,12 +263,6 @@ function editMissionToDb(id,mission){
 	});
 }
 
-function successDatabaseHandler(){
-}
-function errorDatabaseHandler(transaction, error) {
-	if(parameters.debug) alert("Error : " + error.message);
-}
-
 function updateMissionEditor(mission,mission_id){
 	var field;
 	field = document.getElementById("mis-Id");

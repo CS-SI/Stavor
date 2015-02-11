@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="style/css/toolbar.css"/>
 	<link rel="stylesheet" href="style/css/tabs.css"/>
 	<link rel="stylesheet" href="style/css/missions.css"/>
+	<link rel="stylesheet" href="style/css/stations.css"/>
 	<link rel="stylesheet" href="style/css/views.css"/>
 	<link rel="stylesheet" href="style/css/map.css"/>
 	<link rel="stylesheet" href="style/css/leds.css"/>
@@ -60,8 +61,10 @@
 	<script type='text/javascript' src="modules/simulator/components/KeplerianOrbit.js"></script>
 	<script type='text/javascript' src="modules/simulator/components/SimDate.js"></script>
 	<script type='text/javascript' src="modules/simulator/components/Mission.js"></script>
+	<script type='text/javascript' src="modules/simulator/components/Station.js"></script>
 	<script type='text/javascript' src="js/Stavor/database.js"></script>
 	<script type='text/javascript' src="js/Stavor/missions.js"></script>
+	<script type='text/javascript' src="js/Stavor/stations.js"></script>
 	<!--<script type='text/javascript' src="js/Stavor/stations.js"></script>-->
 	
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
@@ -88,6 +91,8 @@
 			initializePanGestures();
 			initializeMissionsDb();//Splash
 			drawMissionsList();
+			initializeStationsDb();//Splash
+			drawStationsList();
 			
 			loadOrekitFilesText();
 		}
@@ -129,7 +134,8 @@
 				global_delayed_loading.visualization.attitude &&
 				global_delayed_loading.visualization.orbit &&
 				global_delayed_loading.visualization.map &&
-				global_delayed_loading.database.missions
+				global_delayed_loading.database.missions &&
+				global_delayed_loading.database.stations
 				){
 				setLoadingText("Stavor loaded!");
 				var current_time = new Date().getTime();
@@ -153,6 +159,8 @@
 					setLoadingText("Init Map module...");
 				}else if(!global_delayed_loading.database.missions){
 					setLoadingText("Loading Missions db...");
+				}else if(!global_delayed_loading.database.stations){
+					setLoadingText("Loading Stations db...");
 				}
 			}
 		}
@@ -388,7 +396,19 @@
 		  </div>
 		  <div class="tabpage" id="Maptabpage_2">
 			<h4>Ground stations</h4>
-			
+			<div id="StationsMenu">
+				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/select.png" title="Select Station" onclick="onSelectStationButtonClicked()"/></div>
+				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/new.png" title="Create Station" onclick="openStationEditor(-1)"/></div>
+				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/edit.png" title="Edit Station" onclick="openStationEditor(global_missions.active)"/></div>
+				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/delete.png" title="Remove Station" onclick="onDeleteStationButtonClicked()"/></div>
+			</div>
+			<div id="DivStations">	
+				<div id="ListStations">
+					<ol id="olListStations">
+					  <li id="0" class="StationNormal" onclick="onStationClicked(this.id)">Coffee</li>
+					</ol>
+				</div>
+			</div>
 		  </div>
 		  <div class="tabpage" id="Maptabpage_3">
 			<h4>Satellite</h4>
@@ -671,6 +691,7 @@
 		<p>Show FPS:<input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
 		<p><input id="ResetConfigButton" value="Reset all configuration" type="button" onclick="resetConfiguration()" class="stavorDarkButton"/></p>
 		<p><input id="ResetMissionsButton" value="Reset missions database" type="button" onclick="resetMissionsDb()" class="stavorDarkButton"/></p>
+		<p><input id="ResetStationsButton" value="Reset stations database" type="button" onclick="resetStationsDb()" class="stavorDarkButton"/></p>
 	</div>
 </div>
 	

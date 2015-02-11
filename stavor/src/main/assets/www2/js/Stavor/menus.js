@@ -18,6 +18,8 @@ function initializeMapMenu(){
 		for (var i = 1; i < pages.length; i++) {
 		 pages.item(i).style.display="none";
 		};
+		document.getElementById("DivStations").style.display = "block";
+		document.getElementById("StationsMenu").style.display = "block";
 
 	//this adds click event to tabs
 	var tabs = tabcontainer.getElementsByTagName("li");
@@ -91,7 +93,14 @@ function displayMapMenuPage() {
   var ident = this.id.split("_")[1];
   //add class of activetabheader to new active tab and show contents
   this.setAttribute("class","tabActiveHeader");
-  document.getElementById("Maptabpage_" + ident).style.display="block";
+  var mapPage = document.getElementById("Maptabpage_" + ident);
+  mapPage.style.display="block";
+  
+  var pages = mapPage.getElementsByTagName("div");
+	for (var i = 1; i < pages.length; i++) {
+		pages.item(i).style.display="block";
+	};
+  
   this.parentNode.setAttribute("data-current",ident);
 }
 
