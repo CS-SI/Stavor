@@ -339,41 +339,6 @@
 			global_menus.global.isOpen = !global_menus.global.isOpen;
 		}
 		
-		function closeMissionEditor(){
-			if(global_menus.mission.isOpen){
-				$( "#MissionEditorBackground" ).fadeOut( "slow", function() {
-					// Animation complete.
-				  });
-				global_menus.mission.isOpen = !global_menus.mission.isOpen;
-			}
-		}
-		
-		function openMissionEditor(id){
-			db.transaction(function (tx) {
-				tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
-					if(!global_menus.mission.isOpen){
-						if(id == -1){//Create mode
-							var mission = new Mission();
-							updateMissionEditor(mission,id);
-							$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
-								// Animation complete.
-							  });
-							global_menus.mission.isOpen = !global_menus.mission.isOpen;
-						}else if(id == global_missions.selected){
-							alert("Cannot edit the simulation selected mission, select another one!");
-						}else{//Edit Mode
-							var mission = JSON.parse(results.rows.item(0).json);
-							updateMissionEditor(mission,id);
-							$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
-								// Animation complete.
-							  });
-							global_menus.mission.isOpen = !global_menus.mission.isOpen;
-						}
-					}
-				}, errorDatabaseHandler);
-			});
-		}
-		
 		function updateInfoPanel(force){
 			if(global_menus.info_panel.isOpen || force){
 				var results = global_simulation.results.info_panel;
@@ -395,115 +360,7 @@
 			}
 		}
 		
-		function updateMissionEditor(mission,mission_id){
-			var field;
-			field = document.getElementById("mis-Id");
-			field.value = mission_id;
-			
-			field = document.getElementById("mis-Title");
-			if(mission_id == -1){
-				field.innerHTML = "Create Mission";
-			}else{
-				field.innerHTML = "Edit Mission";
-			}
-			field = document.getElementById("mis-Name");
-			field.value = mission.name;
-			field = document.getElementById("mis-Description");
-			field.value = mission.description;
-			field = document.getElementById("mis-Mass");
-			field.value = mission.initial_mass;
-			
-			
-			
-			field = document.getElementById("mis-Date");
-			field.value = mission.initial_date.year+"/"+mission.initial_date.month+"/"+mission.initial_date.day;
-			field = document.getElementById("mis-Time");
-			field.value = mission.initial_date.hour+":"+mission.initial_date.minute;
-			
-			$('.datepicker').pickadate({
-				clear: '',
-				format: 'yyyy/mm/dd',
-				formatSubmit: 'yyyy/m/d'
-			});
-			$('.timepicker').pickatime({
-				clear: '',
-				format: 'HH:i',
-				formatLabel: 'HH:i',
-				formatSubmit: 'H:i'
-			});
-			
-			field = document.getElementById("mis-Duration");
-			field.value = mission.duration;
-			field = document.getElementById("mis-Speed");
-			field.value = mission.step*parameters.simulator_target_fps;
-			field = document.getElementById("mis-a");
-			field.value = mission.initial_orbit.a;
-			field = document.getElementById("mis-e");
-			field.value = mission.initial_orbit.e;
-			field = document.getElementById("mis-i");
-			field.value = mission.initial_orbit.i;
-			field = document.getElementById("mis-omega");
-			field.value = mission.initial_orbit.omega;
-			field = document.getElementById("mis-raan");
-			field.value = mission.initial_orbit.raan;
-			field = document.getElementById("mis-lm");
-			field.value = mission.initial_orbit.lM;
-		}
 		
-		function saveMissionEditor(){
-			try{
-				var field;
-				
-				var mission = new Mission();
-				
-				field = document.getElementById("mis-Name");
-				mission.name = field.value;
-				field = document.getElementById("mis-Description");
-				mission.description = field.value;
-				field = document.getElementById("mis-Mass");
-				mission.initial_mass = field.value;
-				
-				field = document.getElementById("mis-Date");
-				var dates = field.value.split('/');
-				mission.initial_date.year = Number(dates[0]);
-				mission.initial_date.month = Number(dates[1]);
-				mission.initial_date.day = Number(dates[2]);
-				field = document.getElementById("mis-Time");
-				var times = field.value.split(':');
-				mission.initial_date.hour = Number(times[0]);
-				mission.initial_date.minute = Number(times[1]);
-				
-				field = document.getElementById("mis-Duration");
-				mission.duration = Number(field.value);
-				field = document.getElementById("mis-Speed");
-				mission.step = Number(field.value)/parameters.simulator_target_fps;
-				
-				
-				field = document.getElementById("mis-a");
-				mission.initial_orbit.a = Number(field.value);
-				field = document.getElementById("mis-e");
-				mission.initial_orbit.e = Number(field.value);
-				field = document.getElementById("mis-i");
-				mission.initial_orbit.i = Number(field.value);
-				field = document.getElementById("mis-omega");
-				mission.initial_orbit.omega = Number(field.value);
-				field = document.getElementById("mis-raan");
-				mission.initial_orbit.raan = Number(field.value);
-				field = document.getElementById("mis-lm");
-				mission.initial_orbit.lM = Number(field.value);
-				
-				field = document.getElementById("mis-Id");
-				var id = Number(field.value);
-				if(id == -1){//Create mode
-					addMissionToDb(mission);
-				}else{//Edit mode
-					editMissionToDb(id,mission);
-				}
-				
-			}catch(err){
-				alert("Format error");
-			}
-		}
 		
 	</script>
 </head>
@@ -564,13 +421,13 @@
 			<p>&bull;Show Earth clouds:<input id="opt-orb-ShowEarthClouds" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
 			<h4>Reference</h4>
 			<p>Show XY plane:<input id="opt-orb-ShowXyPlane" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>Color:<input id="opt-orb-PlaneXyColor" class="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-PlaneXyColor" class="color MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 			<h4>Spacecraft</h4>
 			<p>Show spacecraft:<input id="opt-orb-ShowSpacecraft" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>Color:<input id="opt-orb-SpacecraftColor" class="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-SpacecraftColor" class="color MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 			<h4>Orbit</h4>
 			<p>Show projection:<input id="opt-orb-ShowProjection" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>Color:<input id="opt-orb-OrbitColor" class="color" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-orb-OrbitColor" class="color MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 		  </div>
 		</div>
 	</div>
@@ -592,46 +449,46 @@
 			<h4>Basic</h4>
 			<h5>Velocity</h5>
 			<p>Show velocity:<input id="opt-att-ShowVelocity" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>Limit (Km/s):<input id="opt-att-LimitVelocity" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-att-VelocityColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Limit (Km/s):<input id="opt-att-LimitVelocity" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Color:<input id="opt-att-VelocityColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5>Acceleration</h5>
 			<p>Show acceleration:<input id="opt-att-ShowAcceleration" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>Limit (Km/s2):<input id="opt-att-LimitAcceleration" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-att-AccelerationColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Limit (Km/s2):<input id="opt-att-LimitAcceleration" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Color:<input id="opt-att-AccelerationColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5>Momentum</h5>
 			<p>Show momentum:<input id="opt-att-ShowMomentum" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>Color:<input id="opt-att-MomentumColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Color:<input id="opt-att-MomentumColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h4>Extra</h4>
 			<h5>Target</h5>
 			<p>Show target:<input id="opt-att-ShowTarget" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>X:<input id="opt-att-TargetValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Y:<input id="opt-att-TargetValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Z:<input id="opt-att-TargetValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-att-TargetColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>X:<input id="opt-att-TargetValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Y:<input id="opt-att-TargetValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Z:<input id="opt-att-TargetValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Color:<input id="opt-att-TargetColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5>Vector</h5>
 			<p>Show vector:<input id="opt-att-ShowVector" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>Limit:<input id="opt-att-LimitVector" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>X:<input id="opt-att-VectorValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Y:<input id="opt-att-VectorValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Z:<input id="opt-att-VectorValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-att-VectorColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Limit:<input id="opt-att-LimitVector" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>X:<input id="opt-att-VectorValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Y:<input id="opt-att-VectorValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Z:<input id="opt-att-VectorValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Color:<input id="opt-att-VectorColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5>Direction</h5>
 			<p>Show direction:<input id="opt-att-ShowDirection" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>X:<input id="opt-att-DirectionValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Y:<input id="opt-att-DirectionValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Z:<input id="opt-att-DirectionValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Color:<input id="opt-att-DirectionColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>X:<input id="opt-att-DirectionValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Y:<input id="opt-att-DirectionValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Z:<input id="opt-att-DirectionValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Color:<input id="opt-att-DirectionColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 		  </div>
 		  <div class="tabpage" id="Attitudetabpage_2">
 			<h4>Inclination</h4>
 			<p>Show planes:<input id="opt-att-ShowOrbitalPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>&bull;Show inclination:<input id="opt-att-ShowInclination" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<!--<p>Show Earth rotation plane:<input id="opt-att-ShowEarthPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>-->
-			<p>Rotation plane color:<input id="opt-att-RotationPlaneColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p>Orbital plane color:<input id="opt-att-OrbitalPlaneColor" class="color" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Rotation plane color:<input id="opt-att-RotationPlaneColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Orbital plane color:<input id="opt-att-OrbitalPlaneColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h4>Spheric coordinates</h4>
 			<p>Show spheric coordinates:<input id="opt-att-ShowSphericCoordinates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<select id="opt-att-SphericCoordsSelection" onchange="updateAttitudeOption(this.id,this.value)">
+			<select id="opt-att-SphericCoordsSelection" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField">
 				<option value="0">VELOCITY</option>
 				<option value="1">ACCELERATION</option>
 				<option value="2">MOMENTUM</option>
@@ -640,14 +497,14 @@
 			</select>
 			<h4>Angles</h4>
 			<p>Show vectors angle:<input id="opt-att-ShowVectorsAngle" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<select id="opt-att-AnglesSelection1" onchange="updateAttitudeOption(this.id,this.value)">
+			<select id="opt-att-AnglesSelection1" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField">
 				<option value="0">VELOCITY</option>
 				<option value="1">ACCELERATION</option>
 				<option value="2">MOMENTUM</option>
 				<option value="3">EARTH</option>
 				<option value="4">SUN</option>
 			</select>
-			<select id="opt-att-AnglesSelection2" onchange="updateAttitudeOption(this.id,this.value)">
+			<select id="opt-att-AnglesSelection2" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField">
 				<option value="0">VELOCITY</option>
 				<option value="1">ACCELERATION</option>
 				<option value="2">MOMENTUM</option>
@@ -671,14 +528,14 @@
 			<p>Show model:<input id="opt-att-ShowSunModel" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>&bull;Show surface:<input id="opt-att-ShowSunSurface" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>&bull;Sun rotates:<input id="opt-att-SunRotates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>Rotation speed [0-9]:<input id="opt-att-SunRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Rotation speed [0-9]:<input id="opt-att-SunRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)" class="MenuField"/></p>
 			<p>&bull;Show line:<input id="opt-att-ShowSunLine" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>&bull;Show distance:<input id="opt-att-ShowSunDistance" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<h4>Earth</h4>
 			<p>Show model:<input id="opt-att-ShowEarthModel" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>&bull;Show surface:<input id="opt-att-ShowEarthSurface" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>&bull;Earth rotates:<input id="opt-att-EarthRotates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>Rotation speed [0-9]:<input id="opt-att-EarthRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p>Rotation speed [0-9]:<input id="opt-att-EarthRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
 			<p>&bull;Show line:<input id="opt-att-ShowEarthLine" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>&bull;Show distance:<input id="opt-att-ShowEarthDistance" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 		  </div>
@@ -777,28 +634,28 @@
 			<h3 id="mis-Title">Edit mission</h3>
 		<div id="MissionEditorContent">
 			<input id="mis-Id" type="hidden"/>
-			<p>Name:<input id="mis-Name" type="text" style="float: right;"/></p>
-			<p>Desription:<input id="mis-Description" type="text" style="float: right;"/></p>
-			<p>Initial mass (Kg):<input id="mis-Mass" type="number" min="0" style="float: right;"/></p>
+			<p>Name:<input id="mis-Name" type="text" style="float: right;" class="MissionField"/></p>
+			<p>Desription:<input id="mis-Description" type="text" style="float: right;" class="MissionField"/></p>
+			<p>Initial mass (Kg):<input id="mis-Mass" type="number" min="0" style="float: right;" class="MissionField"/></p>
 			<h4>Simulation</h4>
 			<!-- Date picker -->
-			<p>Date:<input id="mis-Date" class="datepicker" style="float: right;"/></p>
-			<p>Time:<input id="mis-Time" class="timepicker" style="float: right;"/></p>
-			<p>Duration (s):<input id="mis-Duration" type="number" min="0" style="float: right;"/></p>
-			<p>Speed (s'/s):<input id="mis-Speed" type="number" min="0" style="float: right;"/></p>
+			<p>Date:<input id="mis-Date" class="datepicker" style="float: right;" class="MissionField"/></p>
+			<p>Time:<input id="mis-Time" class="timepicker" style="float: right;" class="MissionField"/></p>
+			<p>Duration (s):<input id="mis-Duration" type="number" min="0" style="float: right;" class="MissionField"/></p>
+			<p>Speed (s'/s):<input id="mis-Speed" type="number" min="0" style="float: right;" class="MissionField"/></p>
 			<h4>Attitude</h4>
-			<p>Attitude control:<select id="mis-AttitudeProvider" style="float: right;">
+			<p>Attitude control:<select id="mis-AttitudeProvider" style="float: right;" class="MissionField">
 				<option value="0">INERTIAL</option>
 				<option value="1">FACING_EARTH</option>
 				<option value="2">FACING_SUN</option>
 			</select></p>
 			<h4>Orbit</h4>
-			<p>Semi-major axis (m):<input id="mis-a" type="number" min="0" step="any" style="float: right;"/></p>
-			<p>Eccentricity:<input id="mis-e" type="number" min="0" step="any" style="float: right;"/></p>
-			<p>Inclination (rad):<input id="mis-i" type="number" step="any" style="float: right;"/></p>
-			<p>Arg. Perigee (rad):<input id="mis-omega" type="number" step="any" style="float: right;"/></p>
-			<p>RAAN (rad):<input id="mis-raan" type="number" step="any" style="float: right;"/></p>
-			<p>Mean anomaly (rad):<input id="mis-lm" type="number" step="any" style="float: right;"/></p>
+			<p>Semi-major axis (m):<input id="mis-a" type="number" min="0" step="any" style="float: right;" class="MissionField"/></p>
+			<p>Eccentricity:<input id="mis-e" type="number" min="0" step="any" style="float: right;" class="MissionField"/></p>
+			<p>Inclination (rad):<input id="mis-i" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p>Arg. Perigee (rad):<input id="mis-omega" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p>RAAN (rad):<input id="mis-raan" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p>Mean anomaly (rad):<input id="mis-lm" type="number" step="any" style="float: right;" class="MissionField"/></p>
 		</div>
 	</div>
 </div>
@@ -810,7 +667,7 @@
 	<div id="DivConfig">
 		<div id="ConfigCloseButton" onclick="switchGlobalMenu()"></div>
 		<h3>Configuration</h3>
-		<p>3D Detail level [1-9]:<input id="opt-glo-PerformanceLevel" type="number" min="1" max="9" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"/></p>
+		<p>3D Detail level [1-9]:<input id="opt-glo-PerformanceLevel" type="number" min="1" max="9" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"class="MenuField"/></p>
 		<p>Show FPS:<input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
 		<p><input id="ResetConfigButton" value="Reset all configuration" type="button" onclick="resetConfiguration()" class="stavorDarkButton"/></p>
 		<p><input id="ResetMissionsButton" value="Reset missions database" type="button" onclick="resetMissionsDb()" class="stavorDarkButton"/></p>

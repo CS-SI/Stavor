@@ -268,3 +268,150 @@ function successDatabaseHandler(){
 function errorDatabaseHandler(transaction, error) {
 	if(parameters.debug) alert("Error : " + error.message);
 }
+
+function updateMissionEditor(mission,mission_id){
+	var field;
+	field = document.getElementById("mis-Id");
+	field.value = mission_id;
+	
+	field = document.getElementById("mis-Title");
+	if(mission_id == -1){
+		field.innerHTML = "Create Mission";
+	}else{
+		field.innerHTML = "Edit Mission";
+	}
+	field = document.getElementById("mis-Name");
+	field.value = mission.name;
+	field = document.getElementById("mis-Description");
+	field.value = mission.description;
+	field = document.getElementById("mis-Mass");
+	field.value = mission.initial_mass;
+	
+	$('.datepicker').pickadate({
+		clear: '',
+		format: 'yyyy/mm/dd',
+		formatSubmit: 'yyyy/m/d'
+	});
+	$('.timepicker').pickatime({
+		clear: '',
+		format: 'HH:i',
+		formatLabel: 'HH:i',
+		formatSubmit: 'H:i'
+	});
+	
+	field = document.getElementById("mis-Date");
+	field.className="MissionField";
+	field.value = mission.initial_date.year+"/"+mission.initial_date.month+"/"+mission.initial_date.day;
+	field = document.getElementById("mis-Time");
+	field.className="MissionField";
+	field.value = mission.initial_date.hour+":"+mission.initial_date.minute;
+	
+	
+	
+	field = document.getElementById("mis-Duration");
+	field.value = mission.duration;
+	field = document.getElementById("mis-Speed");
+	field.value = mission.step*parameters.simulator_target_fps;
+	field = document.getElementById("mis-a");
+	field.value = mission.initial_orbit.a;
+	field = document.getElementById("mis-e");
+	field.value = mission.initial_orbit.e;
+	field = document.getElementById("mis-i");
+	field.value = mission.initial_orbit.i;
+	field = document.getElementById("mis-omega");
+	field.value = mission.initial_orbit.omega;
+	field = document.getElementById("mis-raan");
+	field.value = mission.initial_orbit.raan;
+	field = document.getElementById("mis-lm");
+	field.value = mission.initial_orbit.lM;
+}
+
+function saveMissionEditor(){
+	try{
+		var field;
+		
+		var mission = new Mission();
+		
+		field = document.getElementById("mis-Name");
+		mission.name = field.value;
+		field = document.getElementById("mis-Description");
+		mission.description = field.value;
+		field = document.getElementById("mis-Mass");
+		mission.initial_mass = field.value;
+		
+		field = document.getElementById("mis-Date");
+		var dates = field.value.split('/');
+		mission.initial_date.year = Number(dates[0]);
+		mission.initial_date.month = Number(dates[1]);
+		mission.initial_date.day = Number(dates[2]);
+		field = document.getElementById("mis-Time");
+		var times = field.value.split(':');
+		mission.initial_date.hour = Number(times[0]);
+		mission.initial_date.minute = Number(times[1]);
+		
+		field = document.getElementById("mis-Duration");
+		mission.duration = Number(field.value);
+		field = document.getElementById("mis-Speed");
+		mission.step = Number(field.value)/parameters.simulator_target_fps;
+		
+		
+		field = document.getElementById("mis-a");
+		mission.initial_orbit.a = Number(field.value);
+		field = document.getElementById("mis-e");
+		mission.initial_orbit.e = Number(field.value);
+		field = document.getElementById("mis-i");
+		mission.initial_orbit.i = Number(field.value);
+		field = document.getElementById("mis-omega");
+		mission.initial_orbit.omega = Number(field.value);
+		field = document.getElementById("mis-raan");
+		mission.initial_orbit.raan = Number(field.value);
+		field = document.getElementById("mis-lm");
+		mission.initial_orbit.lM = Number(field.value);
+		
+		field = document.getElementById("mis-Id");
+		var id = Number(field.value);
+		if(id == -1){//Create mode
+			addMissionToDb(mission);
+		}else{//Edit mode
+			editMissionToDb(id,mission);
+		}
+		
+	}catch(err){
+		alert("Format error");
+	}
+}
+
+function closeMissionEditor(){
+	if(global_menus.mission.isOpen){
+		$( "#MissionEditorBackground" ).fadeOut( "slow", function() {
+			// Animation complete.
+		  });
+		global_menus.mission.isOpen = !global_menus.mission.isOpen;
+	}
+}
+
+function openMissionEditor(id){
+	db.transaction(function (tx) {
+		tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
+			if(!global_menus.mission.isOpen){
+				if(id == -1){//Create mode
+					var mission = new Mission();
+					updateMissionEditor(mission,id);
+					$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
+						// Animation complete.
+					  });
+					global_menus.mission.isOpen = !global_menus.mission.isOpen;
+				}else if(id == global_missions.selected){
+					alert("Cannot edit the simulation selected mission, select another one!");
+				}else{//Edit Mode
+					var mission = JSON.parse(results.rows.item(0).json);
+					updateMissionEditor(mission,id);
+					$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
+						// Animation complete.
+					  });
+					global_menus.mission.isOpen = !global_menus.mission.isOpen;
+				}
+			}
+		}, errorDatabaseHandler);
+	});
+}
