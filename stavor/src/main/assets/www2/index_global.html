@@ -398,7 +398,7 @@
 			<h4>Ground stations</h4>
 			<div id="StationsMenu">
 				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/new.png" title="Create Station" onclick="openStationEditor(-1)"/></div>
-				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/edit.png" title="Edit Station" onclick="openStationEditor(global_missions.active)"/></div>
+				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/edit.png" title="Edit Station" onclick="openStationEditor(global_stations.active)"/></div>
 				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/delete.png" title="Remove Station" onclick="onDeleteStationButtonClicked()"/></div>
 			</div>
 			<div id="DivStations">	
@@ -675,6 +675,22 @@
 			<p>Arg. Perigee (rad):<input id="mis-omega" type="number" step="any" style="float: right;" class="MissionField"/></p>
 			<p>RAAN (rad):<input id="mis-raan" type="number" step="any" style="float: right;" class="MissionField"/></p>
 			<p>Mean anomaly (rad):<input id="mis-lm" type="number" step="any" style="float: right;" class="MissionField"/></p>
+		</div>
+	</div>
+</div>
+
+<div id="StationEditorBackground">
+	<div id="StationEditor">
+		<div id="StationCloseButton" onclick="closeStationEditor()"></div>
+		<div id="StationConfirmButton" onclick="saveStationEditor()"></div>
+			<h3 id="sta-Title">Edit station</h3>
+		<div id="StationEditorContent">
+			<input id="sta-Id" type="hidden"/>
+			<p>Name:<input id="sta-Name" type="text" style="float: right;" class="StationField"/></p>
+			<p>Latitude (deg):<input id="sta-latitude" type="number" min="-90" max="90" step="any" style="float: right;" class="StationField"/></p>
+			<p>Longitude (deg):<input id="sta-longitude" type="number" min="-180" max="180" step="any" style="float: right;" class="StationField"/></p>
+			<p>Altitude (m):<input id="sta-altitude" type="number" step="any" style="float: right;" class="StationField"/></p>
+			<p>Min. elevation (deg):<input id="sta-elevation" type="number" max="90" min="-10" step="any" style="float: right;" class="StationField"/></p>
 		</div>
 	</div>
 </div>
