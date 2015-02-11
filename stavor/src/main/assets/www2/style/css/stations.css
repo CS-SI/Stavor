@@ -63,7 +63,7 @@ div#Maptabscontent.tabscontent{
 }
 .StationsMenuItem{
 	display: inline-block;
-	width: calc(25% - 1px);
+	width: calc(33% - 1px);
 	height: 100%;
 	text-align: center;
 	float: left;

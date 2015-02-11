@@ -100,7 +100,11 @@ function drawStationsList(){
 			var len = station_rows.length, i;
 			for (i = 0; i < len; i++) {
 				var row = station_rows.item(i); 
-				content += "<li id='sta_"+row.id+"' class='StationNormal' onclick='onStationClicked(this.id)'>"+row.name+"</li>";
+				var checked = "";
+				if(row.enabled == "true"){
+					checked = "checked";
+				}
+				content += "<li id='sta_"+row.id+"' class='StationNormal' onclick='onStationClicked(this.id)'><input type='checkbox' id='stc_"+row.id+"' "+checked+" onchange='changeStationEnabled(this.id,this.checked)'/>"+row.name+"</li>";
 			}
 			div_list.innerHTML = content;
 			styleStationRows();
@@ -108,7 +112,7 @@ function drawStationsList(){
 	});
 }
 
-function resetStationssDb(){
+function resetStationsDb(){
 	var r = confirm("Reset stations list to default value?");
 	if(r){
 		db.transaction(function (tx) {
@@ -121,7 +125,7 @@ function resetStationssDb(){
 
 function initializeStationsDb(){
 	db.transaction(function (tx) {
-		tx.executeSql('CREATE TABLE stations (id INTEGER PRIMARY KEY, isDefault BOOLEAN, name VARCHAR(255), json BLOB)', [], function (tx, results) {
+		tx.executeSql('CREATE TABLE stations (id INTEGER PRIMARY KEY, isDefault BOOLEAN, name VARCHAR(255), enabled BOOLEAN, json BLOB)', [], function (tx, results) {
 			var default_stations = new Array();
 			var station;
 			
@@ -217,7 +221,7 @@ function initializeStationsDb(){
 			
 			
 			for(var i = 0; i < default_stations.length; i++)
-				tx.executeSql('INSERT INTO stations (isDefault, name, json) VALUES (?, ?, ?)', [true, default_stations[i].name, JSON.stringify(default_stations[i])], successDatabaseHandler, errorDatabaseHandler);
+				tx.executeSql('INSERT INTO stations (isDefault, name, enabled, json) VALUES (?, ?, ?, ?)', [true, default_stations[i].name, default_stations[i].enabled, JSON.stringify(default_stations[i])], successDatabaseHandler, errorDatabaseHandler);
 			});
 			
 			loadStationsStoredVariables();
@@ -235,7 +239,7 @@ function initializeStationsDb(){
 function addStationToDb(station){
 	var json = JSON.stringify(station);
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO stations (isDefault, name, json) VALUES (?, ?, ?)', [false, station.name, json], onStationEditorConfirm);
+		tx.executeSql('INSERT INTO stations (isDefault, name, enabled, json) VALUES (?, ?, ?, ?)', [false, station.name, station.enabled, json], onStationEditorConfirm);
 	});
 }
 function onStationEditorConfirm(){
@@ -246,7 +250,14 @@ function onStationEditorConfirm(){
 function editStationToDb(id,station){
 	var json = JSON.stringify(station);
 	db.transaction(function (tx) {
-		tx.executeSql('UPDATE stations SET name=?, json=? WHERE id=?', [station.name, json, id], onStationEditorConfirm);
+		tx.executeSql('UPDATE stations SET name=?, enabled=?, json=? WHERE id=?', [station.name, station.enabled, json, id], onStationEditorConfirm);
+	});
+}
+
+function changeStationEnabled(id,enabled){
+	var num_id = Number(id.substr(4,id.length));
+	db.transaction(function (tx) {
+		tx.executeSql('UPDATE stations SET enabled=? WHERE id=?', [enabled, num_id], onStationEditorConfirm);
 	});
 }
 
