@@ -88,6 +88,5 @@
 
     <include layout="@layout/hud_guide"/>
 
-    <include layout="@layout/loading_screen" />
     
 </RelativeLayout>

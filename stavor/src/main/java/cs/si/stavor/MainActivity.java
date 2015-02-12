@@ -148,15 +148,15 @@ public class MainActivity extends ActionBarActivity implements
     private ProgressBar browserProgressBar = null;
     private FrameLayout browserProgressLayout = null;
     public void setBrowserProgressBar(ProgressBar bar, FrameLayout fr){
-    	browserProgressLayout = fr;
-    	browserProgressBar = bar;
+    	/*browserProgressLayout = fr;
+    	browserProgressBar = bar;*/
     }
     public void resetBrowserProgressBar(){
-    	browserProgressLayout = null;
-    	browserProgressBar = null;
+    	/*browserProgressLayout = null;
+    	browserProgressBar = null;*/
     }
     public void setBrowserProgressValue(int progr){
-    	if(browserProgressLayout!=null && browserProgressBar!=null){
+    	/*if(browserProgressLayout!=null && browserProgressBar!=null){
 	    	browserProgressBar.setProgress(progr);
 	    	if(progr<10000){
 	    		browserProgressLayout.setVisibility(View.VISIBLE);
@@ -174,7 +174,7 @@ public class MainActivity extends ActionBarActivity implements
                 browserProgressLayout.startAnimation(fadeOut);
 	    		
 	    	}
-    	}
+    	}*/
     }
     
     
