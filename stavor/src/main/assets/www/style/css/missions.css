@@ -83,6 +83,7 @@
 	width: calc(25% - 3px);
 	height: 100%;
 	text-align: center;
+	float: left;
 }
 
 .MissionsMenuButton{

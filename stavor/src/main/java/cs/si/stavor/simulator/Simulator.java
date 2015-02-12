@@ -110,24 +110,7 @@ public class Simulator {
 	public int getSelectedMissionid(){
 		return mission_id;
 	}
-	
-	/**
-	 * Set connect button View
-	 * @param bt
-	 */
-	public void setButtonConnect(Button bt){
-		buttonConnect=bt;
-		updateConnectButtonText();
-	}
-	
-	/**
-	 * Set local/remote switch View
-	 * @param st
-	 */
-	public void setSwitchView(Switch st){
-		switchSelector=st;
-		enableCorrectSimulatorViews();
-	}
+
 
 	private ProgressDialog progress;
 	/**
@@ -445,64 +428,10 @@ public class Simulator {
 	 */
 	public void setSimulatorStatus(SimulatorStatus new_status) {
 		simulatorStatus = new_status;
-		updateConnectButtonText();
-		enableCorrectSimulatorViews();
 		setCorrectSimulatorControls();
-		setProgress(100 * 100);
+		//setProgress(100 * 100);
 	}
-	
-	/**
-	 * Sets the correct text in simulator button according to its status (Connected/Disconnected)
-	 */
-	public void updateConnectButtonText(){
-		if(buttonConnect!=null){
-			activity.runOnUiThread( new Runnable() {
-				public void run() {
-					buttonConnect.setEnabled(true);
-					boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
-					if(remote){
-						if(simulatorStatus.equals(SimulatorStatus.Connected))
-				    		buttonConnect.setText(context.getString(R.string.sim_disconnect));
-				    	else
-				    		buttonConnect.setText(context.getString(R.string.sim_connect));
-					}else{
-						if(simulatorStatus.equals(SimulatorStatus.Connected))
-				    		buttonConnect.setText(context.getString(R.string.sim_stop));
-				    	else
-				    		buttonConnect.setText(context.getString(R.string.sim_start));
-					}
-		        }
-			});
-		}
-	}
-	
-	/**
-	 * Enable or disable the simulator mode switch and controls according to its status (Connected/Disconnected)
-	 */
-	private void enableCorrectSimulatorViews(){
-			activity.runOnUiThread( new Runnable() {
-				public void run() {
-					if(switchSelector!=null){
-						if(simulatorStatus.equals(SimulatorStatus.Connected))
-				    		switchSelector.setEnabled(false);
-				    	else
-				    		switchSelector.setEnabled(true);
-					}
-		        }
-			});
-	}
-	/*
-	private static void enableView(ViewGroup layout, boolean enabled) {
-	    layout.setEnabled(false);
-	    for (int i = 0; i < layout.getChildCount(); i++) {
-	        View child = layout.getChildAt(i);
-	        if (child instanceof ViewGroup && !(child instanceof ListView) ) {
-	            enableView((ViewGroup) child, enabled);
-	        } else {
-	            child.setEnabled(enabled);
-	        }
-	    }
-	}*/
+
 
 	private String message = "";
 	public void showMessage(String string) {
@@ -514,99 +443,14 @@ public class Simulator {
 	        }
 		});
 	}
-	
-	ImageButton but_play;
-	ImageButton but_stop;
-	public void setControlButtons(ImageButton b_play, ImageButton b_stop) {
-		but_play=b_play;
-		but_stop=b_stop;
-		
-		//Listeners
-		but_play.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-            	if(simulationStatus.equals(SimulationStatus.Play)){
-            		pause();
-            	}else{
-            		play();
-            	}
-            }
-        });
-		but_stop.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-            	stop();
-            }
-        });
 
-	}
-	
+
 	/**
 	 * Change the play/pause icon according to simulation status
 	 * and enable or disable the controls depending on simulator status
 	 */
 	public void setCorrectSimulatorControls() {
-		if(but_play!=null && but_stop!=null){
-			activity.runOnUiThread( new Runnable() {
-				public void run() {
-					boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
-					if(remote){
-						but_play.setVisibility(View.GONE);
-						but_stop.setVisibility(View.GONE);
-					}else{
-						but_play.setVisibility(View.VISIBLE);
-						but_stop.setVisibility(View.VISIBLE);
-						if(getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
-							//but_play.setEnabled(false);
-							//but_stop.setEnabled(false);
-							but_play.setAlpha(0.4f);
-							but_stop.setAlpha(0.4f);
-							//Listeners
-							but_play.setOnClickListener(new View.OnClickListener() {
-					            public void onClick(View v) {
-					                // Perform action on click
-					            	Toast.makeText(activity.getApplicationContext(), activity.getString(R.string.sim_local_start_simulator_first), Toast.LENGTH_LONG).show();
-					            }
-					        });
-							but_stop.setOnClickListener(new View.OnClickListener() {
-					            public void onClick(View v) {
-					                // Perform action on click
-					            	Toast.makeText(activity.getApplicationContext(), activity.getString(R.string.sim_local_start_simulator_first), Toast.LENGTH_LONG).show();
-					            }
-					        });
-						}else{
-							//but_play.setEnabled(true);
-							//but_stop.setEnabled(true);
-							but_play.setAlpha(1.0f);
-							but_stop.setAlpha(1.0f);
-							if(getSimulationStatus().equals(SimulationStatus.Play)){
-								//set pause drawable
-								but_play.setImageDrawable(context.getResources().getDrawable(R.drawable.pause));
-							}else{
-								but_play.setImageDrawable(context.getResources().getDrawable(R.drawable.play));
-							}
-							//Listeners
-							but_play.setOnClickListener(new View.OnClickListener() {
-					            public void onClick(View v) {
-					                // Perform action on click
-					            	if(simulationStatus.equals(SimulationStatus.Play)){
-					            		pause();
-					            	}else{
-					            		play();
-					            	}
-					            }
-					        });
-							but_stop.setOnClickListener(new View.OnClickListener() {
-					            public void onClick(View v) {
-					                // Perform action on click
-					            	stop();
-					            }
-					        });
-						}
-					}
-		        }
-			});
-		}
+		//TODO XGGDEBUG: interface
 	}
 	
 }

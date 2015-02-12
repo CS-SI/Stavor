@@ -1,3 +1,32 @@
+// RENDERER
+var orb_renderer, orb_container;
+if ( Detector.webgl ){
+	orb_renderer = new THREE.WebGLRenderer( { antialias:true } );
+	//orb_renderer.autoClear = true;
+	//orb_renderer.autoClearColor = true;
+	//orb_renderer.setClearColor(0xff0000, 1);
+	/*if(global.performance_level<=2)
+		canvasMode(global.performance_level);*/
+}else{
+	orb_renderer = new THREE.CanvasRenderer();
+	alert('WebGL not supported in this device');
+	//canvasMode(1);
+}
+orb_renderer.setSize(window.innerWidth, window.innerHeight);
+orb_container = document.getElementById( 'orbit' );
+orb_container.innerHTML = "";
+orb_container.appendChild( orb_renderer.domElement );
+orb_renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
+	event.preventDefault();
+	// animationID would have been set by your call to requestAnimationFrame
+	cancelAnimationFrame(requestId); 
+}, false);
+
+orb_renderer.context.canvas.addEventListener("webglcontextrestored", function(event) {
+   // Do something 
+	alert("WebGL Context Lost");
+}, false);
+
 var Orbit = function()
 {	
 	// Global pointers
@@ -16,7 +45,7 @@ var Orbit = function()
 	//		GLOBAL VARIABLES
 	//***********************************************************************************************************************
 	//setLoadingProgress(5);
-	var container, scene, camera, renderer, controls, stats, light, delta;
+	var scene, camera, controls, stats, light, delta;
 	var clock = new THREE.Clock();
 	var onRenderFcts = [];
 	var fps_update_counter = 0;
@@ -68,7 +97,7 @@ var Orbit = function()
 	//		render the scene						//
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
-		renderer.render( scene, camera );		
+		orb_renderer.render( scene, camera );		
 	})
 
 	//////////////////////////////////////////////////////////////////////////////////
@@ -115,7 +144,7 @@ var Orbit = function()
 
 
 	function render() {
-		renderer.render( scene, camera );
+		orb_renderer.render( scene, camera );
 	}
 	function includeOrbit() {
 		createOrbit();
@@ -392,44 +421,17 @@ var Orbit = function()
 		scene.add(camera);
 		camera.position = global_cameras.orbit.position;
 		camera.lookAt(scene.position);	
-		// RENDERER
-		if ( Detector.webgl ){
-			renderer = new THREE.WebGLRenderer( { antialias:true } );
-			//renderer.autoClear = true;
-			//renderer.autoClearColor = true;
-			//renderer.setClearColor(0xff0000, 1);
-			/*if(global.performance_level<=2)
-				canvasMode(global.performance_level);*/
-		}else{
-			renderer = new THREE.CanvasRenderer();
-			alert('WebGL not supported in this device');
-			canvasMode(1);
-		}
-		renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-		container = document.getElementById( 'orbit' );
-		container.innerHTML = "";
-		container.appendChild( renderer.domElement );
-		renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
-			event.preventDefault();
-			// animationID would have been set by your call to requestAnimationFrame
-			cancelAnimationFrame(requestId); 
-		}, false);
-
-		renderer.context.canvas.addEventListener("webglcontextrestored", function(event) {
-		   // Do something 
-			alert("WebGL Context Lost");
-		}, false);
 		
 		// EVENTS
-		//THREEx.WindowResize(renderer, camera);
+		//THREEx.WindowResize(orb_renderer, camera);
 		//THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 		
 		window.addEventListener( 'resize', onWindowResize, false );
-		//container.addEventListener("transitionend", onWindowResize, false);
+		//orb_container.addEventListener("transitionend", onWindowResize, false);
 
 		// CONTROLS
-		//controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls = new THREE.TrackballControls( camera, renderer.domElement );
+		//controls = new THREE.OrbitControls( camera, orb_renderer.domElement );
+		controls = new THREE.TrackballControls( camera, orb_renderer.domElement );
 		controls.rotateSpeed = 1.0;
 		controls.zoomSpeed = 1.2;
 		controls.panSpeed = 0.8;
@@ -449,7 +451,7 @@ var Orbit = function()
 		stats.domElement.style.zIndex = 100;
 		if(global.show_fps){
 			stats.domElement.style.webkitTransform = 0;
-			container.appendChild( stats.domElement );
+			orb_container.appendChild( stats.domElement );
 		}
 		// LIGHT
 		//light = new THREE.PointLight(0xE0E0E0);
@@ -477,16 +479,16 @@ var Orbit = function()
 		/*camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 
-		renderer.setSize( window.innerWidth, window.innerHeight );
+		orb_renderer.setSize( window.innerWidth, window.innerHeight );
 
 		controls.handleResize();
 
 		render();
 		*/
-		camera.aspect = container.clientWidth / container.clientHeight;
+		camera.aspect = orb_container.clientWidth / orb_container.clientHeight;
 		camera.updateProjectionMatrix();
 
-		renderer.setSize( container.clientWidth, container.clientHeight );
+		orb_renderer.setSize( orb_container.clientWidth, orb_container.clientHeight );
 
 		controls.handleResize();
 

@@ -159,12 +159,6 @@ ol li{
 	#SimTime{
 		font-size: 0.8em;
 	}
-	.MissionsMenuItem{
-		display: inline-block;
-		width: calc(25% - 6px);
-		height: 100%;
-		text-align: center;
-	}
 	#Splash{
 		background-image:  url(../icons/stavor_port.jpg);
 	}

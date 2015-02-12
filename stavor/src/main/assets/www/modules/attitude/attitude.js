@@ -1,3 +1,36 @@
+// RENDERER
+var att_renderer, att_container;
+if ( Detector.webgl ){
+	att_renderer = new THREE.WebGLRenderer( { antialias:true } );
+	//att_renderer.autoClear = true;
+	//att_renderer.autoClearColor = true;
+	//att_renderer.setClearColor(0xff0000, 1);
+	/*if(config.performance_level<=2)
+		canvasMode(config.performance_level);*/
+}else{
+	att_renderer = new THREE.CanvasRenderer();
+	alert('WebGL not supported in this device');
+	//canvasMode(1);
+}
+//att_renderer.setClearColor(0xff0000, 1);
+att_renderer.setSize(window.innerWidth, window.innerHeight);
+att_container = document.getElementById( 'attitude' );
+att_container.innerHTML = "";
+att_container.appendChild( att_renderer.domElement );
+att_renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
+	event.preventDefault();
+	// animationID would have been set by your call to requestAnimationFrame
+	cancelAnimationFrame(requestId); 
+}, false);
+
+att_renderer.context.canvas.addEventListener("webglcontextrestored", function(event) {
+   // Do something 
+	alert("WebGL Context Lost");
+}, false);
+
+
+
+
 var Attitude = function () 
 {
 	// Global pointers
@@ -13,7 +46,7 @@ var Attitude = function ()
 	//		GLOBAL VARIABLES
 	//***********************************************************************************************************************
 	//setLoadingProgress(5);
-	var container, scene, camera, renderer, controls, stats, light, delta;
+	var scene, camera, controls, stats, light, delta;
 	var sun, sunGlow, sunLight, lineSun, spriteSun, contextSun;
 	var earth, lineEarth, spriteEarth, contextEarth;
 	var plane_orb, incl_arc, spriteInclination, contextInclination;
@@ -129,7 +162,7 @@ var Attitude = function ()
 	}
 	function render() 
 	{
-		renderer.render( scene, camera );
+		att_renderer.render( scene, camera );
 	}
 	function update()
 	{	
@@ -1056,45 +1089,18 @@ var Attitude = function ()
 		scene.add(camera);
 		camera.position = global_cameras.attitude.position;
 		camera.lookAt(scene.position);	
-		// RENDERER
-		if ( Detector.webgl ){
-			renderer = new THREE.WebGLRenderer( { antialias:true } );
-			//renderer.autoClear = true;
-			//renderer.autoClearColor = true;
-			//renderer.setClearColor(0xff0000, 1);
-			/*if(config.performance_level<=2)
-				canvasMode(config.performance_level);*/
-		}else{
-			renderer = new THREE.CanvasRenderer();
-			alert('WebGL not supported in this device');
-			canvasMode(1);
-		}
-		//renderer.setClearColor(0xff0000, 1);
-		renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-		container = document.getElementById( 'attitude' );
-		container.innerHTML = "";
-		container.appendChild( renderer.domElement );
-		renderer.context.canvas.addEventListener("webglcontextlost", function(event) {
-			event.preventDefault();
-			// animationID would have been set by your call to requestAnimationFrame
-			cancelAnimationFrame(requestId); 
-		}, false);
-
-		renderer.context.canvas.addEventListener("webglcontextrestored", function(event) {
-		   // Do something 
-			alert("WebGL Context Lost");
-		}, false);
+		
 		
 		// EVENTS
-		//THREEx.WindowResize(renderer, camera);
+		//THREEx.WindowResize(att_renderer, camera);
 		//THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 		
 		window.addEventListener( 'resize', onWindowResize, false );
-		//container.addEventListener("transitionend", onWindowResize, false);
+		//att_container.addEventListener("transitionend", onWindowResize, false);
 
 		// CONTROLS
-		//controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls = new THREE.TrackballControls( camera, renderer.domElement );
+		//controls = new THREE.OrbitControls( camera, att_renderer.domElement );
+		controls = new THREE.TrackballControls( camera, att_renderer.domElement );
 		controls.rotateSpeed = 1.0;
 		controls.zoomSpeed = 1.2;
 		controls.panSpeed = 0.8;
@@ -1114,7 +1120,7 @@ var Attitude = function ()
 		stats.domElement.style.zIndex = 100;
 		if(global.show_fps){
 			stats.domElement.style.webkitTransform = 0;
-			container.appendChild( stats.domElement );
+			att_container.appendChild( stats.domElement );
 		}
 		// LIGHT
 		light = new THREE.PointLight(0xE0E0E0);
@@ -1601,16 +1607,16 @@ var Attitude = function ()
 		/*camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 
-		renderer.setSize( window.innerWidth, window.innerHeight );
+		att_renderer.setSize( window.innerWidth, window.innerHeight );
 
 		controls.handleResize();
 
 		render();
 		*/
-		camera.aspect = container.clientWidth / container.clientHeight;
+		camera.aspect = att_container.clientWidth / att_container.clientHeight;
 		camera.updateProjectionMatrix();
 
-		renderer.setSize( container.clientWidth, container.clientHeight );
+		att_renderer.setSize( att_container.clientWidth, att_container.clientHeight );
 
 		controls.handleResize();
 

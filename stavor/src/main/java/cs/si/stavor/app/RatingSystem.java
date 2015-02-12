@@ -68,7 +68,7 @@ public class RatingSystem {
 		        ll.setOrientation(LinearLayout.VERTICAL);
 		        //ll.setPadding(20, 0, 20, 0);//XGG
 		        //ll.setBackgroundColor(activity.getResources().getColor(R.color.red));
-		        ll.setBackgroundResource(R.drawable.stars_dialog);
+		        //ll.setBackgroundResource(R.drawable.stars_dialog);
 		        
 		        TextView tv = new TextView(activity);
 		        tv.setText(activity.getString(R.string.rate_dialog_rate_message));

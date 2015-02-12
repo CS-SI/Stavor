@@ -19,7 +19,7 @@
     </style>
     
     <style name="splashScreenTheme" parent="@style/AppTheme">
-    	<item name="android:windowBackground">@drawable/loading</item>
+    	<!--<item name="android:windowBackground">@drawable/loading</item>-->
 	</style>
 	<style name="nonSplashScreenTheme" parent="@style/AppTheme">
     	<item name="android:windowBackground">@color/black</item>
