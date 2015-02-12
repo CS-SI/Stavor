@@ -528,13 +528,13 @@ function addPathPoint(point){
 function changeView(view_mode){
 	switch(view_mode){
 		case "Free"://free
-			follow_sc = false;
+			global_cameras.map.view_locked = false;
 			break;
 		case "Locked"://locked
-			follow_sc = true;
+			global_cameras.map.view_locked = true;
 			break;
 		default://xyz
-			follow_sc = false;
+			global_cameras.map.view_locked = false;
 			break;
 	}
 }
@@ -615,8 +615,8 @@ function changeView(view_mode){
 			wrapDateLine: false
 				})
 			],
-			center: new OpenLayers.LonLat(0, 0),
-			zoom: 1
+			center: global_cameras.map.position,
+			zoom: global_cameras.map.zoom
 		});
 
 		/*map.events.register("moveend", map, function(){
@@ -645,13 +645,13 @@ function changeView(view_mode){
 	var sun_lon_tmp = 0;
 
 	init();
-	var lonLat = new OpenLayers.LonLat( 0.0 ,0.0 )
+	/*var lonLat = new OpenLayers.LonLat( 0.0 ,0.0 )
 	  .transform(
 	    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
 	    map.getProjectionObject() // to Spherical Mercator Projection
 	  );
  
-   	var zoom=1;
+   	var zoom=1;*/
 
 	//setLoadingProgress(60);
 
@@ -801,7 +801,7 @@ function changeView(view_mode){
 		drawFov();
 
 	//Follow Spacecraft
-		if(follow_sc){
+		if(global_cameras.map.view_locked){
 		    	var lonLat = new OpenLayers.LonLat( sc_longitude ,sc_latitude )
 			  .transform(
 			    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
@@ -825,6 +825,13 @@ function changeView(view_mode){
 	
 	Map.prototype.resizeCanvas = function(){
 		onWindowResize();
+	}
+	
+	Map.prototype.stopAnimation = function(){
+		//global_cameras.map.view_locked = global_cameras.map.view_locked;
+		global_cameras.map.position = map.getCenter();
+		global_cameras.map.zoom = map.getZoom();
+		map.destroy();
 	}
 	
 }

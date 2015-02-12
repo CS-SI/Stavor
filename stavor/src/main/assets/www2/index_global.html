@@ -391,8 +391,12 @@
 		</div>
 		<div id="Maptabscontent" class="tabscontent">
 		  <div class="tabpage" id="Maptabpage_1">
-			<h4>Payload</h4>
-			
+			<h4>Sensor/Antenna</h4>
+			<p>Aperture angle [Deg]:<input id="opt-map-ApertureAngle" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
+			<h5>Direction</h5>
+			<p>X:<input id="opt-map-DirectionX" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Y:<input id="opt-map-DirectionY" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
+			<p>Z:<input id="opt-map-DirectionZ" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
 		  </div>
 		  <div class="tabpage" id="Maptabpage_2">
 			<h4>Ground stations</h4>
@@ -411,8 +415,11 @@
 		  </div>
 		  <div class="tabpage" id="Maptabpage_3">
 			<h4>Satellite</h4>
+			<p>Show FOV:<input id="opt-map-ShowFov" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
+			<p>Show ground track:<input id="opt-map-ShowTrack" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
 			<h4>Sun</h4>
-			
+			<p>Show icon:<input id="opt-map-ShowSunIcon" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
+			<p>Show terminator:<input id="opt-map-ShowSunTerminator" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
 		  </div>
 		</div>
 	</div>

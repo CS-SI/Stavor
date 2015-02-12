@@ -137,6 +137,7 @@ function switchMapMenu(){
 		var divi = document.getElementById("DivMap"); 
 		var w = Math.min(400,divi.clientWidth);
 		if(!global_menus.map.isOpen){
+			updateMapOptions();
 			menu.style.right = "-"+w+"px"; 
 			menu.style.display = "block";
 			$('#MaptabContainer').animate({
@@ -155,6 +156,52 @@ function mapEndClosing(){
 	menu.style.display = "none";
 	endMapAnimation();
 }
+
+function updateMapOption(id,val){
+	switch(id) {
+		case "opt-map-ShowFov":
+			global_simulation.config.map.show_fov = val;
+			break;
+		case "opt-map-ShowTrack":
+			global_simulation.config.map.show_track = val;
+			break;
+		case "opt-map-ShowSunIcon":
+			global_simulation.config.map.show_sun_icon = val;
+			break;
+		case "opt-map-ShowSunTerminator":
+			global_simulation.config.map.show_sun_terminator = val;
+			break;
+		case "opt-map-ApertureAngle":
+			global_simulation.config.map.fov.aperture_angle = val;
+			break;
+		case "opt-map-DirectionX":
+			global_simulation.config.map.fov.direction.x = val;
+			break;
+		case "opt-map-DirectionY":
+			global_simulation.config.map.fov.direction.y = val;
+			break;
+		case "opt-map-DirectionZ":
+			global_simulation.config.map.fov.direction.z = val;
+			break;
+		default:
+	}
+	global_map.stopAnimation();
+	global_map = new Map();
+	saveStoredVariables();
+}
+
+function updateMapOptions(){
+	document.getElementById("opt-map-ShowFov").checked = global_simulation.config.map.show_fov;
+	document.getElementById("opt-map-ShowTrack").checked = global_simulation.config.map.show_track;
+	document.getElementById("opt-map-ShowSunIcon").checked = global_simulation.config.map.show_sun_icon;
+	document.getElementById("opt-map-ShowSunTerminator").checked = global_simulation.config.map.show_sun_terminator;
+	
+	document.getElementById("opt-map-ApertureAngle").value = global_simulation.config.map.fov.aperture_angle;
+	document.getElementById("opt-map-DirectionX").value = global_simulation.config.map.fov.direction.x;
+	document.getElementById("opt-map-DirectionY").value = global_simulation.config.map.fov.direction.y;
+	document.getElementById("opt-map-DirectionZ").value = global_simulation.config.map.fov.direction.z;
+}
+
 function switchOrbitMenu(){
 	if(global_menus.orbit.inAnimation == false){
 		global_menus.orbit.inAnimation = true;

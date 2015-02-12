@@ -53,6 +53,9 @@ var global_cameras = {
 		view_locked: false
 	},
 	map:{
+		zoom: 1,
+		position: new OpenLayers.LonLat( 0, 0 ),
+		view_locked: false
 	}
 }
 
@@ -136,15 +139,20 @@ var global_simulation = {
 			orbit_color: "#00ff00"
 		},
 		map:{
-			zoom: 0,
-			lonLat: new OpenLayers.LonLat( 0, 0 ),
 			stations: [],
 			show_satellite: true,					
 			show_fov: true,
+			fov:{
+				aperture_angle: 5,//Deg
+				direction:{
+					x: 0,
+					y: 0,
+					z: 0
+				}
+			},
 			show_track: true,
 			show_sun_icon: true,
-			show_sun_terminator: true,
-			follow_sc: false
+			show_sun_terminator: true
 		}
 	},
 	results:{
