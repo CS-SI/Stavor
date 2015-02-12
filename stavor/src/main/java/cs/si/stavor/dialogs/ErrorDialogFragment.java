@@ -1,11 +1,12 @@
 package cs.si.stavor.dialogs;
 
-import cs.si.stavor.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import cs.si.stavor.R;
 
 /**
  * Dialog to sho errors
@@ -16,7 +17,7 @@ public class ErrorDialogFragment extends DialogFragment {
 	private static final String ARG_MESSAGE = "error_message";
 	private static final String ARG_IGNORE = "can_be_ignored";
 	
-	public static ErrorDialogFragment newInstance(String message, boolean canIgnore) {	
+	public static ErrorDialogFragment newInstance(String message, boolean canIgnore) {
 		ErrorDialogFragment fragment = new ErrorDialogFragment();
 		Bundle args = new Bundle();
 		args.putString(ARG_MESSAGE, message);

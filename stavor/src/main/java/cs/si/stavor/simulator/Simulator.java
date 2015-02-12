@@ -128,24 +128,6 @@ public class Simulator {
 		switchSelector=st;
 		enableCorrectSimulatorViews();
 	}
-	
-	/**
-	 * Sets the Hud and browser view
-	 * @param v
-	 * @param x
-	 */
-	public void setHudView(Browsers type, View v, XWalkView x){
-		simulation.setHud(type, v,x);
-	}
-	
-	public void clearHud(){
-		simulation.clearHud();
-	}
-	
-	public void setBrowserLoaded(boolean is){
-		simulation.setBrowserloaded(is);
-	}
-	
 
 	private ProgressDialog progress;
 	/**
@@ -531,9 +513,6 @@ public class Simulator {
 		                Toast.LENGTH_LONG).show();
 	        }
 		});
-	}
-	public void goToHud() {
-		((MainActivity)activity).showSection(1);
 	}
 	
 	ImageButton but_play;

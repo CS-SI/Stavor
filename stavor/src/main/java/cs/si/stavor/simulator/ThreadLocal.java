@@ -45,7 +45,6 @@ public class ThreadLocal extends Thread{
     			simulator.setProgress(80 * 100);
 				setConnected();
 				clearBrowserPath();
-				simulator.goToHud();
         	    simulator.showMessage(simulator.getContext().getString(R.string.sim_local_simulator_connected));
         	} catch (OrekitException e) {
         		e.printStackTrace();
@@ -122,13 +121,7 @@ public class ThreadLocal extends Thread{
             public void run() {
         		//Update model by push
             	simulator.getSimulationResults().pushSimulationModel();
-            	
-            	//Update GUI HUD
-            	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
-            		
-            		time_tmp_gui = System.nanoTime();
-            		simulator.getSimulationResults().updateHUD();
-            	}
+
             }
         });
 	}

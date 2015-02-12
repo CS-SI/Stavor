@@ -90,7 +90,6 @@ public class ThreadRemote extends Thread{
 					
 	    			simulator.setProgress(80 * 100);
 					setConnected();
-					simulator.goToHud();
 	        	    simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_simulator_connected));
     			}else{
     	            /*SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
@@ -171,7 +170,6 @@ public class ThreadRemote extends Thread{
     	    		init_states = getSimObject();
 					if(init_states.size()!=0){
 						setConnected();
-						simulator.goToHud();
 		        	    simulator.showMessage(simulator.getContext().getString(R.string.sim_remote_simulator_connected));
 					}else{
 						setDisconnected();
@@ -249,10 +247,6 @@ public class ThreadRemote extends Thread{
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-            	if(time_tmp_gui==0 || (System.nanoTime()-time_tmp_gui)>Parameters.Simulator.min_hud_panel_refreshing_interval_ns){
-            		time_tmp_gui = System.nanoTime();
-            		simulator.getSimulationResults().updateHUD();
-            	}
             	if(time_tmp_data==0 || (System.nanoTime()-time_tmp_data)>Parameters.Simulator.min_hud_model_refreshing_interval_ns){
             		time_tmp_data = System.nanoTime();
                 	simulator.getSimulationResults().pushSimulationModel();

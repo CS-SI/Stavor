@@ -12,19 +12,7 @@ public class Parameters {
 	 *
 	 */
 	public static class App {
-		//public static final String google_analytics_property_id = "UA-58638794-1";
-		
-		public static final int splash_min_time_ms = 3000;//[ms] 3.0s min
-		public static final boolean show_tests_section = false;
-		public static final boolean pro_version = false;
-		
-		//FIRST RUN PARAMETERS
-		public static final boolean show_guide = true;
-		//Deprecated: it was the old crappy tutorial based on dialog boxes
-		public static final boolean show_tutorial = false;
-		public static final boolean show_orekit_data_installation_message = false;
-		//If we want to show the sections menu open during the first run of the application and always until user makes use of it then set to false.
-		public static final boolean first_start_app_closed_section_menu = true; 
+        public static final boolean debug = true;
 	}
 	/**
 	 * About screen information
@@ -45,14 +33,6 @@ public class Parameters {
 		public static final String version_http = "1.2.1";
 	}
 	/**
-	 * Visualization configuration
-	 * @author Xavier Gibert
-	 *
-	 */
-	public static class Hud {
-		public static final boolean start_panel_open = true;
-	}
-	/**
 	 * Simulator configuration
 	 * @author Xavier Gibert
 	 *
@@ -61,7 +41,6 @@ public class Parameters {
 		public static final long min_hud_panel_refreshing_interval_ns = 500000000;//[ns] 2Hz max
 		public static final long min_hud_model_refreshing_interval_ns = 40000000;//[ns] 25Hz max
 		public static final long model_refreshing_interval_safe_guard_ns = 5000000;//[ns] 5ms
-		public static final int amount_mission_examples = 6;
 		public static class Remote{
 			public static final int remote_connection_timeout_ms = 5000;//[ms]
 			public static final String default_host = "192.168.1.2";
@@ -76,22 +55,15 @@ public class Parameters {
 	 *
 	 */
 	public static class Web {
-		public static final String STARTING_PAGE = "file:///android_asset/www2/index.html";
-		public static final String STARTING_PAGE_ORBIT = "file:///android_asset/www/huds/index_orbit.html";
-		public static final String STARTING_PAGE_MAP = "file:///android_asset/www/map/index.html";
-		//public static final String TEST_PAGE_1 = "file:///android_asset/www/index.html";
-		//public static final String TEST_PAGE_1 = "http://127.0.0.1:8081/";
-		//public static final String TEST_PAGE_1 = "http://webglreport.com";
-		public static final String TEST_PAGE_1 = "http://get.webgl.org/";
-		public static final String TEST_PAGE_2 = "http://doesmybrowsersupportwebgl.com/";
-		public static final String TEST_PAGE_3 = "http://www.khronos.org/registry/webgl/sdk/tests/webgl-conformance-tests.html";
-		public static final String LOCALHOST = "http://localhost:8080/";
+		public static final String STARTING_PAGE = "file:///android_asset/www/index.html";
 	}
-	public static class Map {
-		//public static final double marker_pos_threshold = 0.2;//In deg
-		public static final int station_visibility_points = 30;//Points in the polygon
-		public static final int satellite_fov_points = 30;//30
-		public static final double solar_terminator_points = 100;
-		public static final double solar_terminator_threshold = 60*15;//In seconds
-	}
+
+
+    public static class Map {
+        //public static final double marker_pos_threshold = 0.2;//In deg
+        public static final int station_visibility_points = 30;//Points in the polygon
+        public static final int satellite_fov_points = 30;//30
+        public static final double solar_terminator_points = 100;
+        public static final double solar_terminator_threshold = 60*15;//In seconds
+    }
 }

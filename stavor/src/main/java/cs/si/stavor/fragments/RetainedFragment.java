@@ -1,10 +1,9 @@
 package cs.si.stavor.fragments;
 
-import cs.si.stavor.database.ReaderDbHelper;
-import cs.si.stavor.simulator.Simulator;
 import android.app.Fragment;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+
+import cs.si.stavor.simulator.Simulator;
 
 /**
  * Fragment to store information when restarting app (e.g. rotating device)
@@ -13,9 +12,6 @@ import android.os.Bundle;
  */
 public class RetainedFragment extends Fragment {
     private Simulator sim;
-    private ReaderDbHelper db_help;
-    private SQLiteDatabase db;
-    private boolean hud_panel_open;
 
     // this method is only called once for this fragment
     @Override
@@ -25,28 +21,13 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setData(Simulator data, ReaderDbHelper missionReaderDbHelper, SQLiteDatabase sqLiteDatabase, boolean hud_panel_is_open) {
+    public void setData(Simulator data) {
     	this.sim = data;
-        this.db_help = missionReaderDbHelper;
-        this.db = sqLiteDatabase;
-        this.hud_panel_open = hud_panel_is_open;
     }
 
     public Simulator getSim() {
         return sim;
     }
-
-	public ReaderDbHelper getDbHelp() {
-		return db_help;
-	}
-
-	public SQLiteDatabase getDb() {
-		return db;
-	}
-	
-	public boolean getHudPanelOpen(){
-		return hud_panel_open;
-	}
 
 
 }
