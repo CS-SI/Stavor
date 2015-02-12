@@ -592,16 +592,16 @@ function changeView(view_mode){
 			theme: null,
 			numZoomLevels: 18,
 			controls: [
-				new OpenLayers.Control.TouchNavigation({
+				/*new OpenLayers.Control.TouchNavigation({
 					dragPanOptions: {
 						enableKinetic: true
 					}
-				})
-				/*new OpenLayers.Control.Navigation({
+				})*/
+				new OpenLayers.Control.Navigation({
 					dragPanOptions: {
 						enableKinetic: true
 					}
-				}),
+				})/*,
 				new OpenLayers.Control.Attribution(),
 				new OpenLayers.Control.Zoom()*/
 				/*new OpenLayers.Control.Navigation(
