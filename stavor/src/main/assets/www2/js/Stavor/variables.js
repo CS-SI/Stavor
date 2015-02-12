@@ -157,6 +157,7 @@ var global_simulation = {
 	},
 	results:{
 		info_panel:{
+			time: new SimDate(),
 			attitude:{
 				roll: 0,
 				pitch: 0,

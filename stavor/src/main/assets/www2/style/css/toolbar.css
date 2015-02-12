@@ -76,6 +76,11 @@
 	font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
 
+#SimTime{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 input[type=range]{
     -webkit-appearance: none;
 }

@@ -51,24 +51,27 @@
 	<!-- Orekit -->
 	<script type='text/javascript' src="modules/simulator/orekit/orekit-data.js"></script>
 	<!-- Stavor -->
+	<script type='text/javascript' src="modules/simulator/components/KeplerianOrbit.js"></script>
+	<script type='text/javascript' src="modules/simulator/components/SimDate.js"></script>
+	<script type='text/javascript' src="modules/simulator/components/Mission.js"></script>
+	<script type='text/javascript' src="modules/simulator/components/Station.js"></script>
+	<script type='text/javascript' src="AndroidInterface.js"></script>
+	<script type='text/javascript' src="modules/simulator/Simulator.js"></script>
+	<script type='text/javascript' src="js/Stavor/database.js"></script>
+	<script type='text/javascript' src="js/Stavor/missions.js"></script>
+	<script type='text/javascript' src="js/Stavor/stations.js"></script>
+	
+	
 	<script type='text/javascript' src="js/Stavor/parameters.js"></script>
 	<script type='text/javascript' src="js/Stavor/constants.js"></script>
 	<script type='text/javascript' src="js/Stavor/enums.js"></script>
 	<script type='text/javascript' src="js/Stavor/variables.js"></script>
 	<script type='text/javascript' src="js/Stavor/menus.js"></script>
 	<script type='text/javascript' src="js/Stavor/gestures.js"></script>
-	
-	<script type='text/javascript' src="modules/simulator/components/KeplerianOrbit.js"></script>
-	<script type='text/javascript' src="modules/simulator/components/SimDate.js"></script>
-	<script type='text/javascript' src="modules/simulator/components/Mission.js"></script>
-	<script type='text/javascript' src="modules/simulator/components/Station.js"></script>
-	<script type='text/javascript' src="js/Stavor/database.js"></script>
-	<script type='text/javascript' src="js/Stavor/missions.js"></script>
-	<script type='text/javascript' src="js/Stavor/stations.js"></script>
 	<!--<script type='text/javascript' src="js/Stavor/stations.js"></script>-->
 	
 	<script type="text/javascript"><!-- GLOBAL FUNCTIONS -->
-		var global_orbit, global_attitude, global_map;
+		var global_orbit, global_attitude, global_map, global_simulator;
 		var start_time;
 		window.onload = function () {
 			start_time = new Date().getTime();
@@ -93,6 +96,8 @@
 			drawMissionsList();
 			initializeStationsDb();//Splash
 			drawStationsList();
+			
+			global_simulator = new Simulator();
 			
 			loadOrekitFilesText();
 		}
@@ -718,16 +723,16 @@
 </div>
 	
 <div id="DivToolbar" >
-	<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator"/>
-	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator"/>
-	<input id="TimeBar" type="range" min="0" max="100" value="0"  title="Simulation time"/><!--disabled="true"-->
-	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation"/>
-	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation"/>&nbsp;
-	<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation"/>
-	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation"/>&nbsp;&nbsp;
+	<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator" onclick="global_simulator.playButtonClicked()"/>
+	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator" onclick="global_simulator.stopButtonClicked()"/>
+	<input id="TimeBar" type="range" min="0" max="100" value="0"  title="Simulation time"  onclick="global_simulator.progressValueChanged(this.value)"/><!--disabled="true"-->
+	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation" onclick="global_simulator.accelerateButtonClicked()"/>
+	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation" onclick="global_simulator.slowButtonClicked()"/>&nbsp;
+	<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation" onclick="global_simulator.reverseButtonClicked()"/>
+	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation" onclick="global_simulator.forwardButtonClicked()"/>&nbsp;&nbsp;
 </div>
 <div id="DivClock" >
-	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/>&nbsp;2014-01-01 20:00:33.1 UTC&nbsp;
+	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/><span id="SimTime">2014-01-01 20:00:33.1 UTC</span>
 </div>
 <div id="LedMap" class="Led LedUnselected" />
 <div id="LedOrbit" class="Led LedUnselected"/>

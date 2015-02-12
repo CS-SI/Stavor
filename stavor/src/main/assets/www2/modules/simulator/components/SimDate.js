@@ -6,3 +6,7 @@ var SimDate = function(){
 		this.minute = 0;
 		this.seconds = 0.0;
 }
+
+SimDate.prototype.getFormatedString = function (){
+	return "NOT IMPLEMENTED";
+}
