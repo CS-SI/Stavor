@@ -331,8 +331,8 @@ ol li{
     transition: height 0.8s ease, width 0.5s ease;
 }
 .InfoPanelClosed{
-	width: 50px;
-	height: 20px;
+	width: 70px;
+	height: 30px;
 }
 .InfoPanelTop{
 	position: relative;

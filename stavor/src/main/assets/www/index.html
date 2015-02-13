@@ -177,6 +177,11 @@
 		function initVisualizations(){
 			global_current_visualization = enum_visualizations.ATTITUDE;
 			updateLeds();
+			
+			var div_orbit = document.getElementById("DivOrbit");
+			var div_map = document.getElementById("DivMap");
+			div_orbit.className = "VisToRight";
+			div_map.className = "VisToLeft";
 		}
 		function updateLeds(){
 			var led_attitude = document.getElementById("LedAttitude");
@@ -206,46 +211,34 @@
 			
 			var new_vis = enum_visualizations.ATTITUDE;
 			if(global_current_visualization == enum_visualizations.ATTITUDE){
-				div_attitude.style.display = "block";
+				/*div_attitude.style.display = "block";
 				div_orbit.style.display = "none";
-				div_map.style.display = "block";
-				//Slide out Attitude
-				$('#DivAttitude').animate({
-					right: '-100%'
-				},"slow");
-				//Slide in Map
-				div_map.style.right = "100%"; 
-				$('#DivMap').animate({
-					right: '0'
-				},"slow");
+				div_map.style.display = "block";*/
+				
+				div_attitude.className = "PrevVisToRight";
+				div_orbit.className = "PrevVisToLeft";
+				div_map.className = "PrevVisToCenterFromLeft";
+				
 				new_vis = enum_visualizations.MAP;
 			}else if(global_current_visualization == enum_visualizations.ORBIT){
-				div_attitude.style.display = "block";
+				/*div_attitude.style.display = "block";
 				div_orbit.style.display = "block";
-				div_map.style.display = "none";
-				//Slide out Orbit
-				$('#DivOrbit').animate({
-					right: '-100%'
-				},"slow");
-				//Slide in Attitude
-				div_attitude.style.right = "100%"; 
-				$('#DivAttitude').animate({
-					right: '0'
-				},"slow");
+				div_map.style.display = "none";*/
+				
+				div_attitude.className = "PrevVisToCenterFromLeft";
+				div_orbit.className = "PrevVisToRight";
+				div_map.className = "PrevVisToLeft";
+				
 				new_vis = enum_visualizations.ATTITUDE;
 			}else if(global_current_visualization == enum_visualizations.MAP){
-				div_attitude.style.display = "none";
+				/*div_attitude.style.display = "none";
 				div_orbit.style.display = "block";
-				div_map.style.display = "block";
-				//Slide out Map
-				$('#DivMap').animate({
-					right: '-100%'
-				},"slow");
-				//Slide in Orbit
-				div_orbit.style.right = "100%"; 
-				$('#DivOrbit').animate({
-					right: '0'
-				},"slow");
+				div_map.style.display = "block";*/
+				
+				div_attitude.className = "PrevVisToLeft";
+				div_orbit.className = "PrevVisToCenterFromLeft";
+				div_map.className = "PrevVisToRight";
+				
 				new_vis = enum_visualizations.ORBIT;
 			}else{
 				error("ERROR: prevVisualization(): the current visualization enum is not recognized.");
@@ -260,46 +253,43 @@
 			
 			var new_vis = enum_visualizations.ATTITUDE;
 			if(global_current_visualization == enum_visualizations.ATTITUDE){
-				div_attitude.style.display = "block";
-				div_orbit.style.display = "block";
-				div_map.style.display = "none";
-				//Slide out Attitude
-				$('#DivAttitude').animate({
-					right: '100%'
-				},"slow");
-				//Slide in Orbit
-				div_orbit.style.right = "-100%"; 
-				$('#DivOrbit').animate({
-					right: '0'
-				},"slow");
+				/*div_attitude.style.visibility = "visible";
+				div_orbit.style.visibility = "visible";
+				div_map.style.visibility = "hidden";
+				div_attitude.style.zIndex = "1";
+				div_orbit.style.zIndex = "1";
+				div_map.style.zIndex = "-1";*/
+				
+				div_attitude.className = "NextVisToLeft";
+				div_orbit.className = "NextVisToCenterFromRight";
+				div_map.className = "NextVisToRight";
+				
 				new_vis = enum_visualizations.ORBIT;
 			}else if(global_current_visualization == enum_visualizations.ORBIT){
-				div_attitude.style.display = "none";
-				div_orbit.style.display = "block";
-				div_map.style.display = "block";
-				//Slide out Orbit
-				$('#DivOrbit').animate({
-					right: '100%'
-				},"slow");
-				//Slide in Map
-				div_map.style.right = "-100%"; 
-				$('#DivMap').animate({
-					right: '0'
-				},"slow");
+				/*div_attitude.style.visibility = "hidden";
+				div_orbit.style.visibility = "visible";
+				div_map.style.visibility = "visible";
+				div_attitude.style.zIndex = "-1";
+				div_orbit.style.zIndex = "1";
+				div_map.style.zIndex = "1";*/
+				
+				div_attitude.className = "NextVisToRight";
+				div_orbit.className = "NextVisToLeft";
+				div_map.className = "NextVisToCenterFromRight";
+				
 				new_vis = enum_visualizations.MAP;
 			}else if(global_current_visualization == enum_visualizations.MAP){
-				div_attitude.style.display = "block";
-				div_orbit.style.display = "none";
-				div_map.style.display = "block";
-				//Slide out Map
-				$('#DivMap').animate({
-					right: '100%'
-				},"slow");
-				//Slide in Attitude
-				div_attitude.style.right = "-100%"; 
-				$('#DivAttitude').animate({
-					right: '0'
-				},"slow");
+				/*div_attitude.style.visibility = "visible";
+				div_orbit.style.visibility = "hidden";
+				div_map.style.visibility = "visible";
+				div_attitude.style.zIndex = "1";
+				div_orbit.style.zIndex = "-1";
+				div_map.style.zIndex = "1";*/
+				
+				div_attitude.className = "NextVisToCenterFromRight";
+				div_orbit.className = "NextVisToRight";
+				div_map.className = "NextVisToLeft";
+				
 				new_vis = enum_visualizations.ATTITUDE;
 			}else{
 				error("ERROR: nextVisualization(): the current visualization enum is not recognized.");
@@ -309,13 +299,9 @@
 		}
 		function switchMissionsListStatus(){
 			if(global_missions_list_is_open){
-				$('#DivMissions').animate({
-					left: '-300px'
-				},"slow");
+				document.getElementById("DivMissions").className = "close";
 			}else{
-				$('#DivMissions').animate({
-					left: '0px'
-				},"slow");
+				document.getElementById("DivMissions").className = "open";
 			}
 			global_missions_list_is_open = !global_missions_list_is_open;
 		}
