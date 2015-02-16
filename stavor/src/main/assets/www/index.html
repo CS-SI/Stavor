@@ -107,6 +107,7 @@
 			if(serialized){
 				var localData = JSON.parse(serialized);
 				global_simulation.config = localData;
+				setPerformanceLevel();
 			}
 		}
 		function saveStoredVariables(){
@@ -149,7 +150,7 @@
 				if( delay < 0 ){
 					delay = 0;
 				}			
-				setTimeout(function() { 					
+				setTimeout(function() { 
 					var div_splash = document.getElementById("Splash");
 					div_splash.style.visibility = "hidden";
 					div_splash.style.opacity = "0";
@@ -178,10 +179,15 @@
 			global_current_visualization = enum_visualizations.ATTITUDE;
 			updateLeds();
 			
-			var div_orbit = document.getElementById("DivOrbit");
-			var div_map = document.getElementById("DivMap");
+			//var div_orbit = document.getElementById("DivOrbit");
+			//var div_map = document.getElementById("DivMap");
 			//div_orbit.className = "VisToRight";
 			//div_map.className = "VisToLeft";
+			window.addEventListener( 'resize', function(){
+				global_attitude.resizeCanvas();
+				global_orbit.resizeCanvas();
+				global_map.resizeCanvas();
+			}, false );
 		}
 		function updateLeds(){
 			var led_attitude = document.getElementById("LedAttitude");

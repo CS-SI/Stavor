@@ -817,7 +817,7 @@ function changeView(view_mode){
 	
 	/*var container = document.getElementById( 'map' );
 	container.addEventListener("transitionend", onWindowResize, false);*/
-	window.addEventListener( 'resize', onWindowResize, false );
+	//window.addEventListener( 'resize', onWindowResize, false );
 	
 	function onWindowResize(){//XGGDEBUG: not used yet in window
 		map.updateSize();

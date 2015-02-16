@@ -426,7 +426,7 @@ var Orbit = function()
 		//THREEx.WindowResize(orb_renderer, camera);
 		//THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 		
-		window.addEventListener( 'resize', onWindowResize, false );
+		//window.addEventListener( 'resize', onWindowResize, false );
 		//orb_container.addEventListener("transitionend", onWindowResize, false);
 
 		// CONTROLS

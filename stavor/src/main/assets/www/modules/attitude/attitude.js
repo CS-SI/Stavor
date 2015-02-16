@@ -1100,7 +1100,7 @@ var Attitude = function ()
 		//THREEx.WindowResize(att_renderer, camera);
 		//THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 		
-		window.addEventListener( 'resize', onWindowResize, false );
+		//window.addEventListener( 'resize', onWindowResize, false );
 		//att_container.addEventListener("transitionend", onWindowResize, false);
 
 		// CONTROLS
