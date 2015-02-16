@@ -180,8 +180,8 @@
 			
 			var div_orbit = document.getElementById("DivOrbit");
 			var div_map = document.getElementById("DivMap");
-			div_orbit.className = "VisToRight";
-			div_map.className = "VisToLeft";
+			//div_orbit.className = "VisToRight";
+			//div_map.className = "VisToLeft";
 		}
 		function updateLeds(){
 			var led_attitude = document.getElementById("LedAttitude");
@@ -325,12 +325,12 @@
 		function switchGlobalMenu(){
 			//var div_global_menu = document.getElementById("DivConfig");
 			if(global_menus.global.isOpen){
-				$( "#DivConfigBackground" ).fadeOut( "slow", function() {
+				$( "#DivConfigBackground" ).fadeOut( "fast", function() {
 					// Animation complete.
 				  });
 				//div_global_menu.className = "DivConfigClosed";
 			}else{
-				$( "#DivConfigBackground" ).fadeIn( "slow", function() {
+				$( "#DivConfigBackground" ).fadeIn( "fast", function() {
 					// Animation complete.
 				  });
 				//div_global_menu.className = "DivConfigOpened";
