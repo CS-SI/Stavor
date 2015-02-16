@@ -715,8 +715,12 @@
 </div>
 	
 <div id="DivToolbar" >
-	<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator" onclick="global_simulator.playButtonClicked()"/>
-	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator" onclick="global_simulator.stopButtonClicked()"/>
+	<!--<input id="PlayButton" class="SimControl" type="image" src="style/icons/play.png" title="Play/Pause simulator" onclick="global_simulator.playButtonClicked()"/>
+	<input id="StopButton" class="SimControl" type="image" src="style/icons/stop.png" title="Stop simulator" onclick="global_simulator.stopButtonClicked()"/>-->
+	
+	<div id="PlayButton" class="SimControl"  title="Play/Pause simulator" onclick="global_simulator.playButtonClicked()"></div>
+	<div id="StopButton" class="SimControl"  title="Stop simulator" onclick="global_simulator.stopButtonClicked()"></div>
+	
 	<input id="TimeBar" type="range" min="0" max="100" value="0"  title="Simulation time"  onclick="global_simulator.progressValueChanged(this.value)"/><!--disabled="true"-->
 	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation" onclick="global_simulator.accelerateButtonClicked()"/>
 	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation" onclick="global_simulator.slowButtonClicked()"/>&nbsp;

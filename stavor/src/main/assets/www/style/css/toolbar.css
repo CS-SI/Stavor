@@ -12,45 +12,70 @@
 	min-width: 20%;
 	max-width: 75%;
 	z-index: 1500;
-	background-color:rgba(255, 255, 255, 0.32);
-	box-shadow: 2px -2px 6px #333;
+	background-color:rgba(150, 150, 150, 0.32);
+	box-shadow: 2px -2px 3px #333;
+}
+#PlayButton{
+	background-image:  url(../icons/play.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+#PlayButton:active{
+}
+#StopButton{
+	background-image:  url(../icons/stop.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+#StopButton:active{
 }
 .SimControl{
 	position: relative;
+	float: left;
 	width: 20px;
 	height: 20px;
 	/*margin: 0 0 5px 5px;*/
 	margin-left: 5px;
-	padding: 2px;
+	margin-top: 5px;
+	padding: 0px;
 	vertical-align:middle;
-	background-color: black;
+	background-color: #cccccc;
     border-radius: 5px;
+	box-shadow: 1px -1px 2px #000;
 }
 .SimControlLeft{
 	position: relative;
-	width: 15px;
-	height: 15px;
+	width: 20px;
+	height: 20px;
 	margin: 5px 0 5px 0;
-	padding: 2px;
+	padding: 0px;
 	vertical-align:middle;
-	background-color: white;
+	background-color: #cccccc;
     border-radius: 5px 0 0 5px;
+	box-shadow: 1px -1px 2px #000;
 }
 .SimControlRight{
 	position: relative;
-	width: 15px;
-	height: 15px;
+	width: 20px;
+	height: 20px;
 	margin: 5px 0 5px 0;
-	padding: 2px;
+	padding: 0px;
 	vertical-align:middle;
-	background-color: white;
+	background-color: #cccccc;
     border-radius: 0 5px 5px 0;
+	box-shadow: 1px -1px 2px #000;
 }
 #TimeBar{
 	position: relative;
-	width: calc(100% - 175px);
+	width: calc(100% - 170px);
 	min-width: 50px;
 	vertical-align:middle;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 #DivClock{
 	position: absolute;
@@ -88,7 +113,7 @@ input[type=range]{
 input[type=range]::-webkit-slider-runnable-track {
     width: 300px;
     height: 5px;
-    background: #ddd;
+    background: #888;
     border: none;
     border-radius: 3px;
 }
@@ -99,8 +124,9 @@ input[type=range]::-webkit-slider-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: #000099;
+    background: #DDDDDD;
     margin-top: -6px;
+	box-shadow: 1px -1px 2px #000;
 }
 
 input[type=range]:focus {
@@ -108,5 +134,5 @@ input[type=range]:focus {
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #ccc;
+    background: #888;
 }
