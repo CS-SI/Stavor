@@ -40,18 +40,22 @@ THREEx.Planets.createVenus	= function(){
 	return mesh	
 }
 
+var textureEarthMap = THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthmap1k.jpg');
+var textureEarthBump = THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthbump1k.jpg');
+var textureEarthSpec = THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthspec1k.jpg');
 THREEx.Planets.createEarth	= function(){
 	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)
 	var material	= new THREE.MeshPhongMaterial({
-		map		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthmap1k.jpg'),
-		bumpMap		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthbump1k.jpg'),
+		map			: textureEarthMap,
+		bumpMap		: textureEarthBump,
 		bumpScale	: 0.05,
-		specularMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthspec1k.jpg'),
+		specularMap	: textureEarthSpec,
 		specular	: new THREE.Color('grey'),
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh	
 }
+
 
 THREEx.Planets.createEarthCloud	= function(){
 	// create destination canvas
@@ -110,7 +114,10 @@ THREEx.Planets.createEarthCloud	= function(){
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh	
 }
-
+var meshEarthCloud = THREEx.Planets.createEarthCloud();
+THREEx.Planets.getEarthCloud	= function(){
+	return meshEarthCloud;
+}
 
 THREEx.Planets.createMoon	= function(){
 	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)
@@ -319,10 +326,11 @@ THREEx.Planets.createPluto	= function(){
 	return mesh	
 }
 
+
+var textureStarfield = THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/galaxy_starfield.png');
 THREEx.Planets.createStarfield	= function(){
-	var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/galaxy_starfield.png')
 	var material	= new THREE.MeshBasicMaterial({
-		map	: texture,
+		map	: textureStarfield,
 		side	: THREE.BackSide
 	})
 	var geometry	= new THREE.SphereGeometry(100, 32, 32)

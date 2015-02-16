@@ -350,7 +350,7 @@ var Orbit = function()
 		}
 		
 		//Earth clouds
-		var earthCloud	= THREEx.Planets.createEarthCloud();
+		var earthCloud	= THREEx.Planets.getEarthCloud();
 		earthCloud.receiveShadow	= true;
 		earthCloud.castShadow	= true;
 		earthCloud.name = "EARTH-CLOUDS";

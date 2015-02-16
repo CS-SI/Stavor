@@ -28,6 +28,11 @@ att_renderer.context.canvas.addEventListener("webglcontextrestored", function(ev
 	alert("WebGL Context Lost");
 }, false);
 
+var textureAttitudeSky = THREE.ImageUtils.loadTexture('modules/attitude/textures/sky/stars.jpg');
+var noiseTexture = new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/cloud.png' );
+noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping;	
+var waterTexture = new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/water/engine.jpg' );
+waterTexture.wrapS = waterTexture.wrapT = THREE.RepeatWrapping; 
 
 
 
@@ -204,7 +209,7 @@ var Attitude = function ()
 			var sky_geometry  = new THREE.SphereGeometry(1000, 32, 32);
 			// create the material, using a texture of startfield
 			var sky_material  = new THREE.MeshBasicMaterial();
-			sky_material.map   = THREE.ImageUtils.loadTexture('modules/attitude/textures/sky/stars.jpg');
+			sky_material.map   = textureAttitudeSky;
 			sky_material.map.wrapS = sky_material.map.wrapT = THREE.RepeatWrapping;
 			sky_material.map.repeat.set( 8, 8 ); 
 			sky_material.side  = THREE.BackSide;
@@ -782,7 +787,7 @@ var Attitude = function ()
 			if(config.show_earth_texture){	 
 				if(typeof textureEarth === 'undefined'){
 				   // your code here.
-					textureEarth= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/earth/Land_ocean_ice_cloud_2048.jpg' );
+					textureEarth = new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/earth/Land_ocean_ice_cloud_2048.jpg' );
 				};
 				var earth_material = new THREE.MeshBasicMaterial( { map: textureEarth, overdraw: true } )
 			}else{
@@ -1205,10 +1210,6 @@ var Attitude = function ()
 			//scene.add( eng2 );
 			
 			if (config.sc_show_eng_texture){
-				var noiseTexture = new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/cloud.png' );
-				noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping;	
-				var waterTexture = new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/water/engine.jpg' );
-				waterTexture.wrapS = waterTexture.wrapT = THREE.RepeatWrapping; 
 				// use "this." to create global object
 				this.customUniforms2 = {
 					baseTexture: 	{ type: "t", value: waterTexture },
@@ -1290,10 +1291,6 @@ var Attitude = function ()
 				   // your code here.
 					textureSun2= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/cloud.png' );
 				};
-				if(typeof textureSun3 === 'undefined'){
-				   // your code here.
-					textureSun3= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/lava.jpg' );
-				};
 				// base image texture for mesh
 				var lavaTexture = textureSun;
 				lavaTexture.wrapS = lavaTexture.wrapT = THREE.RepeatWrapping; 
@@ -1307,7 +1304,7 @@ var Attitude = function ()
 				// magnitude of noise effect
 				var noiseScale = 0.5;
 				// texture to additively blend with base image texture
-				var blendTexture = textureSun3;
+				var blendTexture = textureSun;
 				blendTexture.wrapS = blendTexture.wrapT = THREE.RepeatWrapping; 
 				// multiplier for distortion speed 
 				var blendSpeed = 0.08;
