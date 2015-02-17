@@ -1,4 +1,21 @@
-
+.closeVisMenu{
+	-webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+	
+}
+.openVisMenu{
+	-webkit-transform: translate3d(calc(-100% - 50px), 0, 0);
+    transform: translate3d(calc(-100% - 50px), 0, 0);
+	
+	-webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
 .MenuField{
 	padding: 2px 0px 2px 10px;
     border: 0;
@@ -25,10 +42,10 @@
 }
 
 .tabContainer {
-	display: none;
+	display: block;
 	position: absolute;
 	z-index: 1000;
-	right: 0;
+	right: -470px;
 	top: 0;
 	width:400px;
 	max-width: 90%;

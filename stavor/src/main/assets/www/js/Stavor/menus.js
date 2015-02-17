@@ -131,30 +131,15 @@ function displayAttitudeMenuPage() {
 }
 
 function switchMapMenu(){
-	if(global_menus.map.inAnimation == false){
-		global_menus.map.inAnimation = true;
-		var menu = document.getElementById("MaptabContainer"); 
-		var divi = document.getElementById("DivMap"); 
-		var w = Math.min(400,divi.clientWidth);
-		if(!global_menus.map.isOpen){
-			updateMapOptions();
-			menu.style.right = "-"+w+"px"; 
-			menu.style.display = "block";
-			$('#MaptabContainer').animate({
-				right: '0'
-			},"slow",endMapAnimation);
-		}else{
-			$('#MaptabContainer').animate({
-				right: '-100%'
-			},"slow",mapEndClosing);
-		}
-		global_menus.map.isOpen = !global_menus.map.isOpen;
-	}
-}
-function mapEndClosing(){
 	var menu = document.getElementById("MaptabContainer"); 
-	menu.style.display = "none";
-	endMapAnimation();
+	var divi = document.getElementById("DivMap"); 
+	if(!global_menus.map.isOpen){
+		updateMapOptions();
+		menu.className = "tabContainer openVisMenu";
+	}else{
+		menu.className = "tabContainer closeVisMenu";
+	}
+	global_menus.map.isOpen = !global_menus.map.isOpen;
 }
 
 function updateMapOption(id,val){
@@ -203,25 +188,16 @@ function updateMapOptions(){
 }
 
 function switchOrbitMenu(){
-	if(global_menus.orbit.inAnimation == false){
-		global_menus.orbit.inAnimation = true;
 		var menu = document.getElementById("OrbittabContainer"); 
 		var divi = document.getElementById("DivOrbit"); 
-		var w = Math.min(400,divi.clientWidth);
 		if(!global_menus.orbit.isOpen){
 			updateOrbitOptions();
-			menu.style.right = "-"+w+"px"; 
-			menu.style.display = "block";
-			$('#OrbittabContainer').animate({
-				right: '0'
-			},"slow",endOrbitAnimation);
+			menu.className = "tabContainer openVisMenu";
 		}else{
-			$('#OrbittabContainer').animate({
-				right: '-100%'
-			},"slow",orbitEndClosing);
+			menu.className = "tabContainer closeVisMenu";
 		}
 		global_menus.orbit.isOpen = !global_menus.orbit.isOpen;
-	}
+	//}
 }
 function updateOrbitOption(id,val){
 	switch(id) {
@@ -310,31 +286,16 @@ function updateOrbitOptions(){
 	document.getElementById("opt-orb-OrbitColor").value = global_simulation.config.orbit.orbit_color;
 	document.getElementById("opt-orb-OrbitColor").style.backgroundColor = global_simulation.config.orbit.orbit_color;
 }
-function orbitEndClosing(){
-	var menu = document.getElementById("OrbittabContainer"); 
-	menu.style.display = "none";
-	endOrbitAnimation();
-}
 function switchAttitudeMenu(){
-	if(global_menus.attitude.inAnimation == false){
-		global_menus.attitude.inAnimation = true;
-		var menu = document.getElementById("AttitudetabContainer"); 
-		var divi = document.getElementById("DivAttitude"); 
-		var w = Math.min(400,divi.clientWidth);
-		if(!global_menus.attitude.isOpen){
-			updateAttitudeOptions();
-			menu.style.right = "-"+w+"px"; 
-			menu.style.display = "block";
-			$('#AttitudetabContainer').animate({
-				right: '0'
-			},"slow",endAttitudeAnimation);
-		}else{
-			$('#AttitudetabContainer').animate({
-				right: '-100%'
-			},"slow",attitudeEndClosing);
-		}
-		global_menus.attitude.isOpen = !global_menus.attitude.isOpen;
+	var menu = document.getElementById("AttitudetabContainer"); 
+	var divi = document.getElementById("DivAttitude"); 
+	if(!global_menus.attitude.isOpen){
+		updateAttitudeOptions();
+		menu.className = "tabContainer openVisMenu";
+	}else{
+		menu.className = "tabContainer closeVisMenu";
 	}
+	global_menus.attitude.isOpen = !global_menus.attitude.isOpen;
 }
 function updateAttitudeOption(id,val){
 	switch(id) {
@@ -633,20 +594,6 @@ function updateAttitudeOptions(){
 	document.getElementById("opt-att-DirectionColor").value = global_simulation.config.attitude.color_direction_a;
 	document.getElementById("opt-att-DirectionColor").style.backgroundColor = global_simulation.config.attitude.color_direction_a;
 	
-}
-function attitudeEndClosing(){
-	var menu = document.getElementById("AttitudetabContainer"); 
-	menu.style.display = "none";
-	endAttitudeAnimation();
-}
-function endAttitudeAnimation(){
-	global_menus.attitude.inAnimation = false;
-}
-function endOrbitAnimation(){
-	global_menus.orbit.inAnimation = false;
-}
-function endMapAnimation(){
-	global_menus.map.inAnimation = false;
 }
 function updateGlobalOption(id,val){
 	switch(id) {

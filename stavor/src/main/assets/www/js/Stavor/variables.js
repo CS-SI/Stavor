@@ -16,16 +16,13 @@ var global_delayed_loading = {
 
 var global_menus = {
 	attitude:{
-		isOpen: false,
-		inAnimation: false
+		isOpen: false
 	},
 	orbit:{
-		isOpen: false,
-		inAnimation: false
+		isOpen: false
 	},
 	map:{
-		isOpen: false,
-		inAnimation: false
+		isOpen: false
 	},
 	info_panel:{
 		isOpen: false
