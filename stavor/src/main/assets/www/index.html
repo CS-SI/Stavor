@@ -723,9 +723,12 @@
 	
 	<input id="TimeBar" type="range" min="0" max="100" value="0"  title="Simulation time"  onclick="global_simulator.progressValueChanged(this.value)"/><!--disabled="true"-->
 	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation" onclick="global_simulator.accelerateButtonClicked()"/>
-	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation" onclick="global_simulator.slowButtonClicked()"/>&nbsp;
-	<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation" onclick="global_simulator.reverseButtonClicked()"/>
-	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation" onclick="global_simulator.forwardButtonClicked()"/>&nbsp;&nbsp;
+	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation" onclick="global_simulator.slowButtonClicked()"/>
+	
+	<div id="ReverseButton" class="SimControlLeft"  title="Reverse simulation" onclick="global_simulator.reverseButtonClicked()"></div>
+	<div id="ForwardButton" class="SimControlRight active" title="Forward simulation" onclick="global_simulator.forwardButtonClicked()"></div>
+	<!--<input id="ReverseButton" class="SimControlLeft" type="image" src="style/icons/reverse.png" title="Reverse simulation" onclick="global_simulator.reverseButtonClicked()"/>
+	<input id="ForwardButton" class="SimControlRight" type="image" src="style/icons/forward.png" title="Forward simulation" onclick="global_simulator.forwardButtonClicked()"/>-->
 </div>
 <div id="DivClock" >
 	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/><span id="SimTime">2014-01-01 20:00:33.1 UTC</span>

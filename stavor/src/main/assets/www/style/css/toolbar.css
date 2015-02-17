@@ -36,11 +36,12 @@
 .SimControl{
 	position: relative;
 	float: left;
-	width: 20px;
-	height: 20px;
+	width: 24px;
+	height: 24px;
 	/*margin: 0 0 5px 5px;*/
 	margin-left: 5px;
-	margin-top: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
 	padding: 0px;
 	vertical-align:middle;
 	background-color: #cccccc;
@@ -48,10 +49,11 @@
 	box-shadow: 1px -1px 2px #000;
 }
 .SimControlLeft{
+	float: left;
 	position: relative;
-	width: 20px;
-	height: 20px;
-	margin: 5px 0 5px 0;
+	width: 24px;
+	height: 24px;
+	margin: 3px 2px 3px 5px;
 	padding: 0px;
 	vertical-align:middle;
 	background-color: #cccccc;
@@ -59,23 +61,46 @@
 	box-shadow: 1px -1px 2px #000;
 }
 .SimControlRight{
+	float: left;
 	position: relative;
-	width: 20px;
-	height: 20px;
-	margin: 5px 0 5px 0;
+	width: 24px;
+	height: 24px;
+	margin: 3px 5px 3px 2px;
 	padding: 0px;
 	vertical-align:middle;
 	background-color: #cccccc;
     border-radius: 0 5px 5px 0;
 	box-shadow: 1px -1px 2px #000;
 }
+#ReverseButton{
+	background-image:  url(../icons/reverse.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+#ForwardButton{
+	background-image:  url(../icons/forward.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+#ReverseButton.active{
+	background-image:  url(../icons/reverse_a.png);
+}
+#ForwardButton.active{
+	background-image:  url(../icons/forward_a.png);
+}
 #TimeBar{
 	position: relative;
-	width: calc(100% - 170px);
+	width: calc(100% - 195px);
 	min-width: 50px;
+	float: left;
 	vertical-align:middle;
 	margin-left: 5px;
 	margin-right: 5px;
+	margin-top: 13px;
 }
 #DivClock{
 	position: absolute;
