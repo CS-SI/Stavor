@@ -365,7 +365,30 @@
 			}
 		}
 		
-		
+		function setAttitudeReloaded(){
+			var div = document.getElementById("AttitudeMenuLoading");
+			div.style.display = "none";
+		}
+		function setOrbitReloaded(){
+			var div = document.getElementById("OrbitMenuLoading");
+			div.style.display = "none";
+		}
+		function setMapReloaded(){
+			var div = document.getElementById("MapMenuLoading");
+			div.style.display = "none";
+		}
+		function setAttitudeReloading(){
+			var div = document.getElementById("AttitudeMenuLoading");
+			div.style.display = "block";
+		}
+		function setOrbitReloading(){
+			var div = document.getElementById("OrbitMenuLoading");
+			div.style.display = "block";
+		}
+		function setMapReloading(){
+			var div = document.getElementById("MapMenuLoading");
+			div.style.display = "block";
+		}
 		
 	</script>
 </head>
@@ -379,6 +402,7 @@
 <div id="DivMap" >
 	<div id="map" ></div>
 	<div id="MaptabContainer" class="tabContainer">
+		<div id="MapMenuLoading" class="ViewMenuLoading"></div>
 		<div id="Maptabs" class="tabs">
 		  <ul>
 			<li id="MaptabHeader_1">Coverage</li>
@@ -426,6 +450,7 @@
 <div id="DivOrbit" >
 	<div id="orbit" ></div>
 	<div id="OrbittabContainer" class="tabContainer">
+		<div id="OrbitMenuLoading" class="ViewMenuLoading"></div>
 		<div id="Orbittabs" class="tabs">
 		  <ul>
 			<li id="OrbittabHeader_1">Models</li>
@@ -460,6 +485,7 @@
 <div id="DivAttitude" >
 	<div id="attitude" ></div>
 	<div id="AttitudetabContainer" class="tabContainer">
+		<div id="AttitudeMenuLoading" class="ViewMenuLoading"></div>
 		<div id="Attitudetabs" class="tabs">
 		  <ul>
 			<li id="AttitudetabHeader_1">Indicators</li>

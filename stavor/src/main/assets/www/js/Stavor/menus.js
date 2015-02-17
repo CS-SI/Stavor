@@ -98,7 +98,8 @@ function displayMapMenuPage() {
   
   var pages = mapPage.getElementsByTagName("div");
 	for (var i = 1; i < pages.length; i++) {
-		pages.item(i).style.display="block";
+		if(pages.item(i).id != "MapMenuLoading")
+			pages.item(i).style.display="block";
 	};
   
   this.parentNode.setAttribute("data-current",ident);
@@ -143,6 +144,7 @@ function switchMapMenu(){
 }
 
 function updateMapOption(id,val){
+	setMapReloading();
 	switch(id) {
 		case "opt-map-ShowFov":
 			global_simulation.config.map.show_fov = val;
@@ -200,6 +202,7 @@ function switchOrbitMenu(){
 	//}
 }
 function updateOrbitOption(id,val){
+	setOrbitReloading();
 	switch(id) {
 		case "opt-orb-ShowSky":
 			global_simulation.config.orbit.show_sky = val;
@@ -292,12 +295,14 @@ function switchAttitudeMenu(){
 	if(!global_menus.attitude.isOpen){
 		updateAttitudeOptions();
 		menu.className = "tabContainer openVisMenu";
+		document.getElementById("AttitudeMenuLoading").style.display="none";
 	}else{
 		menu.className = "tabContainer closeVisMenu";
 	}
 	global_menus.attitude.isOpen = !global_menus.attitude.isOpen;
 }
 function updateAttitudeOption(id,val){
+	setAttitudeReloading();
 	switch(id) {
 		//Models
 		case "opt-att-ShowSky":

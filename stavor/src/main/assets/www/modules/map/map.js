@@ -784,6 +784,7 @@ function changeView(view_mode){
 	global_delayed_loading.visualization.map = true;
 	setLoadingText("Map module loaded!");
 	hideSplash();
+	setMapReloaded();
 //------------------------------------------------------------------------------
 
 	function reDraw(){

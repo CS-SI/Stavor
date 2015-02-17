@@ -240,6 +240,7 @@ var Attitude = function ()
 		global_delayed_loading.visualization.attitude = true;
 		setLoadingText("Attitude module loaded!");
 		hideSplash();
+		setAttitudeReloaded();
 	}
 	
 //***********************************************************************************************************************

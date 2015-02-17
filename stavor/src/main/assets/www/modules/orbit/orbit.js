@@ -113,6 +113,7 @@ var Orbit = function()
 	global_delayed_loading.visualization.orbit = true;
 	setLoadingText("Orbit module loaded!");
 	hideSplash();
+	setOrbitReloaded();
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		loop runner							//

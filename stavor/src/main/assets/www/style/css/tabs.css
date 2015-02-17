@@ -1,3 +1,12 @@
+.ViewMenuLoading{
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(50, 50, 50, 0.5);
+	z-index: 1001;
+}
+
 .closeVisMenu{
 	-webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
