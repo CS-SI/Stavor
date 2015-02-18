@@ -1611,10 +1611,10 @@ var Attitude = function ()
 
 		render();
 		*/
-		camera.aspect = att_container.clientWidth / att_container.clientHeight;
+		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 
-		att_renderer.setSize( att_container.clientWidth, att_container.clientHeight );
+		att_renderer.setSize( window.innerWidth, window.innerHeight );
 
 		controls.handleResize();
 

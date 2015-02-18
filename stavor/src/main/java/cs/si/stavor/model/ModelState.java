@@ -19,7 +19,7 @@ public class ModelState implements Serializable{
 	private static final long serialVersionUID = 6931304300114881770L;
 
     //Info_Panel
-    public double orbit_radium = 0;
+    public double orbit_radius = 0;
     public double velocity;
     public double acceleration;
     public double mass = 0;// Kg

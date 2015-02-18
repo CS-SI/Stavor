@@ -486,10 +486,10 @@ var Orbit = function()
 
 		render();
 		*/
-		camera.aspect = orb_container.clientWidth / orb_container.clientHeight;
+		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 
-		orb_renderer.setSize( orb_container.clientWidth, orb_container.clientHeight );
+		orb_renderer.setSize( window.innerWidth, window.innerHeight );
 
 		controls.handleResize();
 

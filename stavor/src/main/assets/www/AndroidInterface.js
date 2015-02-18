@@ -4,10 +4,10 @@ var AndroidInterface = function(sim){
 //****************************************************************************
 //                         From Stavor to Simulator  --> (Control widgets callbacks)
 //****************************************************************************
-AndroidInterface.prototype.initializePropagator = function(init){
+AndroidInterface.prototype.changeMission = function(mission){
 	if (typeof Android != "undefined"){ // check the bridge 
-		  if (Android.initializePropagator!= "undefined") { // check the method
-			 Android.initializePropagator(init);
+		  if (Android.changeMission!= "undefined") { // check the method
+			 Android.changeMission(mission);
 		  }
    	}
 }
@@ -46,20 +46,17 @@ AndroidInterface.prototype.slowButtonClicked = function(){
 		  }
    	}
 }
-AndroidInterface.prototype.progressValueChanged = function(value){
+AndroidInterface.prototype.accelerateButtonClicked = function(){
 	if (typeof Android != "undefined"){ // check the bridge 
-		  if (Android.progressValueChanged!= "undefined") { // check the method
-			 Android.progressValueChanged();
+		  if (Android.accelerateButtonClicked!= "undefined") { // check the method
+			 Android.accelerateButtonClicked();
 		  }
    	}
 }
-//****************************************************************************
-//                        From Simulator to Stavor  <-- (Events thrown by simulator)
-//****************************************************************************
-AndroidInterface.prototype.updateMissionState = function(state){
-	this.simulator.updateMissionState(state);
-}
-
-AndroidInterface.prototype.updateSimulatorState = function(state){
-	this.simulator.updateSimulatorState(state);
+AndroidInterface.prototype.progressValueChanged = function(value){
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.progressValueChanged!= "undefined") { // check the method
+			 Android.progressValueChanged(value);
+		  }
+   	}
 }

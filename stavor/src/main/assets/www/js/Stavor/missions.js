@@ -8,6 +8,7 @@ function loadMissionsStoredVariables(){
 	if(serialized){
 		var localData = JSON.parse(serialized);
 		global_missions = localData;
+		global_missions.selected = -1;
 	}
 }
 function saveMissionsStoredVariables(){
@@ -44,13 +45,13 @@ function onSelectMissionButtonClicked(){
 	}else{
 		if(global_missions.active != global_missions.selected){
 			db.transaction(function (tx) {
-				tx.executeSql('SELECT name FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
+				tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
 					var r = confirm("Select mission "+results.rows.item(0).name+" for simulation? (Simulator will be stopped)");
 					if(r){
 						global_missions.selected = global_missions.active;
 						styleMissionRows();
 						saveMissionsStoredVariables();
-						//TODO reinit simulator
+						global_simulator.changeMission(results.rows.item(0).json);
 					}
 				}, errorDatabaseHandler);
 			});
@@ -98,13 +99,13 @@ function styleMissionRows(){
 		}
 	}
 	
-	if(!selected_found){
+	/*if(!selected_found){
 		if(listItems.length > 0){
 			global_missions.selected = Number(listItems[0].id.substr(4,listItems[0].id.length));
 		}else{
 			global_missions.selected = -1;
 		}
-	}
+	}*/
 	
 	if(recursive){
 		styleMissionRows();
@@ -281,6 +282,10 @@ function updateMissionEditor(mission,mission_id){
 	field = document.getElementById("mis-Mass");
 	field.value = mission.initial_mass;
 	
+	
+	field = document.getElementById("mis-AttitudeProvider");
+	field.value = mission.attitude_provider;
+	
 	$('.datepicker').pickadate({
 		clear: '',
 		format: 'yyyy/mm/dd',
@@ -332,6 +337,10 @@ function saveMissionEditor(){
 		mission.description = field.value;
 		field = document.getElementById("mis-Mass");
 		mission.initial_mass = field.value;
+		
+		
+		field = document.getElementById("mis-AttitudeProvider");
+		mission.attitude_provider = Number(field.value);
 		
 		field = document.getElementById("mis-Date");
 		var dates = field.value.split('/');

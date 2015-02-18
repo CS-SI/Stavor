@@ -15,21 +15,32 @@
 	background-color:rgba(150, 150, 150, 0.32);
 	box-shadow: 2px -2px 3px #333;
 }
-#PlayButton{
+.SimPlay{
 	background-image:  url(../icons/play.png);
 	background-size:   contain;                      /* <------ cover/contain */
     background-repeat: no-repeat;
     background-position: center center; 
 	cursor: pointer;
 }
-#PlayButton:active{
+.SimPause{
+	background-image:  url(../icons/pause.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
 }
-#StopButton{
+.SimStopEnabled{
 	background-image:  url(../icons/stop.png);
 	background-size:   contain;                      /* <------ cover/contain */
     background-repeat: no-repeat;
     background-position: center center; 
 	cursor: pointer;
+}
+.SimStopDisabled{
+	background-image:  url(../icons/stop.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
 }
 #StopButton:active{
 }

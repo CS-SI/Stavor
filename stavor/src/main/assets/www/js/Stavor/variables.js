@@ -3,6 +3,7 @@ var global_missions_list_is_open = false;
 
 //Flags for asyncronous loading functions
 var global_delayed_loading = {
+	splashIsHidden: false,
 	visualization:{
 		attitude: false,
 		orbit: false,
@@ -154,7 +155,8 @@ var global_simulation = {
 	},
 	results:{
 		info_panel:{
-			time: new SimDate(),
+			progress: 0,
+			time: "2014-01-01 23:55:10",
 			attitude:{
 				roll: 0,
 				pitch: 0,

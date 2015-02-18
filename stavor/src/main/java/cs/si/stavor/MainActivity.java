@@ -19,7 +19,7 @@ import cs.si.stavor.app.RatingSystem;
 import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
-import cs.si.stavor.web.WebAppInterface;
+import cs.si.stavor.web.StavorInterface;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -60,6 +60,13 @@ public class MainActivity extends Activity {
      */
     public Simulator getSimulator(){
         return simulator;
+    }
+    /**
+     * Returns the simulator object
+     * @return
+     */
+    public XWalkView getBrowser(){
+        return mXwalkView;
     }
 
 	@Override
@@ -110,7 +117,7 @@ public class MainActivity extends Activity {
         mXwalkView.clearCache(true);
 
     	mXwalkView.addJavascriptInterface(
-                new WebAppInterface(this, simulator.getSimulationResults()),
+                new StavorInterface(mXwalkView, simulator),
                 "Android");
     	
     	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);

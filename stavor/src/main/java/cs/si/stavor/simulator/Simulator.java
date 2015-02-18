@@ -11,7 +11,6 @@ import cs.si.stavor.StavorApplication;
 import cs.si.stavor.StavorApplication.TrackerName;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
-import cs.si.stavor.model.Browsers;
 import cs.si.stavor.model.ModelSimulation;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -40,9 +39,17 @@ public class Simulator {
 	//Simulation core
 	private SimulatorStatus simulatorStatus = SimulatorStatus.Disconnected;
 	private SimulationStatus simulationStatus = SimulationStatus.Pause;
+    private SimulationSense simulationSense = SimulationSense.Forward;
 	private ThreadRemote thread_remote;
 	private ThreadLocal thread_local;
 	private Handler handler_remote, handler_local;
+
+    public void setSimulationSense(SimulationSense simulationSense){
+        this.simulationSense = simulationSense;
+    }
+    public SimulationSense getSimulationSense() {
+        return simulationSense;
+    }
 	
 	//Results
 	private ModelSimulation simulation;
@@ -53,7 +60,6 @@ public class Simulator {
 	
 	//Mission
 	private Mission mission;
-	private int mission_id=-1;
 	
 	//Flags
 	private boolean wasPlaying = false;//Flag to restore playing if fragment has paused-resumed while playing
@@ -89,28 +95,12 @@ public class Simulator {
 	/**
 	 * Sets the mission before connecting the simulator
 	 * @param mis
-	 * @param id
 	 */
-	public void setSelectedMission(Mission mis, int id){
+	public void setSelectedMission(Mission mis){
+        disconnect();
 		mission = mis;
-		mission_id = id;
+        connect();
 	}
-
-	/**
-	 * Set no mission selected
-	 */
-	public void resetSelectedMissionId() {
-		mission_id=-1;
-	}
-	
-	/**
-	 * Returns the selected mission id
-	 * @return
-	 */
-	public int getSelectedMissionid(){
-		return mission_id;
-	}
-
 
 	private ProgressDialog progress;
 	/**
@@ -118,7 +108,7 @@ public class Simulator {
 	 * @param prog
 	 */
 	public void setProgress(final int prog){
-		if(prog==10000 && progress==null){//Case of disconnecting simulator
+		/*if(prog==10000 && progress==null){//Case of disconnecting simulator
 		}else{
 			if(progress==null){
 				progress = new ProgressDialog(activity);
@@ -138,16 +128,7 @@ public class Simulator {
 				progress.dismiss();
 				progress = null;
 			}
-			/*try{
-				activity.runOnUiThread( new Runnable() {
-					public void run() {
-						activity.setProgress(prog);
-			        }
-				});
-			}catch(NullPointerException nulle){
-				
-			}*/
-		}
+		}*/
 	}
 
 	
@@ -228,7 +209,6 @@ public class Simulator {
 	public SimulatorStatus disconnect(){
 		resetTemporaryPause();
 		if(simulatorStatus.equals(SimulatorStatus.Connected)){
-			resetSelectedMissionId();
 			disconnectThread();
 			
 			//********** Google Analytics ***********
@@ -277,7 +257,7 @@ public class Simulator {
 	            //***************************************
 			}
 		}
-    	setCorrectSimulatorControls();
+    	//setCorrectSimulatorControls();
 		return simulationStatus;
 	}
 	
@@ -308,7 +288,7 @@ public class Simulator {
 	            //***************************************
 			}
 		}
-    	setCorrectSimulatorControls();
+    	//setCorrectSimulatorControls();
 		return simulationStatus;
 	}
 	
@@ -428,7 +408,7 @@ public class Simulator {
 	 */
 	public void setSimulatorStatus(SimulatorStatus new_status) {
 		simulatorStatus = new_status;
-		setCorrectSimulatorControls();
+		//setCorrectSimulatorControls();
 		//setProgress(100 * 100);
 	}
 
@@ -449,8 +429,43 @@ public class Simulator {
 	 * Change the play/pause icon according to simulation status
 	 * and enable or disable the controls depending on simulator status
 	 */
-	public void setCorrectSimulatorControls() {
+	/*public void setCorrectSimulatorControls() {
 		//TODO XGGDEBUG: interface
-	}
-	
+	}*/
+
+    public SimulatorControlsStatus getControlsStatus() {
+        return new SimulatorControlsStatus(this);
+    }
+
+    public void doSlowSimulation() {
+        mission.sim_step = mission.sim_step * 0.5;
+    }
+    public void doAccelerateSimulation() {
+        mission.sim_step = mission.sim_step * 2;
+    }
+
+    public void setCurrentSimulationProgress(int percentage) {
+        boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
+        if(!remote){
+            try {
+                thread_local.setCurrentSimulationProgress(percentage);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public int getSimulationProgress() {
+        boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
+        if(!remote){
+            try {
+                return thread_local.getSimulationProgress();
+            }catch(Exception e){
+                e.printStackTrace();
+                return 0;
+            }
+        }else{
+            return 0;
+        }
+    }
 }

@@ -265,7 +265,7 @@ public class ThreadRemote extends Thread{
     	//if(simulator.getSimulatorStatus().equals(SimulatorStatus.Connected)){
     		closeSocket();
 	    	simulator.setSimulatorStatus(SimulatorStatus.Disconnected);
-	    	simulator.resetSelectedMissionId();
+	    	//simulator.resetSelectedMissionId();
     	//}
     }
     

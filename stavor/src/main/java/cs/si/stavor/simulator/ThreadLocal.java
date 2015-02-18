@@ -21,12 +21,18 @@ import cs.si.stavor.R;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import android.os.Handler;
+import android.util.Log;
 
 public class ThreadLocal extends Thread{
 	private final Handler mHandler;
 	
 	private Simulator simulator;
 	private Mission mission;
+    private int progress;
+
+    public int getSimulationProgress() {
+        return progress;
+    }
 	
 	ThreadLocal(Handler handler, Simulator simu, Mission mis) {
         mHandler = handler;
@@ -89,7 +95,7 @@ public class ThreadLocal extends Thread{
 					
 					
 					SpacecraftState sstate = propagate();
-					int progress = (int)(((mission.sim_duration+extrapDate.durationFrom(finalDate))/mission.sim_duration)*100); 
+					progress = (int)(((mission.sim_duration+extrapDate.durationFrom(finalDate))/mission.sim_duration)*100);
 
 					if(sstate!=null){
 						simulator.getSimulationResults().updateSimulation(sstate, progress);
@@ -145,7 +151,7 @@ public class ThreadLocal extends Thread{
     public void setDisconnected(){
 		//Log.d("Sim",System.currentTimeMillis()+": "+"Simulator disconnected");
     	simulator.setSimulatorStatus(SimulatorStatus.Disconnected);
-    	simulator.resetSelectedMissionId();
+    	//simulator.resetSelectedMissionId();
     }
     
     private Frame inertialFrame; 
@@ -230,13 +236,27 @@ public class ThreadLocal extends Thread{
      * @return
      * @throws PropagationException
      */
-    private SpacecraftState propagate() throws PropagationException{
-		if(extrapDate.compareTo(finalDate) <= 0){
-			SpacecraftState currentState = propagator.propagate(extrapDate);
-			extrapDate = new AbsoluteDate(extrapDate, mission.sim_step);
-			return currentState;
-		}else{
-			return null;
-		}
-	}
+    private SpacecraftState propagate() throws PropagationException {
+        if (simulator.getSimulationSense() == SimulationSense.Forward) {
+            if (extrapDate.compareTo(finalDate) <= 0) {
+                SpacecraftState currentState = propagator.propagate(extrapDate);
+                extrapDate = new AbsoluteDate(extrapDate, mission.sim_step);
+                return currentState;
+            } else {
+                return null;
+            }
+        } else {
+            if (extrapDate.compareTo(mission.initial_date) >= 0) {
+                SpacecraftState currentState = propagator.propagate(extrapDate);
+                extrapDate = new AbsoluteDate(extrapDate, -mission.sim_step);
+                return currentState;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public void setCurrentSimulationProgress(int percentage) {
+        extrapDate = new AbsoluteDate(mission.initial_date,mission.sim_duration*percentage/100);
+    }
 }

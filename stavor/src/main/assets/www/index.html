@@ -92,6 +92,7 @@
 			initializeMapMenu();
 				setLoadingText("Init Touch Controls...");
 			initializePanGestures();
+			
 			initializeMissionsDb();//Splash
 			drawMissionsList();
 			initializeStationsDb();//Splash
@@ -141,9 +142,11 @@
 				global_delayed_loading.visualization.orbit &&
 				global_delayed_loading.visualization.map &&
 				global_delayed_loading.database.missions &&
-				global_delayed_loading.database.stations
+				global_delayed_loading.database.stations &&
+				!global_delayed_loading.splashIsHidden
 				){
 				setLoadingText("Stavor loaded!");
+				global_delayed_loading.splashIsHidden = true;
 				var current_time = new Date().getTime();
 				var elapsed = current_time - start_time;
 				var delay = parameters.splash_min_time - elapsed;
@@ -154,6 +157,7 @@
 					var div_splash = document.getElementById("Splash");
 					div_splash.style.visibility = "hidden";
 					div_splash.style.opacity = "0";
+					switchMissionsListStatus();
 				}, delay);
 			}else{
 				//Wait for loading
@@ -742,8 +746,8 @@
 	
 <div id="DivToolbar" >
 	
-	<div id="PlayButton" class="SimControl"  title="Play/Pause simulator" onclick="global_simulator.playButtonClicked()"></div>
-	<div id="StopButton" class="SimControl"  title="Stop simulator" onclick="global_simulator.stopButtonClicked()"></div>
+	<div id="PlayButton" class="SimControl SimPlay"  title="Play/Pause simulator" onclick="global_simulator.playButtonClicked()"></div>
+	<div id="StopButton" class="SimControl SimStopDisabled"  title="Stop simulator" onclick="global_simulator.stopButtonClicked()"></div>
 	
 	<input id="TimeBar" type="range" min="0" max="100" value="0"  title="Simulation time"  onclick="global_simulator.progressValueChanged(this.value)"/><!--disabled="true"-->
 	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation" onclick="global_simulator.accelerateButtonClicked()"/>

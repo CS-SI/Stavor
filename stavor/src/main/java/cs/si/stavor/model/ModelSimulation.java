@@ -1,7 +1,6 @@
 package cs.si.stavor.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Line;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
@@ -25,6 +24,7 @@ import org.orekit.time.TimeScalesFactory;
 import org.xwalk.core.XWalkView;
 import org.orekit.utils.Constants;
 
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -33,8 +33,6 @@ import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.station.LatLon;
-import cs.si.stavor.station.StationArea;
-import cs.si.stavor.station.VisibilityCircle;
 
 /**
  * Contains and handles both the model information and configuration
@@ -50,6 +48,7 @@ public class ModelSimulation {
     
     public ModelSimulation(MainActivity acv){
     	activity=acv;
+        browser = activity.getBrowser();
     	state = new ModelState();
     }
     
@@ -96,9 +95,10 @@ public class ModelSimulation {
      * Pushes the new simulation step to the WebGL model
      */
     public void pushSimulationModel(){
-    	if(browser!=null){
-    		if(state!=null)
-    			browser.load("javascript:updateModelState('"+gson.toJson(state)+"')",null);
+        if(browser!=null){
+    		if(state!=null) {
+                browser.load("javascript:global_simulator.updateMissionState('" + gson.toJson(state) + "')", null);
+            }
     	}
 	}
     
@@ -140,7 +140,7 @@ public class ModelSimulation {
             new_state.value_sun[0] = sun.getX()/1000;
             new_state.value_sun[1] = sun.getY()/1000;
             new_state.value_sun[2] = sun.getZ()/1000;
-            new_state.orbit_radium = earth.getNorm()/1000;
+            new_state.orbit_radius = earth.getNorm()/1000;
 
         } catch (OrekitException e) {
             e.printStackTrace();
@@ -406,7 +406,9 @@ public class ModelSimulation {
 
     private void clearSimulationModel(){
         if(browser!=null){
-            browser.load("javascript:clearPath()",null);
+            //browser.load("javascript:clearPath()",null);
+            //XGGEDEBUG: use
+            //TODO
         }
     }
 
