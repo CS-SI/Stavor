@@ -96,7 +96,7 @@ public class MainActivity extends Activity {
             Simulator simulator = new Simulator(this);
 
 
-            XWalkView browser = new XWalkView(this.getApplicationContext(), this);
+            XWalkView browser = new XWalkView(this, this);
             // turn on debugging
             XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, Parameters.App.debug);
             //browser.setBackgroundResource(R.color.black);
