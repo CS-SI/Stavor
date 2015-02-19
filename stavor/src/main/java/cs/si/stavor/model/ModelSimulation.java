@@ -155,7 +155,7 @@ public class ModelSimulation {
             new_state.progress=0;
 
         AbsoluteDate date = sc_att.getDate();
-        new_state.time = date.getComponents(utc).toString();
+        new_state.time = date.getComponents(utc).toString().replace("T"," ");
 
         //Compute acceleration
         if(tmp_time != null){
