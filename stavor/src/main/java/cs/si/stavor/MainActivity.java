@@ -1,7 +1,5 @@
 package cs.si.stavor;
 
-import java.util.ArrayList;
-
 //import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkPreferences;
 import org.xwalk.core.XWalkView;
@@ -29,6 +27,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /**
@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
 	/**
 	 * Browser object
 	 */
-	private XWalkView mXwalkView;
+	private XWalkView browser;
 
     /**
      * Used to store information during application restart due to configuration
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
      * @return
      */
     public XWalkView getBrowser(){
-        return mXwalkView;
+        return browser;
     }
 
 	@Override
@@ -93,34 +93,38 @@ public class MainActivity extends Activity {
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "data").commit();
 
-            Simulator simu = new Simulator(this);
+            Simulator simulator = new Simulator(this);
+
+
+            XWalkView browser = new XWalkView(this.getApplicationContext(), this);
+            // turn on debugging
+            XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, Parameters.App.debug);
+            //browser.setBackgroundResource(R.color.black);
+            browser.setBackgroundColor(0x00000000);
+            browser.setResourceClient(new MyResourceClient(browser));
+            browser.setUIClient(new MyUIClient(browser));
+            browser.clearCache(true);
+            browser.addJavascriptInterface(
+                    new StavorInterface(browser, simulator),
+                    "Android");
+            browser.load(Parameters.Web.STARTING_PAGE, null);
 
             dataFragment.setData(
-                    simu
+                    browser,
+                    simulator
             );
 
             RatingSystem.verify(this);
         }
 
-        // the data is available in dataFragment.getData()
-        this.simulator = dataFragment.getSim();
+        //Load Retained Objects
+        this.simulator = dataFragment.getSimulator();
+        this.browser = dataFragment.getBrowser();
 
-
-        // turn on debugging
-        XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, Parameters.App.debug);
-
-        mXwalkView = (XWalkView) findViewById(R.id.activity_main);
-		//mXwalkView.setBackgroundResource(R.color.black);
-        mXwalkView.setBackgroundColor(0x00000000);
-        mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
-        mXwalkView.setUIClient(new MyUIClient(mXwalkView));
-        mXwalkView.clearCache(true);
-
-    	mXwalkView.addJavascriptInterface(
-                new StavorInterface(mXwalkView, simulator),
-                "Android");
-    	
-    	mXwalkView.load(Parameters.Web.STARTING_PAGE,null);
+        LinearLayout browserLayout = (LinearLayout) findViewById(R.id.activity_main);
+        ViewGroup.LayoutParams browser_params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        this.browser.setLayoutParams(browser_params);
+        browserLayout.addView(this.browser);
 	}
 	
 	private void launchMarket() {
@@ -168,62 +172,55 @@ public class MainActivity extends Activity {
         if(rate_dialog!=null){
         	rate_dialog.dismiss();
         }
-        if (mXwalkView != null) {
-            mXwalkView.pauseTimers();
-            mXwalkView.onHide();
+        if (browser != null) {
+            browser.pauseTimers();
+            browser.onHide();
         }
     }
 
     @Override
     protected void onResume() {//Resume browser
         super.onResume();
-        if (mXwalkView != null) {
-            mXwalkView.resumeTimers();
-            mXwalkView.onShow();
+        if (browser != null) {
+            browser.resumeTimers();
+            browser.onShow();
         }
     }
 
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	//super.onActivityResult(requestCode, resultCode, data);
-        if (mXwalkView != null) {
-            mXwalkView.onActivityResult(requestCode, resultCode, data);
+        if (browser != null) {
+            browser.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
-        if (mXwalkView != null) {
-            mXwalkView.onNewIntent(intent);
+        if (browser != null) {
+            browser.onNewIntent(intent);
         }
     	//super.onNewIntent(intent);
     }
 	
 	@Override
     public void onDestroy() {//Disconnect simulator, close database and browser
-        super.onDestroy();
         // store the data in the fragment
         if(isFinishing()){
         	simulator.disconnect();
-            //((StavorApplication)getApplication()).db_help.close();
+            //Prevent onDestroy to avoid exception of illegalArgument: receiver not registered
+            if (browser != null) {
+                browser.onDestroy();
+            }
         }else{
         	dataFragment.setData(
-        			this.simulator
-        			);
-        	//Recycle background [NOT USED SINCE NEW ACTIVITY SPLASH SCREEN BUT SAVE FOR FUTURE IMPLEMENTATIONS]
-            /*BitmapDrawable bd = (BitmapDrawable)getWindow().getDecorView().getBackground();
-            Bitmap mBitmap = bd.getBitmap();
-            if (mBitmap != null && !mBitmap.isRecycled()) {
-            	getWindow().getDecorView().setBackgroundResource(0);
-                bd.setCallback(null);
-                mBitmap.recycle();
-                mBitmap = null; 
-            }*/
+                    this.browser,
+                    this.simulator
+            );
+            LinearLayout browserLayout = (LinearLayout) findViewById(R.id.activity_main);
+            browserLayout.removeView(this.browser);
         }
-        //Prevent onDestroy to avoid exception of illegalArgument: receiver not registered
-        if (mXwalkView != null) {
-            mXwalkView.onDestroy();
-        }
+        super.onDestroy();
     }
 
 }

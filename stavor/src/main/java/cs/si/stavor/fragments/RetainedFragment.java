@@ -3,6 +3,8 @@ package cs.si.stavor.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import org.xwalk.core.XWalkView;
+
 import cs.si.stavor.simulator.Simulator;
 
 /**
@@ -11,7 +13,8 @@ import cs.si.stavor.simulator.Simulator;
  *
  */
 public class RetainedFragment extends Fragment {
-    private Simulator sim;
+    private Simulator simulator;
+    private XWalkView browser;
 
     // this method is only called once for this fragment
     @Override
@@ -21,12 +24,17 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setData(Simulator data) {
-    	this.sim = data;
+    public void setData(XWalkView browser, Simulator simulator) {
+        this.browser = browser;
+    	this.simulator = simulator;
     }
 
-    public Simulator getSim() {
-        return sim;
+    public Simulator getSimulator() {
+        return simulator;
+    }
+
+    public XWalkView getBrowser() {
+        return browser;
     }
 
 
