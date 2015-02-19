@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="style/css/views.css"/>
 	<link rel="stylesheet" href="style/css/map.css"/>
 	<link rel="stylesheet" href="style/css/leds.css"/>
+	<link rel="stylesheet" href="style/css/effects.css"/>
     <link rel="stylesheet" href="style/css/OpenLayers/style.css" type="text/css">
     <link rel="stylesheet" href="style/css/OpenLayers/style.mobile.css" type="text/css">
 	
@@ -327,8 +328,10 @@
 		function switchMissionsListStatus(){
 			if(global_missions_list_is_open){
 				document.getElementById("DivMissions").className = "close";
+				document.getElementById("MissionsListButton").className = "effectShake";
 			}else{
 				document.getElementById("DivMissions").className = "open";
+				document.getElementById("MissionsListButton").className = "";
 			}
 			global_missions_list_is_open = !global_missions_list_is_open;
 		}
@@ -774,7 +777,7 @@
 	<div id="ForwardButton" class="SimControlRight active" title="Forward simulation" onclick="global_simulator.forwardButtonClicked()"></div>
 </div>
 <div id="DivClock" >
-	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/><span id="SimTime">2014-01-01 20:00:33.1 UTC</span>
+	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/><span id="SimTime">0000-00-00 00:00:00.000</span>
 </div>
 <div id="LedMap" class="Led LedUnselected" />
 <div id="LedOrbit" class="Led LedUnselected"/>
