@@ -448,7 +448,8 @@ public class Simulator {
         boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
         if(!remote){
             try {
-                thread_local.setCurrentSimulationProgress(percentage);
+                if(thread_local != null)
+                    thread_local.setCurrentSimulationProgress(percentage);
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -459,7 +460,10 @@ public class Simulator {
         boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
         if(!remote){
             try {
-                return thread_local.getSimulationProgress();
+                if(thread_local != null)
+                    return thread_local.getSimulationProgress();
+                else
+                    return 0;
             }catch(Exception e){
                 e.printStackTrace();
                 return 0;

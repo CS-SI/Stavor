@@ -53,10 +53,15 @@ AndroidInterface.prototype.accelerateButtonClicked = function(){
 		  }
    	}
 }
-AndroidInterface.prototype.progressValueChanged = function(value){
+AndroidInterface.prototype.progressValueChanged = function(perc){
 	if (typeof Android != "undefined"){ // check the bridge 
 		  if (Android.progressValueChanged!= "undefined") { // check the method
-			 Android.progressValueChanged(value);
+			var json = JSON.stringify(new MyInteger(perc));
+			 Android.missionProgressValueChanged(json);
 		  }
    	}
+}
+
+var MyInteger = function(value){
+	this.value = value;
 }

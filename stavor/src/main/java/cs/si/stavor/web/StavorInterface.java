@@ -27,7 +27,7 @@ public final class StavorInterface {
     private XWalkView browser;
     private Simulator simulator;
     private Gson gson = new Gson();
-    JsonParser parser = new JsonParser();
+    //JsonParser parser = new JsonParser();
     private TimeScale timeScale;
 
     /** Instantiate the interface and set the context */
@@ -39,6 +39,13 @@ public final class StavorInterface {
         } catch (OrekitException e) {
             e.printStackTrace();
         }
+    }
+
+    @JavascriptInterface
+    public void missionProgressValueChanged(String json_percentage) {
+        MyInteger obj_integer = gson.fromJson(json_percentage,MyInteger.class);
+        simulator.setCurrentSimulationProgress(obj_integer.value);
+        updateGuiControls();
     }
 
     @JavascriptInterface
@@ -110,12 +117,6 @@ public final class StavorInterface {
     @JavascriptInterface
     public void accelerateButtonClicked() {
         simulator.doAccelerateSimulation();
-        updateGuiControls();
-    }
-
-    @JavascriptInterface
-    public void progressValueChanged(int percentage) {
-        simulator.setCurrentSimulationProgress(percentage);
         updateGuiControls();
     }
 
