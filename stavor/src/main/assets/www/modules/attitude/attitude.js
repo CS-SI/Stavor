@@ -13,7 +13,7 @@ if ( Detector.webgl ){
 	//canvasMode(1);
 }
 //att_renderer.setClearColor(0xff0000, 1);
-att_renderer.setSize(window.innerWidth, window.innerHeight);
+att_renderer.setSize(global_window.width, global_window.height);
 att_container = document.getElementById( 'attitude' );
 att_container.innerHTML = "";
 att_container.appendChild( att_renderer.domElement );
@@ -1089,7 +1089,7 @@ var Attitude = function ()
 		// SCENE
 		scene = new THREE.Scene();
 		// CAMERA
-		var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+		var SCREEN_WIDTH = global_window.width, SCREEN_HEIGHT = global_window.height;
 		var VIEW_ANGLE = cam_view_angle, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = cam_rend_near, FAR = cam_rend_far;
 		camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 		scene.add(camera);
@@ -1601,20 +1601,10 @@ var Attitude = function ()
 		camera.lookAt(scene.position);
 	}
 	function onWindowResize(){
-
-		/*camera.aspect = window.innerWidth / window.innerHeight;
+		camera.aspect = global_window.width / global_window.height;
 		camera.updateProjectionMatrix();
 
-		att_renderer.setSize( window.innerWidth, window.innerHeight );
-
-		controls.handleResize();
-
-		render();
-		*/
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-
-		att_renderer.setSize( window.innerWidth, window.innerHeight );
+		att_renderer.setSize( global_window.width, global_window.height );
 
 		controls.handleResize();
 

@@ -75,6 +75,7 @@
 		var start_time;
 		window.onload = function () {
 			start_time = new Date().getTime();
+			//computeWindowSize();
 				setLoadingText("Loading Configuration...");
 			loadStoredVariables();
 			
@@ -99,9 +100,25 @@
 			drawStationsList();
 			
 			global_simulator = new Simulator();
-			
 			loadOrekitFilesText();
 		}
+		
+		/*function computeWindowSize(){
+			global_window.width = window.innerWidth * window.devicePixelRatio;
+			global_window.height = window.innerHeight * window.devicePixelRatio;
+		}*/
+		
+		/*function showSizes(){
+			var str = "";
+			str += "PixelRatio: "+window.devicePixelRatio;
+			str += "Window inner: ( "+window.innerWidth+", "+window.innerHeight+" )";
+			str += "Screen: ( "+screen.width+", "+screen.height+" )";
+			var body = document.body;
+			str += "Body client: ( "+body.clientWidth+", "+body.clientHeight+" )";
+			var div = document.getElementById("DivAttitude");
+			str += "Div client: ( "+div.clientWidth+", "+div.clientHeight+" )";
+			alert(str);
+		}*/
 		
 		function loadStoredVariables(){
 			var serialized = localStorage.getItem('simulationConfig'); 
