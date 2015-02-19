@@ -5,8 +5,8 @@
 	margin: 0;
 	left: 0;
 	bottom: 0;
-	height: 30px;
-	line-height: 30px;
+	height: 40px;
+	line-height: 40px;
     border-radius: 0px 10px 0px 0px;
 	width: 75%;
 	min-width: 20%;
@@ -47,8 +47,8 @@
 .SimControl{
 	position: relative;
 	float: left;
-	width: 24px;
-	height: 24px;
+	width: 34px;
+	height: 34px;
 	/*margin: 0 0 5px 5px;*/
 	margin-left: 5px;
 	margin-top: 3px;
@@ -62,8 +62,8 @@
 .SimControlLeft{
 	float: left;
 	position: relative;
-	width: 24px;
-	height: 24px;
+	width: 34px;
+	height: 34px;
 	margin: 3px 2px 3px 5px;
 	padding: 0px;
 	vertical-align:middle;
@@ -74,8 +74,8 @@
 .SimControlRight{
 	float: left;
 	position: relative;
-	width: 24px;
-	height: 24px;
+	width: 34px;
+	height: 34px;
 	margin: 3px 5px 3px 2px;
 	padding: 0px;
 	vertical-align:middle;
@@ -105,20 +105,20 @@
 }
 #TimeBar{
 	position: relative;
-	width: calc(100% - 195px);
+	width: calc(100% - 255px);
 	min-width: 50px;
 	float: left;
 	vertical-align:middle;
 	margin-left: 5px;
 	margin-right: 5px;
-	margin-top: 13px;
+	margin-top: 18px;
 }
 #DivClock{
 	position: absolute;
 	margin: 0;
 	/*padding: 0.1%;*/
 	left: 0;
-	bottom: 30px;
+	bottom: 40px;
 	
 	
     display: block;
@@ -151,17 +151,17 @@ input[type=range]::-webkit-slider-runnable-track {
     height: 5px;
     background: #888;
     border: none;
-    border-radius: 3px;
+    border-radius: 0px;
 }
 
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
-    height: 16px;
-    width: 16px;
+    height: 26px;
+    width: 26px;
     border-radius: 50%;
     background: #DDDDDD;
-    margin-top: -6px;
+    margin-top: -11px;
 	box-shadow: 1px -1px 2px #000;
 }
 
