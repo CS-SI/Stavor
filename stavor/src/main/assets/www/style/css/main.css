@@ -193,7 +193,7 @@ ol li{
 	}	
 	.InfoPanelOpened{
 		height: auto;
-		width: 250px;
+		width: 360px;
 	}
 	.tabs > ul > li{
 		font-size: 0.8em;
@@ -235,7 +235,7 @@ ol li{
 	}	
 	.InfoPanelOpened{
 		height: auto;
-		width: 500px;
+		width: 600px;
 	}
 }
 /* #### Landscape Tablet #### */
@@ -327,11 +327,12 @@ ol li{
 	left: 0;
 	right: 0;
 	top: 0;
-	background-color:rgba(255, 255, 255, 0.1);
+	background-color:rgba(255, 255, 255, 0.2);
 	z-index: 500;
 	/*box-shadow: 1px 1px 8px #999999;*/
 	border-radius: 0 0 10px 10px;
 	cursor: pointer;
+	max-width: 100%;
 	
     -webkit-transition: height 0.8s ease, width 0.5s ease;
     -moz-transition: height 0.8s ease, width 0.5s ease;

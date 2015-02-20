@@ -376,27 +376,6 @@
 			global_menus.global.isOpen = !global_menus.global.isOpen;
 		}
 		
-		function updateInfoPanel(force){
-			if(global_menus.info_panel.isOpen || force){
-				var results = global_simulation.results.info_panel;
-				var ip_roll = document.getElementById("IpRoll");
-				var ip_pitch = document.getElementById("IpPitch");
-				var ip_yaw = document.getElementById("IpYaw");
-				var ip_vel = document.getElementById("IpVel");
-				var ip_accel = document.getElementById("IpAccel");
-				var ip_mass = document.getElementById("IpMass");
-				var ip_radius = document.getElementById("IpRadius");
-				
-				ip_roll.innerHTML = results.attitude.roll.toPrecision(3)+"°";
-				ip_pitch.innerHTML = results.attitude.pitch.toPrecision(3)+"°";
-				ip_yaw.innerHTML = results.attitude.yaw.toPrecision(3)+"°";
-				ip_vel.innerHTML = results.velocity.toPrecision(3)+" Km/s";
-				ip_accel.innerHTML = results.acceleration.toPrecision(3)+" Km/s2";
-				ip_mass.innerHTML = results.mass.toPrecision(4)+" Kg";
-				ip_radius.innerHTML = results.orb_radius.toPrecision(6)+" Km";
-			}
-		}
-		
 		function setAttitudeReloaded(){
 			var div = document.getElementById("AttitudeMenuLoading");
 			div.style.display = "none";
