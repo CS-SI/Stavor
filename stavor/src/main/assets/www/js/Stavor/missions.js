@@ -386,7 +386,7 @@ function saveMissionEditor(){
 
 function closeMissionEditor(){
 	if(global_menus.mission.isOpen){
-		$( "#MissionEditorBackground" ).fadeOut( "slow", function() {
+		$( "#MissionEditorBackground" ).fadeOut( "fast", function() {
 			// Animation complete.
 		  });
 		global_menus.mission.isOpen = !global_menus.mission.isOpen;
@@ -400,7 +400,7 @@ function openMissionEditor(id){
 				if(id == -1){//Create mode
 					var mission = new Mission();
 					updateMissionEditor(mission,id);
-					$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
+					$( "#MissionEditorBackground" ).fadeIn( "fast", function() {
 						// Animation complete.
 					  });
 					global_menus.mission.isOpen = !global_menus.mission.isOpen;
@@ -409,7 +409,7 @@ function openMissionEditor(id){
 				}else{//Edit Mode
 					var mission = JSON.parse(results.rows.item(0).json);
 					updateMissionEditor(mission,id);
-					$( "#MissionEditorBackground" ).fadeIn( "slow", function() {
+					$( "#MissionEditorBackground" ).fadeIn( "fast", function() {
 						// Animation complete.
 					  });
 					global_menus.mission.isOpen = !global_menus.mission.isOpen;
