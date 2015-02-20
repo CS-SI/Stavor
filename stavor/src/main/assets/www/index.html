@@ -681,10 +681,10 @@
 		</ol>
 	</div>
 	<div id="MissionsMenu">
-		<div class="MissionsMenuItem"><div id="SelectMissionButton" class="MissionsMenuButton"  title="Select Mission" onclick="onSelectMissionButtonClicked()"></div></div>
-		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/new.png" title="Create Mission" onclick="openMissionEditor(-1)"/></div>
-		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission" onclick="openMissionEditor(global_missions.active)"/></div>
-		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission" onclick="onDeleteMissionButtonClicked()"/></div>
+		<div class="MissionsMenuItem" onclick="onSelectMissionButtonClicked()" style="cursor: pointer;"><div id="SelectMissionButton" class="MissionsMenuButton"  title="Select Mission"></div></div>
+		<div class="MissionsMenuItem" onclick="openMissionEditor(-1)" style="cursor: pointer;"><input class="MissionsMenuButton" type="image" src="style/icons/new.png" title="Create Mission"/></div>
+		<div class="MissionsMenuItem" onclick="openMissionEditor(global_missions.active)" style="cursor: pointer;"><input class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission"/></div>
+		<div class="MissionsMenuItem" onclick="onDeleteMissionButtonClicked()" style="cursor: pointer;"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission"/></div>
 	</div>
 </div>
 

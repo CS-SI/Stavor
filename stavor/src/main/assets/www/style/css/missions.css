@@ -121,10 +121,13 @@
 }
 .MissionsMenuItem{
 	display: inline-block;
-	width: calc(25% - 3px);
+	width: calc(25% - 0px);
 	height: 100%;
 	text-align: center;
 	float: left;
+}
+.MissionsMenuItem:active{
+	background-color: rgba(0, 0, 0, 0.7);
 }
 
 .MissionsMenuButton{
