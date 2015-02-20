@@ -21,8 +21,8 @@ android {
     buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "cs.si.stavor"
-        versionCode 210
-        versionName "2.1.0"
+        versionCode 211
+        versionName "2.1.1"
         minSdkVersion 14
         targetSdkVersion 21
         // Enabling multidex support.
