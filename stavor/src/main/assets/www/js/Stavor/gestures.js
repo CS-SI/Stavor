@@ -72,10 +72,7 @@ function initializeMissionPanGestures(){
 		//console.log(ev);
 		var dist = ev.deltaX;
 		if(dist<0 && global_missions_list_is_open){
-			$('#DivMissions').animate({
-				left: '-300px'
-			},"slow");
-			global_missions_list_is_open = !global_missions_list_is_open;
+			switchMissionsListStatus();
 		}
 	});
 	hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 20 });
