@@ -22,21 +22,32 @@ var Simulator = function(){
 		PROGRESS: document.getElementById("TimeBar")
 	}
 	
-	this.sim_state = {
+	/*this.sim_state = {
 		state: this.enum_simulation_status.STOPPED,
 		sense: this.enum_simulation_sense.FORWARD
-	}
+	}*/
+	this.isConnected = false;
 	
 	this.sim_interface = new AndroidInterface(this);
 }
 //****************************************************************************
 //                         From Stavor to Simulator  --> (Control widgets callbacks)
 //****************************************************************************
+function warningSelectMission(){
+	alert("Select a mission first!");
+	if(!global_missions_list_is_open){
+		switchMissionsListStatus();
+	}
+}
 Simulator.prototype.changeMission = function(mission){
 	this.sim_interface.changeMission(mission);
 }
 Simulator.prototype.playButtonClicked = function(){
-	this.sim_interface.playButtonClicked();
+	if(this.isConnected){
+		this.sim_interface.playButtonClicked();
+	}else{
+		warningSelectMission();
+	}
 }
 Simulator.prototype.stopButtonClicked = function(){
 	this.sim_interface.stopButtonClicked();
@@ -147,6 +158,7 @@ Simulator.prototype.updateIndicators = function(){
 
 Simulator.prototype.updateSimulatorState = function(json_state){//Update GUI controls
 	var state = JSON.parse(json_state);
+	this.isConnected = state.isConnected;
 	if(state.isConnected){
 		if(state.isStopped){
 			this.controls.PLAY.className = "SimControl SimPlay";
@@ -164,16 +176,35 @@ Simulator.prototype.updateSimulatorState = function(json_state){//Update GUI con
 				this.controls.PROGRESS.className = "SimProgressEnabled";
 			}
 		}
+		
+		if(state.isForward){
+			this.controls.FORWARD.className = "SimControlRight active";
+			this.controls.REVERSE.className = "SimControlLeft";
+		}else{
+			this.controls.REVERSE.className = "SimControlLeft active";
+			this.controls.FORWARD.className = "SimControlRight";
+		}
+		this.controls.PROGRESS.disabled = false;
+		
+		this.controls.ACCEL.className = "SimControlLeft";
+		this.controls.SLOW.className = "SimControlLeft";
 	}else{
-		//TODO
+		this.controls.STOP.className = "SimControl SimStopDisabled";
+		this.controls.PLAY.className = "SimControl SimPlayDisabled";
+		this.controls.PROGRESS.disabled = true;
+		
+		this.controls.ACCEL.className = "SimControlLeft disabled";
+		this.controls.SLOW.className = "SimControlLeft disabled";
+		
+		if(state.isForward){
+			this.controls.FORWARD.className = "SimControlRight active disabled";
+			this.controls.REVERSE.className = "SimControlLeft disabled";
+		}else{
+			this.controls.REVERSE.className = "SimControlLeft active disabled";
+			this.controls.FORWARD.className = "SimControlRight disabled";
+		}
 	}
-	if(state.isForward){
-		this.controls.FORWARD.className = "SimControlRight active";
-		this.controls.REVERSE.className = "SimControlLeft";
-	}else{
-		this.controls.REVERSE.className = "SimControlLeft active";
-		this.controls.FORWARD.className = "SimControlRight";
-	}
+	
 	this.controls.PROGRESS.value = state.progress;
 }
 

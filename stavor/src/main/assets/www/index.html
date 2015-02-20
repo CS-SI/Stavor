@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>STAVOR v3.0.0</title>
+	<title>STAVOR</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="icon" href="style/icons/capsule.png" />
+	<link rel="icon" href="style/icons/launcher.png" />
 	<link rel="stylesheet" href="style/css/main.css"/>
 	<link rel="stylesheet" href="style/css/toolbar.css"/>
 	<link rel="stylesheet" href="style/css/tabs.css"/>
@@ -76,6 +76,7 @@
 		var start_time;
 		window.onload = function () {
 			start_time = new Date().getTime();
+			initializeSplashScreen();
 			//computeWindowSize();
 				setLoadingText("Loading Configuration...");
 			loadStoredVariables();
@@ -102,6 +103,11 @@
 			
 			global_simulator = new Simulator();
 			loadOrekitFilesText();
+		}
+		
+		function initializeSplashScreen(){
+			var version_div = document.getElementById("SplashVersion");
+			version_div.innerHTML = "v"+parameters.version;
 		}
 		
 		/*function computeWindowSize(){
@@ -329,9 +335,11 @@
 			if(global_missions_list_is_open){
 				document.getElementById("DivMissions").className = "close";
 				document.getElementById("MissionsListButton").className = "effectShake";
+				document.getElementById("SelectMissionButton").className = "";
 			}else{
 				document.getElementById("DivMissions").className = "open";
 				document.getElementById("MissionsListButton").className = "";
+				document.getElementById("SelectMissionButton").className = "effectShakeSelect";
 			}
 			global_missions_list_is_open = !global_missions_list_is_open;
 		}
@@ -419,6 +427,7 @@
 <body>
 
 <div id="Splash">
+	<div id="SplashVersion" ></div>
 	<div id="SplashLoading">Starting Stavor...</div>
 </div>
 
@@ -693,7 +702,7 @@
 		</ol>
 	</div>
 	<div id="MissionsMenu">
-		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/select.png" title="Select Mission" onclick="onSelectMissionButtonClicked()"/></div>
+		<div class="MissionsMenuItem"><div id="SelectMissionButton" class="MissionsMenuButton"  title="Select Mission" onclick="onSelectMissionButtonClicked()"></div></div>
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/new.png" title="Create Mission" onclick="openMissionEditor(-1)"/></div>
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission" onclick="openMissionEditor(global_missions.active)"/></div>
 		<div class="MissionsMenuItem"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission" onclick="onDeleteMissionButtonClicked()"/></div>
@@ -766,18 +775,22 @@
 	
 <div id="DivToolbar" >
 	
-	<div id="PlayButton" class="SimControl SimPlay"  title="Play/Pause simulator" onclick="global_simulator.playButtonClicked()"></div>
+	<div id="PlayButton" class="SimControl SimPlayDisabled"  title="Play/Pause simulator" onclick="global_simulator.playButtonClicked()"></div>
 	<div id="StopButton" class="SimControl SimStopDisabled"  title="Stop simulator" onclick="global_simulator.stopButtonClicked()"></div>
 	
-	<input id="TimeBar" type="range" min="0" max="100" value="0"  title="Simulation time"  onclick="global_simulator.progressValueChanged(this.value)"/><!--disabled="true"-->
-	<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation" onclick="global_simulator.accelerateButtonClicked()"/>
-	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation" onclick="global_simulator.slowButtonClicked()"/>
+	<input id="TimeBar" class="SimRangeDisabled" type="range" min="0" max="100" value="0"  title="Simulation time"  onclick="global_simulator.progressValueChanged(this.value)" disabled="true"/><!--disabled="true"-->
 	
-	<div id="ReverseButton" class="SimControlLeft"  title="Reverse simulation" onclick="global_simulator.reverseButtonClicked()"></div>
-	<div id="ForwardButton" class="SimControlRight active" title="Forward simulation" onclick="global_simulator.forwardButtonClicked()"></div>
+	<!--<input id="AccelButton" class="SimControlLeft" type="image" src="style/icons/accelerate.png" title="Accelerate simulation" onclick="global_simulator.accelerateButtonClicked()"/>
+	<input id="SlowButton" class="SimControlRight" type="image" src="style/icons/slow.png" title="Slow down simulation" onclick="global_simulator.slowButtonClicked()"/>-->
+	<div id="AccelButton" class="SimControlLeft disabled" title="Accelerate simulation" onclick="global_simulator.accelerateButtonClicked()"></div>
+	<div id="SlowButton" class="SimControlRight disabled" title="Slow down simulation" onclick="global_simulator.slowButtonClicked()"></div> 
+	
+	<div id="ReverseButton" class="SimControlLeft disabled"  title="Reverse simulation" onclick="global_simulator.reverseButtonClicked()"></div>
+	<div id="ForwardButton" class="SimControlRight active disabled" title="Forward simulation" onclick="global_simulator.forwardButtonClicked()"></div>
 </div>
 <div id="DivClock" >
-	<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/><span id="SimTime">0000-00-00 00:00:00.000</span>
+	<!--<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/><span id="SimTime">0000-00-00 00:00:00.000</span>-->
+	<div  id="MissionsListButton" class="" title="Mission list" onclick="switchMissionsListStatus()"></div><span id="SimTime">0000-00-00 00:00:00.000</span>
 </div>
 <div id="LedMap" class="Led LedUnselected" />
 <div id="LedOrbit" class="Led LedUnselected"/>

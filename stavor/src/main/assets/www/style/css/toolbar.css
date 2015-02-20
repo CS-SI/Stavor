@@ -15,12 +15,55 @@
 	background-color:rgba(150, 150, 150, 0.32);
 	box-shadow: 2px -2px 3px #333;
 }
+#AccelButton{
+	background-image:  url(../icons/accelerate.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+#SlowButton{
+	background-image:  url(../icons/slow.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+#AccelButton:active{
+	background-image:  url(../icons/accelerate_d.png)!important;
+}
+#SlowButton:active{
+	background-image:  url(../icons/slow_d.png)!important;
+}
+#AccelButton.disabled{
+	background-image:  url(../icons/accelerate_d.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: default;
+	background-color:rgba(0, 0, 0, 0.5) !important;
+}
+#SlowButton.disabled{
+	background-image:  url(../icons/slow_d.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: default;
+	background-color:rgba(0, 0, 0, 0.5) !important;
+}
 .SimPlay{
 	background-image:  url(../icons/play.png);
 	background-size:   contain;                      /* <------ cover/contain */
     background-repeat: no-repeat;
     background-position: center center; 
 	cursor: pointer;
+}
+.SimPlayDisabled{
+	background-image:  url(../icons/play_d.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center;
+	background-color:rgba(0, 0, 0, 0.5) !important;
 }
 .SimPause{
 	background-image:  url(../icons/pause.png);
@@ -37,12 +80,17 @@
 	cursor: pointer;
 }
 .SimStopDisabled{
-	background-image:  url(../icons/stop.png);
+	background-image:  url(../icons/stop_d.png);
 	background-size:   contain;                      /* <------ cover/contain */
     background-repeat: no-repeat;
     background-position: center center; 
+	background-color:rgba(0, 0, 0, 0.5) !important;
 }
 #StopButton:active{
+	background-image:  url(../icons/stop_d.png)!important;
+}
+#PlayButton:active{
+	background-image:  url(../icons/play_d.png)!important;
 }
 .SimControl{
 	position: relative;
@@ -103,6 +151,22 @@
 #ForwardButton.active{
 	background-image:  url(../icons/forward_a.png);
 }
+#ReverseButton.active.disabled{
+	background-image:  url(../icons/reverse_ad.png);
+	background-color:rgba(0, 0, 0, 0.5) !important;
+}
+#ForwardButton.active.disabled{
+	background-image:  url(../icons/forward_ad.png);
+	background-color:rgba(0, 0, 0, 0.5) !important;
+}
+#ReverseButton.disabled{
+	background-image:  url(../icons/reverse_d.png);
+	background-color:rgba(0, 0, 0, 0.5) !important;
+}
+#ForwardButton.disabled{
+	background-image:  url(../icons/forward_d.png);
+	background-color:rgba(0, 0, 0, 0.5) !important;
+}
 #TimeBar{
 	position: relative;
 	width: calc(100% - 255px);
@@ -137,9 +201,19 @@
 }
 
 #SimTime{
+	position: relative;
+	float: right;
 	padding-left: 10px;
 	padding-right: 10px;
 	font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+}
+
+input[type=range].SimRangeDisabled::-webkit-slider-runnable-track{
+    background: #111 !important;
+}
+
+input[type=range].SimRangeDisabled::-webkit-slider-thumb{
+    background: #666666 !important;
 }
 
 input[type=range]{
@@ -163,12 +237,12 @@ input[type=range]::-webkit-slider-thumb {
     background: #DDDDDD;
     margin-top: -11px;
 	box-shadow: 1px -1px 2px #000;
-}
-
-input[type=range]:focus {
-    outline: none;
+	cursor: pointer;
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
     background: #888;
+}
+input[type=range]:focus {
+    outline: none;
 }

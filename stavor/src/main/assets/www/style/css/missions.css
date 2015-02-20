@@ -1,3 +1,15 @@
+#SelectMissionButton{
+	background-color:transparent;	
+	background-image:  url(../icons/select.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+	height: 20px;
+	/*width: 26px;*/
+	margin: 5px;
+	/*text-align: center;*/
+}
 .MissionField{
 	padding: 2px 0px 2px 10px;
     border: 0;
@@ -13,13 +25,20 @@
 
 #MissionsListButton{
 	position: relative;
-	height: 20px;
+	height: 24px;
 	margin-left: 2px;
-	padding-top: 3px;
-	padding-bottom: 5px;
-	width: auto;
+	padding-top: 1px;
+	padding-bottom: 3px;
+	width: 24px;
 	background-color: black;
 	vertical-align:middle;
+	float: left;
+	background-color:transparent;	
+	background-image:  url(../icons/list.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
 }
 #MissionsListClose{
 	display:inline-block;

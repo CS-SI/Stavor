@@ -251,6 +251,15 @@ ol li{
 	}
 }
 
+#SplashVersion{
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: #E6E616;
+	font-family: Stavor, Helvetica, Verdana, Sans-Serif;
+	font-size: 0.7em;
+}
+
 .MenuButton{
 	position: absolute;
 	height: 50px;
