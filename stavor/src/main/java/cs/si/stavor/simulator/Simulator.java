@@ -98,6 +98,13 @@ public class Simulator {
 	 */
 	public void setSelectedMission(Mission mis){
         disconnect();
+        while(simulatorStatus.equals(SimulatorStatus.Connected)){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 		mission = mis;
         connect();
 	}

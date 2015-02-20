@@ -52,7 +52,6 @@ public class ThreadLocal extends Thread{
 				setConnected();
 				clearBrowserPath();
         	    simulator.showMessage(simulator.getContext().getString(R.string.sim_local_simulator_connected));
-                simulator.updateGuiControls();
         	} catch (OrekitException e) {
         		e.printStackTrace();
         		simulator.showMessage(simulator.getContext().getString(R.string.sim_orekit_init_error)+": "+e.getMessage());
@@ -150,12 +149,15 @@ public class ThreadLocal extends Thread{
     private void setConnected(){
     	//Log.d("Sim",System.currentTimeMillis()+": "+"Simulator connected");
     	simulator.setSimulatorStatus(SimulatorStatus.Connected);
+        simulator.updateGuiControls();
     }
     
     public void setDisconnected(){
 		//Log.d("Sim",System.currentTimeMillis()+": "+"Simulator disconnected");
     	simulator.setSimulatorStatus(SimulatorStatus.Disconnected);
     	//simulator.resetSelectedMissionId();
+        progress = 0;
+        simulator.updateGuiControls();
     }
     
     private Frame inertialFrame; 
