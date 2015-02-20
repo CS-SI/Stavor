@@ -50,19 +50,39 @@ Simulator.prototype.playButtonClicked = function(){
 	}
 }
 Simulator.prototype.stopButtonClicked = function(){
-	this.sim_interface.stopButtonClicked();
+	if(this.isConnected){
+		this.sim_interface.stopButtonClicked();
+	}else{
+		warningSelectMission();
+	}
 }
 Simulator.prototype.reverseButtonClicked = function(){
-	this.sim_interface.reverseButtonClicked();
+	if(this.isConnected){
+		this.sim_interface.reverseButtonClicked();
+	}else{
+		warningSelectMission();
+	}
 }
 Simulator.prototype.forwardButtonClicked = function(){
-	this.sim_interface.forwardButtonClicked();
+	if(this.isConnected){
+		this.sim_interface.forwardButtonClicked();
+	}else{
+		warningSelectMission();
+	}
 }
 Simulator.prototype.accelerateButtonClicked = function(){
-	this.sim_interface.accelerateButtonClicked();
+	if(this.isConnected){
+		this.sim_interface.accelerateButtonClicked();
+	}else{
+		warningSelectMission();
+	}
 }
 Simulator.prototype.slowButtonClicked = function(){
-	this.sim_interface.slowButtonClicked();
+	if(this.isConnected){
+		this.sim_interface.slowButtonClicked();
+	}else{
+		warningSelectMission();
+	}
 }
 Simulator.prototype.progressValueChanged = function(value){
 	this.sim_interface.progressValueChanged(value);
@@ -187,14 +207,14 @@ Simulator.prototype.updateSimulatorState = function(json_state){//Update GUI con
 		this.controls.PROGRESS.disabled = false;
 		
 		this.controls.ACCEL.className = "SimControlLeft";
-		this.controls.SLOW.className = "SimControlLeft";
+		this.controls.SLOW.className = "SimControlRight";
 	}else{
 		this.controls.STOP.className = "SimControl SimStopDisabled";
 		this.controls.PLAY.className = "SimControl SimPlayDisabled";
 		this.controls.PROGRESS.disabled = true;
 		
 		this.controls.ACCEL.className = "SimControlLeft disabled";
-		this.controls.SLOW.className = "SimControlLeft disabled";
+		this.controls.SLOW.className = "SimControlRight disabled";
 		
 		if(state.isForward){
 			this.controls.FORWARD.className = "SimControlRight active disabled";
@@ -206,5 +226,26 @@ Simulator.prototype.updateSimulatorState = function(json_state){//Update GUI con
 	}
 	
 	this.controls.PROGRESS.value = state.progress;
+}
+
+function updateInfoPanel(force){
+	if(global_menus.info_panel.isOpen || force){
+		var results = global_simulation.results.info_panel;
+		var ip_roll = document.getElementById("IpRoll");
+		var ip_pitch = document.getElementById("IpPitch");
+		var ip_yaw = document.getElementById("IpYaw");
+		var ip_vel = document.getElementById("IpVel");
+		var ip_accel = document.getElementById("IpAccel");
+		var ip_mass = document.getElementById("IpMass");
+		var ip_radius = document.getElementById("IpRadius");
+		
+		ip_roll.innerHTML = results.attitude.roll.toFixed(2)+"°";
+		ip_pitch.innerHTML = results.attitude.pitch.toFixed(2)+"°";
+		ip_yaw.innerHTML = results.attitude.yaw.toFixed(2)+"°";
+		ip_vel.innerHTML = results.velocity.toFixed(2)+" Km/s";
+		ip_accel.innerHTML = results.acceleration.toFixed(2)+" Km/s2";
+		ip_mass.innerHTML = results.mass.toFixed(1)+" Kg";
+		ip_radius.innerHTML = results.orb_radius.toFixed(0)+" Km";
+	}
 }
 

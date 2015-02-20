@@ -45,7 +45,7 @@ public final class StavorInterface {
     public void missionProgressValueChanged(String json_percentage) {
         MyInteger obj_integer = gson.fromJson(json_percentage,MyInteger.class);
         simulator.setCurrentSimulationProgress(obj_integer.value);
-        updateGuiControls();
+        //updateGuiControls();
     }
 
     @JavascriptInterface
@@ -77,7 +77,7 @@ public final class StavorInterface {
         mission.initial_orbit.lM = obj_mission.initial_orbit.lM;
 
         simulator.setSelectedMission(mission);//If is playing, stop it.
-        updateGuiControls();
+        //updateGuiControls(); set in local_thread after connection
     }
 
     @JavascriptInterface
@@ -87,47 +87,47 @@ public final class StavorInterface {
         else {
             simulator.play();
         }
-        updateGuiControls();
+        simulator.updateGuiControls();
     }
 
     @JavascriptInterface
     public void stopButtonClicked() {
         simulator.stop();
-        updateGuiControls();
+        //updateGuiControls(); set after stop in local thread
     }
 
     @JavascriptInterface
     public void reverseButtonClicked() {
         simulator.setSimulationSense(SimulationSense.Reverse);
-        updateGuiControls();
+        simulator.updateGuiControls();
     }
 
     @JavascriptInterface
     public void forwardButtonClicked() {
         simulator.setSimulationSense(SimulationSense.Forward);
-        updateGuiControls();
+        simulator.updateGuiControls();
     }
 
     @JavascriptInterface
     public void slowButtonClicked() {
         simulator.doSlowSimulation();
-        updateGuiControls();
+        //updateGuiControls();
     }
 
     @JavascriptInterface
     public void accelerateButtonClicked() {
         simulator.doAccelerateSimulation();
-        updateGuiControls();
+        //updateGuiControls();
     }
 
-    private void updateGuiControls() {
+    /*private void updateGuiControls() {
         runOnUiThread(new Runnable() {
             public void run() {
                 String json_state = gson.toJson(simulator.getControlsStatus());
                 browser.evaluateJavascript("global_simulator.updateSimulatorState('"+json_state+"')",null);
             }
         });
-    }
+    }*/
     
     
 }

@@ -472,4 +472,8 @@ public class Simulator {
             return 0;
         }
     }
+
+    public void updateGuiControls() {
+        ((MainActivity)activity).updateGuiControls();
+    }
 }

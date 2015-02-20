@@ -52,6 +52,7 @@ public class ThreadLocal extends Thread{
 				setConnected();
 				clearBrowserPath();
         	    simulator.showMessage(simulator.getContext().getString(R.string.sim_local_simulator_connected));
+                simulator.updateGuiControls();
         	} catch (OrekitException e) {
         		e.printStackTrace();
         		simulator.showMessage(simulator.getContext().getString(R.string.sim_orekit_init_error)+": "+e.getMessage());
@@ -66,6 +67,9 @@ public class ThreadLocal extends Thread{
 						setSimulationParameters();
 						simulator.pause();
 						clearBrowserPath();
+
+                        progress = 0;
+                        simulator.updateGuiControls();
 					}
 					simulator.playCondition.block();
 					if(simulator.cancel){
@@ -258,5 +262,7 @@ public class ThreadLocal extends Thread{
 
     public void setCurrentSimulationProgress(int percentage) {
         extrapDate = new AbsoluteDate(mission.initial_date,mission.sim_duration*percentage/100);
+        progress = (int)(((mission.sim_duration+extrapDate.durationFrom(finalDate))/mission.sim_duration)*100);
+        simulator.updateGuiControls();
     }
 }

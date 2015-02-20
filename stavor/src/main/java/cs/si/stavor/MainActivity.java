@@ -6,6 +6,7 @@ import org.xwalk.core.XWalkView;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.gson.Gson;
 
 import cs.si.stavor.dialogs.ErrorDialogFragment;
 import cs.si.stavor.fragments.RetainedFragment;
@@ -42,6 +43,7 @@ public class MainActivity extends Activity {
 	 * Browser object
 	 */
 	private XWalkView browser;
+    private Gson gson = new Gson();
 
     /**
      * Used to store information during application restart due to configuration
@@ -126,6 +128,15 @@ public class MainActivity extends Activity {
         this.browser.setLayoutParams(browser_params);
         browserLayout.addView(this.browser);
 	}
+
+    public void updateGuiControls() {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                String json_state = gson.toJson(simulator.getControlsStatus());
+                browser.evaluateJavascript("global_simulator.updateSimulatorState('"+json_state+"')",null);
+            }
+        });
+    }
 	
 	private void launchMarket() {
 		//********** Google Analytics ***********
