@@ -193,7 +193,7 @@ ol li{
 	}	
 	.InfoPanelOpened{
 		height: auto;
-		width: 360px;
+		width: 300px;
 	}
 	.tabs > ul > li{
 		font-size: 0.8em;
@@ -235,7 +235,7 @@ ol li{
 	}	
 	.InfoPanelOpened{
 		height: auto;
-		width: 600px;
+		width: 550px;
 	}
 }
 /* #### Landscape Tablet #### */

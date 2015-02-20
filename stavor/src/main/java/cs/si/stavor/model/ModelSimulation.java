@@ -181,9 +181,9 @@ public class ModelSimulation {
         tmp_time = date;
 
         double[] angles = sc_att.getOrientation().getRotation().getAngles(RotationOrder.XYZ);
-        new_state.roll = angles[0];
-        new_state.pitch = angles[1];
-        new_state.yaw = angles[2];
+        new_state.roll = angles[0]*180/Math.PI;
+        new_state.pitch = angles[1]*180/Math.PI;
+        new_state.yaw = angles[2]*180/Math.PI;
 
         new_state.mass = scs.getMass();
 
