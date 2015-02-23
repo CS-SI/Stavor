@@ -195,8 +195,8 @@
 	/*border: 5px solid rgba(255, 255, 255, 0.32);*/
 	width: auto;
 	z-index: 1000;
-	background-color:rgba(0, 0, 20, 1.00);
-	box-shadow: 3px -3px 6px #333;
+	background-color: #111;
+	box-shadow: 1px -1px 6px #333;
 	color: white;
 }
 

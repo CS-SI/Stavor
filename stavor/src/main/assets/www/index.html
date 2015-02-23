@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<link rel="icon" href="style/icons/launcher.png" />
 	<link rel="stylesheet" href="style/css/main.css"/>
+	<link rel="stylesheet" href="style/css/dialog.css"/>
 	<link rel="stylesheet" href="style/css/toolbar.css"/>
 	<link rel="stylesheet" href="style/css/tabs.css"/>
 	<link rel="stylesheet" href="style/css/missions.css"/>
@@ -63,6 +64,7 @@
 	<script type='text/javascript' src="js/Stavor/stations.js"></script>
 	
 	
+	<script type='text/javascript' src="js/Stavor/Dialog.js"></script>
 	<script type='text/javascript' src="js/Stavor/parameters.js"></script>
 	<script type='text/javascript' src="js/Stavor/constants.js"></script>
 	<script type='text/javascript' src="js/Stavor/enums.js"></script>
@@ -751,6 +753,15 @@
 		<p><input id="ResetStationsButton" value="Reset stations database" type="button" onclick="resetStationsDb()" class="stavorDarkButton"/></p>
 	</div>
 </div>
+
+<div id="DivDialogBackground">
+	<div id="DivDialog">
+		<div id="DialogCloseButton" onclick=""></div>
+		<div id="DialogConfirmButton" onclick=""></div>
+		<h4 id="DivDialogTitle" >Stavor says</h4>
+		<p id="DivDialogText" >Question ?</p>
+	</div>
+</div>
 	
 <div id="DivToolbar" >
 	
@@ -769,8 +780,9 @@
 </div>
 <div id="DivClock" >
 	<!--<input id="MissionsListButton" class="" type="image" src="style/icons/list.png" title="Mission list" onclick="switchMissionsListStatus()"/><span id="SimTime">0000-00-00 00:00:00.000</span>-->
-	<div  id="MissionsListButton" class="" title="Mission list" onclick="switchMissionsListStatus()"></div><span id="SimTime">0000-00-00 00:00:00.000</span>
+	<span id="SimTime">0000-00-00 00:00:00.000</span>
 </div>
+<div  id="MissionsListButton" class="" title="Mission list" onclick="switchMissionsListStatus()"></div>
 <div id="LedMap" class="Led LedUnselected" />
 <div id="LedOrbit" class="Led LedUnselected"/>
 <div id="LedAttitude" class="Led LedUnselected"/>

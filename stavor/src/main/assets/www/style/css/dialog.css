@@ -1,0 +1,67 @@
+/* Dialog */
+#DivDialogBackground{
+	display: none;
+	z-index: 25000;
+	position: absolute;
+	left: 0;
+	top:0;
+	width:100%;
+	height:100%;
+	background-color:rgba(0, 0, 0, 0.7);
+}
+
+#DivDialog{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate3d(-50%, -50%, 0);
+	background-color:rgba(255, 255, 255, 0.85);
+	padding:10px;
+	width: 250px;
+	max-width: 90%;
+	height: auto;
+	max-height: 90%;
+	border-radius: 10px;
+	overflow: auto;
+	box-shadow: 1px -1px 6px #333;
+}
+#DialogCloseButton{
+	position: relative;
+	height: 30px;
+	width: 30px;
+	top: 0;
+	right: 0;
+	float:right;
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/close_options.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+
+#DialogCloseButton:active{
+	background-image:  url(../icons/close_options_h.png);
+}
+
+#DialogConfirmButton{
+	position: relative;
+	height: 30px;
+	width: 30px;
+	top: 0;
+	right: 0px;
+	float:right;
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/tick.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+
+#DialogConfirmButton:active{
+	background-image:  url(../icons/tick_h.png);
+}

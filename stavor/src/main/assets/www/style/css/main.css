@@ -428,7 +428,7 @@ ol li{
 	top: 50%;
 	left: 50%;
 	/* bring your own prefixes */
-	transform: translate(-50%, -50%);
+	transform: translate3d(-50%, -50%, 0);
 	background-color:rgba(255, 255, 255, 0.85);
 	padding:10px;
 	width: 250px;
@@ -437,6 +437,7 @@ ol li{
 	max-height: 90%;
 	border-radius: 20px;
 	overflow: auto;
+	box-shadow: 1px -1px 6px #333;
 }
 #ConfigCloseButton{
 	position: relative;
@@ -539,3 +540,4 @@ ol li{
 	position:relative;
 	top:1px;
 }
+

@@ -24,15 +24,17 @@
 }
 
 #MissionsListButton{
-	position: relative;
-	height: 24px;
-	margin-left: 2px;
+	position: absolute;
+	bottom: 70px;
+	left: 0px;
+	height: 50px;
+	z-index: 1000; 
+	width: 50px;
+	margin: 2px;
+	/*margin-left: 2px;
 	padding-top: 1px;
 	padding-bottom: 3px;
-	width: 24px;
-	background-color: black;
-	vertical-align:middle;
-	float: left;
+	vertical-align:middle;*/
 	background-color:transparent;	
 	background-image:  url(../icons/list.png);
 	background-size:   contain;                      /* <------ cover/contain */
