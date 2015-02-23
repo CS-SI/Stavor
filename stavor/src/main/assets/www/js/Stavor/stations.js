@@ -16,19 +16,18 @@ function saveStationsStoredVariables(){
 
 function onDeleteStationButtonClicked(){
 	if(global_stations.active == -1){
-		alert("Click on a station first!");
+		Dialog.showDialog("Stavor says", "Click on a station first!", function(){});
 	}else{
 		db.transaction(function (tx) {
 			tx.executeSql('SELECT name FROM stations WHERE id = '+global_stations.active+';', [], function (tx, results) {	
-				var r = confirm("Delete station "+results.rows.item(0).name+"?");
-				if(r){
+				Dialog.showConfirmDialog("Stavor says","Delete station "+results.rows.item(0).name+"?",function(){
 					db.transaction(function (tx) {
 						tx.executeSql('DELETE FROM stations WHERE id = '+global_stations.active+';', [], function (tx, results) {	
 							global_stations.active = -1;
 							drawStationsList();
 						}, errorDatabaseHandler);
 					});
-				}
+				},function(){});
 			}, errorDatabaseHandler);
 		});
 	}
@@ -94,14 +93,13 @@ function drawStationsList(){
 }
 
 function resetStationsDb(){
-	var r = confirm("Reset stations list to default value?");
-	if(r){
+	Dialog.showConfirmDialog("Stavor says","Reset missions list to default value?",function(){
 		db.transaction(function (tx) {
 			tx.executeSql('DROP TABLE stations', [], function (tx, results) {
 				window.location.reload();
 			}, errorDatabaseHandler);
 		});
-	}
+	},function(){});
 }
 
 function initializeStationsDb(){

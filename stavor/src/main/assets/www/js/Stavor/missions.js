@@ -18,22 +18,21 @@ function saveMissionsStoredVariables(){
 
 function onDeleteMissionButtonClicked(){
 	if(global_missions.active == -1){
-		alert("Click on a mission first!");
+		Dialog.showDialog("Stavor says", "Click on a mission first!", function(){});
 	}else{
 		if(global_missions.active == global_missions.selected){
-			alert("The mission selected for simulation cannot be deleted, please select another mission first!");
+			Dialog.showDialog("Stavor says", "The mission selected for simulation cannot be deleted, please select another mission first!", function(){});
 		}else{
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT name FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
-					var r = confirm("Delete mission "+results.rows.item(0).name+"?");
-					if(r){
+					Dialog.showConfirmDialog("Stavor says","Delete mission "+results.rows.item(0).name+"?",function(){
 						db.transaction(function (tx) {
 							tx.executeSql('DELETE FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
 								global_missions.active = -1;
 								drawMissionsList();
 							}, errorDatabaseHandler);
 						});
-					}
+					},function(){});
 				}, errorDatabaseHandler);
 			});
 		}
@@ -41,18 +40,17 @@ function onDeleteMissionButtonClicked(){
 }
 function onSelectMissionButtonClicked(){
 	if(global_missions.active == -1){
-		alert("Click on a mission first!");
+		Dialog.showDialog("Stavor says", "Click on a mission first!", function(){});
 	}else{
 		if(global_missions.active != global_missions.selected){
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
-					var r = confirm("Select mission "+results.rows.item(0).name+" for simulation? (Simulator will be stopped)");
-					if(r){
+					Dialog.showConfirmDialog("Stavor says","Select mission "+results.rows.item(0).name+" for simulation? (Simulator will be stopped)", function(){
 						global_missions.selected = global_missions.active;
 						styleMissionRows();
 						saveMissionsStoredVariables();
 						global_simulator.changeMission(results.rows.item(0).json);
-					}
+					},function(){});
 				}, errorDatabaseHandler);
 			});
 		}
@@ -130,14 +128,13 @@ function drawMissionsList(){
 }
 
 function resetMissionsDb(){
-	var r = confirm("Reset missions list to default value?");
-	if(r){
+	Dialog.showConfirmDialog("Stavor says","Reset missions list to default value?",function(){
 		db.transaction(function (tx) {
 			tx.executeSql('DROP TABLE missions', [], function (tx, results) {
 				window.location.reload();
 			}, errorDatabaseHandler);
 		});
-	}
+	},function(){});
 }
 
 function initializeMissionsDb(){
@@ -405,7 +402,7 @@ function openMissionEditor(id){
 					  });
 					global_menus.mission.isOpen = !global_menus.mission.isOpen;
 				}else if(id == global_missions.selected){
-					alert("Cannot edit the simulation selected mission, select another one!");
+					Dialog.showDialog("Stavor says", "Cannot edit the simulation selected mission, select another one!", function(){});
 				}else{//Edit Mode
 					var mission = JSON.parse(results.rows.item(0).json);
 					updateMissionEditor(mission,id);

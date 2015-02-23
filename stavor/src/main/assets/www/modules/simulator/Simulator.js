@@ -34,10 +34,12 @@ var Simulator = function(){
 //                         From Stavor to Simulator  --> (Control widgets callbacks)
 //****************************************************************************
 function warningSelectMission(){
-	alert("Select a mission first!");
-	if(!global_missions_list_is_open){
-		switchMissionsListStatus();
-	}
+	//alert("Select a mission first!");
+	Dialog.showDialog("Stavor says","Select a mission first!",function(){		
+		if(!global_missions_list_is_open){
+			switchMissionsListStatus();
+		}
+	});
 }
 Simulator.prototype.changeMission = function(mission){
 	this.sim_interface.changeMission(mission);

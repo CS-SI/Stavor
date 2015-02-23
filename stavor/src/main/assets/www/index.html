@@ -59,6 +59,7 @@
 	<script type='text/javascript' src="modules/simulator/components/Station.js"></script>
 	<script type='text/javascript' src="AndroidInterface.js"></script>
 	<script type='text/javascript' src="modules/simulator/Simulator.js"></script>
+	<script type='text/javascript' src="js/Stavor/Dialog.js"></script>
 	<script type='text/javascript' src="js/Stavor/database.js"></script>
 	<script type='text/javascript' src="js/Stavor/missions.js"></script>
 	<script type='text/javascript' src="js/Stavor/stations.js"></script>
@@ -148,10 +149,9 @@
 		}
 		
 		function resetConfiguration(){
-			var r = confirm("Are you sure?");
-			if (r == true) {
+			Dialog.showDialog("Stavor says","Are you sure?",function(){
 				resetStoredVariables();
-			}
+			},function(){});
 		}
 		
 		function error(text){

@@ -1,39 +1,47 @@
 var Dialog = function (){
-	/*this.title = "Stavor says";
-	this.text = "";
 	
-	this.confirmation = false;
-	this.callback_confirm = "";
-	this.callback_cancel = "";*/
-	
+}
+
+Dialog.showDialog = function(title, message, callbackOk){
 	this.dialog = document.getElementById("DivDialogBackground");
 	this.dialog_title = document.getElementById("DivDialogTitle");
 	this.dialog_text = document.getElementById("DivDialogText");
 	this.confirm_button = document.getElementById("DialogConfirmButton");
 	this.cancel_button = document.getElementById("DialogCloseButton");
-}
-
-Dialog.prototype.showDialog = function(title, message){
-	this.title = title;
-	this.text = message;
-	this.confirmation = false;
 	
 	//Show dialog
-	this.dialog.style.display = "block";
-}
-Dialog.prototype.showDialog = function(message){
-	this.showDialog(this.title, message);
+	this.dialog_title. innerHTML = title;
+	this.dialog_text. innerHTML = message;
+	this.confirm_button.style.display = "none";
+	this.cancel_button.style.display = "block";
+	this.cancel_button.onclick = function(){	
+		callbackOk();
+		$( "#DivDialogBackground" ).fadeOut( "fast", function() {});
+	};
+	
+	$( "#DivDialogBackground" ).fadeIn( "fast", function() {});
 }
 
-Dialog.prototype.showConfirmDialog = function(title, message, callbackOk, callbackCancel){
-	this.title = title;
-	this.text = message;
-	this.confirmation = true;
-	this.callback_confirm = callbackOk;
-	this.callback_cancel = callbackCancel;
-	//Show confirm dialog
+Dialog.showConfirmDialog = function(title, message, callbackOk, callbackCancel){
+	this.dialog = document.getElementById("DivDialogBackground");
+	this.dialog_title = document.getElementById("DivDialogTitle");
+	this.dialog_text = document.getElementById("DivDialogText");
+	this.confirm_button = document.getElementById("DialogConfirmButton");
+	this.cancel_button = document.getElementById("DialogCloseButton");
 	
-}
-Dialog.prototype.showConfirmDialog = function(message, callbackOk, callbackCancel){
-	this.showConfirmDialog(this.title, message, callbackOk, callbackCancel);
+	//Show confirm dialog
+	this.dialog_title. innerHTML = title;
+	this.dialog_text. innerHTML = message;
+	this.cancel_button.style.display = "block";
+	this.cancel_button.onclick = function(){
+		callbackCancel();
+		$( "#DivDialogBackground" ).fadeOut( "fast", function() {});
+	};
+	this.confirm_button.style.display = "block";
+	this.confirm_button.onclick = function(){
+		callbackOk();
+		$( "#DivDialogBackground" ).fadeOut( "fast", function() {});
+	};
+	
+	$( "#DivDialogBackground" ).fadeIn( "fast", function() {});
 }
