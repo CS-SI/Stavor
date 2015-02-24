@@ -26,16 +26,21 @@
 	overflow: auto;
 	box-shadow: 1px -1px 6px #333;
 }
+#DivDialogTitle{
+	text-align: center;
+	line-height: 36px;
+}
 #DialogCloseButton{
 	position: relative;
 	height: 30px;
 	width: 30px;
+	padding: 3px;
 	top: 0;
 	right: 0;
 	float:right;
 	overflow: hidden; 
 	background-color:transparent;	
-	background-image:  url(../icons/close_options.png);
+	background-image:  url(../icons/ok.png);
 	background-size:   contain;                      /* <------ cover/contain */
     background-repeat: no-repeat;
     background-position: center center; 
@@ -43,19 +48,41 @@
 }
 
 #DialogCloseButton:active{
-	background-image:  url(../icons/close_options_h.png);
+	background-image:  url(../icons/ok_h.png);
+}
+
+#DialogCancelButton{
+	position: relative;
+	height: 30px;
+	width: 30px;
+	padding: 3px;
+	top: 0;
+	right: 0;
+	float:right;
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/cancel.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+
+#DialogCancelButton:active{
+	background-image:  url(../icons/cancel_h.png);
 }
 
 #DialogConfirmButton{
 	position: relative;
 	height: 30px;
 	width: 30px;
+	padding: 3px;
 	top: 0;
-	right: 0px;
-	float:right;
+	left: 0px;
+	float:left;
 	overflow: hidden; 
 	background-color:transparent;	
-	background-image:  url(../icons/tick.png);
+	background-image:  url(../icons/confirm.png);
 	background-size:   contain;                      /* <------ cover/contain */
     background-repeat: no-repeat;
     background-position: center center; 
@@ -63,5 +90,5 @@
 }
 
 #DialogConfirmButton:active{
-	background-image:  url(../icons/tick_h.png);
+	background-image:  url(../icons/confirm_h.png);
 }
