@@ -194,6 +194,11 @@ var global_simulation = {
 			}
 		},
 		map:{
+			point: {
+				latitude: 0,
+				longitude: 0,
+				altitude: 0
+			},
 			sun_position:{
 				lat: 0,//In degrees
 				lon: 0//In degrees

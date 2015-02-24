@@ -110,6 +110,7 @@ public class ModelSimulation {
  	private double sensor_aperture = 3;
  	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
     private AbsoluteDate date_tmp = null;
+    ArrayList<LatLon> solarTerminator = new ArrayList<LatLon>();
 
     public void updateSimulation(SpacecraftState scs, int sim_progress){
         //Attitude
@@ -230,9 +231,9 @@ public class ModelSimulation {
             }
 
             //Solar terminator
-            ArrayList<LatLon> solarTerminator = new ArrayList<LatLon>();
             if(date_tmp == null || Math.abs(scs.getDate().durationFrom(date_tmp))>Parameters.Map.solar_terminator_threshold){
                 date_tmp = scs.getDate();
+                solarTerminator = new ArrayList<LatLon>();
 
                 Vector3D s = CelestialBodyFactory.getSun().getPVCoordinates(
                         scs.getDate(),

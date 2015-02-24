@@ -157,6 +157,7 @@ Simulator.prototype.updateMissionState = function(json_state){
 	earth.osculating_orbit.raan = state.value_orbit_raan;
 	
 	var map = global_simulation.results.map;
+	map.point = state.point;
 	map.sun_position.lat = state.sun_lat;
 	map.sun_position.lon = state.sun_lon;
 	map.station_areas = state.stations;
@@ -166,6 +167,11 @@ Simulator.prototype.updateMissionState = function(json_state){
 	map.solarTerminator = state.terminator;
 	
 	this.updateIndicators();
+	this.triggerManualVisualizationsUpdate();
+}
+
+Simulator.prototype.triggerManualVisualizationsUpdate = function(){
+	global_map.updateModelState();
 }
 
 Simulator.prototype.alertEndOfSimulation = function(){
