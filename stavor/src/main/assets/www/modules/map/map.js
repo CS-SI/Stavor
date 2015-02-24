@@ -79,7 +79,7 @@ function drawFov(){
 			}
 		}else{
 			//Normal FOVs
-			if(fov_type==0)
+			if(results.fov.fov_type==0)
 				paintFovClosedArea();
 			else
 				paintFovOpenArea();
@@ -93,7 +93,7 @@ function paintFovClosedArea(){
 	var fovPointsB = [];
 	var fov_tmp_long = 0, fov_tmp_lat = 0;
 	var first = true;
-	for (var i in fov) {
+	for (var i in results.fov.closed) {
 		var point = new OpenLayers.Geometry.Point(results.fov.closed[i].longitude, results.fov.closed[i].latitude);
 		// transform from WGS 1984 to Spherical Mercator
 		point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
@@ -145,15 +145,15 @@ function paintFovOpenArea(){
 	var fovPointsA = [];
 	var fov_tmp_long = 0, fov_tmp_lat = 0;
 	var first = true;
-	for (var i in results.fov.closed) {
-		var point = new OpenLayers.Geometry.Point(results.fov.closed[i].longitude, results.fov.closed[i].latitude);
+	for (var i in results.fov.terminator) {
+		var point = new OpenLayers.Geometry.Point(results.fov.terminator[i].longitude, results.fov.terminator[i].latitude);
 		// transform from WGS 1984 to Spherical Mercator
 		point.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 
 
-		if((i!=0) && ((results.fov.closed[i].longitude*fov_tmp_long)<0) && (Math.abs(results.fov.closed[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
-			var avg_lat = (results.fov.closed[i].latitude+fov_tmp_lat)/2;
-			if(results.fov.closed[i].longitude > 0)
+		if((i!=0) && ((results.fov.terminator[i].longitude*fov_tmp_long)<0) && (Math.abs(results.fov.terminator[i].longitude)+Math.abs(fov_tmp_long)>180.0)){
+			var avg_lat = (results.fov.terminator[i].latitude+fov_tmp_lat)/2;
+			if(results.fov.terminator[i].longitude > 0)
 				var new_lon = -179.999999;
 			else
 				var new_lon = 179.999999;
@@ -168,8 +168,8 @@ function paintFovOpenArea(){
 			fovPointsA.push(new OpenLayers.Geometry.Point(-new_lon, avg_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()));
 
 		}
-		fov_tmp_lat = results.fov.closed[i].latitude;
-		fov_tmp_long = results.fov.closed[i].longitude;
+		fov_tmp_lat = results.fov.terminator[i].latitude;
+		fov_tmp_long = results.fov.terminator[i].longitude;
 
 		fovPointsA.push(point);
 	}				
@@ -211,7 +211,7 @@ var Paths = function() {
 Paths.prototype = {
 
 	addPointToPath: function(point) {
-		if(show_track){
+		if(config.show_track){
 			//Check if discontinuity
 			if(this.tmp_lon>=0)
 				var tmp_positive = true;
@@ -397,7 +397,7 @@ function drawSun(){
 	if(config.show_sun_icon){
 		sun_layer.removeAllFeatures();    
 		var marker_sun = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(results.sun_position.lon, results.sun_position.lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()), null, {
-			externalGraphic: "sun.png",
+			externalGraphic: "modules/map/textures/sun.png",
 			graphicWidth: 32,
 			graphicHeight: 32,
 			fillOpacity: 1
@@ -410,12 +410,12 @@ var nightStyle = {
       strokeColor: "#FFcc00",
       strokeOpacity: 0.5,
       strokeWidth: 1,
-      fillOpacity: 0.1,
+      fillOpacity: 0.3,
 	fillColor: "#000000"
 };
-var solarTerminator;
+
 function drawSolarTerminator(){
-	if(typeof solarTerminator != "undefined" && solarTerminator.length > 0){
+	if(typeof results.solarTerminator != "undefined" && results.solarTerminator.length > 0){
 		drawSun();
 		if(config.show_sun_terminator){
 			night_layer.removeAllFeatures();
@@ -424,10 +424,10 @@ function drawSolarTerminator(){
 			var sign = 1;
 			var sign_lat = 1;
 			//draw polygon 
-			for (var i in solarTerminator) {
+			for (var i in results.solarTerminator) {
 				if(i==0){
 					//Sign
-					if(solarTerminator[i].longitude>0)
+					if(results.solarTerminator[i].longitude>0)
 						sign = -1;
 					if(results.sun_position.lat>=0)
 						sign_lat = -1;
@@ -440,22 +440,22 @@ function drawSolarTerminator(){
 					//open polygon 2
 					var point = new OpenLayers.Geometry.Point(
 						-179.999*sign, 
-						solarTerminator[i].latitude
+						results.solarTerminator[i].latitude
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					solarPoints.push(point);
 				}
 
 				var point = new OpenLayers.Geometry.Point(
-					solarTerminator[i].longitude, 
-					solarTerminator[i].latitude
+					results.solarTerminator[i].longitude, 
+					results.solarTerminator[i].latitude
 				).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 				solarPoints.push(point);
 
-				if(i==solarTerminator.length-1){
+				if(i==results.solarTerminator.length-1){
 					//close polygon 1
 					var point = new OpenLayers.Geometry.Point(
 						179.999*sign, 
-						solarTerminator[i].latitude
+						results.solarTerminator[i].latitude
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					solarPoints.push(point);
 					//close polygon
@@ -484,6 +484,7 @@ function drawSolarTerminator(){
 //******************************************************
 //---------------------- Interface ---------------------
 //******************************************************
+
 function clearPath(){
 	myMultyPath = new Paths();
 	lineLayer.removeAllFeatures();
@@ -512,12 +513,12 @@ function addPathPoint(point){
 	sc_longitude = point.longitude;
 	sc_altitude = point.altitude;
 
-	if(show_satellite){
+	if(config.show_satellite){
 		sc_marker_layer.removeAllFeatures();    
 		var marker_sat = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(sc_longitude, sc_latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()), null, {
-			externalGraphic: "sat.png",
+			externalGraphic: "modules/map/textures/sat.png",
 			graphicWidth: 30,
-			graphicHeight: 10,
+			graphicHeight: 30,
 			fillOpacity: 1
 		});
 		sc_marker_layer.addFeatures([marker_sat]);
@@ -788,12 +789,11 @@ function changeView(view_mode){
 //------------------------------------------------------------------------------
 
 	function reDraw(){
-
 	//Night line and Sun
 		drawSolarTerminator();
 		
 	//Path
-		if(show_track){
+		if(config.show_track){
 			lineLayer.removeAllFeatures();
 			lineLayer.addFeatures([myMultyPath.getFeature()]);
 		}
@@ -833,6 +833,12 @@ function changeView(view_mode){
 		global_cameras.map.position = map.getCenter();
 		global_cameras.map.zoom = map.getZoom();
 		map.destroy();
+	}
+	
+	Map.prototype.updateModelState = function(){
+		if (typeof results.point != "undefined"){
+			addPathPoint(results.point);
+		}
 	}
 	
 }
