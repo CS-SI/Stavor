@@ -97,7 +97,11 @@ public class ModelSimulation {
     public void pushSimulationModel(){
         if(browser!=null){
     		if(state!=null) {
-                browser.load("javascript:global_simulator.updateMissionState('" + gson.toJson(state) + "')", null);
+                try {
+                    browser.load("javascript:global_simulator.updateMissionState('" + gson.toJson(state) + "')", null);
+                }catch(Exception e) {
+                    e.printStackTrace();
+                }
             }
     	}
 	}
@@ -175,6 +179,9 @@ public class ModelSimulation {
             if(Double.isNaN(new_state.value_acceleration[2]))
                 new_state.value_acceleration[2]=0.0;
             new_state.acceleration = acceleration.getNorm();
+            if (Double.isNaN(new_state.acceleration)) {
+                new_state.acceleration = 0;
+            }
         }
 
         //Update temporal variables for acceleration computation

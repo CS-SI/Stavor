@@ -173,11 +173,11 @@ Simulator.prototype.updateMissionState = function(json_state){
 Simulator.prototype.triggerManualVisualizationsUpdate = function(){
 	global_map.updateModelState();
 }
-
+/*
 Simulator.prototype.alertEndOfSimulation = function(){
 	alert("Mission ended");
 }
-
+*/
 Simulator.prototype.clearDataLogs = function(){
 	global_map.clearDataLogs();
 }

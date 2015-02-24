@@ -249,7 +249,8 @@ public class ThreadLocal extends Thread{
                 extrapDate = new AbsoluteDate(extrapDate, mission.sim_step);
                 return currentState;
             } else {
-                return null;
+                SpacecraftState currentState = propagator.propagate(finalDate);
+                return currentState;
             }
         } else {
             if (extrapDate.compareTo(mission.initial_date) >= 0) {
@@ -257,7 +258,8 @@ public class ThreadLocal extends Thread{
                 extrapDate = new AbsoluteDate(extrapDate, -mission.sim_step);
                 return currentState;
             } else {
-                return null;
+                SpacecraftState currentState = propagator.propagate(mission.initial_date);
+                return currentState;
             }
         }
     }
