@@ -306,7 +306,7 @@ ol li{
 	width: 50px;
 	top: 0;
 	left: 52px;
-	z-index: 499; 
+	/*z-index: 499; */
 	overflow: hidden; 
 	background-color:transparent;	
 	background-image:  url(../icons/view.png);
@@ -318,6 +318,25 @@ ol li{
 
 .ViewButton:active{
 	background-image:  url(../icons/view_h.png);
+}
+
+.PathButton{
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	top: 0;
+	left: 104px; 
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/clear_path.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+
+.PathButton:active{
+	background-image:  url(../icons/clear_path_h.png);
 }
 
 #DivInfoPanel{
