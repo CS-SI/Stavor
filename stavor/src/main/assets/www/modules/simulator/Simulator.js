@@ -178,6 +178,10 @@ Simulator.prototype.alertEndOfSimulation = function(){
 	alert("Mission ended");
 }
 
+Simulator.prototype.clearDataLogs = function(){
+	global_map.clearDataLogs();
+}
+
 Simulator.prototype.updateIndicators = function(){
 	updateInfoPanel(false);
 	this.indicators.CLOCK.innerHTML = global_simulation.results.info_panel.time;

@@ -841,4 +841,8 @@ function changeView(view_mode){
 		}
 	}
 	
+	Map.prototype.clearDataLogs = function(){
+		clearPath();
+	}
+	
 }

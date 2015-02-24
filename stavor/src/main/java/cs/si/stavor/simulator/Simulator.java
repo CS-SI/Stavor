@@ -483,4 +483,8 @@ public class Simulator {
     public void updateGuiControls() {
         ((MainActivity)activity).updateGuiControls();
     }
+
+    public void clearDataLogs() {
+        ((MainActivity)activity).clearDataLogs();
+    }
 }

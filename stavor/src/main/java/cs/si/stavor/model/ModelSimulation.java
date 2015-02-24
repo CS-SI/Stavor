@@ -406,11 +406,7 @@ public class ModelSimulation {
     }
 
     private void clearSimulationModel(){
-        if(browser!=null){
-            //browser.load("javascript:clearPath()",null);
-            //XGGEDEBUG: use
-            //TODO
-        }
+        activity.clearDataLogs();
     }
 
 	double sun_lat, sun_lon;

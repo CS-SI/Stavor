@@ -137,6 +137,14 @@ public class MainActivity extends Activity {
             }
         });
     }
+
+    public void clearDataLogs() {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                browser.evaluateJavascript("global_simulator.clearDataLogs()",null);
+            }
+        });
+    }
 	
 	private void launchMarket() {
 		//********** Google Analytics ***********
