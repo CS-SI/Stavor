@@ -12,6 +12,8 @@ import cs.si.stavor.StavorApplication.TrackerName;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import cs.si.stavor.model.ModelSimulation;
+import cs.si.stavor.web.SimConfig;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -60,7 +62,11 @@ public class Simulator {
 	
 	//Mission
 	private Mission mission;
-	
+	private SimConfig sim_config = new SimConfig();
+    public SimConfig getSimConfig() {
+        return sim_config;
+    }
+
 	//Flags
 	private boolean wasPlaying = false;//Flag to restore playing if fragment has paused-resumed while playing
 	
@@ -431,15 +437,6 @@ public class Simulator {
 		});
 	}
 
-
-	/**
-	 * Change the play/pause icon according to simulation status
-	 * and enable or disable the controls depending on simulator status
-	 */
-	/*public void setCorrectSimulatorControls() {
-		//TODO XGGDEBUG: interface
-	}*/
-
     public SimulatorControlsStatus getControlsStatus() {
         return new SimulatorControlsStatus(this);
     }
@@ -486,5 +483,9 @@ public class Simulator {
 
     public void clearDataLogs() {
         ((MainActivity)activity).clearDataLogs();
+    }
+
+    public void setSimulatorConfig(SimConfig obj_config) {
+        sim_config = obj_config;
     }
 }

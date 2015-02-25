@@ -1,6 +1,7 @@
 package cs.si.stavor.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Line;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
@@ -32,7 +33,10 @@ import com.google.gson.Gson;
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.app.Parameters;
+import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.station.LatLon;
+import cs.si.stavor.station.StationArea;
+import cs.si.stavor.station.VisibilityCircle;
 
 /**
  * Contains and handles both the model information and configuration
@@ -45,10 +49,12 @@ public class ModelSimulation {
     private MainActivity activity;
     private View view;
     private XWalkView browser;
+    private Simulator simulator;
     
     public ModelSimulation(MainActivity acv){
     	activity=acv;
         browser = activity.getBrowser();
+        simulator = activity.getSimulator();
     	state = new ModelState();
     }
     
@@ -111,8 +117,10 @@ public class ModelSimulation {
     private TimeScale utc;
     private Frame sunFrame, earthFixedFrame;
     private OneAxisEllipsoid earthPlanet;
- 	private double sensor_aperture = 3;
+
+ 	private double sensor_aperture = 5;
  	Vector3D sensor_sc_direction = new Vector3D(0,0,1);
+
     private AbsoluteDate date_tmp = null;
     ArrayList<LatLon> solarTerminator = new ArrayList<LatLon>();
 
@@ -269,46 +277,60 @@ public class ModelSimulation {
 
 
             //Station Areas
-           /* ArrayList<StationArea> stations = new ArrayList<StationArea>();
-            for(int i = 0; i < config_map.stations.length; i++){
-                if(config_map.stations[i].enabled){
+            ArrayList<StationArea> stations = new ArrayList<StationArea>();
+            for(int i = 0; i < simulator.getSimConfig().stations.length; i++){
+                if(simulator.getSimConfig().stations[i].enabled){
                     List<LatLon> circle = VisibilityCircle.computeCircle(
-                            earth,
-                            config_map.stations[i].latitude,
-                            config_map.stations[i].longitude,
-                            config_map.stations[i].altitude,
-                            config_map.stations[i].name,
-                            config_map.stations[i].elevation,
+                            earthPlanet,
+                            simulator.getSimConfig().stations[i].latitude,
+                            simulator.getSimConfig().stations[i].longitude,
+                            simulator.getSimConfig().stations[i].altitude,
+                            simulator.getSimConfig().stations[i].name,
+                            simulator.getSimConfig().stations[i].elevation,
                             scs.getPVCoordinates().getPosition().getNorm(),
                             Parameters.Map.station_visibility_points);
 
                     //Find polygon type
                     int type = VisibilityCircle.computeType(
-                            earth,
-                            config_map.stations[i].latitude,
-                            config_map.stations[i].longitude,
-                            config_map.stations[i].altitude,
-                            config_map.stations[i].elevation,
+                            earthPlanet,
+                            simulator.getSimConfig().stations[i].latitude,
+                            simulator.getSimConfig().stations[i].longitude,
+                            simulator.getSimConfig().stations[i].altitude,
+                            simulator.getSimConfig().stations[i].elevation,
                             scs.getPVCoordinates().getPosition().getNorm()
                     );
 
                     //------------------------
 
                     stations.add(new StationArea(
-                            config_map.stations[i].name,
-                            config_map.stations[i].longitude,
+                            simulator.getSimConfig().stations[i].name,
+                            simulator.getSimConfig().stations[i].longitude,
                             circle.toArray(new LatLon[circle.size()]),
                             type
                     ));
                 }
-            }*/
+            }
 
             //Satellite FOV
             //data
             Rotation attitude = scs.getAttitude().withReferenceFrame(earthFixedFrame).getRotation();
             Vector3D close = scs.getPVCoordinates(earthFixedFrame).getPosition();
             //step
-            sensor_sc_direction = sensor_sc_direction.normalize();
+            sensor_aperture = simulator.getSimConfig().aperture_angle;
+            sensor_sc_direction = new Vector3D(
+                    simulator.getSimConfig().sensor_direction_x,
+                    simulator.getSimConfig().sensor_direction_y,
+                    simulator.getSimConfig().sensor_direction_z
+                );
+            if(sensor_sc_direction.getX() != 0 || sensor_sc_direction.getY() != 0 || sensor_sc_direction.getZ() != 0) {
+                sensor_sc_direction = sensor_sc_direction.normalize();
+            }else {
+                sensor_sc_direction = new Vector3D(
+                        0,
+                        0,
+                        1
+                );
+            }
             Vector3D axis = attitude.applyInverseTo(sensor_sc_direction);
             Vector3D ortho = axis.orthogonal();
             Rotation rot_aperture = new Rotation(ortho, sensor_aperture*Math.PI/360);

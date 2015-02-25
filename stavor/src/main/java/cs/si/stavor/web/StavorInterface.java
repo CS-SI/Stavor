@@ -120,6 +120,22 @@ public final class StavorInterface {
         //updateGuiControls();
     }
 
+    @JavascriptInterface
+    public void sendSimulatorConfiguration(String json_config) {
+        //JsonObject obj = parser.parse(json_config).getAsJsonObject();
+        SimConfig obj_config = gson.fromJson(json_config, SimConfig.class);
+        /*SimConfig obj_config = new SimConfig();
+        obj_config.fov.aperture_angle = obj.getAsJsonObject("map").getAsJsonObject("fov").getAsJsonObject("aperture_angle").getAsDouble();
+        obj_config.fov.direction.x = obj.getAsJsonObject("map").getAsJsonObject("fov").getAsJsonObject("direction").getAsJsonObject("x").getAsDouble();
+        obj_config.fov.direction.y = obj.getAsJsonObject("map").getAsJsonObject("fov").getAsJsonObject("direction").getAsJsonObject("y").getAsDouble();
+        obj_config.fov.direction.z = obj.getAsJsonObject("map").getAsJsonObject("fov").getAsJsonObject("direction").getAsJsonObject("z").getAsDouble();
+
+        obj_config.stations = obj.getAsJsonObject("map").getAsJsonArray("stations").*/
+
+        simulator.setSimulatorConfig(obj_config);//If is playing, stop it.
+        //updateGuiControls(); set in local_thread after connection
+    }
+
     /*private void updateGuiControls() {
         runOnUiThread(new Runnable() {
             public void run() {

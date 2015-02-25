@@ -62,6 +62,14 @@ AndroidInterface.prototype.progressValueChanged = function(perc){
    	}
 }
 
+AndroidInterface.prototype.sendSimulatorConfiguration = function(sim_conf){
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.sendSimulatorConfiguration!= "undefined") { // check the method
+			 Android.sendSimulatorConfiguration(sim_conf);
+		  }
+   	}
+}
+
 var MyInteger = function(value){
 	this.value = value;
 }

@@ -89,9 +89,24 @@ Simulator.prototype.slowButtonClicked = function(){
 Simulator.prototype.progressValueChanged = function(value){
 	this.sim_interface.progressValueChanged(value);
 }
+
+Simulator.prototype.sendSimulatorConfiguration = function(){
+	var sim_conf = new SimConfig();
+	sim_conf.aperture_angle = global_simulation.config.map.fov.aperture_angle;
+	sim_conf.sensor_direction_x = global_simulation.config.map.fov.direction.x;
+	sim_conf.sensor_direction_y = global_simulation.config.map.fov.direction.y;
+	sim_conf.sensor_direction_z = global_simulation.config.map.fov.direction.z;
+	sim_conf.stations = global_simulation.config.map.stations;
+	
+	this.sim_interface.sendSimulatorConfiguration(JSON.stringify(sim_conf));
+}
 //****************************************************************************
 //                        From Simulator to Stavor  <-- (Events thrown by simulator)
 //****************************************************************************
+Simulator.prototype.updateSimulatorConfigurationRequest = function(){
+	this.sendSimulatorConfiguration();
+}
+
 Simulator.prototype.updateMissionState = function(json_state){
 	var state = JSON.parse(json_state);
 	var info_panel = global_simulation.results.info_panel;
@@ -259,5 +274,13 @@ function updateInfoPanel(force){
 		ip_mass.innerHTML = results.mass.toFixed(1)+" Kg";
 		ip_radius.innerHTML = results.orb_radius.toFixed(0)+" Km";
 	}
+}
+
+var SimConfig = function(){
+	this.aperture_angle = 5;
+	this.sensor_direction_x = 0;
+	this.sensor_direction_y = 0;
+	this.sensor_direction_z = 1;
+	this.stations = [];
 }
 

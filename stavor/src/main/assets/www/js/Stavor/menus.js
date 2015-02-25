@@ -160,15 +160,19 @@ function updateMapOption(id,val){
 			break;
 		case "opt-map-ApertureAngle":
 			global_simulation.config.map.fov.aperture_angle = val;
+			global_simulator.sendSimulatorConfiguration();
 			break;
 		case "opt-map-DirectionX":
 			global_simulation.config.map.fov.direction.x = val;
+			global_simulator.sendSimulatorConfiguration();
 			break;
 		case "opt-map-DirectionY":
 			global_simulation.config.map.fov.direction.y = val;
+			global_simulator.sendSimulatorConfiguration();
 			break;
 		case "opt-map-DirectionZ":
 			global_simulation.config.map.fov.direction.z = val;
+			global_simulator.sendSimulatorConfiguration();
 			break;
 		default:
 	}

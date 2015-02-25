@@ -152,7 +152,7 @@ var global_simulation = {
 				direction:{
 					x: 0,
 					y: 0,
-					z: 0
+					z: 1
 				}
 			},
 			show_track: true,
