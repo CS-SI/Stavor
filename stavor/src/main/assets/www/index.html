@@ -218,7 +218,25 @@
 				global_orbit.resizeCanvas();
 				global_map.resizeCanvas();
 			}, false );
+			window.addEventListener( 'orientationchange', function(){
+				global_attitude.resizeCanvas();
+				global_orbit.resizeCanvas();
+				global_map.resizeCanvas();
+			}, false );
 		}
+		
+		/*function resizeAllVisualizations(){
+			var readyStateCheckInterval = setInterval(function() {
+				if (document.readyState === "complete") {
+					clearInterval(readyStateCheckInterval);
+					global_attitude.resizeCanvas();
+					global_orbit.resizeCanvas();
+					global_map.resizeCanvas();
+				}
+			}, 10);
+				
+		}*/
+		
 		function updateLeds(){
 			var led_attitude = document.getElementById("LedAttitude");
 			var led_orbit = document.getElementById("LedOrbit");

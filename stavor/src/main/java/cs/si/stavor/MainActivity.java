@@ -117,7 +117,9 @@ public class MainActivity extends Activity {
             );
 
             RatingSystem.verify(this);
-        }
+        }/*else{
+            dataFragment.getBrowser().evaluateJavascript("resizeAllVisualizations()",null);
+        }*/
 
         //Load Retained Objects
         this.simulator = dataFragment.getSimulator();

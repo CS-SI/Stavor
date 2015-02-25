@@ -12,7 +12,7 @@ if ( Detector.webgl ){
 	alert('WebGL not supported in this device');
 	//canvasMode(1);
 }
-orb_renderer.setSize(global_window.width, global_window.height);
+orb_renderer.setSize(window.innerWidth, window.innerHeight);
 orb_container = document.getElementById( 'orbit' );
 orb_container.innerHTML = "";
 orb_container.appendChild( orb_renderer.domElement );
@@ -416,7 +416,7 @@ var Orbit = function()
 		// SCENE
 		scene = new THREE.Scene();
 		// CAMERA
-		var SCREEN_WIDTH = global_window.width, SCREEN_HEIGHT = global_window.height;
+		var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
 		var VIEW_ANGLE = cam_view_angle, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = cam_rend_near, FAR = cam_rend_far;
 		camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 		scene.add(camera);
@@ -476,10 +476,10 @@ var Orbit = function()
 	}
 
 	function onWindowResize(){
-		camera.aspect = global_window.width / global_window.height;
+		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 
-		orb_renderer.setSize( global_window.width, global_window.height );
+		orb_renderer.setSize( window.innerWidth, window.innerHeight );
 
 		controls.handleResize();
 

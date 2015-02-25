@@ -1,9 +1,9 @@
-var global_window = {
-	/*width: window.innerWidth * window.devicePixelRatio,
-	height: window.innerHeight * window.devicePixelRatio*/
+/*var global_window = {
+	width: window.innerWidth * window.devicePixelRatio,
+	height: window.innerHeight * window.devicePixelRatio
 	width: window.innerWidth,
 	height: window.innerHeight
-}
+}*/
 
 var global_current_visualization = enum_visualizations.ORBITE;
 var global_missions_list_is_open = false;
