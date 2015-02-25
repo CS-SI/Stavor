@@ -149,7 +149,7 @@
 		}
 		
 		function resetConfiguration(){
-			Dialog.showDialog("Stavor says","Are you sure?",function(){
+			Dialog.showConfirmDialog("Stavor says","Are you sure?",function(){
 				resetStoredVariables();
 			},function(){});
 		}
