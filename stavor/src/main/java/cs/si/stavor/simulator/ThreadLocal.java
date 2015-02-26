@@ -141,7 +141,7 @@ public class ThreadLocal extends Thread{
             public void run() {
         		//Clear model by push
             	simulator.getSimulationResults().resetMapPathBuffer();
-            	
+                //simulator.clearDataLogs();
             }
         });
 	}

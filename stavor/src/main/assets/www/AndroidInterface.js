@@ -70,6 +70,7 @@ AndroidInterface.prototype.sendSimulatorConfiguration = function(sim_conf){
    	}
 }
 
+
 var MyInteger = function(value){
 	this.value = value;
 }
