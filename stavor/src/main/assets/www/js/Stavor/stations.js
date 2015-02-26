@@ -205,11 +205,13 @@ function initializeStationsDb(){
 			
 			loadStationsStoredVariables();
 			global_delayed_loading.database.stations = true;
+			fillSelectedStationsArray();
 			setLoadingText("Stations loaded!");
 			hideSplash();
 		}, function(){
 			loadStationsStoredVariables();
 			global_delayed_loading.database.stations = true;
+			fillSelectedStationsArray();
 			setLoadingText("Stations loaded!");
 			hideSplash();
 		});
@@ -224,6 +226,7 @@ function addStationToDb(station){
 function onStationEditorConfirm(){
 	closeStationEditor();
 	drawStationsList();
+	fillSelectedStationsArray();
 }
 
 function editStationToDb(id,station){
@@ -322,6 +325,21 @@ function openStationEditor(id){
 					global_menus.station.isOpen = !global_menus.station.isOpen;
 				}
 			}
+		}, errorDatabaseHandler);
+	});
+}
+
+function fillSelectedStationsArray(){
+	db.transaction(function (tx) {
+		tx.executeSql('SELECT * FROM stations WHERE enabled = "true"', [], function (tx, results) {
+			var station_rows = results.rows;
+			var len = station_rows.length, i;
+			global_simulation.config.map.stations = [];
+			for (i = 0; i < len; i++) {
+				var row = station_rows.item(i); 
+				global_simulation.config.map.stations.push(JSON.parse(row.json));
+			}
+			global_simulator.sendSimulatorConfiguration();
 		}, errorDatabaseHandler);
 	});
 }

@@ -36,7 +36,7 @@ function drawFov(){
 					//open polygon 2
 					var point = new OpenLayers.Geometry.Point(
 						-179.999*sign, 
-						fov_terminator[i].latitude
+						results.fov_terminator[i].latitude
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					fovPoints.push(point);
 				}
@@ -187,11 +187,12 @@ function paintFovOpenArea(){
 //---------------------- Stations --------------------------
 //******************************************************
 function addSelectedStationsNames(){
+	stations_name_layer.removeAllFeatures();
 	for (var arrayIndex in config.stations){
 		var point = new OpenLayers.Geometry.Point(config.stations[arrayIndex].longitude, config.stations[arrayIndex].latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 		var station_name_feature = new OpenLayers.Feature.Vector(point, null, null);
 		station_name_feature.attributes = {
-			label:stations[arrayIndex].name
+			label:config.stations[arrayIndex].name
 		}
 		stations_name_layer.addFeatures([station_name_feature]);
 	}
@@ -729,6 +730,7 @@ function changeView(view_mode){
 		}
 
 	//Stations	
+		addSelectedStationsNames();
 		drawStationsAreas();	
 	}
 	

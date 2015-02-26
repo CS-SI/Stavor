@@ -37,6 +37,7 @@ import cs.si.stavor.simulator.Simulator;
 import cs.si.stavor.station.LatLon;
 import cs.si.stavor.station.StationArea;
 import cs.si.stavor.station.VisibilityCircle;
+import cs.si.stavor.web.SimConfig;
 
 /**
  * Contains and handles both the model information and configuration
@@ -278,36 +279,40 @@ public class ModelSimulation {
 
             //Station Areas
             ArrayList<StationArea> stations = new ArrayList<StationArea>();
-            for(int i = 0; i < simulator.getSimConfig().stations.length; i++){
-                if(simulator.getSimConfig().stations[i].enabled){
+            SimConfig simConfig = simulator.getSimConfig();
+            for(int i = 0; i < simConfig.stations.length; i++){
+                //if(simConfig.stations[i].enabled){
+                try{
                     List<LatLon> circle = VisibilityCircle.computeCircle(
                             earthPlanet,
-                            simulator.getSimConfig().stations[i].latitude,
-                            simulator.getSimConfig().stations[i].longitude,
-                            simulator.getSimConfig().stations[i].altitude,
-                            simulator.getSimConfig().stations[i].name,
-                            simulator.getSimConfig().stations[i].elevation,
+                            simConfig.stations[i].latitude,
+                            simConfig.stations[i].longitude,
+                            simConfig.stations[i].altitude,
+                            simConfig.stations[i].name,
+                            simConfig.stations[i].elevation,
                             scs.getPVCoordinates().getPosition().getNorm(),
                             Parameters.Map.station_visibility_points);
 
                     //Find polygon type
                     int type = VisibilityCircle.computeType(
                             earthPlanet,
-                            simulator.getSimConfig().stations[i].latitude,
-                            simulator.getSimConfig().stations[i].longitude,
-                            simulator.getSimConfig().stations[i].altitude,
-                            simulator.getSimConfig().stations[i].elevation,
+                            simConfig.stations[i].latitude,
+                            simConfig.stations[i].longitude,
+                            simConfig.stations[i].altitude,
+                            simConfig.stations[i].elevation,
                             scs.getPVCoordinates().getPosition().getNorm()
                     );
 
                     //------------------------
 
                     stations.add(new StationArea(
-                            simulator.getSimConfig().stations[i].name,
-                            simulator.getSimConfig().stations[i].longitude,
+                            simConfig.stations[i].name,
+                            simConfig.stations[i].longitude,
                             circle.toArray(new LatLon[circle.size()]),
                             type
                     ));
+                }catch(Exception e){
+
                 }
             }
 
@@ -316,11 +321,11 @@ public class ModelSimulation {
             Rotation attitude = scs.getAttitude().withReferenceFrame(earthFixedFrame).getRotation();
             Vector3D close = scs.getPVCoordinates(earthFixedFrame).getPosition();
             //step
-            sensor_aperture = simulator.getSimConfig().aperture_angle;
+            sensor_aperture = simConfig.aperture_angle;
             sensor_sc_direction = new Vector3D(
-                    simulator.getSimConfig().sensor_direction_x,
-                    simulator.getSimConfig().sensor_direction_y,
-                    simulator.getSimConfig().sensor_direction_z
+                    simConfig.sensor_direction_x,
+                    simConfig.sensor_direction_y,
+                    simConfig.sensor_direction_z
                 );
             if(sensor_sc_direction.getX() != 0 || sensor_sc_direction.getY() != 0 || sensor_sc_direction.getZ() != 0) {
                 sensor_sc_direction = sensor_sc_direction.normalize();
@@ -421,7 +426,7 @@ public class ModelSimulation {
             new_state.point = getMapPathBufferLast();
             new_state.sun_lat = sun_lat;
             new_state.sun_lon = sun_lon;
-            /*new_state.stations = stations.toArray(new StationArea[stations.size()]);*/
+            new_state.stations = stations.toArray(new StationArea[stations.size()]);
             new_state.fov = fov.toArray(new LatLon[fov.size()]);
             new_state.fov_type = fov_type;
             new_state.fov_terminator =  fovTerminator.toArray(new LatLon[fovTerminator.size()]);

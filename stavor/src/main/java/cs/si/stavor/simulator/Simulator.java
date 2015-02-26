@@ -63,7 +63,7 @@ public class Simulator {
 	//Mission
 	private Mission mission;
 	private SimConfig sim_config = new SimConfig();
-    public SimConfig getSimConfig() {
+    public synchronized SimConfig getSimConfig() {
         return sim_config;
     }
 
@@ -485,7 +485,7 @@ public class Simulator {
         ((MainActivity)activity).clearDataLogs();
     }
 
-    public void setSimulatorConfig(SimConfig obj_config) {
+    public synchronized void setSimulatorConfig(SimConfig obj_config) {
         sim_config = obj_config;
     }
 }
