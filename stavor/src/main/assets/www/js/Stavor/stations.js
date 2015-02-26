@@ -204,12 +204,14 @@ function initializeStationsDb(){
 			});
 			
 			loadStationsStoredVariables();
+			drawStationsList();
 			global_delayed_loading.database.stations = true;
 			fillSelectedStationsArray();
 			setLoadingText("Stations loaded!");
 			hideSplash();
 		}, function(){
 			loadStationsStoredVariables();
+			drawStationsList();
 			global_delayed_loading.database.stations = true;
 			fillSelectedStationsArray();
 			setLoadingText("Stations loaded!");

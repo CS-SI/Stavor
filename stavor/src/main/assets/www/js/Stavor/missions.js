@@ -8,12 +8,31 @@ function loadMissionsStoredVariables(){
 	if(serialized){
 		var localData = JSON.parse(serialized);
 		global_missions = localData;
-		global_missions.selected = -1;
+		//global_missions.selected = -1;
 	}
 }
 function saveMissionsStoredVariables(){
 	var dataToStore = JSON.stringify(global_missions);
 	localStorage.setItem('missionsConfig', dataToStore);
+}
+
+function selectActiveMission(){
+	if(global_missions.selected != -1){
+		db.transaction(function (tx) {
+			tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.selected+';', [], function (tx, results) {	
+				if(results.rows.length == 1){
+					styleMissionRows();
+					global_simulator.changeMission(results.rows.item(0).json);
+				}else{
+					global_missions.selected = -1;
+					saveMissionsStoredVariables();
+				}
+			}, errorDatabaseHandler);
+		});
+	}else{
+		global_missions.selected = 1;
+		selectActiveMission();
+	}
 }
 
 function onDeleteMissionButtonClicked(){
@@ -143,6 +162,20 @@ function initializeMissionsDb(){
 			var default_missions = new Array();
 			var mission;
 			
+			//Example 0- GTO
+			mission = new Mission();
+			mission.name = "GTO";
+			mission.description = "Geostationary Transfer Orbit";
+			mission.duration = 100000.0;
+			mission.step = 10.0;
+			mission.initial_orbit.a = 2.4396159E7;
+			mission.initial_orbit.e = 0.72831215;
+			//mission.initial_orbit.i = 0.0;
+			//mission.initial_orbit.omega = ;
+			//mission.initial_orbit.raan = 0.0;
+			//mission.initial_orbit.lM = ;
+			default_missions[default_missions.length] = mission;
+			
 			//Example 1- LEO
 			mission = new Mission();
 			mission.name = "LEO";
@@ -213,30 +246,21 @@ function initializeMissionsDb(){
 			//mission.initial_orbit.lM = ;
 			default_missions[default_missions.length] = mission;
 			
-			//Example 6- GTO
-			mission = new Mission();
-			mission.name = "GTO";
-			mission.description = "Geostationary Transfer Orbit";
-			mission.duration = 100000.0;
-			mission.step = 10.0;
-			mission.initial_orbit.a = 2.4396159E7;
-			mission.initial_orbit.e = 0.72831215;
-			//mission.initial_orbit.i = 0.0;
-			//mission.initial_orbit.omega = ;
-			//mission.initial_orbit.raan = 0.0;
-			//mission.initial_orbit.lM = ;
-			default_missions[default_missions.length] = mission;
 			
 			for(var i = 0; i < default_missions.length; i++)
 				tx.executeSql('INSERT INTO missions (isDefault, name, json) VALUES (?, ?, ?)', [true, default_missions[i].name, JSON.stringify(default_missions[i])], successDatabaseHandler, errorDatabaseHandler);
 			});
 			
 			loadMissionsStoredVariables();
+			drawMissionsList();
+			selectActiveMission();
 			global_delayed_loading.database.missions = true;
 			setLoadingText("Missions loaded!");
 			hideSplash();
 		}, function(){
 			loadMissionsStoredVariables();
+			drawMissionsList();
+			selectActiveMission();
 			global_delayed_loading.database.missions = true;
 			setLoadingText("Missions loaded!");
 			hideSplash();
