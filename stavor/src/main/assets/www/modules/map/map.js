@@ -14,17 +14,17 @@ var Map = function ()
 function drawFov(){
 	if(config.show_fov){
 		sc_layer.removeAllFeatures();
-
+		var fov_terminator = results.fov.terminator;
 		//WHOLE EARTH CASE
-		if(typeof results.fov.terminator != "undefined" && results.fov.terminator.length > 0){
+		if(typeof fov_terminator != "undefined" && fov_terminator.length > 0){
 			var fovPoints = [];
 			var sign = 1;
 			var sign_lat = -1;
 			//draw polygon 
-			for (var i in results.fov.terminator) {
+			for (var i in fov_terminator) {
 				if(i==0){
 					//Sign
-					if(results.fov.terminator[i].longitude>0)
+					if(fov_terminator[i].longitude>0)
 						sign = -1;
 					if(sc_latitude>=0)
 						sign_lat = 1;
@@ -36,22 +36,22 @@ function drawFov(){
 					//open polygon 2
 					var point = new OpenLayers.Geometry.Point(
 						-179.999*sign, 
-						results.fov_terminator[i].latitude
+						fov_terminator[i].latitude
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					fovPoints.push(point);
 				}
 
 				var point = new OpenLayers.Geometry.Point(
-					results.fov.terminator[i].longitude, 
-					results.fov.terminator[i].latitude
+					fov_terminator[i].longitude, 
+					fov_terminator[i].latitude
 				).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 				fovPoints.push(point);
 
-				if(i==results.fov.terminator.length-1){
+				if(i==fov_terminator.length-1){
 					//close polygon 1
 					var point = new OpenLayers.Geometry.Point(
 						179.999*sign, 
-						results.fov.terminator[i].latitude
+						fov_terminator[i].latitude
 					).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 					fovPoints.push(point);
 					//close polygon				
