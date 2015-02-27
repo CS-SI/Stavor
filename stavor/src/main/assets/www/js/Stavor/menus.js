@@ -144,7 +144,7 @@ function switchMapMenu(){
 }
 
 function updateMapOption(id,val){
-	if(val != ""){
+	if(val != "" || typeof val == "boolean"){
 		setMapReloading();
 		switch(id) {
 			case "opt-map-ShowFov":
@@ -210,7 +210,7 @@ function switchOrbitMenu(){
 	//}
 }
 function updateOrbitOption(id,val){
-	if(val != ""){
+	if(val != "" || typeof val == "boolean"){
 		setOrbitReloading();
 		switch(id) {
 			case "opt-orb-ShowSky":
@@ -314,7 +314,7 @@ function switchAttitudeMenu(){
 	global_menus.attitude.isOpen = !global_menus.attitude.isOpen;
 }
 function updateAttitudeOption(id,val){
-	if(val != ""){
+	if(val != "" || typeof val == "boolean"){
 		setAttitudeReloading();
 		switch(id) {
 			//Models
@@ -617,7 +617,7 @@ function updateAttitudeOptions(){
 	
 }
 function updateGlobalOption(id,val){
-	if(val != ""){
+	if(val != "" || typeof val == "boolean"){
 		switch(id) {
 			case "opt-glo-ShowFps":
 				global_simulation.config.global.show_fps = val;		
