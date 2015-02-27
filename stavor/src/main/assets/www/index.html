@@ -223,6 +223,13 @@
 				global_orbit.resizeCanvas();
 				global_map.resizeCanvas();
 			}, false );
+			
+			var div_attitude = document.getElementById("DivAttitude");
+			var div_orbit = document.getElementById("DivOrbit");
+			var div_map = document.getElementById("DivMap");
+			div_attitude.className = "NextVisToCenterFromRight";
+			div_orbit.className = "NextVisToRight";
+			div_map.className = "NextVisToLeft";
 		}
 		
 		/*function resizeAllVisualizations(){
