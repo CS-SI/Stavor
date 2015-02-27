@@ -147,6 +147,14 @@ public class MainActivity extends Activity {
             }
         });
     }
+
+    public void disableProgressBlockingFlag() {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                browser.evaluateJavascript("global_simulator.disableProgressBlockingFlag()",null);
+            }
+        });
+    }
 	
 	private void launchMarket() {
 		//********** Google Analytics ***********
@@ -243,5 +251,6 @@ public class MainActivity extends Activity {
         }
         super.onDestroy();
     }
+
 
 }

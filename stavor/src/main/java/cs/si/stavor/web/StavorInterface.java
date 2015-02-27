@@ -45,7 +45,13 @@ public final class StavorInterface {
     @JavascriptInterface
     public void missionProgressValueChanged(String json_percentage) {
         MyInteger obj_integer = gson.fromJson(json_percentage,MyInteger.class);
-        simulator.setCurrentSimulationProgress(obj_integer.value);
+        simulator.setCurrentSimulationProgress(obj_integer.value,false);
+        //updateGuiControls();
+    }
+    @JavascriptInterface
+    public void missionProgressValueChangedEnd(String json_percentage) {
+        MyInteger obj_integer = gson.fromJson(json_percentage,MyInteger.class);
+        simulator.setCurrentSimulationProgress(obj_integer.value,true);
         //updateGuiControls();
     }
 

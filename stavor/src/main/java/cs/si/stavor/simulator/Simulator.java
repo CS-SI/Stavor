@@ -448,12 +448,12 @@ public class Simulator {
         mission.sim_step = mission.sim_step * 2;
     }
 
-    public void setCurrentSimulationProgress(int percentage) {
+    public void setCurrentSimulationProgress(int percentage, boolean isLast) {
         boolean remote = sharedPref.getBoolean(context.getString(R.string.pref_key_sim_global_remote), false);
         if(!remote){
             try {
                 if(thread_local != null)
-                    thread_local.setCurrentSimulationProgress(percentage);
+                    thread_local.setCurrentSimulationProgress(percentage, isLast);
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -487,5 +487,9 @@ public class Simulator {
 
     public synchronized void setSimulatorConfig(SimConfig obj_config) {
         sim_config = obj_config;
+    }
+
+    public void disableProgressBlockingFlag() {
+        ((MainActivity)activity).disableProgressBlockingFlag();
     }
 }

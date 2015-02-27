@@ -264,9 +264,11 @@ public class ThreadLocal extends Thread{
         }
     }
 
-    public void setCurrentSimulationProgress(int percentage) {
+    public void setCurrentSimulationProgress(int percentage, boolean isLast) {
         extrapDate = new AbsoluteDate(mission.initial_date,mission.sim_duration*percentage/100);
         progress = (int)(((mission.sim_duration+extrapDate.durationFrom(finalDate))/mission.sim_duration)*100);
         simulator.updateGuiControls();
+        if(isLast)
+            simulator.disableProgressBlockingFlag();
     }
 }

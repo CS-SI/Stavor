@@ -27,6 +27,22 @@ var Simulator = function(){
 		sense: this.enum_simulation_sense.FORWARD
 	}*/
 	this.isConnected = false;
+	this.blockProgressUpdate = false;
+	this.indicators.PROGRESS.onclick=function(){
+		global_simulator.blockProgressUpdate = true;
+		//console.log("OnClick");
+		//global_simulator.progressValueChanged(this.value);
+	};
+	this.indicators.PROGRESS.onchange=function(){
+		global_simulator.blockProgressUpdate = true;
+		//console.log("OnChange");
+		global_simulator.progressValueChangedEnd(this.value);
+	};
+	this.indicators.PROGRESS.oninput=function(){
+		global_simulator.blockProgressUpdate = true;
+		//console.log("OnInput");
+		global_simulator.progressValueChanged(this.value);
+	};
 	
 	this.sim_interface = new AndroidInterface(this);
 }
@@ -89,6 +105,10 @@ Simulator.prototype.slowButtonClicked = function(){
 Simulator.prototype.progressValueChanged = function(value){
 	this.sim_interface.progressValueChanged(value);
 }
+//The last value so it will trigger the unblock of the progress indicator
+Simulator.prototype.progressValueChangedEnd = function(value){
+	this.sim_interface.progressValueChangedEnd(value);
+}
 
 Simulator.prototype.sendSimulatorConfiguration = function(){
 	var sim_conf = new SimConfig();
@@ -103,6 +123,10 @@ Simulator.prototype.sendSimulatorConfiguration = function(){
 //****************************************************************************
 //                        From Simulator to Stavor  <-- (Events thrown by simulator)
 //****************************************************************************
+Simulator.prototype.disableProgressBlockingFlag = function(){
+	this.blockProgressUpdate = false;
+}
+
 Simulator.prototype.updateSimulatorConfigurationRequest = function(){
 	this.sendSimulatorConfiguration();
 }
@@ -200,7 +224,9 @@ Simulator.prototype.clearDataLogs = function(){
 Simulator.prototype.updateIndicators = function(){
 	updateInfoPanel(false);
 	this.indicators.CLOCK.innerHTML = global_simulation.results.info_panel.time;
-	this.indicators.PROGRESS.value = global_simulation.results.info_panel.progress;
+	if(!this.blockProgressUpdate){
+		this.indicators.PROGRESS.value = global_simulation.results.info_panel.progress;
+	}
 }
 
 Simulator.prototype.updateSimulatorState = function(json_state){//Update GUI controls

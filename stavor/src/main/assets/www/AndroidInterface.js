@@ -61,6 +61,14 @@ AndroidInterface.prototype.progressValueChanged = function(perc){
 		  }
    	}
 }
+AndroidInterface.prototype.progressValueChangedEnd = function(perc){
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.progressValueChangedEnd!= "undefined") { // check the method
+			var json = JSON.stringify(new MyInteger(perc));
+			 Android.missionProgressValueChangedEnd(json);
+		  }
+   	}
+}
 
 AndroidInterface.prototype.sendSimulatorConfiguration = function(sim_conf){
 	if (typeof Android != "undefined"){ // check the bridge 
