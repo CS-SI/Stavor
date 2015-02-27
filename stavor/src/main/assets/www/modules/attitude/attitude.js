@@ -1121,12 +1121,18 @@ var Attitude = function ()
 
 		// STATS
 		stats = new Stats();
+		stats.domElement.id = 'statsOfAttitude';
 		stats.domElement.style.position = 'absolute';
 		stats.domElement.style.top = '50px';
 		stats.domElement.style.zIndex = 100;
 		if(global.show_fps){
 			stats.domElement.style.webkitTransform = 0;
 			att_container.appendChild( stats.domElement );
+		}else{
+			var stats_old = document.getElementById("statsOfAttitude");
+			if(stats_old){
+				att_container.removeChild(stats_old);
+			}
 		}
 		// LIGHT
 		light = new THREE.PointLight(0xE0E0E0);

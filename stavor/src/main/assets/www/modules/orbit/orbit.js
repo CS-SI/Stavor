@@ -447,12 +447,18 @@ var Orbit = function()
 
 		// STATS
 		stats = new Stats();
+		stats.domElement.id = 'statsOfOrbit';
 		stats.domElement.style.position = 'absolute';
 		stats.domElement.style.top = '50px';
 		stats.domElement.style.zIndex = 100;
 		if(global.show_fps){
 			stats.domElement.style.webkitTransform = 0;
 			orb_container.appendChild( stats.domElement );
+		}else{
+			var stats_old = document.getElementById("statsOfOrbit");
+			if(stats_old){
+				orb_container.removeChild(stats_old);
+			}
 		}
 		// LIGHT
 		//light = new THREE.PointLight(0xE0E0E0);
