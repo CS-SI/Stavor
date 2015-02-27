@@ -219,7 +219,7 @@ public class ThreadLocal extends Thread{
                 attitudeProvider = new NadirPointing(earth);
                 break;
             case 2:
-                BodyShape sun = new OneAxisEllipsoid(Constants..SUN_RADIUS, 0,CelestialBodyFactory.getSun().getBodyOrientedFrame());
+                BodyShape sun = new OneAxisEllipsoid(Constants.SUN_RADIUS, 0,CelestialBodyFactory.getSun().getBodyOrientedFrame());
                 attitudeProvider = new NadirPointing(sun);
                 break;
             default:
