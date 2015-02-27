@@ -32,8 +32,8 @@
 }
 #DialogCloseButton{
 	position: relative;
-	height: 30px;
-	width: 30px;
+	height: 40px;
+	width: 40px;
 	padding: 3px;
 	top: 0;
 	right: 0;
@@ -53,8 +53,8 @@
 
 #DialogCancelButton{
 	position: relative;
-	height: 30px;
-	width: 30px;
+	height: 40px;
+	width: 40px;
 	padding: 3px;
 	top: 0;
 	right: 0;
@@ -74,8 +74,8 @@
 
 #DialogConfirmButton{
 	position: relative;
-	height: 30px;
-	width: 30px;
+	height: 40px;
+	width: 40px;
 	padding: 3px;
 	top: 0;
 	left: 0px;
