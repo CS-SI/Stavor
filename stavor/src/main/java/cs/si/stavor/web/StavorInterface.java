@@ -67,6 +67,7 @@ public final class StavorInterface {
         mission.sim_step = obj_mission.step;
         //mission. = obj_mission.attitude_provider;
         mission.initial_mass = obj_mission.initial_mass;
+        mission.attitude_provider = obj_mission.attitude_provider;
         mission.initial_date = new AbsoluteDate(
                 obj_mission.initial_date.year,
                 obj_mission.initial_date.month,

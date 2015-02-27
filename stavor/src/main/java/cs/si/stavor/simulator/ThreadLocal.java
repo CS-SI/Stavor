@@ -1,6 +1,8 @@
 package cs.si.stavor.simulator;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.orekit.attitudes.AttitudeProvider;
+import org.orekit.attitudes.InertialProvider;
 import org.orekit.attitudes.NadirPointing;
 import org.orekit.bodies.BodyShape;
 import org.orekit.bodies.CelestialBodyFactory;
@@ -16,6 +18,7 @@ import org.orekit.propagation.Propagator;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.propagation.analytical.KeplerianPropagator;
 import org.orekit.time.AbsoluteDate;
+import org.orekit.utils.Constants;
 
 import cs.si.stavor.R;
 import cs.si.stavor.app.Parameters;
@@ -204,8 +207,26 @@ public class ThreadLocal extends Thread{
 				break;
 		}*/
 		Orbit initialOrbit = new KeplerianOrbit(mission.initial_orbit.a, mission.initial_orbit.e, mission.initial_orbit.i, mission.initial_orbit.omega, mission.initial_orbit.raan, mission.initial_orbit.lM, PositionAngle.MEAN, inertialFrame, mission.initial_date, mission.initial_orbit.mu);
-		BodyShape earth = new OneAxisEllipsoid(org.orekit.utils.Constants.WGS84_EARTH_EQUATORIAL_RADIUS,org.orekit.utils.Constants.WGS84_EARTH_FLATTENING,CelestialBodyFactory.getEarth().getBodyOrientedFrame());
-		AttitudeProvider attitudeProvider = new NadirPointing(earth);
+
+
+		AttitudeProvider attitudeProvider;
+        switch(mission.attitude_provider) {
+            case 0:
+                attitudeProvider = new InertialProvider(new Rotation(1.0,0.0,0.0,0.0, false));
+                break;
+            case 1:
+                BodyShape earth = new OneAxisEllipsoid(org.orekit.utils.Constants.WGS84_EARTH_EQUATORIAL_RADIUS,org.orekit.utils.Constants.WGS84_EARTH_FLATTENING,CelestialBodyFactory.getEarth().getBodyOrientedFrame());
+                attitudeProvider = new NadirPointing(earth);
+                break;
+            case 2:
+                BodyShape sun = new OneAxisEllipsoid(Constants..SUN_RADIUS, 0,CelestialBodyFactory.getSun().getBodyOrientedFrame());
+                attitudeProvider = new NadirPointing(sun);
+                break;
+            default:
+                attitudeProvider = new InertialProvider(new Rotation(1.0,0.0,0.0,0.0, false));
+                break;
+        }
+
 		
 		SpacecraftState old_st;
 		switch(mission.propagatorType){

@@ -28,4 +28,5 @@ public class Mission implements Serializable{
 	//public RotatingFrames rotatingFrame = RotatingFrames.GTOD;
 	public AbsoluteDate initial_date = new AbsoluteDate();
 	public Orbit initial_orbit = new Orbit();
+    public int attitude_provider = 0;
 }
