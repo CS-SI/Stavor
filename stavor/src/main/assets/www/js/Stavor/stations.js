@@ -234,7 +234,7 @@ function onStationEditorConfirm(){
 function editStationToDb(id,station){
 	var json = JSON.stringify(station);
 	db.transaction(function (tx) {
-		tx.executeSql('UPDATE stations SET name=?, enabled=?, json=? WHERE id=?', [station.name, station.enabled, json, id], onStationEditorConfirm);
+		tx.executeSql('UPDATE stations SET name=?, json=? WHERE id=?', [station.name, json, id], onStationEditorConfirm);
 	});
 }
 
