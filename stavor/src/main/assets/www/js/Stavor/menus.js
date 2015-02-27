@@ -164,16 +164,28 @@ function updateMapOption(id,val){
 				global_simulator.sendSimulatorConfiguration();
 				break;
 			case "opt-map-DirectionX":
-				global_simulation.config.map.fov.direction.x = val;
-				global_simulator.sendSimulatorConfiguration();
+				if(val == 0 && global_simulation.config.map.fov.direction.y == 0 && global_simulation.config.map.fov.direction.z == 0){
+					Dialog.showDialog("Stavor says", "Sensor direction cannot be (0,0,0)", function(){updateMapOptions();});
+				}else{
+					global_simulation.config.map.fov.direction.x = val;
+					global_simulator.sendSimulatorConfiguration();
+				}
 				break;
 			case "opt-map-DirectionY":
-				global_simulation.config.map.fov.direction.y = val;
-				global_simulator.sendSimulatorConfiguration();
+				if(val == 0 && global_simulation.config.map.fov.direction.x == 0 && global_simulation.config.map.fov.direction.z == 0){
+					Dialog.showDialog("Stavor says", "Sensor direction cannot be (0,0,0)", function(){updateMapOptions();});
+				}else{
+					global_simulation.config.map.fov.direction.y = val;
+					global_simulator.sendSimulatorConfiguration();
+				}
 				break;
 			case "opt-map-DirectionZ":
-				global_simulation.config.map.fov.direction.z = val;
-				global_simulator.sendSimulatorConfiguration();
+				if(val == 0 && global_simulation.config.map.fov.direction.x == 0 && global_simulation.config.map.fov.direction.y == 0){
+					Dialog.showDialog("Stavor says", "Sensor direction cannot be (0,0,0)", function(){updateMapOptions();});
+				}else{
+					global_simulation.config.map.fov.direction.z = val;
+					global_simulator.sendSimulatorConfiguration();
+				}
 				break;
 			default:
 		}
