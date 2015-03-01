@@ -362,7 +362,9 @@ var Orbit = function()
 		earthCloud.name = "EARTH-CLOUDS";
 		containerEarth.add(earthCloud);
 		onRenderFcts.push(function(delta, now){
-			earthCloud.rotation.z += 1/32 * delta * accel_time;		
+			if(config.show_earth_clouds){
+				earthCloud.rotation.z += 1/32 * delta * accel_time;		
+			}
 		});
 
 		if(config.show_earth_clouds){
