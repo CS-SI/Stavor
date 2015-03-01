@@ -140,9 +140,9 @@
 }
 
 .MissionNormal{
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	/*-moz-box-shadow:inset 0px 1px 3px 0px #BBBBBB;
+	-webkit-box-shadow:inset 0px 1px 3px 0px #BBBBBB;
+	box-shadow:inset 0px 1px 0px 0px #BBBBBB;*/
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
 	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
 	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
@@ -168,9 +168,9 @@
 	margin-bottom: 2px;
 }
 .MissionActive{
-	/*-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;*/
+	/*-moz-box-shadow:inset 0px 1px 3px 0px #BBBBBB;
+	-webkit-box-shadow:inset 0px 1px 3px 0px #BBBBBB;
+	box-shadow:inset 0px 1px 3px 0px #BBBBBB;*/
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
 	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
 	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
@@ -197,9 +197,9 @@
 	margin-bottom: 2px;
 }
 .MissionSelected{
-	/*-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	box-shadow:inset 0px 1px 3px 0px #91b8b3;*/
+	-moz-box-shadow:inset 0px 1px 3px 0px #BBBBBB;
+	-webkit-box-shadow:inset 0px 1px 3px 0px #BBBBBB;
+	box-shadow:inset 0px 1px 3px 0px #BBBBBB;
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #8c8c8c), color-stop(1, #777777));
 	background:-moz-linear-gradient(top, #8c8c8c 5%, #777777 100%);
 	background:-webkit-linear-gradient(top, #8c8c8c 5%, #777777 100%);
@@ -224,9 +224,9 @@
 	margin-bottom: 2px;
 }
 .MissionActiveSelected{
-	/*-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	box-shadow:inset 0px 1px 3px 0px #91b8b3;*/
+	-moz-box-shadow:inset 0px 1px 3px 0px #BBBBBB;
+	-webkit-box-shadow:inset 0px 1px 3px 0px #BBBBBB;
+	box-shadow:inset 0px 1px 3px 0px #BBBBBB;
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #8c8c8c), color-stop(1, #777777));
 	background:-moz-linear-gradient(top, #8c8c8c 5%, #777777 100%);
 	background:-webkit-linear-gradient(top, #8c8c8c 5%, #777777 100%);
