@@ -25,12 +25,12 @@
 
 #MissionsListButton{
 	position: absolute;
-	bottom: 80px;
+	bottom: 75px;
 	left: 0px;
-	height: 50px;
+	height: 70px;
 	z-index: 1000; 
-	width: 50px;
-	margin: 2px;
+	width: 60px;
+	margin: 0px;
 	/*margin-left: 2px;
 	padding-top: 1px;
 	padding-bottom: 3px;

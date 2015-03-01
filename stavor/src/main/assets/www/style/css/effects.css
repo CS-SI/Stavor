@@ -11,12 +11,25 @@
 	90% { -webkit-transform: translate3d(2px, 2px, 0px) rotateZ(0deg); background-image:  url(../icons/list_e.png);}
 	100% { -webkit-transform: translate3d(1px, -2px, 0px) rotateZ(-1deg); background-image:  url(../icons/list_e.png);}
 }
+@-webkit-keyframes dancingMove {
+	0% { -webkit-transform: /*translate3d(2px, 1px, 0px)*/ rotateZ(-1deg); background-image:  url(../icons/list_e.png); }
+	10% { -webkit-transform: /*translate3d(-1px, -2px, 0px)*/ rotateZ(-5deg); background-image:  url(../icons/list_e.png);}
+	20% { -webkit-transform: /*translate3d(-3px, 0px, 0px)*/ rotateZ(-10deg); background-image:  url(../icons/list_e.png);}
+	30% { -webkit-transform: /*translate3d(0px, 2px, 0px)*/ rotateZ(-5deg); background-image:  url(../icons/list_e.png);}
+	40% { -webkit-transform: /*translate3d(1px, -1px, 0px)*/ rotateZ(-1deg); background-image:  url(../icons/list_e.png);}
+	50% { -webkit-transform: /*translate3d(-1px, 2px, 0px)*/ rotateZ(1deg); background-image:  url(../icons/list_e.png);}
+	60% { -webkit-transform: /*translate3d(-3px, 1px, 0px)*/ rotateZ(5deg); background-image:  url(../icons/list_e.png);}
+	70% { -webkit-transform: /*translate3d(2px, 1px, 0px)*/ rotateZ(10deg); background-image:  url(../icons/list_e.png);}
+	80% { -webkit-transform: /*translate3d(-1px, -1px, 0px)*/ rotateZ(5deg); background-image:  url(../icons/list_e.png);}
+	90% { -webkit-transform: /*translate3d(2px, 2px, 0px)*/ rotateZ(1deg); background-image:  url(../icons/list_e.png);}
+	100% { -webkit-transform: /*translate3d(1px, -2px, 0px)*/ rotateZ(0deg); background-image:  url(../icons/list_e.png);}
+}
 
 .effectShake {	
-	-webkit-animation-name: spaceboots;
-	-webkit-animation-duration: 0.4s;
+	-webkit-animation-name: dancingMove;
+	-webkit-animation-duration: 0.2s;
 	-webkit-transform-origin:50% 50%;
-	-webkit-animation-iteration-count: 2;
+	-webkit-animation-iteration-count: 5;
 	-webkit-animation-timing-function: linear;
 }
 
@@ -34,10 +47,23 @@
 	100% { -webkit-transform: translate3d(1px, -2px, 0px) rotateZ(-1deg); background-image:  url(../icons/select_e.png);}
 }
 
+@-webkit-keyframes lateralShake {
+	0% { -webkit-transform: translate3d(2px, 0px, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_e.png); }
+	10% { -webkit-transform: translate3d(4px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_e.png);}
+	20% { -webkit-transform: translate3d(8px, 0px, 0px) /*rotateZ(1deg)*/; background-image:  url(../icons/select_e.png);}
+	30% { -webkit-transform: translate3d(4px, 0x, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_e.png);}
+	40% { -webkit-transform: translate3d(2px, 0px, 0px) /*rotateZ(1deg)*/; background-image:  url(../icons/select_e.png);}
+	50% { -webkit-transform: translate3d(-2px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_e.png);}
+	60% { -webkit-transform: translate3d(-4px, 0px, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_e.png);}
+	70% { -webkit-transform: translate3d(-8px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_e.png);}
+	80% { -webkit-transform: translate3d(-4px, 0px, 0px) /*rotateZ(1deg)*/; background-image:  url(../icons/select_e.png);}
+	90% { -webkit-transform: translate3d(-2px, 0px, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_e.png);}
+	100% { -webkit-transform: translate3d(0px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_e.png);}
+}
 .effectShakeSelect {	
-	-webkit-animation-name: selectMission;
-	-webkit-animation-duration: 0.4s;
+	-webkit-animation-name: lateralShake;
+	-webkit-animation-duration: 0.2s;
 	-webkit-transform-origin:50% 50%;
-	-webkit-animation-iteration-count: 2;
+	-webkit-animation-iteration-count: 5;
 	-webkit-animation-timing-function: linear;
 }
