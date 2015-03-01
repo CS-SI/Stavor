@@ -48,17 +48,17 @@
 }
 
 @-webkit-keyframes lateralShake {
-	0% { -webkit-transform: translate3d(2px, 0px, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_e.png); }
-	10% { -webkit-transform: translate3d(4px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_e.png);}
-	20% { -webkit-transform: translate3d(8px, 0px, 0px) /*rotateZ(1deg)*/; background-image:  url(../icons/select_e.png);}
-	30% { -webkit-transform: translate3d(4px, 0x, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_e.png);}
-	40% { -webkit-transform: translate3d(2px, 0px, 0px) /*rotateZ(1deg)*/; background-image:  url(../icons/select_e.png);}
-	50% { -webkit-transform: translate3d(-2px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_e.png);}
-	60% { -webkit-transform: translate3d(-4px, 0px, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_e.png);}
-	70% { -webkit-transform: translate3d(-8px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_e.png);}
-	80% { -webkit-transform: translate3d(-4px, 0px, 0px) /*rotateZ(1deg)*/; background-image:  url(../icons/select_e.png);}
-	90% { -webkit-transform: translate3d(-2px, 0px, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_e.png);}
-	100% { -webkit-transform: translate3d(0px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_e.png);}
+	0% { -webkit-transform: translate3d(2px, 0px, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_er.png); }
+	10% { -webkit-transform: translate3d(4px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_er.png);}
+	20% { -webkit-transform: translate3d(8px, 0px, 0px) /*rotateZ(1deg)*/; background-image:  url(../icons/select_er.png);}
+	30% { -webkit-transform: translate3d(4px, 0x, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_el.png);}
+	40% { -webkit-transform: translate3d(2px, 0px, 0px) /*rotateZ(1deg)*/; background-image:  url(../icons/select_el.png);}
+	50% { -webkit-transform: translate3d(-2px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_el.png);}
+	60% { -webkit-transform: translate3d(-4px, 0px, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_el.png);}
+	70% { -webkit-transform: translate3d(-8px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_el.png);}
+	80% { -webkit-transform: translate3d(-4px, 0px, 0px) /*rotateZ(1deg)*/; background-image:  url(../icons/select_er.png);}
+	90% { -webkit-transform: translate3d(-2px, 0px, 0px) /*rotateZ(0deg)*/; background-image:  url(../icons/select_er.png);}
+	100% { -webkit-transform: translate3d(0px, 0px, 0px) /*rotateZ(-1deg)*/; background-image:  url(../icons/select_er.png);}
 }
 .effectShakeSelect {	
 	-webkit-animation-name: lateralShake;
