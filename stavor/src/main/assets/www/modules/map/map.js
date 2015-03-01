@@ -644,12 +644,12 @@ function changeView(view_mode){
 	stationNameStyle.fillOpacity = 0.4;
 	stationNameStyle.strokeWidth = 1;
 	stationNameStyle.label = "${label}";
-	stationNameStyle.labelOutlineColor = "white";
+	stationNameStyle.labelOutlineColor = "black";
 	stationNameStyle.labelOutlineWidth = 0.3;
-	stationNameStyle.fontSize="10px";
+	stationNameStyle.fontSize="12px";
 	stationNameStyle.fontWeight="bold";
-	stationNameStyle.fontColor="#000000";
-	stationNameStyle.pointRadius="1";
+	stationNameStyle.fontColor="#FFFFFF";
+	stationNameStyle.pointRadius="2";
 	stationNameStyle.labelYOffset="10";	
 	
 	var smap = new OpenLayers.StyleMap({"default": stationNameStyle});

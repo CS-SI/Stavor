@@ -88,12 +88,13 @@ ol{
 	margin: 0;
 }
 ol li{
+	vertical-align: middle;
     padding-left: 10px;
     padding-right: 10px;
 	margin-left: 10px;
 	margin-right: 10px;
-	padding-top:2px;
-	padding-bottom:2px;
+	padding-top:4px;
+	padding-bottom:4px;
 	background-color: rgba(240, 240, 240, 0.98);
 	border: 1px solid black;/*
 	border-radius: 4px;*/
@@ -370,6 +371,9 @@ ol li{
 	border-radius: 0 0 10px 10px;
 	cursor: pointer;
 	max-width: 100%;
+	
+	border: 1px solid #666666;
+	border-top: 0px;
 	
     -webkit-transition: height 0.8s ease, width 0.5s ease;
     -moz-transition: height 0.8s ease, width 0.5s ease;

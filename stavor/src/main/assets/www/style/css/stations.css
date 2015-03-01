@@ -4,14 +4,16 @@
 	width: 40px;
 	height:20px;
 	padding:0px;
-	margin: 2px;
+	margin: 0px;
+	margin-top: 2px;
 }
 .StationActive input[type=checkbox]
 {
 	width: 40px;
 	height:20px;
 	padding:0px;
-	margin: 2px;
+	margin: 0px;
+	margin-top: 2px;
 }
 
 .StationField{
@@ -71,7 +73,7 @@ div#Maptabscontent.tabscontent{
 	margin-left: 10px;
 	margin-top: 10px;
 	margin-right: 10px;
-	height: 30px;
+	height: 35px;
 	background-color: rgba(220, 220, 220, 0.7);
 	border-radius: 2px 2px 4px 2px;
 	box-shadow: 1px -1px 4px #000;
@@ -86,7 +88,7 @@ div#Maptabscontent.tabscontent{
 }
 
 .StationsMenuButton{
-	height: 20px;
+	height: 25px;
 	padding: 5px;
 	width: auto;
 }
@@ -111,11 +113,14 @@ div#Maptabscontent.tabscontent{
 	cursor:pointer;
 	color:#666666;
 	/*font-family:arial;*/
-	font-size:18px;
+	font-size:20px;
 	font-weight:bold;
 	/*padding:6px 24px;*/
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffffff;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	margin-top: 4px;
 }
 .StationActive{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -132,16 +137,20 @@ div#Maptabscontent.tabscontent{
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
 	border-radius:6px;
-	border:2px solid #474747;
+	border:1px solid #474747;
 	display:inline-block;
 	cursor:pointer;
 	color:#666666;
 	/*font-family:arial;*/
-	font-size:18px;
+	font-size:20px;
 	font-weight:bold;
 	/*padding:6px 24px;*/
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffffff;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	margin-top: 4px;
+	box-shadow: 1px -1px 1px #666;
 }
 
 #StationEditorBackground{

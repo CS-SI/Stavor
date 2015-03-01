@@ -13,7 +13,11 @@
 	max-width: 75%;
 	z-index: 1500;
 	background-color:rgba(150, 150, 150, 0.32);
-	box-shadow: 2px -2px 3px #333;
+	box-shadow: 1px -1px 3px #333;
+	/*border: 1px solid #000029;
+	border-bottom: 0;
+	border-left: 0;*/
+	padding-top: 1px;
 }
 #AccelButton{
 	background-image:  url(../icons/accelerate.png);
@@ -169,7 +173,7 @@
 }
 #TimeBar{
 	position: relative;
-	width: calc(100% - 255px);
+	width: calc(100% - 253px);
 	min-width: 50px;
 	float: left;
 	vertical-align:middle;
@@ -196,7 +200,7 @@
 	width: auto;
 	z-index: 1000;
 	background-color: #111;
-	box-shadow: 1px -1px 6px #333;
+	box-shadow: 1px -1px 4px #333;
 	color: white;
 }
 
