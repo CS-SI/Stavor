@@ -640,11 +640,12 @@ function updateGlobalOption(id,val){
 				break;
 			default:
 		}	
-		global_orbit.stopAnimation();
+		/*global_orbit.stopAnimation();
 		global_orbit = new Orbit();
 		global_attitude.stopAnimation();
-		global_attitude = new Attitude();
+		global_attitude = new Attitude();*/
 		saveStoredVariables();
+		window.location.reload();
 	}else{
 		initializeGlobalMenu();
 	}
