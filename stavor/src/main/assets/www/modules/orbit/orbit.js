@@ -129,7 +129,12 @@ var Orbit = function()
 		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
 		lastTimeMsec	= nowMsec*/
 		
-		if(global_current_visualization == enum_visualizations.ORBIT){
+		if(global_current_visualization == enum_visualizations.ORBIT ||
+			!global_renderers_preloaded.orbit){
+			if(!global_renderers_preloaded.orbit){
+				global_renderers_preloaded.orbit = true;
+			}
+			
 			//console.log("UPDATE ORBIT");
 			delta = clock.getDelta();
 			

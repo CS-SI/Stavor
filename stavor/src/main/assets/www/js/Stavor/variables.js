@@ -8,6 +8,11 @@
 var global_current_visualization = enum_visualizations.ORBITE;
 var global_missions_list_is_open = false;
 
+var global_renderers_preloaded = {
+	attitude: false,
+	orbit: false
+}
+
 //Flags for asyncronous loading functions
 var global_delayed_loading = {
 	splashIsHidden: false,

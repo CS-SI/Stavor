@@ -171,7 +171,11 @@ var Attitude = function ()
 	}
 	function update()
 	{	
-		if(global_current_visualization == enum_visualizations.ATTITUDE){
+		if(global_current_visualization == enum_visualizations.ATTITUDE ||
+			!global_renderers_preloaded.attitude){
+			if(!global_renderers_preloaded.attitude){
+				global_renderers_preloaded.attitude = true;
+			}
 			//console.log("UPDATE ATTITUDE");
 			//Controls
 			controls.update();
