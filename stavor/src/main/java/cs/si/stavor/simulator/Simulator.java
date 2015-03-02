@@ -111,6 +111,7 @@ public class Simulator {
                 e.printStackTrace();
             }
         }
+        setSimulationSense(SimulationSense.Forward);
 		mission = mis;
         connect();
 	}
