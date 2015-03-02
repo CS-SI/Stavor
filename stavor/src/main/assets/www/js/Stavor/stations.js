@@ -2,6 +2,11 @@ var global_stations = {
 	active: -1
 }
 
+function updateStationAngleUnitsInRads(bool){
+	setAngleUnitsRads(bool);
+	reopenStationEditor();
+}
+
 function areStationsInstalled(){
 	var serialized = localStorage.getItem('stationsInstalled'); 
 	if(serialized){
@@ -263,6 +268,20 @@ function changeStationEnabled(id,enabled){
 }
 
 function updateStationEditor(station,station_id){
+	if(global_angle_in_rads){
+		document.getElementById("AngleUnitsSelectionRadsStation").className = "AngleUnitsSelected";
+		document.getElementById("AngleUnitsSelectionDegsStation").className = "AngleUnitsUnselected";
+		document.getElementById("StationEditor-Latitude").innerHTML = "Latitude (rad):";
+		document.getElementById("StationEditor-Longitude").innerHTML = "Longitude (rad):";
+		document.getElementById("StationEditor-Elevation").innerHTML = "Min. elevation (rad):";
+	}else{
+		document.getElementById("AngleUnitsSelectionRadsStation").className = "AngleUnitsUnselected";
+		document.getElementById("AngleUnitsSelectionDegsStation").className = "AngleUnitsSelected";
+		document.getElementById("StationEditor-Latitude").innerHTML = "Latitude (deg):";
+		document.getElementById("StationEditor-Longitude").innerHTML = "Longitude (deg):";
+		document.getElementById("StationEditor-Elevation").innerHTML = "Min. elevation (deg):";
+	}
+	
 	var field;
 	field = document.getElementById("sta-Id");
 	field.value = station_id;
@@ -277,12 +296,21 @@ function updateStationEditor(station,station_id){
 	field.value = station.name;
 	field = document.getElementById("sta-longitude");
 	field.value = station.longitude;
+	if(global_angle_in_rads){
+		field.value = field.value * Math.PI / 180.0;
+	}
 	field = document.getElementById("sta-latitude");
 	field.value = station.latitude;
+	if(global_angle_in_rads){
+		field.value = field.value * Math.PI / 180.0;
+	}
 	field = document.getElementById("sta-altitude");
 	field.value = station.altitude;
 	field = document.getElementById("sta-elevation");
 	field.value = station.elevation;
+	if(global_angle_in_rads){
+		field.value = field.value * Math.PI / 180.0;
+	}
 }
 
 function saveStationEditor(){
@@ -295,12 +323,21 @@ function saveStationEditor(){
 		station.name = field.value;
 		field = document.getElementById("sta-longitude");
 		station.longitude = Number(field.value);
+		if(global_angle_in_rads){
+			station.longitude = station.longitude * 180.0 / Math.PI;
+		}
 		field = document.getElementById("sta-latitude");
 		station.latitude = Number(field.value);
+		if(global_angle_in_rads){
+			station.latitude = station.latitude * 180.0 / Math.PI;
+		}
 		field = document.getElementById("sta-altitude");
 		station.altitude = Number(field.value);
 		field = document.getElementById("sta-elevation");
 		station.elevation = Number(field.value);
+		if(global_angle_in_rads){
+			station.elevation = station.elevation * 180.0 / Math.PI;
+		}
 		
 		field = document.getElementById("sta-Id");
 		var id = Number(field.value);
@@ -324,7 +361,18 @@ function closeStationEditor(){
 	}
 }
 
+function reopenStationEditor(){
+	if(global_menus.station.isOpen){
+		$( "#StationEditorBackground" ).fadeOut( "slow", function() {
+			global_menus.station.isOpen = !global_menus.station.isOpen;
+			openStationEditor(lastStationEditorId);
+		  });
+	}
+}
+
+var lastStationEditorId = -1;
 function openStationEditor(id){
+	lastStationEditorId = id;
 	db.transaction(function (tx) {
 		tx.executeSql('SELECT * FROM stations WHERE id = '+global_stations.active+';', [], function (tx, results) {	
 			if(!global_menus.station.isOpen){

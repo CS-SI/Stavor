@@ -3,6 +3,11 @@ var global_missions = {
 	selected: -1
 }
 
+function updateMissionAngleUnitsInRads(bool){
+	setAngleUnitsRads(bool);
+	reopenMissionEditor();
+}
+
 function areMissionsInstalled(){
 	var serialized = localStorage.getItem('missionsInstalled'); 
 	if(serialized){
@@ -303,6 +308,22 @@ function editMissionToDb(id,mission){
 }
 
 function updateMissionEditor(mission,mission_id){
+	if(global_angle_in_rads){
+		document.getElementById("AngleUnitsSelectionRads").className = "AngleUnitsSelected";
+		document.getElementById("AngleUnitsSelectionDegs").className = "AngleUnitsUnselected";
+		document.getElementById("MissionEditor-Inclination").innerHTML = "Inclination (rad):";
+		document.getElementById("MissionEditor-Omega").innerHTML = "Arg. Perigee (rad):";
+		document.getElementById("MissionEditor-Raan").innerHTML = "RAAN (rad):";
+		document.getElementById("MissionEditor-lM").innerHTML = "Mean anomaly (rad):";
+	}else{
+		document.getElementById("AngleUnitsSelectionRads").className = "AngleUnitsUnselected";
+		document.getElementById("AngleUnitsSelectionDegs").className = "AngleUnitsSelected";
+		document.getElementById("MissionEditor-Inclination").innerHTML = "Inclination (deg):";
+		document.getElementById("MissionEditor-Omega").innerHTML = "Arg. Perigee (deg):";
+		document.getElementById("MissionEditor-Raan").innerHTML = "RAAN (deg):";
+		document.getElementById("MissionEditor-lM").innerHTML = "Mean anomaly (deg):";
+	}
+
 	var field;
 	field = document.getElementById("mis-Id");
 	field.value = mission_id;
@@ -355,12 +376,24 @@ function updateMissionEditor(mission,mission_id){
 	field.value = mission.initial_orbit.e;
 	field = document.getElementById("mis-i");
 	field.value = mission.initial_orbit.i;
+	if(!global_angle_in_rads){
+		field.value = field.value * 180.0 / Math.PI;
+	}
 	field = document.getElementById("mis-omega");
 	field.value = mission.initial_orbit.omega;
+	if(!global_angle_in_rads){
+		field.value = field.value * 180.0 / Math.PI;
+	}
 	field = document.getElementById("mis-raan");
 	field.value = mission.initial_orbit.raan;
+	if(!global_angle_in_rads){
+		field.value = field.value * 180.0 / Math.PI;
+	}
 	field = document.getElementById("mis-lm");
 	field.value = mission.initial_orbit.lM;
+	if(!global_angle_in_rads){
+		field.value = field.value * 180.0 / Math.PI;
+	}
 }
 
 function saveMissionEditor(){
@@ -402,12 +435,24 @@ function saveMissionEditor(){
 		mission.initial_orbit.e = Number(field.value);
 		field = document.getElementById("mis-i");
 		mission.initial_orbit.i = Number(field.value);
+		if(!global_angle_in_rads){
+			mission.initial_orbit.i = mission.initial_orbit.i * Math.PI / 180.0;
+		}
 		field = document.getElementById("mis-omega");
 		mission.initial_orbit.omega = Number(field.value);
+		if(!global_angle_in_rads){
+			mission.initial_orbit.omega = mission.initial_orbit.omega * Math.PI / 180.0;
+		}
 		field = document.getElementById("mis-raan");
 		mission.initial_orbit.raan = Number(field.value);
+		if(!global_angle_in_rads){
+			mission.initial_orbit.raan = mission.initial_orbit.raan * Math.PI / 180.0;
+		}
 		field = document.getElementById("mis-lm");
 		mission.initial_orbit.lM = Number(field.value);
+		if(!global_angle_in_rads){
+			mission.initial_orbit.lM = mission.initial_orbit.lM * Math.PI / 180.0;
+		}
 		
 		field = document.getElementById("mis-Id");
 		var id = Number(field.value);
@@ -431,7 +476,18 @@ function closeMissionEditor(){
 	}
 }
 
+function reopenMissionEditor(){
+	if(global_menus.mission.isOpen){
+		$( "#MissionEditorBackground" ).fadeOut( "fast", function() {
+			global_menus.mission.isOpen = !global_menus.mission.isOpen;
+			openMissionEditor(lastMissionEditorId);
+		  });
+	}
+}
+
+var lastMissionEditorId = -1;
 function openMissionEditor(id){
+	lastMissionEditorId = id;
 	db.transaction(function (tx) {
 		tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
 			if(!global_menus.mission.isOpen){

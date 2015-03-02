@@ -418,6 +418,22 @@
 			div.style.display = "block";
 		}
 		
+		function loadAngleUnitsRads(){
+			var serialized = localStorage.getItem('angleUnitsRads'); 
+			if(serialized){
+				global_angle_in_rads = JSON.parse(serialized);
+			}else{
+				setAngleUnitsRads(true);
+				loadAngleUnitsRads();
+			}
+		}
+		
+		function setAngleUnitsRads(bool){
+			var dataToStore = JSON.stringify(bool);
+			localStorage.setItem('angleUnitsRads', dataToStore);
+			global_angle_in_rads = bool;
+		}
+		
 	</script>
 </head>
 <body>
@@ -734,11 +750,12 @@
 			<h4>Orbit</h4>
 			<p>Semi-major axis (m):<input id="mis-a" type="number" min="0" step="any" style="float: right;" class="MissionField"/></p>
 			<p>Eccentricity:<input id="mis-e" type="number" min="0" step="any" style="float: right;" class="MissionField"/></p>
-			<p>Inclination (rad):<input id="mis-i" type="number" step="any" style="float: right;" class="MissionField"/></p>
-			<p>Arg. Perigee (rad):<input id="mis-omega" type="number" step="any" style="float: right;" class="MissionField"/></p>
-			<p>RAAN (rad):<input id="mis-raan" type="number" step="any" style="float: right;" class="MissionField"/></p>
-			<p>Mean anomaly (rad):<input id="mis-lm" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p><span id="MissionEditor-Inclination">Inclination (rad):</span><input id="mis-i" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p><span id="MissionEditor-Omega">Arg. Perigee (rad):</span><input id="mis-omega" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p><span id="MissionEditor-Raan">RAAN (rad):</span><input id="mis-raan" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p><span id="MissionEditor-lM">Mean anomaly (rad):</span><input id="mis-lm" type="number" step="any" style="float: right;" class="MissionField"/></p>
 		</div>
+		<div id="AngleUnitsSelectionRads" class="AngleUnitsSelected" onclick="updateMissionAngleUnitsInRads(true)">Rads</div><div id="AngleUnitsSelectionDegs" class="AngleUnitsUnselected" onclick="updateMissionAngleUnitsInRads(false)">Degs</div>
 	</div>
 </div>
 
@@ -750,11 +767,12 @@
 		<div id="StationEditorContent">
 			<input id="sta-Id" type="hidden"/>
 			<p>Name:<input id="sta-Name" type="text" style="float: right;" class="StationField"/></p>
-			<p>Latitude (deg):<input id="sta-latitude" type="number" min="-90" max="90" step="any" style="float: right;" class="StationField"/></p>
-			<p>Longitude (deg):<input id="sta-longitude" type="number" min="-180" max="180" step="any" style="float: right;" class="StationField"/></p>
+			<p><span id="StationEditor-Latitude">Latitude (deg):</span><input id="sta-latitude" type="number" min="-90" max="90" step="any" style="float: right;" class="StationField"/></p>
+			<p><span id="StationEditor-Longitude">Longitude (deg):</span><input id="sta-longitude" type="number" min="-180" max="180" step="any" style="float: right;" class="StationField"/></p>
 			<p>Altitude (m):<input id="sta-altitude" type="number" step="any" style="float: right;" class="StationField"/></p>
-			<p>Min. elevation (deg):<input id="sta-elevation" type="number" max="90" min="-10" step="any" style="float: right;" class="StationField"/></p>
+			<p><span id="StationEditor-Elevation">Min. elevation (deg):</span><input id="sta-elevation" type="number" max="90" min="-10" step="any" style="float: right;" class="StationField"/></p>
 		</div>
+		<div id="AngleUnitsSelectionRadsStation" class="AngleUnitsSelected" onclick="updateStationAngleUnitsInRads(true)">Rads</div><div id="AngleUnitsSelectionDegsStation" class="AngleUnitsUnselected" onclick="updateStationAngleUnitsInRads(false)">Degs</div>
 	</div>
 </div>
 

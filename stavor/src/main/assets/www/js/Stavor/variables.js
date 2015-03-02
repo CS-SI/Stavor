@@ -5,6 +5,8 @@
 	height: window.innerHeight
 }*/
 
+var global_angle_in_rads = true;
+
 var global_current_visualization = enum_visualizations.ORBITE;
 var global_missions_list_is_open = false;
 
