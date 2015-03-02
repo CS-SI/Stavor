@@ -362,12 +362,20 @@ function closeStationEditor(){
 }
 
 function reopenStationEditor(){
-	if(global_menus.station.isOpen){
-		$( "#StationEditorBackground" ).fadeOut( "slow", function() {
-			global_menus.station.isOpen = !global_menus.station.isOpen;
-			openStationEditor(lastStationEditorId);
-		  });
-	}
+	var id = lastStationEditorId;
+	db.transaction(function (tx) {
+		tx.executeSql('SELECT * FROM stations WHERE id = '+global_stations.active+';', [], function (tx, results) {	
+			if(global_menus.station.isOpen){
+				if(id == -1){//Create mode
+					var station = new Station();
+					updateStationEditor(station,id);
+				}else{//Edit Mode
+					var station = JSON.parse(results.rows.item(0).json);
+					updateStationEditor(station,id);
+				}
+			}
+		}, errorDatabaseHandler);
+	});
 }
 
 var lastStationEditorId = -1;

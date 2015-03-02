@@ -84,6 +84,8 @@
 				setLoadingText("Loading Configuration...");
 			loadStoredVariables();
 			
+			loadAngleUnitsRads();
+			
 			global_attitude = new Attitude();//Splash
 			global_orbit = new Orbit();//Splash
 			global_map = new Map();//Splash
@@ -144,6 +146,7 @@
 		function resetStoredVariables(){
 			localStorage.removeItem('simulationConfig'); 
 			localStorage.removeItem('missionsConfig');
+			localStorage.removeItem('angleUnitsRads');
 			window.location.reload();
 		}
 		
@@ -423,7 +426,7 @@
 			if(serialized){
 				global_angle_in_rads = JSON.parse(serialized);
 			}else{
-				setAngleUnitsRads(true);
+				setAngleUnitsRads(false);
 				loadAngleUnitsRads();
 			}
 		}

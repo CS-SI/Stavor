@@ -477,12 +477,20 @@ function closeMissionEditor(){
 }
 
 function reopenMissionEditor(){
-	if(global_menus.mission.isOpen){
-		$( "#MissionEditorBackground" ).fadeOut( "fast", function() {
-			global_menus.mission.isOpen = !global_menus.mission.isOpen;
-			openMissionEditor(lastMissionEditorId);
-		  });
-	}
+	var id = lastMissionEditorId;
+	db.transaction(function (tx) {
+		tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
+			if(global_menus.mission.isOpen){
+				if(id == -1){//Create mode
+					var mission = new Mission();
+					updateMissionEditor(mission,id);
+				}else{//Edit Mode
+					var mission = JSON.parse(results.rows.item(0).json);
+					updateMissionEditor(mission,id);
+				}
+			}
+		}, errorDatabaseHandler);
+	});
 }
 
 var lastMissionEditorId = -1;
