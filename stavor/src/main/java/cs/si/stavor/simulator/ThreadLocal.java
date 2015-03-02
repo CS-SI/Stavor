@@ -264,25 +264,23 @@ public class ThreadLocal extends Thread{
      * @throws PropagationException
      */
     private SpacecraftState propagate() throws PropagationException {
+        SpacecraftState currentState;
         if (simulator.getSimulationSense() == SimulationSense.Forward) {
             if (extrapDate.compareTo(finalDate) <= 0) {
-                SpacecraftState currentState = propagator.propagate(extrapDate);
+                currentState = propagator.propagate(extrapDate);
                 extrapDate = new AbsoluteDate(extrapDate, mission.sim_step);
-                return currentState;
             } else {
-                SpacecraftState currentState = propagator.propagate(finalDate);
-                return currentState;
+                currentState = propagator.propagate(finalDate);
             }
         } else {
             if (extrapDate.compareTo(mission.initial_date) >= 0) {
-                SpacecraftState currentState = propagator.propagate(extrapDate);
+                currentState = propagator.propagate(extrapDate);
                 extrapDate = new AbsoluteDate(extrapDate, -mission.sim_step);
-                return currentState;
             } else {
-                SpacecraftState currentState = propagator.propagate(mission.initial_date);
-                return currentState;
+                currentState = propagator.propagate(mission.initial_date);
             }
         }
+        return currentState;
     }
 
     public void setCurrentSimulationProgress(int percentage, boolean isLast) {

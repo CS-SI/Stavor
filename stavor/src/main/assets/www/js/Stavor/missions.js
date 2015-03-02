@@ -3,6 +3,18 @@ var global_missions = {
 	selected: -1
 }
 
+function areMissionsInstalled(){
+	var serialized = localStorage.getItem('missionsInstalled'); 
+	if(serialized){
+		var localData = JSON.parse(serialized);
+		return localData;
+	}
+}
+function setMissionsInstalled(bool){
+	var dataToStore = JSON.stringify(bool);
+	localStorage.setItem('missionsInstalled', dataToStore);
+}
+
 function loadMissionsStoredVariables(){
 	var serialized = localStorage.getItem('missionsConfig'); 
 	if(serialized){
@@ -150,6 +162,7 @@ function resetMissionsDb(){
 	Dialog.showConfirmDialog("Stavor says","Reset missions list to default value?",function(){
 		db.transaction(function (tx) {
 			tx.executeSql('DROP TABLE missions', [], function (tx, results) {
+				setMissionsInstalled(false);
 				window.location.reload();
 			}, errorDatabaseHandler);
 		});
@@ -157,114 +170,118 @@ function resetMissionsDb(){
 }
 
 function initializeMissionsDb(){
-	db.transaction(function (tx) {
-		tx.executeSql('CREATE TABLE missions (id INTEGER PRIMARY KEY, isDefault BOOLEAN, name VARCHAR(255), json BLOB)', [], function (tx, results) {
-			var default_missions = new Array();
-			var mission;
-			
-			//Example 0- GTO
-			mission = new Mission();
-			mission.name = "GTO";
-			mission.description = "Geostationary Transfer Orbit";
-			mission.duration = 100000.0;
-			mission.step = 10.0;
-			mission.initial_orbit.a = 2.4396159E7;
-			mission.initial_orbit.e = 0.72831215;
-			//mission.initial_orbit.i = 0.0;
-			//mission.initial_orbit.omega = ;
-			//mission.initial_orbit.raan = 0.0;
-			//mission.initial_orbit.lM = ;
-			default_missions[default_missions.length] = mission;
-			
-			//Example 1- LEO
-			mission = new Mission();
-			mission.name = "LEO";
-			mission.description = "Example of Low Earth Orbit";
-			mission.duration = 100000.0;
-			mission.step = 10.0;
-			mission.initial_orbit.a = 7.0E6;
-			mission.initial_orbit.e = 0.0;
-			mission.initial_orbit.i = 0;
-			//mission.initial_orbit.omega = ;
-			mission.initial_orbit.raan = 0.0;
-			//mission.initial_orbit.lM = ;
-			default_missions[default_missions.length] = mission;
-			
-			//Example 2- LEO Polar
-			mission = new Mission();
-			mission.name = "LEO - Polar";
-			mission.description = "Example of Polar Low Earth Orbit";
-			mission.duration = 100000.0;
-			mission.step = 10.0;
-			mission.initial_orbit.a = 7.0E6;
-			mission.initial_orbit.e = 0.0;
-			mission.initial_orbit.i = 1.57;
-			//mission.initial_orbit.omega = ;
-			mission.initial_orbit.raan = 0.0;
-			//mission.initial_orbit.lM = ;
-			default_missions[default_missions.length] = mission;
-			
-			//Example 3- MEO
-			mission = new Mission();
-			mission.name = "MEO";
-			mission.description = "Example of Medium Earth Orbit";
-			mission.duration = 100000.0;
-			mission.step = 10.0;
-			mission.initial_orbit.a = 2.9E7;
-			mission.initial_orbit.e = 0.0;
-			mission.initial_orbit.i = 0.90;
-			//mission.initial_orbit.omega = ;
-			mission.initial_orbit.raan = 0.0;
-			//mission.initial_orbit.lM = ;
-			default_missions[default_missions.length] = mission;
-			
-			//Example 4- GEO
-			mission = new Mission();
-			mission.name = "GEO";
-			mission.description = "Example of Geostationary Orbit";
-			mission.duration = 100000.0;
-			mission.step = 10.0;
-			mission.initial_orbit.a = 4.2164E7;
-			mission.initial_orbit.e = 0.0;
-			mission.initial_orbit.i = 0.90;
-			//mission.initial_orbit.omega = ;
-			mission.initial_orbit.raan = 0.0;
-			//mission.initial_orbit.lM = ;
-			default_missions[default_missions.length] = mission;
-			
-			//Example 5- GEO
-			mission = new Mission();
-			mission.name = "GEO - Equatorial";
-			mission.description = "Example of Equatorial Geostationary Orbit";
-			mission.duration = 100000.0;
-			mission.step = 10.0;
-			mission.initial_orbit.a = 4.2164E7;
-			mission.initial_orbit.e = 0.0;
-			mission.initial_orbit.i = 0.0;
-			//mission.initial_orbit.omega = ;
-			mission.initial_orbit.raan = 0.0;
-			//mission.initial_orbit.lM = ;
-			default_missions[default_missions.length] = mission;
-			
-			
-			for(var i = 0; i < default_missions.length; i++)
-				tx.executeSql('INSERT INTO missions (isDefault, name, json) VALUES (?, ?, ?)', [true, default_missions[i].name, JSON.stringify(default_missions[i])], successDatabaseHandler, errorDatabaseHandler);
+	var installed = areMissionsInstalled();
+	if(!installed){
+		db.transaction(function (tx) {
+			tx.executeSql('CREATE TABLE missions (id INTEGER PRIMARY KEY, isDefault BOOLEAN, name VARCHAR(255), json BLOB)', [], function (tx, results) {
+				var default_missions = new Array();
+				var mission;
+				
+				//Example 0- GTO
+				mission = new Mission();
+				mission.name = "GTO";
+				mission.description = "Geostationary Transfer Orbit";
+				mission.duration = 100000.0;
+				mission.step = 10.0;
+				mission.initial_orbit.a = 2.4396159E7;
+				mission.initial_orbit.e = 0.72831215;
+				//mission.initial_orbit.i = 0.0;
+				//mission.initial_orbit.omega = ;
+				//mission.initial_orbit.raan = 0.0;
+				//mission.initial_orbit.lM = ;
+				default_missions[default_missions.length] = mission;
+				
+				//Example 1- LEO
+				mission = new Mission();
+				mission.name = "LEO";
+				mission.description = "Example of Low Earth Orbit";
+				mission.duration = 100000.0;
+				mission.step = 10.0;
+				mission.initial_orbit.a = 7.0E6;
+				mission.initial_orbit.e = 0.0;
+				mission.initial_orbit.i = 0;
+				//mission.initial_orbit.omega = ;
+				mission.initial_orbit.raan = 0.0;
+				//mission.initial_orbit.lM = ;
+				default_missions[default_missions.length] = mission;
+				
+				//Example 2- LEO Polar
+				mission = new Mission();
+				mission.name = "LEO - Polar";
+				mission.description = "Example of Polar Low Earth Orbit";
+				mission.duration = 100000.0;
+				mission.step = 10.0;
+				mission.initial_orbit.a = 7.0E6;
+				mission.initial_orbit.e = 0.0;
+				mission.initial_orbit.i = 1.57;
+				//mission.initial_orbit.omega = ;
+				mission.initial_orbit.raan = 0.0;
+				//mission.initial_orbit.lM = ;
+				default_missions[default_missions.length] = mission;
+				
+				//Example 3- MEO
+				mission = new Mission();
+				mission.name = "MEO";
+				mission.description = "Example of Medium Earth Orbit";
+				mission.duration = 100000.0;
+				mission.step = 10.0;
+				mission.initial_orbit.a = 2.9E7;
+				mission.initial_orbit.e = 0.0;
+				mission.initial_orbit.i = 0.90;
+				//mission.initial_orbit.omega = ;
+				mission.initial_orbit.raan = 0.0;
+				//mission.initial_orbit.lM = ;
+				default_missions[default_missions.length] = mission;
+				
+				//Example 4- GEO
+				mission = new Mission();
+				mission.name = "GEO";
+				mission.description = "Example of Geostationary Orbit";
+				mission.duration = 100000.0;
+				mission.step = 10.0;
+				mission.initial_orbit.a = 4.2164E7;
+				mission.initial_orbit.e = 0.0;
+				mission.initial_orbit.i = 0.90;
+				//mission.initial_orbit.omega = ;
+				mission.initial_orbit.raan = 0.0;
+				//mission.initial_orbit.lM = ;
+				default_missions[default_missions.length] = mission;
+				
+				//Example 5- GEO
+				mission = new Mission();
+				mission.name = "GEO - Equatorial";
+				mission.description = "Example of Equatorial Geostationary Orbit";
+				mission.duration = 100000.0;
+				mission.step = 10.0;
+				mission.initial_orbit.a = 4.2164E7;
+				mission.initial_orbit.e = 0.0;
+				mission.initial_orbit.i = 0.0;
+				//mission.initial_orbit.omega = ;
+				mission.initial_orbit.raan = 0.0;
+				//mission.initial_orbit.lM = ;
+				default_missions[default_missions.length] = mission;
+				
+				
+				for(var i = 0; i < default_missions.length; i++)
+					tx.executeSql('INSERT INTO missions (isDefault, name, json) VALUES (?, ?, ?)', [true, default_missions[i].name, JSON.stringify(default_missions[i])], successDatabaseHandler, errorDatabaseHandler);
+				});
+				
+				setMissionsInstalled(true);
+				loadMissionsStoredVariables();
+				drawMissionsList();
+				selectActiveMission();
+				global_delayed_loading.database.missions = true;
+				setLoadingText("Missions installed!");
+				hideSplash();
 			});
-			
-			loadMissionsStoredVariables();
-			drawMissionsList();
-			selectActiveMission();
-			global_delayed_loading.database.missions = true;
-			setLoadingText("Missions loaded!");
-			hideSplash();
-		}, function(){
-			loadMissionsStoredVariables();
-			drawMissionsList();
-			selectActiveMission();
-			global_delayed_loading.database.missions = true;
-			setLoadingText("Missions loaded!");
-			hideSplash();
-		});
+	}else{
+		loadMissionsStoredVariables();
+		drawMissionsList();
+		selectActiveMission();
+		global_delayed_loading.database.missions = true;
+		setLoadingText("Missions loaded!");
+		hideSplash();
+	}
 }
 
 function addMissionToDb(mission){

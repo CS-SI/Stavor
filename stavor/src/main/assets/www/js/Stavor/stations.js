@@ -2,6 +2,18 @@ var global_stations = {
 	active: -1
 }
 
+function areStationsInstalled(){
+	var serialized = localStorage.getItem('stationsInstalled'); 
+	if(serialized){
+		var localData = JSON.parse(serialized);
+		return localData;
+	}
+}
+function setStationsInstalled(bool){
+	var dataToStore = JSON.stringify(bool);
+	localStorage.setItem('stationsInstalled', dataToStore);
+}
+
 function loadStationsStoredVariables(){
 	var serialized = localStorage.getItem('stationsConfig'); 
 	if(serialized){
@@ -96,6 +108,7 @@ function resetStationsDb(){
 	Dialog.showConfirmDialog("Stavor says","Reset missions list to default value?",function(){
 		db.transaction(function (tx) {
 			tx.executeSql('DROP TABLE stations', [], function (tx, results) {
+				setStationsInstalled(false);
 				window.location.reload();
 			}, errorDatabaseHandler);
 		});
@@ -103,120 +116,124 @@ function resetStationsDb(){
 }
 
 function initializeStationsDb(){
-	db.transaction(function (tx) {
-		tx.executeSql('CREATE TABLE stations (id INTEGER PRIMARY KEY, isDefault BOOLEAN, name VARCHAR(255), enabled BOOLEAN, json BLOB)', [], function (tx, results) {
-			var default_stations = new Array();
-			var station;
-			
-			station = new Station();
-			station.name = "Villafranca";
-			station.enabled = false;
-			station.latitude = 40.442592;
-			station.longitude = -3.951583;
-			station.altitude = 664.8;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			station = new Station();
-			station.name = "Kourou";
-			station.enabled = true;
-			station.latitude = 5.251439;
-			station.longitude = -52.804664;
-			station.altitude = 14.6709;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			station = new Station();
-			station.name = "Cebreros";
-			station.enabled = false;
-			station.latitude = 40.452689;
-			station.longitude = -4.36755;
-			station.altitude = 794.095;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			station = new Station();
-			station.name = "Kiruna";
-			station.enabled = false;
-			station.latitude = 67.857128;
-			station.longitude = 20.964325;
-			station.altitude = 402.1724;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			station = new Station();
-			station.name = "Maspalomas";
-			station.enabled = false;
-			station.latitude = 27.762889;
-			station.longitude = -15.6338;
-			station.altitude = 205.1177;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			station = new Station();
-			station.name = "Poker Flat";
-			station.enabled = false;
-			station.latitude = 65.116667;
-			station.longitude = -147.461667;
-			station.altitude = 430.34;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			station = new Station();
-			station.name = "Santiago";
-			station.enabled = false;
-			station.latitude = -33.151794;
-			station.longitude = -70.667312;
-			station.altitude = 730.0;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			station = new Station();
-			station.name = "Canberra";
-			station.enabled = false;
-			station.latitude = -39.018556;
-			station.longitude = 148.983058;
-			station.altitude = 680.0;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			station = new Station();
-			station.name = "Goldstone";
-			station.enabled = false;
-			station.latitude = 35.339907;
-			station.longitude = -116.883019;
-			station.altitude = 956.059;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			station = new Station();
-			station.name = "Tokyo";
-			station.enabled = true;
-			station.latitude = 35.708762;
-			station.longitude = 139.491778;
-			station.altitude = -641.245;
-			station.elevation = 1;
-			default_stations[default_stations.length] = station;
-			
-			
-			for(var i = 0; i < default_stations.length; i++)
-				tx.executeSql('INSERT INTO stations (isDefault, name, enabled, json) VALUES (?, ?, ?, ?)', [true, default_stations[i].name, default_stations[i].enabled, JSON.stringify(default_stations[i])], successDatabaseHandler, errorDatabaseHandler);
+	var installed = areStationsInstalled();
+	if(!installed){
+		db.transaction(function (tx) {
+			tx.executeSql('CREATE TABLE stations (id INTEGER PRIMARY KEY, isDefault BOOLEAN, name VARCHAR(255), enabled BOOLEAN, json BLOB)', [], function (tx, results) {
+				var default_stations = new Array();
+				var station;
+				
+				station = new Station();
+				station.name = "Villafranca";
+				station.enabled = false;
+				station.latitude = 40.442592;
+				station.longitude = -3.951583;
+				station.altitude = 664.8;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				station = new Station();
+				station.name = "Kourou";
+				station.enabled = true;
+				station.latitude = 5.251439;
+				station.longitude = -52.804664;
+				station.altitude = 14.6709;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				station = new Station();
+				station.name = "Cebreros";
+				station.enabled = false;
+				station.latitude = 40.452689;
+				station.longitude = -4.36755;
+				station.altitude = 794.095;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				station = new Station();
+				station.name = "Kiruna";
+				station.enabled = false;
+				station.latitude = 67.857128;
+				station.longitude = 20.964325;
+				station.altitude = 402.1724;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				station = new Station();
+				station.name = "Maspalomas";
+				station.enabled = false;
+				station.latitude = 27.762889;
+				station.longitude = -15.6338;
+				station.altitude = 205.1177;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				station = new Station();
+				station.name = "Poker Flat";
+				station.enabled = false;
+				station.latitude = 65.116667;
+				station.longitude = -147.461667;
+				station.altitude = 430.34;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				station = new Station();
+				station.name = "Santiago";
+				station.enabled = false;
+				station.latitude = -33.151794;
+				station.longitude = -70.667312;
+				station.altitude = 730.0;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				station = new Station();
+				station.name = "Canberra";
+				station.enabled = false;
+				station.latitude = -39.018556;
+				station.longitude = 148.983058;
+				station.altitude = 680.0;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				station = new Station();
+				station.name = "Goldstone";
+				station.enabled = false;
+				station.latitude = 35.339907;
+				station.longitude = -116.883019;
+				station.altitude = 956.059;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				station = new Station();
+				station.name = "Tokyo";
+				station.enabled = true;
+				station.latitude = 35.708762;
+				station.longitude = 139.491778;
+				station.altitude = -641.245;
+				station.elevation = 1;
+				default_stations[default_stations.length] = station;
+				
+				
+				for(var i = 0; i < default_stations.length; i++)
+					tx.executeSql('INSERT INTO stations (isDefault, name, enabled, json) VALUES (?, ?, ?, ?)', [true, default_stations[i].name, default_stations[i].enabled, JSON.stringify(default_stations[i])], successDatabaseHandler, errorDatabaseHandler);
+				});
+				
+				setStationsInstalled(true);
+				loadStationsStoredVariables();
+				drawStationsList();
+				global_delayed_loading.database.stations = true;
+				fillSelectedStationsArray();
+				setLoadingText("Stations loaded!");
+				hideSplash();
 			});
-			
-			loadStationsStoredVariables();
-			drawStationsList();
-			global_delayed_loading.database.stations = true;
-			fillSelectedStationsArray();
-			setLoadingText("Stations loaded!");
-			hideSplash();
-		}, function(){
-			loadStationsStoredVariables();
-			drawStationsList();
-			global_delayed_loading.database.stations = true;
-			fillSelectedStationsArray();
-			setLoadingText("Stations loaded!");
-			hideSplash();
-		});
+	}else{
+		loadStationsStoredVariables();
+		drawStationsList();
+		global_delayed_loading.database.stations = true;
+		fillSelectedStationsArray();
+		setLoadingText("Stations loaded!");
+		hideSplash();
+	}
 }
 
 function addStationToDb(station){
