@@ -181,17 +181,22 @@ public class ModelSimulation {
             new_state.value_acceleration[0] = acceleration.getX();
             new_state.value_acceleration[1] = acceleration.getY();
             new_state.value_acceleration[2] = acceleration.getZ();
-            if(Double.isNaN(new_state.value_acceleration[0]))
-                new_state.value_acceleration[0]=0.0;
-            if(Double.isNaN(new_state.value_acceleration[1]))
-                new_state.value_acceleration[1]=0.0;
-            if(Double.isNaN(new_state.value_acceleration[2]))
-                new_state.value_acceleration[2]=0.0;
+            if(
+                    Double.isNaN(new_state.value_acceleration[0]) ||
+                    Double.isNaN(new_state.value_acceleration[1]) ||
+                    Double.isNaN(new_state.value_acceleration[2])) {
+                new_state.value_acceleration[0] = 0.0;
+                new_state.value_acceleration[1] = 0.0;
+                new_state.value_acceleration[2] = 0.001;
+            }
             new_state.acceleration = acceleration.getNorm();
             if (Double.isNaN(new_state.acceleration)) {
                 new_state.acceleration = 0;
             }
         }
+        /*new_state.value_acceleration[0]=1.0;
+        new_state.value_acceleration[1]=1.0;
+        new_state.value_acceleration[2]=1.0;*/
 
         //Update temporal variables for acceleration computation
         tmp_vel = velocity;
@@ -431,7 +436,6 @@ public class ModelSimulation {
             new_state.fov_type = fov_type;
             new_state.fov_terminator =  fovTerminator.toArray(new LatLon[fovTerminator.size()]);
             new_state.terminator = solarTerminator.toArray(new LatLon[solarTerminator.size()]);
-
             updateState(new_state);
 
         } catch (OrekitException e) {
