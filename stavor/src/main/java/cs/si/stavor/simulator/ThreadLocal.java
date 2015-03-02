@@ -71,6 +71,8 @@ public class ThreadLocal extends Thread{
 						clearBrowserPath();
 
                         progress = 0;
+
+                        simulator.setSimulationSense(SimulationSense.Forward);
                         simulator.updateGuiControls();
 					}
 					simulator.playCondition.block();
