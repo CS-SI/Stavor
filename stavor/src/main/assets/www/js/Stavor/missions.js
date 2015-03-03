@@ -81,7 +81,7 @@ function onSelectMissionButtonClicked(){
 		if(global_missions.active != global_missions.selected){
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
-					Dialog.showConfirmDialog("Stavor says","Select mission "+results.rows.item(0).name+" for simulation? (Simulator will be stopped)", function(){
+					Dialog.showConfirmDialog("Stavor says","Select mission "+results.rows.item(0).name+" for simulation?", function(){
 						global_missions.selected = global_missions.active;
 						styleMissionRows();
 						saveMissionsStoredVariables();
@@ -469,6 +469,10 @@ function saveMissionEditor(){
 
 function closeMissionEditor(){
 	if(global_menus.mission.isOpen){
+		var id = lastMissionEditorId;
+		if(id == global_missions.selected){
+			Dialog.showConfirmDialog("Stavor says","Do you want to restart the simulator?",function(){selectActiveMission();},function(){});
+		}
 		$( "#MissionEditorBackground" ).fadeOut( "fast", function() {
 			// Animation complete.
 		  });
@@ -506,9 +510,9 @@ function openMissionEditor(id){
 						// Animation complete.
 					  });
 					global_menus.mission.isOpen = !global_menus.mission.isOpen;
-				}else if(id == global_missions.selected){
+				}/*else if(id == global_missions.selected){
 					Dialog.showDialog("Stavor says", "Cannot edit the simulation selected mission, select another one!", function(){});
-				}else{//Edit Mode
+				}*/else{//Edit Mode
 					var mission = JSON.parse(results.rows.item(0).json);
 					updateMissionEditor(mission,id);
 					$( "#MissionEditorBackground" ).fadeIn( "fast", function() {
