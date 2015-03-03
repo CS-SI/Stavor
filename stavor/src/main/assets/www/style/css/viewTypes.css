@@ -1,0 +1,111 @@
+.ViewTypeMenu{
+	position: absolute;
+	left: 60px;
+	top: 50px;
+	background-color: rgba(255, 255, 255, 0.5);
+	min-width: 20px;
+	border-radius: 10px;
+	
+	-webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.ViewTypeMenuClosed{
+	-webkit-transform: translate3d(0, calc(-100% - 50px), 0);
+    transform: translate3d(0, calc(-100% - 50px), 0);
+}
+
+.ViewTypeMenuOpen{
+}
+
+#AttitudeViewTypeMenu{
+	height: calc(100% - 140px);
+}
+
+.ViewButton{
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	top: 0;
+	left: 52px;
+	/*z-index: 499; */
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/view.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+
+.ViewButton:active{
+	background-image:  url(../icons/view_h.png);
+}
+.ViewButtonLocked{
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	top: 0;
+	left: 52px;
+	/*z-index: 499; */
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/view_locked.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+.ViewButtonUnlocked{
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	top: 0;
+	left: 52px;
+	/*z-index: 499; */
+	overflow: hidden; 
+	background-color:transparent;	
+	background-image:  url(../icons/view_unlocked.png);
+	background-size:   contain;                      /* <------ cover/contain */
+    background-repeat: no-repeat;
+    background-position: center center; 
+	cursor: pointer;
+}
+
+.ViewTypeGroup{
+	border-radius: 5px;
+	background-color: rgba(200, 200, 200, 0.5);
+	padding: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin: 5px;
+	/*position: relative;*/
+	width: 150px;
+}
+
+.ViewTypeButtonWrapper{
+	display: inline-block;
+	width: 100%;
+}
+
+.ViewTypeButton{
+	display: inline-block;
+	text-align: center;
+	border-radius: 5px;
+	background-color: rgba(100, 100, 100, 0.5);
+	padding: 5px;
+	margin: 2px;
+	border: 1px solid #333;
+	position: relative;
+	width: calc(50% - 16px);
+	/*float: left;*/
+	left: 0;
+	cursor: pointer;
+}
+
+.TitleViewTypes{
+	text-align: center;
+}

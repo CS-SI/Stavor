@@ -31,7 +31,8 @@ var global_delayed_loading = {
 
 var global_menus = {
 	attitude:{
-		isOpen: false
+		isOpen: false,
+		isViewsMenuOpen: false
 	},
 	orbit:{
 		isOpen: false

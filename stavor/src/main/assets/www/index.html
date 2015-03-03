@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="style/css/missions.css"/>
 	<link rel="stylesheet" href="style/css/stations.css"/>
 	<link rel="stylesheet" href="style/css/views.css"/>
+	<link rel="stylesheet" href="style/css/viewTypes.css"/>
 	<link rel="stylesheet" href="style/css/map.css"/>
 	<link rel="stylesheet" href="style/css/leds.css"/>
 	<link rel="stylesheet" href="style/css/effects.css"/>
@@ -64,6 +65,7 @@
 	<script type='text/javascript' src="js/Stavor/database.js"></script>
 	<script type='text/javascript' src="js/Stavor/missions.js"></script>
 	<script type='text/javascript' src="js/Stavor/stations.js"></script>
+	<script type='text/javascript' src="js/Stavor/viewTypes.js"></script>
 	
 	
 	<script type='text/javascript' src="js/Stavor/Dialog.js"></script>
@@ -493,7 +495,7 @@
 		</div>
 	</div>
 	<div id="MenuButtonMap" class="MenuButton" onclick="switchMapMenu()" ></div>
-	<div id="ViewButtonMap" class="ViewButton" onclick="" ></div>
+	<div id="ViewButtonMap" class="ViewButtonUnlocked" onclick="switchMapViewTypeMenu()" ></div>
 	<div id="PathButtonMap" class="PathButton" onclick="global_simulator.clearDataLogs()" ></div>
 </div>
 <div id="DivOrbit" >
@@ -529,7 +531,7 @@
 		</div>
 	</div>
 	<div id="MenuButtonOrbit" class="MenuButton" onclick="switchOrbitMenu()" ></div>
-	<div id="ViewButtonOrbit" class="ViewButton" onclick="" ></div>
+	<div id="ViewButtonOrbit" class="ViewButtonUnlocked" onclick="switchOrbitViewTypeMenu()" ></div>
 </div>
 <div id="DivAttitude" >
 	<div id="attitude" ></div>
@@ -640,7 +642,27 @@
 		</div>
 	</div>
 	<div id="MenuButtonAttitude" class="MenuButton" onclick="switchAttitudeMenu()" ></div>
-	<div id="ViewButtonAttitude" class="ViewButton" onclick="" ></div>
+	<div id="ViewButtonAttitude" class="ViewButton" onclick="switchAttitudeViewTypeMenu()" ></div>
+	<div id="AttitudeViewTypeMenu" class="ViewTypeMenu ViewTypeMenuClosed">
+		<div class="ViewTypeGroup">
+			<h5 class="TitleViewTypes">Ref. Frame</h5>
+			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-FREE" onclick="changeAttitudeSelectedViewType('FREE')">Free</div><div class="ViewTypeButton" id="att-view-XYZ" onclick="changeAttitudeSelectedViewType('XYZ')">XYZ</div></div>
+			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-X" onclick="changeAttitudeSelectedViewType('X')">X</div><div class="ViewTypeButton" id="att-view-XX" onclick="changeAttitudeSelectedViewType('-X')">-X</div></div>
+			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Y" onclick="changeAttitudeSelectedViewType('Y')">Y</div><div class="ViewTypeButton" id="att-view-YY" onclick="changeAttitudeSelectedViewType('-Y')">-Y</div></div>
+			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Z" onclick="changeAttitudeSelectedViewType('Z')">Z</div><div class="ViewTypeButton" id="att-view-ZZ" onclick="changeAttitudeSelectedViewType('-Z')">-Z</div></div>
+		</div>
+		<div class="ViewTypeGroup">
+			<h5 class="TitleViewTypes">Spacecraft</h5>
+			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-sc-XYZ" onclick="changeAttitudeSelectedViewType('S/C-XYZ')">XYZ</div></div>
+			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Rear" onclick="changeAttitudeSelectedViewType('S/C-Rear')">Rear</div><div class="ViewTypeButton" id="att-view-Front" onclick="changeAttitudeSelectedViewType('S/C-Front')">Front</div></div>
+			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Bottom" onclick="changeAttitudeSelectedViewType('S/C-Bottom')">Bottom</div><div class="ViewTypeButton" id="att-view-Top" onclick="changeAttitudeSelectedViewType('S/C-Top')">Top</div></div>
+			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Left" onclick="changeAttitudeSelectedViewType('S/C-Left')">Left</div><div class="ViewTypeButton" id="att-view-Right" onclick="changeAttitudeSelectedViewType('S/C-Right')">Right</div></div>
+		</div>
+		<div class="ViewTypeGroup">
+			<h5 class="TitleViewTypes">Bodies</h5>
+			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Earth" onclick="changeAttitudeSelectedViewType('Earth')">Earth</div><div class="ViewTypeButton" id="att-view-Sun" onclick="changeAttitudeSelectedViewType('Sun')">Sun</div></div>
+		</div>
+	</div>
 </div>
 
 <div id="ConfigButton" class="ConfigButton" onclick="switchGlobalMenu()" ></div>

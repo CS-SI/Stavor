@@ -328,25 +328,6 @@ ol li{
 	background-image:  url(../icons/config_h.png);
 }
 
-.ViewButton{
-	position: absolute;
-	height: 50px;
-	width: 50px;
-	top: 0;
-	left: 52px;
-	/*z-index: 499; */
-	overflow: hidden; 
-	background-color:transparent;	
-	background-image:  url(../icons/view.png);
-	background-size:   contain;                      /* <------ cover/contain */
-    background-repeat: no-repeat;
-    background-position: center center; 
-	cursor: pointer;
-}
-
-.ViewButton:active{
-	background-image:  url(../icons/view_h.png);
-}
 
 .PathButton{
 	position: absolute;

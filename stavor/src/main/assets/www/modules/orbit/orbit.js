@@ -35,7 +35,7 @@ var Orbit = function()
 	var results = global_simulation.results.earth;
 	var segments = global_3d_segments.orbit;
 	
-	var locked_view = global_cameras.orbit.view_locked;
+	//var locked_view = global_cameras.orbit.view_locked;
 	
 	var orbit;
 	var spacecraft;
@@ -104,8 +104,8 @@ var Orbit = function()
 	//		VIEWS        						        //
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
-		if(locked_view){
-			camera.position = value_spacecraft.clone().normalize().multiplyScalar(getCamDistance());			
+		if(global_cameras.orbit.view_locked){
+			camera.position = results.spacecraft_position.clone().normalize().multiplyScalar(getCamDistance());			
 			camera.lookAt(scene.position);
 		}		
 	})	
@@ -159,6 +159,10 @@ var Orbit = function()
 			scene.remove(orbit);
 			createOrbit();
 		});
+	}
+	
+	function getCamDistance(){
+		return Math.sqrt(camera.position.x*camera.position.x+camera.position.y*camera.position.y+camera.position.z*camera.position.z);
 	}
 
 	function createOrbit() {
@@ -504,7 +508,7 @@ var Orbit = function()
 	}
 	Orbit.prototype.stopAnimation = function(){
 		cancelAnimationFrame(requestId); 
-		global_cameras.orbit.view_locked = locked_view;
+		//global_cameras.orbit.view_locked = locked_view;
 		global_cameras.orbit.position = camera.position;
 		global_cameras.orbit.up = camera.up;
 	}
