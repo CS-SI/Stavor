@@ -57,7 +57,7 @@ div#Maptabscontent.tabscontent{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	width: calc(100% - 5px);
-	height: calc(100% - 70px);
+	height: calc(100% - 40px);
 	overflow: hidden;
 	background-color: rgba(220, 220, 220, 0.7);
 }
