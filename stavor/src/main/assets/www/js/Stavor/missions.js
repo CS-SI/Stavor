@@ -93,6 +93,22 @@ function onSelectMissionButtonClicked(){
 	}
 }
 
+function onCopyMissionButtonClicked(){
+	if(global_missions.active == -1){
+		Dialog.showDialog("Stavor says", "Click on a mission first!", function(){});
+	}else{
+		db.transaction(function (tx) {
+			tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
+				Dialog.showConfirmDialog("Stavor says","Copy mission "+results.rows.item(0).name+"?", function(){
+					db.transaction(function (tx) {
+						tx.executeSql('INSERT INTO missions (isDefault, name, json) VALUES (?, ?, ?)', [false, results.rows.item(0).name+"_c", results.rows.item(0).json], drawMissionsList);
+					});
+				},function(){});
+			}, errorDatabaseHandler);
+		});
+	}
+}
+
 
 function onMissionClicked(id){
 	var num_id = Number(id.substr(4,id.length));

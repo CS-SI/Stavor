@@ -125,7 +125,7 @@
 }
 .MissionsMenuItem{
 	display: inline-block;
-	width: calc(25% - 0px);
+	width: calc(20% - 0px);
 	height: 100%;
 	text-align: center;
 	float: left;
