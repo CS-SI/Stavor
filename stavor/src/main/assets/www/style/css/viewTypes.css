@@ -48,6 +48,9 @@
 .ViewButton:active{
 	background-image:  url(../icons/view_h.png);
 }
+.ViewButton.opened{
+	background-image:  url(../icons/view_expanded.png);
+}
 .ViewButtonLocked{
 	position: absolute;
 	height: 50px;
@@ -123,20 +126,4 @@
 
 .TitleViewTypes{
 	text-align: center;
-}
-
-#CloseViewTypeMenu{
-	position: absolute;
-	height: 30px;
-	width: 40px;
-	top: 0;
-	left: 0;
-	/*z-index: 1001;*/ 
-	overflow: hidden; 
-	background-color:transparent;	
-	background-image:  url(../icons/close_views.png);
-	background-size:   contain;                      /* <------ cover/contain */
-    background-repeat: no-repeat;
-    background-position: center center; 
-	cursor: pointer;
 }

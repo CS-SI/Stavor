@@ -1,10 +1,13 @@
 function switchAttitudeViewTypeMenu(){
 	var div = document.getElementById("AttitudeViewTypeMenu");
+	var button = document.getElementById("ViewButtonAttitude");
 	if(global_menus.attitude.isViewsMenuOpen){
 		div.className = "ViewTypeMenu ViewTypeMenuClosed";
+		button.className = "ViewButton";
 	}else{
 		updateAttitudeViewTypeMenu();
 		div.className = "ViewTypeMenu ViewTypeMenuOpen";
+		button.className = "ViewButton opened";
 	}
 	global_menus.attitude.isViewsMenuOpen = !global_menus.attitude.isViewsMenuOpen;
 }
