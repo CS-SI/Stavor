@@ -646,21 +646,21 @@
 	<div id="AttitudeViewTypeMenu" class="ViewTypeMenu ViewTypeMenuClosed">
 		<div class="ViewTypeGroup">
 			<h5 class="TitleViewTypes">Ref. Frame</h5>
-			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-FREE" onclick="changeAttitudeSelectedViewType('FREE')">Free</div><div class="ViewTypeButton" id="att-view-XYZ" onclick="changeAttitudeSelectedViewType('XYZ')">XYZ</div></div>
-			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-X" onclick="changeAttitudeSelectedViewType('X')">X</div><div class="ViewTypeButton" id="att-view-XX" onclick="changeAttitudeSelectedViewType('-X')">-X</div></div>
-			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Y" onclick="changeAttitudeSelectedViewType('Y')">Y</div><div class="ViewTypeButton" id="att-view-YY" onclick="changeAttitudeSelectedViewType('-Y')">-Y</div></div>
-			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Z" onclick="changeAttitudeSelectedViewType('Z')">Z</div><div class="ViewTypeButton" id="att-view-ZZ" onclick="changeAttitudeSelectedViewType('-Z')">-Z</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton selected" id="att-view-FREE" onclick="changeAttitudeSelectedViewType('FREE')">Free</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-XYZ" onclick="changeAttitudeSelectedViewType('XYZ')">XYZ</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-X" onclick="changeAttitudeSelectedViewType('X')">X</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view--X" onclick="changeAttitudeSelectedViewType('-X')">-X</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Y" onclick="changeAttitudeSelectedViewType('Y')">Y</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view--Y" onclick="changeAttitudeSelectedViewType('-Y')">-Y</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Z" onclick="changeAttitudeSelectedViewType('Z')">Z</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view--Z" onclick="changeAttitudeSelectedViewType('-Z')">-Z</div></div>
 		</div>
 		<div class="ViewTypeGroup">
 			<h5 class="TitleViewTypes">Spacecraft</h5>
-			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-sc-XYZ" onclick="changeAttitudeSelectedViewType('S/C-XYZ')">XYZ</div></div>
-			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Rear" onclick="changeAttitudeSelectedViewType('S/C-Rear')">Rear</div><div class="ViewTypeButton" id="att-view-Front" onclick="changeAttitudeSelectedViewType('S/C-Front')">Front</div></div>
-			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Bottom" onclick="changeAttitudeSelectedViewType('S/C-Bottom')">Bottom</div><div class="ViewTypeButton" id="att-view-Top" onclick="changeAttitudeSelectedViewType('S/C-Top')">Top</div></div>
-			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Left" onclick="changeAttitudeSelectedViewType('S/C-Left')">Left</div><div class="ViewTypeButton" id="att-view-Right" onclick="changeAttitudeSelectedViewType('S/C-Right')">Right</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-XYZ" onclick="changeAttitudeSelectedViewType('S/C-XYZ')">XYZ</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Rear" onclick="changeAttitudeSelectedViewType('S/C-Rear')">Rear</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Front" onclick="changeAttitudeSelectedViewType('S/C-Front')">Front</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Bottom" onclick="changeAttitudeSelectedViewType('S/C-Bottom')">Bottom</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Top" onclick="changeAttitudeSelectedViewType('S/C-Top')">Top</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Left" onclick="changeAttitudeSelectedViewType('S/C-Left')">Left</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Right" onclick="changeAttitudeSelectedViewType('S/C-Right')">Right</div></div>
 		</div>
 		<div class="ViewTypeGroup">
 			<h5 class="TitleViewTypes">Bodies</h5>
-			<div class="ViewTypeButtonWrapper"><div class="ViewTypeButton" id="att-view-Earth" onclick="changeAttitudeSelectedViewType('Earth')">Earth</div><div class="ViewTypeButton" id="att-view-Sun" onclick="changeAttitudeSelectedViewType('Sun')">Sun</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Earth" onclick="changeAttitudeSelectedViewType('Earth')">Earth</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Sun" onclick="changeAttitudeSelectedViewType('Sun')">Sun</div></div>
 		</div>
 	</div>
 </div>

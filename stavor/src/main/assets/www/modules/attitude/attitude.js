@@ -1557,21 +1557,21 @@ var Attitude = function ()
 				camera.up = new THREE.Vector3(0,1,0);
 				break;
 			case "Earth"://Earth
-				if(show_earth){
+				if(config.show_earth){
 					//earth.visible = false;
 					earth.material.opacity = 0.2;
 					earth.material.transparent = true;
 				}
 				camera.up = new THREE.Vector3(0,0,1);
-				camera.position = value_earth.clone().normalize().multiplyScalar(getCamDistance());
+				camera.position = results.earth_direction.clone().normalize().multiplyScalar(getCamDistance());
 				break;
 			case "Sun"://Sun
-				if(show_sun){
+				if(config.show_sun){
 					sun.visible = false;
 					sunGlow.visible=false;
 				}
 				camera.up = new THREE.Vector3(0,0,1);
-				camera.position = value_sun.clone().normalize().multiplyScalar(getCamDistance());
+				camera.position = results.sun_direction.clone().normalize().multiplyScalar(getCamDistance());
 				break;
 			case "S/C-XYZ"://Spacecraft
 				camera.position = init_sc_dir_xyz.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());
@@ -1629,14 +1629,17 @@ var Attitude = function ()
 		global_cameras.attitude.position = camera.position;
 		global_cameras.attitude.up = camera.up;
 	}
+	Attitude.prototype.selectView = function(view){
+		changeView(view);
+	}
 	
 	function updateView() {
 		switch(selected_view){
 			case "Earth"://Earth
-				camera.position = value_earth.clone().normalize().multiplyScalar(getCamDistance());	
+				camera.position = results.earth_direction.clone().normalize().multiplyScalar(getCamDistance());	
 				break;
 			case "Sun"://Sun
-				camera.position = value_sun.clone().normalize().multiplyScalar(getCamDistance());
+				camera.position = results.sun_direction.clone().normalize().multiplyScalar(getCamDistance());
 				break;
 			case "S/C-XYZ"://Spacecraft
 				camera.position = init_sc_dir_xyz.clone().applyQuaternion(spacecraft.quaternion.clone().normalize()).multiplyScalar(getCamDistance());

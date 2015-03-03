@@ -3,6 +3,7 @@ function switchAttitudeViewTypeMenu(){
 	if(global_menus.attitude.isViewsMenuOpen){
 		div.className = "ViewTypeMenu ViewTypeMenuClosed";
 	}else{
+		updateAttitudeViewTypeMenu();
 		div.className = "ViewTypeMenu ViewTypeMenuOpen";
 	}
 	global_menus.attitude.isViewsMenuOpen = !global_menus.attitude.isViewsMenuOpen;
@@ -27,11 +28,16 @@ function switchMapViewTypeMenu(){
 }
 
 function updateAttitudeViewTypeMenu(){
+	var view = global_cameras.attitude.view_mode;
+	var divs = document.getElementsByName("ViewTypeButtons");
+	for(var i = 0; i < divs.length; i++){
+		divs[i].className = "ViewTypeButton";
+	}
+	document.getElementById("att-view-"+view).className = "ViewTypeButton selected";
 		
 }
 
 function changeAttitudeSelectedViewType(view_str){
-
-
+	global_attitude.selectView(view_str);
 	updateAttitudeViewTypeMenu();
 }
