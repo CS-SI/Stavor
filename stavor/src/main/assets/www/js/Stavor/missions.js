@@ -320,17 +320,27 @@ function updateMissionEditor(mission,mission_id){
 	if(global_angle_in_rads){
 		document.getElementById("AngleUnitsSelectionRads").className = "AngleUnitsSelected";
 		document.getElementById("AngleUnitsSelectionDegs").className = "AngleUnitsUnselected";
-		document.getElementById("MissionEditor-Inclination").innerHTML = "Inclination (rad):";
-		document.getElementById("MissionEditor-Omega").innerHTML = "Arg. Perigee (rad):";
-		document.getElementById("MissionEditor-Raan").innerHTML = "RAAN (rad):";
-		document.getElementById("MissionEditor-lM").innerHTML = "Mean anomaly (rad):";
+		var div;
+		div = document.getElementById("MissionEditor-Inclination");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
+		div = document.getElementById("MissionEditor-Omega");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
+		div = document.getElementById("MissionEditor-Raan");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
+		div = document.getElementById("MissionEditor-lM");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
 	}else{
 		document.getElementById("AngleUnitsSelectionRads").className = "AngleUnitsUnselected";
 		document.getElementById("AngleUnitsSelectionDegs").className = "AngleUnitsSelected";
-		document.getElementById("MissionEditor-Inclination").innerHTML = "Inclination (deg):";
-		document.getElementById("MissionEditor-Omega").innerHTML = "Arg. Perigee (deg):";
-		document.getElementById("MissionEditor-Raan").innerHTML = "RAAN (deg):";
-		document.getElementById("MissionEditor-lM").innerHTML = "Mean anomaly (deg):";
+		var div;
+		div = document.getElementById("MissionEditor-Inclination");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
+		div = document.getElementById("MissionEditor-Omega");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
+		div = document.getElementById("MissionEditor-Raan");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
+		div = document.getElementById("MissionEditor-lM");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
 	}
 
 	var field;

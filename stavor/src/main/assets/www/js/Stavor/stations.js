@@ -268,15 +268,23 @@ function updateStationEditor(station,station_id){
 	if(global_angle_in_rads){
 		document.getElementById("AngleUnitsSelectionRadsStation").className = "AngleUnitsSelected";
 		document.getElementById("AngleUnitsSelectionDegsStation").className = "AngleUnitsUnselected";
-		document.getElementById("StationEditor-Latitude").innerHTML = "Latitude (rad):";
-		document.getElementById("StationEditor-Longitude").innerHTML = "Longitude (rad):";
-		document.getElementById("StationEditor-Elevation").innerHTML = "Min. elevation (rad):";
+		var div;
+		div = document.getElementById("StationEditor-Latitude");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
+		div = document.getElementById("StationEditor-Longitude");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
+		div = document.getElementById("StationEditor-Elevation");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
 	}else{
 		document.getElementById("AngleUnitsSelectionRadsStation").className = "AngleUnitsUnselected";
 		document.getElementById("AngleUnitsSelectionDegsStation").className = "AngleUnitsSelected";
-		document.getElementById("StationEditor-Latitude").innerHTML = "Latitude (deg):";
-		document.getElementById("StationEditor-Longitude").innerHTML = "Longitude (deg):";
-		document.getElementById("StationEditor-Elevation").innerHTML = "Min. elevation (deg):";
+		var div;
+		div = document.getElementById("StationEditor-Latitude");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
+		div = document.getElementById("StationEditor-Longitude");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
+		div = document.getElementById("StationEditor-Elevation");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
 	}
 	
 	var field;

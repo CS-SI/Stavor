@@ -353,15 +353,23 @@ function updateOrbitOptions(){
 	if(global_angle_in_rads){
 		document.getElementById("AngleUnitsSelectionRadsRefOrbit").className = "AngleUnitsSelected";
 		document.getElementById("AngleUnitsSelectionDegsRefOrbit").className = "AngleUnitsUnselected";
-		document.getElementById("RefOrbit-Inclination").innerHTML = "Inclination (rad):";
-		document.getElementById("RefOrbit-Omega").innerHTML = "Arg. Perigee (rad):";
-		document.getElementById("RefOrbit-Raan").innerHTML = "RAAN (rad):";
+		var div;
+		div	= document.getElementById("RefOrbit-Inclination");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
+		div = document.getElementById("RefOrbit-Omega");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
+		div = document.getElementById("RefOrbit-Raan");
+		div.innerHTML = div.innerHTML.replace("(deg)","(rad)");
 	}else{
 		document.getElementById("AngleUnitsSelectionRadsRefOrbit").className = "AngleUnitsUnselected";
 		document.getElementById("AngleUnitsSelectionDegsRefOrbit").className = "AngleUnitsSelected";
-		document.getElementById("RefOrbit-Inclination").innerHTML = "Inclination (deg):";
-		document.getElementById("RefOrbit-Omega").innerHTML = "Arg. Perigee (deg):";
-		document.getElementById("RefOrbit-Raan").innerHTML = "RAAN (deg):";
+		var div;
+		div = document.getElementById("RefOrbit-Inclination");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
+		div = document.getElementById("RefOrbit-Omega");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
+		div = document.getElementById("RefOrbit-Raan");
+		div.innerHTML = div.innerHTML.replace("(rad)","(deg)");
 	}
 	
 	var field;
