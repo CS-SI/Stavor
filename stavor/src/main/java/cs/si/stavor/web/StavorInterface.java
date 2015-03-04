@@ -1,5 +1,7 @@
 package cs.si.stavor.web;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -13,6 +15,7 @@ import org.xwalk.core.XWalkView;
 
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.model.MapPoint;
+import cs.si.stavor.model.Visualizations;
 import cs.si.stavor.simulator.SimulationSense;
 import cs.si.stavor.simulator.SimulationStatus;
 import cs.si.stavor.simulator.Simulator;
@@ -40,6 +43,19 @@ public final class StavorInterface {
         } catch (OrekitException e) {
             e.printStackTrace();
         }
+    }
+
+    @JavascriptInterface
+    public void setCurrentVisualization(String json_visu) {
+        MyInteger obj_integer = gson.fromJson(json_visu,MyInteger.class);
+        if(obj_integer.value == 0){
+            simulator.getSimulationResults().setCurrentVisualization(Visualizations.ATTITUDE);
+        }else if(obj_integer.value == 1){
+            simulator.getSimulationResults().setCurrentVisualization(Visualizations.ORBIT);
+        }else if(obj_integer.value == 2){
+            simulator.getSimulationResults().setCurrentVisualization(Visualizations.MAP);
+        }
+
     }
 
     @JavascriptInterface

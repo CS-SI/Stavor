@@ -46,6 +46,8 @@ var Simulator = function(){
 	
 	this.sim_interface = new AndroidInterface(this);
 	
+	this.setCurrentVisualization();
+	
 }
 //****************************************************************************
 //                         From Stavor to Simulator  --> (Control widgets callbacks)
@@ -109,6 +111,10 @@ Simulator.prototype.progressValueChanged = function(value){
 //The last value so it will trigger the unblock of the progress indicator
 Simulator.prototype.progressValueChangedEnd = function(value){
 	this.sim_interface.progressValueChangedEnd(value);
+}
+
+Simulator.prototype.setCurrentVisualization = function(){
+	this.sim_interface.setCurrentVisualization();
 }
 
 Simulator.prototype.sendSimulatorConfiguration = function(){

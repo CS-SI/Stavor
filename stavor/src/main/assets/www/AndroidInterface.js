@@ -78,6 +78,14 @@ AndroidInterface.prototype.sendSimulatorConfiguration = function(sim_conf){
    	}
 }
 
+AndroidInterface.prototype.setCurrentVisualization = function(){
+	if (typeof Android != "undefined"){ // check the bridge 
+		  if (Android.setCurrentVisualization!= "undefined") { // check the method
+			var json = JSON.stringify(new MyInteger(global_current_visualization));
+			 Android.setCurrentVisualization(json);
+		  }
+   	}
+}
 
 var MyInteger = function(value){
 	this.value = value;

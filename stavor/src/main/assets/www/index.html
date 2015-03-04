@@ -326,6 +326,7 @@
 				error("ERROR: prevVisualization(): the current visualization enum is not recognized.");
 			}
 			global_current_visualization = new_vis;
+			global_simulator.setCurrentVisualization();
 			updateLeds();
 		}
 		function nextVisualization(){
@@ -377,6 +378,7 @@
 				error("ERROR: nextVisualization(): the current visualization enum is not recognized.");
 			}
 			global_current_visualization = new_vis;
+			global_simulator.setCurrentVisualization();
 			updateLeds();
 		}
 		function switchMissionsListStatus(){
