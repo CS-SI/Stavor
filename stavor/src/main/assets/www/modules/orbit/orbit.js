@@ -37,7 +37,7 @@ var Orbit = function()
 	
 	//var locked_view = global_cameras.orbit.view_locked;
 	
-	var orbit;
+	var orbit, ref_orbit;
 	var spacecraft;
 	var projection, starSphere, containerEarth;
 	// MAIN
@@ -89,6 +89,8 @@ var Orbit = function()
 	includeProjection();
 	//setLoadingProgress(18);
 	includeOrbit();
+	
+	includeRefOrbit();
 	
 	//setLoadingProgress(100);
 
@@ -154,11 +156,15 @@ var Orbit = function()
 	}
 	function includeOrbit() {
 		createOrbit();
-		orbit_init = true;
+		//orbit_init = true;
 		onRenderFcts.push(function(delta, now){
 			scene.remove(orbit);
 			createOrbit();
 		});
+	}
+	
+	function includeRefOrbit() {
+		createRefOrbit();
 	}
 	
 	function getCamDistance(){
@@ -187,6 +193,32 @@ var Orbit = function()
 		orbit.quaternion.multiplyQuaternions(quat, orbit.quaternion);
 		
 		scene.add( orbit );
+	}
+	
+	function createRefOrbit() {
+		if(config.ref_orbit.show){
+			var a = config.ref_orbit.a*dist_scale;
+			var f=a*config.ref_orbit.e;
+			var b = Math.sqrt(a*a-f*f);	
+
+			// Ellipse
+			var material = new THREE.LineBasicMaterial({color:config.ref_orbit.color, opacity:1});
+			var ellipse = new THREE.EllipseCurve(0, f, b, a, 0, 2.0 * Math.PI, false);
+			var ellipsePath = new THREE.CurvePath();
+			ellipsePath.add(ellipse);
+			var ellipseGeometry = ellipsePath.createPointsGeometry(100);
+			ellipseGeometry.computeTangents();
+			ref_orbit = new THREE.Line(ellipseGeometry, material);
+			// Argument of the perigee
+			ref_orbit.rotation.z = config.ref_orbit.w+Math.PI/2+config.ref_orbit.raan;
+			//Inclination
+			var nodeA = new THREE.Vector3(Math.cos(config.ref_orbit.raan),Math.sin(config.ref_orbit.raan),0);
+			var quat = new THREE.Quaternion();
+			quat.setFromAxisAngle(nodeA,config.ref_orbit.i);
+			ref_orbit.quaternion.multiplyQuaternions(quat, ref_orbit.quaternion);
+			
+			scene.add( ref_orbit );
+		}
 	}
 
 	function includeSpacecraft(){
@@ -432,6 +464,7 @@ var Orbit = function()
 		camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 		scene.add(camera);
 		camera.position = global_cameras.orbit.position;
+		camera.up = global_cameras.orbit.up;
 		camera.lookAt(scene.position);	
 		
 		// EVENTS

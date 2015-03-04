@@ -64,6 +64,7 @@ var global_cameras = {
 	},
 	orbit:{
 		position: new THREE.Vector3(0,0,13),
+		up: new THREE.Vector3(0,1,0),
 		view_locked: false
 	},
 	map:{
