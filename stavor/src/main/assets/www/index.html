@@ -83,32 +83,41 @@
 		window.onload = function () {
 			start_time = new Date().getTime();
 			initializeSplashScreen();
-			//computeWindowSize();
-				setLoadingText("Loading Configuration...");
-			loadStoredVariables();
 			
+			loadStoredVariables();
 			loadAngleUnitsRads();
 			
 			global_attitude = new Attitude();//Splash
 			global_orbit = new Orbit();//Splash
 			global_map = new Map();//Splash
-				setLoadingText("Init Visualizations...");
+			
 			initVisualizations();
-				setLoadingText("Init Info Panel...");
+			
 			updateInfoPanel(true);
-				setLoadingText("Init Option Menus...");
+			
+			initOptionMenus();
+			
+			initializePanGestures();
+			
+			initSimulator();
+			
+			initializeStationsDb();//Splash
+			//initializeMissionsDb();//Splash Moved inside initStationsDb at the end
+			
+			loadOrekitFilesText();
+		}
+		
+		function initOptionMenus(){
 			initializeGlobalMenu();
 			initializeAttitudeMenu();
 			initializeOrbitMenu();
 			initializeMapMenu();
-				setLoadingText("Init Touch Controls...");
-			initializePanGestures();
-			
-			initializeStationsDb();//Splash
-			initializeMissionsDb();//Splash
-			
+			setLoadingText("Options preloaded!");
+		}
+		
+		function initSimulator(){
 			global_simulator = new Simulator();
-			loadOrekitFilesText();
+			setLoadingText("Simulator ready!");
 		}
 		
 		function initializeSplashScreen(){
@@ -116,22 +125,23 @@
 			version_div.innerHTML = "v"+parameters.version;
 		}
 		
-		/*function computeWindowSize(){
-			global_window.width = window.innerWidth * window.devicePixelRatio;
-			global_window.height = window.innerHeight * window.devicePixelRatio;
-		}*/
 		
-		/*function showSizes(){
-			var str = "";
-			str += "PixelRatio: "+window.devicePixelRatio;
-			str += "Window inner: ( "+window.innerWidth+", "+window.innerHeight+" )";
-			str += "Screen: ( "+screen.width+", "+screen.height+" )";
-			var body = document.body;
-			str += "Body client: ( "+body.clientWidth+", "+body.clientHeight+" )";
-			var div = document.getElementById("DivAttitude");
-			str += "Div client: ( "+div.clientWidth+", "+div.clientHeight+" )";
-			alert(str);
-		}*/
+		
+		function loadAngleUnitsRads(){
+			var serialized = localStorage.getItem('angleUnitsRads'); 
+			if(serialized){
+				global_angle_in_rads = JSON.parse(serialized);
+			}else{
+				setAngleUnitsRads(false);
+				loadAngleUnitsRads();
+			}
+		}
+		
+		function setAngleUnitsRads(bool){
+			var dataToStore = JSON.stringify(bool);
+			localStorage.setItem('angleUnitsRads', dataToStore);
+			global_angle_in_rads = bool;
+		}
 		
 		function loadStoredVariables(){
 			var serialized = localStorage.getItem('simulationConfig'); 
@@ -139,6 +149,7 @@
 				var localData = JSON.parse(serialized);
 				global_simulation.config = localData;
 				setPerformanceLevel();
+				setLoadingText("Configuration loaded!");
 			}
 		}
 		function saveStoredVariables(){
@@ -169,6 +180,7 @@
 		//SplashScreen
 		function hideSplash(){
 			if(
+				global_delayed_loading.visualization.slider &&
 				global_delayed_loading.visualization.attitude &&
 				global_delayed_loading.visualization.orbit &&
 				global_delayed_loading.visualization.map &&
@@ -192,7 +204,7 @@
 				}, delay);
 			}else{
 				//Wait for loading
-				if(!global_delayed_loading.visualization.attitude){
+				/*if(!global_delayed_loading.visualization.attitude){
 					setLoadingText("Init Attitude module...");
 				}else if(!global_delayed_loading.visualization.orbit){
 					setLoadingText("Init Orbit module...");
@@ -202,7 +214,7 @@
 					setLoadingText("Loading Missions db...");
 				}else if(!global_delayed_loading.database.stations){
 					setLoadingText("Loading Stations db...");
-				}
+				}*/
 			}
 		}
 		function setLoadingText(text){
@@ -235,6 +247,10 @@
 			div_attitude.className = "NextVisToCenterFromRight";
 			div_orbit.className = "NextVisToRight";
 			div_map.className = "NextVisToLeft";
+			
+			global_delayed_loading.visualization.slider = true;
+			setLoadingText("Slider initialized!");
+			hideSplash();
 		}
 		
 		/*function resizeAllVisualizations(){
@@ -422,22 +438,6 @@
 		function setMapReloading(){
 			var div = document.getElementById("MapMenuLoading");
 			div.style.display = "block";
-		}
-		
-		function loadAngleUnitsRads(){
-			var serialized = localStorage.getItem('angleUnitsRads'); 
-			if(serialized){
-				global_angle_in_rads = JSON.parse(serialized);
-			}else{
-				setAngleUnitsRads(false);
-				loadAngleUnitsRads();
-			}
-		}
-		
-		function setAngleUnitsRads(bool){
-			var dataToStore = JSON.stringify(bool);
-			localStorage.setItem('angleUnitsRads', dataToStore);
-			global_angle_in_rads = bool;
 		}
 		
 	</script>

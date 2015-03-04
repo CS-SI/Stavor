@@ -21,7 +21,8 @@ var global_delayed_loading = {
 	visualization:{
 		attitude: false,
 		orbit: false,
-		map: false
+		map: false,
+		slider: false
 	},
 	database:{
 		missions: false,

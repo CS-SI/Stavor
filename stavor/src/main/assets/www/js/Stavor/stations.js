@@ -226,18 +226,20 @@ function initializeStationsDb(){
 				setStationsInstalled(true);
 				loadStationsStoredVariables();
 				drawStationsList();
-				global_delayed_loading.database.stations = true;
 				fillSelectedStationsArray();
-				setLoadingText("Stations loaded!");
-				hideSplash();
+				global_delayed_loading.database.stations = true;
+				setLoadingText("Stations installed!");
+				//hideSplash();
+				initializeMissionsDb();
 			});
 	}else{
 		loadStationsStoredVariables();
 		drawStationsList();
-		global_delayed_loading.database.stations = true;
 		fillSelectedStationsArray();
+		global_delayed_loading.database.stations = true;
 		setLoadingText("Stations loaded!");
-		hideSplash();
+		//hideSplash();
+		initializeMissionsDb();
 	}
 }
 

@@ -45,6 +45,7 @@ var Simulator = function(){
 	};
 	
 	this.sim_interface = new AndroidInterface(this);
+	
 }
 //****************************************************************************
 //                         From Stavor to Simulator  --> (Control widgets callbacks)

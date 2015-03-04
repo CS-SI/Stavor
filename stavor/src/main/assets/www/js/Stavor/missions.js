@@ -175,6 +175,12 @@ function drawMissionsList(){
 			}
 			div_list.innerHTML = content;
 			styleMissionRows();
+			if(!global_delayed_loading.database.missions){				
+				selectActiveMission();
+				global_delayed_loading.database.missions = true;
+				setLoadingText("Missions loaded!");
+				hideSplash();
+			}
 		}, errorDatabaseHandler);
 	});
 }
@@ -290,18 +296,10 @@ function initializeMissionsDb(){
 				setMissionsInstalled(true);
 				loadMissionsStoredVariables();
 				drawMissionsList();
-				selectActiveMission();
-				global_delayed_loading.database.missions = true;
-				setLoadingText("Missions installed!");
-				hideSplash();
 			});
 	}else{
 		loadMissionsStoredVariables();
 		drawMissionsList();
-		selectActiveMission();
-		global_delayed_loading.database.missions = true;
-		setLoadingText("Missions loaded!");
-		hideSplash();
 	}
 }
 
