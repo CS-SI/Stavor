@@ -46,7 +46,9 @@ function initializeOrbitMenu(){
 	//hide two tab contents we don't need
 	 var pages = tabcon.getElementsByTagName("div");
 		for (var i = 1; i < pages.length; i++) {
-		 pages.item(i).style.display="none";
+			if(pages.item(i).id != "AngleUnitsSelectionRadsRefOrbit" && pages.item(i).id != "AngleUnitsSelectionDegsRefOrbit"){
+				pages.item(i).style.display="none";
+			}
 		};
 
 	//this adds click event to tabs
@@ -282,6 +284,36 @@ function updateOrbitOption(id,val){
 			case "opt-orb-OrbitColor":
 				global_simulation.config.orbit.orbit_color = "#"+val;
 				break;
+			case "opt-orb-ShowRefOrbit":
+				global_simulation.config.orbit.ref_orbit.show = val;
+				break;
+			case "opt-orb-RefOrbitColor":
+				global_simulation.config.orbit.ref_orbit.color = "#"+val;
+				break;
+			case "opt-orb-RefOrbit-a":
+				global_simulation.config.orbit.ref_orbit.a = val;
+				break;
+			case "opt-orb-RefOrbit-e":
+				global_simulation.config.orbit.ref_orbit.e = val;
+				break;
+			case "opt-orb-RefOrbit-i":
+				global_simulation.config.orbit.ref_orbit.i = val;
+				if(!global_angle_in_rads){
+					global_simulation.config.orbit.ref_orbit.i = global_simulation.config.orbit.ref_orbit.i * Math.PI / 180.0;
+				}
+				break;
+			case "opt-orb-RefOrbit-omega":
+				global_simulation.config.orbit.ref_orbit.w = val;
+				if(!global_angle_in_rads){
+					global_simulation.config.orbit.ref_orbit.w = global_simulation.config.orbit.ref_orbit.w * Math.PI / 180.0;
+				}
+				break;
+			case "opt-orb-RefOrbit-raan":
+				global_simulation.config.orbit.ref_orbit.raan = val;
+				if(!global_angle_in_rads){
+					global_simulation.config.orbit.ref_orbit.raan = global_simulation.config.orbit.ref_orbit.raan * Math.PI / 180.0;
+				}
+				break;
 			default:
 		}
 		global_orbit.stopAnimation();
@@ -312,7 +344,48 @@ function updateOrbitOptions(){
 	document.getElementById("opt-orb-ShowProjection").checked = global_simulation.config.orbit.show_projection;
 	document.getElementById("opt-orb-OrbitColor").value = global_simulation.config.orbit.orbit_color;
 	document.getElementById("opt-orb-OrbitColor").style.backgroundColor = global_simulation.config.orbit.orbit_color;
+	
+	
+	document.getElementById("opt-orb-ShowRefOrbit").checked = global_simulation.config.orbit.ref_orbit.show;
+	document.getElementById("opt-orb-RefOrbitColor").value = global_simulation.config.orbit.ref_orbit.color;
+	document.getElementById("opt-orb-RefOrbitColor").style.backgroundColor = global_simulation.config.orbit.ref_orbit.color;
+	
+	if(global_angle_in_rads){
+		document.getElementById("AngleUnitsSelectionRadsRefOrbit").className = "AngleUnitsSelected";
+		document.getElementById("AngleUnitsSelectionDegsRefOrbit").className = "AngleUnitsUnselected";
+		document.getElementById("RefOrbit-Inclination").innerHTML = "Inclination (rad):";
+		document.getElementById("RefOrbit-Omega").innerHTML = "Arg. Perigee (rad):";
+		document.getElementById("RefOrbit-Raan").innerHTML = "RAAN (rad):";
+	}else{
+		document.getElementById("AngleUnitsSelectionRadsRefOrbit").className = "AngleUnitsUnselected";
+		document.getElementById("AngleUnitsSelectionDegsRefOrbit").className = "AngleUnitsSelected";
+		document.getElementById("RefOrbit-Inclination").innerHTML = "Inclination (deg):";
+		document.getElementById("RefOrbit-Omega").innerHTML = "Arg. Perigee (deg):";
+		document.getElementById("RefOrbit-Raan").innerHTML = "RAAN (deg):";
+	}
+	
+	var field;
+	field = document.getElementById("opt-orb-RefOrbit-a");
+	field.value = global_simulation.config.orbit.ref_orbit.a;
+	field = document.getElementById("opt-orb-RefOrbit-e");
+	field.value = global_simulation.config.orbit.ref_orbit.e;
+	field = document.getElementById("opt-orb-RefOrbit-i");
+	field.value = global_simulation.config.orbit.ref_orbit.i;
+	if(!global_angle_in_rads){
+		field.value = field.value * 180.0 / Math.PI;
+	}
+	field = document.getElementById("opt-orb-RefOrbit-omega");
+	field.value = global_simulation.config.orbit.ref_orbit.w;
+	if(!global_angle_in_rads){
+		field.value = field.value * 180.0 / Math.PI;
+	}
+	field = document.getElementById("opt-orb-RefOrbit-raan");
+	field.value = global_simulation.config.orbit.ref_orbit.raan;
+	if(!global_angle_in_rads){
+		field.value = field.value * 180.0 / Math.PI;
+	}
 }
+
 function switchAttitudeMenu(){
 	var menu = document.getElementById("AttitudetabContainer"); 
 	var divi = document.getElementById("DivAttitude"); 

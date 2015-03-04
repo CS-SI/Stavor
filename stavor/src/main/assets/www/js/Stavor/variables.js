@@ -150,7 +150,16 @@ var global_simulation = {
 			show_spacecraft: true,
 			spacecraft_color: "#fff200",
 			show_projection: true,
-			orbit_color: "#00ff00"
+			orbit_color: "#00ff00",
+			ref_orbit:{
+				show: false,
+				color: "#ff0000",
+				a: 24396159,
+				e: 0.73,
+				i: Math.PI/9,
+				w: Math.PI,
+				raan: 0
+			}
 		},
 		map:{
 			stations: [],

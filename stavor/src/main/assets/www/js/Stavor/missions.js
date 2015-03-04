@@ -3,11 +3,6 @@ var global_missions = {
 	selected: -1
 }
 
-function updateMissionAngleUnitsInRads(bool){
-	setAngleUnitsRads(bool);
-	reopenMissionEditor();
-}
-
 function areMissionsInstalled(){
 	var serialized = localStorage.getItem('missionsInstalled'); 
 	if(serialized){

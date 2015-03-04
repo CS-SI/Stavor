@@ -141,6 +141,15 @@
 			var dataToStore = JSON.stringify(bool);
 			localStorage.setItem('angleUnitsRads', dataToStore);
 			global_angle_in_rads = bool;
+			if(global_menus.orbit.isOpen){
+				updateOrbitOptions();
+			}
+			if(global_menus.mission.isOpen){
+				reopenMissionEditor();
+			}
+			if(global_menus.station.isOpen){
+				reopenStationEditor();
+			}
 		}
 		
 		function loadStoredVariables(){
@@ -505,6 +514,7 @@
 		<div id="Orbittabs" class="tabs">
 		  <ul>
 			<li id="OrbittabHeader_1">Models</li>
+			<li id="OrbittabHeader_2">Ref. Orbit</li>
 		  </ul>
 		</div>
 		<div id="Orbittabscontent" class="tabscontent">
@@ -527,6 +537,17 @@
 			<h4>Orbit</h4>
 			<p>Show projection:<input id="opt-orb-ShowProjection" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
 			<p>Color:<input id="opt-orb-OrbitColor" class="color MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+		  </div>
+		  <div class="tabpage" id="Orbittabpage_2">
+			<p>Show orbit:<input id="opt-orb-ShowRefOrbit" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>Color:<input id="opt-orb-RefOrbitColor" class="color MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<h4>Orbit</h4>
+			<p>Semi-major axis (m):<input id="opt-orb-RefOrbit-a" type="number" min="0" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<p>Eccentricity:<input id="opt-orb-RefOrbit-e" type="number" min="0" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<p><span id="RefOrbit-Inclination">Inclination (rad):</span><input id="opt-orb-RefOrbit-i" type="number" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<p><span id="RefOrbit-Omega">Arg. Perigee (rad):</span><input id="opt-orb-RefOrbit-omega" type="number" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<p><span id="RefOrbit-Raan">RAAN (rad):</span><input id="opt-orb-RefOrbit-raan" type="number" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<div id="AngleUnitsSelectionRadsRefOrbit" class="AngleUnitsSelected" onclick="setAngleUnitsRads(true)">Rads</div><div id="AngleUnitsSelectionDegsRefOrbit" class="AngleUnitsUnselected" onclick="setAngleUnitsRads(false)">Degs</div>
 		  </div>
 		</div>
 	</div>
@@ -773,7 +794,7 @@
 			<p><span id="MissionEditor-Raan">RAAN (rad):</span><input id="mis-raan" type="number" step="any" style="float: right;" class="MissionField"/></p>
 			<p><span id="MissionEditor-lM">Mean anomaly (rad):</span><input id="mis-lm" type="number" step="any" style="float: right;" class="MissionField"/></p>
 		</div>
-		<div id="AngleUnitsSelectionRads" class="AngleUnitsSelected" onclick="updateMissionAngleUnitsInRads(true)">Rads</div><div id="AngleUnitsSelectionDegs" class="AngleUnitsUnselected" onclick="updateMissionAngleUnitsInRads(false)">Degs</div>
+		<div id="AngleUnitsSelectionRads" class="AngleUnitsSelected" onclick="setAngleUnitsRads(true)">Rads</div><div id="AngleUnitsSelectionDegs" class="AngleUnitsUnselected" onclick="setAngleUnitsRads(false)">Degs</div>
 	</div>
 </div>
 
@@ -790,7 +811,7 @@
 			<p>Altitude (m):<input id="sta-altitude" type="number" step="any" style="float: right;" class="StationField"/></p>
 			<p><span id="StationEditor-Elevation">Min. elevation (deg):</span><input id="sta-elevation" type="number" max="90" min="-10" step="any" style="float: right;" class="StationField"/></p>
 		</div>
-		<div id="AngleUnitsSelectionRadsStation" class="AngleUnitsSelected" onclick="updateStationAngleUnitsInRads(true)">Rads</div><div id="AngleUnitsSelectionDegsStation" class="AngleUnitsUnselected" onclick="updateStationAngleUnitsInRads(false)">Degs</div>
+		<div id="AngleUnitsSelectionRadsStation" class="AngleUnitsSelected" onclick="setAngleUnitsRads(true)">Rads</div><div id="AngleUnitsSelectionDegsStation" class="AngleUnitsUnselected" onclick="setAngleUnitsRads(false)">Degs</div>
 	</div>
 </div>
 

@@ -2,11 +2,6 @@ var global_stations = {
 	active: -1
 }
 
-function updateStationAngleUnitsInRads(bool){
-	setAngleUnitsRads(bool);
-	reopenStationEditor();
-}
-
 function areStationsInstalled(){
 	var serialized = localStorage.getItem('stationsInstalled'); 
 	if(serialized){
