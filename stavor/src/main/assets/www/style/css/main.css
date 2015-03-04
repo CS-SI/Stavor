@@ -471,7 +471,8 @@ ol li{
 	max-height: 90%;
 	border-radius: 20px;
 	overflow: auto;
-	box-shadow: 1px -1px 6px #333;
+	/*box-shadow: 1px -1px 6px #333;*/
+	box-shadow: inset 0px -1px 9px 0px #333;
 }
 #ConfigCloseButton{
 	position: relative;
