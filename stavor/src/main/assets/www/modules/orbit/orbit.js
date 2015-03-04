@@ -122,7 +122,7 @@ var Orbit = function()
 	//////////////////////////////////////////////////////////////////////////////////
 	var lastTimeMsec = null;
 	var requestId;
-	requestAnimationFrame(function animate(nowMsec){
+	requestId = requestAnimationFrame(function animate(nowMsec){
 		// keep looping
 		requestId = requestAnimationFrame( animate );
 		
