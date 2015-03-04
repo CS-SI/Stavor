@@ -347,11 +347,12 @@ function updateMissionEditor(mission,mission_id){
 	field = document.getElementById("mis-Id");
 	field.value = mission_id;
 	
-	field = document.getElementById("mis-Title");
 	if(mission_id == -1){
-		field.innerHTML = "Create Mission";
+		document.getElementById("mis-TitleCreate").style.display = "block";
+		document.getElementById("mis-TitleEdit").style.display = "none";
 	}else{
-		field.innerHTML = "Edit Mission";
+		document.getElementById("mis-TitleCreate").style.display = "none";
+		document.getElementById("mis-TitleEdit").style.display = "block";
 	}
 	field = document.getElementById("mis-Name");
 	field.value = mission.name;

@@ -291,11 +291,12 @@ function updateStationEditor(station,station_id){
 	field = document.getElementById("sta-Id");
 	field.value = station_id;
 	
-	field = document.getElementById("sta-Title");
 	if(station_id == -1){
-		field.innerHTML = "Create Station";
+		document.getElementById("sta-TitleCreate").style.display = "block";
+		document.getElementById("sta-TitleEdit").style.display = "none";
 	}else{
-		field.innerHTML = "Edit Station";
+		document.getElementById("sta-TitleCreate").style.display = "none";
+		document.getElementById("sta-TitleEdit").style.display = "block";
 	}
 	field = document.getElementById("sta-Name");
 	field.value = station.name;
