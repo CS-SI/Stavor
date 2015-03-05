@@ -54,7 +54,7 @@ var Simulator = function(){
 //****************************************************************************
 function warningSelectMission(){
 	//alert("Select a mission first!");
-	Dialog.showDialog("Stavor says","Select a mission first!",function(){		
+	Dialog.showDialog($.localize.data.strings.dialog_select_mission_first_title,$.localize.data.strings.dialog_select_mission_first_message,function(){
 		if(!global_missions_list_is_open){
 			switchMissionsListStatus();
 		}

@@ -28,11 +28,11 @@ function saveStationsStoredVariables(){
 
 function onDeleteStationButtonClicked(){
 	if(global_stations.active == -1){
-		Dialog.showDialog("Stavor says", "Click on a station first!", function(){});
+		Dialog.showDialog($.localize.data.strings.dialog_click_station_first_title, $.localize.data.strings.dialog_click_station_first_message, function(){});
 	}else{
 		db.transaction(function (tx) {
 			tx.executeSql('SELECT name FROM stations WHERE id = '+global_stations.active+';', [], function (tx, results) {	
-				Dialog.showConfirmDialog("Stavor says","Delete station "+results.rows.item(0).name+"?",function(){
+				Dialog.showConfirmDialog($.localize.data.strings.dialog_confirm_delete_station_title,$.localize.data.strings.dialog_confirm_delete_station_message_1+results.rows.item(0).name+$.localize.data.strings.dialog_confirm_delete_station_message_2,function(){
 					db.transaction(function (tx) {
 						tx.executeSql('DELETE FROM stations WHERE id = '+global_stations.active+';', [], function (tx, results) {	
 							global_stations.active = -1;
@@ -105,7 +105,7 @@ function drawStationsList(){
 }
 
 function resetStationsDb(){
-	Dialog.showConfirmDialog("Stavor says","Reset missions list to default value?",function(){
+	Dialog.showConfirmDialog($.localize.data.strings.dialog_reset_stations_db_title,$.localize.data.strings.dialog_reset_stations_db_message,function(){
 		db.transaction(function (tx) {
 			tx.executeSql('DROP TABLE stations', [], function (tx, results) {
 				setStationsInstalled(false);

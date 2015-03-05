@@ -49,14 +49,14 @@ function selectActiveMission(){
 
 function onDeleteMissionButtonClicked(){
 	if(global_missions.active == -1){
-		Dialog.showDialog("Stavor says", "Click on a mission first!", function(){});
+		Dialog.showDialog($.localize.data.strings.dialog_click_mission_first_title, $.localize.data.strings.dialog_click_mission_first_message, function(){});
 	}else{
 		if(global_missions.active == global_missions.selected){
-			Dialog.showDialog("Stavor says", "The mission selected for simulation cannot be deleted, please select another mission first!", function(){});
+			Dialog.showDialog($.localize.data.strings.dialog_cannot_delete_mission_title, $.localize.data.strings.dialog_cannot_delete_mission_message, function(){});
 		}else{
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT name FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
-					Dialog.showConfirmDialog("Stavor says","Delete mission "+results.rows.item(0).name+"?",function(){
+					Dialog.showConfirmDialog($.localize.data.strings.dialog_confirm_delete_mission_title,$.localize.data.strings.dialog_confirm_delete_mission_message_1+results.rows.item(0).name+$.localize.data.strings.dialog_confirm_delete_mission_message_2,function(){
 						db.transaction(function (tx) {
 							tx.executeSql('DELETE FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
 								global_missions.active = -1;
@@ -71,12 +71,12 @@ function onDeleteMissionButtonClicked(){
 }
 function onSelectMissionButtonClicked(){
 	if(global_missions.active == -1){
-		Dialog.showDialog("Stavor says", "Click on a mission first!", function(){});
+		Dialog.showDialog($.localize.data.strings.dialog_click_mission_first_title, $.localize.data.strings.dialog_click_mission_first_message, function(){});
 	}else{
 		if(global_missions.active != global_missions.selected){
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
-					Dialog.showConfirmDialog("Stavor says","Select mission "+results.rows.item(0).name+" for simulation?", function(){
+					Dialog.showConfirmDialog($.localize.data.strings.dialog_confirm_select_mission_title,$.localize.data.strings.dialog_confirm_select_mission_message_1+results.rows.item(0).name+$.localize.data.strings.dialog_confirm_select_mission_message_2, function(){
 						global_missions.selected = global_missions.active;
 						styleMissionRows();
 						saveMissionsStoredVariables();
@@ -90,11 +90,11 @@ function onSelectMissionButtonClicked(){
 
 function onCopyMissionButtonClicked(){
 	if(global_missions.active == -1){
-		Dialog.showDialog("Stavor says", "Click on a mission first!", function(){});
+		Dialog.showDialog($.localize.data.strings.dialog_click_mission_first_title, $.localize.data.strings.dialog_click_mission_first_message, function(){});
 	}else{
 		db.transaction(function (tx) {
 			tx.executeSql('SELECT * FROM missions WHERE id = '+global_missions.active+';', [], function (tx, results) {	
-				Dialog.showConfirmDialog("Stavor says","Copy mission "+results.rows.item(0).name+"?", function(){
+				Dialog.showConfirmDialog($.localize.data.strings.dialog_confirm_copy_mission_title,$.localize.data.strings.dialog_confirm_copy_mission_message_1+results.rows.item(0).name+$.localize.data.strings.dialog_confirm_copy_mission_message_2, function(){
 					db.transaction(function (tx) {
 						tx.executeSql('INSERT INTO missions (isDefault, name, json) VALUES (?, ?, ?)', [false, results.rows.item(0).name+"_c", results.rows.item(0).json], drawMissionsList);
 					});
@@ -181,7 +181,7 @@ function drawMissionsList(){
 }
 
 function resetMissionsDb(){
-	Dialog.showConfirmDialog("Stavor says","Reset missions list to default value?",function(){
+	Dialog.showConfirmDialog($.localize.data.strings.dialog_reset_missions_db_title,$.localize.data.strings.dialog_reset_missions_db_message,function(){
 		db.transaction(function (tx) {
 			tx.executeSql('DROP TABLE missions', [], function (tx, results) {
 				setMissionsInstalled(false);
@@ -491,7 +491,7 @@ function closeMissionEditor(){
 	if(global_menus.mission.isOpen){
 		var id = lastMissionEditorId;
 		if(id == global_missions.selected){
-			Dialog.showConfirmDialog("Stavor says","Do you want to restart the simulator?",function(){selectActiveMission();},function(){});
+			Dialog.showConfirmDialog($.localize.data.strings.dialog_restart_simulator_title, $.localize.data.strings.dialog_restart_simulator_message, function(){selectActiveMission();},function(){});
 		}
 		$( "#MissionEditorBackground" ).fadeOut( "fast", function() {
 			// Animation complete.
@@ -530,9 +530,7 @@ function openMissionEditor(id){
 						// Animation complete.
 					  });
 					global_menus.mission.isOpen = !global_menus.mission.isOpen;
-				}/*else if(id == global_missions.selected){
-					Dialog.showDialog("Stavor says", "Cannot edit the simulation selected mission, select another one!", function(){});
-				}*/else{//Edit Mode
+				}else{//Edit Mode
 					var mission = JSON.parse(results.rows.item(0).json);
 					updateMissionEditor(mission,id);
 					$( "#MissionEditorBackground" ).fadeIn( "fast", function() {

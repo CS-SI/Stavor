@@ -69,6 +69,7 @@
 	<script type='text/javascript' src="js/Stavor/viewTypes.js"></script>
 	
 	
+	<script type='text/javascript' src="js/Stavor/localize.js"></script>
 	<script type='text/javascript' src="js/Stavor/Dialog.js"></script>
 	<script type='text/javascript' src="js/Stavor/parameters.js"></script>
 	<script type='text/javascript' src="js/Stavor/constants.js"></script>
@@ -107,10 +108,7 @@
 			
 			loadOrekitFilesText();
 			
-			$(function(){
-				var opts = { pathPrefix: "lang" };
-				$("[data-localize]").localize("strings", opts)
-			})
+			localizeStrings();
 		}
 		
 		function initOptionMenus(){
@@ -180,7 +178,7 @@
 		}
 		
 		function resetConfiguration(){
-			Dialog.showConfirmDialog("Stavor says","Are you sure?",function(){
+			Dialog.showConfirmDialog($.localize.data.strings.dialog_reset_config_title,$.localize.data.strings.dialog_reset_config_message,function(){
 				resetStoredVariables();
 			},function(){});
 		}
@@ -490,9 +488,9 @@
 		  <div class="tabpage" id="Maptabpage_2">
 			<h4 data-localize="menu_map_stations_ground_title">Ground stations</h4>
 			<div id="StationsMenu">
-				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/new.png" title="Create Station" onclick="openStationEditor(-1)"/></div>
-				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/edit.png" title="Edit Station" onclick="openStationEditor(global_stations.active)"/></div>
-				<div class="StationsMenuItem"><input class="StationsMenuButton" type="image" src="style/icons/delete.png" title="Remove Station" onclick="onDeleteStationButtonClicked()"/></div>
+				<div class="StationsMenuItem"><input id="CreateStationButton" class="StationsMenuButton" type="image" src="style/icons/new.png" title="Create Station" onclick="openStationEditor(-1)"/></div>
+				<div class="StationsMenuItem"><input id="EditStationButton" class="StationsMenuButton" type="image" src="style/icons/edit.png" title="Edit Station" onclick="openStationEditor(global_stations.active)"/></div>
+				<div class="StationsMenuItem"><input id="RemoveStationButton" class="StationsMenuButton" type="image" src="style/icons/delete.png" title="Remove Station" onclick="onDeleteStationButtonClicked()"/></div>
 			</div>
 			<div id="DivStations">	
 				<div id="ListStations">
@@ -765,10 +763,10 @@
 	</div>
 	<div id="MissionsMenu">
 		<div class="MissionsMenuItem" onclick="onSelectMissionButtonClicked()" style="cursor: pointer;"><div id="SelectMissionButton" class="MissionsMenuButton"  title="Select Mission"></div></div>
-		<div class="MissionsMenuItem" onclick="openMissionEditor(-1)" style="cursor: pointer;"><input class="MissionsMenuButton" type="image" src="style/icons/new.png" title="Create Mission"/></div>
-		<div class="MissionsMenuItem" onclick="onCopyMissionButtonClicked()" style="cursor: pointer;"><input class="MissionsMenuButton" type="image" src="style/icons/copy.png" title="Copy Mission"/></div>
-		<div class="MissionsMenuItem" onclick="openMissionEditor(global_missions.active)" style="cursor: pointer;"><input class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission"/></div>
-		<div class="MissionsMenuItem" onclick="onDeleteMissionButtonClicked()" style="cursor: pointer;"><input class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission"/></div>
+		<div class="MissionsMenuItem" onclick="openMissionEditor(-1)" style="cursor: pointer;"><input id="CreateMissionButton" class="MissionsMenuButton" type="image" src="style/icons/new.png" title="Create Mission"/></div>
+		<div class="MissionsMenuItem" onclick="onCopyMissionButtonClicked()" style="cursor: pointer;"><input id="CopyMissionButton" class="MissionsMenuButton" type="image" src="style/icons/copy.png" title="Copy Mission"/></div>
+		<div class="MissionsMenuItem" onclick="openMissionEditor(global_missions.active)" style="cursor: pointer;"><input id="EditMissionButton" class="MissionsMenuButton" type="image" src="style/icons/edit.png" title="Edit Mission"/></div>
+		<div class="MissionsMenuItem" onclick="onDeleteMissionButtonClicked()" style="cursor: pointer;"><input id="RemoveMissionButton" class="MissionsMenuButton" type="image" src="style/icons/delete.png" title="Remove Mission"/></div>
 	</div>
 </div>
 
