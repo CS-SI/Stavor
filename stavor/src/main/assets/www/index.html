@@ -494,7 +494,7 @@
 			<p><span data-localize="menu_map_coverage_direction_z_field">Z:</span><input id="opt-map-DirectionZ" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
 		  </div>
 		  <div class="tabpage" id="Maptabpage_2">
-			<h4 data-localize="menu_map_stations_ground_title">Ground stations</h4>
+			<h4 data-localize="menu_map_stations_ground_title" style="display: none;">Ground stations</h4>
 			<div id="StationsMenu">
 				<div class="StationsMenuItem"><input id="CreateStationButton" class="StationsMenuButton" type="image" src="style/icons/new.png" title="Create Station" onclick="openStationEditor(-1)"/></div>
 				<div class="StationsMenuItem"><input id="EditStationButton" class="StationsMenuButton" type="image" src="style/icons/edit.png" title="Edit Station" onclick="openStationEditor(global_stations.active)"/></div>
@@ -581,7 +581,7 @@
 		</div>
 		<div id="Attitudetabscontent" class="tabscontent">
 		  <div class="tabpage" id="Attitudetabpage_1">
-			<h4 data-localize="menu_att_indicators_basic_title">Basic</h4>
+			<h4 data-localize="menu_att_indicators_basic_title" style="display: none;">Basic</h4>
 			<h5 data-localize="menu_att_indicators_velocity_title">Velocity</h5>
 			<p><span data-localize="menu_att_indicators_show_velocity_field">Show velocity:</span><input id="opt-att-ShowVelocity" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p><span data-localize="menu_att_indicators_limit_velocity_field">Limit (Km/s):</span><input id="opt-att-LimitVelocity" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
