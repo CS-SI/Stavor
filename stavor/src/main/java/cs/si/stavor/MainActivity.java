@@ -32,6 +32,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 /**
  * Main activity of the application, managing persistent objects and fragments
  * @author Xavier Gibert
@@ -109,7 +111,7 @@ public class MainActivity extends Activity {
             browser.addJavascriptInterface(
                     new StavorInterface(browser, simulator),
                     "Android");
-            browser.load(Parameters.Web.STARTING_PAGE, null);
+            browser.load(Parameters.Web.STARTING_PAGE+"?lang="+ Locale.getDefault().getLanguage(), null);
 
             dataFragment.setData(
                     browser,

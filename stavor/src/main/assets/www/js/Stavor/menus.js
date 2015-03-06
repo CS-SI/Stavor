@@ -15,11 +15,17 @@ function initializeMapMenu(){
 
 	//hide two tab contents we don't need
 	 var pages = tabcon.getElementsByTagName("div");
-		for (var i = 1; i < pages.length; i++) {
+		/*for (var i = 1; i < pages.length; i++) {
 		 pages.item(i).style.display="none";
 		};
 		document.getElementById("DivStations").style.display = "block";
-		document.getElementById("StationsMenu").style.display = "block";
+		document.getElementById("StationsMenu").style.display = "block";*/
+		for (var i = 1; i < pages.length; i++) {
+			if(pages.item(i).parentElement === tabcon){
+				pages.item(i).style.display="none";
+			}
+		};
+		
 
 	//this adds click event to tabs
 	var tabs = tabcontainer.getElementsByTagName("li");
@@ -46,7 +52,10 @@ function initializeOrbitMenu(){
 	//hide two tab contents we don't need
 	 var pages = tabcon.getElementsByTagName("div");
 		for (var i = 1; i < pages.length; i++) {
-			if(pages.item(i).id != "AngleUnitsSelectionRadsRefOrbit" && pages.item(i).id != "AngleUnitsSelectionDegsRefOrbit"){
+			/*if(pages.item(i).id != "AngleUnitsSelectionRadsRefOrbit" && pages.item(i).id != "AngleUnitsSelectionDegsRefOrbit"){
+				pages.item(i).style.display="none";
+			}*/
+			if(pages.item(i).parentElement === tabcon){
 				pages.item(i).style.display="none";
 			}
 		};
@@ -76,7 +85,9 @@ function initializeAttitudeMenu(){
 	//hide two tab contents we don't need
 	 var pages = tabcon.getElementsByTagName("div");
 		for (var i = 1; i < pages.length; i++) {
-		 pages.item(i).style.display="none";
+			if(pages.item(i).parentElement === tabcon){
+				pages.item(i).style.display="none";
+			}
 		};
 
 	//this adds click event to tabs

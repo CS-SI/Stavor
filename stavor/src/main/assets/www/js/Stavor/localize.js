@@ -1,7 +1,14 @@
 function localizeStrings(){
 	$(function(){
-		var opts = { pathPrefix: "lang" };
-		$("[data-localize]").localize("strings", opts)
+		var lang = getURLParameter('lang');
+		if(lang){
+			var opts = { pathPrefix: "lang", language: lang };
+			$("[data-localize]").localize("strings", opts)
+		}else{
+			//var opts = { pathPrefix: "lang", skipLanguage: /^en/ };
+			var opts = { pathPrefix: "lang" };
+			$("[data-localize]").localize("strings", opts)
+		}
 	});
 	
 	localizeDynamicStrings();
@@ -21,6 +28,10 @@ function localizeDynamicStrings(){
 	document.getElementById("CreateStationButton").title = $.localize.data.strings.station_list_button_create;
 	document.getElementById("EditStationButton").title = $.localize.data.strings.station_list_button_edit;
 	document.getElementById("RemoveStationButton").title = $.localize.data.strings.station_list_button_remove;
+}
+
+function getURLParameter(name) {
+	return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
 }
 
 
