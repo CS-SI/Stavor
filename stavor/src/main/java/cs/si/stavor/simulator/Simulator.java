@@ -430,12 +430,14 @@ public class Simulator {
 	private String message = "";
 	public void showMessage(String string) {
 		message = string;
-		activity.runOnUiThread( new Runnable() {
-			public void run() {
-				Toast.makeText(context, message,
-		                Toast.LENGTH_LONG).show();
-	        }
-		});
+        if(Parameters.App.output_simulator_toasts) {
+            activity.runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(context, message,
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 	}
 
     public SimulatorControlsStatus getControlsStatus() {

@@ -13,6 +13,7 @@ public class Parameters {
 	 */
 	public static class App {
         public static final boolean debug = true;
+        public static final boolean output_simulator_toasts = false;
 	}
 	/**
 	 * About screen information
