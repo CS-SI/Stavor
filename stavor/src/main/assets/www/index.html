@@ -25,14 +25,15 @@
 	
 	<!-- HammerJs -->
 	<script type="text/javascript" src="js/Gestures/hammer.min.js"></script>
-	<!-- JSColor -->
-	<script type="text/javascript" src="js/jscolor/jscolor.js"></script>
 	<!-- jQuery -->
 	<!--<link rel="stylesheet" href="js/jQuery/jquery.mobile-1.4.5.min.css"/>-->
 	<script type='text/javascript' src="js/jQuery/jquery-2.1.3.min.js"></script>
 	<!--<script type='text/javascript' src="js/jQuery/jquery.mobile-1.4.5.min.js"></script>-->
 	<script type='text/javascript' src="js/jQuery/Localization/jquery.localize.min.js"></script>
 	<script type='text/javascript' src="js/Animations/css-fadeslide-v1.4.0.min.js"></script>
+	<!-- Spectrum (color picker) -->
+	<script type="text/javascript" src="js/Spectrum/spectrum.js"></script>
+	<link rel="stylesheet" href="js/Spectrum/spectrum.css"/>
 	<!-- ThreeJS -->
 	<script type='text/javascript' src="js/ThreeJS/three.js"></script>
 	<script type='text/javascript' src="js/ThreeJS/three.ext.js"></script>	
@@ -543,17 +544,17 @@
 			<p>&bull;<span data-localize="menu_orb_models_show_earth_clouds_field">Show Earth clouds:</span><input id="opt-orb-ShowEarthClouds" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
 			<h4 data-localize="menu_orb_models_reference_title">Reference</h4>
 			<p><span data-localize="menu_orb_models_show_xy_plane_field">Show XY plane:</span><input id="opt-orb-ShowXyPlane" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_models_xy_plane_color_field">Color:</span><input id="opt-orb-PlaneXyColor" class="color MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_orb_models_xy_plane_color_field">Color:</span><input id="opt-orb-PlaneXyColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 			<h4 data-localize="menu_orb_models_spacecraft_title">Spacecraft</h4>
 			<p><span data-localize="menu_orb_models_show_spacecraft_field">Show spacecraft:</span><input id="opt-orb-ShowSpacecraft" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_models_spacecraft_color_field">Color:</span><input id="opt-orb-SpacecraftColor" class="color MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_orb_models_spacecraft_color_field">Color:</span><input id="opt-orb-SpacecraftColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 			<h4 data-localize="menu_orb_models_orbit_title">Orbit</h4>
 			<p><span data-localize="menu_orb_models_show_projection_field">Show projection:</span><input id="opt-orb-ShowProjection" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_models_orbit_color_field">Color:</span><input id="opt-orb-OrbitColor" class="color MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_orb_models_orbit_color_field">Color:</span><input id="opt-orb-OrbitColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 		  </div>
 		  <div class="tabpage" id="Orbittabpage_2">
 			<p><span data-localize="menu_orb_ref_orbit_show_orbit_field">Show orbit:</span><input id="opt-orb-ShowRefOrbit" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_ref_orbit_orbit_color_field">Color:</span><input id="opt-orb-RefOrbitColor" class="color MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_orb_ref_orbit_orbit_color_field">Color:</span><input id="opt-orb-RefOrbitColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 			<h4 data-localize="menu_orb_ref_orbit_orbit_title">Orbit</h4>
 			<p><span data-localize="menu_orb_ref_orbit_orbit_a_field">Semi-major axis (m):</span><input id="opt-orb-RefOrbit-a" type="number" min="0" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
 			<p><span data-localize="menu_orb_ref_orbit_orbit_e_field">Eccentricity:</span><input id="opt-orb-RefOrbit-e" type="number" min="0" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
@@ -584,42 +585,42 @@
 			<h5 data-localize="menu_att_indicators_velocity_title">Velocity</h5>
 			<p><span data-localize="menu_att_indicators_show_velocity_field">Show velocity:</span><input id="opt-att-ShowVelocity" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p><span data-localize="menu_att_indicators_limit_velocity_field">Limit (Km/s):</span><input id="opt-att-LimitVelocity" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_velocity_field">Color:</span><input id="opt-att-VelocityColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_att_indicators_color_velocity_field">Color:</span><input id="opt-att-VelocityColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5 data-localize="menu_att_indicators_acceleration_title">Acceleration</h5>
 			<p><span data-localize="menu_att_indicators_show_acceleration_field">Show acceleration:</span><input id="opt-att-ShowAcceleration" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p><span data-localize="menu_att_indicators_limit_acceleration_field">Limit (Km/s2):</span><input id="opt-att-LimitAcceleration" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_acceleration_field">Color:</span><input id="opt-att-AccelerationColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_att_indicators_color_acceleration_field">Color:</span><input id="opt-att-AccelerationColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5 data-localize="menu_att_indicators_momentum_title">Momentum</h5>
 			<p><span data-localize="menu_att_indicators_show_momentum_field">Show momentum:</span><input id="opt-att-ShowMomentum" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_indicators_color_momentum_field">Color:</span><input id="opt-att-MomentumColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_att_indicators_color_momentum_field">Color:</span><input id="opt-att-MomentumColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h4 data-localize="menu_att_indicators_extra_title">Extra</h4>
 			<h5 data-localize="menu_att_indicators_target_title">Target</h5>
 			<p><span data-localize="menu_att_indicators_show_target_field">Show target:</span><input id="opt-att-ShowTarget" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p><span data-localize="menu_att_indicators_target_x_field">X:</span><input id="opt-att-TargetValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
 			<p><span data-localize="menu_att_indicators_target_y_field">Y:</span><input id="opt-att-TargetValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
 			<p><span data-localize="menu_att_indicators_target_z_field">Z:</span><input id="opt-att-TargetValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_target_field">Color:</span><input id="opt-att-TargetColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_att_indicators_color_target_field">Color:</span><input id="opt-att-TargetColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5 data-localize="menu_att_indicators_vector_title">Vector</h5>
 			<p><span data-localize="menu_att_indicators_show_vector_field">Show vector:</span><input id="opt-att-ShowVector" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p><span data-localize="menu_att_indicators_vector_limit_field">Limit:</span><input id="opt-att-LimitVector" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
 			<p><span data-localize="menu_att_indicators_vector_x_field">X:</span><input id="opt-att-VectorValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
 			<p><span data-localize="menu_att_indicators_vector_y_field">Y:</span><input id="opt-att-VectorValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
 			<p><span data-localize="menu_att_indicators_vector_z_field">Z:</span><input id="opt-att-VectorValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_vector_field">Color:</span><input id="opt-att-VectorColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_att_indicators_color_vector_field">Color:</span><input id="opt-att-VectorColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h5 data-localize="menu_att_indicators_direction_title">Direction</h5>
 			<p><span data-localize="menu_att_indicators_show_direction_field">Show direction:</span><input id="opt-att-ShowDirection" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p><span data-localize="menu_att_indicators_direction_x_field">X:</span><input id="opt-att-DirectionValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
 			<p><span data-localize="menu_att_indicators_direction_y_field">Y:</span><input id="opt-att-DirectionValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
 			<p><span data-localize="menu_att_indicators_direction_z_field">Z:</span><input id="opt-att-DirectionValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_direction_field">Color:</span><input id="opt-att-DirectionColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_att_indicators_color_direction_field">Color:</span><input id="opt-att-DirectionColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 		  </div>
 		  <div class="tabpage" id="Attitudetabpage_2">
 			<h4 data-localize="menu_att_measures_inclination_title">Inclination</h4>
 			<p><span data-localize="menu_att_measures_show_planes_field">Show planes:</span><input id="opt-att-ShowOrbitalPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<p>&bull;<span data-localize="menu_att_measures_show_inclination_field">Show inclination:</span><input id="opt-att-ShowInclination" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<!--<p>Show Earth rotation plane:<input id="opt-att-ShowEarthPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>-->
-			<p><span data-localize="menu_att_measures_rot_plane_color_field">Rotation plane color:</span><input id="opt-att-RotationPlaneColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<p><span data-localize="menu_att_measures_orb_plane_color_field">Orbital plane color:</span><input id="opt-att-OrbitalPlaneColor" class="color MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<p><span data-localize="menu_att_measures_rot_plane_color_field">Rotation plane color:</span><input id="opt-att-RotationPlaneColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p><br>
+			<p><span data-localize="menu_att_measures_orb_plane_color_field">Orbital plane color:</span><input id="opt-att-OrbitalPlaneColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 			<h4 data-localize="menu_att_measures_spheric_title">Spheric coordinates</h4>
 			<p><span data-localize="menu_att_measures_show_spheric_field">Show spheric coordinates:</span><input id="opt-att-ShowSphericCoordinates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<select id="opt-att-SphericCoordsSelection" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField">

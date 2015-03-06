@@ -281,25 +281,25 @@ function updateOrbitOption(id,val){
 				global_simulation.config.orbit.show_xy_plane = val;
 				break;
 			case "opt-orb-PlaneXyColor":
-				global_simulation.config.orbit.color_xy_plane = "#"+val;
+				global_simulation.config.orbit.color_xy_plane = val;
 				break;
 			case "opt-orb-ShowSpacecraft":
 				global_simulation.config.orbit.show_spacecraft = val;
 				break;
 			case "opt-orb-SpacecraftColor":
-				global_simulation.config.orbit.spacecraft_color = "#"+val;
+				global_simulation.config.orbit.spacecraft_color = val;
 				break;
 			case "opt-orb-ShowProjection":
 				global_simulation.config.orbit.show_projection = val;
 				break;
 			case "opt-orb-OrbitColor":
-				global_simulation.config.orbit.orbit_color = "#"+val;
+				global_simulation.config.orbit.orbit_color = val;
 				break;
 			case "opt-orb-ShowRefOrbit":
 				global_simulation.config.orbit.ref_orbit.show = val;
 				break;
 			case "opt-orb-RefOrbitColor":
-				global_simulation.config.orbit.ref_orbit.color = "#"+val;
+				global_simulation.config.orbit.ref_orbit.color = val;
 				break;
 			case "opt-orb-RefOrbit-a":
 				global_simulation.config.orbit.ref_orbit.a = val;
@@ -345,21 +345,21 @@ function updateOrbitOptions(){
 	document.getElementById("opt-orb-ShowXyPlane").checked = global_simulation.config.orbit.show_xy_plane;
 	
 	document.getElementById("opt-orb-PlaneXyColor").value = global_simulation.config.orbit.color_xy_plane;
-	document.getElementById("opt-orb-PlaneXyColor").style.backgroundColor = global_simulation.config.orbit.color_xy_plane;
+	//document.getElementById("opt-orb-PlaneXyColor").style.backgroundColor = global_simulation.config.orbit.color_xy_plane;
 	
 	document.getElementById("opt-orb-ShowSpacecraft").checked = global_simulation.config.orbit.show_spacecraft;
 	
 	document.getElementById("opt-orb-SpacecraftColor").value = global_simulation.config.orbit.spacecraft_color;
-	document.getElementById("opt-orb-SpacecraftColor").style.backgroundColor = global_simulation.config.orbit.spacecraft_color;
+	//document.getElementById("opt-orb-SpacecraftColor").style.backgroundColor = global_simulation.config.orbit.spacecraft_color;
 	
 	document.getElementById("opt-orb-ShowProjection").checked = global_simulation.config.orbit.show_projection;
 	document.getElementById("opt-orb-OrbitColor").value = global_simulation.config.orbit.orbit_color;
-	document.getElementById("opt-orb-OrbitColor").style.backgroundColor = global_simulation.config.orbit.orbit_color;
+	//document.getElementById("opt-orb-OrbitColor").style.backgroundColor = global_simulation.config.orbit.orbit_color;
 	
 	
 	document.getElementById("opt-orb-ShowRefOrbit").checked = global_simulation.config.orbit.ref_orbit.show;
 	document.getElementById("opt-orb-RefOrbitColor").value = global_simulation.config.orbit.ref_orbit.color;
-	document.getElementById("opt-orb-RefOrbitColor").style.backgroundColor = global_simulation.config.orbit.ref_orbit.color;
+	//document.getElementById("opt-orb-RefOrbitColor").style.backgroundColor = global_simulation.config.orbit.ref_orbit.color;
 	
 	if(global_angle_in_rads){
 		document.getElementById("AngleUnitsSelectionRadsRefOrbit").className = "AngleUnitsSelected";
@@ -547,10 +547,10 @@ function updateAttitudeOption(id,val){
 				global_simulation.config.attitude.show_planes = val;
 				break;*/
 			case "opt-att-RotationPlaneColor":
-				global_simulation.config.attitude.plane_xy_color = "#"+val;
+				global_simulation.config.attitude.plane_xy_color = val;
 				break;
 			case "opt-att-OrbitalPlaneColor":
-				global_simulation.config.attitude.plane_orb_color = "#"+val;
+				global_simulation.config.attitude.plane_orb_color = val;
 				break;
 			case "opt-att-ShowSphericCoordinates":
 				global_simulation.config.attitude.show_spheric_coords = val;
@@ -576,7 +576,7 @@ function updateAttitudeOption(id,val){
 				global_simulation.config.attitude.limit_velocity = val;
 				break;
 			case "opt-att-VelocityColor":
-				global_simulation.config.attitude.color_velocity = "#"+val;
+				global_simulation.config.attitude.color_velocity = val;
 				break;
 			case "opt-att-ShowAcceleration":
 				global_simulation.config.attitude.show_acceleration = val;
@@ -585,13 +585,13 @@ function updateAttitudeOption(id,val){
 				global_simulation.config.attitude.limit_acceleration = val;
 				break;
 			case "opt-att-AccelerationColor":
-				global_simulation.config.attitude.color_acceleration = "#"+val;
+				global_simulation.config.attitude.color_acceleration = val;
 				break;
 			case "opt-att-ShowMomentum":
 				global_simulation.config.attitude.show_momentum = val;
 				break;
 			case "opt-att-MomentumColor":
-				global_simulation.config.attitude.color_momentum = "#"+val;
+				global_simulation.config.attitude.color_momentum = val;
 				break;
 			case "opt-att-ShowTarget":
 				global_simulation.config.attitude.show_target_a = val;
@@ -606,7 +606,7 @@ function updateAttitudeOption(id,val){
 				global_simulation.config.attitude.value_target_a.setZ(val);
 				break;
 			case "opt-att-TargetColor":
-				global_simulation.config.attitude.color_target_a = "#"+val;
+				global_simulation.config.attitude.color_target_a = val;
 				break;
 			case "opt-att-ShowVector":
 				global_simulation.config.attitude.show_vector_a = val;
@@ -624,7 +624,7 @@ function updateAttitudeOption(id,val){
 				global_simulation.config.attitude.value_vector_a.setZ(val);
 				break;
 			case "opt-att-VectorColor":
-				global_simulation.config.attitude.color_vector_a = "#"+val;
+				global_simulation.config.attitude.color_vector_a = val;
 				break;
 			case "opt-att-ShowDirection":
 				global_simulation.config.attitude.show_direction_a = val;
@@ -639,7 +639,7 @@ function updateAttitudeOption(id,val){
 				global_simulation.config.attitude.value_direction_a.setZ(val);
 				break;
 			case "opt-att-color_direction_a":
-				global_simulation.config.attitude.spheric_coords_selection = "#"+val;
+				global_simulation.config.attitude.spheric_coords_selection = val;
 				break;
 			default:
 		}
@@ -677,10 +677,10 @@ function updateAttitudeOptions(){
 	document.getElementById("opt-att-ShowInclination").checked = global_simulation.config.attitude.show_inclination;
 	//document.getElementById("opt-att-ShowEarthPlane").checked = global_simulation.config.attitude.show_planes;
 	document.getElementById("opt-att-RotationPlaneColor").value = global_simulation.config.attitude.plane_xy_color;
-	document.getElementById("opt-att-RotationPlaneColor").style.backgroundColor = global_simulation.config.attitude.plane_xy_color;
+	//document.getElementById("opt-att-RotationPlaneColor").style.backgroundColor = global_simulation.config.attitude.plane_xy_color;
 	document.getElementById("opt-att-ShowOrbitalPlane").checked = global_simulation.config.attitude.show_orbital_plane;
 	document.getElementById("opt-att-OrbitalPlaneColor").value = global_simulation.config.attitude.plane_orb_color;
-	document.getElementById("opt-att-OrbitalPlaneColor").style.backgroundColor = global_simulation.config.attitude.plane_orb_color;
+	//document.getElementById("opt-att-OrbitalPlaneColor").style.backgroundColor = global_simulation.config.attitude.plane_orb_color;
 	document.getElementById("opt-att-ShowSphericCoordinates").checked = global_simulation.config.attitude.show_spheric_coords;
 	document.getElementById("opt-att-SphericCoordsSelection").value = global_simulation.config.attitude.spheric_coords_selection;
 	document.getElementById("opt-att-ShowVectorsAngle").checked = global_simulation.config.attitude.show_vectors_angle;
@@ -691,33 +691,33 @@ function updateAttitudeOptions(){
 	document.getElementById("opt-att-ShowVelocity").checked = global_simulation.config.attitude.show_velocity;
 	document.getElementById("opt-att-LimitVelocity").value = global_simulation.config.attitude.limit_velocity;
 	document.getElementById("opt-att-VelocityColor").value = global_simulation.config.attitude.color_velocity;
-	document.getElementById("opt-att-VelocityColor").style.backgroundColor = global_simulation.config.attitude.color_velocity;
+	//document.getElementById("opt-att-VelocityColor").style.backgroundColor = global_simulation.config.attitude.color_velocity;
 	document.getElementById("opt-att-ShowAcceleration").checked = global_simulation.config.attitude.show_acceleration;
 	document.getElementById("opt-att-LimitAcceleration").value = global_simulation.config.attitude.limit_acceleration;
 	document.getElementById("opt-att-AccelerationColor").value = global_simulation.config.attitude.color_acceleration;
-	document.getElementById("opt-att-AccelerationColor").style.backgroundColor = global_simulation.config.attitude.color_acceleration;
+	//document.getElementById("opt-att-AccelerationColor").style.backgroundColor = global_simulation.config.attitude.color_acceleration;
 	document.getElementById("opt-att-ShowMomentum").checked = global_simulation.config.attitude.show_momentum;
 	document.getElementById("opt-att-MomentumColor").value = global_simulation.config.attitude.color_momentum;
-	document.getElementById("opt-att-MomentumColor").style.backgroundColor = global_simulation.config.attitude.color_momentum;
+	//document.getElementById("opt-att-MomentumColor").style.backgroundColor = global_simulation.config.attitude.color_momentum;
 	document.getElementById("opt-att-ShowTarget").checked = global_simulation.config.attitude.show_target_a;
 	document.getElementById("opt-att-TargetValueX").value = global_simulation.config.attitude.value_target_a.x;
 	document.getElementById("opt-att-TargetValueY").value = global_simulation.config.attitude.value_target_a.y;
 	document.getElementById("opt-att-TargetValueZ").value = global_simulation.config.attitude.value_target_a.z;
 	document.getElementById("opt-att-TargetColor").value = global_simulation.config.attitude.color_target_a;
-	document.getElementById("opt-att-TargetColor").style.backgroundColor = global_simulation.config.attitude.color_target_a;
+	//document.getElementById("opt-att-TargetColor").style.backgroundColor = global_simulation.config.attitude.color_target_a;
 	document.getElementById("opt-att-ShowVector").checked = global_simulation.config.attitude.show_vector_a;
 	document.getElementById("opt-att-LimitVector").value = global_simulation.config.attitude.limit_vector_a;
 	document.getElementById("opt-att-VectorValueX").value = global_simulation.config.attitude.value_vector_a.x;
 	document.getElementById("opt-att-VectorValueY").value = global_simulation.config.attitude.value_vector_a.y;
 	document.getElementById("opt-att-VectorValueZ").value = global_simulation.config.attitude.value_vector_a.z;
 	document.getElementById("opt-att-VectorColor").value = global_simulation.config.attitude.color_vector_a;
-	document.getElementById("opt-att-VectorColor").style.backgroundColor = global_simulation.config.attitude.color_vector_a;
+	//document.getElementById("opt-att-VectorColor").style.backgroundColor = global_simulation.config.attitude.color_vector_a;
 	document.getElementById("opt-att-ShowDirection").checked = global_simulation.config.attitude.show_direction_a;
 	document.getElementById("opt-att-DirectionValueX").value = global_simulation.config.attitude.value_direction_a.x;
 	document.getElementById("opt-att-DirectionValueY").value = global_simulation.config.attitude.value_direction_a.y;
 	document.getElementById("opt-att-DirectionValueZ").value = global_simulation.config.attitude.value_direction_a.z;
 	document.getElementById("opt-att-DirectionColor").value = global_simulation.config.attitude.color_direction_a;
-	document.getElementById("opt-att-DirectionColor").style.backgroundColor = global_simulation.config.attitude.color_direction_a;
+	//document.getElementById("opt-att-DirectionColor").style.backgroundColor = global_simulation.config.attitude.color_direction_a;
 	
 }
 function updateGlobalOption(id,val){
