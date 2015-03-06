@@ -178,7 +178,7 @@ function updateMapOption(id,val){
 				break;
 			case "opt-map-DirectionX":
 				if(val == 0 && global_simulation.config.map.fov.direction.y == 0 && global_simulation.config.map.fov.direction.z == 0){
-					Dialog.showDialog($.localize.data.strings.dialog_sensor_direction_title, $.localize.data.strings.dialog_sensor_direction_message, function(){updateMapOptions();});
+					Dialog.showDialog("str_dialog_sensor_direction_title", "str_dialog_sensor_direction_message", function(){updateMapOptions();});
 				}else{
 					global_simulation.config.map.fov.direction.x = val;
 					global_simulator.sendSimulatorConfiguration();
@@ -186,7 +186,7 @@ function updateMapOption(id,val){
 				break;
 			case "opt-map-DirectionY":
 				if(val == 0 && global_simulation.config.map.fov.direction.x == 0 && global_simulation.config.map.fov.direction.z == 0){
-					Dialog.showDialog($.localize.data.strings.dialog_sensor_direction_title, $.localize.data.strings.dialog_sensor_direction_message, function(){updateMapOptions();});
+					Dialog.showDialog("str_dialog_sensor_direction_title", "str_dialog_sensor_direction_message", function(){updateMapOptions();});
 				}else{
 					global_simulation.config.map.fov.direction.y = val;
 					global_simulator.sendSimulatorConfiguration();
@@ -194,7 +194,7 @@ function updateMapOption(id,val){
 				break;
 			case "opt-map-DirectionZ":
 				if(val == 0 && global_simulation.config.map.fov.direction.x == 0 && global_simulation.config.map.fov.direction.y == 0){
-					Dialog.showDialog($.localize.data.strings.dialog_sensor_direction_title, $.localize.data.strings.dialog_sensor_direction_message, function(){updateMapOptions();});
+					Dialog.showDialog("str_dialog_sensor_direction_title", "str_dialog_sensor_direction_message", function(){updateMapOptions();});
 				}else{
 					global_simulation.config.map.fov.direction.z = val;
 					global_simulator.sendSimulatorConfiguration();

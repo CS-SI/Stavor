@@ -116,6 +116,10 @@ ol li{
 	width: calc(100% - 50px);
 }
 
+.LocalizedString{
+	display: none;
+}
+
 #Splash{
 	position: absolute; 
 	left:0px; 

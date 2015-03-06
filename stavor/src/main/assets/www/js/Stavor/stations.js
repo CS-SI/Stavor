@@ -28,11 +28,11 @@ function saveStationsStoredVariables(){
 
 function onDeleteStationButtonClicked(){
 	if(global_stations.active == -1){
-		Dialog.showDialog($.localize.data.strings.dialog_click_station_first_title, $.localize.data.strings.dialog_click_station_first_message, function(){});
+		Dialog.showDialog("str_dialog_click_station_first_title", "str_dialog_click_station_first_message", function(){});
 	}else{
 		db.transaction(function (tx) {
 			tx.executeSql('SELECT name FROM stations WHERE id = '+global_stations.active+';', [], function (tx, results) {	
-				Dialog.showConfirmDialog($.localize.data.strings.dialog_confirm_delete_station_title,$.localize.data.strings.dialog_confirm_delete_station_message_1+results.rows.item(0).name+$.localize.data.strings.dialog_confirm_delete_station_message_2,function(){
+				Dialog.showConfirmDialog("str_dialog_confirm_delete_station_title",["str_dialog_confirm_delete_station_message_1",results.rows.item(0).name,"str_dialog_confirm_delete_station_message_2"],function(){
 					db.transaction(function (tx) {
 						tx.executeSql('DELETE FROM stations WHERE id = '+global_stations.active+';', [], function (tx, results) {	
 							global_stations.active = -1;
@@ -105,7 +105,7 @@ function drawStationsList(){
 }
 
 function resetStationsDb(){
-	Dialog.showConfirmDialog($.localize.data.strings.dialog_reset_stations_db_title,$.localize.data.strings.dialog_reset_stations_db_message,function(){
+	Dialog.showConfirmDialog("str_dialog_reset_stations_db_title","str_dialog_reset_stations_db_message",function(){
 		db.transaction(function (tx) {
 			tx.executeSql('DROP TABLE stations', [], function (tx, results) {
 				setStationsInstalled(false);

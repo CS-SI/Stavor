@@ -11,8 +11,14 @@ Dialog.showDialog = function(title, message, callbackOk){
 	this.ok_button = document.getElementById("DialogCloseButton");
 	
 	//Show dialog
-	this.dialog_title. innerHTML = title;
-	this.dialog_text. innerHTML = message;
+	this.dialog_title.innerHTML = document.getElementById(title).innerHTML;
+	if(message.constructor === Array){
+		this.dialog_text.innerHTML = document.getElementById(message[0]).innerHTML +
+									message[1] +
+									document.getElementById(message[2]).innerHTML;
+	}else{
+		this.dialog_text.innerHTML = document.getElementById(message).innerHTML;
+	}
 	this.confirm_button.style.display = "none";
 	this.cancel_button.style.display = "none";
 	this.ok_button.style.display = "block";
@@ -33,8 +39,14 @@ Dialog.showConfirmDialog = function(title, message, callbackOk, callbackCancel){
 	this.ok_button = document.getElementById("DialogCloseButton");
 	
 	//Show confirm dialog
-	this.dialog_title. innerHTML = title;
-	this.dialog_text. innerHTML = message;
+	this.dialog_title.innerHTML = document.getElementById(title).innerHTML;
+	if(message.constructor === Array){
+		this.dialog_text.innerHTML = document.getElementById(message[0]).innerHTML +
+									message[1] +
+									document.getElementById(message[2]).innerHTML;
+	}else{
+		this.dialog_text.innerHTML = document.getElementById(message).innerHTML;
+	}
 	this.ok_button.style.display = "none";
 	this.cancel_button.style.display = "block";
 	this.cancel_button.onclick = function(){
