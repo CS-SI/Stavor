@@ -838,7 +838,14 @@
 	<div id="DivConfig">
 		<div id="ConfigCloseButton" onclick="switchGlobalMenu()"></div>
 		<h3 data-localize="global_config_title">Configuration</h3>
-		<p><span data-localize="global_config_performances_field">3D Detail level [1-9]:</span><input id="opt-glo-PerformanceLevel" type="number" min="1" max="9" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"class="MenuField"/></p>
+		<p><span data-localize="global_config_performances_field">3D Detail level:</span><!--<input id="opt-glo-PerformanceLevel" type="number" min="1" max="5" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"class="MenuField"/>-->
+		<select id="opt-glo-PerformanceLevel" style="float: right;" class="MenuField" onchange="updateGlobalOption(this.id,this.value)">
+				<option data-localize="global_config_performances_value_1" value="1">Very Low</option>
+				<option data-localize="global_config_performances_value_2" value="2">Low</option>
+				<option data-localize="global_config_performances_value_3" value="3">Normal</option>
+				<option data-localize="global_config_performances_value_4" value="4">High</option>
+				<option data-localize="global_config_performances_value_5" value="5">Very High</option>
+		</select></p>
 		<p><span data-localize="global_config_fps_field">Show FPS:</span><input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
 		<p><input id="ResetConfigButton" value="Reset all configuration" type="button" onclick="resetConfiguration()" class="stavorDarkButton"/></p>
 		<p><input id="ResetMissionsButton" value="Reset missions database" type="button" onclick="resetMissionsDb()" class="stavorDarkButton"/></p>

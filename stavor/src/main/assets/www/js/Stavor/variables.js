@@ -240,6 +240,8 @@ var global_3d_segments;
 function setPerformanceLevel(){
 	if(global_simulation.config.global.performance_level<1)
 		global_simulation.config.global.performance_level=1;
+	if(global_simulation.config.global.performance_level>5)
+		global_simulation.config.global.performance_level=5;
 	var segments_scale = global_simulation.config.global.performance_level;//Multiply segments of all geometries:
 
 	global_3d_segments = {

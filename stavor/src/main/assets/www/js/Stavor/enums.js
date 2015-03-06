@@ -32,9 +32,7 @@ var enum_performance_level = {
 	LOW: 2,
 	NORMAL: 3,
 	HIGH: 4,
-	VERY_HIGH: 5,
-	ULTRA_HIGH: 6,
-	EXTREMELY_HIGH: 7
+	VERY_HIGH: 5
 }
 var enum_fov_type = {
 	NO_POLES: 0,
