@@ -23,15 +23,15 @@ function localizeDynamicStrings(){
 	document.getElementById("ResetMissionsButton").value = document.getElementById("str_global_config_reset_missions_button").innerHTML;
 	document.getElementById("ResetStationsButton").value = document.getElementById("str_global_config_reset_stations_button").innerHTML;
 	
-	/*document.getElementById("SelectMissionButton").title = $.localize.data.strings.mission_list_button_select;
-	document.getElementById("CreateMissionButton").title = $.localize.data.strings.mission_list_button_create;
-	document.getElementById("CopyMissionButton").title = $.localize.data.strings.mission_list_button_copy;
-	document.getElementById("EditMissionButton").title = $.localize.data.strings.mission_list_button_edit;
-	document.getElementById("RemoveMissionButton").title = $.localize.data.strings.mission_list_button_remove;
+	document.getElementById("SelectMissionButton").title = document.getElementById("str_mission_list_button_select").innerHTML;
+	document.getElementById("CreateMissionButton").title = document.getElementById("str_mission_list_button_create").innerHTML;
+	document.getElementById("CopyMissionButton").title = document.getElementById("str_mission_list_button_copy").innerHTML;
+	document.getElementById("EditMissionButton").title = document.getElementById("str_mission_list_button_edit").innerHTML;
+	document.getElementById("RemoveMissionButton").title = document.getElementById("str_mission_list_button_remove").innerHTML;
 	
-	document.getElementById("CreateStationButton").title = $.localize.data.strings.station_list_button_create;
-	document.getElementById("EditStationButton").title = $.localize.data.strings.station_list_button_edit;
-	document.getElementById("RemoveStationButton").title = $.localize.data.strings.station_list_button_remove;*/
+	document.getElementById("CreateStationButton").title = document.getElementById("str_station_list_button_create").innerHTML;
+	document.getElementById("EditStationButton").title = document.getElementById("str_station_list_button_edit").innerHTML;
+	document.getElementById("RemoveStationButton").title = document.getElementById("str_station_list_button_remove").innerHTML;
 }
 
 function getURLParameter(name) {

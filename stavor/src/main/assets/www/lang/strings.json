@@ -195,7 +195,7 @@
   "mission_editor_date_field": "Date:",
   "mission_editor_time_field": "Time:",
   "mission_editor_duration_field": "Duration (s):",
-  "mission_editor_speed_field": "Speed(s'/s):",
+  "mission_editor_speed_field": "Speed (s'/s):",
   "mission_editor_attitude_title": "Attitude",
   "mission_editor_attitude_field": "Attitude control:",
   "mission_editor_attitude_field_value1": "Inertial",

@@ -72,7 +72,7 @@
 }
 
 .tabs > ul{
-	font: 1em;
+	/*font-size: 1em;*/
 	list-style:none;
 }
 
