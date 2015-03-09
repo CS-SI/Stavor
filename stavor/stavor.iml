@@ -109,7 +109,6 @@
     <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="CWAC-LoaderEx" level="project" />
-    <orderEntry type="library" exported="" name="xwalk_core_library-11.40.277.7" level="project" />
     <orderEntry type="library" exported="" name="httpclientandroidlib-1.2.1" level="project" />
     <orderEntry type="library" exported="" name="multidex-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
@@ -117,6 +116,7 @@
     <orderEntry type="library" exported="" name="commons-math3-3.3" level="project" />
     <orderEntry type="library" exported="" name="orekit" level="project" />
     <orderEntry type="library" exported="" name="play-services-6.5.87" level="project" />
+    <orderEntry type="library" exported="" name="xwalk_core_library-10.39.235.16" level="project" />
   </component>
 </module>
 
