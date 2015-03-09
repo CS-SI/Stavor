@@ -305,6 +305,10 @@ function addMissionToDb(mission){
 	});
 }
 function onMissionEditorConfirm(){
+	var id = lastMissionEditorId;
+	if(id == global_missions.selected){
+		Dialog.showConfirmDialog("str_dialog_restart_simulator_title", "str_dialog_restart_simulator_message", function(){selectActiveMission();},function(){});
+	}
 	closeMissionEditor();
 	drawMissionsList();
 }
@@ -489,10 +493,6 @@ function saveMissionEditor(){
 
 function closeMissionEditor(){
 	if(global_menus.mission.isOpen){
-		var id = lastMissionEditorId;
-		if(id == global_missions.selected){
-			Dialog.showConfirmDialog("str_dialog_restart_simulator_title", "str_dialog_restart_simulator_message", function(){selectActiveMission();},function(){});
-		}
 		$( "#MissionEditorBackground" ).fadeOut( "fast", function() {
 			// Animation complete.
 		  });
