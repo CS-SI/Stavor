@@ -52,10 +52,18 @@ THREEx.Planets.createEarth	= function(){
 		specularMap	: textureEarthSpec,
 		specular	: new THREE.Color('grey'),
 	})
-	var mesh	= new THREE.Mesh(geometry, material)
+	var mesh	= new THREE.Mesh(geometry, material);
+	
+	mesh.receiveShadow	= true;
+	mesh.castShadow	= true;
+		
 	return mesh	
 }
+/*var earthPlanetMesh = THREEx.Planets.createEarth();
 
+THREEx.Planets.getEarthPlanet	= function(){
+	return earthPlanetMesh;
+}*/
 
 THREEx.Planets.createEarthCloud	= function(){
 	// create destination canvas
@@ -114,10 +122,10 @@ THREEx.Planets.createEarthCloud	= function(){
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh	
 }
-var meshEarthCloud = THREEx.Planets.createEarthCloud();
+/*var meshEarthCloud = THREEx.Planets.createEarthCloud();
 THREEx.Planets.getEarthCloud	= function(){
 	return meshEarthCloud;
-}
+}*/
 
 THREEx.Planets.createMoon	= function(){
 	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)

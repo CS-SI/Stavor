@@ -328,7 +328,7 @@ var Orbit = function()
 		containerEarth.add(moonMesh);
 		*/
 
-		var geometry	= new THREE.SphereGeometry(earth_radius, segments.earth_seg, segments.earth_seg);
+		/*var geometry	= new THREE.SphereGeometry(earth_radius, segments.earth_seg, segments.earth_seg);
 		var material	= new THREE.MeshPhongMaterial({
 			map		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthmap1k.jpg'),
 			bumpMap		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthbump1k.jpg'),
@@ -336,10 +336,11 @@ var Orbit = function()
 			specularMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthspec1k.jpg'),
 			specular	: new THREE.Color('grey'),
 		});
-		var earthMesh	= new THREE.Mesh(geometry, material);
+		var earthMesh	= new THREE.Mesh(geometry, material);*/
 		
-		earthMesh.receiveShadow	= true
-		earthMesh.castShadow	= true
+		var earthMesh = THREEx.Planets.createEarth();
+		
+		
 		earthMesh.name = "EARTH-PLANET";
 		containerEarth.add(earthMesh)
 		onRenderFcts.push(function(delta, now){
@@ -392,7 +393,7 @@ var Orbit = function()
 		}
 		
 		//Earth clouds
-		var earthCloud	= THREEx.Planets.getEarthCloud();
+		var earthCloud	= THREEx.Planets.createEarthCloud();
 		earthCloud.receiveShadow	= true;
 		earthCloud.castShadow	= true;
 		earthCloud.name = "EARTH-CLOUDS";
