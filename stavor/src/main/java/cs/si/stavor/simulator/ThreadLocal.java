@@ -1,7 +1,9 @@
 package cs.si.stavor.simulator;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.orekit.attitudes.AttitudeProvider;
+import org.orekit.attitudes.CelestialBodyPointed;
 import org.orekit.attitudes.InertialProvider;
 import org.orekit.attitudes.NadirPointing;
 import org.orekit.bodies.BodyShape;
@@ -221,8 +223,10 @@ public class ThreadLocal extends Thread{
                 attitudeProvider = new NadirPointing(earth);
                 break;
             case 2:
-                BodyShape sun = new OneAxisEllipsoid(Constants.SUN_RADIUS, 0,CelestialBodyFactory.getSun().getBodyOrientedFrame());
-                attitudeProvider = new NadirPointing(sun);
+                attitudeProvider = new CelestialBodyPointed(inertialFrame,CelestialBodyFactory.getSun(), Vector3D.PLUS_K, new Vector3D(0,0,1), new Vector3D(1,0,0));
+                break;
+            case 3:
+                attitudeProvider = new CelestialBodyPointed(inertialFrame,CelestialBodyFactory.getMoon(), Vector3D.PLUS_K, new Vector3D(0,0,1), new Vector3D(1,0,0));
                 break;
             default:
                 attitudeProvider = new InertialProvider(new Rotation(1.0,0.0,0.0,0.0, false));
