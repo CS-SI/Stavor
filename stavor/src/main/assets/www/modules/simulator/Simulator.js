@@ -150,6 +150,8 @@ Simulator.prototype.updateMissionState = function(json_state){
 	info_panel.orb_radius = state.orbit_radius;
 	info_panel.mass = state.mass;
 	info_panel.progress = state.progress;
+	info_panel.period = state.period;
+	info_panel.mean_anomaly = state.mean_anomaly;
 	
 	var spacecraft = global_simulation.results.spacecraft;
 	spacecraft.attitude = new THREE.Quaternion(
@@ -298,6 +300,8 @@ function updateInfoPanel(force){
 		var ip_accel = document.getElementById("IpAccel");
 		var ip_mass = document.getElementById("IpMass");
 		var ip_radius = document.getElementById("IpRadius");
+		var ip_period = document.getElementById("IpPeriod");
+		var ip_mean_anomaly = document.getElementById("IpMeanAnomaly");
 		
 		ip_roll.innerHTML = results.attitude.roll.toFixed(2)+"°";
 		ip_pitch.innerHTML = results.attitude.pitch.toFixed(2)+"°";
@@ -306,6 +310,28 @@ function updateInfoPanel(force){
 		ip_accel.innerHTML = results.acceleration.toFixed(2)+" Km/s2";
 		ip_mass.innerHTML = results.mass.toFixed(1)+" Kg";
 		ip_radius.innerHTML = results.orb_radius.toFixed(0)+" Km";
+		
+		ip_mean_anomaly.innerHTML = results.mean_anomaly.toFixed(0)+"º";
+		var period = results.period;
+		var period_units = " s";
+		if(period>60){
+			period = period / 60.0;
+			period_units = " m";
+		}
+		if(period>60){
+			period = period / 60.0;
+			period_units = " h";
+		}
+		if(period>24){
+			period = period / 24.0;
+			period_units = " d";
+		}
+		if(period>365){
+			period = period / 365.0;
+			period_units = " y";
+		}
+		ip_period.innerHTML = period.toFixed(1)+period_units;
+		
 	}
 }
 

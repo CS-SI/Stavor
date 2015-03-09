@@ -28,6 +28,8 @@ public class ModelState implements Serializable{
     public double roll = 0;// Rad
     public double pitch = 0;// Rad
     public double yaw = 0;// Rad
+    public double period = 0;// Seconds
+    public double mean_anomaly = 0;// Deg
 
     //Attitude
 	public Quat value_attitude = new Quat(new Rotation(1.0,0.0,0.0,0.0, false));

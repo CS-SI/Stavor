@@ -267,7 +267,7 @@ ol li{
 	}	
 	.InfoPanelOpened{
 		height: auto;
-		width: 550px;
+		width: 600px;
 	}
 }
 /* #### Landscape Tablet #### */
@@ -405,7 +405,7 @@ ol li{
     transition: all 0.5s ease;
 	
 	opacity:1.0;
-	font-size: 0.8em;
+	font-size: 0.7em;
 	
 	
 	/*

@@ -191,7 +191,9 @@ var global_simulation = {
 			velocity: 0,
 			acceleration: 0,
 			orb_radius: 0,
-			mass: 0
+			mass: 0,
+			period: 0,
+			mean_anomaly: 0
 		},
 		spacecraft:{
 			attitude: new THREE.Quaternion(0,0,0,1),			

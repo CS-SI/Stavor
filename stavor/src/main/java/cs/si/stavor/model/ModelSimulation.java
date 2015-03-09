@@ -213,6 +213,8 @@ public class ModelSimulation {
         new_state.yaw = angles[2]*180/Math.PI;
 
         new_state.mass = scs.getMass();
+        new_state.period = scs.getKeplerianPeriod();
+        new_state.mean_anomaly = Math.toDegrees(scs.getLM());
 
         //Orbit
         if(visualization.equals(Visualizations.ORBIT)) {
