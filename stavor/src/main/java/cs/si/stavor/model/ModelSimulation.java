@@ -156,7 +156,8 @@ public class ModelSimulation {
             new_state.value_earth[2] = earth.getZ() / 1000;
 
             try {
-                Vector3D sun = scs.getPVCoordinates(sunFrame).getPosition().negate();
+                //Vector3D sun = scs.getPVCoordinates(sunFrame).getPosition().negate();
+                Vector3D sun = CelestialBodyFactory.getSun().getPVCoordinates(scs.getDate(),scs.getFrame()).getPosition();
 
                 new_state.value_sun[0] = sun.getX() / 1000;
                 new_state.value_sun[1] = sun.getY() / 1000;
