@@ -283,9 +283,17 @@ function updateOrbitOption(id,val){
 					break;
 				case "opt-orb-ShowXyPlane":
 					global_simulation.config.orbit.show_xy_plane = val;
+					//Prevent reinit scene
+					saveStoredVariables();
+					setOrbitReloaded();
+					return;
 					break;
 				case "opt-orb-PlaneXyColor":
 					global_simulation.config.orbit.color_xy_plane = val;
+					//Prevent reinit scene
+					saveStoredVariables();
+					setOrbitReloaded();
+					return;
 					break;
 				case "opt-orb-ShowSpacecraft":
 					global_simulation.config.orbit.show_spacecraft = val;

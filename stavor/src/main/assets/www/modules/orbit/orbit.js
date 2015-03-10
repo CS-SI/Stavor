@@ -255,66 +255,73 @@ var Orbit = function()
 		//////////////////////////////////////////////////////////////////////////////////
 		//		Projection						//
 		//////////////////////////////////////////////////////////////////////////////////
-			var lineGeometry = new THREE.Geometry();
-			var vertArray = lineGeometry.vertices;
-			vertArray.push( new THREE.Vector3(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z), new THREE.Vector3(0, 0, 0) );
-			lineGeometry.computeLineDistances();
-			var lineMaterial = new THREE.LineDashedMaterial( { color: config.spacecraft_color, dashSize: 0.02, gapSize: 0.04 } );
-			projection = new THREE.Line( lineGeometry, lineMaterial );
-			projection.name = "PROJECTION";
-			scene.add(projection);
-			projection_init = true;
-			onRenderFcts.push(function(delta, now){
-				projection.visible = config.show_projection;
-				if(projection.visible){
-					if("#"+projection.material.color.getHexString() != config.spacecraft_color){
-						projection.material.color.setHex(parseInt("0x"+config.spacecraft_color.substr(1,config.spacecraft_color.length)));
-					}
-					projection.geometry.vertices[0].set(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z);
-					projection.geometry.computeLineDistances();
-					projection.geometry.verticesNeedUpdate = true;
+		var lineGeometry = new THREE.Geometry();
+		var vertArray = lineGeometry.vertices;
+		vertArray.push( new THREE.Vector3(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z), new THREE.Vector3(0, 0, 0) );
+		lineGeometry.computeLineDistances();
+		var lineMaterial = new THREE.LineDashedMaterial( { color: config.spacecraft_color, dashSize: 0.02, gapSize: 0.04 } );
+		projection = new THREE.Line( lineGeometry, lineMaterial );
+		projection.name = "PROJECTION";
+		scene.add(projection);
+		projection_init = true;
+		onRenderFcts.push(function(delta, now){
+			projection.visible = config.show_projection;
+			if(projection.visible){
+				if("#"+projection.material.color.getHexString() != config.spacecraft_color){
+					projection.material.color.setHex(parseInt("0x"+config.spacecraft_color.substr(1,config.spacecraft_color.length)));
 				}
-			});
+				projection.geometry.vertices[0].set(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z);
+				projection.geometry.computeLineDistances();
+				projection.geometry.verticesNeedUpdate = true;
+			}
+		});
 	}
 
 	function setXYplane()
 	{
-		if(config.show_xy_plane){
-			// points that define shape
-			var pts = [], hls = [];
-			var radius = planes_radius;
-			var radius_ext = planes_width;
+		// points that define shape
+		var pts = [], hls = [];
+		var radius = planes_radius;
+		var radius_ext = planes_width;
 
-			for ( i = 0; i < segments.plane_resolution; i ++ ) {
-				var a = 2*Math.PI * i / segments.plane_resolution;
-				pts.push( new THREE.Vector2 ( Math.cos( a ) * radius_ext, Math.sin( a ) * radius_ext ) );
-				hls.push( new THREE.Vector2 ( Math.cos( a ) * radius, Math.sin( a ) * radius ) );
-			}
-
-			// shape to extrude
-			var shape = new THREE.Shape( pts );
-			var holesPath = new THREE.Path(hls);
-			shape.holes.push(holesPath);
-
-			// extrude options
-			var options = { 
-				amount: 0.01,              // default 100, only used when path is null
-				bevelEnabled: false, 
-				bevelSegments: 2, 
-				steps: 1,                // default 1, try 3 if path defined
-				extrudePath: null        // or path
-			};
-
-			// geometry
-			var geometry = new THREE.ExtrudeGeometry( shape, options );
-
-			// mesh
-			var plane_xy = new THREE.Mesh( 
-				geometry, 
-				new THREE.MeshBasicMaterial( { color: config.color_xy_plane, transparent: true, opacity: 0.2 } )
-			);
-			scene.add( plane_xy );
+		for ( i = 0; i < segments.plane_resolution; i ++ ) {
+			var a = 2*Math.PI * i / segments.plane_resolution;
+			pts.push( new THREE.Vector2 ( Math.cos( a ) * radius_ext, Math.sin( a ) * radius_ext ) );
+			hls.push( new THREE.Vector2 ( Math.cos( a ) * radius, Math.sin( a ) * radius ) );
 		}
+
+		// shape to extrude
+		var shape = new THREE.Shape( pts );
+		var holesPath = new THREE.Path(hls);
+		shape.holes.push(holesPath);
+
+		// extrude options
+		var options = { 
+			amount: 0.01,              // default 100, only used when path is null
+			bevelEnabled: false, 
+			bevelSegments: 2, 
+			steps: 1,                // default 1, try 3 if path defined
+			extrudePath: null        // or path
+		};
+
+		// geometry
+		var geometry = new THREE.ExtrudeGeometry( shape, options );
+
+		// mesh
+		var plane_xy = new THREE.Mesh( 
+			geometry, 
+			new THREE.MeshBasicMaterial( { color: config.color_xy_plane, transparent: true, opacity: 0.2 } )
+		);
+		scene.add( plane_xy );
+		
+		onRenderFcts.push(function(delta, now){
+			plane_xy.visible = config.show_xy_plane;
+			if(plane_xy.visible){
+				if("#"+plane_xy.material.color.getHexString() != config.color_xy_plane){
+					plane_xy.material.color.setHex(parseInt("0x"+config.color_xy_plane.substr(1,config.color_xy_plane.length)));
+				}
+			}
+		});
 	}
 
 	function includeEarth()
@@ -327,33 +334,7 @@ var Orbit = function()
 		containerEarth.name = "EARTH";
 		scene.add(containerEarth);
 		
-		/*
-		var geometry	= new THREE.SphereGeometry(1737000*dist_scale, 32, 32);
-		var material	= new THREE.MeshPhongMaterial({
-			map	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/moonmap1k.jpg'),
-			bumpMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/moonbump1k.jpg'),
-			bumpScale: 0.002,
-		});
-		var moonMesh	= new THREE.Mesh(geometry, material);
-		moonMesh.position.set(384400000*dist_scale,0.5,0.5);
-		moonMesh.scale.multiplyScalar(1/5);
-		moonMesh.receiveShadow	= true;
-		moonMesh.castShadow	= true;
-		containerEarth.add(moonMesh);
-		*/
-
-		/*var geometry	= new THREE.SphereGeometry(earth_radius, segments.earth_seg, segments.earth_seg);
-		var material	= new THREE.MeshPhongMaterial({
-			map		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthmap1k.jpg'),
-			bumpMap		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthbump1k.jpg'),
-			bumpScale	: 0.05,
-			specularMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'www/modules/orbit/textures/earthspec1k.jpg'),
-			specular	: new THREE.Color('grey'),
-		});
-		var earthMesh	= new THREE.Mesh(geometry, material);*/
-		
 		var earthMesh = THREEx.Planets.createEarth();
-		
 		
 		earthMesh.name = "EARTH-PLANET";
 		containerEarth.add(earthMesh)
