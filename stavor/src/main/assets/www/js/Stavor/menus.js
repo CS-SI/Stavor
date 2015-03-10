@@ -159,52 +159,54 @@ function switchMapMenu(){
 function updateMapOption(id,val){
 	if(val != "" || typeof val == "boolean"){
 		setMapReloading();
-		switch(id) {
-			case "opt-map-ShowFov":
-				global_simulation.config.map.show_fov = val;
-				break;
-			case "opt-map-ShowTrack":
-				global_simulation.config.map.show_track = val;
-				break;
-			case "opt-map-ShowSunIcon":
-				global_simulation.config.map.show_sun_icon = val;
-				break;
-			case "opt-map-ShowSunTerminator":
-				global_simulation.config.map.show_sun_terminator = val;
-				break;
-			case "opt-map-ApertureAngle":
-				global_simulation.config.map.fov.aperture_angle = val;
-				global_simulator.sendSimulatorConfiguration();
-				break;
-			case "opt-map-DirectionX":
-				if(val == 0 && global_simulation.config.map.fov.direction.y == 0 && global_simulation.config.map.fov.direction.z == 0){
-					Dialog.showDialog("str_dialog_sensor_direction_title", "str_dialog_sensor_direction_message", function(){updateMapOptions();});
-				}else{
-					global_simulation.config.map.fov.direction.x = val;
+		setTimeout(function(){
+			switch(id) {
+				case "opt-map-ShowFov":
+					global_simulation.config.map.show_fov = val;
+					break;
+				case "opt-map-ShowTrack":
+					global_simulation.config.map.show_track = val;
+					break;
+				case "opt-map-ShowSunIcon":
+					global_simulation.config.map.show_sun_icon = val;
+					break;
+				case "opt-map-ShowSunTerminator":
+					global_simulation.config.map.show_sun_terminator = val;
+					break;
+				case "opt-map-ApertureAngle":
+					global_simulation.config.map.fov.aperture_angle = val;
 					global_simulator.sendSimulatorConfiguration();
-				}
-				break;
-			case "opt-map-DirectionY":
-				if(val == 0 && global_simulation.config.map.fov.direction.x == 0 && global_simulation.config.map.fov.direction.z == 0){
-					Dialog.showDialog("str_dialog_sensor_direction_title", "str_dialog_sensor_direction_message", function(){updateMapOptions();});
-				}else{
-					global_simulation.config.map.fov.direction.y = val;
-					global_simulator.sendSimulatorConfiguration();
-				}
-				break;
-			case "opt-map-DirectionZ":
-				if(val == 0 && global_simulation.config.map.fov.direction.x == 0 && global_simulation.config.map.fov.direction.y == 0){
-					Dialog.showDialog("str_dialog_sensor_direction_title", "str_dialog_sensor_direction_message", function(){updateMapOptions();});
-				}else{
-					global_simulation.config.map.fov.direction.z = val;
-					global_simulator.sendSimulatorConfiguration();
-				}
-				break;
-			default:
-		}
-		global_map.stopAnimation();
-		global_map = new Map();
-		saveStoredVariables();
+					break;
+				case "opt-map-DirectionX":
+					if(val == 0 && global_simulation.config.map.fov.direction.y == 0 && global_simulation.config.map.fov.direction.z == 0){
+						Dialog.showDialog("str_dialog_sensor_direction_title", "str_dialog_sensor_direction_message", function(){updateMapOptions();});
+					}else{
+						global_simulation.config.map.fov.direction.x = val;
+						global_simulator.sendSimulatorConfiguration();
+					}
+					break;
+				case "opt-map-DirectionY":
+					if(val == 0 && global_simulation.config.map.fov.direction.x == 0 && global_simulation.config.map.fov.direction.z == 0){
+						Dialog.showDialog("str_dialog_sensor_direction_title", "str_dialog_sensor_direction_message", function(){updateMapOptions();});
+					}else{
+						global_simulation.config.map.fov.direction.y = val;
+						global_simulator.sendSimulatorConfiguration();
+					}
+					break;
+				case "opt-map-DirectionZ":
+					if(val == 0 && global_simulation.config.map.fov.direction.x == 0 && global_simulation.config.map.fov.direction.y == 0){
+						Dialog.showDialog("str_dialog_sensor_direction_title", "str_dialog_sensor_direction_message", function(){updateMapOptions();});
+					}else{
+						global_simulation.config.map.fov.direction.z = val;
+						global_simulator.sendSimulatorConfiguration();
+					}
+					break;
+				default:
+			}
+			global_map.stopAnimation();
+			global_map = new Map();
+			saveStoredVariables();
+		},0);
 	}else{
 		updateMapOptions();
 	}
@@ -237,99 +239,101 @@ function switchOrbitMenu(){
 function updateOrbitOption(id,val){
 	if(val != "" || typeof val == "boolean"){
 		setOrbitReloading();
-		switch(id) {
-			case "opt-orb-ShowSky":
-				global_simulation.config.orbit.show_sky = val;
-				break;
-			case "opt-orb-ShowAxis":
-				global_simulation.config.orbit.show_axis = val;
-				break;
-			case "opt-orb-ShowAxisLabels":
-				global_simulation.config.orbit.show_axis_labels = val;
-				break;
-			case "opt-orb-ShowEarthModel":
-				global_simulation.config.orbit.show_earth = val;
-				if(!val){
+		setTimeout(function(){
+			switch(id) {
+				case "opt-orb-ShowSky":
+					global_simulation.config.orbit.show_sky = val;
+					break;
+				case "opt-orb-ShowAxis":
+					global_simulation.config.orbit.show_axis = val;
+					break;
+				case "opt-orb-ShowAxisLabels":
+					global_simulation.config.orbit.show_axis_labels = val;
+					break;
+				case "opt-orb-ShowEarthModel":
+					global_simulation.config.orbit.show_earth = val;
+					if(!val){
+						global_simulation.config.orbit.show_earth_axis = val;
+						global_simulation.config.orbit.show_earth_atmosphere = val;
+						global_simulation.config.orbit.show_earth_clouds = val;
+						updateOrbitOptions();
+					}
+					break;
+				case "opt-orb-ShowEarthAxis":
 					global_simulation.config.orbit.show_earth_axis = val;
+					if(val){
+						global_simulation.config.orbit.show_earth = val;
+						updateOrbitOptions();
+					}
+					break;
+				case "opt-orb-ShowEarthAtmosphere":
 					global_simulation.config.orbit.show_earth_atmosphere = val;
+					if(val){
+						global_simulation.config.orbit.show_earth = val;
+						updateOrbitOptions();
+					}
+					break;
+				case "opt-orb-ShowEarthClouds":
 					global_simulation.config.orbit.show_earth_clouds = val;
-					updateOrbitOptions();
-				}
-				break;
-			case "opt-orb-ShowEarthAxis":
-				global_simulation.config.orbit.show_earth_axis = val;
-				if(val){
-					global_simulation.config.orbit.show_earth = val;
-					updateOrbitOptions();
-				}
-				break;
-			case "opt-orb-ShowEarthAtmosphere":
-				global_simulation.config.orbit.show_earth_atmosphere = val;
-				if(val){
-					global_simulation.config.orbit.show_earth = val;
-					updateOrbitOptions();
-				}
-				break;
-			case "opt-orb-ShowEarthClouds":
-				global_simulation.config.orbit.show_earth_clouds = val;
-				if(val){
-					global_simulation.config.orbit.show_earth = val;
-					updateOrbitOptions();
-				}
-				break;
-			case "opt-orb-ShowXyPlane":
-				global_simulation.config.orbit.show_xy_plane = val;
-				break;
-			case "opt-orb-PlaneXyColor":
-				global_simulation.config.orbit.color_xy_plane = val;
-				break;
-			case "opt-orb-ShowSpacecraft":
-				global_simulation.config.orbit.show_spacecraft = val;
-				break;
-			case "opt-orb-SpacecraftColor":
-				global_simulation.config.orbit.spacecraft_color = val;
-				break;
-			case "opt-orb-ShowProjection":
-				global_simulation.config.orbit.show_projection = val;
-				break;
-			case "opt-orb-OrbitColor":
-				global_simulation.config.orbit.orbit_color = val;
-				break;
-			case "opt-orb-ShowRefOrbit":
-				global_simulation.config.orbit.ref_orbit.show = val;
-				break;
-			case "opt-orb-RefOrbitColor":
-				global_simulation.config.orbit.ref_orbit.color = val;
-				break;
-			case "opt-orb-RefOrbit-a":
-				global_simulation.config.orbit.ref_orbit.a = val;
-				break;
-			case "opt-orb-RefOrbit-e":
-				global_simulation.config.orbit.ref_orbit.e = val;
-				break;
-			case "opt-orb-RefOrbit-i":
-				global_simulation.config.orbit.ref_orbit.i = val;
-				if(!global_angle_in_rads){
-					global_simulation.config.orbit.ref_orbit.i = global_simulation.config.orbit.ref_orbit.i * Math.PI / 180.0;
-				}
-				break;
-			case "opt-orb-RefOrbit-omega":
-				global_simulation.config.orbit.ref_orbit.w = val;
-				if(!global_angle_in_rads){
-					global_simulation.config.orbit.ref_orbit.w = global_simulation.config.orbit.ref_orbit.w * Math.PI / 180.0;
-				}
-				break;
-			case "opt-orb-RefOrbit-raan":
-				global_simulation.config.orbit.ref_orbit.raan = val;
-				if(!global_angle_in_rads){
-					global_simulation.config.orbit.ref_orbit.raan = global_simulation.config.orbit.ref_orbit.raan * Math.PI / 180.0;
-				}
-				break;
-			default:
-		}
-		global_orbit.stopAnimation();
-		global_orbit = new Orbit();
-		saveStoredVariables();
+					if(val){
+						global_simulation.config.orbit.show_earth = val;
+						updateOrbitOptions();
+					}
+					break;
+				case "opt-orb-ShowXyPlane":
+					global_simulation.config.orbit.show_xy_plane = val;
+					break;
+				case "opt-orb-PlaneXyColor":
+					global_simulation.config.orbit.color_xy_plane = val;
+					break;
+				case "opt-orb-ShowSpacecraft":
+					global_simulation.config.orbit.show_spacecraft = val;
+					break;
+				case "opt-orb-SpacecraftColor":
+					global_simulation.config.orbit.spacecraft_color = val;
+					break;
+				case "opt-orb-ShowProjection":
+					global_simulation.config.orbit.show_projection = val;
+					break;
+				case "opt-orb-OrbitColor":
+					global_simulation.config.orbit.orbit_color = val;
+					break;
+				case "opt-orb-ShowRefOrbit":
+					global_simulation.config.orbit.ref_orbit.show = val;
+					break;
+				case "opt-orb-RefOrbitColor":
+					global_simulation.config.orbit.ref_orbit.color = val;
+					break;
+				case "opt-orb-RefOrbit-a":
+					global_simulation.config.orbit.ref_orbit.a = val;
+					break;
+				case "opt-orb-RefOrbit-e":
+					global_simulation.config.orbit.ref_orbit.e = val;
+					break;
+				case "opt-orb-RefOrbit-i":
+					global_simulation.config.orbit.ref_orbit.i = val;
+					if(!global_angle_in_rads){
+						global_simulation.config.orbit.ref_orbit.i = global_simulation.config.orbit.ref_orbit.i * Math.PI / 180.0;
+					}
+					break;
+				case "opt-orb-RefOrbit-omega":
+					global_simulation.config.orbit.ref_orbit.w = val;
+					if(!global_angle_in_rads){
+						global_simulation.config.orbit.ref_orbit.w = global_simulation.config.orbit.ref_orbit.w * Math.PI / 180.0;
+					}
+					break;
+				case "opt-orb-RefOrbit-raan":
+					global_simulation.config.orbit.ref_orbit.raan = val;
+					if(!global_angle_in_rads){
+						global_simulation.config.orbit.ref_orbit.raan = global_simulation.config.orbit.ref_orbit.raan * Math.PI / 180.0;
+					}
+					break;
+				default:
+			}
+			global_orbit.stopAnimation();
+			global_orbit = new Orbit();
+			saveStoredVariables();
+		},0);
 	}else{
 		updateOrbitOptions();
 	}
@@ -420,232 +424,234 @@ function switchAttitudeMenu(){
 function updateAttitudeOption(id,val){
 	if(val != "" || typeof val == "boolean"){
 		setAttitudeReloading();
-		switch(id) {
-			//Models
-			case "opt-att-ShowSky":
-				global_simulation.config.attitude.show_sky = val;
-				break;
-			case "opt-att-ShowAxis":
-				global_simulation.config.attitude.show_axis = val;
-				break;
-			case "opt-att-ShowAxisLabels":
-				global_simulation.config.attitude.show_axis_labels = val;
-				break;
-			case "opt-att-ShowSphere":
-				global_simulation.config.attitude.show_sphere = val;
-				break;
-			case "opt-att-ShowMiniSpheres":
-				global_simulation.config.attitude.show_mini_spheres = val;
-				break;
-			case "opt-att-ShowCircles":
-				global_simulation.config.attitude.show_circles = val;
-				break;
-			case "opt-att-ShowScAxis":
-				global_simulation.config.attitude.show_sc_axis = val;
-				break;
-			case "opt-att-ShowEngineTexture":
-				global_simulation.config.attitude.sc_show_eng_texture = val;
-				break;
-			case "opt-att-ShowSunModel":
-				global_simulation.config.attitude.show_sun = val;
-				if(!val){
+		setTimeout(function(){
+			switch(id) {
+				//Models
+				case "opt-att-ShowSky":
+					global_simulation.config.attitude.show_sky = val;
+					break;
+				case "opt-att-ShowAxis":
+					global_simulation.config.attitude.show_axis = val;
+					break;
+				case "opt-att-ShowAxisLabels":
+					global_simulation.config.attitude.show_axis_labels = val;
+					break;
+				case "opt-att-ShowSphere":
+					global_simulation.config.attitude.show_sphere = val;
+					break;
+				case "opt-att-ShowMiniSpheres":
+					global_simulation.config.attitude.show_mini_spheres = val;
+					break;
+				case "opt-att-ShowCircles":
+					global_simulation.config.attitude.show_circles = val;
+					break;
+				case "opt-att-ShowScAxis":
+					global_simulation.config.attitude.show_sc_axis = val;
+					break;
+				case "opt-att-ShowEngineTexture":
+					global_simulation.config.attitude.sc_show_eng_texture = val;
+					break;
+				case "opt-att-ShowSunModel":
+					global_simulation.config.attitude.show_sun = val;
+					if(!val){
+						global_simulation.config.attitude.show_sun_texture = val;
+						global_simulation.config.attitude.sun_rotates = val;
+						global_simulation.config.attitude.sun_show_line = val;
+						global_simulation.config.attitude.sun_show_dist = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-ShowSunSurface":
 					global_simulation.config.attitude.show_sun_texture = val;
+					if(val){
+						global_simulation.config.attitude.show_sun = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-SunRotates":
 					global_simulation.config.attitude.sun_rotates = val;
+					if(val){
+						global_simulation.config.attitude.show_sun = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-SunRotationSpeed":
+					global_simulation.config.attitude.sun_rotation_speed = val;
+					break;
+				case "opt-att-ShowSunLine":
 					global_simulation.config.attitude.sun_show_line = val;
+					if(val){
+						global_simulation.config.attitude.show_sun = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-ShowSunDistance":
 					global_simulation.config.attitude.sun_show_dist = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-ShowSunSurface":
-				global_simulation.config.attitude.show_sun_texture = val;
-				if(val){
-					global_simulation.config.attitude.show_sun = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-SunRotates":
-				global_simulation.config.attitude.sun_rotates = val;
-				if(val){
-					global_simulation.config.attitude.show_sun = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-SunRotationSpeed":
-				global_simulation.config.attitude.sun_rotation_speed = val;
-				break;
-			case "opt-att-ShowSunLine":
-				global_simulation.config.attitude.sun_show_line = val;
-				if(val){
-					global_simulation.config.attitude.show_sun = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-ShowSunDistance":
-				global_simulation.config.attitude.sun_show_dist = val;
-				if(val){
-					global_simulation.config.attitude.show_sun = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-ShowEarthModel":
-				global_simulation.config.attitude.show_earth = val;
-				if(!val){
+					if(val){
+						global_simulation.config.attitude.show_sun = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-ShowEarthModel":
+					global_simulation.config.attitude.show_earth = val;
+					if(!val){
+						global_simulation.config.attitude.show_earth_texture = val;
+						global_simulation.config.attitude.earth_rotates = val;
+						global_simulation.config.attitude.earth_show_line = val;
+						global_simulation.config.attitude.earth_show_dist = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-ShowEarthSurface":
 					global_simulation.config.attitude.show_earth_texture = val;
+					if(val){
+						global_simulation.config.attitude.show_earth = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-EarthRotates":
 					global_simulation.config.attitude.earth_rotates = val;
+					if(val){
+						global_simulation.config.attitude.show_earth = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-EarthRotationSpeed":
+					global_simulation.config.attitude.earth_rotation_speed = val;
+					break;
+				case "opt-att-ShowEarthLine":
 					global_simulation.config.attitude.earth_show_line = val;
+					if(val){
+						global_simulation.config.attitude.show_earth = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-ShowEarthDistance":
 					global_simulation.config.attitude.earth_show_dist = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-ShowEarthSurface":
-				global_simulation.config.attitude.show_earth_texture = val;
-				if(val){
-					global_simulation.config.attitude.show_earth = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-EarthRotates":
-				global_simulation.config.attitude.earth_rotates = val;
-				if(val){
-					global_simulation.config.attitude.show_earth = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-EarthRotationSpeed":
-				global_simulation.config.attitude.earth_rotation_speed = val;
-				break;
-			case "opt-att-ShowEarthLine":
-				global_simulation.config.attitude.earth_show_line = val;
-				if(val){
-					global_simulation.config.attitude.show_earth = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-ShowEarthDistance":
-				global_simulation.config.attitude.earth_show_dist = val;
-				if(val){
-					global_simulation.config.attitude.show_earth = val;
-					updateAttitudeOptions();
-				}
-				break;
-			//Measures	
-			case "opt-att-ShowOrbitalPlane":
-				global_simulation.config.attitude.show_orbital_plane = val;
-				if(!val){
-					global_simulation.config.attitude.show_inclination = val;
-					updateAttitudeOptions();
-				}
-				break;
-			case "opt-att-ShowInclination":
-				global_simulation.config.attitude.show_inclination = val;
-				if(val){
+					if(val){
+						global_simulation.config.attitude.show_earth = val;
+						updateAttitudeOptions();
+					}
+					break;
+				//Measures	
+				case "opt-att-ShowOrbitalPlane":
 					global_simulation.config.attitude.show_orbital_plane = val;
-					updateAttitudeOptions();
-				}
-				break;
-			/*case "opt-att-ShowEarthPlane":
-				global_simulation.config.attitude.show_planes = val;
-				break;*/
-			case "opt-att-RotationPlaneColor":
-				global_simulation.config.attitude.plane_xy_color = val;
-				break;
-			case "opt-att-OrbitalPlaneColor":
-				global_simulation.config.attitude.plane_orb_color = val;
-				break;
-			case "opt-att-ShowSphericCoordinates":
-				global_simulation.config.attitude.show_spheric_coords = val;
-				break;
-			case "opt-att-SphericCoordsSelection":
-				global_simulation.config.attitude.spheric_coords_selection = Number(val);
-				break;
-			case "opt-att-ShowVectorsAngle":
-				global_simulation.config.attitude.show_vectors_angle = val;
-				break;
-			case "opt-att-AnglesSelection1":
-				global_simulation.config.attitude.vectors_angle_sel1 = Number(val);
-				break;
-			case "opt-att-AnglesSelection2":
-				global_simulation.config.attitude.vectors_angle_sel2 = Number(val);
-				break;
-			
-			//Indicators
-			case "opt-att-ShowVelocity":
-				global_simulation.config.attitude.show_velocity = val;
-				break;
-			case "opt-att-LimitVelocity":
-				global_simulation.config.attitude.limit_velocity = val;
-				break;
-			case "opt-att-VelocityColor":
-				global_simulation.config.attitude.color_velocity = val;
-				break;
-			case "opt-att-ShowAcceleration":
-				global_simulation.config.attitude.show_acceleration = val;
-				break;
-			case "opt-att-LimitAcceleration":
-				global_simulation.config.attitude.limit_acceleration = val;
-				break;
-			case "opt-att-AccelerationColor":
-				global_simulation.config.attitude.color_acceleration = val;
-				break;
-			case "opt-att-ShowMomentum":
-				global_simulation.config.attitude.show_momentum = val;
-				break;
-			case "opt-att-MomentumColor":
-				global_simulation.config.attitude.color_momentum = val;
-				break;
-			case "opt-att-ShowTarget":
-				global_simulation.config.attitude.show_target_a = val;
-				break;
-			case "opt-att-TargetValueX":
-				global_simulation.config.attitude.value_target_a.setX(val);
-				break;
-			case "opt-att-TargetValueY":
-				global_simulation.config.attitude.value_target_a.setY(val);
-				break;
-			case "opt-att-TargetValueZ":
-				global_simulation.config.attitude.value_target_a.setZ(val);
-				break;
-			case "opt-att-TargetColor":
-				global_simulation.config.attitude.color_target_a = val;
-				break;
-			case "opt-att-ShowVector":
-				global_simulation.config.attitude.show_vector_a = val;
-				break;
-			case "opt-att-LimitVector":
-				global_simulation.config.attitude.limit_vector_a = val;
-				break;
-			case "opt-att-VectorValueX":
-				global_simulation.config.attitude.value_vector_a.setX(val);
-				break;
-			case "opt-att-VectorValueY":
-				global_simulation.config.attitude.value_vector_a.setY(val);
-				break;
-			case "opt-att-VectorValueZ":
-				global_simulation.config.attitude.value_vector_a.setZ(val);
-				break;
-			case "opt-att-VectorColor":
-				global_simulation.config.attitude.color_vector_a = val;
-				break;
-			case "opt-att-ShowDirection":
-				global_simulation.config.attitude.show_direction_a = val;
-				break;
-			case "opt-att-DirectionValueX":
-				global_simulation.config.attitude.value_direction_a.setX(val);
-				break;
-			case "opt-att-DirectionValueY":
-				global_simulation.config.attitude.value_direction_a.setY(val);
-				break;
-			case "opt-att-DirectionValueZ":
-				global_simulation.config.attitude.value_direction_a.setZ(val);
-				break;
-			case "opt-att-color_direction_a":
-				global_simulation.config.attitude.spheric_coords_selection = val;
-				break;
-			default:
-		}
-		global_attitude.stopAnimation();
-		global_attitude = new Attitude();
-		saveStoredVariables();
+					if(!val){
+						global_simulation.config.attitude.show_inclination = val;
+						updateAttitudeOptions();
+					}
+					break;
+				case "opt-att-ShowInclination":
+					global_simulation.config.attitude.show_inclination = val;
+					if(val){
+						global_simulation.config.attitude.show_orbital_plane = val;
+						updateAttitudeOptions();
+					}
+					break;
+				/*case "opt-att-ShowEarthPlane":
+					global_simulation.config.attitude.show_planes = val;
+					break;*/
+				case "opt-att-RotationPlaneColor":
+					global_simulation.config.attitude.plane_xy_color = val;
+					break;
+				case "opt-att-OrbitalPlaneColor":
+					global_simulation.config.attitude.plane_orb_color = val;
+					break;
+				case "opt-att-ShowSphericCoordinates":
+					global_simulation.config.attitude.show_spheric_coords = val;
+					break;
+				case "opt-att-SphericCoordsSelection":
+					global_simulation.config.attitude.spheric_coords_selection = Number(val);
+					break;
+				case "opt-att-ShowVectorsAngle":
+					global_simulation.config.attitude.show_vectors_angle = val;
+					break;
+				case "opt-att-AnglesSelection1":
+					global_simulation.config.attitude.vectors_angle_sel1 = Number(val);
+					break;
+				case "opt-att-AnglesSelection2":
+					global_simulation.config.attitude.vectors_angle_sel2 = Number(val);
+					break;
+				
+				//Indicators
+				case "opt-att-ShowVelocity":
+					global_simulation.config.attitude.show_velocity = val;
+					break;
+				case "opt-att-LimitVelocity":
+					global_simulation.config.attitude.limit_velocity = val;
+					break;
+				case "opt-att-VelocityColor":
+					global_simulation.config.attitude.color_velocity = val;
+					break;
+				case "opt-att-ShowAcceleration":
+					global_simulation.config.attitude.show_acceleration = val;
+					break;
+				case "opt-att-LimitAcceleration":
+					global_simulation.config.attitude.limit_acceleration = val;
+					break;
+				case "opt-att-AccelerationColor":
+					global_simulation.config.attitude.color_acceleration = val;
+					break;
+				case "opt-att-ShowMomentum":
+					global_simulation.config.attitude.show_momentum = val;
+					break;
+				case "opt-att-MomentumColor":
+					global_simulation.config.attitude.color_momentum = val;
+					break;
+				case "opt-att-ShowTarget":
+					global_simulation.config.attitude.show_target_a = val;
+					break;
+				case "opt-att-TargetValueX":
+					global_simulation.config.attitude.value_target_a.setX(val);
+					break;
+				case "opt-att-TargetValueY":
+					global_simulation.config.attitude.value_target_a.setY(val);
+					break;
+				case "opt-att-TargetValueZ":
+					global_simulation.config.attitude.value_target_a.setZ(val);
+					break;
+				case "opt-att-TargetColor":
+					global_simulation.config.attitude.color_target_a = val;
+					break;
+				case "opt-att-ShowVector":
+					global_simulation.config.attitude.show_vector_a = val;
+					break;
+				case "opt-att-LimitVector":
+					global_simulation.config.attitude.limit_vector_a = val;
+					break;
+				case "opt-att-VectorValueX":
+					global_simulation.config.attitude.value_vector_a.setX(val);
+					break;
+				case "opt-att-VectorValueY":
+					global_simulation.config.attitude.value_vector_a.setY(val);
+					break;
+				case "opt-att-VectorValueZ":
+					global_simulation.config.attitude.value_vector_a.setZ(val);
+					break;
+				case "opt-att-VectorColor":
+					global_simulation.config.attitude.color_vector_a = val;
+					break;
+				case "opt-att-ShowDirection":
+					global_simulation.config.attitude.show_direction_a = val;
+					break;
+				case "opt-att-DirectionValueX":
+					global_simulation.config.attitude.value_direction_a.setX(val);
+					break;
+				case "opt-att-DirectionValueY":
+					global_simulation.config.attitude.value_direction_a.setY(val);
+					break;
+				case "opt-att-DirectionValueZ":
+					global_simulation.config.attitude.value_direction_a.setZ(val);
+					break;
+				case "opt-att-color_direction_a":
+					global_simulation.config.attitude.spheric_coords_selection = val;
+					break;
+				default:
+			}
+			global_attitude.stopAnimation();
+			global_attitude = new Attitude();
+			saveStoredVariables();
+		},0);
 	}else{
 		updateAttitudeOptions();
 	}
@@ -722,22 +728,25 @@ function updateAttitudeOptions(){
 }
 function updateGlobalOption(id,val){
 	if(val != "" || typeof val == "boolean"){
-		switch(id) {
-			case "opt-glo-ShowFps":
-				global_simulation.config.global.show_fps = val;		
-				break;
-			case "opt-glo-PerformanceLevel":
-				global_simulation.config.global.performance_level = Number(val);
-				setPerformanceLevel();
-				break;
-			default:
-		}	
-		/*global_orbit.stopAnimation();
-		global_orbit = new Orbit();
-		global_attitude.stopAnimation();
-		global_attitude = new Attitude();*/
-		saveStoredVariables();
-		window.location.reload();
+		setGlobalReloading();
+		setTimeout(function(){
+			switch(id) {
+				case "opt-glo-ShowFps":
+					global_simulation.config.global.show_fps = val;		
+					break;
+				case "opt-glo-PerformanceLevel":
+					global_simulation.config.global.performance_level = Number(val);
+					setPerformanceLevel();
+					break;
+				default:
+			}	
+			/*global_orbit.stopAnimation();
+			global_orbit = new Orbit();
+			global_attitude.stopAnimation();
+			global_attitude = new Attitude();*/
+			saveStoredVariables();
+			window.location.reload();
+		},0);
 	}else{
 		initializeGlobalMenu();
 	}
@@ -746,4 +755,53 @@ function initializeGlobalMenu(){
 
 	document.getElementById("opt-glo-ShowFps").checked = global_simulation.config.global.show_fps;
 	document.getElementById("opt-glo-PerformanceLevel").value = global_simulation.config.global.performance_level;
+}
+
+function switchGlobalMenu(){
+	//var div_global_menu = document.getElementById("DivConfig");
+	if(global_menus.global.isOpen){
+		$( "#DivConfigBackground" ).fadeOut( "fast", function() {
+			// Animation complete.
+		  });
+		//div_global_menu.className = "DivConfigClosed";
+	}else{
+		$( "#DivConfigBackground" ).fadeIn( "fast", function() {
+			// Animation complete.
+		  });
+		//div_global_menu.className = "DivConfigOpened";
+	}
+	global_menus.global.isOpen = !global_menus.global.isOpen;
+}
+
+function setAttitudeReloaded(){
+	var div = document.getElementById("AttitudeMenuLoading");
+	div.style.display = "none";
+}
+function setOrbitReloaded(){
+	var div = document.getElementById("OrbitMenuLoading");
+	div.style.display = "none";
+}
+function setMapReloaded(){
+	var div = document.getElementById("MapMenuLoading");
+	div.style.display = "none";
+}
+/*function setGlobalReloaded(){
+	var div = document.getElementById("GlobalMenuLoading");
+	div.style.display = "none";
+}*/
+function setAttitudeReloading(){
+	var div = document.getElementById("AttitudeMenuLoading");
+	div.style.display = "block";
+}
+function setOrbitReloading(){
+	var div = document.getElementById("OrbitMenuLoading");
+	div.style.display = "block";
+}
+function setMapReloading(){
+	var div = document.getElementById("MapMenuLoading");
+	div.style.display = "block";
+}
+function setGlobalReloading(){
+	var div = document.getElementById("GlobalMenuLoading");
+	div.style.display = "block";
 }

@@ -430,46 +430,6 @@
 			global_menus.info_panel.isOpen = !global_menus.info_panel.isOpen;
 		}
 		
-		function switchGlobalMenu(){
-			//var div_global_menu = document.getElementById("DivConfig");
-			if(global_menus.global.isOpen){
-				$( "#DivConfigBackground" ).fadeOut( "fast", function() {
-					// Animation complete.
-				  });
-				//div_global_menu.className = "DivConfigClosed";
-			}else{
-				$( "#DivConfigBackground" ).fadeIn( "fast", function() {
-					// Animation complete.
-				  });
-				//div_global_menu.className = "DivConfigOpened";
-			}
-			global_menus.global.isOpen = !global_menus.global.isOpen;
-		}
-		
-		function setAttitudeReloaded(){
-			var div = document.getElementById("AttitudeMenuLoading");
-			div.style.display = "none";
-		}
-		function setOrbitReloaded(){
-			var div = document.getElementById("OrbitMenuLoading");
-			div.style.display = "none";
-		}
-		function setMapReloaded(){
-			var div = document.getElementById("MapMenuLoading");
-			div.style.display = "none";
-		}
-		function setAttitudeReloading(){
-			var div = document.getElementById("AttitudeMenuLoading");
-			div.style.display = "block";
-		}
-		function setOrbitReloading(){
-			var div = document.getElementById("OrbitMenuLoading");
-			div.style.display = "block";
-		}
-		function setMapReloading(){
-			var div = document.getElementById("MapMenuLoading");
-			div.style.display = "block";
-		}
 		
 	</script>
 </head>
@@ -872,6 +832,7 @@
 		<p><input id="ResetMissionsButton" value="Reset missions database" type="button" onclick="resetMissionsDb()" class="stavorDarkButton"/></p>
 		<p><input id="ResetStationsButton" value="Reset stations database" type="button" onclick="resetStationsDb()" class="stavorDarkButton"/></p>
 	</div>
+	<div id="GlobalMenuLoading" class="ViewMenuLoading"></div>
 </div>
 
 <div id="DivDialogBackground">
