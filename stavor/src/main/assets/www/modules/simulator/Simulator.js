@@ -62,6 +62,7 @@ function warningSelectMission(){
 }
 Simulator.prototype.changeMission = function(mission){
 	this.sim_interface.changeMission(mission);
+	this.setCurrentVisualization();
 }
 Simulator.prototype.playButtonClicked = function(){
 	if(this.isConnected){
