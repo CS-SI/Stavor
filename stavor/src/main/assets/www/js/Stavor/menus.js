@@ -239,29 +239,16 @@ function switchOrbitMenu(){
 
 function updateOrbitOption(id,val){
 	if(val != "" || typeof val == "boolean"){
-		setOrbitReloading();
 		setTimeout(function(){
 			switch(id) {
 				case "opt-orb-ShowSky":
 					global_simulation.config.orbit.show_sky = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-ShowAxis":
 					global_simulation.config.orbit.show_axis = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-ShowAxisLabels":
 					global_simulation.config.orbit.show_axis_labels = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-ShowEarthModel":
 					global_simulation.config.orbit.show_earth = val;
@@ -271,10 +258,6 @@ function updateOrbitOption(id,val){
 						global_simulation.config.orbit.show_earth_clouds = val;
 						updateOrbitOptions();
 					}
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-ShowEarthAxis":
 					global_simulation.config.orbit.show_earth_axis = val;
@@ -282,10 +265,6 @@ function updateOrbitOption(id,val){
 						global_simulation.config.orbit.show_earth = val;
 						updateOrbitOptions();
 					}
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-ShowEarthAtmosphere":
 					global_simulation.config.orbit.show_earth_atmosphere = val;
@@ -293,10 +272,6 @@ function updateOrbitOption(id,val){
 						global_simulation.config.orbit.show_earth = val;
 						updateOrbitOptions();
 					}
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-ShowEarthClouds":
 					global_simulation.config.orbit.show_earth_clouds = val;
@@ -304,111 +279,57 @@ function updateOrbitOption(id,val){
 						global_simulation.config.orbit.show_earth = val;
 						updateOrbitOptions();
 					}
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-ShowXyPlane":
 					global_simulation.config.orbit.show_xy_plane = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-PlaneXyColor":
 					global_simulation.config.orbit.color_xy_plane = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-ShowSpacecraft":
 					global_simulation.config.orbit.show_spacecraft = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-SpacecraftColor":
 					global_simulation.config.orbit.spacecraft_color = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-ShowProjection":
 					global_simulation.config.orbit.show_projection = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-OrbitColor":
 					global_simulation.config.orbit.orbit_color = val;
 					break;
 				case "opt-orb-ShowRefOrbit":
 					global_simulation.config.orbit.ref_orbit.show = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-RefOrbitColor":
 					global_simulation.config.orbit.ref_orbit.color = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-RefOrbit-a":
 					global_simulation.config.orbit.ref_orbit.a = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-RefOrbit-e":
 					global_simulation.config.orbit.ref_orbit.e = val;
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-RefOrbit-i":
 					global_simulation.config.orbit.ref_orbit.i = val;
 					if(!global_angle_in_rads){
 						global_simulation.config.orbit.ref_orbit.i = global_simulation.config.orbit.ref_orbit.i * Math.PI / 180.0;
 					}
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-RefOrbit-omega":
 					global_simulation.config.orbit.ref_orbit.w = val;
 					if(!global_angle_in_rads){
 						global_simulation.config.orbit.ref_orbit.w = global_simulation.config.orbit.ref_orbit.w * Math.PI / 180.0;
 					}
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				case "opt-orb-RefOrbit-raan":
 					global_simulation.config.orbit.ref_orbit.raan = val;
 					if(!global_angle_in_rads){
 						global_simulation.config.orbit.ref_orbit.raan = global_simulation.config.orbit.ref_orbit.raan * Math.PI / 180.0;
 					}
-					//Prevent reinit scene
-					saveStoredVariables();
-					setOrbitReloaded();
-					return;
 					break;
 				default:
 			}
-			global_orbit.stopAnimation();
-			global_orbit = new Orbit();
 			saveStoredVariables();
 		},0);
 	}else{
@@ -854,10 +775,6 @@ function setAttitudeReloaded(){
 	var div = document.getElementById("AttitudeMenuLoading");
 	div.style.display = "none";
 }
-function setOrbitReloaded(){
-	var div = document.getElementById("OrbitMenuLoading");
-	div.style.display = "none";
-}
 function setMapReloaded(){
 	var div = document.getElementById("MapMenuLoading");
 	div.style.display = "none";
@@ -868,10 +785,6 @@ function setMapReloaded(){
 }*/
 function setAttitudeReloading(){
 	var div = document.getElementById("AttitudeMenuLoading");
-	div.style.display = "block";
-}
-function setOrbitReloading(){
-	var div = document.getElementById("OrbitMenuLoading");
 	div.style.display = "block";
 }
 function setMapReloading(){
