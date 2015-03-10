@@ -165,6 +165,10 @@ var Orbit = function()
 	
 	function includeRefOrbit() {
 		createRefOrbit();
+		onRenderFcts.push(function(delta, now){
+			scene.remove(ref_orbit);
+			createRefOrbit();
+		});
 	}
 	
 	function getCamDistance(){
@@ -232,13 +236,18 @@ var Orbit = function()
 		scene.add(spacecraft);
 		spacecraft_init=true;
 		onRenderFcts.push(function(delta, now){
-			spacecraft.position = new THREE.Vector3(
-				results.spacecraft_position.x*dist_scale,
-				results.spacecraft_position.y*dist_scale,
-				results.spacecraft_position.z*dist_scale
-			);					
+			spacecraft.visible = config.show_spacecraft;
+			if(spacecraft.visible){
+				if("#"+spacecraft.material.color.getHexString() != config.spacecraft_color){
+					spacecraft.material.color.setHex(parseInt("0x"+config.spacecraft_color.substr(1,config.spacecraft_color.length)));
+				}
+				spacecraft.position = new THREE.Vector3(
+					results.spacecraft_position.x*dist_scale,
+					results.spacecraft_position.y*dist_scale,
+					results.spacecraft_position.z*dist_scale
+				);					
+			}
 		});
-		spacecraft.visible = config.show_spacecraft;
 	}
 
 
@@ -256,11 +265,16 @@ var Orbit = function()
 			scene.add(projection);
 			projection_init = true;
 			onRenderFcts.push(function(delta, now){
-				projection.geometry.vertices[0].set(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z);
-				projection.geometry.computeLineDistances();
-				projection.geometry.verticesNeedUpdate = true;
+				projection.visible = config.show_projection;
+				if(projection.visible){
+					if("#"+projection.material.color.getHexString() != config.spacecraft_color){
+						projection.material.color.setHex(parseInt("0x"+config.spacecraft_color.substr(1,config.spacecraft_color.length)));
+					}
+					projection.geometry.vertices[0].set(spacecraft.position.x,spacecraft.position.y,spacecraft.position.z);
+					projection.geometry.computeLineDistances();
+					projection.geometry.verticesNeedUpdate = true;
+				}
 			});
-			projection.visible = config.show_projection;
 	}
 
 	function setXYplane()
