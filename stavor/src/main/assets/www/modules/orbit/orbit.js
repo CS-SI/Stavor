@@ -39,7 +39,7 @@ var Orbit = function()
 	
 	var orbit, ref_orbit;
 	var spacecraft;
-	var projection, starSphere, containerEarth;
+	var projection, starSphere, containerEarth, axis_earth, earth_atm_1, earth_atm_2, earthCloud, earthMesh;
 	// MAIN
 	//***********************************************************************************************************************
 	//		GLOBAL VARIABLES
@@ -326,7 +326,7 @@ var Orbit = function()
 
 	function includeEarth()
 	{
-		
+		//Earth container
 		containerEarth	= new THREE.Object3D();
 		//containerEarth.rotateX(Math.PI/2);
 		//containerEarth.rotateZ(-23.4 * Math.PI/180);
@@ -334,27 +334,18 @@ var Orbit = function()
 		containerEarth.name = "EARTH";
 		scene.add(containerEarth);
 		
-		var earthMesh = THREEx.Planets.createEarth();
+		//Earth planet
+		earthMesh = THREEx.Planets.createEarth();
 		
 		earthMesh.name = "EARTH-PLANET";
 		containerEarth.add(earthMesh)
-		onRenderFcts.push(function(delta, now){
-			//earthMesh.rotation.y += 1/32 * delta * accel_time;
-			var offset_quat = new THREE.Quaternion().setFromUnitVectors( new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,1) );
-			earthMesh.quaternion.multiplyQuaternions(results.earth_rotation,offset_quat);
-		})
 
 		//Earth axis
-		var axis_earth = new THREE.AxisHelper( axis_earth_radius );
+		axis_earth = new THREE.AxisHelper( axis_earth_radius );
 		axis_earth.rotation.x = -Math.PI/2;
 		axis_earth.position.set( 0, 0, 0 );
 		axis_earth.name = "EARTH-AXIS"
 		earthMesh.add(axis_earth);
-		if(config.show_earth_axis){
-			axis_earth.visible = true;
-		}else{
-			axis_earth.visible = false;
-		}
 
 		//Earth atmosphere
 		var geometry	= new THREE.SphereGeometry(earth_radius, segments.earth_seg, segments.earth_seg);
@@ -362,11 +353,10 @@ var Orbit = function()
 		material.uniforms.glowColor.value.set(0x00b3ff);
 		material.uniforms.coeficient.value	= 0.8;
 		material.uniforms.power.value		= 2.0;
-		var mesh	= new THREE.Mesh(geometry, material );
-		mesh.scale.multiplyScalar(1.01);
-		mesh.name = "EARTH-ATM-1";
-		containerEarth.add( mesh );
-		// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
+		earth_atm_1	= new THREE.Mesh(geometry, material );
+		earth_atm_1.scale.multiplyScalar(1.01);
+		earth_atm_1.name = "EARTH-ATM-1";
+		containerEarth.add( earth_atm_1 );
 		
 		var geometry	= new THREE.SphereGeometry(earth_radius, segments.earth_seg, segments.earth_seg);
 		var material	= THREEx.createAtmosphereMaterial();
@@ -374,42 +364,41 @@ var Orbit = function()
 		material.uniforms.glowColor.value.set(0x00b3ff);
 		material.uniforms.coeficient.value	= 0.5;
 		material.uniforms.power.value		= 4.0;
-		var mesh2	= new THREE.Mesh(geometry, material );
-		mesh2.scale.multiplyScalar(1.15);
-		mesh2.name = "EARTH-ATM-2";
-		containerEarth.add( mesh2 );
-		// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
-		if(config.show_earth_atmosphere){
-			mesh.visible=true;
-			mesh2.visible=true;
-		}else{
-			mesh.visible=false;
-			mesh2.visible=false;
-		}
+		earth_atm_2	= new THREE.Mesh(geometry, material );
+		earth_atm_2.scale.multiplyScalar(1.15);
+		earth_atm_2.name = "EARTH-ATM-2";
+		containerEarth.add( earth_atm_2 );
 		
 		//Earth clouds
-		var earthCloud	= THREEx.Planets.createEarthCloud();
+		earthCloud	= THREEx.Planets.createEarthCloud();
 		earthCloud.receiveShadow	= true;
 		earthCloud.castShadow	= true;
 		earthCloud.name = "EARTH-CLOUDS";
 		containerEarth.add(earthCloud);
+
 		onRenderFcts.push(function(delta, now){
-			if(config.show_earth_clouds){
+			//Earth
+			earthMesh.visible = config.show_earth
+			/*if(config.show_earth){
+				containerEarth.visible = true;
+			}else{
+				containerEarth.traverse( function ( child ) { child.visible = false; } );
+			}*/
+			if(earthMesh.visible){
+				var offset_quat = new THREE.Quaternion().setFromUnitVectors( new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,1) );
+				earthMesh.quaternion.multiplyQuaternions(results.earth_rotation,offset_quat);
+			}
+			//Earth axis
+			axis_earth.visible = config.show_earth_axis;
+			//Atmosphere
+			earth_atm_1.visible = config.show_earth_atmosphere;
+			earth_atm_2.visible = config.show_earth_atmosphere;
+			//Clouds
+			earthCloud.visible = config.show_earth_clouds;
+			if(earthCloud.visible){
 				earthCloud.rotation.z += 1/32 * delta * accel_time;		
 			}
-		});
-
-		if(config.show_earth_clouds){
-			earthCloud.visible = true;
-		}else{
-			earthCloud.visible = false;
-		}
-		
-		if(config.show_earth){
-			containerEarth.visible = true;
-		}else{
-			containerEarth.traverse( function ( child ) { child.visible = false; } );
-		}
+		})
 	}
 
 	function setAxis(){

@@ -259,6 +259,10 @@ function updateOrbitOption(id,val){
 						global_simulation.config.orbit.show_earth_clouds = val;
 						updateOrbitOptions();
 					}
+					//Prevent reinit scene
+					saveStoredVariables();
+					setOrbitReloaded();
+					return;
 					break;
 				case "opt-orb-ShowEarthAxis":
 					global_simulation.config.orbit.show_earth_axis = val;
@@ -266,6 +270,10 @@ function updateOrbitOption(id,val){
 						global_simulation.config.orbit.show_earth = val;
 						updateOrbitOptions();
 					}
+					//Prevent reinit scene
+					saveStoredVariables();
+					setOrbitReloaded();
+					return;
 					break;
 				case "opt-orb-ShowEarthAtmosphere":
 					global_simulation.config.orbit.show_earth_atmosphere = val;
@@ -273,6 +281,10 @@ function updateOrbitOption(id,val){
 						global_simulation.config.orbit.show_earth = val;
 						updateOrbitOptions();
 					}
+					//Prevent reinit scene
+					saveStoredVariables();
+					setOrbitReloaded();
+					return;
 					break;
 				case "opt-orb-ShowEarthClouds":
 					global_simulation.config.orbit.show_earth_clouds = val;
@@ -280,6 +292,10 @@ function updateOrbitOption(id,val){
 						global_simulation.config.orbit.show_earth = val;
 						updateOrbitOptions();
 					}
+					//Prevent reinit scene
+					saveStoredVariables();
+					setOrbitReloaded();
+					return;
 					break;
 				case "opt-orb-ShowXyPlane":
 					global_simulation.config.orbit.show_xy_plane = val;
