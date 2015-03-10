@@ -108,7 +108,7 @@ var global_simulation = {
 			sun_rotates: true,
 			sun_rotation_speed: enum_rotation_speed.NORMAL,
 			show_sun_texture: true,
-			sun_simple_glow: true,//Recomended to not use the shader glow, problems in android
+			//sun_simple_glow: true,//Recomended to not use the shader glow, problems in android
 			sun_show_line: true,
 			sun_show_dist: true,
 			//Earth

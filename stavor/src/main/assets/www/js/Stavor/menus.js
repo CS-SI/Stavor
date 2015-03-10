@@ -421,7 +421,6 @@ function switchAttitudeMenu(){
 }
 function updateAttitudeOption(id,val){
 	if(val != "" || typeof val == "boolean"){
-		setAttitudeReloading();
 		setTimeout(function(){
 			switch(id) {
 				//Models
@@ -646,8 +645,6 @@ function updateAttitudeOption(id,val){
 					break;
 				default:
 			}
-			global_attitude.stopAnimation();
-			global_attitude = new Attitude();
 			saveStoredVariables();
 		},0);
 	}else{
@@ -771,21 +768,9 @@ function switchGlobalMenu(){
 	global_menus.global.isOpen = !global_menus.global.isOpen;
 }
 
-function setAttitudeReloaded(){
-	var div = document.getElementById("AttitudeMenuLoading");
-	div.style.display = "none";
-}
 function setMapReloaded(){
 	var div = document.getElementById("MapMenuLoading");
 	div.style.display = "none";
-}
-/*function setGlobalReloaded(){
-	var div = document.getElementById("GlobalMenuLoading");
-	div.style.display = "none";
-}*/
-function setAttitudeReloading(){
-	var div = document.getElementById("AttitudeMenuLoading");
-	div.style.display = "block";
 }
 function setMapReloading(){
 	var div = document.getElementById("MapMenuLoading");

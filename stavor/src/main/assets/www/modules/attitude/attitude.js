@@ -52,12 +52,16 @@ var Attitude = function ()
 	//***********************************************************************************************************************
 	//setLoadingProgress(5);
 	var scene, camera, controls, stats, light, delta;
-	var sun, sunGlow, sunLight, lineSun, spriteSun, contextSun;
+	//Ref objects
+	var objRefAxis, objRefAxisLabelX, objRefAxisLabelY, objRefAxisLabelZ, objRefSphere, objRefCircleX, objRefCircleY, objRefCircleZ, objRefSphere;
+	var miniSphereX,miniSphereXX,miniSphereY,miniSphereYY,miniSphereZ,miniSphereZZ;
+	var objSky;
+	var sun, sunSurface, sunGlow, sunLight, lineSun, spriteSun, contextSun;
 	var earth, lineEarth, spriteEarth, contextEarth;
-	var plane_orb, incl_arc, spriteInclination, contextInclination;
+	var plane_orb, plane_xy, incl_arc, spriteInclination, contextInclination;
 	//var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
-	var spacecraft, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
+	var spacecraft, spacecraftAxis, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
 	var long_arc, lat_arc, long_sprite, lat_sprite, lineAngle, lineSpheric, lineSpheric2;
 	var vectors_arc, vectors_sprite;
 	var origin = new THREE.Vector3(0,0,0);
@@ -70,7 +74,6 @@ var Attitude = function ()
 	var fontsizeAngles, borderColorAngles, borderThicknessAngles, backgroundColorAngles, fontColorAngles;
 
 	var fps_update_counter = 0;
-	var miniSphereX,miniSphereXX,miniSphereY,miniSphereYY,miniSphereZ,miniSphereZZ;
 	var gui, parameters;
 	var axis_x = new THREE.Vector3(1,0,0);
 	var axis_z = new THREE.Vector3(0,0,1);
@@ -176,14 +179,18 @@ var Attitude = function ()
 			if(!global_renderers_preloaded.attitude){
 				global_renderers_preloaded.attitude = true;
 			}
+			delta = clock.getDelta();
 			//console.log("UPDATE ATTITUDE");
 			//Controls
 			controls.update();
 			//View
 			updateView();
 			
-			updateScene();
+			updateSky();
+			updateReference();
 			updateSpacecraft();
+			updateScene();
+			
 			updateAngles();
 			updateSun();
 			updateEarth();
@@ -195,56 +202,40 @@ var Attitude = function ()
 		//***********************************************************************************************************************
 		//		SCENE ELEMENTS
 		//***********************************************************************************************************************
-		//setLoadingProgress(1);	
-		//setLoadingProgress(15);
 		initScene();
-		//***********************************************************************************************************************
-		//		STATIC ELEMENTS
-		//***********************************************************************************************************************
-		//setLoadingProgress(35);
-		//setLoadingProgress(5);
-
-		//-----------------------------------------------------------------------------------------------------------------------
-		//			SKY
-		//-----------------------------------------------------------------------------------------------------------------------
-		
-		if(config.show_sky){
-			// create the geometry sphere
-			var sky_geometry  = new THREE.SphereGeometry(1000, 32, 32);
-			// create the material, using a texture of startfield
-			var sky_material  = new THREE.MeshBasicMaterial();
-			sky_material.map   = textureAttitudeSky;
-			sky_material.map.wrapS = sky_material.map.wrapT = THREE.RepeatWrapping;
-			sky_material.map.repeat.set( 8, 8 ); 
-			sky_material.side  = THREE.BackSide;
-			// create the mesh based on geometry and material
-			var sky_mesh  = new THREE.Mesh(sky_geometry, sky_material);
-			sky_mesh.name = "SKY";
-			scene.add(sky_mesh);
-		}
-
+		initSky();
 		initReference();
+		initSpacecraft();
 		//***********************************************************************************************************************
 		//		DYNAMIC ELEMENTS
 		//***********************************************************************************************************************
 		initAngles();
-		//setLoadingProgress(65);
-		//setLoadingProgress(10);
 		initIndicators();
-		//setLoadingProgress(75);
-		//setLoadingProgress(13);
 		initSun();
-		//setLoadingProgress(85);
-		//setLoadingProgress(15);
 		initEarth();
 		changeView(selected_view);
-		//setLoadingProgress(100);
-		//setLoadingProgress(18);
 		
 		global_delayed_loading.visualization.attitude = true;
 		setLoadingText("Attitude module loaded!");
 		hideSplash();
-		setAttitudeReloaded();
+	}
+	
+	function initSky(){
+		// create the geometry sphere
+		var sky_geometry  = new THREE.SphereGeometry(1000, 32, 32);
+		// create the material, using a texture of startfield
+		var sky_material  = new THREE.MeshBasicMaterial();
+		sky_material.map   = textureAttitudeSky;
+		sky_material.map.wrapS = sky_material.map.wrapT = THREE.RepeatWrapping;
+		sky_material.map.repeat.set( 8, 8 ); 
+		sky_material.side  = THREE.BackSide;
+		// create the mesh based on geometry and material
+		objSky  = new THREE.Mesh(sky_geometry, sky_material);
+		objSky.name = "SKY";
+		scene.add(objSky);
+	}
+	function updateSky(){
+		objSky.visible = config.show_sky;
 	}
 	
 //***********************************************************************************************************************
@@ -286,7 +277,7 @@ var Attitude = function ()
 			var geometry = new THREE.ExtrudeGeometry( shape, options );
 
 			// mesh
-			var plane_xy = new THREE.Mesh( 
+			plane_xy = new THREE.Mesh( 
 				geometry, 
 				new THREE.MeshBasicMaterial( { color: config.plane_xy_color, transparent: true, opacity: 0.2 } )
 			);
@@ -971,118 +962,137 @@ var Attitude = function ()
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			REFERENCE SPHERE
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(config.show_sphere){
-			var mat_sphere = new THREE.MeshPhongMaterial( { 
-				color: 0x282400,
-				transparent: true,
-				side: THREE.FrontSide,
-				metal: true,
-				depthWrite: false, depthTest: false, alphaTest: 0.1,
-				opacity: 0.4,
-				} );	
-			var mat_sphere2 = new THREE.MeshBasicMaterial( { 
-				color: 0xBBBBBB,
-				transparent: true,
-				side: THREE.FrontSide,
-				metal: true,
-				depthWrite: false, depthTest: false, alphaTest: 0.1,
-				opacity: 0.11,
-				} );
-			var mats_sphere = [mat_sphere, mat_sphere2];
-			var sphere = THREE.SceneUtils.createMultiMaterialObject(new THREE.SphereGeometry( sphere_radius, segments.sphere_segments, segments.sphere_segments ), mats_sphere);
-			
-			
-			sphere.position.set( 0, 0, 0 );
-			sphere.renderDepth = -0.1;
-			scene.add( sphere );
-		}
+		var mat_sphere = new THREE.MeshPhongMaterial( { 
+			color: 0x282400,
+			transparent: true,
+			side: THREE.FrontSide,
+			metal: true,
+			depthWrite: false, depthTest: false, alphaTest: 0.1,
+			opacity: 0.4,
+			} );	
+		var mat_sphere2 = new THREE.MeshBasicMaterial( { 
+			color: 0xBBBBBB,
+			transparent: true,
+			side: THREE.FrontSide,
+			metal: true,
+			depthWrite: false, depthTest: false, alphaTest: 0.1,
+			opacity: 0.11,
+			} );
+		var mats_sphere = [mat_sphere, mat_sphere2];
+		objRefSphere = THREE.SceneUtils.createMultiMaterialObject(new THREE.SphereGeometry( sphere_radius, segments.sphere_segments, segments.sphere_segments ), mats_sphere);
+		
+		
+		objRefSphere.position.set( 0, 0, 0 );
+		objRefSphere.renderDepth = -0.1;
+		scene.add( objRefSphere );
+		
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			MINI SPHERES
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(config.show_mini_spheres){
-			//if(!canvas_mode)
-				var mat_mini = new THREE.MeshPhongMaterial( { color: 0xAAAAAA, metal: true } );
-			//else
-				//var mat_mini = new THREE.MeshBasicMaterial( { color: 0xAAAAAA } );
-			var miniSphere = new THREE.Mesh(new THREE.SphereGeometry( miniSphere_radius, segments.miniSphere_seg, segments.miniSphere_seg ), mat_mini);
-			miniSphere.position.set( 0, 0, 0 );
-			//if(!show_spacecraft){
-				//scene.add( miniSphere );
-			//}
-			
-			miniSphereX = miniSphere.clone();
-			miniSphereX.position.set( sphere_radius+miniSphere_margin, 0, 0 );
-			scene.add( miniSphereX );
-			
-			miniSphereXX = miniSphere.clone();
-			miniSphereXX.position.set( -sphere_radius-miniSphere_margin, 0, 0 );
-			scene.add( miniSphereXX );
-			
-			miniSphereY = miniSphere.clone();
-			miniSphereY.position.set( 0, sphere_radius+miniSphere_margin, 0 );
-			scene.add( miniSphereY );
-			
-			miniSphereYY = miniSphere.clone();
-			miniSphereYY.position.set( 0, -sphere_radius-miniSphere_margin, 0 );
-			scene.add( miniSphereYY );
-			
-			miniSphereZ = miniSphere.clone();
-			miniSphereZ.position.set( 0, 0, sphere_radius+miniSphere_margin);
-			scene.add( miniSphereZ );
-			
-			miniSphereZZ = miniSphere.clone();
-			miniSphereZZ.position.set( 0, 0, -sphere_radius-miniSphere_margin);
-			scene.add( miniSphereZZ );
-		}
-		initSpacecraft();
+		//if(!canvas_mode)
+			var mat_mini = new THREE.MeshPhongMaterial( { color: 0xAAAAAA, metal: true } );
+		//else
+			//var mat_mini = new THREE.MeshBasicMaterial( { color: 0xAAAAAA } );
+		var miniSphere = new THREE.Mesh(new THREE.SphereGeometry( miniSphere_radius, segments.miniSphere_seg, segments.miniSphere_seg ), mat_mini);
+		miniSphere.position.set( 0, 0, 0 );
+		//if(!show_spacecraft){
+			//scene.add( miniSphere );
+		//}
+		
+		miniSphereX = miniSphere.clone();
+		miniSphereX.position.set( sphere_radius+miniSphere_margin, 0, 0 );
+		scene.add( miniSphereX );
+		
+		miniSphereXX = miniSphere.clone();
+		miniSphereXX.position.set( -sphere_radius-miniSphere_margin, 0, 0 );
+		scene.add( miniSphereXX );
+		
+		miniSphereY = miniSphere.clone();
+		miniSphereY.position.set( 0, sphere_radius+miniSphere_margin, 0 );
+		scene.add( miniSphereY );
+		
+		miniSphereYY = miniSphere.clone();
+		miniSphereYY.position.set( 0, -sphere_radius-miniSphere_margin, 0 );
+		scene.add( miniSphereYY );
+		
+		miniSphereZ = miniSphere.clone();
+		miniSphereZ.position.set( 0, 0, sphere_radius+miniSphere_margin);
+		scene.add( miniSphereZ );
+		
+		miniSphereZZ = miniSphere.clone();
+		miniSphereZZ.position.set( 0, 0, -sphere_radius-miniSphere_margin);
+		scene.add( miniSphereZZ );
 		
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			SPHERE CIRCLES
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(config.show_circles){
-			//if(!canvas_mode)
-				var mat_torus = new THREE.MeshPhongMaterial( { color: 0xAAAAAA, metal: true, transparent: false, opacity: 1.0, side: THREE.BackSide } );
-			//else
-				//var mat_torus = new THREE.MeshBasicMaterial( { color: 0xAAAAAA,  side: THREE.BackSide } );
+		//if(!canvas_mode)
+			var mat_torus = new THREE.MeshPhongMaterial( { color: 0xAAAAAA, metal: true, transparent: false, opacity: 1.0, side: THREE.BackSide } );
+		//else
+			//var mat_torus = new THREE.MeshBasicMaterial( { color: 0xAAAAAA,  side: THREE.BackSide } );
+	
+		objRefCircleY = new THREE.Mesh( new THREE.TorusGeometry( torus_radius, torus_tube, segments.torus_seg_r, segments.torus_seg_t ), mat_torus );
+		objRefCircleY.position.set( 0, 0, 0 );
+		scene.add( objRefCircleY );
 		
-			var sphere_y = new THREE.Mesh( new THREE.TorusGeometry( torus_radius, torus_tube, segments.torus_seg_r, segments.torus_seg_t ), mat_torus );
-			sphere_y.position.set( 0, 0, 0 );
-			scene.add( sphere_y );
-			
-			var sphere_z = new THREE.Mesh( new THREE.TorusGeometry( torus_radius, torus_tube, segments.torus_seg_r, segments.torus_seg_t ), mat_torus );
-			sphere_z.position.set( 0, 0, 0 );
-			sphere_z.rotation.x = Math.PI/2;
-			scene.add( sphere_z );
-			
-			var sphere_x = new THREE.Mesh( new THREE.TorusGeometry( torus_radius, torus_tube, segments.torus_seg_r, segments.torus_seg_t ), mat_torus );
-			sphere_x.position.set( 0, 0, 0 );
-			sphere_x.rotation.y = Math.PI/2;
-			scene.add( sphere_x );
-		}
+		objRefCircleZ = new THREE.Mesh( new THREE.TorusGeometry( torus_radius, torus_tube, segments.torus_seg_r, segments.torus_seg_t ), mat_torus );
+		objRefCircleZ.position.set( 0, 0, 0 );
+		objRefCircleZ.rotation.x = Math.PI/2;
+		scene.add( objRefCircleZ );
+		
+		objRefCircleX = new THREE.Mesh( new THREE.TorusGeometry( torus_radius, torus_tube, segments.torus_seg_r, segments.torus_seg_t ), mat_torus );
+		objRefCircleX.position.set( 0, 0, 0 );
+		objRefCircleX.rotation.y = Math.PI/2;
+		scene.add( objRefCircleX );
+		
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			REFERENCE AXIS
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(config.show_axis){
-			var axis = new THREE.AxisHelper( sphere_radius );
-			axis.position.set( 0, 0, 0 );
-			scene.add( axis );
-		}
-		if(config.show_axis_labels){
-			var sprite_X = makeTextSprite( 0, " X ", 
-			{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:174, b:0, a:1.0} } );
-			sprite_X.position.set( sphere_radius+miniSphere_margin, 0, 0 );
-			scene.add( sprite_X );
-			
-			var sprite_Y = makeTextSprite( 0, " Y ", 
-			{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:16, g:219, b:2, a:1.0} } );
-			sprite_Y.position.set( 0, sphere_radius+miniSphere_margin, 0 );
-			scene.add( sprite_Y );
-			
-			var sprite_Z = makeTextSprite( 0, " Z ", 
-			{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:50, g:119, b:255, a:1.0} } );
-			sprite_Z.position.set( 0, 0, sphere_radius+miniSphere_margin );
-			scene.add( sprite_Z );
-		}
+		//Axis
+		objRefAxis = new THREE.AxisHelper( sphere_radius );
+		objRefAxis.position.set( 0, 0, 0 );
+		scene.add( objRefAxis );
+		
+		objRefAxisLabelX = makeTextSprite( 0, " X ", 
+		{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:174, b:0, a:1.0} } );
+		objRefAxisLabelX.position.set( sphere_radius+miniSphere_margin, 0, 0 );
+		scene.add( objRefAxisLabelX );
+		
+		//Axis labels
+		objRefAxisLabelY = makeTextSprite( 0, " Y ", 
+		{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:16, g:219, b:2, a:1.0} } );
+		objRefAxisLabelY.position.set( 0, sphere_radius+miniSphere_margin, 0 );
+		scene.add( objRefAxisLabelY );
+		
+		objRefAxisLabelZ = makeTextSprite( 0, " Z ", 
+		{ fontsize: 48, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:50, g:119, b:255, a:1.0} } );
+		objRefAxisLabelZ.position.set( 0, 0, sphere_radius+miniSphere_margin );
+		scene.add( objRefAxisLabelZ );
+	}
+	
+	function updateReference(){
+		//Reference sphere
+		objRefSphere.visible = config.show_sphere;
+		objRefSphere.children[0].visible = config.show_sphere;
+		objRefSphere.children[1].visible = config.show_sphere;
+		//Mini spheres
+		miniSphereX.visible = config.show_mini_spheres;
+		miniSphereXX.visible = config.show_mini_spheres;
+		miniSphereY.visible = config.show_mini_spheres;
+		miniSphereYY.visible = config.show_mini_spheres;
+		miniSphereZ.visible = config.show_mini_spheres;
+		miniSphereZZ.visible = config.show_mini_spheres;
+		//Spacecraft
+		//Ref circles
+		objRefCircleX.visible = config.show_circles;
+		objRefCircleY.visible = config.show_circles;
+		objRefCircleZ.visible = config.show_circles;
+		//Axis
+		objRefAxis.visible = config.show_axis;
+		//Axis labels
+		objRefAxisLabelX.visible = config.show_axis_labels;
+		objRefAxisLabelY.visible = config.show_axis_labels;
+		objRefAxisLabelZ.visible = config.show_axis_labels;
 	}
 
 
@@ -1153,7 +1163,6 @@ var Attitude = function ()
 		//scene.add( ambient );
 	}
 	function updateScene(){
-		delta = clock.getDelta();
 		//Ligts
 		light.position.set(camera.position.x,camera.position.y,camera.position.z);
 
@@ -1176,114 +1185,109 @@ var Attitude = function ()
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			SPACECRAFT
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(true){
-			spacecraft = new THREE.Object3D();
-			if(config.show_sc_axis){
-				var sc_axis = new THREE.AxisHelper( sc_axis_lenght );
-				sc_axis.position.set( 0, 0, 0 );
-				spacecraft.add( sc_axis );
-			}
-			//if(!canvas_mode)
-				var sc_material = new THREE.MeshLambertMaterial( { color: sc_body_color, metal: true, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } );
-			//else
-				//var sc_material = new THREE.MeshBasicMaterial( { color: sc_body_color } );
-			var sc_geometry = new THREE.CylinderGeometry( 6, 1, 15, segments.sc_body_segments );
-			var sc = new THREE.Mesh( sc_geometry, sc_material );
-			sc.position.set( 0, 0, 0 );
-			sc.rotation.x = -Math.PI/2;
-			spacecraft.add(sc);
-			//scene.add( sc );
-			
-			//if(!canvas_mode)
-				var mat_window = new THREE.MeshPhongMaterial( { color: sc_window_color, metal: true, side: THREE.FrontSide } );
-			//else
-				//var mat_window = new THREE.MeshBasicMaterial( { color: sc_window_color, side: THREE.FrontSide } );
-			var sc_window = new THREE.Mesh(new THREE.SphereGeometry( 3, segments.sc_window_segments, segments.sc_window_segments ), mat_window);
-			sc_window.position.set( 0, 1.5, -2 );
-			spacecraft.add(sc_window);
-			//scene.add( sc_window );
-			
-			var eng_geometry = new THREE.CylinderGeometry( 2, 2.5, 2, segments.sc_engine_segments );
-			//if(!canvas_mode)
-				var eng_material = new THREE.MeshPhongMaterial( { color: sc_engine_color, metal: true, side: THREE.FrontSide } );
-			//else
-				//var eng_material = new THREE.MeshBasicMaterial( { color: sc_engine_color, side: THREE.FrontSide } );
-			var eng = new THREE.Mesh( eng_geometry, eng_material );
-			eng.rotation.x = -Math.PI/2;
-			eng.position.set( -2.5, 0, -8 );
-			spacecraft.add(eng);
-			//scene.add( eng );
-			
-			var eng2 = eng.clone();
-			eng2.rotation.x = -Math.PI/2;
-			eng2.position.set( 2.5, 0, -8 );
-			spacecraft.add(eng2);
-			//scene.add( eng2 );
-			
-			if (config.sc_show_eng_texture){
-				// use "this." to create global object
-				this.customUniforms2 = {
-					baseTexture: 	{ type: "t", value: waterTexture },
-					baseSpeed: 		{ type: "f", value: 1.15 },
-					noiseTexture: 	{ type: "t", value: noiseTexture },
-					noiseScale:		{ type: "f", value: 0.5 },
-					alpha: 			{ type: "f", value: 0.8 },
-					time: 			{ type: "f", value: 1.0 }
-				};
+		spacecraft = new THREE.Object3D();
+		
+		spacecraftAxis = new THREE.AxisHelper( sc_axis_lenght );
+		spacecraftAxis.position.set( 0, 0, 0 );
+		spacecraft.add( spacecraftAxis );
+		
+		var sc_material = new THREE.MeshLambertMaterial( { color: sc_body_color, metal: true, shading: THREE.SmoothShading, blending: THREE.AdditiveBlending, vertexColors: THREE.VertexColors } );
 
-				// create custom material from the shader code above
-				//   that is within specially labeled script tags
-				var customMaterial2 = new THREE.ShaderMaterial( 
-				{
-					uniforms: customUniforms2,
-					vertexShader:   THREE.ShaderEngine.vertexShader,
-					fragmentShader: THREE.ShaderEngine.fragmentShader
-				}   );
-			 
-				// other material properties
-				
-				//customMaterial2.transparent = true;
-			}else{
-				//if(!canvas_mode)
-					var customMaterial2 = new THREE.MeshPhongMaterial( { color: sc_eng_solid_color, metal: true } );
-				/*else
-					var customMaterial2 = new THREE.MeshBasicMaterial( { color: sc_eng_solid_color } );*/
-			}
-			customMaterial2.side = THREE.BackSide;
-			// apply the material to a surface    innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength)
-			var flatGeometry = new THREE.RingGeometry( 0.5, 2, 15 );
-			var surface = new THREE.Mesh( flatGeometry, customMaterial2 );
-			//surface.rotation.z = -Math.PI/2;
-			surface.position.set( 2.5, 0, -9.1 );
-			spacecraft.add(surface);
-			//scene.add( surface );
-			var engine_surface2 = surface.clone(); 
-			engine_surface2.position.set( -2.5, 0, -9.1 );
-			spacecraft.add(engine_surface2);
-			//scene.add( engine_surface2 );
+		var sc_geometry = new THREE.CylinderGeometry( 6, 1, 15, segments.sc_body_segments );
+		var sc = new THREE.Mesh( sc_geometry, sc_material );
+		sc.position.set( 0, 0, 0 );
+		sc.rotation.x = -Math.PI/2;
+		spacecraft.add(sc);
+		//scene.add( sc );
+		
+		//if(!canvas_mode)
+			var mat_window = new THREE.MeshPhongMaterial( { color: sc_window_color, metal: true, side: THREE.FrontSide } );
+		//else
+			//var mat_window = new THREE.MeshBasicMaterial( { color: sc_window_color, side: THREE.FrontSide } );
+		var sc_window = new THREE.Mesh(new THREE.SphereGeometry( 3, segments.sc_window_segments, segments.sc_window_segments ), mat_window);
+		sc_window.position.set( 0, 1.5, -2 );
+		spacecraft.add(sc_window);
+		//scene.add( sc_window );
+		
+		var eng_geometry = new THREE.CylinderGeometry( 2, 2.5, 2, segments.sc_engine_segments );
+		//if(!canvas_mode)
+			var eng_material = new THREE.MeshPhongMaterial( { color: sc_engine_color, metal: true, side: THREE.FrontSide } );
+		//else
+			//var eng_material = new THREE.MeshBasicMaterial( { color: sc_engine_color, side: THREE.FrontSide } );
+		var eng = new THREE.Mesh( eng_geometry, eng_material );
+		eng.rotation.x = -Math.PI/2;
+		eng.position.set( -2.5, 0, -8 );
+		spacecraft.add(eng);
+		//scene.add( eng );
+		
+		var eng2 = eng.clone();
+		eng2.rotation.x = -Math.PI/2;
+		eng2.position.set( 2.5, 0, -8 );
+		spacecraft.add(eng2);
+		//scene.add( eng2 );
+		
+		if (config.sc_show_eng_texture){
+			// use "this." to create global object
+			customUniforms2 = {
+				baseTexture: 	{ type: "t", value: waterTexture },
+				baseSpeed: 		{ type: "f", value: 1.15 },
+				noiseTexture: 	{ type: "t", value: noiseTexture },
+				noiseScale:		{ type: "f", value: 0.5 },
+				alpha: 			{ type: "f", value: 0.8 },
+				time: 			{ type: "f", value: 1.0 }
+			};
 
-			spacecraft.scale.multiplyScalar(sc_scale);
-			scene.add(spacecraft);
+			// create custom material from the shader code above
+			//   that is within specially labeled script tags
+			var customMaterial2 = new THREE.ShaderMaterial( 
+			{
+				uniforms: customUniforms2,
+				vertexShader:   THREE.ShaderEngine.vertexShader,
+				fragmentShader: THREE.ShaderEngine.fragmentShader
+			}   );
+		 
+			// other material properties
+			
+			//customMaterial2.transparent = true;
+		}else{
+			//if(!canvas_mode)
+				var customMaterial2 = new THREE.MeshPhongMaterial( { color: sc_eng_solid_color, metal: true } );
+			/*else
+				var customMaterial2 = new THREE.MeshBasicMaterial( { color: sc_eng_solid_color } );*/
 		}
+		customMaterial2.side = THREE.BackSide;
+		// apply the material to a surface    innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength)
+		var flatGeometry = new THREE.RingGeometry( 0.5, 2, 15 );
+		var surface = new THREE.Mesh( flatGeometry, customMaterial2 );
+		//surface.rotation.z = -Math.PI/2;
+		surface.position.set( 2.5, 0, -9.1 );
+		spacecraft.add(surface);
+		//scene.add( surface );
+		var engine_surface2 = surface.clone(); 
+		engine_surface2.position.set( -2.5, 0, -9.1 );
+		spacecraft.add(engine_surface2);
+		//scene.add( engine_surface2 );
+
+		spacecraft.scale.multiplyScalar(sc_scale);
+		scene.add(spacecraft);
 	}
 	function updateSpacecraft(){
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			SPACECRAFT UPDATE
 		//-----------------------------------------------------------------------------------------------------------------------
-		
-		if(true && config.sc_show_eng_texture){
+		spacecraftAxis.visible = config.show_sc_axis;
+		if(config.sc_show_eng_texture){
 			customUniforms2.time.value += delta;
 		}
-		//if(show_spacecraft){
-			if(!auto_rotate_sc){		
-				spacecraft.quaternion.copy(results.attitude);
-				spacecraft.matrixWorldNeedsUpdate = true;
-				spacecraft.updateMatrix();
-			}else{
-				spacecraft.rotation.x += 0.01;
-				spacecraft.rotation.y += 0.01;
-			}
-		//}
+		
+		if(!auto_rotate_sc){		
+			spacecraft.quaternion.copy(results.attitude);
+			spacecraft.matrixWorldNeedsUpdate = true;
+			spacecraft.updateMatrix();
+		}else{
+			spacecraft.rotation.x += 0.01;
+			spacecraft.rotation.y += 0.01;
+		}
 	}
 //***********************************************************************************************************************
 //		                                                SUN
@@ -1292,164 +1296,141 @@ var Attitude = function ()
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			SUN
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(config.show_sun){
-			if(config.show_sun_texture){
-				if(typeof textureSun === 'undefined'){
-				   // your code here.
-					textureSun= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/lava.jpg' );
-				};
-				if(typeof textureSun2 === 'undefined'){
-				   // your code here.
-					textureSun2= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/cloud.png' );
-				};
-				// base image texture for mesh
-				var lavaTexture = textureSun;
-				lavaTexture.wrapS = lavaTexture.wrapT = THREE.RepeatWrapping; 
-				// multiplier for distortion speed 		
-				var baseSpeed = 0.02;
-				// number of times to repeat texture in each direction
-				var repeatS = repeatT = 2.0;
-				// texture used to generate "randomness", distort all other textures
-				var noiseTexture = textureSun2;
-				noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping; 
-				// magnitude of noise effect
-				var noiseScale = 0.5;
-				// texture to additively blend with base image texture
-				var blendTexture = textureSun;
-				blendTexture.wrapS = blendTexture.wrapT = THREE.RepeatWrapping; 
-				// multiplier for distortion speed 
-				var blendSpeed = 0.08;
-				// adjust lightness/darkness of blended texture
-				var blendOffset = 0.45;
-				// texture to determine normal displacement
-				var bumpTexture = noiseTexture;
-				bumpTexture.wrapS = bumpTexture.wrapT = THREE.RepeatWrapping; 
-				// multiplier for distortion speed 		
-				var bumpSpeed   = 0.5;
-				// magnitude of normal displacement
-				var bumpScale   = 2.0;
-				
-				// use "this." to create global object
-				this.customUniforms = {
-					baseTexture: 	{ type: "t", value: lavaTexture },
-					baseSpeed:		{ type: "f", value: baseSpeed },
-					repeatS:		{ type: "f", value: repeatS },
-					repeatT:		{ type: "f", value: repeatT },
-					noiseTexture:	{ type: "t", value: noiseTexture },
-					noiseScale:		{ type: "f", value: noiseScale },
-					blendTexture:	{ type: "t", value: blendTexture },
-					blendSpeed: 	{ type: "f", value: blendSpeed },
-					blendOffset: 	{ type: "f", value: blendOffset },
-					bumpTexture:	{ type: "t", value: bumpTexture },
-					bumpSpeed: 		{ type: "f", value: bumpSpeed },
-					bumpScale: 		{ type: "f", value: bumpScale },
-					alpha: 			{ type: "f", value: 1.0 },
-					time: 			{ type: "f", value: 1.0 }
-				};
-				
-				// create custom material from the shader code above
-				//   that is within specially labeled script tags
-				var customMaterialSun = new THREE.ShaderMaterial( 
-				{
-					uniforms: customUniforms,
-					vertexShader:   THREE.ShaderEngine.vertexShader,
-					fragmentShader: THREE.ShaderSun.fragmentShader
-				}   );
-			}else{//Not using texture, solid color instead
-				//if(!canvas_mode)
-					var customMaterialSun = new THREE.MeshPhongMaterial( { color: sun_solid_color, metal: true } );
-				/*else
-					var customMaterialSun = new THREE.MeshBasicMaterial( { color: sun_solid_color } );*/
-			}
 			
-			var sunGeometry = new THREE.SphereGeometry( sun_radius, segments.sun_seg, segments.sun_seg );
-			sun = new THREE.Mesh(	sunGeometry, customMaterialSun );
-			sun.position.set(0, 85, 85);//Don't remove or the dashed material is not created
-			scene.add( sun );
+		if(typeof textureSun === 'undefined'){
+		   // your code here.
+			textureSun= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/lava.jpg' );
+		};
+		if(typeof textureSun2 === 'undefined'){
+		   // your code here.
+			textureSun2= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/cloud.png' );
+		};
+		// base image texture for mesh
+		var lavaTexture = textureSun;
+		lavaTexture.wrapS = lavaTexture.wrapT = THREE.RepeatWrapping; 
+		// multiplier for distortion speed 		
+		var baseSpeed = 0.02;
+		// number of times to repeat texture in each direction
+		var repeatS = repeatT = 2.0;
+		// texture used to generate "randomness", distort all other textures
+		var noiseTexture = textureSun2;
+		noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping; 
+		// magnitude of noise effect
+		var noiseScale = 0.5;
+		// texture to additively blend with base image texture
+		var blendTexture = textureSun;
+		blendTexture.wrapS = blendTexture.wrapT = THREE.RepeatWrapping; 
+		// multiplier for distortion speed 
+		var blendSpeed = 0.08;
+		// adjust lightness/darkness of blended texture
+		var blendOffset = 0.45;
+		// texture to determine normal displacement
+		var bumpTexture = noiseTexture;
+		bumpTexture.wrapS = bumpTexture.wrapT = THREE.RepeatWrapping; 
+		// multiplier for distortion speed 		
+		var bumpSpeed   = 0.5;
+		// magnitude of normal displacement
+		var bumpScale   = 2.0;
+		
+		// use "this." to create global object
+		this.customUniforms = {
+			baseTexture: 	{ type: "t", value: lavaTexture },
+			baseSpeed:		{ type: "f", value: baseSpeed },
+			repeatS:		{ type: "f", value: repeatS },
+			repeatT:		{ type: "f", value: repeatT },
+			noiseTexture:	{ type: "t", value: noiseTexture },
+			noiseScale:		{ type: "f", value: noiseScale },
+			blendTexture:	{ type: "t", value: blendTexture },
+			blendSpeed: 	{ type: "f", value: blendSpeed },
+			blendOffset: 	{ type: "f", value: blendOffset },
+			bumpTexture:	{ type: "t", value: bumpTexture },
+			bumpSpeed: 		{ type: "f", value: bumpSpeed },
+			bumpScale: 		{ type: "f", value: bumpScale },
+			alpha: 			{ type: "f", value: 1.0 },
+			time: 			{ type: "f", value: 1.0 }
+		};
 			
-			if(!config.sun_simple_glow){
-				// SHADER GLOW EFFECT
-				var customMaterialGlow = new THREE.ShaderMaterial( 
-				{
-					uniforms: 
-					{ 
-						"c":   { type: "f", value: 0.1 },
-						"p":   { type: "f", value: 3.4 },
-						glowColor: { type: "c", value: new THREE.Color(0xffff00) },
-						viewVector: { type: "v3", value: camera.position }
-					},
-					vertexShader:   THREE.ShaderGlow.vertexShader,
-					fragmentShader: THREE.ShaderGlow.fragmentShader,
-					side: THREE.FrontSide,
-					blending: THREE.AdditiveBlending,
-					transparent: true
-				}   );
-					
-				sunGlow = new THREE.Mesh( sunGeometry.clone(), customMaterialGlow.clone() );
-				
-				sunGlow.position = sun.position;
-				sunGlow.scale.multiplyScalar(1.8);
-				scene.add( sunGlow );
-			}else{
-				// SUPER SIMPLE GLOW EFFECT
-				// use sprite because it appears the same from all angles
-				if(typeof textureSun4 === 'undefined'){
-				   // your code here.
-					textureSun4= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/glow.png' );
-				};
-				var spriteMaterial = new THREE.SpriteMaterial( 
-				{ 
-					map: textureSun4, 
-					useScreenCoordinates: false,// alignment: THREE.SpriteAlignment.center,
-					color: 0xf79216, transparent: false, blending: THREE.AdditiveBlending
-				});
-				sunGlow = new THREE.Sprite( spriteMaterial );
-				sunGlow.scale.set(20, 20, 1.0);
-				sun.add(sunGlow); // this centers the glow at the mesh
-			}
-			
-			if(config.sun_show_line){
-				// SUN LINE
-				var lineGeometrySun = new THREE.Geometry();
-				lineGeometrySun.dynamic = true;
-				var vertArraySun = lineGeometrySun.vertices;
-				vertArraySun.push( new THREE.Vector3(sun.position.x,sun.position.y,sun.position.z), new THREE.Vector3(0, 0, 0) );
-				lineGeometrySun.computeLineDistances();
-				var lineMaterialSun = new THREE.LineDashedMaterial( { color: 0xffa100, dashSize: 2, gapSize: 2 } );
-				lineSun = new THREE.Line( lineGeometrySun, lineMaterialSun );
-				scene.add(lineSun);
-			}
-			
-			if(config.sun_show_dist){
-				// Sun Sprite
-				spriteSun = makeTextSprite( 1, " 1.05 AU ", 
-					{ fontsize: 24, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:1.5}, fontColor: {r:252, g:186, b:45, a:1.0} } );
-				sun.add( spriteSun );
-			}
-		}
+		// create custom material from the shader code above
+		//   that is within specially labeled script tags
+		var customMaterialSun = new THREE.ShaderMaterial( 
+		{
+			uniforms: customUniforms,
+			vertexShader:   THREE.ShaderEngine.vertexShader,
+			fragmentShader: THREE.ShaderSun.fragmentShader
+		}   );
+		
+		var customMaterialSunBasic = new THREE.MeshPhongMaterial( { color: sun_solid_color, metal: true } );
+		
+		var sunGeometry = new THREE.SphereGeometry( sun_radius, segments.sun_seg, segments.sun_seg );
+		sun = new THREE.Mesh( sunGeometry, customMaterialSunBasic );
+		sun.position.set(0, 85, 85);//Don't remove or the dashed material is not created
+		scene.add( sun );
+		
+		//Sun surface
+		var sunSurfaceGeometry = new THREE.SphereGeometry( sun_radius+1, segments.sun_seg, segments.sun_seg );
+		sunSurface = new THREE.Mesh( sunSurfaceGeometry, customMaterialSun );
+		sunSurface.position.set(0, 85, 85);//Don't remove or the dashed material is not created
+		scene.add( sunSurface );
+		
+		// Sun Glow
+		if(typeof textureSun4 === 'undefined'){
+			textureSun4= new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/lava/glow.png' );
+		};
+		var spriteMaterial = new THREE.SpriteMaterial( 
+		{ 
+			map: textureSun4, 
+			useScreenCoordinates: false,// alignment: THREE.SpriteAlignment.center,
+			color: 0xf79216, transparent: false, blending: THREE.AdditiveBlending
+		});
+		sunGlow = new THREE.Sprite( spriteMaterial );
+		sunGlow.scale.set(20, 20, 1.0);
+		sun.add(sunGlow); // this centers the glow at the mesh
+		
+		// Sun Line
+		var lineGeometrySun = new THREE.Geometry();
+		lineGeometrySun.dynamic = true;
+		var vertArraySun = lineGeometrySun.vertices;
+		vertArraySun.push( new THREE.Vector3(sun.position.x,sun.position.y,sun.position.z), new THREE.Vector3(0, 0, 0) );
+		lineGeometrySun.computeLineDistances();
+		var lineMaterialSun = new THREE.LineDashedMaterial( { color: 0xffa100, dashSize: 2, gapSize: 2 } );
+		lineSun = new THREE.Line( lineGeometrySun, lineMaterialSun );
+		scene.add(lineSun);
+		
+		// Sun Sprite
+		spriteSun = makeTextSprite( 1, " 1.05 AU ", 
+			{ fontsize: 24, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:1.5}, fontColor: {r:252, g:186, b:45, a:1.0} } );
+		sun.add( spriteSun );
 		
 	}
 	function updateSun() {
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			SUN UPDATE
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(config.show_sun){
-			if(config.show_sun_texture){
+		sun.visible = config.show_sun;
+		sunGlow.visible = config.show_sun;
+		sunSurface.visible = config.show_sun_texture;
+		if(sun.visible){
+			if(sunSurface.visible){
 				customUniforms.time.value += delta;
 			}
 			var sun_obj_pos = results.sun_direction.clone().normalize().multiplyScalar(sun_obj_dist);
 			sun.position = sun_obj_pos;
+			sunSurface.position = sun_obj_pos;
 			// change the direction this spotlight is facing
 			//if(!canvas_mode)
 				sunLight.position.set(sun.position.x,sun.position.y,sun.position.z);
-			if(config.sun_show_line){
+				
+			lineSun.visible = config.sun_show_line;
+			if(lineSun.visible){
 				// SUN LINE
 				lineSun.geometry.vertices[0] = new THREE.Vector3(sun.position.x,sun.position.y,sun.position.z);
 				lineSun.geometry.computeLineDistances();
 				lineSun.geometry.verticesNeedUpdate = true;
 				//lineSun.material.attributes.lineDistances.needsUpdate = true;
 			}
-			if(config.sun_show_dist){
+			
+			spriteSun.visible = config.sun_show_dist;
+			if(spriteSun.visible){
 				var sun_label_distance = results.sun_direction.length()/149597871;//convert Km to AU
 				var messageSun = " "+parseFloat(Math.round(sun_label_distance * 1000) / 1000).toFixed(3)+" AU ";
 				contextSun.fillStyle = "rgba(0, 0, 0, 1.0)"; // CLEAR WITH COLOR BLACK (new BG color)
@@ -1472,13 +1453,10 @@ var Attitude = function ()
 				contextSun.fillText( messageSun, borderThicknessSun, fontsizeSun + borderThicknessSun);
 				spriteSun.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
 			}
-			if(!config.sun_simple_glow){
-				moonGlow.material.uniforms.viewVector.value = 
-					new THREE.Vector3().subVectors( camera.position, moonGlow.position );
-			}
+				
 			if(config.sun_rotates){
 				//sun.rotation.x += 0.005;
-				sun.rotation.y += 0.001*config.sun_rotation_speed;
+				sunSurface.rotation.y += 0.001*config.sun_rotation_speed;
 			}
 		}
 	}
