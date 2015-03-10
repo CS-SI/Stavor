@@ -40,6 +40,7 @@ var Orbit = function()
 	var orbit, ref_orbit;
 	var spacecraft;
 	var projection, starSphere, containerEarth, axis_earth, earth_atm_1, earth_atm_2, earthCloud, earthMesh;
+	var refAxis, refAxisLabelX, refAxisLabelY, refAxisLabelZ;
 	// MAIN
 	//***********************************************************************************************************************
 	//		GLOBAL VARIABLES
@@ -406,26 +407,33 @@ var Orbit = function()
 		//			REFERENCE AXIS
 		//-----------------------------------------------------------------------------------------------------------------------
 		if(config.show_axis){
-			var axis = new THREE.AxisHelper( axis_radius );
-			axis.position.set( 0, 0, 0 );
-			scene.add( axis );
+			refAxis = new THREE.AxisHelper( axis_radius );
+			refAxis.position.set( 0, 0, 0 );
+			scene.add( refAxis );
 		}
 		if(config.show_axis_labels){
-			var sprite_X = makeTextSprite( 0, " X ", 
+			refAxisLabelX = makeTextSprite( 0, " X ", 
 			{ fontsize: 128, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:174, b:0, a:1.0} } );
-			sprite_X.position.set( axis_radius, 0, 0 );
-			scene.add( sprite_X );
+			refAxisLabelX.position.set( axis_radius, 0, 0 );
+			scene.add( refAxisLabelX );
 			
-			var sprite_Y = makeTextSprite( 0, " Y ", 
+			refAxisLabelY = makeTextSprite( 0, " Y ", 
 			{ fontsize: 128, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:16, g:219, b:2, a:1.0} } );
-			sprite_Y.position.set( 0, axis_radius, 0 );
-			scene.add( sprite_Y );
+			refAxisLabelY.position.set( 0, axis_radius, 0 );
+			scene.add( refAxisLabelY );
 			
-			var sprite_Z = makeTextSprite( 0, " Z ", 
+			refAxisLabelZ = makeTextSprite( 0, " Z ", 
 			{ fontsize: 128, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:50, g:119, b:255, a:1.0} } );
-			sprite_Z.position.set( 0, 0, axis_radius );
-			scene.add( sprite_Z );
+			refAxisLabelZ.position.set( 0, 0, axis_radius );
+			scene.add( refAxisLabelZ );
 		}
+		
+		onRenderFcts.push(function(delta, now){
+			refAxis.visible = config.show_axis;
+			refAxisLabelX.visible = config.show_axis_labels;
+			refAxisLabelY.visible = config.show_axis_labels;
+			refAxisLabelZ.visible = config.show_axis_labels;
+		});
 	}
 
 	function setSky(){
@@ -433,11 +441,10 @@ var Orbit = function()
 		starSphere = THREEx.Planets.createStarfield();
 		starSphere.name = "STARS";
 		scene.add(starSphere);
-		if(!config.show_sky){
-			starSphere.visible = false;
-		}else{
-			starSphere.visible = true;
-		}
+		
+		onRenderFcts.push(function(delta, now){
+			starSphere.visible = config.show_sky;
+		});
 	}
 
 	function initScene(){

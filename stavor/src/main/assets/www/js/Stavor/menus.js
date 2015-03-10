@@ -244,12 +244,24 @@ function updateOrbitOption(id,val){
 			switch(id) {
 				case "opt-orb-ShowSky":
 					global_simulation.config.orbit.show_sky = val;
+					//Prevent reinit scene
+					saveStoredVariables();
+					setOrbitReloaded();
+					return;
 					break;
 				case "opt-orb-ShowAxis":
 					global_simulation.config.orbit.show_axis = val;
+					//Prevent reinit scene
+					saveStoredVariables();
+					setOrbitReloaded();
+					return;
 					break;
 				case "opt-orb-ShowAxisLabels":
 					global_simulation.config.orbit.show_axis_labels = val;
+					//Prevent reinit scene
+					saveStoredVariables();
+					setOrbitReloaded();
+					return;
 					break;
 				case "opt-orb-ShowEarthModel":
 					global_simulation.config.orbit.show_earth = val;
