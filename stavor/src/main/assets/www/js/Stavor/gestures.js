@@ -18,7 +18,7 @@ function initializeMapMenuPanGestures(){
 			switchMapMenu();
 		}
 	});
-	hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 40 });
+	hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 150 });
 }
 
 function initializeOrbitMenuPanGestures(){
@@ -32,7 +32,7 @@ function initializeOrbitMenuPanGestures(){
 			switchOrbitMenu();
 		}
 	});
-	hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 40 });
+	hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 150 });
 }
 
 function initializeAttitudeMenuPanGestures(){
@@ -46,7 +46,7 @@ function initializeAttitudeMenuPanGestures(){
 			switchAttitudeMenu();
 		}
 	});
-	hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 40 });
+	hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 150 });
 }
 
 function initializeInfoPanelPanGestures(){
@@ -76,5 +76,5 @@ function initializeMissionPanGestures(){
 			switchMissionsListStatus();
 		}
 	});
-	hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 40 });
+	hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 100 });
 }
