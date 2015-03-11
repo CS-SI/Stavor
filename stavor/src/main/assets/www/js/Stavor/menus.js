@@ -413,7 +413,6 @@ function switchAttitudeMenu(){
 	if(!global_menus.attitude.isOpen){
 		updateAttitudeOptions();
 		menu.className = "tabContainer openVisMenu";
-		document.getElementById("AttitudeMenuLoading").style.display="none";
 	}else{
 		menu.className = "tabContainer closeVisMenu";
 	}
