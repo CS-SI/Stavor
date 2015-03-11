@@ -2,19 +2,17 @@ function localizeStrings(){
 	$(function(){
 		var lang = getURLParameter('lang');
 		if(lang){
-			var opts = { pathPrefix: "lang", language: lang, skipLanguage: /^en/, callback: dialogCallback };
-			$("[data-localize]").localize("strings", opts)
+			$("[data-translate]").jqTranslate('strings',{defaultLang: 'en', asyncLangLoad: false, path: "lang", onComplete: dialogCallback, forceLang: lang});
 		}else{
-			var opts = { pathPrefix: "lang", skipLanguage: /^en/, callback: dialogCallback };
-			$("[data-localize]").localize("strings", opts)
+			$("[data-translate]").jqTranslate('strings',{defaultLang: 'en', asyncLangLoad: false, path: "lang", onComplete: dialogCallback});
 		}
 	});
 	
 }
 
-function dialogCallback(data, defaultCallback){
+function dialogCallback(){
 	//data.title = data.title + currentBugName();
-	defaultCallback(data);
+	//defaultCallback(data);
 	localizeDynamicStrings();
 }
 

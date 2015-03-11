@@ -29,7 +29,7 @@
 	<!--<link rel="stylesheet" href="js/jQuery/jquery.mobile-1.4.5.min.css"/>-->
 	<script type='text/javascript' src="js/jQuery/jquery-2.1.3.min.js"></script>
 	<!--<script type='text/javascript' src="js/jQuery/jquery.mobile-1.4.5.min.js"></script>-->
-	<script type='text/javascript' src="js/jQuery/Localization/jquery.localize.min.js"></script>
+	<script type='text/javascript' src="js/jQuery/Localization/jqueryTranslator.min.js"></script>
 	<script type='text/javascript' src="js/Animations/css-fadeslide-v1.4.0.min.js"></script>
 	<!-- Spectrum (color picker) -->
 	<script type="text/javascript" src="js/Spectrum/spectrum.js"></script>
@@ -446,23 +446,23 @@
 		<div id="MapMenuLoading" class="ViewMenuLoading"></div>
 		<div id="Maptabs" class="tabs">
 		  <ul>
-			<li data-localize="menu_map_coverage_header" id="MaptabHeader_1">Coverage</li>
-			<li data-localize="menu_map_stations_header" id="MaptabHeader_2">Stations</li>
-			<li data-localize="menu_map_models_header" id="MaptabHeader_3">Models</li>
+			<li data-translate="menu_map_coverage_header" id="MaptabHeader_1">Coverage</li>
+			<li data-translate="menu_map_stations_header" id="MaptabHeader_2">Stations</li>
+			<li data-translate="menu_map_models_header" id="MaptabHeader_3">Models</li>
 		  </ul>
 		</div>
 		<div id="Maptabscontent" class="tabscontent">
 		  <div class="tabpage" id="Maptabpage_1">
-			<h4 data-localize="menu_map_coverage_sensor_title">Sensor/Antenna</h4>
-			<p><span data-localize="menu_map_models_show_fov_field">Show FOV:</span><input id="opt-map-ShowFov" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_map_coverage_aperture_field">Aperture angle [Deg]:</span><input id="opt-map-ApertureAngle" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
-			<h5 data-localize="menu_map_coverage_direction_title">Direction</h5>
-			<p><span data-localize="menu_map_coverage_direction_x_field">X:</span><input id="opt-map-DirectionX" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_map_coverage_direction_y_field">Y:</span><input id="opt-map-DirectionY" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_map_coverage_direction_z_field">Z:</span><input id="opt-map-DirectionZ" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
+			<h4 data-translate="menu_map_coverage_sensor_title">Sensor/Antenna</h4>
+			<p><span data-translate="menu_map_models_show_fov_field">Show FOV:</span><input id="opt-map-ShowFov" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_map_coverage_aperture_field">Aperture angle [Deg]:</span><input id="opt-map-ApertureAngle" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
+			<h5 data-translate="menu_map_coverage_direction_title">Direction</h5>
+			<p><span data-translate="menu_map_coverage_direction_x_field">X:</span><input id="opt-map-DirectionX" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_map_coverage_direction_y_field">Y:</span><input id="opt-map-DirectionY" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_map_coverage_direction_z_field">Z:</span><input id="opt-map-DirectionZ" type="number" style="float: right;" onchange="updateMapOption(this.id,this.value)"class="MenuField"/></p>
 		  </div>
 		  <div class="tabpage" id="Maptabpage_2">
-			<h4 data-localize="menu_map_stations_ground_title" style="display: none;">Ground stations</h4>
+			<h4 data-translate="menu_map_stations_ground_title" style="display: none;">Ground stations</h4>
 			<div id="StationsMenu">
 				<div class="StationsMenuItem"><input id="CreateStationButton" class="StationsMenuButton" type="image" src="style/icons/new.png" title="Create Station" onclick="openStationEditor(-1)"/></div>
 				<div class="StationsMenuItem"><input id="EditStationButton" class="StationsMenuButton" type="image" src="style/icons/edit.png" title="Edit Station" onclick="openStationEditor(global_stations.active)"/></div>
@@ -477,11 +477,11 @@
 			</div>
 		  </div>
 		  <div class="tabpage" id="Maptabpage_3">
-			<h4 data-localize="menu_map_models_satellite_title">Satellite</h4>
-			<p><span data-localize="menu_map_models_show_track_field">Show ground track:</span><input id="opt-map-ShowTrack" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
-			<h4 data-localize="menu_map_models_sun_title">Sun</h4>
-			<p><span data-localize="menu_map_models_show_sun_icon_field">Show icon:</span><input id="opt-map-ShowSunIcon" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_map_models_show_sun_terminator_field">Show terminator:</span><input id="opt-map-ShowSunTerminator" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_map_models_satellite_title">Satellite</h4>
+			<p><span data-translate="menu_map_models_show_track_field">Show ground track:</span><input id="opt-map-ShowTrack" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_map_models_sun_title">Sun</h4>
+			<p><span data-translate="menu_map_models_show_sun_icon_field">Show icon:</span><input id="opt-map-ShowSunIcon" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_map_models_show_sun_terminator_field">Show terminator:</span><input id="opt-map-ShowSunTerminator" type="checkbox" style="float: right;" onchange="updateMapOption(this.id,this.checked)"/></p>
 		  </div>
 		</div>
 	</div>
@@ -494,40 +494,40 @@
 	<div id="OrbittabContainer" class="tabContainer">
 		<div id="Orbittabs" class="tabs">
 		  <ul>
-			<li data-localize="menu_orb_models_header" id="OrbittabHeader_1">Models</li>
-			<li data-localize="menu_orb_ref_orbit_header" id="OrbittabHeader_2">Ref. Orbit</li>
+			<li data-translate="menu_orb_models_header" id="OrbittabHeader_1">Models</li>
+			<li data-translate="menu_orb_ref_orbit_header" id="OrbittabHeader_2">Ref. Orbit</li>
 		  </ul>
 		</div>
 		<div id="Orbittabscontent" class="tabscontent">
 		  <div class="tabpage" id="Orbittabpage_1">
-			<h4 data-localize="menu_orb_models_general_title">General</h4>
-			<p><span data-localize="menu_orb_models_show_sky_field">Show sky:</span><input id="opt-orb-ShowSky" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_models_show_axis_field">Show axis:</span><input id="opt-orb-ShowAxis" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_models_show_axis_labels_field">Show axis labels:</span><input id="opt-orb-ShowAxisLabels" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<h4 data-localize="menu_orb_models_earth_title">Earth</h4>
-			<p><span data-localize="menu_orb_models_show_earth_model_field">Show Earth model:</span><input id="opt-orb-ShowEarthModel" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_orb_models_show_earth_axis_field">Show Earth axis:</span><input id="opt-orb-ShowEarthAxis" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_orb_models_show_earth_atmosphere_field">Show Earth atmosphere:</span><input id="opt-orb-ShowEarthAtmosphere" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_orb_models_show_earth_clouds_field">Show Earth clouds:</span><input id="opt-orb-ShowEarthClouds" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<h4 data-localize="menu_orb_models_reference_title">Reference</h4>
-			<p><span data-localize="menu_orb_models_show_xy_plane_field">Show XY plane:</span><input id="opt-orb-ShowXyPlane" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_models_xy_plane_color_field">Color:</span><input id="opt-orb-PlaneXyColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
-			<h4 data-localize="menu_orb_models_spacecraft_title">Spacecraft</h4>
-			<p><span data-localize="menu_orb_models_show_spacecraft_field">Show spacecraft:</span><input id="opt-orb-ShowSpacecraft" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_models_show_projection_field">Show projection:</span><input id="opt-orb-ShowProjection" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_models_spacecraft_color_field">Color:</span><input id="opt-orb-SpacecraftColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
-			<h4 data-localize="menu_orb_models_orbit_title">Orbit</h4>
-			<p><span data-localize="menu_orb_models_orbit_color_field">Color:</span><input id="opt-orb-OrbitColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<h4 data-translate="menu_orb_models_general_title">General</h4>
+			<p><span data-translate="menu_orb_models_show_sky_field">Show sky:</span><input id="opt-orb-ShowSky" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_orb_models_show_axis_field">Show axis:</span><input id="opt-orb-ShowAxis" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_orb_models_show_axis_labels_field">Show axis labels:</span><input id="opt-orb-ShowAxisLabels" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_orb_models_earth_title">Earth</h4>
+			<p><span data-translate="menu_orb_models_show_earth_model_field">Show Earth model:</span><input id="opt-orb-ShowEarthModel" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_orb_models_show_earth_axis_field">Show Earth axis:</span><input id="opt-orb-ShowEarthAxis" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_orb_models_show_earth_atmosphere_field">Show Earth atmosphere:</span><input id="opt-orb-ShowEarthAtmosphere" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_orb_models_show_earth_clouds_field">Show Earth clouds:</span><input id="opt-orb-ShowEarthClouds" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_orb_models_reference_title">Reference</h4>
+			<p><span data-translate="menu_orb_models_show_xy_plane_field">Show XY plane:</span><input id="opt-orb-ShowXyPlane" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_orb_models_xy_plane_color_field">Color:</span><input id="opt-orb-PlaneXyColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<h4 data-translate="menu_orb_models_spacecraft_title">Spacecraft</h4>
+			<p><span data-translate="menu_orb_models_show_spacecraft_field">Show spacecraft:</span><input id="opt-orb-ShowSpacecraft" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_orb_models_show_projection_field">Show projection:</span><input id="opt-orb-ShowProjection" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_orb_models_spacecraft_color_field">Color:</span><input id="opt-orb-SpacecraftColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<h4 data-translate="menu_orb_models_orbit_title">Orbit</h4>
+			<p><span data-translate="menu_orb_models_orbit_color_field">Color:</span><input id="opt-orb-OrbitColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
 		  </div>
 		  <div class="tabpage" id="Orbittabpage_2">
-			<p><span data-localize="menu_orb_ref_orbit_show_orbit_field">Show orbit:</span><input id="opt-orb-ShowRefOrbit" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_orb_ref_orbit_orbit_color_field">Color:</span><input id="opt-orb-RefOrbitColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
-			<h4 data-localize="menu_orb_ref_orbit_orbit_title">Orbit</h4>
-			<p><span data-localize="menu_orb_ref_orbit_orbit_a_field">Semi-major axis (m):</span><input id="opt-orb-RefOrbit-a" type="number" min="0" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
-			<p><span data-localize="menu_orb_ref_orbit_orbit_e_field">Eccentricity:</span><input id="opt-orb-RefOrbit-e" type="number" min="0" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
-			<p><span data-localize="menu_orb_ref_orbit_orbit_i_field" id="RefOrbit-Inclination">Inclination (rad):</span><input id="opt-orb-RefOrbit-i" type="number" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
-			<p><span data-localize="menu_orb_ref_orbit_orbit_omega_field" id="RefOrbit-Omega">Arg. Perigee (rad):</span><input id="opt-orb-RefOrbit-omega" type="number" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
-			<p><span data-localize="menu_orb_ref_orbit_orbit_raan_field" id="RefOrbit-Raan">RAAN (rad):</span><input id="opt-orb-RefOrbit-raan" type="number" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<p><span data-translate="menu_orb_ref_orbit_show_orbit_field">Show orbit:</span><input id="opt-orb-ShowRefOrbit" type="checkbox" style="float: right;" onchange="updateOrbitOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_orb_ref_orbit_orbit_color_field">Color:</span><input id="opt-orb-RefOrbitColor" type="color" class="MenuColorField" style="float: right;" onchange="updateOrbitOption(this.id,this.value)"/></p>
+			<h4 data-translate="menu_orb_ref_orbit_orbit_title">Orbit</h4>
+			<p><span data-translate="menu_orb_ref_orbit_orbit_a_field">Semi-major axis (m):</span><input id="opt-orb-RefOrbit-a" type="number" min="0" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<p><span data-translate="menu_orb_ref_orbit_orbit_e_field">Eccentricity:</span><input id="opt-orb-RefOrbit-e" type="number" min="0" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<p><span data-translate="menu_orb_ref_orbit_orbit_i_field" id="RefOrbit-Inclination">Inclination (rad):</span><input id="opt-orb-RefOrbit-i" type="number" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<p><span data-translate="menu_orb_ref_orbit_orbit_omega_field" id="RefOrbit-Omega">Arg. Perigee (rad):</span><input id="opt-orb-RefOrbit-omega" type="number" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
+			<p><span data-translate="menu_orb_ref_orbit_orbit_raan_field" id="RefOrbit-Raan">RAAN (rad):</span><input id="opt-orb-RefOrbit-raan" type="number" step="any" style="float: right;" onchange="updateOrbitOption(this.id,this.value)" class="MenuField"/></p>
 			<div id="AngleUnitsSelectionRadsRefOrbit" class="AngleUnitsSelected" onclick="setAngleUnitsRads(true)">Rads</div><div id="AngleUnitsSelectionDegsRefOrbit" class="AngleUnitsUnselected" onclick="setAngleUnitsRads(false)">Degs</div>
 		  </div>
 		</div>
@@ -540,105 +540,105 @@
 	<div id="AttitudetabContainer" class="tabContainer">
 		<div id="Attitudetabs" class="tabs">
 		  <ul>
-			<li data-localize="menu_att_indicators_header" id="AttitudetabHeader_1">Indicators</li>
-			<li data-localize="menu_att_measures_header" id="AttitudetabHeader_2">Measures</li>
-			<li data-localize="menu_att_models_header" id="AttitudetabHeader_3">Models</li>
+			<li data-translate="menu_att_indicators_header" id="AttitudetabHeader_1">Indicators</li>
+			<li data-translate="menu_att_measures_header" id="AttitudetabHeader_2">Measures</li>
+			<li data-translate="menu_att_models_header" id="AttitudetabHeader_3">Models</li>
 		  </ul>
 		</div>
 		<div id="Attitudetabscontent" class="tabscontent">
 		  <div class="tabpage" id="Attitudetabpage_1">
-			<h4 data-localize="menu_att_indicators_basic_title" style="display: none;">Basic</h4>
-			<h5 data-localize="menu_att_indicators_velocity_title">Velocity</h5>
-			<p><span data-localize="menu_att_indicators_show_velocity_field">Show velocity:</span><input id="opt-att-ShowVelocity" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_indicators_limit_velocity_field">Limit (Km/s):</span><input id="opt-att-LimitVelocity" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_velocity_field">Color:</span><input id="opt-att-VelocityColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<h5 data-localize="menu_att_indicators_acceleration_title">Acceleration</h5>
-			<p><span data-localize="menu_att_indicators_show_acceleration_field">Show acceleration:</span><input id="opt-att-ShowAcceleration" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_indicators_limit_acceleration_field">Limit (Km/s2):</span><input id="opt-att-LimitAcceleration" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_acceleration_field">Color:</span><input id="opt-att-AccelerationColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<h5 data-localize="menu_att_indicators_momentum_title">Momentum</h5>
-			<p><span data-localize="menu_att_indicators_show_momentum_field">Show momentum:</span><input id="opt-att-ShowMomentum" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_indicators_color_momentum_field">Color:</span><input id="opt-att-MomentumColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<h4 data-localize="menu_att_indicators_extra_title">Extra</h4>
-			<h5 data-localize="menu_att_indicators_target_title">Target</h5>
-			<p><span data-localize="menu_att_indicators_show_target_field">Show target:</span><input id="opt-att-ShowTarget" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_indicators_target_x_field">X:</span><input id="opt-att-TargetValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_target_y_field">Y:</span><input id="opt-att-TargetValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_target_z_field">Z:</span><input id="opt-att-TargetValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_target_field">Color:</span><input id="opt-att-TargetColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<h5 data-localize="menu_att_indicators_vector_title">Vector</h5>
-			<p><span data-localize="menu_att_indicators_show_vector_field">Show vector:</span><input id="opt-att-ShowVector" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_indicators_vector_limit_field">Limit:</span><input id="opt-att-LimitVector" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_vector_x_field">X:</span><input id="opt-att-VectorValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_vector_y_field">Y:</span><input id="opt-att-VectorValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_vector_z_field">Z:</span><input id="opt-att-VectorValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_vector_field">Color:</span><input id="opt-att-VectorColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<h5 data-localize="menu_att_indicators_direction_title">Direction</h5>
-			<p><span data-localize="menu_att_indicators_show_direction_field">Show direction:</span><input id="opt-att-ShowDirection" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_indicators_direction_x_field">X:</span><input id="opt-att-DirectionValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_direction_y_field">Y:</span><input id="opt-att-DirectionValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_direction_z_field">Z:</span><input id="opt-att-DirectionValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p><span data-localize="menu_att_indicators_color_direction_field">Color:</span><input id="opt-att-DirectionColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h4 data-translate="menu_att_indicators_basic_title" style="display: none;">Basic</h4>
+			<h5 data-translate="menu_att_indicators_velocity_title">Velocity</h5>
+			<p><span data-translate="menu_att_indicators_show_velocity_field">Show velocity:</span><input id="opt-att-ShowVelocity" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_indicators_limit_velocity_field">Limit (Km/s):</span><input id="opt-att-LimitVelocity" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_color_velocity_field">Color:</span><input id="opt-att-VelocityColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h5 data-translate="menu_att_indicators_acceleration_title">Acceleration</h5>
+			<p><span data-translate="menu_att_indicators_show_acceleration_field">Show acceleration:</span><input id="opt-att-ShowAcceleration" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_indicators_limit_acceleration_field">Limit (Km/s2):</span><input id="opt-att-LimitAcceleration" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_color_acceleration_field">Color:</span><input id="opt-att-AccelerationColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h5 data-translate="menu_att_indicators_momentum_title">Momentum</h5>
+			<p><span data-translate="menu_att_indicators_show_momentum_field">Show momentum:</span><input id="opt-att-ShowMomentum" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_indicators_color_momentum_field">Color:</span><input id="opt-att-MomentumColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h4 data-translate="menu_att_indicators_extra_title">Extra</h4>
+			<h5 data-translate="menu_att_indicators_target_title">Target</h5>
+			<p><span data-translate="menu_att_indicators_show_target_field">Show target:</span><input id="opt-att-ShowTarget" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_indicators_target_x_field">X:</span><input id="opt-att-TargetValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_target_y_field">Y:</span><input id="opt-att-TargetValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_target_z_field">Z:</span><input id="opt-att-TargetValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_color_target_field">Color:</span><input id="opt-att-TargetColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h5 data-translate="menu_att_indicators_vector_title">Vector</h5>
+			<p><span data-translate="menu_att_indicators_show_vector_field">Show vector:</span><input id="opt-att-ShowVector" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_indicators_vector_limit_field">Limit:</span><input id="opt-att-LimitVector" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_vector_x_field">X:</span><input id="opt-att-VectorValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_vector_y_field">Y:</span><input id="opt-att-VectorValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_vector_z_field">Z:</span><input id="opt-att-VectorValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_color_vector_field">Color:</span><input id="opt-att-VectorColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h5 data-translate="menu_att_indicators_direction_title">Direction</h5>
+			<p><span data-translate="menu_att_indicators_show_direction_field">Show direction:</span><input id="opt-att-ShowDirection" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_indicators_direction_x_field">X:</span><input id="opt-att-DirectionValueX" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_direction_y_field">Y:</span><input id="opt-att-DirectionValueY" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_direction_z_field">Z:</span><input id="opt-att-DirectionValueZ" type="number" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p><span data-translate="menu_att_indicators_color_direction_field">Color:</span><input id="opt-att-DirectionColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
 		  </div>
 		  <div class="tabpage" id="Attitudetabpage_2">
-			<h4 data-localize="menu_att_measures_inclination_title">Inclination</h4>
-			<p><span data-localize="menu_att_measures_show_planes_field">Show planes:</span><input id="opt-att-ShowOrbitalPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_att_measures_show_inclination_field">Show inclination:</span><input id="opt-att-ShowInclination" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_att_measures_inclination_title">Inclination</h4>
+			<p><span data-translate="menu_att_measures_show_planes_field">Show planes:</span><input id="opt-att-ShowOrbitalPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_att_measures_show_inclination_field">Show inclination:</span><input id="opt-att-ShowInclination" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<!--<p>Show Earth rotation plane:<input id="opt-att-ShowEarthPlane" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>-->
-			<p><span data-localize="menu_att_measures_rot_plane_color_field">Rotation plane color:</span><input id="opt-att-RotationPlaneColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p><br>
-			<p><span data-localize="menu_att_measures_orb_plane_color_field">Orbital plane color:</span><input id="opt-att-OrbitalPlaneColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
-			<h4 data-localize="menu_att_measures_spheric_title">Spheric coordinates</h4>
-			<p><span data-localize="menu_att_measures_show_spheric_field">Show spheric coordinates:</span><input id="opt-att-ShowSphericCoordinates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_measures_rot_plane_color_field">Rotation plane color:</span><input id="opt-att-RotationPlaneColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p><br>
+			<p><span data-translate="menu_att_measures_orb_plane_color_field">Orbital plane color:</span><input id="opt-att-OrbitalPlaneColor" type="color" class="MenuColorField" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"/></p>
+			<h4 data-translate="menu_att_measures_spheric_title">Spheric coordinates</h4>
+			<p><span data-translate="menu_att_measures_show_spheric_field">Show spheric coordinates:</span><input id="opt-att-ShowSphericCoordinates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<select id="opt-att-SphericCoordsSelection" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField">
-				<option value="0" data-localize="menu_att_measures_value_velocity">Velocity</option>
-				<option value="1" data-localize="menu_att_measures_value_acceleration">Acceleration</option>
-				<option value="2" data-localize="menu_att_measures_value_momentum">Momentum</option>
-				<option value="3" data-localize="menu_att_measures_value_earth">Earth</option>
-				<option value="4" data-localize="menu_att_measures_value_sun">Sun</option>
+				<option value="0" data-translate="menu_att_measures_value_velocity">Velocity</option>
+				<option value="1" data-translate="menu_att_measures_value_acceleration">Acceleration</option>
+				<option value="2" data-translate="menu_att_measures_value_momentum">Momentum</option>
+				<option value="3" data-translate="menu_att_measures_value_earth">Earth</option>
+				<option value="4" data-translate="menu_att_measures_value_sun">Sun</option>
 			</select>
-			<h4 data-localize="menu_att_measures_angles_title">Angles</h4>
-			<p><span data-localize="menu_att_measures_show_angles_field">Show vectors angle:</span><input id="opt-att-ShowVectorsAngle" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_att_measures_angles_title">Angles</h4>
+			<p><span data-translate="menu_att_measures_show_angles_field">Show vectors angle:</span><input id="opt-att-ShowVectorsAngle" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 			<select id="opt-att-AnglesSelection1" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField">
-				<option value="0" data-localize="menu_att_measures_value_velocity">Velocity</option>
-				<option value="1" data-localize="menu_att_measures_value_acceleration">Acceleration</option>
-				<option value="2" data-localize="menu_att_measures_value_momentum">Momentum</option>
-				<option value="3" data-localize="menu_att_measures_value_earth">Earth</option>
-				<option value="4" data-localize="menu_att_measures_value_sun">Sun</option>
+				<option value="0" data-translate="menu_att_measures_value_velocity">Velocity</option>
+				<option value="1" data-translate="menu_att_measures_value_acceleration">Acceleration</option>
+				<option value="2" data-translate="menu_att_measures_value_momentum">Momentum</option>
+				<option value="3" data-translate="menu_att_measures_value_earth">Earth</option>
+				<option value="4" data-translate="menu_att_measures_value_sun">Sun</option>
 			</select>
 			<select id="opt-att-AnglesSelection2" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField">
-				<option value="0" data-localize="menu_att_measures_value_velocity">Velocity</option>
-				<option value="1" data-localize="menu_att_measures_value_acceleration">Acceleration</option>
-				<option value="2" data-localize="menu_att_measures_value_momentum">Momentum</option>
-				<option value="3" data-localize="menu_att_measures_value_earth">Earth</option>
-				<option value="4" data-localize="menu_att_measures_value_sun">Sun</option>
+				<option value="0" data-translate="menu_att_measures_value_velocity">Velocity</option>
+				<option value="1" data-translate="menu_att_measures_value_acceleration">Acceleration</option>
+				<option value="2" data-translate="menu_att_measures_value_momentum">Momentum</option>
+				<option value="3" data-translate="menu_att_measures_value_earth">Earth</option>
+				<option value="4" data-translate="menu_att_measures_value_sun">Sun</option>
 			</select>
 		  </div>
 		  <div class="tabpage" id="Attitudetabpage_3">
-			<h4 data-localize="menu_att_models_general_title">General</h4>
-			<p><span data-localize="menu_att_models_show_sky_field">Show sky:</span><input id="opt-att-ShowSky" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_models_show_axis_field">Show axis:</span><input id="opt-att-ShowAxis" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_models_show_axis_labels_field">Show axis labels:</span><input id="opt-att-ShowAxisLabels" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<h4 data-localize="menu_att_models_reference_title">Reference</h4>
-			<p><span data-localize="menu_att_models_show_ref_sphere_field">Show ref. sphere:</span><input id="opt-att-ShowSphere" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_models_show_mini_spheres_field">Show mini spheres:</span><input id="opt-att-ShowMiniSpheres" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_models_show_circles_field">Show circles:</span><input id="opt-att-ShowCircles" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<h4 data-localize="menu_att_models_spacecraft_title">Spacecraft</h4>
-			<p><span data-localize="menu_att_models_show_sc_axis_field">Show spacecraft axis:</span><input id="opt-att-ShowScAxis" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_models_show_engine_field">Show engine texture:</span><input id="opt-att-ShowEngineTexture" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<h4 data-localize="menu_att_models_sun_title">Sun</h4>
-			<p><span data-localize="menu_att_models_sun_show_model_field">Show model:</span><input id="opt-att-ShowSunModel" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_att_models_sun_show_surface_field">Show surface:</span><input id="opt-att-ShowSunSurface" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_att_models_sun_rotates_field">Sun rotates:</span><input id="opt-att-SunRotates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_models_sun_rotation_field">Rotation speed [0-9]:</span><input id="opt-att-SunRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)" class="MenuField"/></p>
-			<p>&bull;<span data-localize="menu_att_models_sun_show_line_field">Show line:</span><input id="opt-att-ShowSunLine" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_att_models_sun_show_distance_field">Show distance:</span><input id="opt-att-ShowSunDistance" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<h4 data-localize="menu_att_models_earth_title">Earth</h4>
-			<p><span data-localize="menu_att_models_earth_show_model_field">Show model:</span><input id="opt-att-ShowEarthModel" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_att_models_earth_show_surface_field">Show surface:</span><input id="opt-att-ShowEarthSurface" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_att_models_earth_rotates_field">Earth rotates:</span><input id="opt-att-EarthRotates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p><span data-localize="menu_att_models_earth_rotation_field">Rotation speed [0-9]:</span><input id="opt-att-EarthRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
-			<p>&bull;<span data-localize="menu_att_models_earth_show_line_field">Show line:</span><input id="opt-att-ShowEarthLine" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
-			<p>&bull;<span data-localize="menu_att_models_earth_show_distance_field">Show distance:</span><input id="opt-att-ShowEarthDistance" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_att_models_general_title">General</h4>
+			<p><span data-translate="menu_att_models_show_sky_field">Show sky:</span><input id="opt-att-ShowSky" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_models_show_axis_field">Show axis:</span><input id="opt-att-ShowAxis" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_models_show_axis_labels_field">Show axis labels:</span><input id="opt-att-ShowAxisLabels" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_att_models_reference_title">Reference</h4>
+			<p><span data-translate="menu_att_models_show_ref_sphere_field">Show ref. sphere:</span><input id="opt-att-ShowSphere" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_models_show_mini_spheres_field">Show mini spheres:</span><input id="opt-att-ShowMiniSpheres" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_models_show_circles_field">Show circles:</span><input id="opt-att-ShowCircles" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_att_models_spacecraft_title">Spacecraft</h4>
+			<p><span data-translate="menu_att_models_show_sc_axis_field">Show spacecraft axis:</span><input id="opt-att-ShowScAxis" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_models_show_engine_field">Show engine texture:</span><input id="opt-att-ShowEngineTexture" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_att_models_sun_title">Sun</h4>
+			<p><span data-translate="menu_att_models_sun_show_model_field">Show model:</span><input id="opt-att-ShowSunModel" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_att_models_sun_show_surface_field">Show surface:</span><input id="opt-att-ShowSunSurface" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_att_models_sun_rotates_field">Sun rotates:</span><input id="opt-att-SunRotates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_models_sun_rotation_field">Rotation speed [0-9]:</span><input id="opt-att-SunRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)" class="MenuField"/></p>
+			<p>&bull;<span data-translate="menu_att_models_sun_show_line_field">Show line:</span><input id="opt-att-ShowSunLine" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_att_models_sun_show_distance_field">Show distance:</span><input id="opt-att-ShowSunDistance" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<h4 data-translate="menu_att_models_earth_title">Earth</h4>
+			<p><span data-translate="menu_att_models_earth_show_model_field">Show model:</span><input id="opt-att-ShowEarthModel" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_att_models_earth_show_surface_field">Show surface:</span><input id="opt-att-ShowEarthSurface" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_att_models_earth_rotates_field">Earth rotates:</span><input id="opt-att-EarthRotates" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p><span data-translate="menu_att_models_earth_rotation_field">Rotation speed [0-9]:</span><input id="opt-att-EarthRotationSpeed" type="number" min="0" max="9" step="1" style="float: right;" onchange="updateAttitudeOption(this.id,this.value)"class="MenuField"/></p>
+			<p>&bull;<span data-translate="menu_att_models_earth_show_line_field">Show line:</span><input id="opt-att-ShowEarthLine" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
+			<p>&bull;<span data-translate="menu_att_models_earth_show_distance_field">Show distance:</span><input id="opt-att-ShowEarthDistance" type="checkbox" style="float: right;" onchange="updateAttitudeOption(this.id,this.checked)"/></p>
 		  </div>
 		</div>
 	</div>
@@ -646,22 +646,22 @@
 	<div id="ViewButtonAttitude" class="ViewButton" onclick="switchAttitudeViewTypeMenu()" ></div>
 	<div id="AttitudeViewTypeMenu" class="ViewTypeMenu ViewTypeMenuClosed">
 		<div class="ViewTypeGroup">
-			<h5 class="TitleViewTypes" data-localize="views_menu_ref_title">Ref. Frame</h5>
-			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton selected" id="att-view-FREE" onclick="changeAttitudeSelectedViewType('FREE')" data-localize="views_menu_ref_free_field">Free</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-XYZ" onclick="changeAttitudeSelectedViewType('XYZ')" data-localize="views_menu_ref_xyz_field">XYZ</div></div>
-			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-X" onclick="changeAttitudeSelectedViewType('X')" data-localize="views_menu_ref_x_field">X</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view--X" onclick="changeAttitudeSelectedViewType('-X')" data-localize="views_menu_ref_xx_field">-X</div></div>
-			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Y" onclick="changeAttitudeSelectedViewType('Y')" data-localize="views_menu_ref_y_field">Y</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view--Y" onclick="changeAttitudeSelectedViewType('-Y')" data-localize="views_menu_ref_yy_field">-Y</div></div>
-			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Z" onclick="changeAttitudeSelectedViewType('Z')" data-localize="views_menu_ref_z_field">Z</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view--Z" onclick="changeAttitudeSelectedViewType('-Z')" data-localize="views_menu_ref_zz_field">-Z</div></div>
+			<h5 class="TitleViewTypes" data-translate="views_menu_ref_title">Ref. Frame</h5>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton selected" id="att-view-FREE" onclick="changeAttitudeSelectedViewType('FREE')" data-translate="views_menu_ref_free_field">Free</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-XYZ" onclick="changeAttitudeSelectedViewType('XYZ')" data-translate="views_menu_ref_xyz_field">XYZ</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-X" onclick="changeAttitudeSelectedViewType('X')" data-translate="views_menu_ref_x_field">X</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view--X" onclick="changeAttitudeSelectedViewType('-X')" data-translate="views_menu_ref_xx_field">-X</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Y" onclick="changeAttitudeSelectedViewType('Y')" data-translate="views_menu_ref_y_field">Y</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view--Y" onclick="changeAttitudeSelectedViewType('-Y')" data-translate="views_menu_ref_yy_field">-Y</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Z" onclick="changeAttitudeSelectedViewType('Z')" data-translate="views_menu_ref_z_field">Z</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view--Z" onclick="changeAttitudeSelectedViewType('-Z')" data-translate="views_menu_ref_zz_field">-Z</div></div>
 		</div>
 		<div class="ViewTypeGroup">
-			<h5 class="TitleViewTypes" data-localize="views_menu_spacecraft_title">Spacecraft</h5>
-			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-XYZ" onclick="changeAttitudeSelectedViewType('S/C-XYZ')" data-localize="views_menu_sc_xyz_field">XYZ</div></div>
-			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Rear" onclick="changeAttitudeSelectedViewType('S/C-Rear')" data-localize="views_menu_sc_rear_field">Rear</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Front" onclick="changeAttitudeSelectedViewType('S/C-Front')" data-localize="views_menu_sc_front_field">Front</div></div>
-			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Bottom" onclick="changeAttitudeSelectedViewType('S/C-Bottom')" data-localize="views_menu_sc_bottom_field">Bottom</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Top" onclick="changeAttitudeSelectedViewType('S/C-Top')" data-localize="views_menu_sc_top_field">Top</div></div>
-			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Left" onclick="changeAttitudeSelectedViewType('S/C-Left')" data-localize="views_menu_sc_left_field">Left</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Right" onclick="changeAttitudeSelectedViewType('S/C-Right')" data-localize="views_menu_sc_right_field">Right</div></div>
+			<h5 class="TitleViewTypes" data-translate="views_menu_spacecraft_title">Spacecraft</h5>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-XYZ" onclick="changeAttitudeSelectedViewType('S/C-XYZ')" data-translate="views_menu_sc_xyz_field">XYZ</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Rear" onclick="changeAttitudeSelectedViewType('S/C-Rear')" data-translate="views_menu_sc_rear_field">Rear</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Front" onclick="changeAttitudeSelectedViewType('S/C-Front')" data-translate="views_menu_sc_front_field">Front</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Bottom" onclick="changeAttitudeSelectedViewType('S/C-Bottom')" data-translate="views_menu_sc_bottom_field">Bottom</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Top" onclick="changeAttitudeSelectedViewType('S/C-Top')" data-translate="views_menu_sc_top_field">Top</div></div>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Left" onclick="changeAttitudeSelectedViewType('S/C-Left')" data-translate="views_menu_sc_left_field">Left</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-S/C-Right" onclick="changeAttitudeSelectedViewType('S/C-Right')" data-translate="views_menu_sc_right_field">Right</div></div>
 		</div>
 		<div class="ViewTypeGroup">
-			<h5 class="TitleViewTypes" data-localize="views_menu_bodies_title">Bodies</h5>
-			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Earth" onclick="changeAttitudeSelectedViewType('Earth')" data-localize="views_menu_bodies_earth_field">Earth</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Sun" onclick="changeAttitudeSelectedViewType('Sun')" data-localize="views_menu_bodies_sun_field">Sun</div></div>
+			<h5 class="TitleViewTypes" data-translate="views_menu_bodies_title">Bodies</h5>
+			<div class="ViewTypeButtonWrapper"><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Earth" onclick="changeAttitudeSelectedViewType('Earth')" data-translate="views_menu_bodies_earth_field">Earth</div><div name="ViewTypeButtons" class="ViewTypeButton" id="att-view-Sun" onclick="changeAttitudeSelectedViewType('Sun')" data-translate="views_menu_bodies_sun_field">Sun</div></div>
 		</div>
 	</div>
 </div>
@@ -672,19 +672,19 @@
 		<div class="InfoPanelTop" >
 			<table class="EqColomTable"><tr><td>
 				<table class="InfoPanelField"><tr><td>
-				<span data-localize="info_panel_roll_field">Roll:</span>
+				<span data-translate="info_panel_roll_field">Roll:</span>
 				</td><td align="right" id="IpRoll">
 				0.00° 
 				</td></tr></table>
 			</td><td>
 				<table class="InfoPanelField"><tr><td>
-				<span data-localize="info_panel_pitch_field">Pitch:</span>
+				<span data-translate="info_panel_pitch_field">Pitch:</span>
 				</td><td align="right" id="IpPitch">
 				0.00° 
 				</td></tr></table>
 			</td><td>
 				<table class="InfoPanelField"><tr><td>
-				<span data-localize="info_panel_yaw_field">Yaw:</span>
+				<span data-translate="info_panel_yaw_field">Yaw:</span>
 				</td><td align="right" id="IpYaw">
 				0.00° 
 				</td></tr></table>
@@ -693,13 +693,13 @@
 		<div class="InfoPanelBottom" >
 			<table class="EqColomTable"><tr><td>
 				<table class="InfoPanelField"><tr><td style="padding-left:5px">
-				<span data-localize="info_panel_mass_field">Mass:</span>
+				<span data-translate="info_panel_mass_field">Mass:</span>
 				</td><td align="right" style="padding-right:5px" id="IpMass">
 				0.00 Kg 
 				</td></tr></table>
 			</td><td>
 				<table class="InfoPanelField"><tr><td style="padding-left:5px">
-				<span data-localize="info_panel_period_field">Period:</span>
+				<span data-translate="info_panel_period_field">Period:</span>
 				</td><td align="right" style="padding-right:5px" id="IpPeriod">
 				0.0 s
 				</td></tr></table>
@@ -710,13 +710,13 @@
 		<div class="InfoPanelTop" >
 			<table class="EqColomTable"><tr><td>
 				<table class="InfoPanelField"><tr><td>
-				<span data-localize="info_panel_vel_field">Vel.:</span>
+				<span data-translate="info_panel_vel_field">Vel.:</span>
 				</td><td align="right" id="IpVel">
 				0.00 Km/s 
 				</td></tr></table>
 			</td><td>
 				<table class="InfoPanelField"><tr><td>
-				<span data-localize="info_panel_accel_field">Accel.:</span>
+				<span data-translate="info_panel_accel_field">Accel.:</span>
 				</td><td align="right" id="IpAccel">
 				0.00 Km/m2 
 				</td></tr></table>
@@ -725,13 +725,13 @@
 		<div class="InfoPanelBottom" >
 			<table class="EqColomTable"><tr><td>
 				<table class="InfoPanelField"><tr><td style="padding-left:5px">
-				<span data-localize="info_panel_radius_field">Orb. radius:</span>
+				<span data-translate="info_panel_radius_field">Orb. radius:</span>
 				</td><td align="right" style="padding-right:5px" id="IpRadius">
 				0.00 Km
 				</td></tr></table>
 			</td><td>
 				<table class="InfoPanelField"><tr><td style="padding-left:5px">
-				<span data-localize="info_panel_mean_anomaly_field">lM:</span>
+				<span data-translate="info_panel_mean_anomaly_field">lM:</span>
 				</td><td align="right" style="padding-right:5px" id="IpMeanAnomaly">
 				0º
 				</td></tr></table>
@@ -742,7 +742,7 @@
 
 <div id="DivMissions">
 	<input id="MissionsListClose" class="" type="image" src="style/icons/close.png" title="Close mission list" onclick="switchMissionsListStatus()"/>
-	<h3 id="TitleMissions" data-localize="missions_title">Missions</h3>	
+	<h3 id="TitleMissions" data-translate="missions_title">Missions</h3>	
 	<div id="ListMissions">
 		<ol id="olListMissions">
 		</ol>
@@ -760,33 +760,33 @@
 	<div id="MissionEditor">
 		<div id="MissionCloseButton" onclick="closeMissionEditor()"></div>
 		<div id="MissionConfirmButton" onclick="saveMissionEditor()"></div>
-			<h3 id="mis-TitleCreate" data-localize="mission_editor_create_title">Create Mission</h3>
-			<h3 id="mis-TitleEdit" data-localize="mission_editor_edit_title">Edit Mission</h3>
+			<h3 id="mis-TitleCreate" data-translate="mission_editor_create_title">Create Mission</h3>
+			<h3 id="mis-TitleEdit" data-translate="mission_editor_edit_title">Edit Mission</h3>
 		<div id="MissionEditorContent">
 			<input id="mis-Id" type="hidden"/>
-			<p><span data-localize="mission_editor_name_field">Name:</span><input id="mis-Name" type="text" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_description_field">Desription:</span><input id="mis-Description" type="text" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_mass_field">Initial mass (Kg):</span><input id="mis-Mass" type="number" min="0" style="float: right;" class="MissionField"/></p>
-			<h4 data-localize="mission_editor_simulation_title">Simulation</h4>
+			<p><span data-translate="mission_editor_name_field">Name:</span><input id="mis-Name" type="text" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_description_field">Desription:</span><input id="mis-Description" type="text" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_mass_field">Initial mass (Kg):</span><input id="mis-Mass" type="number" min="0" style="float: right;" class="MissionField"/></p>
+			<h4 data-translate="mission_editor_simulation_title">Simulation</h4>
 			<!-- Date picker -->
-			<p><span data-localize="mission_editor_date_field">Date:</span><input id="mis-Date" class="datepicker" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_time_field">Time:</span><input id="mis-Time" class="timepicker" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_duration_field">Duration (s):</span><input id="mis-Duration" type="number" min="0" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_speed_field">Speed (s'/s):</span><input id="mis-Speed" type="number" min="0" style="float: right;" class="MissionField"/></p>
-			<h4 data-localize="mission_editor_attitude_title">Attitude</h4>
-			<p><span data-localize="mission_editor_attitude_field">Attitude control:</span><select id="mis-AttitudeProvider" style="float: right;" class="MissionField">
-				<option data-localize="mission_editor_attitude_field_value1" value="0">Inertial</option>
-				<option data-localize="mission_editor_attitude_field_value2" value="1">Facing Earth</option>
-				<option data-localize="mission_editor_attitude_field_value3" value="2">Facing Sun</option>
-				<option data-localize="mission_editor_attitude_field_value4" value="3">Facing Moon</option>
+			<p><span data-translate="mission_editor_date_field">Date:</span><input id="mis-Date" class="datepicker" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_time_field">Time:</span><input id="mis-Time" class="timepicker" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_duration_field">Duration (s):</span><input id="mis-Duration" type="number" min="0" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_speed_field">Speed (s'/s):</span><input id="mis-Speed" type="number" min="0" style="float: right;" class="MissionField"/></p>
+			<h4 data-translate="mission_editor_attitude_title">Attitude</h4>
+			<p><span data-translate="mission_editor_attitude_field">Attitude control:</span><select id="mis-AttitudeProvider" style="float: right;" class="MissionField">
+				<option data-translate="mission_editor_attitude_field_value1" value="0">Inertial</option>
+				<option data-translate="mission_editor_attitude_field_value2" value="1">Facing Earth</option>
+				<option data-translate="mission_editor_attitude_field_value3" value="2">Facing Sun</option>
+				<option data-translate="mission_editor_attitude_field_value4" value="3">Facing Moon</option>
 			</select></p>
-			<h4 data-localize="mission_editor_orbit_title">Orbit</h4>
-			<p><span data-localize="mission_editor_orbit_a_field">Semi-major axis (m):</span><input id="mis-a" type="number" min="0" step="any" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_orbit_e_field">Eccentricity:</span><input id="mis-e" type="number" min="0" step="any" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_orbit_i_field" id="MissionEditor-Inclination">Inclination (rad):</span><input id="mis-i" type="number" step="any" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_orbit_omega_field" id="MissionEditor-Omega">Arg. Perigee (rad):</span><input id="mis-omega" type="number" step="any" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_orbit_raan_field" id="MissionEditor-Raan">RAAN (rad):</span><input id="mis-raan" type="number" step="any" style="float: right;" class="MissionField"/></p>
-			<p><span data-localize="mission_editor_orbit_lm_field" id="MissionEditor-lM">Mean anomaly (rad):</span><input id="mis-lm" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<h4 data-translate="mission_editor_orbit_title">Orbit</h4>
+			<p><span data-translate="mission_editor_orbit_a_field">Semi-major axis (m):</span><input id="mis-a" type="number" min="0" step="any" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_orbit_e_field">Eccentricity:</span><input id="mis-e" type="number" min="0" step="any" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_orbit_i_field" id="MissionEditor-Inclination">Inclination (rad):</span><input id="mis-i" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_orbit_omega_field" id="MissionEditor-Omega">Arg. Perigee (rad):</span><input id="mis-omega" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_orbit_raan_field" id="MissionEditor-Raan">RAAN (rad):</span><input id="mis-raan" type="number" step="any" style="float: right;" class="MissionField"/></p>
+			<p><span data-translate="mission_editor_orbit_lm_field" id="MissionEditor-lM">Mean anomaly (rad):</span><input id="mis-lm" type="number" step="any" style="float: right;" class="MissionField"/></p>
 		</div>
 		<div id="AngleUnitsSelectionRads" class="AngleUnitsSelected" onclick="setAngleUnitsRads(true)">Rads</div><div id="AngleUnitsSelectionDegs" class="AngleUnitsUnselected" onclick="setAngleUnitsRads(false)">Degs</div>
 	</div>
@@ -796,15 +796,15 @@
 	<div id="StationEditor">
 		<div id="StationCloseButton" onclick="closeStationEditor()"></div>
 		<div id="StationConfirmButton" onclick="saveStationEditor()"></div>
-			<h3 id="sta-TitleCreate" data-localize="station_editor_create_title">Create Station</h3>
-			<h3 id="sta-TitleEdit" data-localize="station_editor_edit_title">Edit Station</h3>
+			<h3 id="sta-TitleCreate" data-translate="station_editor_create_title">Create Station</h3>
+			<h3 id="sta-TitleEdit" data-translate="station_editor_edit_title">Edit Station</h3>
 		<div id="StationEditorContent">
 			<input id="sta-Id" type="hidden"/>
-			<p><span data-localize="station_editor_name_field">Name:</span><input id="sta-Name" type="text" style="float: right;" class="StationField"/></p>
-			<p><span data-localize="station_editor_latitude_field" id="StationEditor-Latitude">Latitude (deg):</span><input id="sta-latitude" type="number" min="-90" max="90" step="any" style="float: right;" class="StationField"/></p>
-			<p><span data-localize="station_editor_longitude_field" id="StationEditor-Longitude">Longitude (deg):</span><input id="sta-longitude" type="number" min="-180" max="180" step="any" style="float: right;" class="StationField"/></p>
-			<p><span data-localize="station_editor_altitude_field">Altitude (m):</span><input id="sta-altitude" type="number" step="any" style="float: right;" class="StationField"/></p>
-			<p><span data-localize="station_editor_elevation_field" id="StationEditor-Elevation">Min. elevation (deg):</span><input id="sta-elevation" type="number" max="90" min="-10" step="any" style="float: right;" class="StationField"/></p>
+			<p><span data-translate="station_editor_name_field">Name:</span><input id="sta-Name" type="text" style="float: right;" class="StationField"/></p>
+			<p><span data-translate="station_editor_latitude_field" id="StationEditor-Latitude">Latitude (deg):</span><input id="sta-latitude" type="number" min="-90" max="90" step="any" style="float: right;" class="StationField"/></p>
+			<p><span data-translate="station_editor_longitude_field" id="StationEditor-Longitude">Longitude (deg):</span><input id="sta-longitude" type="number" min="-180" max="180" step="any" style="float: right;" class="StationField"/></p>
+			<p><span data-translate="station_editor_altitude_field">Altitude (m):</span><input id="sta-altitude" type="number" step="any" style="float: right;" class="StationField"/></p>
+			<p><span data-translate="station_editor_elevation_field" id="StationEditor-Elevation">Min. elevation (deg):</span><input id="sta-elevation" type="number" max="90" min="-10" step="any" style="float: right;" class="StationField"/></p>
 		</div>
 		<div id="AngleUnitsSelectionRadsStation" class="AngleUnitsSelected" onclick="setAngleUnitsRads(true)">Rads</div><div id="AngleUnitsSelectionDegsStation" class="AngleUnitsUnselected" onclick="setAngleUnitsRads(false)">Degs</div>
 	</div>
@@ -816,16 +816,16 @@
 <div id="DivConfigBackground">
 	<div id="DivConfig">
 		<div id="ConfigCloseButton" onclick="switchGlobalMenu()"></div>
-		<h3 data-localize="global_config_title">Configuration</h3>
-		<p><span data-localize="global_config_performances_field">3D Detail level:</span><!--<input id="opt-glo-PerformanceLevel" type="number" min="1" max="5" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"class="MenuField"/>-->
+		<h3 data-translate="global_config_title">Configuration</h3>
+		<p><span data-translate="global_config_performances_field">3D Detail level:</span><!--<input id="opt-glo-PerformanceLevel" type="number" min="1" max="5" step="1" style="float: right;" onchange="updateGlobalOption(this.id,this.value)"class="MenuField"/>-->
 		<select id="opt-glo-PerformanceLevel" style="float: right;" class="MenuField" onchange="updateGlobalOption(this.id,this.value)">
-				<option data-localize="global_config_performances_value_1" value="1">Very Low</option>
-				<option data-localize="global_config_performances_value_2" value="2">Low</option>
-				<option data-localize="global_config_performances_value_3" value="3">Normal</option>
-				<option data-localize="global_config_performances_value_4" value="4">High</option>
-				<option data-localize="global_config_performances_value_5" value="5">Very High</option>
+				<option data-translate="global_config_performances_value_1" value="1">Very Low</option>
+				<option data-translate="global_config_performances_value_2" value="2">Low</option>
+				<option data-translate="global_config_performances_value_3" value="3">Normal</option>
+				<option data-translate="global_config_performances_value_4" value="4">High</option>
+				<option data-translate="global_config_performances_value_5" value="5">Very High</option>
 		</select></p>
-		<p><span data-localize="global_config_fps_field">Show FPS:</span><input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
+		<p><span data-translate="global_config_fps_field">Show FPS:</span><input id="opt-glo-ShowFps" type="checkbox" style="float: right;" onchange="updateGlobalOption(this.id,this.checked)"/></p>
 		<p><input id="ResetConfigButton" value="Reset all configuration" type="button" onclick="resetConfiguration()" class="stavorDarkButton"/></p>
 		<p><input id="ResetMissionsButton" value="Reset missions database" type="button" onclick="resetMissionsDb()" class="stavorDarkButton"/></p>
 		<p><input id="ResetStationsButton" value="Reset stations database" type="button" onclick="resetStationsDb()" class="stavorDarkButton"/></p>
@@ -867,47 +867,47 @@
 <div id="LedOrbit" class="Led LedUnselected"/>
 <div id="LedAttitude" class="Led LedUnselected"/>
 
-<div id="str_mission_list_button_select" data-localize="mission_list_button_select" class="LocalizedString" >Select Mission</div>
-<div id="str_mission_list_button_create" data-localize="mission_list_button_create" class="LocalizedString" >Create Mission</div>
-<div id="str_mission_list_button_copy" data-localize="mission_list_button_copy" class="LocalizedString" >Copy Mission</div>
-<div id="str_mission_list_button_edit" data-localize="mission_list_button_edit" class="LocalizedString" >Edit Mission</div>
-<div id="str_mission_list_button_remove" data-localize="mission_list_button_remove" class="LocalizedString" >Remove Mission</div>
-<div id="str_station_list_button_create" data-localize="station_list_button_create" class="LocalizedString" >Create Station</div>
-<div id="str_station_list_button_edit" data-localize="station_list_button_edit" class="LocalizedString" >Edit Station</div>
-<div id="str_station_list_button_remove" data-localize="station_list_button_remove" class="LocalizedString" >Remove Station</div>
-<div id="str_global_config_reset_config_button" data-localize="global_config_reset_config_button" class="LocalizedString" >Reset all configuration</div>
-<div id="str_global_config_reset_missions_button" data-localize="global_config_reset_missions_button" class="LocalizedString" >Reset missions database</div>
-<div id="str_global_config_reset_stations_button" data-localize="global_config_reset_stations_button" class="LocalizedString" >Reset stations database</div>
-<div id="str_dialog_reset_config_title" data-localize="dialog_reset_config_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_reset_config_message" data-localize="dialog_reset_config_message" class="LocalizedString" >Are you sure?</div>
-<div id="str_dialog_sensor_direction_title" data-localize="dialog_sensor_direction_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_reset_config_title" data-localize="dialog_sensor_direction_message" class="LocalizedString" >Sensor direction cannot be (0,0,0)</div>
-<div id="str_dialog_sensor_direction_message" data-localize="dialog_reset_missions_db_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_reset_missions_db_message" data-localize="dialog_reset_missions_db_message" class="LocalizedString" >Reset missions list to default value?</div>
-<div id="str_dialog_reset_stations_db_title" data-localize="dialog_reset_stations_db_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_reset_stations_db_message" data-localize="dialog_reset_stations_db_message" class="LocalizedString" >Reset stations list to default value?</div>
-<div id="str_dialog_restart_simulator_title" data-localize="dialog_restart_simulator_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_restart_simulator_message" data-localize="dialog_restart_simulator_message" class="LocalizedString" >Do you want to restart the simulator?</div>
-<div id="str_dialog_select_mission_first_title" data-localize="dialog_select_mission_first_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_select_mission_first_message" data-localize="dialog_select_mission_first_message" class="LocalizedString" >Select a mission first!</div>
-<div id="str_dialog_click_mission_first_title" data-localize="dialog_click_mission_first_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_click_mission_first_message" data-localize="dialog_click_mission_first_message" class="LocalizedString" >Click on a mission first!</div>
-<div id="str_dialog_cannot_delete_mission_title" data-localize="dialog_cannot_delete_mission_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_cannot_delete_mission_message" data-localize="dialog_cannot_delete_mission_message" class="LocalizedString" >The mission selected for simulation cannot be deleted, please select another mission first!</div>
-<div id="str_dialog_confirm_delete_mission_title" data-localize="dialog_confirm_delete_mission_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_confirm_delete_mission_message_1" data-localize="dialog_confirm_delete_mission_message_1" class="LocalizedString" >Delete mission </div>
-<div id="str_dialog_confirm_delete_mission_message_2" data-localize="dialog_confirm_delete_mission_message_2" class="LocalizedString" >?</div>
-<div id="str_dialog_confirm_select_mission_title" data-localize="dialog_confirm_select_mission_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_confirm_select_mission_message_1" data-localize="dialog_confirm_select_mission_message_1" class="LocalizedString" >Select mission </div>
-<div id="str_dialog_confirm_select_mission_message_2" data-localize="dialog_confirm_select_mission_message_2" class="LocalizedString" > for simulation?</div>
-<div id="str_dialog_confirm_copy_mission_title" data-localize="dialog_confirm_copy_mission_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_confirm_copy_mission_message_1" data-localize="dialog_confirm_copy_mission_message_1" class="LocalizedString" >Copy mission </div>
-<div id="str_dialog_confirm_copy_mission_message_2" data-localize="dialog_confirm_copy_mission_message_2" class="LocalizedString" >?</div>
-<div id="str_dialog_click_station_first_title" data-localize="dialog_click_station_first_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_click_station_first_message" data-localize="dialog_click_station_first_message" class="LocalizedString" >Click on a station first!</div>
-<div id="str_dialog_confirm_delete_station_title" data-localize="dialog_confirm_delete_station_title" class="LocalizedString" >Stavor says</div>
-<div id="str_dialog_confirm_delete_station_message_1" data-localize="dialog_confirm_delete_station_message_1" class="LocalizedString" >Delete station </div>
-<div id="str_dialog_confirm_delete_station_message_2" data-localize="dialog_confirm_delete_station_message_2" class="LocalizedString" >?</div>
+<div id="str_mission_list_button_select" data-translate="mission_list_button_select" class="LocalizedString" >Select Mission</div>
+<div id="str_mission_list_button_create" data-translate="mission_list_button_create" class="LocalizedString" >Create Mission</div>
+<div id="str_mission_list_button_copy" data-translate="mission_list_button_copy" class="LocalizedString" >Copy Mission</div>
+<div id="str_mission_list_button_edit" data-translate="mission_list_button_edit" class="LocalizedString" >Edit Mission</div>
+<div id="str_mission_list_button_remove" data-translate="mission_list_button_remove" class="LocalizedString" >Remove Mission</div>
+<div id="str_station_list_button_create" data-translate="station_list_button_create" class="LocalizedString" >Create Station</div>
+<div id="str_station_list_button_edit" data-translate="station_list_button_edit" class="LocalizedString" >Edit Station</div>
+<div id="str_station_list_button_remove" data-translate="station_list_button_remove" class="LocalizedString" >Remove Station</div>
+<div id="str_global_config_reset_config_button" data-translate="global_config_reset_config_button" class="LocalizedString" >Reset all configuration</div>
+<div id="str_global_config_reset_missions_button" data-translate="global_config_reset_missions_button" class="LocalizedString" >Reset missions database</div>
+<div id="str_global_config_reset_stations_button" data-translate="global_config_reset_stations_button" class="LocalizedString" >Reset stations database</div>
+<div id="str_dialog_reset_config_title" data-translate="dialog_reset_config_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_reset_config_message" data-translate="dialog_reset_config_message" class="LocalizedString" >Are you sure?</div>
+<div id="str_dialog_sensor_direction_title" data-translate="dialog_sensor_direction_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_reset_config_title" data-translate="dialog_sensor_direction_message" class="LocalizedString" >Sensor direction cannot be (0,0,0)</div>
+<div id="str_dialog_sensor_direction_message" data-translate="dialog_reset_missions_db_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_reset_missions_db_message" data-translate="dialog_reset_missions_db_message" class="LocalizedString" >Reset missions list to default value?</div>
+<div id="str_dialog_reset_stations_db_title" data-translate="dialog_reset_stations_db_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_reset_stations_db_message" data-translate="dialog_reset_stations_db_message" class="LocalizedString" >Reset stations list to default value?</div>
+<div id="str_dialog_restart_simulator_title" data-translate="dialog_restart_simulator_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_restart_simulator_message" data-translate="dialog_restart_simulator_message" class="LocalizedString" >Do you want to restart the simulator?</div>
+<div id="str_dialog_select_mission_first_title" data-translate="dialog_select_mission_first_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_select_mission_first_message" data-translate="dialog_select_mission_first_message" class="LocalizedString" >Select a mission first!</div>
+<div id="str_dialog_click_mission_first_title" data-translate="dialog_click_mission_first_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_click_mission_first_message" data-translate="dialog_click_mission_first_message" class="LocalizedString" >Click on a mission first!</div>
+<div id="str_dialog_cannot_delete_mission_title" data-translate="dialog_cannot_delete_mission_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_cannot_delete_mission_message" data-translate="dialog_cannot_delete_mission_message" class="LocalizedString" >The mission selected for simulation cannot be deleted, please select another mission first!</div>
+<div id="str_dialog_confirm_delete_mission_title" data-translate="dialog_confirm_delete_mission_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_confirm_delete_mission_message_1" data-translate="dialog_confirm_delete_mission_message_1" class="LocalizedString" >Delete mission </div>
+<div id="str_dialog_confirm_delete_mission_message_2" data-translate="dialog_confirm_delete_mission_message_2" class="LocalizedString" >?</div>
+<div id="str_dialog_confirm_select_mission_title" data-translate="dialog_confirm_select_mission_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_confirm_select_mission_message_1" data-translate="dialog_confirm_select_mission_message_1" class="LocalizedString" >Select mission </div>
+<div id="str_dialog_confirm_select_mission_message_2" data-translate="dialog_confirm_select_mission_message_2" class="LocalizedString" > for simulation?</div>
+<div id="str_dialog_confirm_copy_mission_title" data-translate="dialog_confirm_copy_mission_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_confirm_copy_mission_message_1" data-translate="dialog_confirm_copy_mission_message_1" class="LocalizedString" >Copy mission </div>
+<div id="str_dialog_confirm_copy_mission_message_2" data-translate="dialog_confirm_copy_mission_message_2" class="LocalizedString" >?</div>
+<div id="str_dialog_click_station_first_title" data-translate="dialog_click_station_first_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_click_station_first_message" data-translate="dialog_click_station_first_message" class="LocalizedString" >Click on a station first!</div>
+<div id="str_dialog_confirm_delete_station_title" data-translate="dialog_confirm_delete_station_title" class="LocalizedString" >Stavor says</div>
+<div id="str_dialog_confirm_delete_station_message_1" data-translate="dialog_confirm_delete_station_message_1" class="LocalizedString" >Delete station </div>
+<div id="str_dialog_confirm_delete_station_message_2" data-translate="dialog_confirm_delete_station_message_2" class="LocalizedString" >?</div>
 
 <!-- Modules -->
 	<!-- Attitude -->
