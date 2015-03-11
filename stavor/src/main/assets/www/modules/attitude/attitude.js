@@ -246,256 +246,245 @@ var Attitude = function ()
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			REFERENCE PLANES
 		//-----------------------------------------------------------------------------------------------------------------------
+//Show Planes: config.show_orbital_plane
 
-		if(config.show_orbital_plane){
+		// points that define shape
+		var pts = [], hls = [];
+		var radius = sphere_radius;
+		var radius_ext = planes_width;
 
-			// points that define shape
-			var pts = [], hls = [];
-			var radius = sphere_radius;
-			var radius_ext = planes_width;
-
-			for ( i = 0; i < segments.plane_resolution; i ++ ) {
-				var a = 2*Math.PI * i / segments.plane_resolution;
-				pts.push( new THREE.Vector2 ( Math.cos( a ) * radius_ext, Math.sin( a ) * radius_ext ) );
-				hls.push( new THREE.Vector2 ( Math.cos( a ) * radius, Math.sin( a ) * radius ) );
-			}
-
-			// shape to extrude
-			var shape = new THREE.Shape( pts );
-			var holesPath = new THREE.Path(hls);
-			shape.holes.push(holesPath);
-
-			// extrude options
-			var options = { 
-				amount: 1,              // default 100, only used when path is null
-				bevelEnabled: false, 
-				bevelSegments: 2, 
-				steps: 1,                // default 1, try 3 if path defined
-				extrudePath: null        // or path
-			};
-
-			// geometry
-			var geometry = new THREE.ExtrudeGeometry( shape, options );
-
-			// mesh
-			plane_xy = new THREE.Mesh( 
-				geometry, 
-				new THREE.MeshBasicMaterial( { color: config.plane_xy_color, transparent: true, opacity: 0.2 } )
-			);
-			scene.add( plane_xy );
-
-			// mesh
-			plane_orb = new THREE.Mesh( 
-				geometry, 
-				new THREE.MeshBasicMaterial( { color: config.plane_orb_color, transparent: true, opacity: 0.2 } )
-			);
-			scene.add( plane_orb );
-
-
-
-			//XY plane
-			//var material_plane_xy = new THREE.MeshPhongMaterial({color: plane_xy_color, transparent: true/*, depthWrite: false, depthTest: false, alphaTest: 0.1*/, opacity: 0.2, side: THREE.DoubleSide });
-			/*var plane_xy = new THREE.Mesh( new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 ), material_plane_xy );
-			plane_xy.position.set( 0, 0, 0 );
-			scene.add( plane_xy );*/
-
-
-			//Orbital plane
-			//var material_plane_orb = new THREE.MeshPhongMaterial({color: plane_orb_color, transparent: true/*, depthWrite: false, depthTest: false, alphaTest: 0.1*/, opacity: 0.2, side: THREE.DoubleSide });
-			/*var ring_geom = new THREE.RingGeometry( sphere_radius, planes_width, plane_theta_seg, plane_phi_seg, 0, Math.PI * 2 )
-			plane_orb = new THREE.Mesh( ring_geom, material_plane_orb );
-			plane_orb.position.set( 0, 0, 0 );*/
-
-			//Compute inclination quaternion
-			var norm_orbital_plane = results.velocity.clone().normalize().cross(results.earth_direction.clone().normalize());
-			var norm_rotation_earth = new THREE.Vector3(0,0,1);
-			var incl_quat = new THREE.Quaternion().setFromUnitVectors( norm_rotation_earth, norm_orbital_plane );
-
-			//Rotate orbital plane
-			plane_orb.quaternion.copy(incl_quat);
-			plane_orb.matrixWorldNeedsUpdate = true;
-			plane_orb.updateMatrix();
-
-			if(config.show_inclination){
-				//Compute instant inclination angle
-				var inclination = Math.asin(results.earth_direction.z/results.earth_direction.length());
-				//console.debug(inclination);
-
-				//Compute arc angle clip points
-				var clip1 = results.earth_direction.clone().normalize().multiplyScalar(sphere_radius);
-				var clip2 = results.earth_direction.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
-				var clip_mid = clip1.clone().add(clip2.clone());
-
-				//Draw Arc
-				var spline = new THREE.QuadraticBezierCurve3(clip1.clone(),
-				   clip_mid.clone(),
-				   clip2.clone());
-
-				var material = new THREE.LineBasicMaterial({
-					color: arc_color,
-				});
-
-				var geometry = new THREE.Geometry();
-				var splinePoints = spline.getPoints(segments.arc_resolution);
-
-				for(var i = 0; i < splinePoints.length; i++){
-					geometry.vertices.push(splinePoints[i]);  
-				}
-
-				incl_arc = new THREE.Line(geometry, material);
-				scene.add( incl_arc );
-
-				//Sprite
-				spriteInclination = makeTextSprite( 4, " i=0º ",
-					{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
-				spriteInclination.position = clip_mid.clone();
-				scene.add(spriteInclination);
-
-				scene.add( incl_arc );
-			} 
-
-			//plane_orb.rotation.x += 0.3;
-			scene.add( plane_orb );
+		for ( i = 0; i < segments.plane_resolution; i ++ ) {
+			var a = 2*Math.PI * i / segments.plane_resolution;
+			pts.push( new THREE.Vector2 ( Math.cos( a ) * radius_ext, Math.sin( a ) * radius_ext ) );
+			hls.push( new THREE.Vector2 ( Math.cos( a ) * radius, Math.sin( a ) * radius ) );
 		}
 
-		//Spheric coordinates
-		if(config.show_spheric_coords){
+		// shape to extrude
+		var shape = new THREE.Shape( pts );
+		var holesPath = new THREE.Path(hls);
+		shape.holes.push(holesPath);
 
-			var sphcoord_target = results.earth_direction.clone().normalize().multiplyScalar(arc_sphcoord_radius);
-			var sphcoord_cross = sphcoord_target.clone().setZ(0).normalize().multiplyScalar(arc_sphcoord_radius);
-			var sphcoord_ref = axis_x.clone().multiplyScalar(arc_sphcoord_radius);
-			var sphcoord_long_mid = sphcoord_ref.clone().add(sphcoord_cross.clone());
-			var sphcoord_lat_mid = sphcoord_cross.clone().add(sphcoord_target.clone());  
+		// extrude options
+		var options = { 
+			amount: 1,              // default 100, only used when path is null
+			bevelEnabled: false, 
+			bevelSegments: 2, 
+			steps: 1,                // default 1, try 3 if path defined
+			extrudePath: null        // or path
+		};
 
-			var lat=Math.atan2(sphcoord_target.z,1);
-			var lng=Math.atan2(sphcoord_target.y,sphcoord_target.x);
+		// geometry
+		var geometry = new THREE.ExtrudeGeometry( shape, options );
 
-			//Set discontinued lines
-			var lineGeometry = new THREE.Geometry();
-			var vertArray = lineGeometry.vertices;
-			vertArray.push( sphcoord_target.clone(), new THREE.Vector3(0, 0, 0) );
-			lineGeometry.computeLineDistances();
-			var lineMaterial = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
-			lineSpheric = new THREE.Line( lineGeometry, lineMaterial );
-			scene.add(lineSpheric);
-			//Set discontinued lines
-			var lineGeometry = new THREE.Geometry();
-			var vertArray = lineGeometry.vertices;
-			vertArray.push( sphcoord_cross.clone(), new THREE.Vector3(0, 0, 0) );
-			lineGeometry.computeLineDistances();
-			var lineMaterial = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
-			lineSpheric2 = new THREE.Line( lineGeometry, lineMaterial );
-			scene.add(lineSpheric2);
+		// mesh
+		plane_xy = new THREE.Mesh( 
+			geometry, 
+			new THREE.MeshBasicMaterial( { color: config.plane_xy_color, transparent: true, opacity: 0.2 } )
+		);
+		scene.add( plane_xy );
 
-			//create longitude arc
+		// mesh
+		plane_orb = new THREE.Mesh( 
+			geometry, 
+			new THREE.MeshBasicMaterial( { color: config.plane_orb_color, transparent: true, opacity: 0.2 } )
+		);
+		scene.add( plane_orb );
 
-			var spline = new THREE.QuadraticBezierCurve3(sphcoord_cross.clone(),
-			   sphcoord_long_mid.clone(),
-			   sphcoord_ref.clone());
+		//Compute inclination quaternion
+		var norm_orbital_plane = results.velocity.clone().normalize().cross(results.earth_direction.clone().normalize());
+		var norm_rotation_earth = new THREE.Vector3(0,0,1);
+		var incl_quat = new THREE.Quaternion().setFromUnitVectors( norm_rotation_earth, norm_orbital_plane );
 
-			var material = new THREE.LineBasicMaterial({
-				color: arc_color,
-			});
+		//Rotate orbital plane
+		plane_orb.quaternion.copy(incl_quat);
+		plane_orb.matrixWorldNeedsUpdate = true;
+		plane_orb.updateMatrix();
 
-			var geometry = new THREE.Geometry();
-			var splinePoints = spline.getPoints(segments.arc_resolution);
+//Planes-Inclination: config.show_inclination
+		//Compute instant inclination angle
+		var inclination = Math.asin(results.earth_direction.z/results.earth_direction.length());
+		//console.debug(inclination);
 
-			for(var i = 0; i < splinePoints.length; i++){
-				geometry.vertices.push(splinePoints[i]);  
-			}
+		//Compute arc angle clip points
+		var clip1 = results.earth_direction.clone().normalize().multiplyScalar(sphere_radius);
+		var clip2 = results.earth_direction.clone().setZ(0).normalize().multiplyScalar(sphere_radius);
+		var clip_mid = clip1.clone().add(clip2.clone());
 
-			long_arc = new THREE.Line(geometry, material);
-			scene.add( long_arc );
+		//Draw Arc
+		var spline = new THREE.QuadraticBezierCurve3(clip1.clone(),
+		   clip_mid.clone(),
+		   clip2.clone());
 
-			//Set longitude arc sprite
-			long_sprite = makeTextSprite( 5, " "+parseFloat(Math.round(lng * 180) / Math.PI).toFixed(1)+"º ",
-					{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
-			long_sprite.position.set( sphcoord_long_mid.x, sphcoord_long_mid.y, sphcoord_long_mid.z);
-			scene.add(long_sprite);
+		var material = new THREE.LineBasicMaterial({
+			color: arc_color,
+		});
 
-			//create latittude arc
-			var spline = new THREE.QuadraticBezierCurve3(sphcoord_target.clone(),
-			   sphcoord_lat_mid.clone(),
-			   sphcoord_cross.clone());
+		var geometry = new THREE.Geometry();
+		var splinePoints = spline.getPoints(segments.arc_resolution);
 
-			var material = new THREE.LineBasicMaterial({
-				color: arc_color,
-			});
-
-			var geometry = new THREE.Geometry();
-			var splinePoints = spline.getPoints(segments.arc_resolution);
-
-			for(var i = 0; i < splinePoints.length; i++){
-				geometry.vertices.push(splinePoints[i]);  
-			}
-
-			lat_arc = new THREE.Line(geometry, material);
-			scene.add( lat_arc );
-
-			//Set latittude arc sprite
-			lat_sprite = makeTextSprite( 6, " "+parseFloat(Math.round(lat * 180) / Math.PI).toFixed(1)+"º ",
-					{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
-			lat_sprite.position = sphcoord_lat_mid.clone();
-			scene.add(lat_sprite);
-
+		for(var i = 0; i < splinePoints.length; i++){
+			geometry.vertices.push(splinePoints[i]);  
 		}
-		if(config.show_vectors_angle){
+
+		incl_arc = new THREE.Line(geometry, material);
+		scene.add( incl_arc );
+
+		//Sprite
+		spriteInclination = makeTextSprite( 4, " i=0º ",
+			{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
+		spriteInclination.position = clip_mid.clone();
+		scene.add(spriteInclination);
+
+		scene.add( incl_arc );
+
+		//plane_orb.rotation.x += 0.3;
+		scene.add( plane_orb );
+
+//Spheric coordinates: config.show_spheric_coords
+
+		var sphcoord_target = results.earth_direction.clone().normalize().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_cross = sphcoord_target.clone().setZ(0).normalize().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_ref = axis_x.clone().multiplyScalar(arc_sphcoord_radius);
+		var sphcoord_long_mid = sphcoord_ref.clone().add(sphcoord_cross.clone());
+		var sphcoord_lat_mid = sphcoord_cross.clone().add(sphcoord_target.clone());  
+
+		var lat=Math.atan2(sphcoord_target.z,1);
+		var lng=Math.atan2(sphcoord_target.y,sphcoord_target.x);
+
+		//Set discontinued lines
+		var lineGeometry = new THREE.Geometry();
+		var vertArray = lineGeometry.vertices;
+		vertArray.push( sphcoord_target.clone(), new THREE.Vector3(0, 0, 0) );
+		lineGeometry.computeLineDistances();
+		var lineMaterial = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
+		lineSpheric = new THREE.Line( lineGeometry, lineMaterial );
+		scene.add(lineSpheric);
+		//Set discontinued lines
+		var lineGeometry = new THREE.Geometry();
+		var vertArray = lineGeometry.vertices;
+		vertArray.push( sphcoord_cross.clone(), new THREE.Vector3(0, 0, 0) );
+		lineGeometry.computeLineDistances();
+		var lineMaterial = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
+		lineSpheric2 = new THREE.Line( lineGeometry, lineMaterial );
+		scene.add(lineSpheric2);
+
+		//create longitude arc
+
+		var spline = new THREE.QuadraticBezierCurve3(sphcoord_cross.clone(),
+		   sphcoord_long_mid.clone(),
+		   sphcoord_ref.clone());
+
+		var material = new THREE.LineBasicMaterial({
+			color: arc_color,
+		});
+
+		var geometry = new THREE.Geometry();
+		var splinePoints = spline.getPoints(segments.arc_resolution);
+
+		for(var i = 0; i < splinePoints.length; i++){
+			geometry.vertices.push(splinePoints[i]);  
+		}
+
+		long_arc = new THREE.Line(geometry, material);
+		scene.add( long_arc );
+
+		//Set longitude arc sprite
+		long_sprite = makeTextSprite( 5, " "+parseFloat(Math.round(lng * 180) / Math.PI).toFixed(1)+"º ",
+				{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
+		long_sprite.position.set( sphcoord_long_mid.x, sphcoord_long_mid.y, sphcoord_long_mid.z);
+		scene.add(long_sprite);
+
+		//create latittude arc
+		var spline = new THREE.QuadraticBezierCurve3(sphcoord_target.clone(),
+		   sphcoord_lat_mid.clone(),
+		   sphcoord_cross.clone());
+
+		var material = new THREE.LineBasicMaterial({
+			color: arc_color,
+		});
+
+		var geometry = new THREE.Geometry();
+		var splinePoints = spline.getPoints(segments.arc_resolution);
+
+		for(var i = 0; i < splinePoints.length; i++){
+			geometry.vertices.push(splinePoints[i]);  
+		}
+
+		lat_arc = new THREE.Line(geometry, material);
+		scene.add( lat_arc );
+
+		//Set latittude arc sprite
+		lat_sprite = makeTextSprite( 6, " "+parseFloat(Math.round(lat * 180) / Math.PI).toFixed(1)+"º ",
+				{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
+		lat_sprite.position = sphcoord_lat_mid.clone();
+		scene.add(lat_sprite);
+
+//Angles vectors: config.show_vectors_angle
 			
-			var angle_vector_start = results.earth_direction.clone().normalize().multiplyScalar(arc_vectors_radius);
-			var angle_vector_end = results.momentum.clone().normalize().multiplyScalar(arc_vectors_radius);
-			var angle_vector_mid = angle_vector_start.clone().add(angle_vector_end.clone());
+		var angle_vector_start = results.earth_direction.clone().normalize().multiplyScalar(arc_vectors_radius);
+		var angle_vector_end = results.momentum.clone().normalize().multiplyScalar(arc_vectors_radius);
+		var angle_vector_mid = angle_vector_start.clone().add(angle_vector_end.clone());
 
-			var dist_angle = angle_vector_start.clone().angleTo(angle_vector_end);
+		var dist_angle = angle_vector_start.clone().angleTo(angle_vector_end);
 
-			//Set discontinued lines
-			var lineGeometry = new THREE.Geometry();
-			var vertArray = lineGeometry.vertices;
-			vertArray.push( angle_vector_start.clone(), new THREE.Vector3(0, 0, 0) );
-			lineGeometry.computeLineDistances();
-			var lineMaterial = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
-			lineAngle = new THREE.Line( lineGeometry, lineMaterial );
-			scene.add(lineAngle);
+		//Set discontinued lines
+		var lineGeometry = new THREE.Geometry();
+		var vertArray = lineGeometry.vertices;
+		vertArray.push( angle_vector_start.clone(), new THREE.Vector3(0, 0, 0) );
+		lineGeometry.computeLineDistances();
+		var lineMaterial = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
+		lineAngle = new THREE.Line( lineGeometry, lineMaterial );
+		scene.add(lineAngle);
 
-			var lineGeometry2 = new THREE.Geometry();
-			var vertArray2 = lineGeometry2.vertices;
-			vertArray2.push( angle_vector_end.clone(), new THREE.Vector3(0, 0, 0) );
-			lineGeometry2.computeLineDistances();
-			var lineMaterial2 = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
-			lineAngle2 = new THREE.Line( lineGeometry2, lineMaterial2 );
-			scene.add(lineAngle2);
+		var lineGeometry2 = new THREE.Geometry();
+		var vertArray2 = lineGeometry2.vertices;
+		vertArray2.push( angle_vector_end.clone(), new THREE.Vector3(0, 0, 0) );
+		lineGeometry2.computeLineDistances();
+		var lineMaterial2 = new THREE.LineDashedMaterial( { color: arc_color, dashSize: 1, gapSize: 3 } );
+		lineAngle2 = new THREE.Line( lineGeometry2, lineMaterial2 );
+		scene.add(lineAngle2);
 
-			var spline = new THREE.QuadraticBezierCurve3(angle_vector_start.clone(),
-			   angle_vector_mid.clone(),
-			   angle_vector_end.clone());
+		var spline = new THREE.QuadraticBezierCurve3(angle_vector_start.clone(),
+		   angle_vector_mid.clone(),
+		   angle_vector_end.clone());
 
-			var material = new THREE.LineBasicMaterial({
-				color: arc_color,
-			});
+		var material = new THREE.LineBasicMaterial({
+			color: arc_color,
+		});
 
-			var geometry = new THREE.Geometry();
-			var splinePoints = spline.getPoints(segments.arc_resolution);
+		var geometry = new THREE.Geometry();
+		var splinePoints = spline.getPoints(segments.arc_resolution);
 
-			for(var i = 0; i < splinePoints.length; i++){
-				geometry.vertices.push(splinePoints[i]);  
-			}
-
-			vectors_arc = new THREE.Line(geometry, material);
-			scene.add( vectors_arc );
-
-			//Set angles arc sprite
-			vectors_sprite = makeTextSprite( 7, " "+parseFloat(Math.round(dist_angle * 180) / Math.PI).toFixed(1)+"º ",
-					{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
-			vectors_sprite.position = angle_vector_mid.clone().multiplyScalar(0.7);
-			scene.add(vectors_sprite);
-
+		for(var i = 0; i < splinePoints.length; i++){
+			geometry.vertices.push(splinePoints[i]);  
 		}
+
+		vectors_arc = new THREE.Line(geometry, material);
+		scene.add( vectors_arc );
+
+		//Set angles arc sprite
+		vectors_sprite = makeTextSprite( 7, " "+parseFloat(Math.round(dist_angle * 180) / Math.PI).toFixed(1)+"º ",
+				{ fontsize: 50, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:255, g:255, b:0, a:1.0} } );
+		vectors_sprite.position = angle_vector_mid.clone().multiplyScalar(0.7);
+		scene.add(vectors_sprite);
 	}
 	function updateAngles(){
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			PLANES UPDATE
 		//-----------------------------------------------------------------------------------------------------------------------
 
+		plane_orb.visible = config.show_orbital_plane;
+		plane_xy.visible = config.show_orbital_plane;
+		incl_arc.visible = config.show_inclination;
+		spriteInclination.visible = config.show_inclination;
 		if(config.show_orbital_plane){
+			if("#"+plane_orb.material.color.getHexString() != config.plane_orb_color){
+				plane_orb.material.color.setHex(parseInt("0x"+config.plane_orb_color.substr(1,config.plane_orb_color.length)));
+			}
+			if("#"+plane_xy.material.color.getHexString() != config.plane_xy_color){
+				plane_xy.material.color.setHex(parseInt("0x"+config.plane_xy_color.substr(1,config.plane_xy_color.length)));
+			}
+		
 			//Compute inclination quaternion
 			var norm_orbital_plane = results.velocity.clone().normalize().cross(results.earth_direction.clone().normalize());
 			var norm_rotation_earth = new THREE.Vector3(0,0,1);
@@ -556,6 +545,12 @@ var Attitude = function ()
 				spriteInclination.position = clip_mid.clone().normalize().multiplyScalar(arc_radius);
 			}
 		}
+		long_arc.visible = config.show_spheric_coords;
+		long_sprite.visible = config.show_spheric_coords;
+		lat_arc.visible = config.show_spheric_coords;
+		lat_sprite.visible = config.show_spheric_coords;
+		lineSpheric.visible = config.show_spheric_coords;
+		lineSpheric2.visible = config.show_spheric_coords;
 		if(config.show_spheric_coords){
 			
 			var sphcoord_target;
@@ -674,6 +669,10 @@ var Attitude = function ()
 			updateLatitudeSprite(lat);
 			lat_sprite.position = sphcoord_lat_mid.clone();
 		}
+		vectors_arc.visible = config.show_vectors_angle;
+		vectors_sprite.visible = config.show_vectors_angle;
+		lineAngle.visible = config.show_vectors_angle;
+		lineAngle2.visible = config.show_vectors_angle;
 		if(config.show_vectors_angle){
 			var angle_vector_start;
 			switch(config.vectors_angle_sel1){
