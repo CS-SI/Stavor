@@ -199,7 +199,7 @@ function addSelectedStationsNames(){
 }
 
 function drawStationsAreas(){
-	if(Math.abs(sc_altitude-sc_altitude_tmp)>sc_altitude_step){
+	//if(Math.abs(sc_altitude-sc_altitude_tmp)>sc_altitude_step){
 		stations_area_layer.removeAllFeatures();
 		for (var arrayIndex in results.station_areas){
 			if(results.station_areas[arrayIndex].type==0)
@@ -210,7 +210,7 @@ function drawStationsAreas(){
 		}
 	
 		sc_altitude_tmp = sc_altitude;
-	}
+	//}
 }
 
 function paintOpenArea(arrayIndex,type){
