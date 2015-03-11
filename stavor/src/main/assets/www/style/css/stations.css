@@ -16,6 +16,15 @@
 	margin-top: 2px;
 }
 
+.StationNormal input[type=checkbox]:active
+{
+    box-shadow: none;
+}
+.StationActive input[type=checkbox]:active
+{
+    box-shadow: none;
+}
+
 .StationField{
 	padding: 2px 0px 2px 10px;
     border: 0;

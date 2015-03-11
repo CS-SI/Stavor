@@ -64,7 +64,7 @@ input[type=checkbox]:active
 	margin-right: 12px;
 	/*background-image: -webkit-linear-gradient(#000000, #EFEFEF) !important;*/
     /*box-shadow:inset 1px 1px 0 rgba(0,0,0,0.2), inset -1px -1px 0 rgba(100,100,100,0.6);*/
-	box-shadow: 0px 0px 3px rgba(60,60,60,0.8);
+	box-shadow: -1px -1px 1px rgba(60,60,60,0.8);
 	border-radius: 5px;
     /*border-color:rgba(0,0,0,0.5);*/
 	/*border: 5px solid black !important;*/
