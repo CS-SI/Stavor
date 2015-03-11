@@ -61,7 +61,7 @@ var Attitude = function ()
 	var plane_orb, plane_xy, incl_arc, spriteInclination, contextInclination;
 	//var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
-	var spacecraft, spacecraftAxis, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
+	var spacecraft, spacecraftAxis, engSurfaceLeft, engSurfaceRight, engBasicLeft, engBasicRight, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
 	var long_arc, lat_arc, long_sprite, lat_sprite, lineAngle, lineSpheric, lineSpheric2;
 	var vectors_arc, vectors_sprite;
 	var origin = new THREE.Vector3(0,0,0);
@@ -1198,75 +1198,66 @@ var Attitude = function ()
 		sc.position.set( 0, 0, 0 );
 		sc.rotation.x = -Math.PI/2;
 		spacecraft.add(sc);
-		//scene.add( sc );
 		
-		//if(!canvas_mode)
-			var mat_window = new THREE.MeshPhongMaterial( { color: sc_window_color, metal: true, side: THREE.FrontSide } );
-		//else
-			//var mat_window = new THREE.MeshBasicMaterial( { color: sc_window_color, side: THREE.FrontSide } );
+		var mat_window = new THREE.MeshPhongMaterial( { color: sc_window_color, metal: true, side: THREE.FrontSide } );
+			
 		var sc_window = new THREE.Mesh(new THREE.SphereGeometry( 3, segments.sc_window_segments, segments.sc_window_segments ), mat_window);
 		sc_window.position.set( 0, 1.5, -2 );
 		spacecraft.add(sc_window);
-		//scene.add( sc_window );
 		
 		var eng_geometry = new THREE.CylinderGeometry( 2, 2.5, 2, segments.sc_engine_segments );
-		//if(!canvas_mode)
-			var eng_material = new THREE.MeshPhongMaterial( { color: sc_engine_color, metal: true, side: THREE.FrontSide } );
-		//else
-			//var eng_material = new THREE.MeshBasicMaterial( { color: sc_engine_color, side: THREE.FrontSide } );
+		var eng_material = new THREE.MeshPhongMaterial( { color: sc_engine_color, metal: true, side: THREE.FrontSide } );
+			
 		var eng = new THREE.Mesh( eng_geometry, eng_material );
 		eng.rotation.x = -Math.PI/2;
 		eng.position.set( -2.5, 0, -8 );
 		spacecraft.add(eng);
-		//scene.add( eng );
 		
 		var eng2 = eng.clone();
 		eng2.rotation.x = -Math.PI/2;
 		eng2.position.set( 2.5, 0, -8 );
 		spacecraft.add(eng2);
-		//scene.add( eng2 );
 		
-		if (config.sc_show_eng_texture){
-			// use "this." to create global object
-			customUniforms2 = {
-				baseTexture: 	{ type: "t", value: waterTexture },
-				baseSpeed: 		{ type: "f", value: 1.15 },
-				noiseTexture: 	{ type: "t", value: noiseTexture },
-				noiseScale:		{ type: "f", value: 0.5 },
-				alpha: 			{ type: "f", value: 0.8 },
-				time: 			{ type: "f", value: 1.0 }
-			};
+		//Engine surface
+		customUniforms2 = {
+			baseTexture: 	{ type: "t", value: waterTexture },
+			baseSpeed: 		{ type: "f", value: 1.15 },
+			noiseTexture: 	{ type: "t", value: noiseTexture },
+			noiseScale:		{ type: "f", value: 0.5 },
+			alpha: 			{ type: "f", value: 0.8 },
+			time: 			{ type: "f", value: 1.0 }
+		};
 
-			// create custom material from the shader code above
-			//   that is within specially labeled script tags
-			var customMaterial2 = new THREE.ShaderMaterial( 
-			{
-				uniforms: customUniforms2,
-				vertexShader:   THREE.ShaderEngine.vertexShader,
-				fragmentShader: THREE.ShaderEngine.fragmentShader
-			}   );
-		 
-			// other material properties
-			
-			//customMaterial2.transparent = true;
-		}else{
-			//if(!canvas_mode)
-				var customMaterial2 = new THREE.MeshPhongMaterial( { color: sc_eng_solid_color, metal: true } );
-			/*else
-				var customMaterial2 = new THREE.MeshBasicMaterial( { color: sc_eng_solid_color } );*/
-		}
-		customMaterial2.side = THREE.BackSide;
+		// create custom material from the shader code above
+		//   that is within specially labeled script tags
+		var customMaterialEngineSurface = new THREE.ShaderMaterial( 
+		{
+			uniforms: customUniforms2,
+			vertexShader:   THREE.ShaderEngine.vertexShader,
+			fragmentShader: THREE.ShaderEngine.fragmentShader
+		}   );
+		customMaterialEngineSurface.side = THREE.BackSide;
+		
+		var customMaterialEngineBasic = new THREE.MeshPhongMaterial( { color: sc_eng_solid_color, metal: true } );
+		customMaterialEngineBasic.side = THREE.BackSide;
+		
 		// apply the material to a surface    innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength)
 		var flatGeometry = new THREE.RingGeometry( 0.5, 2, 15 );
-		var surface = new THREE.Mesh( flatGeometry, customMaterial2 );
+		var flatGeometrySurface = new THREE.RingGeometry( 0.5, 2, 15 );
+		engBasicLeft = new THREE.Mesh( flatGeometry, customMaterialEngineBasic );
+		engSurfaceLeft = new THREE.Mesh( flatGeometrySurface, customMaterialEngineSurface );
 		//surface.rotation.z = -Math.PI/2;
-		surface.position.set( 2.5, 0, -9.1 );
-		spacecraft.add(surface);
-		//scene.add( surface );
-		var engine_surface2 = surface.clone(); 
-		engine_surface2.position.set( -2.5, 0, -9.1 );
-		spacecraft.add(engine_surface2);
-		//scene.add( engine_surface2 );
+		engBasicLeft.position.set( 2.5, 0, -9.1 );
+		engSurfaceLeft.position.set( 2.5, 0, -9.1 );
+		spacecraft.add(engBasicLeft);
+		spacecraft.add(engSurfaceLeft);
+		
+		engBasicRight = engBasicLeft.clone(); 
+		engSurfaceRight = engSurfaceLeft.clone();
+		engBasicRight.position.set( -2.5, 0, -9.1 );
+		engSurfaceRight.position.set( -2.5, 0, -9.1 );
+		spacecraft.add(engBasicRight);
+		spacecraft.add(engSurfaceRight);
 
 		spacecraft.scale.multiplyScalar(sc_scale);
 		scene.add(spacecraft);
@@ -1276,6 +1267,11 @@ var Attitude = function ()
 		//			SPACECRAFT UPDATE
 		//-----------------------------------------------------------------------------------------------------------------------
 		spacecraftAxis.visible = config.show_sc_axis;
+		
+		engBasicRight.visible = !config.sc_show_eng_texture;
+		engBasicLeft.visible = !config.sc_show_eng_texture;
+		engSurfaceRight.visible = config.sc_show_eng_texture;
+		engSurfaceLeft.visible = config.sc_show_eng_texture;
 		if(config.sc_show_eng_texture){
 			customUniforms2.time.value += delta;
 		}
