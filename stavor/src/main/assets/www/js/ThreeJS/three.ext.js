@@ -252,7 +252,7 @@ THREE.TargetHelper.prototype.setLength = function ( length, headLength, headWidt
 
 THREE.TargetHelper.prototype.setColor = function ( hex ) {
 
-	//this.line.material.color.setHex( hex );
+	this.line.material.color.setHex( hex );
 	this.cone.material.color.setHex( hex );
 
 };

@@ -874,86 +874,95 @@ var Attitude = function ()
 		var direction;
 		
 		// BASIC
-		if(config.show_velocity){
-			direction = new THREE.Vector3().subVectors(results.velocity, origin).normalize();		
-			arrow_vel = new THREE.VectorHelper(direction, origin, arrow_max_length, config.color_velocity, arrow_head_length, arrow_head_width, segments.arrow_segments);
-			scene.add(arrow_vel);
-		}
+		direction = new THREE.Vector3().subVectors(results.velocity, origin).normalize();		
+		arrow_vel = new THREE.VectorHelper(direction, origin, arrow_max_length, config.color_velocity, arrow_head_length, arrow_head_width, segments.arrow_segments);
+		scene.add(arrow_vel);
 		
-		if(config.show_acceleration){
-			direction = new THREE.Vector3().subVectors(results.acceleration, origin).normalize();
-			arrow_accel = new THREE.VectorHelper(direction, origin, arrow_max_length, config.color_acceleration, arrow_head_length, arrow_head_width, segments.arrow_segments);
-			scene.add(arrow_accel);
-		}
+		direction = new THREE.Vector3().subVectors(results.acceleration, origin).normalize();
+		arrow_accel = new THREE.VectorHelper(direction, origin, arrow_max_length, config.color_acceleration, arrow_head_length, arrow_head_width, segments.arrow_segments);
+		scene.add(arrow_accel);
 		
-		if(config.show_momentum){
-			direction = new THREE.Vector3().subVectors(results.momentum, origin).normalize();
-			arrow_momentum = new THREE.MomentumHelper(direction, origin, momentum_length, config.color_momentum, momentum_head_length, momentum_head_width, segments.momentum_segments);
-			scene.add(arrow_momentum);
-		}
+		direction = new THREE.Vector3().subVectors(results.momentum, origin).normalize();
+		arrow_momentum = new THREE.MomentumHelper(direction, origin, momentum_length, config.color_momentum, momentum_head_length, momentum_head_width, segments.momentum_segments);
+		scene.add(arrow_momentum);
 		
 		// EXTRA
-		if(config.show_target_a){
-			direction = new THREE.Vector3().subVectors(config.value_target_a, origin).normalize();
-			target_a = new THREE.TargetHelper(direction, origin, target_length, config.color_target_a, target_head_length, target_head_width, segments.target_segments);
-			scene.add(target_a);
-		}
+		direction = new THREE.Vector3().subVectors(config.value_target_a, origin).normalize();
+		target_a = new THREE.TargetHelper(direction, origin, target_length, config.color_target_a, target_head_length, target_head_width, segments.target_segments);
+		scene.add(target_a);
 		
-		if(config.show_vector_a){
-			direction = new THREE.Vector3().subVectors(config.value_vector_a, origin).normalize();
-			vector_a = new THREE.VectorHelper(direction, origin, arrow_max_length, config.color_vector_a, arrow_head_length, arrow_head_width, segments.arrow_segments);
-			scene.add(vector_a);
-		}
+		direction = new THREE.Vector3().subVectors(config.value_vector_a, origin).normalize();
+		vector_a = new THREE.VectorHelper(direction, origin, arrow_max_length, config.color_vector_a, arrow_head_length, arrow_head_width, segments.arrow_segments);
+		scene.add(vector_a);
 		
-		if(config.show_direction_a){
-			direction = new THREE.Vector3().subVectors(config.value_direction_a, origin).normalize();
-			direction_a = new THREE.MomentumHelper(direction, origin, momentum_length, config.color_direction_a, momentum_head_length, momentum_head_width, segments.momentum_segments);
-			scene.add(direction_a);
-		}
+		direction = new THREE.Vector3().subVectors(config.value_direction_a, origin).normalize();
+		direction_a = new THREE.MomentumHelper(direction, origin, momentum_length, config.color_direction_a, momentum_head_length, momentum_head_width, segments.momentum_segments);
+		scene.add(direction_a);
 
 	}
 	function updateIndicators() {
-			//-----------------------------------------------------------------------------------------------------------------------
+		//-----------------------------------------------------------------------------------------------------------------------
 		//			ARROWS UPDATE
 		//-----------------------------------------------------------------------------------------------------------------------
 		var new_direction;
+		
+		//THREE.SceneUtils.traverseHierarchy( arrow_vel, function( node ) { node.__visible = config.show_velocity; } )
+		arrow_vel.visible = config.show_velocity;
+		arrow_vel.children[0].visible = config.show_velocity;
+		arrow_vel.children[1].visible = config.show_velocity;
 		if(config.show_velocity){
 			new_direction = new THREE.Vector3().subVectors(results.velocity, origin).normalize();
 			arrow_vel.setDirection(new_direction);
 			arrow_vel.setLength(results.velocity.length()*arrow_max_length/config.limit_velocity, arrow_head_length, arrow_head_width);
-			//arrow_vel.setColor(color_velocity);
+			arrow_vel.setColor(parseInt("0x"+config.color_velocity.substr(1,config.color_velocity.length)));
 		}
 		
+		arrow_accel.visible = config.show_acceleration;
+		arrow_accel.children[0].visible = config.show_acceleration;
+		arrow_accel.children[1].visible = config.show_acceleration;
 		if(config.show_acceleration){
 			new_direction = new THREE.Vector3().subVectors(results.acceleration, origin).normalize();
 			arrow_accel.setDirection(new_direction);
 			arrow_accel.setLength(results.acceleration.length()*arrow_max_length/config.limit_acceleration, arrow_head_length, arrow_head_width);
-			//arrow_accel.setColor(color_acceleration);
+			arrow_accel.setColor(parseInt("0x"+config.color_acceleration.substr(1,config.color_acceleration.length)));
 		}
 		
+		arrow_momentum.visible = config.show_momentum;
+		arrow_momentum.children[0].visible = config.show_momentum;
+		arrow_momentum.children[1].visible = config.show_momentum;
 		if(config.show_momentum){			
 			new_direction = new THREE.Vector3().subVectors(results.momentum, origin).normalize();
 			arrow_momentum.setDirection(new_direction);
-			//arrow_momentum.setColor(color_momentum);
+			arrow_momentum.setColor(parseInt("0x"+config.color_momentum.substr(1,config.color_momentum.length)));
 		}
 		
+		target_a.visible = config.show_target_a;
+		target_a.children[0].visible = config.show_target_a;
+		target_a.children[1].visible = config.show_target_a;
 		if(config.show_target_a){
 			new_direction = new THREE.Vector3().subVectors(config.value_target_a, origin).normalize();
 			target_a.setDirection(new_direction);
-			//target_a.setColor(color_target_a);
+			target_a.setColor(parseInt("0x"+config.color_target_a.substr(1,config.color_target_a.length)));
 		}
 		
+		vector_a.visible = config.show_vector_a;
+		vector_a.children[0].visible = config.show_vector_a;
+		vector_a.children[1].visible = config.show_vector_a;
 		if(config.show_vector_a){
 			new_direction = new THREE.Vector3().subVectors(config.value_vector_a, origin).normalize();
 			vector_a.setDirection(new_direction);
-			vector_a.setLength(config.value_vector_a.length()*arrow_max_length/config.limit_vector_a, arrow_head_length, arrow_head_width);
-			//vector_a.setColor(color_vector_a);
+			var length = new THREE.Vector3(config.value_vector_a.x,config.value_vector_a.y,config.value_vector_a.z).length();
+			vector_a.setLength(length*arrow_max_length/config.limit_vector_a, arrow_head_length, arrow_head_width);
+			vector_a.setColor(parseInt("0x"+config.color_vector_a.substr(1,config.color_vector_a.length)));
 		}
 		
+		direction_a.visible = config.show_direction_a;
+		direction_a.children[0].visible = config.show_direction_a;
+		direction_a.children[1].visible = config.show_direction_a;
 		if(config.show_direction_a){
 			new_direction = new THREE.Vector3().subVectors(config.value_direction_a, origin).normalize();
 			direction_a.setDirection(new_direction);
-			//direction_a.setColor(color_direction_a);
+			direction_a.setColor(parseInt("0x"+config.color_direction_a.substr(1,config.color_direction_a.length)));
 		}
 
 	}

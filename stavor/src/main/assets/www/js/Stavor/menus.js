@@ -599,13 +599,13 @@ function updateAttitudeOption(id,val){
 					global_simulation.config.attitude.show_target_a = val;
 					break;
 				case "opt-att-TargetValueX":
-					global_simulation.config.attitude.value_target_a.setX(val);
+					global_simulation.config.attitude.value_target_a.x = val;
 					break;
 				case "opt-att-TargetValueY":
-					global_simulation.config.attitude.value_target_a.setY(val);
+					global_simulation.config.attitude.value_target_a.y = val;
 					break;
 				case "opt-att-TargetValueZ":
-					global_simulation.config.attitude.value_target_a.setZ(val);
+					global_simulation.config.attitude.value_target_a.z = val;
 					break;
 				case "opt-att-TargetColor":
 					global_simulation.config.attitude.color_target_a = val;
@@ -617,13 +617,13 @@ function updateAttitudeOption(id,val){
 					global_simulation.config.attitude.limit_vector_a = val;
 					break;
 				case "opt-att-VectorValueX":
-					global_simulation.config.attitude.value_vector_a.setX(val);
+					global_simulation.config.attitude.value_vector_a.x = val;
 					break;
 				case "opt-att-VectorValueY":
-					global_simulation.config.attitude.value_vector_a.setY(val);
+					global_simulation.config.attitude.value_vector_a.y = val;
 					break;
 				case "opt-att-VectorValueZ":
-					global_simulation.config.attitude.value_vector_a.setZ(val);
+					global_simulation.config.attitude.value_vector_a.z = val;
 					break;
 				case "opt-att-VectorColor":
 					global_simulation.config.attitude.color_vector_a = val;
@@ -632,16 +632,16 @@ function updateAttitudeOption(id,val){
 					global_simulation.config.attitude.show_direction_a = val;
 					break;
 				case "opt-att-DirectionValueX":
-					global_simulation.config.attitude.value_direction_a.setX(val);
+					global_simulation.config.attitude.value_direction_a.x = val;
 					break;
 				case "opt-att-DirectionValueY":
-					global_simulation.config.attitude.value_direction_a.setY(val);
+					global_simulation.config.attitude.value_direction_a.y = val;
 					break;
 				case "opt-att-DirectionValueZ":
-					global_simulation.config.attitude.value_direction_a.setZ(val);
+					global_simulation.config.attitude.value_direction_a.z = val;
 					break;
-				case "opt-att-color_direction_a":
-					global_simulation.config.attitude.spheric_coords_selection = val;
+				case "opt-att-DirectionColor":
+					global_simulation.config.attitude.color_direction_a = val;
 					break;
 				default:
 			}
