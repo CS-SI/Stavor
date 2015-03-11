@@ -57,11 +57,12 @@ var Attitude = function ()
 	var miniSphereX,miniSphereXX,miniSphereY,miniSphereYY,miniSphereZ,miniSphereZZ;
 	var objSky;
 	var sun, sunSurface, sunGlow, sunLight, lineSun, spriteSun, contextSun;
-	var earth, lineEarth, spriteEarth, contextEarth;
+	var earth, earthSurface, lineEarth, spriteEarth, contextEarth;
 	var plane_orb, plane_xy, incl_arc, spriteInclination, contextInclination;
 	//var keyboard = new THREEx.KeyboardState();
 	var clock = new THREE.Clock();
-	var spacecraft, spacecraftAxis, engSurfaceLeft, engSurfaceRight, engBasicLeft, engBasicRight, arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
+	var spacecraft, spacecraftAxis, engSurfaceLeft, engSurfaceRight, engBasicLeft, engBasicRight;
+	var	arrow_vel, arrow_accel, arrow_momentum, target_a, vector_a, direction_a;
 	var long_arc, lat_arc, long_sprite, lat_sprite, lineAngle, lineSpheric, lineSpheric2;
 	var vectors_arc, vectors_sprite;
 	var origin = new THREE.Vector3(0,0,0);
@@ -778,49 +779,51 @@ var Attitude = function ()
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			EARTH
 		//-----------------------------------------------------------------------------------------------------------------------
-		if(config.show_earth){
-			var earth_geometry = new THREE.SphereGeometry( earth_radius, segments.earth_seg, segments.earth_seg ) ;
-			if(config.show_earth_texture){	 
-				if(typeof textureEarth === 'undefined'){
-				   // your code here.
-					textureEarth = new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/earth/Land_ocean_ice_cloud_2048.jpg' );
-				};
-				var earth_material = new THREE.MeshBasicMaterial( { map: textureEarth, overdraw: true } )
-			}else{
-				//if(!canvas_mode)
-					var earth_material = new THREE.MeshPhongMaterial( { color: earth_solid_color, metal: true } );
-				//else
-					//var earth_material = new THREE.MeshBasicMaterial( { color: earth_solid_color } );
-			}
-			earth = new THREE.Mesh( earth_geometry, earth_material ) ;
-			earth.position.set(75, 0, 75);//Don't remove or the dashed material is not created
-			scene.add( earth );
-			
-			if(config.earth_show_line){
-				// EARTH LINE
-				var lineGeometryEarth = new THREE.Geometry();
-				var vertArrayEarth = lineGeometryEarth.vertices;
-				vertArrayEarth.push( new THREE.Vector3(earth.position.x,earth.position.y,earth.position.z), new THREE.Vector3(0, 0, 0) );
-				lineGeometryEarth.computeLineDistances();
-				var lineMaterialEarth = new THREE.LineDashedMaterial( { color: 0x0099ff, dashSize: 2, gapSize: 2 } );
-				lineEarth = new THREE.Line( lineGeometryEarth, lineMaterialEarth );
-				scene.add(lineEarth);
-			}
-			if(config.earth_show_dist){
-				// Earth Sprite
-				spriteEarth = makeTextSprite( 2, " 36150 Km ", 
-					{ fontsize: 20, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:95, g:247, b:252, a:1.0} } );
-				earth.add( spriteEarth );
-			}
-		}
+		var earth_geometry = new THREE.SphereGeometry( earth_radius, segments.earth_seg, segments.earth_seg ) ;
+		var earth_geometry_surface = new THREE.SphereGeometry( earth_radius+1, segments.earth_seg, segments.earth_seg ) ;
+		
+		if(typeof textureEarth === 'undefined'){
+		   // your code here.
+			textureEarth = new THREE.ImageUtils.loadTexture( 'modules/attitude/textures/earth/Land_ocean_ice_cloud_2048.jpg' );
+		};
+		var earth_material_surface = new THREE.MeshBasicMaterial( { map: textureEarth, overdraw: true } );
+		var earth_material = new THREE.MeshPhongMaterial( { color: earth_solid_color, metal: true } );
+		
+		earth = new THREE.Mesh( earth_geometry, earth_material ) ;
+		earth.position.set(75, 0, 75);//Don't remove or the dashed material is not created
+		scene.add( earth );
+		
+		earthSurface = new THREE.Mesh( earth_geometry_surface, earth_material_surface ) ;
+		earthSurface.position.set(75, 0, 75);//Don't remove or the dashed material is not created
+		scene.add( earthSurface );
+		
+		// EARTH LINE
+		var lineGeometryEarth = new THREE.Geometry();
+		var vertArrayEarth = lineGeometryEarth.vertices;
+		vertArrayEarth.push( new THREE.Vector3(earth.position.x,earth.position.y,earth.position.z), new THREE.Vector3(0, 0, 0) );
+		lineGeometryEarth.computeLineDistances();
+		var lineMaterialEarth = new THREE.LineDashedMaterial( { color: 0x0099ff, dashSize: 2, gapSize: 2 } );
+		lineEarth = new THREE.Line( lineGeometryEarth, lineMaterialEarth );
+		scene.add(lineEarth);
+		
+		// Earth Sprite
+		spriteEarth = makeTextSprite( 2, " 36150 Km ", 
+			{ fontsize: 20, borderColor: {r:0, g:0, b:0, a:1.0}, borderThickness: 1, backgroundColor: {r:0, g:0, b:0, a:0.5}, fontColor: {r:95, g:247, b:252, a:1.0} } );
+		earth.add( spriteEarth );
+		
 	}
 	function updateEarth(){
 		//-----------------------------------------------------------------------------------------------------------------------
 		//			EARTH UPDATE
 		//-----------------------------------------------------------------------------------------------------------------------
+		earth.visible = config.show_earth;
+		earthSurface.visible = config.show_earth_texture;
+		lineEarth.visible = config.earth_show_line;
+		spriteEarth.visible = config.earth_show_dist;
 		if(config.show_earth){
 			var earth_obj_pos = results.earth_direction.clone().normalize().multiplyScalar(earth_obj_dist);
 			earth.position = earth_obj_pos;
+			earthSurface.position = earth_obj_pos;
 			//XGGDEBUG: maybe it does not need to update the line after updating the object position since it is link to its coordinates.
 			if(config.earth_show_line){
 				// EARTH LINE
@@ -853,7 +856,7 @@ var Attitude = function ()
 				spriteEarth.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
 			}
 			if(config.earth_rotates){
-				earth.rotation.y += 0.001*config.earth_rotation_speed;
+				earthSurface.rotation.y += 0.001*config.earth_rotation_speed;
 			}
 		}
 
@@ -1481,11 +1484,18 @@ var Attitude = function ()
 		if(config.show_earth){
 			earth.material.opacity = 1;
 			earth.material.transparent = false;
+			earthSurface.material.opacity = 1;
+			earthSurface.material.transparent = false;
 			//earth.visible=true;
 		}
 		if(config.show_sun){
-			sun.visible=true;
+			//sun.visible=true;
 			sunGlow.visible=true;
+			sun.material.opacity = 1;
+			sun.material.transparent = false;
+			sunSurface.material.opacity = 1;
+			sunSurface.material.transparent = false;
+			customUniforms.alpha.value = 1.0;
 		}
 	}
 	function changeView(view_mode){
@@ -1531,19 +1541,26 @@ var Attitude = function ()
 				camera.up = new THREE.Vector3(0,1,0);
 				break;
 			case "Earth"://Earth
-				if(config.show_earth){
+				//if(config.show_earth){
 					//earth.visible = false;
 					earth.material.opacity = 0.2;
 					earth.material.transparent = true;
-				}
+					earthSurface.material.opacity = 0.2;
+					earthSurface.material.transparent = true;
+				//}
 				camera.up = new THREE.Vector3(0,0,1);
 				camera.position = results.earth_direction.clone().normalize().multiplyScalar(getCamDistance());
 				break;
 			case "Sun"://Sun
-				if(config.show_sun){
-					sun.visible = false;
+				//if(config.show_sun){
+					//sun.visible = false;
 					sunGlow.visible=false;
-				}
+					sun.material.opacity = 0.2;
+					sun.material.transparent = true;
+					sunSurface.material.opacity = 0.2;
+					sunSurface.material.transparent = true;
+					customUniforms.alpha.value = 0.2;
+				//}
 				camera.up = new THREE.Vector3(0,0,1);
 				camera.position = results.sun_direction.clone().normalize().multiplyScalar(getCamDistance());
 				break;
