@@ -1,7 +1,5 @@
 package cs.si.stavor.simulator;
 
-import org.xwalk.core.XWalkView;
-
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -21,9 +19,7 @@ import android.content.SharedPreferences;
 import android.os.ConditionVariable;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 

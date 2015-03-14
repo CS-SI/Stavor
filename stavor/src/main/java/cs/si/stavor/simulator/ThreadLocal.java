@@ -20,13 +20,11 @@ import org.orekit.propagation.Propagator;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.propagation.analytical.KeplerianPropagator;
 import org.orekit.time.AbsoluteDate;
-import org.orekit.utils.Constants;
 
 import cs.si.stavor.R;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.mission.Mission;
 import android.os.Handler;
-import android.util.Log;
 
 public class ThreadLocal extends Thread{
 	private final Handler mHandler;

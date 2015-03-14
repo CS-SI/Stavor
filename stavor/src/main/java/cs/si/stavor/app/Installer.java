@@ -6,19 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.orekit.errors.OrekitException;
-import org.orekit.time.AbsoluteDate;
-import org.orekit.time.TimeScalesFactory;
-
 import cs.si.stavor.R;
 import cs.si.stavor.MainActivity;
-import cs.si.stavor.mission.Mission;
-import cs.si.stavor.station.GroundStation;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 

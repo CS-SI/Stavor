@@ -25,7 +25,6 @@ import org.orekit.time.TimeScalesFactory;
 import org.xwalk.core.XWalkView;
 import org.orekit.utils.Constants;
 
-import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -118,8 +117,8 @@ public class ModelSimulation {
     	}
 	}
     
-    private AbsoluteDate tmp_time;
-    private Vector3D tmp_vel;
+    //private AbsoluteDate tmp_time;
+    //private Vector3D tmp_vel;
     private TimeScale utc;
     private Frame sunFrame, earthFixedFrame;
     private OneAxisEllipsoid earthPlanet;
@@ -211,8 +210,8 @@ public class ModelSimulation {
         }*/
 
         //Update temporal variables for acceleration computation
-        tmp_vel = velocity;
-        tmp_time = date;
+        //tmp_vel = velocity;
+        //tmp_time = date;
 
         double[] angles = sc_att.getOrientation().getRotation().getAngles(RotationOrder.XYZ);
         new_state.roll = angles[0]*180/Math.PI;

@@ -1,10 +1,6 @@
 package cs.si.stavor.web;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import org.orekit.errors.OrekitException;
 import org.orekit.time.AbsoluteDate;
@@ -13,14 +9,10 @@ import org.orekit.time.TimeScalesFactory;
 import org.xwalk.core.JavascriptInterface;
 import org.xwalk.core.XWalkView;
 
-import cs.si.stavor.MainActivity;
-import cs.si.stavor.model.MapPoint;
 import cs.si.stavor.model.Visualizations;
 import cs.si.stavor.simulator.SimulationSense;
 import cs.si.stavor.simulator.SimulationStatus;
 import cs.si.stavor.simulator.Simulator;
-
-import static org.chromium.base.ThreadUtils.runOnUiThread;
 
 /**
  * JavaScript-to-Android bridge functions
