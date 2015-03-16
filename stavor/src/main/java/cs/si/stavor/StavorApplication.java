@@ -1,18 +1,20 @@
 package cs.si.stavor;
 
+import android.app.Application;
+
 import java.util.HashMap;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
-import android.support.multidex.MultiDexApplication;
+//import android.support.multidex.MultiDexApplication;
 
 /**
  * Application
  * @author Xavier Gibert
  *
  */
-public class StavorApplication extends MultiDexApplication {
+public class StavorApplication extends Application {
 	private String searchTerm = "";
 
 	public void setSearchTerm(String searchTerm) {
