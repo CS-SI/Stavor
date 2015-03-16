@@ -147,9 +147,9 @@ public class ModelSimulation {
             new_state.value_velocity[2] = velocity.getZ() / 1000;
 
             Vector3D acceleration = scs.getPVCoordinates().getAcceleration();
-            new_state.value_acceleration[0] = acceleration.getX() / 1000;
-            new_state.value_acceleration[1] = acceleration.getY() / 1000;
-            new_state.value_acceleration[2] = acceleration.getZ() / 1000;
+            new_state.value_acceleration[0] = acceleration.getX();
+            new_state.value_acceleration[1] = acceleration.getY();
+            new_state.value_acceleration[2] = acceleration.getZ();
 
             new_state.value_momentum[0] = scs.getPVCoordinates().getMomentum().getX();
             new_state.value_momentum[1] = scs.getPVCoordinates().getMomentum().getY();
@@ -175,7 +175,7 @@ public class ModelSimulation {
 
         //Info panel
         new_state.velocity = scs.getPVCoordinates().getVelocity().getNorm()/1000;
-        new_state.acceleration = scs.getPVCoordinates().getAcceleration().getNorm() / 1000;
+        new_state.acceleration = scs.getPVCoordinates().getAcceleration().getNorm();
         new_state.orbit_radius = earth.getNorm()/1000;
         new_state.progress = sim_progress;
         if(new_state.progress>100)

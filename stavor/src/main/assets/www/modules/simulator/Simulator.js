@@ -308,7 +308,7 @@ function updateInfoPanel(force){
 		ip_pitch.innerHTML = results.attitude.pitch.toFixed(2)+"°";
 		ip_yaw.innerHTML = results.attitude.yaw.toFixed(2)+"°";
 		ip_vel.innerHTML = results.velocity.toFixed(2)+" Km/s";
-		ip_accel.innerHTML = results.acceleration.toFixed(2)+" Km/s2";
+		ip_accel.innerHTML = results.acceleration.toFixed(2)+" m/s2";
 		ip_mass.innerHTML = results.mass.toFixed(1)+" Kg";
 		ip_radius.innerHTML = results.orb_radius.toFixed(0)+" Km";
 		
