@@ -4,7 +4,7 @@ function localizeStrings(){
 		if(lang){
 			$("[data-translate]").jqTranslate('strings',{defaultLang: 'en', asyncLangLoad: false, path: "lang", onComplete: dialogCallback, forceLang: lang});
 		}else{
-			$("[data-translate]").jqTranslate('strings',{defaultLang: 'en', asyncLangLoad: false, path: "lang", onComplete: dialogCallback});
+			$("[data-translate]").jqTranslate('strings',{defaultLang: 'en', asyncLangLoad: true, path: "lang", onComplete: dialogCallback});
 		}
 	});
 	
