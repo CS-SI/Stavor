@@ -4,7 +4,7 @@ function initializePanGestures(){
 	initializeAttitudeMenuPanGestures();
 	initializeOrbitMenuPanGestures();
 	initializeMapMenuPanGestures();
-	setLoadingText("Gestures linked!");
+	setLoadingText(document.getElementById("str_loading_gestures_linked").innerHTML);
 }
 
 function initializeMapMenuPanGestures(){

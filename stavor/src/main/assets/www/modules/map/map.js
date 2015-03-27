@@ -702,7 +702,7 @@ function changeView(view_mode){
 
 	//setLoadingProgress(100);
 	global_delayed_loading.visualization.map = true;
-	setLoadingText("Map module loaded!");
+	setLoadingText(document.getElementById("str_loading_map_module_loaded").innerHTML);
 	hideSplash();
 	setMapReloaded();
 //------------------------------------------------------------------------------

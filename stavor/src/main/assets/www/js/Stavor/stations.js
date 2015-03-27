@@ -223,7 +223,7 @@ function initializeStationsDb(){
 				drawStationsList();
 				fillSelectedStationsArray();
 				global_delayed_loading.database.stations = true;
-				setLoadingText("Stations installed!");
+				setLoadingText(document.getElementById("str_loading_stations_installed").innerHTML);
 				//hideSplash();
 				initializeMissionsDb();
 			});
@@ -232,7 +232,7 @@ function initializeStationsDb(){
 		drawStationsList();
 		fillSelectedStationsArray();
 		global_delayed_loading.database.stations = true;
-		setLoadingText("Stations loaded!");
+		setLoadingText(document.getElementById("str_loading_stations_loaded").innerHTML);
 		//hideSplash();
 		initializeMissionsDb();
 	}

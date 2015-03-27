@@ -114,7 +114,7 @@ var Orbit = function()
 	})	
 	
 	global_delayed_loading.visualization.orbit = true;
-	setLoadingText("Orbit module loaded!");
+	setLoadingText(document.getElementById("str_loading_orbit_module_loaded").innerHTML);
 	hideSplash();
 
 	//////////////////////////////////////////////////////////////////////////////////

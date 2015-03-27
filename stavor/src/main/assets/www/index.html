@@ -101,6 +101,7 @@
 		window.onload = function () {
 			start_time = new Date().getTime();
 			initializeSplashScreen();
+			localizeStrings();
 			
 			loadStoredVariables();
 			loadAngleUnitsRads();
@@ -124,7 +125,6 @@
 			
 			loadOrekitFilesText();
 			
-			localizeStrings();
 		}
 		
 		function initOptionMenus(){
@@ -132,12 +132,12 @@
 			initializeAttitudeMenu();
 			initializeOrbitMenu();
 			initializeMapMenu();
-			setLoadingText("Options preloaded!");
+			setLoadingText(document.getElementById("str_loading_options_preloaded").innerHTML);
 		}
 		
 		function initSimulator(){
 			global_simulator = new Simulator();
-			setLoadingText("Simulator ready!");
+			setLoadingText(document.getElementById("str_loading_simulator_ready").innerHTML);
 		}
 		
 		function initializeSplashScreen(){
@@ -178,7 +178,7 @@
 				var localData = JSON.parse(serialized);
 				global_simulation.config = localData;
 				setPerformanceLevel();
-				setLoadingText("Configuration loaded!");
+				setLoadingText(document.getElementById("str_loading_configuration_loaded").innerHTML);
 			}
 		}
 		function saveStoredVariables(){
@@ -217,7 +217,7 @@
 				global_delayed_loading.database.stations &&
 				!global_delayed_loading.splashIsHidden
 				){
-				setLoadingText("Stavor loaded!");
+				setLoadingText(document.getElementById("str_loading_stavor_loaded").innerHTML);
 				global_delayed_loading.splashIsHidden = true;
 				var current_time = new Date().getTime();
 				var elapsed = current_time - start_time;
@@ -231,19 +231,6 @@
 					div_splash.style.opacity = "0";
 					switchMissionsListStatus();
 				}, delay);
-			}else{
-				//Wait for loading
-				/*if(!global_delayed_loading.visualization.attitude){
-					setLoadingText("Init Attitude module...");
-				}else if(!global_delayed_loading.visualization.orbit){
-					setLoadingText("Init Orbit module...");
-				}else if(!global_delayed_loading.visualization.map){
-					setLoadingText("Init Map module...");
-				}else if(!global_delayed_loading.database.missions){
-					setLoadingText("Loading Missions db...");
-				}else if(!global_delayed_loading.database.stations){
-					setLoadingText("Loading Stations db...");
-				}*/
 			}
 		}
 		function setLoadingText(text){
@@ -278,7 +265,7 @@
 			div_map.className = "NextVisToLeft";
 			
 			global_delayed_loading.visualization.slider = true;
-			setLoadingText("Slider initialized!");
+			setLoadingText(document.getElementById("str_loading_slider_initialized").innerHTML);
 			hideSplash();
 		}
 		
@@ -908,6 +895,18 @@
 <div id="str_dialog_confirm_delete_station_title" data-translate="dialog_confirm_delete_station_title" class="LocalizedString" >Stavor says</div>
 <div id="str_dialog_confirm_delete_station_message_1" data-translate="dialog_confirm_delete_station_message_1" class="LocalizedString" >Delete station </div>
 <div id="str_dialog_confirm_delete_station_message_2" data-translate="dialog_confirm_delete_station_message_2" class="LocalizedString" >?</div>
+<div id="str_loading_options_preloaded" data-translate="loading_options_preloaded" class="LocalizedString" >Options preloaded!</div>
+<div id="str_loading_simulator_ready" data-translate="loading_simulator_ready" class="LocalizedString" >Simulator ready!</div>
+<div id="str_loading_configuration_loaded" data-translate="loading_configuration_loaded" class="LocalizedString" >Configuration loaded!</div>
+<div id="str_loading_stavor_loaded" data-translate="loading_stavor_loaded" class="LocalizedString" >Stavor loaded!</div>
+<div id="str_loading_slider_initialized" data-translate="loading_slider_initialized" class="LocalizedString" >Slider initialized!</div>
+<div id="str_loading_gestures_linked" data-translate="loading_gestures_linked" class="LocalizedString" >Gestures linked!</div>
+<div id="str_loading_missions_loaded" data-translate="loading_missions_loaded" class="LocalizedString" >Missions loaded!</div>
+<div id="str_loading_stations_installed" data-translate="loading_stations_installed" class="LocalizedString" >Stations installed!</div>
+<div id="str_loading_stations_loaded" data-translate="loading_stations_loaded" class="LocalizedString" >Stations loaded!</div>
+<div id="str_loading_attitude_module_loaded" data-translate="loading_attitude_module_loaded" class="LocalizedString" >Attitude module loaded!</div>
+<div id="str_loading_orbit_module_loaded" data-translate="loading_orbit_module_loaded" class="LocalizedString" >Orbit module loaded!</div>
+<div id="str_loading_map_module_loaded" data-translate="loading_map_module_loaded" class="LocalizedString" >Map module loaded!</div>
 
 <!-- Modules -->
 	<!-- Attitude -->

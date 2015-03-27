@@ -217,7 +217,7 @@ var Attitude = function ()
 		changeView(selected_view);
 		
 		global_delayed_loading.visualization.attitude = true;
-		setLoadingText("Attitude module loaded!");
+		setLoadingText(document.getElementById("str_loading_attitude_module_loaded").innerHTML);
 		hideSplash();
 	}
 	

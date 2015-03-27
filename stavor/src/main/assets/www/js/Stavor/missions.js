@@ -173,7 +173,7 @@ function drawMissionsList(){
 			if(!global_delayed_loading.database.missions){				
 				selectActiveMission();
 				global_delayed_loading.database.missions = true;
-				setLoadingText("Missions loaded!");
+				setLoadingText(document.getElementById("str_loading_missions_loaded").innerHTML);
 				hideSplash();
 			}
 		}, errorDatabaseHandler);
