@@ -96,3 +96,10 @@
 /assets/www/huds/modules/view.js~
 /assets/www/huds/update.js~
 /assets/www/huds/viewFuncs.js~
+.gradle/
+stavor/build/
+crosswalkwebview103923515arm/build/
+.idea/
+build/
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/
