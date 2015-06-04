@@ -839,6 +839,24 @@ Paths.prototype = {
 			this.tmp_lon = point.longitude;
 			this.tmp_alt = point.altitude;
 			this.firstPoint=false;
+
+			//Limit the size
+			var wrong_length = true;
+			while(wrong_length){
+				var total_length = 0;
+				for(var i = 0; i < this.paths.length; i++){
+					total_length = total_length + this.paths[i].points.length;
+				}
+				if(total_length > global_simulation.config.map.max_path_length){
+					this.paths[0].points.splice(0,1);
+					if(this.paths[0].points.length == 0){
+						this.paths.splice(0,1);
+					}
+				}
+				if(total_length <= global_simulation.config.map.max_path_length){
+					wrong_length = false;
+				}
+			}
 		}
 	},
 

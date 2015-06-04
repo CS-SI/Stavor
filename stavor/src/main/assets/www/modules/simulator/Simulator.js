@@ -120,7 +120,7 @@ Simulator.prototype.setCurrentVisualization = function(){
 
 Simulator.prototype.sendSimulatorConfiguration = function(){
 	var sim_conf = new SimConfig();
-	sim_conf.aperture_angle = global_simulation.config.map.fov.aperture_angle;
+	sim_conf.aperture_angle = global_simulation.config.map.fov.aperture_angle;//In degrees
 	sim_conf.sensor_direction_x = global_simulation.config.map.fov.direction.x;
 	sim_conf.sensor_direction_y = global_simulation.config.map.fov.direction.y;
 	sim_conf.sensor_direction_z = global_simulation.config.map.fov.direction.z;

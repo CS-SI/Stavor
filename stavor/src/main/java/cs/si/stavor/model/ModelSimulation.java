@@ -17,6 +17,7 @@ import org.orekit.bodies.GeodeticPoint;
 import org.orekit.bodies.OneAxisEllipsoid;
 import org.orekit.errors.OrekitException;
 import org.orekit.frames.Frame;
+import org.orekit.frames.Transform;
 import org.orekit.orbits.KeplerianOrbit;
 import org.orekit.propagation.SpacecraftState;
 import org.orekit.time.AbsoluteDate;
@@ -129,8 +130,9 @@ public class ModelSimulation {
     private AbsoluteDate date_tmp = null;
     ArrayList<LatLon> solarTerminator = new ArrayList<LatLon>();
 
+    private ModelState new_state;//temporal object
     public void updateSimulation(SpacecraftState scs, int sim_progress){
-        ModelState new_state = new ModelState();
+        new_state = new ModelState();
 
         //Global
         Attitude sc_att = scs.getAttitude();
@@ -252,9 +254,12 @@ public class ModelSimulation {
             double lat = gp.getLatitude()*180/Math.PI;
             double lon = gp.getLongitude()*180/Math.PI;
             double alt = gp.getAltitude();
-            if(!Double.isNaN(lat)&&!Double.isNaN(lon))
+            /*if(!Double.isNaN(lat)&&!Double.isNaN(lon))
                 addToMapPathBuffer(lat, lon, alt);
-            new_state.point = getMapPathBufferLast();
+            new_state.point = getMapPathBufferLast();*/
+            if(!Double.isNaN(lat)&&!Double.isNaN(lon)&&!Double.isNaN(alt)) {
+                new_state.point = new MapPoint(lat,lon,alt);
+            }
 
             if(visualization.equals(Visualizations.MAP)) {
                 //Sun_Pos
@@ -357,6 +362,7 @@ public class ModelSimulation {
                     );
                 }
                 Vector3D axis = attitude.applyInverseTo(sensor_sc_direction);
+                axis = scs.toTransform().getInverse().transformPosition(axis);//Axis from spacecraft to rotatingFrame
                 Vector3D ortho = axis.orthogonal();
                 Rotation rot_aperture = new Rotation(ortho, sensor_aperture * Math.PI / 360);
                 Vector3D start = rot_aperture.applyTo(axis);

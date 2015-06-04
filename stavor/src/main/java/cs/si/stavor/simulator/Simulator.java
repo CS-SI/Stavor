@@ -378,6 +378,7 @@ public class Simulator {
 			simulation.preInitialize(); 
 			setProgress(50 * 100);
 			thread_local = new ThreadLocal(handler_local, ((MainActivity)activity).getSimulator(), mission);
+			thread_local.setPriority(Thread.MIN_PRIORITY);
 			thread_local.start();
 		}
 	}

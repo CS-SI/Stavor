@@ -45,7 +45,6 @@ public class ThreadLocal extends Thread{
     }
 	
 	@Override public void run() {
-    	Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
     	if(simulator.getSimulatorStatus().equals(SimulatorStatus.Disconnected)){
     		//initialize simulation
     		try {
