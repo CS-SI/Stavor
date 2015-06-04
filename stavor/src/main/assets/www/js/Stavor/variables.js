@@ -153,16 +153,17 @@ var global_simulation = {
 			show_projection: true,
 			orbit_color: "#00ff00",
 			ref_orbit:{
-				show: false,
+				show: true,
 				color: "#ff0000",
-				a: 24396159,
-				e: 0.73,
-				i: Math.PI/9,
-				w: Math.PI,
+				a: 26900000,
+				e: 0.23,
+				i: 0.8691,
+				w: 0,
 				raan: 0
 			}
 		},
 		map:{
+			max_path_length: 100,
 			stations: [],
 			show_satellite: true,					
 			show_fov: true,

@@ -282,6 +282,20 @@ function initializeMissionsDb(){
 				mission.initial_orbit.raan = 0.0;
 				//mission.initial_orbit.lM = ;
 				default_missions[default_missions.length] = mission;
+
+				//Example Galileo
+				mission = new Mission();
+				mission.name = "Galileo #5";
+				mission.description = "Example of Galileo expected Orbit";
+				mission.duration = 100000.0;
+				mission.step = 10.0;
+				mission.initial_orbit.a = 2.9900E7;
+				mission.initial_orbit.e = 0.0;
+				mission.initial_orbit.i = 0.9599;
+				//mission.initial_orbit.omega = ;
+				mission.initial_orbit.raan = 0.0;
+				//mission.initial_orbit.lM = ;
+				default_missions[default_missions.length] = mission;
 				
 				
 				for(var i = 0; i < default_missions.length; i++)
