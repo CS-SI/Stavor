@@ -28,9 +28,9 @@ var init = function () {
             })
         ],
         layers: [
-            new OpenLayers.Layer.OSM("OpenStreetMap", null, {
+            new OpenLayers.Layer.OSM("OpenStreetMap", ["http://a.basemaps.cartocdn.com/dark_all/${z}/${x}/${y}.png"]/*null*/, {
                 transitionEffect: 'null',
-		wrapDateLine: false
+        wrapDateLine: false
             })
         ],
         center: new OpenLayers.LonLat(0, 0),
