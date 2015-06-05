@@ -25,7 +25,7 @@ import android.widget.TextView;
 public class RatingSystem {
 
 	private static int runs_of_application_before_rate_suggestion = 5;
-	private static int runs_of_application_after_rate_suggestion = 2;//Remind me later
+	private static int runs_of_application_after_rate_suggestion = 3;//Remind me later
 	private static int rate_suggestion_show_delay = 5000;//ms
 	
 	private static String screenName = "RatingDialog";
@@ -68,12 +68,12 @@ public class RatingSystem {
 		        ll.setOrientation(LinearLayout.VERTICAL);
 		        //ll.setPadding(20, 0, 20, 0);//XGG
 		        //ll.setBackgroundColor(activity.getResources().getColor(R.color.red));
-		        ll.setBackgroundResource(R.drawable.stars_dialog);
+		        //ll.setBackgroundResource(R.drawable.stars_dialog);
 		        
 		        TextView tv = new TextView(activity);
 		        tv.setText(activity.getString(R.string.rate_dialog_rate_message));
 		        tv.setWidth(240);
-		        tv.setPadding(20, 0, 20, 10);
+		        tv.setPadding(20, 10, 20, 10);
 		        tv.setTextAppearance(activity, android.R.style.TextAppearance_Medium);
 		        ll.addView(tv);
 		        
