@@ -345,8 +345,8 @@
     <string name="pref_summary_show_sc_axis">Show spacecraft reference axis</string>
     <string name="pref_title_show_engine_texture">Show engine texture</string>
     <string name="pref_summary_show_engine_texture">Show spacecraft engine texture</string>
-    <string name="pref_title_sun_simple_glow">Simple glow effect</string>
-    <string name="pref_summary_sun_simple_glow">Use Sun simple glow effect</string>
+    <string name="pref_title_sun_show_glow">Show glow effect</string>
+    <string name="pref_summary_sun_show_glow">Show Sun glow effect sprite</string>
     <string name="pref_title_sun_rotates">Sun rotates</string>
     <string name="pref_summary_sun_rotates">Sun body rotates</string>
     <string name="pref_title_earth_rotates">Earth rotates</string>

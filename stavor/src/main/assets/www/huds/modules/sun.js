@@ -81,7 +81,7 @@ function initSun(){
 		sun.position.set(0, 85, 85);//Don't remove or the dashed material is not created
 		scene.add( sun );
 		
-		if(!sun_simple_glow){
+		if(false){
 			// SHADER GLOW EFFECT
 			var customMaterialGlow = new THREE.ShaderMaterial( 
 			{
@@ -105,21 +105,23 @@ function initSun(){
 			sunGlow.scale.multiplyScalar(1.8);
 			scene.add( sunGlow );
 		}else{
-			// SUPER SIMPLE GLOW EFFECT
-			// use sprite because it appears the same from all angles
-			if(typeof textureSun4 === 'undefined'){
-			   // your code here.
-				textureSun4= new THREE.ImageUtils.loadTexture( 'textures/lava/glow.png' );
-			};
-			var spriteMaterial = new THREE.SpriteMaterial( 
-			{ 
-				map: textureSun4, 
-				useScreenCoordinates: false,// alignment: THREE.SpriteAlignment.center,
-				color: 0xf79216, transparent: false, blending: THREE.AdditiveBlending
-			});
-			sunGlow = new THREE.Sprite( spriteMaterial );
-			sunGlow.scale.set(20, 20, 1.0);
-			sun.add(sunGlow); // this centers the glow at the mesh
+			if(sun_show_glow){
+				// SUPER SIMPLE GLOW EFFECT
+				// use sprite because it appears the same from all angles
+				if(typeof textureSun4 === 'undefined'){
+				   // your code here.
+					textureSun4= new THREE.ImageUtils.loadTexture( 'textures/lava/glow.png' );
+				};
+				var spriteMaterial = new THREE.SpriteMaterial(
+				{
+					map: textureSun4,
+					useScreenCoordinates: false,// alignment: THREE.SpriteAlignment.center,
+					color: 0xf79216, transparent: false, blending: THREE.AdditiveBlending
+				});
+				sunGlow = new THREE.Sprite( spriteMaterial );
+				sunGlow.scale.set(20, 20, 1.0);
+				sun.add(sunGlow); // this centers the glow at the mesh
+			}
 		}
 		
 		if(sun_show_line){
@@ -186,7 +188,7 @@ function updateSun() {
 			contextSun.fillText( messageSun, borderThicknessSun, fontsizeSun + borderThicknessSun);
 			spriteSun.material.map._needsUpdate = true; // AND UPDATE THE IMAGE..
 		}
-		if(!sun_simple_glow){
+		if(false){
 			moonGlow.material.uniforms.viewVector.value = 
 				new THREE.Vector3().subVectors( camera.position, moonGlow.position );
 		}

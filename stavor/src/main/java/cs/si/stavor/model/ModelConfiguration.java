@@ -59,7 +59,7 @@ public class ModelConfiguration {
 		sun_rotates = sharedPref.getBoolean(ctx.getString(R.string.pref_key_sun_rotates), sun_rotates);
 		show_sun = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_sun), show_sun);
 		show_sun_texture = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_sun_texture), show_sun_texture);
-		sun_simple_glow = sharedPref.getBoolean(ctx.getString(R.string.pref_key_sun_simple_glow), sun_simple_glow);
+		sun_show_glow = sharedPref.getBoolean(ctx.getString(R.string.pref_key_sun_show_glow), sun_show_glow);
 		sun_show_line = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_sun_line), sun_show_line);
 		sun_show_dist = sharedPref.getBoolean(ctx.getString(R.string.pref_key_show_sun_distance), sun_show_dist);
 		earth_rotates = sharedPref.getBoolean(ctx.getString(R.string.pref_key_earth_rotates), earth_rotates);
@@ -122,7 +122,7 @@ public class ModelConfiguration {
 	public boolean sun_rotates = true;
 	public int sun_rotation_speed = 5;//Base rotation speed multiplier
 	public boolean show_sun_texture = true;
-	public boolean sun_simple_glow = true;
+	public boolean sun_show_glow = true;
 	public boolean sun_show_line = true;
 	public boolean sun_show_dist = true;
 	//Earth

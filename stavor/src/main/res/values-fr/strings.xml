@@ -345,8 +345,8 @@
     <string name="pref_summary_show_sc_axis">Afficher les axes de référence du vaisseau</string>
     <string name="pref_title_show_engine_texture">Afficher texture de moteur</string>
     <string name="pref_summary_show_engine_texture">Afficher la texture de moteur du vaisseau</string>
-    <string name="pref_title_sun_simple_glow">Effet brillant simple</string>
-    <string name="pref_summary_sun_simple_glow">Utilisez un effet de brillant simple pour le Soleil</string>
+    <string name="pref_title_sun_show_glow">Afficher effet brillant</string>
+    <string name="pref_summary_sun_show_glow">Utiliser un effet de brillant pour le Soleil</string>
     <string name="pref_title_sun_rotates">Soleil tourne</string>
     <string name="pref_summary_sun_rotates">Le modèle du Soleil tourne</string>
     <string name="pref_title_earth_rotates">La Terre tourne</string>

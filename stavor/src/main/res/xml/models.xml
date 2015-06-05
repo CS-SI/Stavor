@@ -74,12 +74,12 @@
         	android:inputType="number" 
         	android:maxLength="1"
             android:numeric="integer" />
-        <!-- <CheckBoxPreference
-            android:key="@string/pref_key_sun_simple_glow"
-            android:summary="@string/pref_summary_sun_simple_glow"
-            android:title="@string/pref_title_sun_simple_glow"
+        <CheckBoxPreference
+            android:key="@string/pref_key_sun_show_glow"
+            android:summary="@string/pref_summary_sun_show_glow"
+            android:title="@string/pref_title_sun_show_glow"
             android:dependency="@string/pref_key_show_sun"
-            android:defaultValue="true" /> -->
+            android:defaultValue="true" />
         <CheckBoxPreference
             android:key="@string/pref_key_show_sun_line"
             android:summary="@string/pref_summary_show_sun_line"

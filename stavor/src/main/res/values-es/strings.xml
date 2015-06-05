@@ -345,8 +345,8 @@
     <string name="pref_summary_show_sc_axis">Mostrar ejes de referencia de la nave</string>
     <string name="pref_title_show_engine_texture">Mostrar textura de motor</string>
     <string name="pref_summary_show_engine_texture">Mostrar textura de motor de la nave</string>
-    <string name="pref_title_sun_simple_glow">Efecto brillo simple</string>
-    <string name="pref_summary_sun_simple_glow">Utilizar un effecto de brillo simple para el Sol</string>
+    <string name="pref_title_sun_show_glow">Mostrar efecto brillo</string>
+    <string name="pref_summary_sun_show_glow">Utilizar un effecto de brillo para el Sol</string>
     <string name="pref_title_sun_rotates">Sol rota</string>
     <string name="pref_summary_sun_rotates">El modelo del Sol rota</string>
     <string name="pref_title_earth_rotates">La Tierra rota</string>

@@ -95,7 +95,7 @@ function getInitialization(){
 		sun_rotates = config.sun_rotates;
 		sun_rotation_speed = config.sun_rotation_speed;
 		show_sun_texture = config.show_sun_texture;
-		sun_simple_glow = config.sun_simple_glow;//Recomended to not use the shader glow, problems in android
+		sun_show_glow = config.sun_show_glow;//Recomended to not use the shader glow, problems in android
 		sun_show_line = config.sun_show_line;
 		sun_show_dist = config.sun_show_dist;
 
