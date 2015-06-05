@@ -33,7 +33,7 @@ android {
         signingConfig signingConfigs.config
     }
     dexOptions {
-        //javaMaxHeapSize "4g"
+        javaMaxHeapSize "4g"
 
     }
     packagingOptions {
@@ -78,11 +78,12 @@ dependencies {
     compile 'org.xwalk:xwalk_core_library:13.42.319.11'
     //compile 'org.xwalk:xwalk_core_library_beta:12.41.296.6'
     //compile 'org.xwalk:xwalk_core_library_beta:11.40.277.6'
+    //compile 'org.xwalk:xwalk_core_library_beta:14.43.343.10'
     compile 'com.google.android.gms:play-services:+'
     //compile 'com.android.support:multidex:1.0.+'
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:+'
     compile files('libs/gson-2.2.4.jar')
-    compile files('libs/commons-math3-3.3.jar')
+    compile files('libs/commons-math3-3.5.jar')
     compile files('libs/CWAC-LoaderEx.jar')
     compile files('libs/httpclientandroidlib-1.2.1.jar')
     compile files('libs/orekit.jar')
