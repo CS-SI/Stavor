@@ -72,7 +72,7 @@ public class RatingSystem {
 		        
 		        TextView tv = new TextView(activity);
 		        tv.setText(activity.getString(R.string.rate_dialog_rate_message));
-		        tv.setWidth(240);
+		        tv.setWidth(350);
 		        tv.setPadding(20, 0, 20, 10);
 		        tv.setTextAppearance(activity, android.R.style.TextAppearance_Medium);
 		        ll.addView(tv);
