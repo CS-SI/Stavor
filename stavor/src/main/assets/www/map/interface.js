@@ -49,6 +49,8 @@ function getInitialization(){
 		lonLat = new OpenLayers.LonLat( config.lon, config.lat );
 
 		map.setCenter (lonLat, zoom);
+
+		track_limit = config.track_limit;
 	
 		stations = config.stations;		
 		show_fov = config.show_fov;

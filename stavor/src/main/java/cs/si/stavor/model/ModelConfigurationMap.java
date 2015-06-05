@@ -3,6 +3,7 @@ package cs.si.stavor.model;
 import java.util.ArrayList;
 
 import cs.si.stavor.R;
+import cs.si.stavor.app.Parameters;
 import cs.si.stavor.database.StationsReaderContract.StationEntry;
 import cs.si.stavor.model.ModelSimulation.MapPoint;
 import cs.si.stavor.station.GroundStation;
@@ -27,6 +28,7 @@ public class ModelConfigurationMap {
 		}catch(NumberFormatException e){
 			System.err.println("Error loading configuration parameter: "+e.getMessage());
 		}*/
+
 		show_fov = sharedPref.getBoolean(ctx.getString(R.string.pref_key_map_show_fov), show_fov);
 		show_track = sharedPref.getBoolean(ctx.getString(R.string.pref_key_map_show_track), show_track);
 		show_sun_icon = sharedPref.getBoolean(ctx.getString(R.string.pref_key_map_show_sun_icon), show_sun_icon);
@@ -94,5 +96,7 @@ public class ModelConfigurationMap {
 	public boolean show_track = true;
 	public boolean show_sun_icon = true;
 	public boolean show_sun_terminator = true;
+
+	public int track_limit = Parameters.Map.satellite_track_max_points;
 
 }

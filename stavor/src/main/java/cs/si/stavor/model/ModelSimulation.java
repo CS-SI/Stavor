@@ -671,7 +671,11 @@ public class ModelSimulation {
 		//if(Math.abs(tmp_lat-lat)>Parameters.Map.marker_pos_threshold || Math.abs(tmp_lon-lon)>Parameters.Map.marker_pos_threshold){
 			//tmp_lat = lat;
 			//tmp_lon = lon;
-			mapPathBuffer.add(new MapPoint(lat,lon,alt));
+			mapPathBuffer.add(new MapPoint(lat, lon, alt));
+
+		while(mapPathBuffer.size() > Parameters.Map.satellite_track_max_points){
+			mapPathBuffer.remove(0);
+		}
 		//}
 	}
 	public synchronized MapPoint[] getMapPathBuffer(){

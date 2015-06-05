@@ -93,5 +93,6 @@ public class Parameters {
 		public static final int satellite_fov_points = 30;//30
 		public static final double solar_terminator_points = 100;
 		public static final double solar_terminator_threshold = 60*15;//In seconds
+		public static final int satellite_track_max_points = 100;
 	}
 }
