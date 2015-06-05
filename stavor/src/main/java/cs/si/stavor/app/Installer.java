@@ -373,8 +373,8 @@ public class Installer {
 		mission.initial_orbit.e=0.0;
 		mission.initial_orbit.i= FastMath.toRadians(55);
 		mission.initial_orbit.raan=0;
-		mission.sim_duration = 6000000.;
-		mission.sim_step = 600.;
+		mission.sim_duration = 1000000.;
+		mission.sim_step = 100.;
 
 		try {
 			mission.initial_date = new AbsoluteDate(2014,8,23,0,0,0.0,TimeScalesFactory.getUTC());
