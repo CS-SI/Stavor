@@ -26,4 +26,5 @@
     <color name="red">#FF0000</color>
     <color name="selected_mission">#c4ddff</color>
     <color name="navigation">#424242</color>
+    <color name="loading_color">#266dff</color>
 </resources>

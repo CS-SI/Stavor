@@ -500,5 +500,7 @@
     <string name="pref_title_ref_orbit_r">R.A.A.N</string>
     <string name="pref_summary_ref_orbit_r">Right Ascension of the Ascending Node [deg]</string>
 
+    <string name="loading_screen_title">Loading...</string>
+
 
 </resources>
