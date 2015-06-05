@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.apache.commons.math3.util.FastMath;
 import org.orekit.errors.OrekitException;
 import org.orekit.time.AbsoluteDate;
 import org.orekit.time.TimeScalesFactory;
@@ -361,6 +362,39 @@ public class Installer {
 				MissionEntry.TABLE_NAME,
 				null,
 		         values);
+		if(newRowId==-1)
+			result=false;
+
+		//Seventh Example
+		mission = new Mission();
+		mission.name="Example Galileo #5";
+		mission.description="Galileo Constellation Satellite #5 expected orbit.";
+		mission.initial_orbit.a=2.9900E7;
+		mission.initial_orbit.e=0.0;
+		mission.initial_orbit.i= FastMath.toRadians(55);
+		mission.initial_orbit.raan=0;
+		try {
+			mission.initial_date = new AbsoluteDate(2014,8,23,0,0,0.0,TimeScalesFactory.getUTC());
+		} catch (IllegalArgumentException e1) {
+			e1.printStackTrace();
+		} catch (OrekitException e1) {
+			e1.printStackTrace();
+		}
+
+		values = new ContentValues();
+		values.put(MissionEntry.COLUMN_NAME_NAME, mission.name);
+		values.put(MissionEntry.COLUMN_NAME_DESCRIPTION, mission.description);
+		try {
+			values.put(MissionEntry.COLUMN_NAME_CLASS, SerializationUtil.serialize(mission));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Insert the new row, returning the primary key value of the new row
+		newRowId = db.insert(
+				MissionEntry.TABLE_NAME,
+				null,
+				values);
 		if(newRowId==-1)
 			result=false;
 		
