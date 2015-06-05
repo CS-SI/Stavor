@@ -723,6 +723,7 @@ function updateAttitudeOptions(){
 function updateGlobalOption(id,val){
 	if(val != "" || typeof val == "boolean"){
 		setGlobalReloading();
+		global_simulator.stopButtonClicked();
 		setTimeout(function(){
 			switch(id) {
 				case "opt-glo-ShowFps":
