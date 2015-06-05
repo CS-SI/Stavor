@@ -51,6 +51,9 @@ import cs.si.stavor.station.StationAndId;
 import cs.si.stavor.web.MyResourceClient;
 import cs.si.stavor.web.MyUIClient;
 import cs.si.stavor.web.WebAppInterface;
+
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.ShareActionProvider;
@@ -612,6 +615,13 @@ public class MainActivity extends ActionBarActivity implements
 			return true;
 		}else if (id == R.id.menu_item_rate) {
 			launchMarket();
+		}else if (id == R.id.menu_item_tutorial) {
+			String key1 = getString(R.string.pref_key_guide_visualization);
+			String key2 = getString(R.string.pref_key_guide_simulator);
+			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+			sharedPref.edit()
+					.putBoolean(key1, true)
+					.putBoolean(key2, true).commit();
 		}
 		/*if (id == R.id.action_reset_conf) {
 			resetUserConfigShowDialog();

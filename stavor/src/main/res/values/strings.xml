@@ -24,6 +24,7 @@
     <string name="action_about">About</string>
     <string name="action_share">Share App</string>
     <string name="action_rate">Rate App</string>
+    <string name="action_tutorial">Reset tutorial</string>
     
     <string name="rate_dialog_rate_app">Rate Stavor</string>
     <string name="rate_dialog_rate_message">If you enjoy using Stavor, please take a moment to rate it. Thanks for your support!</string>
