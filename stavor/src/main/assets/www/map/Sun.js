@@ -15,7 +15,7 @@ var nightStyle = {
       strokeColor: "#FFcc00",
       strokeOpacity: 0.5,
       strokeWidth: 1,
-      fillOpacity: 0.1,
+      fillOpacity: 0.3,
 	fillColor: "#000000"
 };
 var solarTerminator;
