@@ -70,4 +70,48 @@
             android:title="@string/pref_title_show_projection_line"
             android:defaultValue="true" />
     </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_category_ref_orbit"
+        android:key="@string/pref_key_category_ref_orbit">
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="@string/pref_key_ref_orbit_color"
+            android:summary="@string/pref_summary_ref_orbit_color"
+            android:title="@string/pref_title_ref_orbit_color"
+            android:defaultValue="@color/pref_def_ref_orbit_color" />
+        <CheckBoxPreference
+            android:key="@string/pref_key_show_ref_orbit"
+            android:summary="@string/pref_summary_show_ref_orbit"
+            android:title="@string/pref_title_show_ref_orbit"
+            android:defaultValue="false" />
+        <EditTextPreference
+            android:key="@string/pref_key_ref_orbit_a"
+            android:summary="@string/pref_summary_ref_orbit_a"
+            android:title="@string/pref_title_ref_orbit_a"
+            android:defaultValue="26900000"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_ref_orbit_e"
+            android:summary="@string/pref_summary_ref_orbit_e"
+            android:title="@string/pref_title_ref_orbit_e"
+            android:defaultValue="0.23"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_ref_orbit_i"
+            android:summary="@string/pref_summary_ref_orbit_i"
+            android:title="@string/pref_title_ref_orbit_i"
+            android:defaultValue="49.8"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_ref_orbit_o"
+            android:summary="@string/pref_summary_ref_orbit_o"
+            android:title="@string/pref_title_ref_orbit_o"
+            android:defaultValue="0"
+            android:numeric="decimal" />
+        <EditTextPreference
+            android:key="@string/pref_key_ref_orbit_r"
+            android:summary="@string/pref_summary_ref_orbit_r"
+            android:title="@string/pref_title_ref_orbit_r"
+            android:defaultValue="0"
+            android:numeric="decimal" />
+    </PreferenceCategory>
 </PreferenceScreen>

@@ -22,7 +22,9 @@ function restorePlanets(){
 	}
 	if(show_sun){
 		sun.visible=true;
-		sunGlow.visible=true;
+		if(sun_show_glow){
+			sunGlow.visible=true;
+		}
 	}
 }
 var selected_view = "XYZ";

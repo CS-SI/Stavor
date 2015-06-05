@@ -109,6 +109,14 @@ function getInitialization(){
 		show_projection = config.show_projection;
 		
 		orbit_color = config.orbit_color;
+
+		ref_orbit_color = config.ref_orbit_color;
+        show_ref_orbit = config.show_ref_orbit;
+        ref_orbit_a = config.ref_orbit_a;
+        ref_orbit_e = config.ref_orbit_e;
+        ref_orbit_i = config.ref_orbit_i * (Math.PI/180);
+        ref_orbit_o = config.ref_orbit_o * (Math.PI/180);
+        ref_orbit_r = config.ref_orbit_r * (Math.PI/180);
 		
 		performance_level = config.performance_level;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
 

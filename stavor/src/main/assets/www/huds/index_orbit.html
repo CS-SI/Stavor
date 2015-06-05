@@ -26,7 +26,7 @@
 
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px; background-color:black"></div>
 <script>
-	var orbit;
+	var orbit, ref_orbit;
 	var spacecraft;
 	var projection, starSphere, containerEarth;
 	// MAIN
@@ -85,6 +85,14 @@
 	var show_projection = true;
 	
 	var orbit_color = 0x00ff00;
+
+	var ref_orbit_color = 0xff0000;
+	var show_ref_orbit = false;
+	var ref_orbit_a = 26900000;
+	var ref_orbit_e = 0.23;
+	var ref_orbit_i = 0.86917;
+	var ref_orbit_o = 0;
+	var ref_orbit_r = 0;
 	
 	var performance_level = 3;//1: VeryLow, 2: Low, 3: Normal, 4: High, 5: VeryHigh, 6: Ultra ...;
 	
@@ -130,6 +138,7 @@
 	setLoadingProgress(18);
 	includeOrbit();
 	
+	includeRefOrbit();
 	
 	setLoadingProgress(100);
 
@@ -230,6 +239,40 @@ function createOrbit(){
 	
 	scene.add( orbit );
 }
+
+function includeRefOrbit() {
+		createRefOrbit();
+		onRenderFcts.push(function(delta, now){
+			scene.remove(ref_orbit);
+			createRefOrbit();
+		});
+	}
+
+function createRefOrbit() {
+		if(show_ref_orbit){
+			var a = ref_orbit_a*dist_scale;
+			var f=a*ref_orbit_e;
+			var b = Math.sqrt(a*a-f*f);	
+
+			// Ellipse
+			var material = new THREE.LineBasicMaterial({color:ref_orbit_color, opacity:1});
+			var ellipse = new THREE.EllipseCurve(0, f, b, a, 0, 2.0 * Math.PI, false);
+			var ellipsePath = new THREE.CurvePath();
+			ellipsePath.add(ellipse);
+			var ellipseGeometry = ellipsePath.createPointsGeometry(100);
+			ellipseGeometry.computeTangents();
+			ref_orbit = new THREE.Line(ellipseGeometry, material);
+			// Argument of the perigee
+			ref_orbit.rotation.z = ref_orbit_o+Math.PI/2+ref_orbit_r;
+			//Inclination
+			var nodeA = new THREE.Vector3(Math.cos(ref_orbit_r),Math.sin(ref_orbit_r),0);
+			var quat = new THREE.Quaternion();
+			quat.setFromAxisAngle(nodeA,ref_orbit_i);
+			ref_orbit.quaternion.multiplyQuaternions(quat, ref_orbit.quaternion);
+			
+			scene.add( ref_orbit );
+		}
+	}
 
 function includeSpacecraft(){
 	//////////////////////////////////////////////////////////////////////////////////

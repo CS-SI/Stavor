@@ -483,5 +483,20 @@
     <string name="color4_title">Color 4</string>
     <string name="color4_summary">color establecido con HEX code en xml</string>
 
+    <string name="pref_category_ref_orbit">Órbita de Ref.</string>
+    <string name="pref_summary_ref_orbit_color">Color de la línea orbital</string>
+    <string name="pref_title_ref_orbit_color">Color de órbita</string>
+    <string name="pref_summary_show_ref_orbit">Mostrar órbita de referencia</string>
+    <string name="pref_title_show_ref_orbit">Mostrar Órbita</string>
+    <string name="pref_title_ref_orbit_a">Semi-eje mayor</string>
+    <string name="pref_summary_ref_orbit_a">Semi-eje mayor [m]</string>
+    <string name="pref_title_ref_orbit_e">Excentricidad</string>
+    <string name="pref_summary_ref_orbit_e">Excentricidad de órbita</string>
+    <string name="pref_title_ref_orbit_i">Inclinación</string>
+    <string name="pref_summary_ref_orbit_i">Inclinación de órbita [deg]</string>
+    <string name="pref_title_ref_orbit_o">Arg. Perigeo</string>
+    <string name="pref_summary_ref_orbit_o">Argumento del perigeo [deg]</string>
+    <string name="pref_title_ref_orbit_r">R.A.A.N</string>
+    <string name="pref_summary_ref_orbit_r">Right Ascension of the Ascending Node [deg]</string>
 
 </resources>

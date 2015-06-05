@@ -163,6 +163,16 @@
     <string name="key_orbviews_locked">Locked</string>
 	<string name="key_mapviews_free">Free</string>
     <string name="key_mapviews_locked">Locked</string>
+
+
+    <string name="pref_key_category_ref_orbit">pref_key_category_ref_orbit</string>
+    <string name="pref_key_ref_orbit_color">pref_key_ref_orbit_color</string>
+    <string name="pref_key_show_ref_orbit">pref_key_show_ref_orbit</string>
+    <string name="pref_key_ref_orbit_a">pref_key_ref_orbit_a</string>
+    <string name="pref_key_ref_orbit_e">pref_key_ref_orbit_e</string>
+    <string name="pref_key_ref_orbit_i">pref_key_ref_orbit_i</string>
+    <string name="pref_key_ref_orbit_o">pref_key_ref_orbit_o</string>
+    <string name="pref_key_ref_orbit_r">pref_key_ref_orbit_r</string>
     
     
 </resources>
