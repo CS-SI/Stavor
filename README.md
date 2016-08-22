@@ -32,3 +32,8 @@ Dependencies
 ============
 
 The simulator included in the application is powered by the open-source library Orekit.
+
+License
+=======
+
+Stavor is distributed under the terms of the [Apache license 2](LICENSE.txt).
