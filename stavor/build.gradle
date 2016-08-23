@@ -38,6 +38,9 @@ android {
         exclude 'META-INF/NOTICE.txt'
     }
     buildTypes {
+        debug {
+            // Unsigned build
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
