@@ -10,11 +10,11 @@ android {
         //abortOnError false
     }
     signingConfigs {
-        config {
-            keyAlias 'Stavor'
-            keyPassword '2TqXSDgA'
-            storeFile file('D:/Users/xgibert/CS/Projets/Stavor_files/Release/Keys_CS_Mobile/releaseKey')
-            storePassword '2TqXSDgA'
+        // Default config -> unsigned
+        release {
+            storePassword = ""
+            keyAlias = ""
+            keyPassword = ""
         }
     }
     compileSdkVersion 21
@@ -27,7 +27,7 @@ android {
         targetSdkVersion 21
         // Enabling multidex support.
         multiDexEnabled true
-        signingConfig signingConfigs.config
+        signingConfig signingConfigs.release
     }
     dexOptions {
         javaMaxHeapSize "4g"
@@ -44,7 +44,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
         }
     }
     productFlavors {
@@ -85,4 +85,10 @@ dependencies {
     compile files('libs/orekit.jar')
 }
 
-
+// Signing configuration
+def props = new Properties()
+props.load(new FileInputStream(rootProject.file("release.properties")))
+android.signingConfigs.release.storeFile rootProject.file(props.keyStore)
+android.signingConfigs.release.storePassword props.keyStorePassword
+android.signingConfigs.release.keyAlias props.keyAlias
+android.signingConfigs.release.keyPassword props.keyAliasPassword
