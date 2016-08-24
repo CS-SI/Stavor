@@ -1,2 +1,7 @@
 sudo: false
 language: android
+env:
+  - PRODUCT_FLAVOR=Armv7 BUILD_TYPE=Debug
+  - PRODUCT_FLAVOR=X86 BUILD_TYPE=Debug
+script:
+  - ./gradlew assemble${PRODUCT_FLAVOR}${BUILD_TYPE}
