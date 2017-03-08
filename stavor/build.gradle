@@ -13,8 +13,8 @@ android {
         config {
             keyAlias 'Stavor'
             keyPassword '2TqXSDgA'
-            storeFile file('D:/Users/xgibert/CS/Projets/Stavor_files/Release/Keys_CS_Mobile/releaseKey')
-            storePassword '2TqXSDgA'
+            //storeFile file('D:/Users/xgibert/CS/Projets/Stavor_files/Release/Keys_CS_Mobile/releaseKey')
+            //storePassword '2TqXSDgA'
         }
     }
     compileSdkVersion 21
@@ -72,7 +72,6 @@ dependencies {
     //compile project(':crosswalkwebview103923515arm')
     //compile 'org.xwalk:xwalk_core_library:10.39.235.15'
     compile 'org.xwalk:xwalk_core_library:13.42.319.11'
-    compile 'com.google.android.gms:play-services:+'
     compile 'com.android.support:multidex:1.0.+'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile files('libs/gson-2.2.4.jar')

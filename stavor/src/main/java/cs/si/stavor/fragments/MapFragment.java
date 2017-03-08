@@ -3,13 +3,9 @@ package cs.si.stavor.fragments;
 
 import org.xwalk.core.XWalkView;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 import cs.si.stavor.MainActivity;
 import cs.si.stavor.R;
 import cs.si.stavor.StavorApplication;
-import cs.si.stavor.StavorApplication.TrackerName;
 import cs.si.stavor.app.Parameters;
 import cs.si.stavor.model.Browsers;
 import cs.si.stavor.simulator.Simulator;
@@ -81,14 +77,7 @@ public final class MapFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		//********** Google Analytics ***********
-        // Get tracker.
-        Tracker t = ((StavorApplication) getActivity().getApplication()).getTracker(
-            TrackerName.APP_TRACKER);
-        t.setScreenName(screenName);
-        t.send(new HitBuilders.AppViewBuilder().build());
-        //***************************************
+
 		
 		View rootView = inflater.inflate(R.layout.map_display, container,
 				false);

@@ -16,12 +16,8 @@ import java.util.ArrayList;
 //import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkView;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 import unused.WelcomeDialogFragment;
 import cs.si.stavor.R;
-import cs.si.stavor.StavorApplication.TrackerName;
 import cs.si.stavor.app.Installer;
 import cs.si.stavor.app.OrekitInit;
 import cs.si.stavor.app.Parameters;
@@ -507,18 +503,7 @@ public class MainActivity extends ActionBarActivity implements
 	private ShareActionProvider mShareActionProvider;
 	
 	private void launchMarket() {
-		//********** Google Analytics ***********
-        // Get tracker.
-        Tracker t = ((StavorApplication) getApplication()).getTracker(
-            TrackerName.APP_TRACKER);
-        t.setScreenName("Menu");
-        t.send(new HitBuilders.EventBuilder()
-        	.setCategory("Menu")
-        	.setAction("Rate")
-        	.setLabel("Rate")
-        	.setValue(1)
-        	.build());
-        //***************************************
+
         
 	    Uri uri = Uri.parse("market://details?id=" + getPackageName());
 	    Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);

@@ -1,11 +1,7 @@
 package cs.si.stavor;
 
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
-import cs.si.stavor.R;
-import cs.si.stavor.StavorApplication.TrackerName;
 import cs.si.stavor.database.StationsReaderContract.StationEntry;
 import cs.si.stavor.station.GroundStation;
 import cs.si.stavor.station.StationAndId;
@@ -68,18 +64,7 @@ public class StationActivity extends Activity{
 							if(isEdit){
 								//Update register with new name and serialized
 								if(editStation()){
-									//********** Google Analytics ***********
-							        // Get tracker.
-							        Tracker t = ((StavorApplication) getApplication()).getTracker(
-							            TrackerName.APP_TRACKER);
-							        t.setScreenName("StationEditor");
-							        t.send(new HitBuilders.EventBuilder()
-							        	.setCategory("StationEditor")
-							        	.setAction("Edit")
-							        	.setLabel(station.station.name)
-							        	.setValue(1)
-							        	.build());
-							        //***************************************
+
 							        
 									//((StavorApplication)getApplication()).loader.reset();
 									finish();
@@ -89,18 +74,7 @@ public class StationActivity extends Activity{
 							}else{
 								//Create new register in db
 								if(addStation()){
-									//********** Google Analytics ***********
-							        // Get tracker.
-							        Tracker t = ((StavorApplication) getApplication()).getTracker(
-							            TrackerName.APP_TRACKER);
-							        t.setScreenName("StationEditor");
-							        t.send(new HitBuilders.EventBuilder()
-							        	.setCategory("StationEditor")
-							        	.setAction("Create")
-							        	.setLabel(station.station.name)
-							        	.setValue(1)
-							        	.build());
-							        //***************************************
+
 							        
 									//((StavorApplication)getApplication()).loader.reset();
 									finish();

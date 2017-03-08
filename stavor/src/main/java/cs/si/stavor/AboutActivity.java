@@ -14,8 +14,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 /**
  * Activity to show the app About screen
@@ -89,18 +87,7 @@ public class AboutActivity extends Activity {
 			ImageView img_jocs = (ImageView) findViewById(R.id.imageView2);
 	    	img_jocs.setOnClickListener(new View.OnClickListener(){
 	    	    public void onClick(View v){
-                    //********** Google Analytics ***********
-                    // Get tracker.
-                    Tracker t = ((StavorApplication) getApplication()).getTracker(
-                            StavorApplication.TrackerName.APP_TRACKER);
-                    t.setScreenName("About");
-                    t.send(new HitBuilders.EventBuilder()
-                            .setCategory("Link")
-                            .setAction("JOCS")
-                            .setLabel("JOCS")
-                            .setValue(1)
-                            .build());
-                    //***************************************
+
 
 	    	        Intent intent = new Intent();
 	    	        intent.setAction(Intent.ACTION_VIEW);
